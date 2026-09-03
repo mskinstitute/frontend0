@@ -1,0 +1,2538 @@
+[
+  {
+    "id": "course-html5-masterclass",
+    "status": "PUBLISH",
+    "title": "HTML5 Complete Masterclass: From Beginner to Pro",
+    "slug": "html5-complete-masterclass",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "The definitive, comprehensive HTML5 full course. Master modern semantic architecture, accessible web forms, responsive multimedia, ARIA, SEO meta tags, and browser APIs with live hands-on projects.",
+    "categories": [
+      "Web Development",
+      "Frontend",
+      "HTML5"
+    ],
+    "level": "Beginner",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "html5-ch1",
+        "title": "Introduction",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "html5-t1.1",
+            "title": "Introduction to HTML",
+            "sortOrder": 1,
+            "videos": [
+              {
+                "id": "v-html5-1.1",
+                "title": "Introduction to HTML & Web Fundamentals",
+                "url": "https://www.youtube.com/watch?v=kUMe1FH4CHE",
+                "preview": true
+              }
+            ]
+          },
+          {
+            "id": "html5-t1.2",
+            "title": "Basic Document Structure",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch2",
+        "title": "Heading & Paragraphs",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "html5-t2.1",
+            "title": "HTML Headings",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t2.2",
+            "title": "Paragraphs & Line Breaks",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch3",
+        "title": "Text Formatting",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "html5-t3.1",
+            "title": "Text Formatting Elements",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t3.2",
+            "title": "Quotations & Citations",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch4",
+        "title": "Comments",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "html5-t4.1",
+            "title": "HTML Comments",
+            "sortOrder": 1
+          }
+        ]
+      },
+      {
+        "id": "html5-ch5",
+        "title": "Colors",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "html5-t5.1",
+            "title": "HTML Colors & Color Codes",
+            "sortOrder": 1
+          }
+        ]
+      },
+      {
+        "id": "html5-ch6",
+        "title": "Links",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "html5-t6.1",
+            "title": "Links & Hyperlinks",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t6.2",
+            "title": "Target Attributes & Security",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch7",
+        "title": "Lists",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "html5-t7.1",
+            "title": "Unordered & Ordered Lists",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t7.2",
+            "title": "Description Lists",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch8",
+        "title": "Table",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "html5-t8.1",
+            "title": "HTML Tables",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t8.2",
+            "title": "Colspan & Rowspan",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch9",
+        "title": "Block & Inline",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "html5-t9.1",
+            "title": "Block vs Inline Elements",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t9.2",
+            "title": "Div & Span Containers",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch10",
+        "title": "Media",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "html5-t10.1",
+            "title": "Images & Responsive Art",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t10.2",
+            "title": "Audio & Video",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch11",
+        "title": "Form",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "html5-t11.1",
+            "title": "Forms & Input Types",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t11.2",
+            "title": "Form Controls & Validations",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "html5-ch12",
+        "title": "Semantic Tags",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "html5-t12.1",
+            "title": "Semantic Layout Elements",
+            "sortOrder": 1
+          },
+          {
+            "id": "html5-t12.2",
+            "title": "Accessibility & ARIA",
+            "sortOrder": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-js-react",
+    "status": "PUBLISH",
+    "title": "JavaScript & React Frontend Engineering",
+    "slug": "javascript-react-frontend-engineering",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Deep dive into modern ES6+ JavaScript, DOM events, asynchronous operations, React components, state hooks, and dynamic client routing.",
+    "categories": [
+      "Web Development",
+      "JavaScript",
+      "React",
+      "Frontend"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 3,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "js-ch1",
+        "title": "Modern ES6+ JavaScript Core",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "js-t1.1",
+            "title": "Arrow Functions, Destructuring & Rest/Spread",
+            "sortOrder": 1
+          },
+          {
+            "id": "js-t1.2",
+            "title": "DOM Manipulation, Events & LocalStorage",
+            "sortOrder": 2
+          },
+          {
+            "id": "js-t1.3",
+            "title": "Promises, Async/Await & Fetch API",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "react-ch2",
+        "title": "React Fundamentals & Hooks",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "react-t2.1",
+            "title": "JSX, Props, and Component Tree Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "react-t2.2",
+            "title": "useState, useEffect, useRef & Custom Hooks",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "react-ch3",
+        "title": "React State Management & Single Page Apps",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "react-t3.1",
+            "title": "React Router DOM & Protected Routes",
+            "sortOrder": 1
+          },
+          {
+            "id": "react-t3.2",
+            "title": "Context API & Global App State",
+            "sortOrder": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-backend-node",
+    "status": "PUBLISH",
+    "title": "Backend Engineering with Node.js & Databases",
+    "slug": "backend-engineering-nodejs-databases",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Learn RESTful API development, JWT authentication, server security, database modeling with Mongoose/MongoDB, and cloud deployment.",
+    "categories": [
+      "Backend",
+      "Node.js",
+      "Express",
+      "Database"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 2,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "node-ch1",
+        "title": "Node.js Core Runtime & Express Servers",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "node-t1.1",
+            "title": "Event Loop, Modules & NPM Package Management",
+            "sortOrder": 1
+          },
+          {
+            "id": "node-t1.2",
+            "title": "Express Routing, Middlewares & Error Handling",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "db-ch2",
+        "title": "Database Architecture & MongoDB",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "db-t2.1",
+            "title": "NoSQL Schema Design & Mongoose ODM",
+            "sortOrder": 1
+          },
+          {
+            "id": "db-t2.2",
+            "title": "CRUD Operations, Aggregations & Indexes",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "auth-ch3",
+        "title": "API Authentication, Security & Deployment",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "auth-t3.1",
+            "title": "JWT Auth, Password Hashing with Bcrypt & Cookies",
+            "sortOrder": 1
+          },
+          {
+            "id": "auth-t3.2",
+            "title": "Production Deployment, CORS & Rate Limiting",
+            "sortOrder": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-web-dev",
+    "status": "PUBLISH",
+    "title": "Full-Stack Web Development Bootcamp",
+    "slug": "full-stack-web-dev-bootcamp",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Complete 3-in-1 combo bootcamp covering Frontend UI, React Engineering, and Node.js Backend API Development. Build full-stack production web applications from scratch.",
+    "categories": [
+      "Web Development",
+      "JavaScript",
+      "React",
+      "Frontend",
+      "Backend",
+      "Combo"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 6,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "OFFLINE",
+    "courseType": "COMBO",
+    "includedCourseIds": [
+      "course-html-css",
+      "course-js-react",
+      "course-backend-node"
+    ]
+  },
+  {
+    "id": "course-ccc",
+    "status": "PUBLISH",
+    "title": "CCC (Course on Computer Concepts)",
+    "slug": "ccc-computer-concepts",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "NIELIT syllabus compliant computer literacy course. Learn MS Office, internet surfing, email, digital financial services, and cyber security.",
+    "categories": [
+      "Computer Literacy",
+      "MS Office",
+      "General"
+    ],
+    "level": "Beginner",
+    "language": [
+      "Hindi"
+    ],
+    "duration": {
+      "value": 80,
+      "unit": "HOURS"
+    },
+    "certificate": true,
+    "mode": "OFFLINE",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "ccc-ch1",
+        "title": "Introduction to Computer & GUI OS",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "ccc-t1.1",
+            "title": "Hardware & Software Fundamentals",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t1.2",
+            "title": "Operating Systems & UI Settings",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch2",
+        "title": "MS Word (Word Processing)",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "ccc-t2.1",
+            "title": "Creating & Formatting Documents",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t2.2",
+            "title": "Tables, Mail Merge, and Templates",
+            "sortOrder": 2
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch3",
+        "title": "MS Excel (Spreadsheets)",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "ccc-t3.1",
+            "title": "Formulas, Functions, and Cell References",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t3.2",
+            "title": "Charts and Data Sorting",
+            "sortOrder": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-master-diploma",
+    "status": "PUBLISH",
+    "title": "Master Computer & Coding Diploma (ADCA + Python)",
+    "slug": "master-computer-coding-diploma",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Comprehensive all-in-one bundle covering basic computer concepts (CCC), foundational web page creation (HTML/CSS), and advanced Python software engineering.",
+    "categories": [
+      "Diploma",
+      "Python",
+      "Computer Literacy",
+      "Combo"
+    ],
+    "level": "Beginner",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 6,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "COMBO",
+    "includedCourseIds": [
+      "course-ccc",
+      "course-html-css",
+      "course-python-basics"
+    ]
+  },
+  {
+    "id": "course-cyber-security-ethical-hacking",
+    "status": "PUBLISH",
+    "title": "Cyber Security & Ethical Hacking Professional Program",
+    "slug": "cyber-security-ethical-hacking-professional-program",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Master Cyber Security and Ethical Hacking from fundamentals to professional-level security operations. Learn networking, Linux, Python, ethical hacking, web security, penetration testing, Active Directory, cloud security, SOC operations, digital forensics, vulnerability assessment, and real-world security projects.",
+    "categories": [
+      "Cyber Security",
+      "Ethical Hacking",
+      "Information Security",
+      "Penetration Testing",
+      "SOC",
+      "Network Security",
+      "Web Security",
+      "Cloud Security"
+    ],
+    "level": "Beginner to Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 18,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "cs-ch1",
+        "title": "Cyber Security Fundamentals",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "cs-t1.1",
+            "title": "Introduction to Cyber Security",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t1.2",
+            "title": "Cyber Security Domains and Career Paths",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t1.3",
+            "title": "CIA Triad: Confidentiality, Integrity and Availability",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t1.4",
+            "title": "Threats, Vulnerabilities, Risks and Attacks",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t1.5",
+            "title": "Security Policies, Ethics and Responsible Disclosure",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t1.6",
+            "title": "Cyber Laws and Legal Boundaries of Ethical Hacking",
+            "sortOrder": 6
+          }
+        ]
+      },
+      {
+        "id": "cs-ch2",
+        "title": "Computer and Operating System Fundamentals",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "cs-t2.1",
+            "title": "Computer Hardware and System Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t2.2",
+            "title": "CPU, RAM, Storage and I/O Fundamentals",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t2.3",
+            "title": "Processes, Threads and Memory Management",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t2.4",
+            "title": "Windows Operating System Fundamentals",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t2.5",
+            "title": "Windows Users, Permissions and Services",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t2.6",
+            "title": "System Administration Fundamentals",
+            "sortOrder": 6
+          }
+        ]
+      },
+      {
+        "id": "cs-ch3",
+        "title": "Networking Fundamentals",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "cs-t3.1",
+            "title": "Introduction to Computer Networks",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t3.2",
+            "title": "OSI and TCP/IP Models",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t3.3",
+            "title": "MAC Address, IP Address and Network Interfaces",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t3.4",
+            "title": "IPv4, IPv6 and Subnetting",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t3.5",
+            "title": "TCP, UDP and Common Network Protocols",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t3.6",
+            "title": "DNS, DHCP, HTTP, HTTPS, FTP and SSH",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t3.7",
+            "title": "Routers, Switches, Firewalls and NAT",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "cs-ch4",
+        "title": "Linux for Cyber Security",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "cs-t4.1",
+            "title": "Linux Architecture and Distributions",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t4.2",
+            "title": "Linux Installation and Virtual Machines",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t4.3",
+            "title": "Linux Command Line Fundamentals",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t4.4",
+            "title": "Files, Directories and Permissions",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t4.5",
+            "title": "Users, Groups and Privilege Management",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t4.6",
+            "title": "Processes, Services and Logs",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t4.7",
+            "title": "Kali Linux Security Toolkit Overview",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "cs-ch5",
+        "title": "Programming and Scripting for Security",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "cs-t5.1",
+            "title": "Programming Fundamentals with Python",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t5.2",
+            "title": "Variables, Data Types, Conditions and Loops",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t5.3",
+            "title": "Functions, Modules and Exception Handling",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t5.4",
+            "title": "Working with Files and JSON",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t5.5",
+            "title": "Regular Expressions for Security Analysis",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t5.6",
+            "title": "Python Networking and HTTP Requests",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t5.7",
+            "title": "Building Security Automation Scripts",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t5.8",
+            "title": "Bash Scripting Fundamentals",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch6",
+        "title": "Security Tools and Virtual Cyber Lab",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "cs-t6.1",
+            "title": "Building a Personal Cyber Security Lab",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t6.2",
+            "title": "VirtualBox and VMware Fundamentals",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t6.3",
+            "title": "Kali Linux Lab Setup",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t6.4",
+            "title": "Windows Security Lab Setup",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t6.5",
+            "title": "Vulnerable Practice Applications and Sandboxes",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t6.6",
+            "title": "Security Tool Categories and Safe Usage",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t6.7",
+            "title": "Lab Documentation and Evidence Collection",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "cs-ch7",
+        "title": "Ethical Hacking Methodology",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "cs-t7.1",
+            "title": "Ethical Hacking and Penetration Testing",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t7.2",
+            "title": "Rules of Engagement and Scope Definition",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t7.3",
+            "title": "Reconnaissance and Information Gathering",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t7.4",
+            "title": "Passive and Active Reconnaissance",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t7.5",
+            "title": "Asset Discovery and Attack Surface Mapping",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t7.6",
+            "title": "Vulnerability Identification and Risk Rating",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t7.7",
+            "title": "Penetration Testing Lifecycle",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "cs-ch8",
+        "title": "Network Security and Vulnerability Assessment",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "cs-t8.1",
+            "title": "Network Security Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t8.2",
+            "title": "Network Discovery and Service Enumeration",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t8.3",
+            "title": "Port Scanning Concepts and Defensive Interpretation",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t8.4",
+            "title": "Vulnerability Scanning",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t8.5",
+            "title": "Firewalls, IDS and IPS",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t8.6",
+            "title": "Network Segmentation and Zero Trust",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t8.7",
+            "title": "Network Security Assessment Project",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "cs-ch9",
+        "title": "Web Application Security",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "cs-t9.1",
+            "title": "How Web Applications Work",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t9.2",
+            "title": "HTTP Requests, Responses, Headers and Cookies",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t9.3",
+            "title": "Authentication and Session Management",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t9.4",
+            "title": "OWASP Top 10 Overview",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t9.5",
+            "title": "Injection Vulnerabilities in Controlled Labs",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t9.6",
+            "title": "Cross-Site Scripting in Controlled Labs",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t9.7",
+            "title": "Access Control and Authorization Testing",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t9.8",
+            "title": "Security Misconfiguration and Sensitive Data Exposure",
+            "sortOrder": 8
+          },
+          {
+            "id": "cs-t9.9",
+            "title": "Web Security Testing with Proxy Tools",
+            "sortOrder": 9
+          }
+        ]
+      },
+      {
+        "id": "cs-ch10",
+        "title": "API Security and Secure Development",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "cs-t10.1",
+            "title": "REST APIs and API Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t10.2",
+            "title": "API Authentication and Authorization",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t10.3",
+            "title": "API Input Validation",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t10.4",
+            "title": "API Rate Limiting and Abuse Prevention",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t10.5",
+            "title": "Common API Security Vulnerabilities",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t10.6",
+            "title": "Secure Coding Principles",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t10.7",
+            "title": "Threat Modeling for Applications",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t10.8",
+            "title": "Secure Web and API Assessment Project",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch11",
+        "title": "Windows Security and Active Directory",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "cs-t11.1",
+            "title": "Windows Security Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t11.2",
+            "title": "Active Directory Fundamentals",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t11.3",
+            "title": "Domains, Users, Groups and Organizational Units",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t11.4",
+            "title": "Group Policy and Security Controls",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t11.5",
+            "title": "Authentication and Kerberos Concepts",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t11.6",
+            "title": "Active Directory Security Assessment",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t11.7",
+            "title": "Privilege Management and Least Privilege",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t11.8",
+            "title": "Active Directory Defense Lab",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch12",
+        "title": "SOC and Blue Team Operations",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "cs-t12.1",
+            "title": "Security Operations Center Fundamentals",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t12.2",
+            "title": "SOC Analyst Roles and Responsibilities",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t12.3",
+            "title": "Security Logs and Event Analysis",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t12.4",
+            "title": "Windows and Linux Log Analysis",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t12.5",
+            "title": "SIEM Fundamentals",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t12.6",
+            "title": "Security Alerts and Incident Triage",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t12.7",
+            "title": "Threat Intelligence Fundamentals",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t12.8",
+            "title": "Incident Response Lifecycle",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch13",
+        "title": "Digital Forensics",
+        "sortOrder": 13,
+        "topics": [
+          {
+            "id": "cs-t13.1",
+            "title": "Introduction to Digital Forensics",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t13.2",
+            "title": "Evidence Handling and Chain of Custody",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t13.3",
+            "title": "File Systems and Digital Artifacts",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t13.4",
+            "title": "Windows Forensic Artifacts",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t13.5",
+            "title": "Linux Forensic Artifacts",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t13.6",
+            "title": "Browser and Application Artifacts",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t13.7",
+            "title": "Memory Forensics Fundamentals",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t13.8",
+            "title": "Digital Forensics Investigation Project",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch14",
+        "title": "Malware Analysis Fundamentals",
+        "sortOrder": 14,
+        "topics": [
+          {
+            "id": "cs-t14.1",
+            "title": "Introduction to Malware",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t14.2",
+            "title": "Malware Types and Attack Lifecycle",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t14.3",
+            "title": "Static Malware Analysis",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t14.4",
+            "title": "Dynamic Analysis in an Isolated Lab",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t14.5",
+            "title": "Indicators of Compromise",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t14.6",
+            "title": "File Hashes and Malware Intelligence",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t14.7",
+            "title": "Behavior Analysis and Detection",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t14.8",
+            "title": "Malware Analysis Report Project",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch15",
+        "title": "Cloud Security",
+        "sortOrder": 15,
+        "topics": [
+          {
+            "id": "cs-t15.1",
+            "title": "Cloud Computing Fundamentals",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t15.2",
+            "title": "IaaS, PaaS and SaaS Security",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t15.3",
+            "title": "Cloud Identity and Access Management",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t15.4",
+            "title": "Cloud Networking and Security Groups",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t15.5",
+            "title": "Storage and Data Protection",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t15.6",
+            "title": "Cloud Logging and Monitoring",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t15.7",
+            "title": "Cloud Security Misconfigurations",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t15.8",
+            "title": "Cloud Security Assessment Project",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch16",
+        "title": "Advanced Penetration Testing",
+        "sortOrder": 16,
+        "topics": [
+          {
+            "id": "cs-t16.1",
+            "title": "Advanced Penetration Testing Methodology",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t16.2",
+            "title": "Vulnerability Validation in Authorized Labs",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t16.3",
+            "title": "Privilege Escalation Concepts",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t16.4",
+            "title": "Linux Privilege Escalation in Practice Labs",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t16.5",
+            "title": "Windows Privilege Escalation in Practice Labs",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t16.6",
+            "title": "Post-Exploitation Concepts and Defensive Detection",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t16.7",
+            "title": "Security Assessment Documentation",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t16.8",
+            "title": "Professional Penetration Testing Report",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch17",
+        "title": "Security Engineering and Advanced Defense",
+        "sortOrder": 17,
+        "topics": [
+          {
+            "id": "cs-t17.1",
+            "title": "Security Architecture Principles",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t17.2",
+            "title": "Defense in Depth",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t17.3",
+            "title": "Zero Trust Security Architecture",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t17.4",
+            "title": "Identity and Access Management",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t17.5",
+            "title": "Endpoint Detection and Response",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t17.6",
+            "title": "Security Automation and SOAR Concepts",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t17.7",
+            "title": "Risk Management and Security Governance",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t17.8",
+            "title": "Security Architecture Design Project",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "cs-ch18",
+        "title": "Professional Cyber Security Capstone",
+        "sortOrder": 18,
+        "topics": [
+          {
+            "id": "cs-t18.1",
+            "title": "Cyber Security Project Planning",
+            "sortOrder": 1
+          },
+          {
+            "id": "cs-t18.2",
+            "title": "Security Assessment Scoping",
+            "sortOrder": 2
+          },
+          {
+            "id": "cs-t18.3",
+            "title": "Reconnaissance and Attack Surface Assessment",
+            "sortOrder": 3
+          },
+          {
+            "id": "cs-t18.4",
+            "title": "Network and Web Security Assessment",
+            "sortOrder": 4
+          },
+          {
+            "id": "cs-t18.5",
+            "title": "Security Monitoring and Incident Investigation",
+            "sortOrder": 5
+          },
+          {
+            "id": "cs-t18.6",
+            "title": "Vulnerability Prioritization and Remediation Planning",
+            "sortOrder": 6
+          },
+          {
+            "id": "cs-t18.7",
+            "title": "Professional Security Assessment Report",
+            "sortOrder": 7
+          },
+          {
+            "id": "cs-t18.8",
+            "title": "Final Cyber Security Capstone Presentation",
+            "sortOrder": 8
+          },
+          {
+            "id": "cs-t18.9",
+            "title": "Cyber Security Career, Resume and Interview Preparation",
+            "sortOrder": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-python-basics",
+    "status": "PUBLISH",
+    "title": "Python for Beginners",
+    "slug": "python-for-beginners",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Master Python programming from scratch in 1 month. Comprehensive hands-on curriculum covering variables, data types, numbers, strings, operators, data structures (lists, tuples, sets, dicts), control flow, loops, functions, file handling, and 4 real-world projects.",
+    "categories": [
+      "Programming",
+      "Python",
+      "Software Engineering",
+      "Beginner"
+    ],
+    "level": "Beginner",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "py-ch1",
+        "title": "1: Introduction and Setup",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "py-t1.1",
+            "title": "Python Introduction",
+            "slug": "python-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/python-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t1.2",
+            "title": "VS Code Setup",
+            "slug": "vs-code-setup",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/vs-code-setup"
+              }
+            ]
+          },
+          {
+            "id": "py-t1.3",
+            "title": "Python Setup",
+            "slug": "python-setup",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/python-setup"
+              }
+            ]
+          },
+          {
+            "id": "py-t1.4",
+            "title": "Syntax & Code Structure",
+            "slug": "syntax-code-structure",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/syntax-code-structure"
+              }
+            ]
+          },
+          {
+            "id": "py-t1.5",
+            "title": "Comments & Best Practices",
+            "slug": "comments-best-practices",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/comments-best-practices"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch2",
+        "title": "2: Variables",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "py-t2.1",
+            "title": "Variables Introduction and Rules",
+            "slug": "variables-introduction-and-rules",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/variables-introduction-and-rules"
+              }
+            ]
+          },
+          {
+            "id": "py-t2.2",
+            "title": "Creating a Variable",
+            "slug": "creating-a-variable",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/creating-a-variable"
+              }
+            ]
+          },
+          {
+            "id": "py-t2.3",
+            "title": "Output Variables & Printing Techniques",
+            "slug": "output-variables-printing-techniques",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/output-variables-printing-techniques"
+              }
+            ]
+          },
+          {
+            "id": "py-t2.4",
+            "title": "Multiple Assignments",
+            "slug": "multiple-assignments",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/multiple-assignments"
+              }
+            ]
+          },
+          {
+            "id": "py-t2.5",
+            "title": "Constants (Python Convention)",
+            "slug": "constants-python-convention",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/constants-python-convention"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch3",
+        "title": "3: Data Types",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "py-t3.1",
+            "title": "Data Types Overview",
+            "slug": "data-types-overview",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/data-types-overview"
+              }
+            ]
+          },
+          {
+            "id": "py-t3.2",
+            "title": "Type Conversion (Casting & type())",
+            "slug": "type-conversion-casting-type",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/type-conversion-casting-type"
+              }
+            ]
+          },
+          {
+            "id": "py-t3.3",
+            "title": "Checking Data Types (isinstance)",
+            "slug": "checking-data-types-isinstance",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/checking-data-types-isinstance"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch4",
+        "title": "4: Numbers",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "py-t4.1",
+            "title": "Integer, Float, Complex",
+            "slug": "integer-float-complex",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/integer-float-complex"
+              }
+            ]
+          },
+          {
+            "id": "py-t4.2",
+            "title": "Mathematical Operations",
+            "slug": "mathematical-operations",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/mathematical-operations"
+              }
+            ]
+          },
+          {
+            "id": "py-t4.3",
+            "title": "Math Module (math, random)",
+            "slug": "math-module-math-random",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/math-module-math-random"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch5",
+        "title": "5: Strings",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "py-t5.1",
+            "title": "String Introduction",
+            "slug": "string-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/string-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t5.2",
+            "title": "Slicing & Indexing",
+            "slug": "slicing-indexing",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/slicing-indexing"
+              }
+            ]
+          },
+          {
+            "id": "py-t5.3",
+            "title": "Modifying Strings",
+            "slug": "modifying-strings",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/modifying-strings"
+              }
+            ]
+          },
+          {
+            "id": "py-t5.4",
+            "title": "Concatenation & Formatting (f-string, format, %)",
+            "slug": "concatenation-formatting",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/concatenation-formatting"
+              }
+            ]
+          },
+          {
+            "id": "py-t5.5",
+            "title": "Escape Characters",
+            "slug": "escape-characters",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/escape-characters"
+              }
+            ]
+          },
+          {
+            "id": "py-t5.6",
+            "title": "String Methods",
+            "slug": "string-methods",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/string-methods"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch6",
+        "title": "6: Operators",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "py-t6.1",
+            "title": "Arithmetic Operators",
+            "slug": "arithmetic-operators",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/arithmetic-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t6.2",
+            "title": "Assignment Operators",
+            "slug": "assignment-operators",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/assignment-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t6.3",
+            "title": "Comparison Operators",
+            "slug": "comparison-operators",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/comparison-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t6.4",
+            "title": "Logical Operators",
+            "slug": "logical-operators",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/logical-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t6.5",
+            "title": "Identity & Membership Operators",
+            "slug": "identity-membership-operators",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/identity-membership-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t6.6",
+            "title": "Bitwise Operators",
+            "slug": "bitwise-operators",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/bitwise-operators"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch7",
+        "title": "7: Casting",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "py-t7.1",
+            "title": "Implicit Casting",
+            "slug": "implicit-casting",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/implicit-casting"
+              }
+            ]
+          },
+          {
+            "id": "py-t7.2",
+            "title": "Explicit Casting (int(), float(), str())",
+            "slug": "explicit-casting",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/explicit-casting"
+              }
+            ]
+          },
+          {
+            "id": "py-t7.3",
+            "title": "Common Pitfalls",
+            "slug": "common-pitfalls",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/common-pitfalls"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch8",
+        "title": "8: Lists",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "py-t8.1",
+            "title": "List Introduction",
+            "slug": "list-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/list-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t8.2",
+            "title": "Create & Access Lists",
+            "slug": "create-access-lists",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/create-access-lists"
+              }
+            ]
+          },
+          {
+            "id": "py-t8.3",
+            "title": "Add & Remove Items",
+            "slug": "add-remove-items",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/add-remove-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t8.4",
+            "title": "Update Items",
+            "slug": "update-items",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/update-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t8.5",
+            "title": "List Methods",
+            "slug": "list-methods",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/list-methods"
+              }
+            ]
+          },
+          {
+            "id": "py-t8.6",
+            "title": "Nested Lists",
+            "slug": "nested-lists",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-lists"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch9",
+        "title": "9: Tuples",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "py-t9.1",
+            "title": "Tuple Introduction",
+            "slug": "tuple-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/tuple-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t9.2",
+            "title": "Accessing Items",
+            "slug": "accessing-items",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/accessing-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t9.3",
+            "title": "Updating & Unpacking Tuples",
+            "slug": "updating-unpacking-tuples",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/updating-unpacking-tuples"
+              }
+            ]
+          },
+          {
+            "id": "py-t9.4",
+            "title": "Join Tuples",
+            "slug": "join-tuples",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/join-tuples"
+              }
+            ]
+          },
+          {
+            "id": "py-t9.5",
+            "title": "Tuple Methods",
+            "slug": "tuple-methods",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/tuple-methods"
+              }
+            ]
+          },
+          {
+            "id": "py-t9.6",
+            "title": "Nested Tuples",
+            "slug": "nested-tuples",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-tuples"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch10",
+        "title": "10: Sets",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "py-t10.1",
+            "title": "Sets Introduction",
+            "slug": "sets-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/sets-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t10.2",
+            "title": "Adding & Removing Items",
+            "slug": "adding-removing-set-items",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/adding-removing-set-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t10.3",
+            "title": "Set Operations",
+            "slug": "set-operations",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/set-operations"
+              }
+            ]
+          },
+          {
+            "id": "py-t10.4",
+            "title": "Set Methods",
+            "slug": "set-methods",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/set-methods"
+              }
+            ]
+          },
+          {
+            "id": "py-t10.5",
+            "title": "Nested Sets",
+            "slug": "nested-sets",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-sets"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch11",
+        "title": "11: Dictionaries",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "py-t11.1",
+            "title": "Dictionaries Introduction",
+            "slug": "dictionaries-introduction",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/dictionaries-introduction"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.2",
+            "title": "Accessing & Updating Items",
+            "slug": "accessing-updating-items",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/accessing-updating-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.3",
+            "title": "Adding & Removing Items",
+            "slug": "adding-removing-dict-items",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/adding-removing-dict-items"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.4",
+            "title": "Copying Dictionaries",
+            "slug": "copying-dictionaries",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/copying-dictionaries"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.5",
+            "title": "Dictionary Methods",
+            "slug": "dictionary-methods",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/dictionary-methods"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.6",
+            "title": "Nested Dictionaries",
+            "slug": "nested-dictionaries",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-dictionaries"
+              }
+            ]
+          },
+          {
+            "id": "py-t11.7",
+            "title": "Project: Student Records",
+            "slug": "project-student-records",
+            "sortOrder": 7,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/project-student-records"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch12",
+        "title": "12: Conditional Statements",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "py-t12.1",
+            "title": "If, Elif, Else",
+            "slug": "if-elif-else",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/if-elif-else"
+              }
+            ]
+          },
+          {
+            "id": "py-t12.2",
+            "title": "Nested Conditions",
+            "slug": "nested-conditions",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-conditions"
+              }
+            ]
+          },
+          {
+            "id": "py-t12.3",
+            "title": "Short-hand If Statements",
+            "slug": "short-hand-if-statements",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/short-hand-if-statements"
+              }
+            ]
+          },
+          {
+            "id": "py-t12.4",
+            "title": "Ternary Operators",
+            "slug": "ternary-operators",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/ternary-operators"
+              }
+            ]
+          },
+          {
+            "id": "py-t12.5",
+            "title": "Project: Grading System",
+            "slug": "project-grading-system",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/project-grading-system"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch13",
+        "title": "13: Loops",
+        "sortOrder": 13,
+        "topics": [
+          {
+            "id": "py-t13.1",
+            "title": "While Loop",
+            "slug": "while-loop",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/while-loop"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.2",
+            "title": "For Loop",
+            "slug": "for-loop",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/for-loop"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.3",
+            "title": "Nested Loops",
+            "slug": "nested-loops",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/nested-loops"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.4",
+            "title": "Break, Continue, Pass",
+            "slug": "break-continue-pass",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/break-continue-pass"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.5",
+            "title": "Loops with Else",
+            "slug": "loops-with-else",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/loops-with-else"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.6",
+            "title": "Iterating with Loops",
+            "slug": "iterating-with-loops",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/iterating-with-loops"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.7",
+            "title": "List Comprehension",
+            "slug": "list-comprehension",
+            "sortOrder": 7,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/list-comprehension"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.8",
+            "title": "Set Comprehension",
+            "slug": "set-comprehension",
+            "sortOrder": 8,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/set-comprehension"
+              }
+            ]
+          },
+          {
+            "id": "py-t13.9",
+            "title": "Project: Multiplication Table Generator",
+            "slug": "project-multiplication-table-generator",
+            "sortOrder": 9,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/project-multiplication-table-generator"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch14",
+        "title": "14: Functions",
+        "sortOrder": 14,
+        "topics": [
+          {
+            "id": "py-t14.1",
+            "title": "Defining & Calling Functions",
+            "slug": "defining-calling-functions",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/defining-calling-functions"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.2",
+            "title": "Arguments: Positional, Keyword",
+            "slug": "arguments-positional-keyword",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/arguments-positional-keyword"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.3",
+            "title": "Arguments: Default, *args, **kwargs",
+            "slug": "arguments-default-args-kwargs",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/arguments-default-args-kwargs"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.4",
+            "title": "Return Values",
+            "slug": "return-values",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/return-values"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.5",
+            "title": "Lambda Functions",
+            "slug": "lambda-functions",
+            "sortOrder": 5,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/lambda-functions"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.6",
+            "title": "Recursion",
+            "slug": "recursion",
+            "sortOrder": 6,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/recursion"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.7",
+            "title": "Scope of Variables in Functions",
+            "slug": "scope-of-variables-in-functions",
+            "sortOrder": 7,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/scope-of-variables-in-functions"
+              }
+            ]
+          },
+          {
+            "id": "py-t14.8",
+            "title": "Project: Calculator",
+            "slug": "project-calculator",
+            "sortOrder": 8,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/project-calculator"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch15",
+        "title": "15: File Handling",
+        "sortOrder": 15,
+        "topics": [
+          {
+            "id": "py-t15.1",
+            "title": "Opening & Closing Files",
+            "slug": "opening-closing-files",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/opening-closing-files"
+              }
+            ]
+          },
+          {
+            "id": "py-t15.2",
+            "title": "Reading & Writing Files",
+            "slug": "reading-writing-files",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/reading-writing-files"
+              }
+            ]
+          },
+          {
+            "id": "py-t15.3",
+            "title": "Working with open()",
+            "slug": "working-with-open",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/working-with-open"
+              }
+            ]
+          },
+          {
+            "id": "py-t15.4",
+            "title": "File Methods (read, readline, write)",
+            "slug": "file-methods-read-readline-write",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/file-methods-read-readline-write"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "py-ch16",
+        "title": "16: Projects",
+        "sortOrder": 16,
+        "topics": [
+          {
+            "id": "py-t16.1",
+            "title": "Contact Book",
+            "slug": "contact-book",
+            "sortOrder": 1,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/contact-book"
+              }
+            ]
+          },
+          {
+            "id": "py-t16.2",
+            "title": "Quiz Application",
+            "slug": "quiz-application",
+            "sortOrder": 2,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/quiz-application"
+              }
+            ]
+          },
+          {
+            "id": "py-t16.3",
+            "title": "Expense Tracker",
+            "slug": "expense-tracker",
+            "sortOrder": 3,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/expense-tracker"
+              }
+            ]
+          },
+          {
+            "id": "py-t16.4",
+            "title": "Basic Student Management System",
+            "slug": "basic-student-management-system",
+            "sortOrder": 4,
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-beginners/basic-student-management-system"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

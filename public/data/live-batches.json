@@ -1,0 +1,50 @@
+[
+  {
+    "id": "batch-python-fasttrack",
+    "courseSlug": "python-programming-masterclass",
+    "title": "Python Developer Fast-Track Live Batch",
+    "startDate": "2026-09-15",
+    "schedule": "Mon, Wed, Fri (04:30 PM - 06:00 PM)",
+    "instructorId": "sumit-kumar",
+    "price": "₹4,999",
+    "originalPrice": "₹8,999",
+    "totalSeats": 20,
+    "leftSeats": 4
+  },
+  {
+    "id": "batch-mern-morning",
+    "courseSlug": "full-stack-web-dev-bootcamp",
+    "title": "Full-Stack MERN Developer Flagship Batch",
+    "startDate": "2026-09-18",
+    "schedule": "Tue, Thu, Sat (09:00 AM - 11:00 AM)",
+    "instructorId": "sumit-kumar",
+    "price": "₹12,499",
+    "originalPrice": "₹19,999",
+    "totalSeats": 20,
+    "leftSeats": 6
+  },
+  {
+    "id": "batch-web-frontend",
+    "courseSlug": "html5-css3-modern-ui-design",
+    "title": "Modern UI/UX & Frontend Web Design Batch",
+    "startDate": "2026-09-20",
+    "schedule": "Mon, Wed, Fri (02:00 PM - 03:30 PM)",
+    "instructorId": "manish-sharma",
+    "price": "₹3,499",
+    "originalPrice": "₹5,999",
+    "totalSeats": 15,
+    "leftSeats": 5
+  },
+  {
+    "id": "batch-ccc-weekend",
+    "courseSlug": "ccc-computer-concepts",
+    "title": "CCC & Computer Concepts Weekend Special",
+    "startDate": "2026-09-22",
+    "schedule": "Saturday & Sunday (10:00 AM - 01:00 PM)",
+    "instructorId": "sumit-kumar",
+    "price": "₹2,499",
+    "originalPrice": "₹4,499",
+    "totalSeats": 25,
+    "leftSeats": 7
+  }
+]

@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Anthropic-AI
+Allow: /
+Allow: /courses/
+Allow: /about
+Allow: /contact
+Disallow: /verify-certificate?id=*
+Disallow: /admin
+
+Sitemap: https://mskinstitute.in/sitemap.xml

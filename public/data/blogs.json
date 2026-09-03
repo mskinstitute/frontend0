@@ -1,0 +1,199 @@
+[
+  {
+    "id": "blog-web-dev-roadmap-2026",
+    "slug": "full-stack-web-development-roadmap-2026",
+    "title": "Complete Roadmap to Full-Stack Web Development in 2026",
+    "excerpt": "A definitive guide for students and beginners looking to become job-ready full-stack software engineers in 2026, starting from HTML/CSS to React, Next.js, and Cloud APIs.",
+    "coverImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop",
+    "category": "Web Development",
+    "featured": true,
+    "author": {
+      "name": "Er. Sumit Kumar",
+      "role": "Founder & Lead Technical Mentor",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-08-25",
+    "readTime": "6 min read",
+    "tags": ["Full Stack", "React", "Next.js", "Career Roadmap", "Web Dev"],
+    "content": {
+      "introduction": "The landscape of software development is evolving rapidly with AI tools and server-driven web architectures. However, core engineering principles remain unchanged. If you are starting your coding journey in 2026 from Shikohabad or anywhere in India, here is the proven, step-by-step path to master full-stack development.",
+      "sections": [
+        {
+          "heading": "1. Solidify Frontend Fundamentals (HTML5, Modern CSS & Tailwind)",
+          "body": "Never skip the basics. Many students rush directly into frameworks without understanding document object models (DOM) or how CSS box models work. Spend 4 weeks writing semantic HTML, mastering Flexbox & Grid, and building responsive mobile layouts using Tailwind CSS.",
+          "callout": "Pro Tip: If you can build a responsive landing page from scratch without looking at framework docs, you are ready for JavaScript."
+        },
+        {
+          "heading": "2. Modern JavaScript (ES6+) and Asynchronous Programming",
+          "body": "JavaScript powers 98% of all websites. Focus your energy on functional array methods (.map, .filter, .reduce), destructuring, promises, and async/await for network requests.",
+          "codeSnippet": "// Clean async fetch pattern\nasync function loadUserData(userId) {\n  try {\n    const res = await fetch(`/api/users/${userId}`);\n    if (!res.ok) throw new Error('User not found');\n    return await res.json();\n  } catch (err) {\n    console.error('Fetch error:', err.message);\n  }\n}",
+          "codeLanguage": "javascript"
+        },
+        {
+          "heading": "3. React 19 & Next.js App Router",
+          "body": "React is the undisputed industry standard for web applications. In 2026, the modern approach is building with React Server Components (RSC) and Next.js. You get instant SEO indexing, automatic code splitting, and ultra-fast page loads right out of the box."
+        },
+        {
+          "heading": "4. Backend APIs & Database Modeling",
+          "body": "A full-stack engineer needs to design relational database schemas (PostgreSQL or MySQL) and write secure REST/GraphQL API services using Node.js or Python. Practice writing indexing queries and securing auth with JWT or OAuth2.",
+          "callout": "At MSK Institute, students in our Full-Stack Bootcamp build 3 live database-driven applications with production deployments."
+        }
+      ],
+      "conclusion": "Becoming a full-stack engineer is a marathon, not a sprint. With disciplined daily lab practice, code reviews, and real projects, you can transition into high-paying remote or on-site engineering roles within 6 to 9 months."
+    },
+    "relatedCourseSlugs": ["full-stack-web-dev-bootcamp", "javascript-react-frontend-engineering"]
+  },
+  {
+    "id": "blog-top-excel-formulas",
+    "slug": "top-10-excel-formulas-every-office-professional-must-know",
+    "title": "Top 10 Advanced Excel Formulas Every Office Professional Must Master",
+    "excerpt": "Boost your productivity by 10x with these essential Microsoft Excel formulas for fast reporting, data cleaning, and instant lookups.",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    "category": "MS Office",
+    "featured": false,
+    "author": {
+      "name": "Manish Sharma",
+      "role": "Senior Computer Applications Instructor",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-08-20",
+    "readTime": "5 min read",
+    "tags": ["Excel", "Office Automation", "Data Analysis", "Productivity"],
+    "content": {
+      "introduction": "Microsoft Excel is the backbone of business analytics, accounting, and daily office operations worldwide. Whether you manage student fees, retail stock, or salary calculations, mastering these modern Excel functions will save you hundreds of hours.",
+      "sections": [
+        {
+          "heading": "1. XLOOKUP — The Modern Replacement for VLOOKUP",
+          "body": "Forget the limitations of VLOOKUP where columns had to be to the right of your lookup index. XLOOKUP searches in any direction and handles missing values gracefully.",
+          "codeSnippet": "=XLOOKUP(E2, A:A, C:C, \"Record Not Found\")",
+          "codeLanguage": "excel",
+          "callout": "Key Advantage: No need to count column index numbers like VLOOKUP!"
+        },
+        {
+          "heading": "2. SUMIFS & COUNTIFS for Multi-Condition Filtering",
+          "body": "When you need to calculate totals based on multiple filters—such as 'Sum total revenue in Shikohabad during August 2026'—SUMIFS is your best friend.",
+          "codeSnippet": "=SUMIFS(D2:D500, B2:B500, \"Shikohabad\", C2:C500, \">=01-08-2026\")",
+          "codeLanguage": "excel"
+        },
+        {
+          "heading": "3. TEXTSPLIT & TEXTJOIN for Rapid Data Cleaning",
+          "body": "Easily parse full names into First Name / Last Name, or combine hundreds of address lines into clean comma-separated paragraphs without complex VBA macros."
+        }
+      ],
+      "conclusion": "Combining these functions with keyboard shortcuts like Ctrl+Shift+L (AutoFilter) and Alt+= (AutoSum) will elevate you to the top 5% of spreadsheet power users in any office."
+    },
+    "relatedCourseSlugs": ["ccc-computer-concepts", "master-computer-coding-diploma"]
+  },
+  {
+    "id": "blog-python-vs-javascript",
+    "slug": "python-vs-javascript-which-to-learn-first",
+    "title": "Python vs JavaScript: Which Programming Language Should Beginners Pick First?",
+    "excerpt": "Confused between Python and JavaScript? We break down syntax difficulty, job opportunities, versatility, and salary trends to help you choose the right path.",
+    "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+    "category": "Programming",
+    "featured": false,
+    "author": {
+      "name": "Er. Sumit Kumar",
+      "role": "Founder & Lead Technical Mentor",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-08-15",
+    "readTime": "5 min read",
+    "tags": ["Python", "JavaScript", "Beginner Guide", "Career Advice"],
+    "content": {
+      "introduction": "This is the most common question students ask when they enter MSK Institute for admissions. Both Python and JavaScript are dominating the tech world, but they shine in different areas.",
+      "sections": [
+        {
+          "heading": "Python: The King of Readability, AI & Automation",
+          "body": "Python uses clean indentation instead of curly braces, making it look almost like plain English. It is the undisputed gold standard for Artificial Intelligence, Machine Learning, Data Science, and script automation.",
+          "codeSnippet": "# Python: Printing even numbers\nnumbers = [1, 2, 3, 4, 5, 6]\nevens = [n for n in numbers if n % 2 == 0]\nprint(f\"Even numbers: {evens}\")",
+          "codeLanguage": "python"
+        },
+        {
+          "heading": "JavaScript: The Universal Language of the Web",
+          "body": "If you want to build websites, web apps, interactive user interfaces, or mobile apps that run everywhere, JavaScript is non-negotiable. With Node.js, you can build full frontends and backends with a single language.",
+          "codeSnippet": "// JavaScript: Filtering even numbers\nconst numbers = [1, 2, 3, 4, 5, 6];\nconst evens = numbers.filter(n => n % 2 === 0);\nconsole.log(`Even numbers: ${evens}`);",
+          "codeLanguage": "javascript"
+        },
+        {
+          "heading": "The Verdict: Which One Should You Pick?",
+          "body": "Choose Python if you love mathematical logic, data, automation, or want the smoothest introduction to programming fundamentals. Choose JavaScript if you want to see visual results immediately in your browser and build websites."
+        }
+      ],
+      "conclusion": "The good news is that once you master the core fundamentals of one language (loops, variables, functions, data structures), learning the second language takes less than a month."
+    },
+    "relatedCourseSlugs": ["python-programming-masterclass", "full-stack-web-dev-bootcamp"]
+  },
+  {
+    "id": "blog-ccc-exam-prep",
+    "slug": "how-to-prepare-for-nielit-ccc-exam-first-attempt",
+    "title": "How to Prepare for NIELIT CCC Exam in First Attempt (Tips & Syllabus Guide)",
+    "excerpt": "A complete blueprint for scoring Grade A or S in your NIELIT CCC (Course on Computer Concepts) examination with topic breakdown and time management tips.",
+    "coverImage": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=800&auto=format&fit=crop",
+    "category": "Certification",
+    "featured": false,
+    "author": {
+      "name": "Er. Sumit Kumar",
+      "role": "Founder & Lead Technical Mentor",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-08-10",
+    "readTime": "4 min read",
+    "tags": ["CCC Exam", "NIELIT", "Government Jobs", "Computer Certificate"],
+    "content": {
+      "introduction": "NIELIT CCC is mandatory for several state government jobs in Uttar Pradesh (RO/ARO, VDO, Lekhpal, Police Computer Operator). Scoring well requires understanding the objective pattern and practicing computer fundamentals.",
+      "sections": [
+        {
+          "heading": "1. Understand the Exam Pattern",
+          "body": "The CCC examination consists of 100 Objective Multiple Choice (MCQ) and True/False questions to be completed in 90 minutes. There is no negative marking, so make sure you answer every single question."
+        },
+        {
+          "heading": "2. High-Weightage Modules to Target",
+          "body": "Over 50% of the questions come from: LibreOffice (Writer, Calc, Impress), Internet protocols (DNS, IP, HTTP, Email protocols POP3/SMTP), and Digital Financial Services (AEPS, UPI, NEFT, RTGS, IMPS)."
+        },
+        {
+          "heading": "3. Hands-on Lab Practice Beats Rote Memorization",
+          "body": "Students who physically practice creating tables in LibreOffice Writer, testing formulas in Calc, and configuring email settings in our MSK computer lab consistently clear CCC on their very first attempt."
+        }
+      ],
+      "conclusion": "Enroll in our weekend special or regular CCC batch, solve our 300+ sample question bank, and walk into the examination hall with 100% confidence."
+    },
+    "relatedCourseSlugs": ["ccc-computer-concepts"]
+  },
+  {
+    "id": "blog-cyber-security-habits",
+    "slug": "demystifying-cyber-security-7-habits-to-protect-digital-footprint",
+    "title": "Demystifying Cyber Security: 7 Essential Habits to Protect Your Digital Life",
+    "excerpt": "Protect your bank accounts, personal data, and business passwords with these 7 fundamental cybersecurity practices every internet user must follow.",
+    "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop",
+    "category": "Cyber Security",
+    "featured": false,
+    "author": {
+      "name": "Manish Sharma",
+      "role": "Cyber Security & Networks Faculty",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-08-05",
+    "readTime": "5 min read",
+    "tags": ["Cyber Security", "Privacy", "Online Safety", "Phishing"],
+    "content": {
+      "introduction": "With the explosion of digital payments and mobile services across India, cyber attacks, phishing SMS links, and credential theft are at an all-time high. Security is no longer optional—it is a mandatory life skill.",
+      "sections": [
+        {
+          "heading": "1. Always Enable Two-Factor Authentication (2FA)",
+          "body": "Passwords alone are vulnerable to credential stuffing. Protect your Gmail, banking, and WhatsApp with an authenticator app (like Google Authenticator) or hardware keys rather than SMS OTPs where possible."
+        },
+        {
+          "heading": "2. Recognize Smishing and Social Engineering",
+          "body": "Banks and government authorities never call asking for your ATM PIN or CVV. If you receive an SMS urging you to download an APK file to 'update KYC', report and block the sender immediately."
+        },
+        {
+          "heading": "3. Keep Software and Operating Systems Updated",
+          "body": "Most system exploits take advantage of known vulnerabilities that have already been patched by Microsoft, Apple, or Google. Keeping auto-updates enabled prevents 90% of automated exploits."
+        }
+      ],
+      "conclusion": "By maintaining vigilant digital habits and learning foundational security in our Cyber Security training program, you can safeguard yourself and your family against online threats."
+    },
+    "relatedCourseSlugs": ["cyber-security-ethical-hacking-professional-program"]
+  }
+]

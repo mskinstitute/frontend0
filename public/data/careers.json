@@ -1,0 +1,325 @@
+[
+  {
+    "id": "intern-python-dev",
+    "type": "internship",
+    "title": "Python Developer Intern",
+    "department": "Software Engineering",
+    "category": "Development",
+    "location": "Remote / Hybrid (Shikohabad)",
+    "workType": "Internship",
+    "mode": "Hybrid",
+    "stipendOrSalary": "₹10,000 - ₹15,000 / month",
+    "duration": "3 to 6 Months",
+    "openings": 3,
+    "experienceLevel": "Freshers / College Students",
+    "deadline": "2026-10-31",
+    "featured": true,
+    "active": true,
+    "shortDescription": "Work on live automation scripts, backend REST APIs using FastAPI/Django, and database integration under senior developer mentorship.",
+    "description": "We are looking for enthusiastic Python Developer Interns to build real-world software applications, RESTful APIs, and backend automation microservices. You will collaborate directly with our engineering lead and gain hands-on experience in production environments.",
+    "responsibilities": [
+      "Develop and test REST API endpoints using Python (FastAPI / Flask / Django)",
+      "Write automated scripts for web scraping, data collection, and processing",
+      "Work with relational databases (PostgreSQL/SQLite) and ORM models",
+      "Collaborate with the frontend team to integrate APIs with modern React applications",
+      "Participate in daily agile standups, code reviews, and Git version control workflows"
+    ],
+    "requirements": [
+      "Proficiency in Python core syntax, data structures (lists, dicts, tuples), and OOP concepts",
+      "Familiarity with basic web frameworks (Flask, FastAPI, or Django) is a plus",
+      "Understanding of SQL databases and REST APIs",
+      "Comfortable with Git and GitHub basics",
+      "Strong problem-solving attitude and willingness to learn"
+    ],
+    "skills": ["Python", "FastAPI", "SQL", "Git", "REST APIs", "Automation"],
+    "perks": [
+      "Pre-Placement Offer (PPO) for top-performing interns",
+      "Official MSK Industry Internship Certificate & Verified Credential",
+      "Personal Letter of Recommendation (LOR) from Er. Sumit Kumar",
+      "1-on-1 mentorship and weekly technical code review sessions",
+      "Flexible working hours and certificate verification URL"
+    ],
+    "postedAt": "2026-09-01",
+    "company": "MSK Tech Labs"
+  },
+  {
+    "id": "intern-frontend-react",
+    "type": "internship",
+    "title": "Frontend Web Developer Intern (React / Next.js)",
+    "department": "Frontend Engineering",
+    "category": "Development",
+    "location": "Remote / Shikohabad",
+    "workType": "Internship",
+    "mode": "Remote",
+    "stipendOrSalary": "₹8,000 - ₹14,000 / month",
+    "duration": "3 Months",
+    "openings": 4,
+    "experienceLevel": "Freshers / Students",
+    "deadline": "2026-10-25",
+    "featured": true,
+    "active": true,
+    "shortDescription": "Craft modern, responsive user interfaces and progressive web apps using React, Next.js, Tailwind CSS, and TypeScript.",
+    "description": "Join our frontend engineering team to craft delightful user experiences, mobile-first responsive dashboards, and interactive learning portals. You will convert Figma designs into pixel-perfect, accessible React components.",
+    "responsibilities": [
+      "Build reusable, performant React and Next.js components with Tailwind CSS",
+      "Ensure web accessibility (WCAG), SEO meta optimization, and fast Core Web Vitals",
+      "Connect client interfaces to backend REST and GraphQL endpoints",
+      "Debug cross-browser compatibility and optimize mobile touch interactions"
+    ],
+    "requirements": [
+      "Solid foundation in HTML5 semantics, modern CSS3, Flexbox, and CSS Grid",
+      "Good command of ES6+ JavaScript (async/await, promises, destructuring)",
+      "Hands-on practice with React components, hooks (useState, useEffect), and props",
+      "Experience with Tailwind CSS and Git version control"
+    ],
+    "skills": ["React", "Next.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5", "Git"],
+    "perks": [
+      "Live production projects featured on your personal portfolio",
+      "Performance-based stipend increments",
+      "Official Verified Internship Certificate",
+      "Full-time Junior Developer placement assistance"
+    ],
+    "postedAt": "2026-09-02",
+    "company": "MSK Institute Digital"
+  },
+  {
+    "id": "intern-data-analyst",
+    "type": "internship",
+    "title": "Data Analyst & Business Intelligence Intern",
+    "department": "Data & AI",
+    "category": "Data Science",
+    "location": "Hybrid (Shikohabad / Remote)",
+    "workType": "Internship",
+    "mode": "Hybrid",
+    "stipendOrSalary": "₹9,000 - ₹15,000 / month",
+    "duration": "4 Months",
+    "openings": 2,
+    "experienceLevel": "Freshers / Final Year",
+    "deadline": "2026-11-05",
+    "featured": false,
+    "active": true,
+    "shortDescription": "Extract insights from business data, build dynamic Excel & Power BI dashboards, and automate analysis using Python and SQL.",
+    "description": "As a Data Analyst Intern, you will work on business intelligence pipelines, customer analytics, and automated reporting. You will clean datasets, formulate predictive summaries, and present interactive data dashboards.",
+    "responsibilities": [
+      "Clean, filter, and structure raw CSV and database records using Python (Pandas/NumPy)",
+      "Design dynamic dashboards in Microsoft Excel (Power Query, Pivot Tables) and Power BI",
+      "Write SQL queries to extract summary metrics and cohort reports",
+      "Present data insights to institute directors and business partners"
+    ],
+    "requirements": [
+      "Proficiency in Advanced Excel (VLOOKUP, XLOOKUP, Pivot Tables, Formulas)",
+      "Basic understanding of SQL queries (SELECT, JOIN, GROUP BY)",
+      "Familiarity with Python data analysis libraries (Pandas, Matplotlib) is advantageous",
+      "Analytical mindset and attention to detail"
+    ],
+    "skills": ["Advanced Excel", "SQL", "Python", "Power BI", "Data Visualization"],
+    "perks": [
+      "Experience with enterprise datasets and real commercial projects",
+      "Official Internship Certification",
+      "Recommendation letter for overseas higher studies and corporate jobs",
+      "Mentorship from senior data science leads"
+    ],
+    "postedAt": "2026-08-28",
+    "company": "MSK Analytics Partner Network"
+  },
+  {
+    "id": "intern-digital-marketing",
+    "type": "internship",
+    "title": "Digital Growth & Content Marketing Intern",
+    "department": "Growth & Marketing",
+    "category": "Marketing",
+    "location": "On-site (Shikohabad)",
+    "workType": "Internship",
+    "mode": "On-site",
+    "stipendOrSalary": "₹6,000 - ₹10,000 / month",
+    "duration": "3 Months",
+    "openings": 2,
+    "experienceLevel": "Freshers",
+    "deadline": "2026-10-20",
+    "featured": false,
+    "active": true,
+    "shortDescription": "Execute social media campaigns, student outreach, local SEO, and technical blog promotion across YouTube, Instagram, and LinkedIn.",
+    "description": "Drive student engagement and digital presence for MSK Institute across regional and national channels. You will learn modern inbound marketing, content writing, SEO optimization, and campaign metrics.",
+    "responsibilities": [
+      "Create creative social media posts and reels showcasing coding projects and campus life",
+      "Assist in writing SEO-friendly articles and tutorials for the MSK blog portal",
+      "Monitor campaign reach, website clicks, and student inquiry funnels",
+      "Coordinate student community webinars and offline workshop events"
+    ],
+    "requirements": [
+      "Excellent communication and creative writing skills in Hindi and English",
+      "Basic knowledge of social media platforms (Instagram, LinkedIn, YouTube)",
+      "Familiarity with Canva or basic graphic editing is an added advantage",
+      "Enthusiasm for technology and education"
+    ],
+    "skills": ["Social Media Marketing", "Content Writing", "Canva", "SEO Basics", "Community Management"],
+    "perks": [
+      "Certificate of Internship in Digital Marketing",
+      "Incentives on student enrollment growth",
+      "Free access to any MSK technical certification course"
+    ],
+    "postedAt": "2026-08-25",
+    "company": "MSK Institute"
+  },
+  {
+    "id": "job-junior-fullstack-dev",
+    "type": "job",
+    "title": "Junior Full Stack Developer",
+    "department": "Software Engineering",
+    "category": "Development",
+    "location": "Hybrid (Shikohabad / Delhi NCR)",
+    "workType": "Full-time",
+    "mode": "Hybrid",
+    "stipendOrSalary": "₹3.6 - ₹5.5 LPA",
+    "duration": "Permanent",
+    "openings": 2,
+    "experienceLevel": "0 - 2 Years (Freshers with strong projects welcome)",
+    "deadline": "2026-11-15",
+    "featured": true,
+    "active": true,
+    "shortDescription": "Build and maintain scalable web applications across the full stack using Next.js, Node.js, Express, MongoDB, and PostgreSQL.",
+    "description": "We are seeking a proactive Junior Full Stack Developer to build mission-critical web applications, student management dashboards, and client web portals. You will write both responsive frontends and secure, high-throughput backend services.",
+    "responsibilities": [
+      "Architect and ship full-stack features using Next.js/React and Node.js backends",
+      "Design database schemas, indexes, and queries in PostgreSQL and MongoDB",
+      "Implement secure JWT authentication, role-based access control (RBAC), and payments",
+      "Deploy and maintain web applications on modern cloud platforms (Vercel, AWS, DigitalOcean)",
+      "Conduct unit testing and participate in sprint planning"
+    ],
+    "requirements": [
+      "Strong proficiency in JavaScript/TypeScript, React.js, and Node.js",
+      "Hands-on experience with RESTful APIs and database management",
+      "Demonstrated portfolio of at least 2 full-stack projects on GitHub",
+      "Knowledge of Git, clean code principles, and basic cloud deployment"
+    ],
+    "skills": ["React", "Next.js", "Node.js", "PostgreSQL", "MongoDB", "TypeScript", "Tailwind CSS"],
+    "perks": [
+      "Competitive starting salary with annual performance bonus",
+      "Health insurance coverage and paid time off",
+      "Hybrid flexible work model",
+      "Annual budget for technical certifications and conferences",
+      "Fast career progression to Senior Software Engineer"
+    ],
+    "postedAt": "2026-09-01",
+    "company": "MSK Tech Solutions"
+  },
+  {
+    "id": "job-python-backend-engineer",
+    "type": "job",
+    "title": "Python Backend Engineer",
+    "department": "Backend Engineering",
+    "category": "Development",
+    "location": "Remote",
+    "workType": "Full-time",
+    "mode": "Remote",
+    "stipendOrSalary": "₹4.0 - ₹6.5 LPA",
+    "duration": "Permanent",
+    "openings": 2,
+    "experienceLevel": "1 - 3 Years",
+    "deadline": "2026-11-20",
+    "featured": true,
+    "active": true,
+    "shortDescription": "Design resilient microservices, asynchronous task queues, and data APIs using Python, FastAPI, Docker, and Redis.",
+    "description": "Our hiring partner is looking for a Python Backend Engineer to build high-scale web microservices and data pipelines. You will optimize database query performance, integrate 3rd-party APIs, and maintain high system reliability.",
+    "responsibilities": [
+      "Develop asynchronous web services using Python (FastAPI / Django)",
+      "Implement background workers with Celery and Redis",
+      "Containerize applications with Docker and configure CI/CD deployment pipelines",
+      "Monitor API latency, write unit tests, and resolve security vulnerabilities"
+    ],
+    "requirements": [
+      "In-depth command of Python 3, asynchronous programming (asyncio), and OOP",
+      "Experience with PostgreSQL, query optimization, and connection pooling",
+      "Familiarity with Docker, Linux terminal, and cloud deployments",
+      "Track record of writing clean, maintainable, PEP 8-compliant code"
+    ],
+    "skills": ["Python", "FastAPI", "Django", "Docker", "PostgreSQL", "Redis", "Git"],
+    "perks": [
+      "100% Remote work from anywhere in India",
+      "Home office setup allowance",
+      "Health insurance for employee and family",
+      "Performance-linked incentives and stock option eligibility"
+    ],
+    "postedAt": "2026-08-30",
+    "company": "Apex Cloud Systems (Hiring Partner)"
+  },
+  {
+    "id": "job-lab-instructor-faculty",
+    "type": "job",
+    "title": "Computer Lab Instructor & Faculty",
+    "department": "Academic & Training",
+    "category": "Training",
+    "location": "On-site (Shikohabad Campus)",
+    "workType": "Full-time",
+    "mode": "On-site",
+    "stipendOrSalary": "₹2.4 - ₹3.6 LPA",
+    "duration": "Permanent",
+    "openings": 2,
+    "experienceLevel": "1+ Years (Teaching or Industry Experience)",
+    "deadline": "2026-10-30",
+    "featured": false,
+    "active": true,
+    "shortDescription": "Mentor classroom students in Shikohabad on practical computer applications, CCC, MS Office, basic programming, and lab exercises.",
+    "description": "Lead hands-on practical lab sessions at our Shikohabad campus. You will guide students through computer basics, CCC certification prep, MS Office suites, foundational HTML/CSS, and Python coding exercises.",
+    "responsibilities": [
+      "Deliver interactive lab practicals on Computer Fundamentals, Windows, MS Office, and CCC",
+      "Assist students during hands-on coding lab hours with personalized problem solving",
+      "Conduct weekly mock tests, evaluate student assignments, and maintain batch attendance",
+      "Assist in hardware and software maintenance of lab computer systems"
+    ],
+    "requirements": [
+      "Degree or Diploma in Computer Science (BCA, B.Sc CS, PGDCA, or 'O' Level)",
+      "Thorough command of MS Word, Excel, PowerPoint, Internet concepts, and CCC syllabus",
+      "Patience, strong communication skills in Hindi, and dedication to student mentorship",
+      "Prior teaching experience at a computer training center is preferred"
+    ],
+    "skills": ["Computer Basics", "MS Office", "Excel Formulas", "CCC Curriculum", "Classroom Teaching", "Lab Management"],
+    "perks": [
+      "Stable academic career with regular daylight working hours",
+      "Annual performance increments and festival bonuses",
+      "Free technical upskilling in Python, MERN Stack, and Cyber Security",
+      "Respectful, family-like campus environment in Shikohabad"
+    ],
+    "postedAt": "2026-08-20",
+    "company": "MSK Institute"
+  },
+  {
+    "id": "job-cyber-security-analyst",
+    "type": "job",
+    "title": "Cyber Security & SOC Associate",
+    "department": "Information Security",
+    "category": "Cyber Security",
+    "location": "Hybrid (Noida / Shikohabad)",
+    "workType": "Full-time",
+    "mode": "Hybrid",
+    "stipendOrSalary": "₹4.5 - ₹6.5 LPA",
+    "duration": "Permanent",
+    "openings": 1,
+    "experienceLevel": "0 - 2 Years",
+    "deadline": "2026-11-10",
+    "featured": false,
+    "active": true,
+    "shortDescription": "Monitor security incidents, analyze vulnerability scans, and assist in penetration testing assessments for enterprise client networks.",
+    "description": "Our partner cyber security firm is hiring a Junior SOC / Security Analyst. You will monitor security incident feeds, perform vulnerability assessments, review firewall logs, and help fortify web application defences.",
+    "responsibilities": [
+      "Triage security alerts and investigate network anomalies using SIEM tools",
+      "Conduct vulnerability assessments using Wireshark, Nmap, and Burp Suite",
+      "Analyze malicious web traffic, brute-force attempts, and phishing campaigns",
+      "Draft concise vulnerability mitigation reports for network administrators"
+    ],
+    "requirements": [
+      "Strong understanding of TCP/IP networking, OSI model, firewalls, and Linux OS",
+      "Hands-on familiarity with ethical hacking tools (Nmap, Burp Suite, Metasploit)",
+      "Basic scripting in Python or Bash for security automation",
+      "Certifications such as CEH, CompTIA Security+, or MSK Cyber Security Diploma are a huge plus"
+    ],
+    "skills": ["Linux", "Networking (TCP/IP)", "Wireshark", "Burp Suite", "Ethical Hacking", "Python Scripting"],
+    "perks": [
+      "Cutting-edge hands-on security operations exposure",
+      "Full sponsorship for advanced security certifications (CEH / OSCP)",
+      "High-growth salary path in the cyber defense sector"
+    ],
+    "postedAt": "2026-08-22",
+    "company": "SecureNet Defense Labs (Hiring Partner)"
+  }
+]

@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0A2540;       /* Logo Dark Navy */
+  --color-primary-light: #1E3A5F; /* Lighter Navy for hovers */
+  --color-secondary: #FF6B00;     /* Logo Vibrant Orange */
+  --color-secondary-light: #FF8533;
+  --color-background: #FFFFFF;    /* Pure White Canvas */
+  --color-surface: #F8FAFC;       /* Off-white Slate for cards */
+  --color-text-main: #0F172A;     /* Slate-900 for text readability */
+  --color-text-muted: #475569;    /* Slate-600 for subtext */
+  --color-border-subtle: #E2E8F0; /* Slate-200 for lines/dividers */
+
+  --animate-marquee: marquee 55s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* PWA & Mobile Safe Area Utilities */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+}
+
+/* Print Styles for Certificate Verification */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, button, form, .no-print, .toast-container {
+    display: none !important; /* Hide layout chrome and utility buttons */
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .certificate-container {
+    border: 10px double #ff6b00 !important; /* High contrast logo orange or amber double border */
+    box-shadow: none !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+    padding: 3rem !important;
+  }
+}
+
+/* ========================================================================= */
+/* Prism.js Code Syntax Highlighting Theme (Modern One-Dark / VS Code Pro)   */
+/* ========================================================================= */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  tab-size: 2;
+  hyphens: none;
+  color: #abb2bf;
+}
+
+/* Comments & Documentation */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #7f848e !important;
+  font-style: italic;
+}
+
+/* Punctuation (braces, parentheses, commas, semicolons) */
+.token.punctuation {
+  color: #abb2bf !important;
+}
+
+/* Namespace */
+.token.namespace {
+  opacity: 0.8;
+}
+
+/* Keywords (public, class, static, void, return, int, if, else, def, import, from) */
+.token.keyword,
+.token.atrule {
+  color: #c678dd !important;
+  font-weight: 600;
+}
+
+/* Functions & Methods (printf, println, print, main, def myFunc) */
+.token.function {
+  color: #61afef !important;
+  font-weight: 600;
+}
+
+/* Function Arguments & Variables */
+.token.variable {
+  color: #e06c75 !important;
+}
+
+/* Strings ("Hello, World!", 'text', `template`) */
+.token.string,
+.token.char,
+.token.attr-value {
+  color: #98c379 !important;
+}
+
+/* Numbers (0, 1, 3.14, 100) */
+.token.number {
+  color: #d19a66 !important;
+}
+
+/* Booleans (true, false, True, False) */
+.token.boolean {
+  color: #d19a66 !important;
+  font-weight: 600;
+}
+
+/* Operators (+, -, *, =, ==, !=, &&, ||) */
+.token.operator {
+  color: #56b6c2 !important;
+}
+
+/* Preprocessor directives in C/C++ (#include, #define) */
+.token.directive-hash,
+.token.directive {
+  color: #e06c75 !important;
+}
+
+.token.macro.property {
+  color: #61afef !important;
+}
+
+/* Class names, Object types (String, System, Main) */
+.token.class-name,
+.token.builtin {
+  color: #e5c07b !important;
+}
+
+/* HTML / XML tags */
+.token.tag {
+  color: #e06c75 !important;
+}
+
+.token.attr-name {
+  color: #d19a66 !important;
+}
+
+/* CSS Properties & Selectors */
+.token.property {
+  color: #61afef !important;
+}
+
+.token.selector {
+  color: #e06c75 !important;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+

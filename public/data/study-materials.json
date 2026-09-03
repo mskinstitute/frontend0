@@ -1,0 +1,322 @@
+[
+  {
+    "id": "cheat-python-core",
+    "type": "cheatsheet",
+    "title": "Python 3 Core Syntax & Built-ins Cheatsheet",
+    "slug": "python-3-syntax-cheatsheet",
+    "category": "Python",
+    "level": "Beginner",
+    "description": "Essential quick-reference for Python variables, string methods, slicing, lists, dicts, set operations, and list comprehensions.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/python-cheatsheet",
+    "topicsCovered": ["Data Structures", "List Comprehensions", "String Slicing", "Dictionary Methods"],
+    "readTime": "3 min lookup",
+    "pages": 2,
+    "featured": true,
+    "updatedAt": "2026-08-20",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Lists & Slicing",
+          "items": [
+            { "commandOrSyntax": "lst[start:stop:step]", "explanation": "Slice a list or string with optional step", "example": "items[::-1]  # reverses list" },
+            { "commandOrSyntax": "[x**2 for x in lst if x > 0]", "explanation": "List comprehension with conditional filter", "example": "evens = [x for x in nums if x%2==0]" },
+            { "commandOrSyntax": "lst.append(item) / lst.extend(iterable)", "explanation": "Add single item vs merge another collection", "example": "arr.extend([4, 5, 6])" }
+          ]
+        },
+        {
+          "categoryTitle": "Dictionaries & Sets",
+          "items": [
+            { "commandOrSyntax": "d.get('key', default_val)", "explanation": "Safe key lookup without raising KeyError", "example": "score = user.get('points', 0)" },
+            { "commandOrSyntax": "{k: v for k, v in d.items()}", "explanation": "Dictionary comprehension", "example": "{x: x*2 for x in range(5)}" },
+            { "commandOrSyntax": "set_a.union(set_b) | set_a.intersection(set_b)", "explanation": "Fast unique mathematical set operations", "example": "common = set(a) & set(b)" }
+          ]
+        },
+        {
+          "categoryTitle": "String Manipulation",
+          "items": [
+            { "commandOrSyntax": "f\"Hello, {name.strip().title()}!\"", "explanation": "Formatted f-strings with expression interpolation", "example": "f\"{val:.2f}\"" },
+            { "commandOrSyntax": "\" - \".join(list_of_strings)", "explanation": "Efficient string concatenation from list", "example": "\", \".join(['A', 'B'])" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-css-flex-grid",
+    "type": "cheatsheet",
+    "title": "Modern CSS Flexbox & CSS Grid Visual Cheatsheet",
+    "slug": "css-flexbox-grid-visual-cheatsheet",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "description": "Visual reference for flex direction, justify-content, align-items, grid template columns, fr units, minmax, and auto-fit layouts.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/css-flex-grid-cheatsheet",
+    "topicsCovered": ["CSS Flexbox", "CSS Grid", "Responsive Layouts", "Tailwind Equivalence"],
+    "readTime": "4 min lookup",
+    "pages": 3,
+    "featured": true,
+    "updatedAt": "2026-08-22",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Flexbox Alignment Properties",
+          "items": [
+            { "commandOrSyntax": "display: flex; flex-direction: row | column;", "explanation": "Establishes main axis direction", "example": "flex flex-col (Tailwind)" },
+            { "commandOrSyntax": "justify-content: center | space-between | space-around;", "explanation": "Aligns child elements along the main axis", "example": "justify-between" },
+            { "commandOrSyntax": "align-items: center | stretch | flex-start;", "explanation": "Aligns child elements along the cross axis", "example": "items-center" },
+            { "commandOrSyntax": "gap: 1rem; flex-wrap: wrap;", "explanation": "Even gutter spacing without negative margins", "example": "gap-4 flex-wrap" }
+          ]
+        },
+        {
+          "categoryTitle": "CSS Grid Essentials",
+          "items": [
+            { "commandOrSyntax": "grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));", "explanation": "Fully responsive card grid without media queries", "example": "grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]" },
+            { "commandOrSyntax": "grid-column: span 2 / span 2;", "explanation": "Make an item stretch across multiple grid tracks", "example": "col-span-2" },
+            { "commandOrSyntax": "place-items: center;", "explanation": "Perfect horizontal and vertical centering in 1 line", "example": "place-items-center" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-git-commands",
+    "type": "cheatsheet",
+    "title": "Git & GitHub Everyday Workflow Cheatsheet",
+    "slug": "git-github-workflow-cheatsheet",
+    "category": "Web Development",
+    "level": "Beginner",
+    "description": "All essential git commands: init, branch switching, merge conflicts, stash, interactive rebase, and remote origin management.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/git-cheatsheet",
+    "topicsCovered": ["Git Branches", "Commit Standards", "Remote Repositories", "Undo & Stash"],
+    "readTime": "3 min lookup",
+    "pages": 2,
+    "featured": false,
+    "updatedAt": "2026-08-25",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Branching & Syncing",
+          "items": [
+            { "commandOrSyntax": "git switch -c <branch-name>", "explanation": "Create and switch to a new branch modern way", "example": "git switch -c feature/login" },
+            { "commandOrSyntax": "git pull origin main --rebase", "explanation": "Pull latest updates keeping linear commit history", "example": "git pull origin main" },
+            { "commandOrSyntax": "git stash push -m \"wip\" / git stash pop", "explanation": "Temporarily save dirty workspace state", "example": "git stash && git pull" }
+          ]
+        },
+        {
+          "categoryTitle": "Inspection & Undos",
+          "items": [
+            { "commandOrSyntax": "git log --oneline --graph --decorate", "explanation": "Compact visual tree of branch commits", "example": "git log --oneline -n 10" },
+            { "commandOrSyntax": "git restore --staged <file>", "explanation": "Unstage changes without losing file edits", "example": "git restore --staged index.html" },
+            { "commandOrSyntax": "git commit --amend --no-edit", "explanation": "Add staged changes to the previous commit directly", "example": "git commit --amend" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-excel-top50",
+    "type": "cheatsheet",
+    "title": "MS Excel Top 50 Formulas & Shortcuts Cheatsheet",
+    "slug": "excel-top-50-formulas-cheatsheet",
+    "category": "MS Office",
+    "level": "Beginner",
+    "description": "Quick lookup for XLOOKUP, VLOOKUP, INDEX-MATCH, SUMIFS, COUNTIFS, conditional formatting, and 20+ Windows keyboard shortcuts.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/excel-shortcuts-cheatsheet",
+    "topicsCovered": ["XLOOKUP / VLOOKUP", "SUMIFS & COUNTIFS", "Pivot Shortcuts", "F4 Absolute Referencing"],
+    "readTime": "4 min lookup",
+    "pages": 3,
+    "featured": false,
+    "updatedAt": "2026-08-29",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Formulas",
+          "items": [
+            { "commandOrSyntax": "=XLOOKUP(lookup_val, lookup_array, return_array, \"Not Found\")", "explanation": "Modern two-way search replacing VLOOKUP & HLOOKUP", "example": "=XLOOKUP(A2, Employees!A:A, Employees!C:C)" },
+            { "commandOrSyntax": "=SUMIFS(sum_range, criteria_range1, criteria1, ...)", "explanation": "Sum numbers meeting multiple criteria", "example": "=SUMIFS(D:D, B:B, \"Shikohabad\", C:C, \">1000\")" },
+            { "commandOrSyntax": "=TEXT(date, \"DD-MMM-YYYY\")", "explanation": "Format date and numerical strings easily", "example": "=TEXT(TODAY(), \"DD-MM-YYYY\")" }
+          ]
+        },
+        {
+          "categoryTitle": "High-Speed Shortcuts",
+          "items": [
+            { "commandOrSyntax": "Ctrl + Shift + L", "explanation": "Toggle AutoFilter on active table", "example": "Filters headers immediately" },
+            { "commandOrSyntax": "Alt + = (Equals)", "explanation": "AutoSum selected numbers instantly", "example": "Sum column in 1 keystroke" },
+            { "commandOrSyntax": "F4 (while typing formula)", "explanation": "Cycle absolute cell references ($A$1, A$1, $A1)", "example": "Locks row or column" },
+            { "commandOrSyntax": "Ctrl + ` (Backtick)", "explanation": "Toggle Show All Formulas mode", "example": "Inspect formula errors easily" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "notes-python-core",
+    "type": "note",
+    "title": "Python Core Programming Notes & PDF Guide",
+    "slug": "python-core-programming-pdf-notes",
+    "category": "Python",
+    "level": "Beginner",
+    "description": "Comprehensive reference guide covering basic syntax, data structures, OOP concepts, file handling, and exception handling.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/python-notes-pdf",
+    "topicsCovered": ["Syntax & Data Types", "Control Flow", "Functions & Modules", "OOP Principles"],
+    "readTime": "45 min study",
+    "pages": 64,
+    "featured": true,
+    "updatedAt": "2026-08-15"
+  },
+  {
+    "id": "notes-html-css-guide",
+    "type": "note",
+    "title": "HTML5 & CSS3 Responsive Styling Guide",
+    "slug": "html5-css3-responsive-styling-guide",
+    "category": "Web Development",
+    "level": "Beginner",
+    "description": "Learn semantic layout design, CSS Grid, Flexbox, media queries, and utility-first styling with modern frameworks.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/html-css-notes",
+    "topicsCovered": ["Semantic Tags", "Flexbox & Grid Layouts", "Responsive Media Queries", "CSS Animations"],
+    "readTime": "35 min study",
+    "pages": 52,
+    "featured": false,
+    "updatedAt": "2026-08-18"
+  },
+  {
+    "id": "notes-js-dom-es6",
+    "type": "note",
+    "title": "JavaScript DOM & Modern ES6+ Notes",
+    "slug": "javascript-dom-modern-es6-notes",
+    "category": "JavaScript",
+    "level": "Intermediate",
+    "description": "Complete guide to DOM manipulation, event handling, async functions, promises, and modern ES6 array functions.",
+    "tier": "paid",
+    "price": "₹149",
+    "topicsCovered": ["ES6 Syntactic Sugar", "DOM Selection & Manipulation", "Event Bubbling & Capturing", "Fetch API & Promises"],
+    "readTime": "60 min study",
+    "pages": 88,
+    "featured": true,
+    "updatedAt": "2026-08-20"
+  },
+  {
+    "id": "notes-ms-office-automation",
+    "type": "note",
+    "title": "MS Excel & Word Office Automation Notes",
+    "slug": "ms-excel-word-office-automation-notes",
+    "category": "MS Office",
+    "level": "Beginner",
+    "description": "Master advanced formulas, pivot tables, data tools in Excel, and professional document formatting, mail merge in Word.",
+    "tier": "paid",
+    "price": "₹99",
+    "topicsCovered": ["Excel Formulas & Pivot Tables", "Word Formatting & Page Layouts", "Mail Merge Integration", "Keyboard Shortcuts"],
+    "readTime": "50 min study",
+    "pages": 76,
+    "featured": false,
+    "updatedAt": "2026-08-21"
+  },
+  {
+    "id": "notes-cyber-security",
+    "type": "note",
+    "title": "Cyber Security & Ethical Hacking Essentials Notes",
+    "slug": "cyber-security-ethical-hacking-notes",
+    "category": "Cyber Security",
+    "level": "Intermediate",
+    "description": "Essential network security protocols, port scanning basics, Kali Linux tools, OWASP Top 10 web vulnerabilities, and password auditing.",
+    "tier": "paid",
+    "price": "₹199",
+    "topicsCovered": ["Network Protocols & OSI", "Nmap & Wireshark Basics", "OWASP Top 10 Web Bugs", "Defensive Hardening"],
+    "readTime": "55 min study",
+    "pages": 92,
+    "featured": false,
+    "updatedAt": "2026-08-24"
+  },
+  {
+    "id": "hb-fullstack-dev",
+    "type": "handbook",
+    "title": "Full-Stack Web Developer Handbook (2026 Edition)",
+    "slug": "fullstack-web-developer-handbook-2026",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "description": "The definitive blueprint to modern full-stack development. Covers Next.js App Router, Tailwind CSS, PostgreSQL, REST/GraphQL APIs, and cloud deployment.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/fullstack-developer-handbook",
+    "topicsCovered": ["Next.js & React 19", "Node.js Architecture", "PostgreSQL & Prisma", "CI/CD & Docker Basics"],
+    "readTime": "2 hours deep read",
+    "pages": 140,
+    "featured": true,
+    "updatedAt": "2026-08-31",
+    "handbookContent": {
+      "chapters": [
+        { "number": 1, "title": "The Modern Web Architecture (Client, Server & Edge)", "summary": "Understanding client rendering vs server components, SSR, and Edge computing." },
+        { "number": 2, "title": "Styling & Design Systems with Tailwind CSS v4", "summary": "Configuring modern themes, variables, and rapid UI component patterns." },
+        { "number": 3, "title": "API Engineering with Node.js & Express", "summary": "Building resilient endpoints, JWT authentication, and rate limiting." },
+        { "number": 4, "title": "Relational Databases & Indexing Strategies", "summary": "Designing clean schemas in PostgreSQL and utilizing Prisma ORM." },
+        { "number": 5, "title": "Deployment, Monitoring & Production Hardening", "summary": "Deploying to Vercel/VPS, handling SSL, and configuring logging." }
+      ],
+      "highlights": [
+        "End-to-end full-stack code examples with real database queries.",
+        "Production-grade security checklist for web APIs.",
+        "Interview prep questions asked by leading tech employers."
+      ]
+    }
+  },
+  {
+    "id": "hb-python-pro",
+    "type": "handbook",
+    "title": "Python Programming: Zero to Industry Pro Handbook",
+    "slug": "python-programming-zero-to-pro-handbook",
+    "category": "Python",
+    "level": "Intermediate",
+    "description": "Complete reference manual from basic syntax up to writing Pythonic scripts, generators, decorators, unit testing, and packaging.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/python-pro-handbook",
+    "topicsCovered": ["Generators & Decorators", "Context Managers", "pytest Framework", "Virtual Environments"],
+    "readTime": "1.5 hours deep read",
+    "pages": 110,
+    "featured": false,
+    "updatedAt": "2026-08-25",
+    "handbookContent": {
+      "chapters": [
+        { "number": 1, "title": "Pythonic Coding Principles & PEP 8", "summary": "Writing clean, readable code and leveraging type hints." },
+        { "number": 2, "title": "Advanced OOP: Metaclasses & Magic Methods", "summary": "Implementing custom operators, __repr__, and property decorators." },
+        { "number": 3, "title": "Async IO & Multithreading", "summary": "Concurrent programming with asyncio and ThreadPoolExecutor." },
+        { "number": 4, "title": "Testing & Test Driven Development (TDD)", "summary": "Writing unit tests with pytest and mocking external API services." }
+      ],
+      "highlights": [
+        "Detailed comparison of iterative vs functional approaches.",
+        "Memory management and garbage collection insights."
+      ]
+    }
+  },
+  {
+    "id": "hb-ccc-exam",
+    "type": "handbook",
+    "title": "NIELIT CCC & Computer Literacy Official Handbook",
+    "slug": "nielit-ccc-computer-literacy-handbook",
+    "category": "MS Office",
+    "level": "Beginner",
+    "description": "Curriculum-aligned handbook for students preparing for the NIELIT CCC exam in Uttar Pradesh. Includes 300+ sample questions and practical exercises.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/ccc-official-handbook",
+    "topicsCovered": ["Computer Hardware & OS", "LibreOffice Writer & Calc", "Digital Financial Services", "Cyber Ethics"],
+    "readTime": "2.5 hours read",
+    "pages": 156,
+    "featured": true,
+    "updatedAt": "2026-09-01",
+    "handbookContent": {
+      "chapters": [
+        { "number": 1, "title": "Introduction to Computers and Operating Systems", "summary": "Hardware architectures, CPU, memory, and Windows/Linux desktops." },
+        { "number": 2, "title": "Word Processing (LibreOffice Writer & MS Word)", "summary": "Document formatting, tables, shapes, and mail merge." },
+        { "number": 3, "title": "Spreadsheets (LibreOffice Calc & MS Excel)", "summary": "Formulas, cell addressing, charts, and data sorting." },
+        { "number": 4, "title": "Internet, WWW and Web Browsers", "summary": "IP addressing, DNS, email protocol, search engines, and social media." },
+        { "number": 5, "title": "Digital Financial Services & Cyber Security", "summary": "UPI, AEPS, net banking, OTP security, and phishing avoidance." }
+      ],
+      "highlights": [
+        "100% mapped to the latest NIELIT 2026 syllabus.",
+        "Includes 5 full-length practice mock test question sets."
+      ]
+    }
+  }
+]

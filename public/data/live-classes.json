@@ -1,0 +1,72 @@
+[
+  {
+    "id": "live-py-1",
+    "liveBatcheId": "batch-python-fasttrack",
+    "date": "2026-09-01",
+    "startTime": "04:30 PM",
+    "endTime": "06:00 PM",
+    "joinUrl": "https://youtube.com/live/python-data-structures",
+    "topics": [
+      "Python Lists & Tuples",
+      "Dictionary Operations",
+      "Sorting Algorithms",
+      "Memory Lookup Optimization"
+    ]
+  },
+  {
+    "id": "live-web-1",
+    "liveBatcheId": "batch-mern-morning",
+    "date": "2026-09-02",
+    "startTime": "09:00 AM",
+    "endTime": "11:00 AM",
+    "joinUrl": "https://meet.google.com/msk-mern-live",
+    "topics": [
+      "Tailwind CSS Grid vs Flexbox",
+      "Responsive Breakpoints",
+      "Interactive UI Components",
+      "Production Layout Architecture"
+    ]
+  },
+  {
+    "id": "live-web-ui-1",
+    "liveBatcheId": "batch-web-frontend",
+    "date": "2026-09-04",
+    "startTime": "02:00 PM",
+    "endTime": "03:30 PM",
+    "joinUrl": "https://zoom.us/j/9876543210",
+    "topics": [
+      "Figma UI to Clean HTML5",
+      "CSS Grid Systems",
+      "Mobile-First Responsive Design",
+      "Component Accessibility (a11y)"
+    ]
+  },
+  {
+    "id": "live-ccc-1",
+    "liveBatcheId": "batch-ccc-weekend",
+    "date": "2026-09-05",
+    "startTime": "10:00 AM",
+    "endTime": "01:00 PM",
+    "joinUrl": "https://youtube.com/live/cyber-security-essentials",
+    "topics": [
+      "Internet Security & Cyber Safety",
+      "Phishing & Fraud Detection",
+      "SSL/TLS Protocols",
+      "Digital Locker & NIELIT Exam Prep"
+    ]
+  },
+  {
+    "id": "live-py-2",
+    "liveBatcheId": "batch-python-fasttrack",
+    "date": "2026-09-06",
+    "startTime": "04:30 PM",
+    "endTime": "06:00 PM",
+    "joinUrl": "https://meet.google.com/msk-py-oop",
+    "topics": [
+      "Object-Oriented Programming (OOP)",
+      "Class Definition & Constructors",
+      "Inheritance & Polymorphism",
+      "Abstract Base Classes & Real Examples"
+    ]
+  }
+]

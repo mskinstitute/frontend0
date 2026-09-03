@@ -1,0 +1,26 @@
+[
+  {
+    "studentId": "std-001",
+    "name": "Rahul Kumar",
+    "username": "rahulkumar",
+    "email": "rahul.kumar@email.com",
+    "status": "ACTIVE",
+    "joinedAt": "2026-02-10"
+  },
+  {
+    "studentId": "std-002",
+    "name": "Priya Sharma",
+    "username": "priyasharma",
+    "email": "priya.sharma@email.com",
+    "status": "ACTIVE",
+    "joinedAt": "2026-02-15"
+  },
+  {
+    "studentId": "std-003",
+    "name": "Amit Singh",
+    "username": "amitsingh",
+    "email": "amit.singh@email.com",
+    "status": "INACTIVE",
+    "joinedAt": "2026-03-01"
+  }
+]

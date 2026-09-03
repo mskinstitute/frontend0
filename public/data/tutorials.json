@@ -1,0 +1,90 @@
+[
+  {
+    "featured": true,
+    "id": "tut-html-fundamentals",
+    "slug": "html-fundamentals",
+    "courseSlug": "html5-complete-masterclass",
+    "title": "HTML5",
+    "icon": "html",
+    "badge": "Beginner to Pro",
+    "tags": ["Beginner", "frontend", "html5", "accessibility", "seo"],
+    "documentationTitle": "Complete HTML5 Masterclass Documentation",
+    "shortDescription": "The definitive, all-in-one HTML5 full course. Master document anatomy, semantic layout architecture, accessible forms, responsive media, ARIA, and modern web APIs.",
+    "lessonsCount": 12,
+    "totalHours": "30h",
+    "topicsCount": 24,
+    "githubRepo": "github.com/msk-institute/html5-complete-course",
+    "updatedAt": "2026-09-02",
+    "seo": {
+      "title": "Complete HTML5 Full Course Tutorial - MSK Notes | MSK Institute",
+      "description": "Exhaustive, beginner-to-advanced HTML5 course covering semantics, forms, tables, media, canvas, SEO meta tags, and web accessibility.",
+      "keywords": ["html tutorial", "complete html course", "learn html5", "html for beginners", "semantic html", "web accessibility", "html forms", "web development"]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-css-mastery",
+    "slug": "css-mastery",
+    "courseSlug": "html5-css3-modern-ui-design",
+    "title": "CSS",
+    "icon": "css",
+    "badge": "Beginner",
+    "tags": ["Beginner", "styling"],
+    "documentationTitle": "CSS Documentation",
+    "shortDescription": "Style beautiful web pages. Learn selectors, flexbox, grid, animations, and responsive design.",
+    "lessonsCount": 11,
+    "totalHours": "25h",
+    "topicsCount": 42,
+    "githubRepo": "github.com/msk-css",
+    "updatedAt": "2026-08-28",
+    "seo": {
+      "title": "CSS Tutorial - MSK Notes | MSK Institute",
+      "description": "Learn modern CSS Grid, Flexbox, transitions, and responsive web styling from scratch.",
+      "keywords": ["css tutorial", "learn css", "flexbox grid", "responsive design"]
+    }
+  },
+  {
+    "featured": false,
+    "id": "tut-javascript-essentials",
+    "slug": "javascript-essentials",
+    "courseSlug": "javascript-react-frontend-engineering",
+    "title": "JavaScript",
+    "icon": "javascript",
+    "badge": "Beginner",
+    "tags": ["Beginner", "programming"],
+    "documentationTitle": "JavaScript Documentation",
+    "shortDescription": "Learn modern ES6+ JavaScript, DOM manipulation, asynchronous programming, APIs, and modern frontend tools.",
+    "lessonsCount": 12,
+    "totalHours": "45h",
+    "topicsCount": 54,
+    "githubRepo": "github.com/msk-javascript",
+    "updatedAt": "2026-08-28",
+    "seo": {
+      "title": "JavaScript Tutorial - MSK Notes | MSK Institute",
+      "description": "Complete beginner to advanced JavaScript course notes, DOM, and async programming.",
+      "keywords": ["javascript tutorial", "learn javascript", "js es6", "web development"]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-python-beginners",
+    "slug": "python-for-beginners",
+    "courseSlug": "python-for-beginners",
+    "title": "Python",
+    "icon": "python",
+    "badge": "Beginner to Pro",
+    "tags": ["Beginner", "programming", "python", "backend", "scripting"],
+    "documentationTitle": "Complete Python for Beginners Documentation",
+    "shortDescription": "Master Python programming from the ground up in 1 month. Comprehensive guide covering syntax, variables, data structures, control flow, functions, file handling, and 4 practical projects.",
+    "lessonsCount": 16,
+    "totalHours": "30h",
+    "topicsCount": 85,
+    "githubRepo": "github.com/msk-institute/python-for-beginners",
+    "updatedAt": "2026-09-03",
+    "seo": {
+      "title": "Python for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Exhaustive Python for Beginners tutorial notes. Step-by-step curriculum covering syntax, variables, lists, dictionaries, loops, functions, file handling, and real projects.",
+      "keywords": ["python tutorial", "python for beginners", "learn python", "python documentation", "python notes", "python full course"]
+    }
+  }
+]
