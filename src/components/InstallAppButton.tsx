@@ -13,10 +13,10 @@ export default function InstallAppButton({
   variant = 'header',
   className = '',
 }: InstallAppButtonProps) {
-  const { isInstalled, installApp } = usePwa();
+  const { isRunningStandalone, installApp, isInstalling } = usePwa();
 
-  // If already installed or currently running inside installed app, hide completely
-  if (isInstalled) {
+  // If currently running inside installed app window, hide completely
+  if (isRunningStandalone) {
     return null;
   }
 

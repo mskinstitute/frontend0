@@ -1,9 +1,10 @@
 // public/sw.js - MSK Institute Progressive Web App Service Worker
-const CACHE_VERSION = 'v-1.7.0';
+const CACHE_VERSION = 'v-1.8.0';
 const CACHE_NAME = `msk-institute-${CACHE_VERSION}`;
 
 const urlsToCache = [
   '/',
+  '/?source=pwa',
   '/courses',
   '/live',
   '/live-batches',
@@ -11,12 +12,17 @@ const urlsToCache = [
   '/blogs',
   '/verify-certificate',
   '/offline.html',
+  '/manifest.webmanifest',
   '/manifest.json',
   '/logo.jpg',
   '/brand/icon-192x192.png',
   '/brand/icon-512x512.png',
+  '/brand/maskable-icon-512x512.png',
+  '/brand/android-icon-192x192.png',
+  '/brand/android-icon-512x512.png',
   '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  '/icons/icon-512x512.png',
+  '/icons/icon-maskable-512x512.png'
 ];
 
 // Install event: cache assets & activate immediately
@@ -24,9 +30,13 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache).catch((err) => {
-        console.warn('Pre-caching assets notice:', err);
-      });
+      return Promise.allSettled(
+        urlsToCache.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('Pre-caching notice for:', url, err);
+          })
+        )
+      );
     })
   );
 });

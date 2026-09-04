@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MobileBottomNav from '@/components/MobileBottomNav';
 import PwaRegister from '@/components/PwaRegister';
+import InstallAppModal from '@/components/InstallAppModal';
 import { PwaProvider } from '@/context/PwaContext';
 import Analytics from '@/components/Analytics';
 import './globals.css';
@@ -18,6 +19,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "MSK Institute | Shikohabad's Leading Coding & Computer Training Academy",
+  applicationName: 'MSK Institute',
   description: 'Learn Python programming, Full-Stack Web Development, CCC, and MS Office with practical, offline lab training at MSK Institute in Shikohabad. Verified graduation certificates.',
   keywords: ['MSK Institute', 'Computer Center Shikohabad', 'Coding Classes Shikohabad', 'Python Training', 'Web Development Shikohabad', 'NIELIT CCC Course'],
   metadataBase: new URL('https://mskinstitute.in'),
@@ -114,6 +116,20 @@ export default function RootLayout({
                 window.deferredPrompt = e;
                 window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
               });
+              if ('serviceWorker' in navigator) {
+                var registerSW = function() {
+                  navigator.serviceWorker.register('/sw.js', { scope: '/' })
+                    .catch(function(err) {
+                      console.warn('Early SW registration fail', err);
+                    });
+                };
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                  registerSW();
+                } else {
+                  window.addEventListener('DOMContentLoaded', registerSW);
+                  window.addEventListener('load', registerSW);
+                }
+              }
             `,
           }}
         />
@@ -122,6 +138,7 @@ export default function RootLayout({
         <PwaProvider>
           <Analytics />
           <PwaRegister />
+          <InstallAppModal />
           <Navbar />
           <main className="flex-grow pb-16 md:pb-0">
             {children}

@@ -25,7 +25,12 @@ interface PwaContextType {
   isInstallable: boolean;
   isNativePromptAvailable: boolean;
   isInstalled: boolean;
+  isRunningStandalone: boolean;
   isIOS: boolean;
+  isInstalling: boolean;
+  isInstallModalOpen: boolean;
+  openInstallModal: () => void;
+  closeInstallModal: () => void;
   installApp: () => Promise<boolean>;
 }
 
@@ -34,7 +39,13 @@ const PwaContext = createContext<PwaContextType | undefined>(undefined);
 export function PwaProvider({ children }: { children: React.ReactNode }) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isRunningStandalone, setIsRunningStandalone] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
+
+  const openInstallModal = useCallback(() => setIsInstallModalOpen(true), []);
+  const closeInstallModal = useCallback(() => setIsInstallModalOpen(false), []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -44,8 +55,8 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
       setDeferredPrompt(window.deferredPrompt);
     }
 
-    // Comprehensive check for installed / standalone PWA mode
-    const checkIsInstalled = () => {
+    // Comprehensive check for currently running inside standalone app window
+    const checkDisplayMode = () => {
       const isStandaloneMedia =
         window.matchMedia('(display-mode: standalone)').matches ||
         window.matchMedia('(display-mode: window-controls-overlay)').matches ||
@@ -60,15 +71,17 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
         document.referrer.includes('android-app://') ||
         window.location.search.includes('source=pwa');
 
-      const isPersistedInstalled =
-        localStorage.getItem('msk_pwa_installed') === 'true';
+      const runningInAppWindow = Boolean(isStandaloneMedia || isIosStandalone || isAndroidApp);
+      setIsRunningStandalone(runningInAppWindow);
 
-      const installed = Boolean(isStandaloneMedia || isIosStandalone || isAndroidApp || isPersistedInstalled);
-      setIsInstalled(installed);
-      return installed;
+      // Persisted check: consider installed if running in app window or marked installed
+      const isPersistedInstalled = localStorage.getItem('msk_pwa_installed') === 'true';
+      setIsInstalled(runningInAppWindow || (isPersistedInstalled && runningInAppWindow));
+
+      return runningInAppWindow;
     };
 
-    checkIsInstalled();
+    checkDisplayMode();
 
     // Check iOS device
     const userAgent = window.navigator.userAgent.toLowerCase();
@@ -95,13 +108,17 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
       setIsInstalled(true);
       window.deferredPrompt = null;
       setDeferredPrompt(null);
+      setIsInstallModalOpen(false);
       try {
         localStorage.setItem('msk_pwa_installed', 'true');
       } catch {
         // ignore storage errors
       }
       trackPwaInstall();
-      toast.success('MSK Institute App installed successfully!', { icon: '🎉' });
+      toast.success('MSK Institute App installed successfully! Launch it anytime from your desktop or app drawer.', {
+        icon: '🎉',
+        duration: 6000,
+      });
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -112,6 +129,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
     const standaloneMedia = window.matchMedia('(display-mode: standalone)');
     const handleDisplayModeChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
+        setIsRunningStandalone(true);
         setIsInstalled(true);
         try {
           localStorage.setItem('msk_pwa_installed', 'true');
@@ -138,15 +156,41 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
   const installApp = useCallback(async (): Promise<boolean> => {
     trackEvent('pwa_install_button_clicked');
 
-    // 1. If already installed
-    if (isInstalled) {
-      toast('MSK Institute App is already installed on this device.', { icon: '📱' });
+    // 1. If already running inside installed standalone app window
+    if (isRunningStandalone) {
+      toast('MSK Institute App is already running in app mode.', { icon: '📱' });
       return true;
     }
 
-    // 2. Try stored prompt in React state or Window global
-    const activePrompt = deferredPrompt || (typeof window !== 'undefined' ? window.deferredPrompt : null);
+    setIsInstalling(true);
 
+    // 2. Try to get native prompt (state, global, or wait up to 800ms)
+    let activePrompt = deferredPrompt || (typeof window !== 'undefined' ? window.deferredPrompt : null);
+
+    if (!activePrompt && typeof window !== 'undefined') {
+      activePrompt = await new Promise<BeforeInstallPromptEvent | null>((resolve) => {
+        let timer: NodeJS.Timeout;
+
+        const onReady = () => {
+          clearTimeout(timer);
+          window.removeEventListener('pwa-prompt-ready', onReady);
+          resolve(window.deferredPrompt || null);
+        };
+
+        timer = setTimeout(() => {
+          window.removeEventListener('pwa-prompt-ready', onReady);
+          resolve(window.deferredPrompt || null);
+        }, 800);
+
+        window.addEventListener('pwa-prompt-ready', onReady);
+      });
+    }
+
+    setIsInstalling(false);
+
+    // 3. If native prompt is available:
+    // Calling .prompt() triggers the browser's native App Install prompt
+    // This installs as a real standalone app (NOT a browser shortcut)
     if (activePrompt) {
       try {
         await activePrompt.prompt();
@@ -161,41 +205,26 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
             // ignore
           }
           trackPwaInstall();
+          setIsInstallModalOpen(false);
+          toast.success('Installing MSK Institute App...', { icon: '⚡' });
           return true;
         } else {
           trackEvent('pwa_install_dismissed');
           return false;
         }
       } catch (err) {
-        console.warn('Direct PWA prompt error:', err);
+        console.warn('Native PWA prompt error:', err);
       }
     }
 
-    // 3. If iOS Safari
-    if (isIOS) {
-      toast(
-        () => (
-          <div className="text-xs space-y-1">
-            <p className="font-bold text-primary">To install on iPhone/iPad:</p>
-            <p>1. Tap the <strong>Share</strong> button (⎕↑) at the bottom.</p>
-            <p>2. Scroll and tap <strong>&ldquo;Add to Home Screen&rdquo;</strong> (➕).</p>
-          </div>
-        ),
-        { duration: 6000, icon: '📲' }
-      );
-      return false;
-    }
-
-    // 4. If prompt not available yet in browser
-    toast(
-      'To install, click the Install (📲) icon in your address bar or browser menu.',
-      { duration: 5000, icon: '💡' }
-    );
+    // 4. If native prompt is not directly available (already dismissed, iOS Safari, or desktop manual):
+    // Open the comprehensive Install App Modal that guides the user to install as an App, NOT a browser shortcut!
+    setIsInstallModalOpen(true);
     return false;
-  }, [deferredPrompt, isInstalled, isIOS]);
+  }, [deferredPrompt, isRunningStandalone]);
 
   const isNativePromptAvailable = Boolean(deferredPrompt || (typeof window !== 'undefined' && window.deferredPrompt));
-  const isInstallable = !isInstalled;
+  const isInstallable = !isRunningStandalone;
 
   return (
     <PwaContext.Provider
@@ -204,7 +233,12 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
         isInstallable,
         isNativePromptAvailable,
         isInstalled,
+        isRunningStandalone,
         isIOS,
+        isInstalling,
+        isInstallModalOpen,
+        openInstallModal,
+        closeInstallModal,
         installApp,
       }}
     >

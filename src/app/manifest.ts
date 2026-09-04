@@ -3,16 +3,17 @@ import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'MSK Institute',
-    short_name: 'MSK',
+    short_name: 'MSK Institute',
     description: 'MSK Institute - Learn coding, web development, and digital tools with practical courses in HTML, CSS, JavaScript, Python, and Computer Courses in Shikohabad.',
-    start_url: '/',
+    start_url: '/?source=pwa',
     id: '/?source=pwa',
     scope: '/',
     display: 'standalone',
     background_color: '#0A2540',
     theme_color: '#0A2540',
     orientation: 'portrait-primary',
-    display_override: ['window-controls-overlay', 'standalone', 'browser'],
+    display_override: ['standalone', 'minimal-ui'],
+    prefer_related_applications: false,
     categories: ['education', 'technology', 'training', 'coding'],
     icons: [
       {

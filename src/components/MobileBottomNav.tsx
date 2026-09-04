@@ -8,7 +8,7 @@ import { usePwa } from '@/context/PwaContext';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
-  const { isInstalled, installApp } = usePwa();
+  const { isRunningStandalone, installApp } = usePwa();
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -84,8 +84,8 @@ export default function MobileBottomNav() {
           );
         })}
 
-        {/* 5th Tab: If NOT installed show Install App button; if INSTALLED show Verify Certificate tab */}
-        {!isInstalled ? (
+        {/* 5th Tab: If NOT running inside standalone app show Install App button; if in standalone app show Verify Certificate tab */}
+        {!isRunningStandalone ? (
           <button
             onClick={() => installApp()}
             aria-label="Install App"
