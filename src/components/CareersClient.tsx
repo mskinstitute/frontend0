@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
   Briefcase,
@@ -25,7 +25,14 @@ import {
   Award,
   Users,
   ShieldCheck,
-  Check
+  Check,
+  Share2,
+  Copy,
+  RotateCcw,
+  MessageCircle,
+  Globe,
+  Layers,
+  ArrowUp
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { CareerOpportunity, CareerType, WorkMode } from '@/types';
@@ -54,12 +61,175 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
   const [applicantPortfolio, setApplicantPortfolio] = useState('');
   const [applicantNote, setApplicantNote] = useState('');
 
+  // Share Modal state
+  const [selectedCareerForShare, setSelectedCareerForShare] = useState<CareerOpportunity | null>(null);
+  const [isCopiedShareText, setIsCopiedShareText] = useState(false);
+  const [isCopiedLinkOnly, setIsCopiedLinkOnly] = useState(false);
+
   // Recruiter Inquiry Modal state
   const [isRecruiterModalOpen, setIsRecruiterModalOpen] = useState(false);
   const [recruiterName, setRecruiterName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [recruiterPhone, setRecruiterPhone] = useState('');
   const [recruiterRoleRequired, setRecruiterRoleRequired] = useState('Trainers & Education Counselors');
+
+  // Dynamic header offset & sticky positioning (defaults to 115px to account for marquee ticker + navbar)
+  const [headerHeight, setHeaderHeight] = useState(115);
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const [isFilterHidden, setIsFilterHidden] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [highlightedJobId, setHighlightedJobId] = useState<string | null>(null);
+
+  // Dynamically measure sticky header height to guarantee filter never clips behind announcement marquee
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const headerEl = document.querySelector('header');
+      if (headerEl) {
+        setHeaderHeight(Math.max(headerEl.offsetHeight, 112));
+      }
+    };
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => window.removeEventListener('resize', updateHeaderHeight);
+  }, []);
+
+  // Detect scroll position for sticky header offset and Back-to-Top (no auto-hide on scroll)
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const listingsEl = document.getElementById('listings-container');
+      const threshold = listingsEl ? listingsEl.offsetTop - (headerHeight + 20) : 260;
+
+      setShowBackToTop(currentScrollY > 500);
+
+      if (currentScrollY > threshold) {
+        setIsScrolledPastHero(true);
+      } else {
+        setIsScrolledPastHero(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [headerHeight]);
+
+  // Auto-scroll, highlight, and expand job if opened with hash (e.g. /careers#job-counselor)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const targetId = window.location.hash.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        setHighlightedJobId(targetId);
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setExpandedCareerId(targetId);
+        }, 350);
+
+        // Remove pulse ring after 6 seconds
+        const timer = setTimeout(() => {
+          setHighlightedJobId(null);
+        }, 6000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
+
+  // Generate structured job share text with full details and direct URL
+  const generateJobShareText = (career: CareerOpportunity) => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in';
+    const jobUrl = `${origin}/careers#${career.id}`;
+    const workTypeStr = career.workType || (career.type === 'internship' ? 'Internship' : 'Full-time Job');
+    const skillsList = career.skills && career.skills.length > 0 ? career.skills.join(', ') : null;
+
+    return `📢 *JOB OPPORTUNITY AT MSK INSTITUTE* 📢
+
+💼 *Role:* ${career.title}
+🏢 *Department:* ${career.department}
+📌 *Employment Type:* ${workTypeStr} (On-site)
+💰 *Salary / Stipend:* ${career.stipendOrSalary}
+📍 *Location:* MSK Institute, Shikohabad (Firozabad, UP)
+🎯 *Experience:* ${career.experienceLevel}
+👥 *Eligibility:* ${career.gender || 'Any Gender'}
+🔢 *Openings:* ${career.openings} ${career.openings === 1 ? 'Position' : 'Positions'}
+
+📝 *Job Overview:*
+${career.shortDescription}
+${skillsList ? `\n🛠 *Key Skills:* ${skillsList}\n` : ''}
+👉 *Apply Online & View Full Details:*
+${jobUrl}
+
+📍 *Campus Address:* Gali No. 3, Near Gyan Jyoti Public School, Shikohabad
+📞 *Contact / WhatsApp:* +91 83930 42166`;
+  };
+
+  const handleOpenShareModal = (career: CareerOpportunity) => {
+    setSelectedCareerForShare(career);
+    setIsCopiedShareText(false);
+    setIsCopiedLinkOnly(false);
+  };
+
+  const handleShareViaWhatsApp = () => {
+    if (!selectedCareerForShare) return;
+    const text = generateJobShareText(selectedCareerForShare);
+    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank');
+  };
+
+  const handleCopyShareContent = async () => {
+    if (!selectedCareerForShare) return;
+    const text = generateJobShareText(selectedCareerForShare);
+    try {
+      await navigator.clipboard.writeText(text);
+      setIsCopiedShareText(true);
+      toast.success('Job details and link copied to clipboard!');
+      setTimeout(() => setIsCopiedShareText(false), 2500);
+    } catch {
+      toast.error('Could not copy to clipboard. Please copy manually.');
+    }
+  };
+
+  const handleCopyLinkOnly = async () => {
+    if (!selectedCareerForShare) return;
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in';
+    const jobUrl = `${origin}/careers#${selectedCareerForShare.id}`;
+    try {
+      await navigator.clipboard.writeText(jobUrl);
+      setIsCopiedLinkOnly(true);
+      toast.success('Job link copied to clipboard!');
+      setTimeout(() => setIsCopiedLinkOnly(false), 2500);
+    } catch {
+      toast.error('Could not copy link.');
+    }
+  };
+
+  const handleNativeShare = async () => {
+    if (!selectedCareerForShare) return;
+    const text = generateJobShareText(selectedCareerForShare);
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `${selectedCareerForShare.title} | MSK Institute Careers`,
+          text: text,
+        });
+      } catch (err: any) {
+        if (err.name !== 'AbortError') {
+          handleCopyShareContent();
+        }
+      }
+    } else {
+      handleCopyShareContent();
+    }
+  };
+
+  const isAnyFilterActive = activeTab !== 'all' || selectedPriority !== 'all' || selectedGender !== 'all' || searchQuery.trim() !== '';
+
+  const handleResetFilters = () => {
+    setActiveTab('all');
+    setSelectedPriority('all');
+    setSelectedGender('all');
+    setSearchQuery('');
+  };
 
   // Filtered list
   const filteredCareers = useMemo(() => {
@@ -286,109 +456,296 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
 
       {/* Main Content Area */}
       <div id="listings-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-6">
-        {/* Controls Card: Tabs & Search */}
-        <div className="bg-white rounded-2xl border border-border-subtle p-4 sm:p-5 shadow-sm space-y-4">
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        {/* Floating "Show Filters & Search" Pill (Fixed at Bottom Center - Never hidden by header) */}
+        {isFilterHidden && (
+          <div className="fixed bottom-11 left-1/2 -translate-x-1/2 z-40 animate-in fade-in slide-in-from-bottom-5 duration-200 pointer-events-auto">
+            <button
+              type="button"
+              onClick={() => {
+                setIsFilterHidden(false);
+                const el = document.getElementById('listings-container');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-5 py-2.5 bg-primary text-white hover:bg-primary-light rounded-full shadow-2xl border-2 border-secondary text-xs sm:text-sm font-bold flex items-center gap-2.5 transition-all cursor-pointer hover:scale-105 active:scale-95 group"
+            >
+              <Search className="w-4 h-4 text-secondary group-hover:rotate-12 transition-transform" />
+              <span>Show Filters</span>
+              <ChevronUp className="w-4 h-4 text-secondary" />
+              {isAnyFilterActive && (
+                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse ml-0.5" />
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* Controls Card: Tabs & Search (Green Area), Hide Button & Expanded Quick Pills */}
+        {!isFilterHidden && (
+          <div
+            style={{
+              top: isScrolledPastHero ? `${headerHeight + 14}px` : undefined,
+            }}
+            className={`z-30 transition-all duration-200 ${
+              isScrolledPastHero ? 'sticky top-[120px] sm:top-[128px]' : 'relative'
+            }`}
+          >
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl border border-border-subtle p-2 sm:p-2.5 shadow-sm space-y-1.5 transition-all duration-200 animate-in fade-in duration-150">
+          {/* Row 1: Role Type Filter Tabs, Search Bar (Green Area), Counter & Hide Button */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             {/* Tab Pill Buttons */}
-            <div className="flex items-center gap-2 bg-surface p-1 rounded-xl border border-border-subtle/80 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 flex-shrink-0">
               <button
                 onClick={() => setActiveTab('all')}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'all'
                     ? 'bg-primary text-white shadow-2xs'
-                    : 'text-text-muted hover:text-primary'
+                    : 'bg-surface hover:bg-slate-100 text-text-muted hover:text-primary border border-border-subtle/60'
                 }`}
               >
-                All Openings ({counts.total})
+                <Layers className="w-3.5 h-3.5" />
+                <span>All ({counts.total})</span>
               </button>
               <button
                 onClick={() => setActiveTab('full-time')}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'full-time'
                     ? 'bg-blue-600 text-white shadow-2xs'
-                    : 'text-text-muted hover:text-blue-700'
+                    : 'bg-surface hover:bg-blue-50 text-text-muted hover:text-blue-700 border border-border-subtle/60'
                 }`}
               >
-                <Briefcase className="w-4 h-4" />
-                Full-Time ({counts.fullTime})
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>Full-Time ({counts.fullTime})</span>
               </button>
               <button
                 onClick={() => setActiveTab('part-time')}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'part-time'
                     ? 'bg-purple-600 text-white shadow-2xs'
-                    : 'text-text-muted hover:text-purple-700'
+                    : 'bg-surface hover:bg-purple-50 text-text-muted hover:text-purple-700 border border-border-subtle/60'
                 }`}
               >
-                <Clock className="w-4 h-4" />
-                Part-Time ({counts.partTime})
+                <Clock className="w-3.5 h-3.5" />
+                <span>Part-Time ({counts.partTime})</span>
               </button>
               <button
                 onClick={() => setActiveTab('internship')}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'internship'
                     ? 'bg-emerald-600 text-white shadow-2xs'
-                    : 'text-text-muted hover:text-emerald-700'
+                    : 'bg-surface hover:bg-emerald-50 text-text-muted hover:text-emerald-700 border border-border-subtle/60'
                 }`}
               >
-                <GraduationCap className="w-4 h-4" />
-                Internships ({counts.internships})
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>Internships ({counts.internships})</span>
               </button>
             </div>
 
-            {/* Filters & Search Input */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-              {/* Priority Dropdown */}
-              <div className="flex-shrink-0">
-                <select
-                  value={selectedPriority}
-                  onChange={(e) => setSelectedPriority(e.target.value)}
-                  aria-label="Filter by hiring priority"
-                  className="w-full sm:w-auto px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 cursor-pointer"
-                >
-                  <option value="all">All Priorities</option>
-                  <option value="High">🔴 High Priority</option>
-                  <option value="Medium">🟠 Medium Priority</option>
-                  <option value="Optional">🟡 Optional Roles</option>
-                </select>
-              </div>
-
-              {/* Gender Dropdown */}
-              <div className="flex-shrink-0">
-                <select
-                  value={selectedGender}
-                  onChange={(e) => setSelectedGender(e.target.value)}
-                  aria-label="Filter by gender preference"
-                  className="w-full sm:w-auto px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 cursor-pointer"
-                >
-                  <option value="all">All Genders</option>
-                  <option value="female">👩 Female Preferred ({counts.female})</option>
-                  <option value="any">👥 Open to Any ({counts.anyGender})</option>
-                </select>
-              </div>
-
-              {/* Search Bar */}
-              <div className="relative flex-1 sm:w-64">
-                <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {/* Middle & Right: Search Input (Green Area) + Matching Counter + Hide Filter Button */}
+            <div className="flex items-center gap-2 flex-1 sm:justify-end min-w-0">
+              {/* Search Bar (Moved from Red area to Green area) */}
+              <div className="relative flex-1 sm:max-w-xs md:max-w-sm">
+                <Search className="w-3.5 h-3.5 text-text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Search by role, Python, Trainer, Sales..."
+                  placeholder="Search roles, skills (Python, Sales)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                  className="w-full pl-8 pr-7 py-1.5 bg-surface border border-border-subtle rounded-lg text-xs text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary p-0.5 cursor-pointer"
+                    aria-label="Clear search"
                   >
-                    <X className="w-3.5 h-3.5" />
+                    <X className="w-3 h-3" />
                   </button>
                 )}
               </div>
+
+              {/* Counter Indicator */}
+              <div className="hidden lg:flex items-center gap-1.5 text-xs font-semibold text-text-muted flex-shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>
+                  <strong className="text-primary font-bold">{filteredCareers.length}</strong> of {counts.total}
+                </span>
+              </div>
+
+              {/* Hide Filter Button */}
+              <button
+                type="button"
+                onClick={() => setIsFilterHidden(true)}
+                className="px-2.5 py-1.5 rounded-lg bg-surface hover:bg-slate-100 text-text-muted hover:text-primary border border-border-subtle/70 text-xs font-semibold flex items-center gap-1 flex-shrink-0 cursor-pointer transition-colors shadow-2xs"
+                title="Hide filter bar"
+                aria-label="Hide filter bar"
+              >
+                <ChevronUp className="w-3.5 h-3.5" />
+                <span className="text-[11px] font-bold">Hide</span>
+              </button>
             </div>
           </div>
-        </div>
+
+          {/* Row 2: Enhanced QUICK Filter Pills (Horizontal Scroll on Mobile) */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5 text-[11px]">
+            <span className="text-text-muted font-bold text-[10px] uppercase tracking-wider flex-shrink-0">
+              Quick:
+            </span>
+
+            {/* Urgent / High Priority */}
+            <button
+              onClick={() => setSelectedPriority(selectedPriority === 'High' ? 'all' : 'High')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                selectedPriority === 'High'
+                  ? 'bg-rose-600 text-white shadow-2xs'
+                  : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200'
+              }`}
+            >
+              <span>🔥 Urgent / High Priority</span>
+            </button>
+
+            {/* Medium Priority */}
+            <button
+              onClick={() => setSelectedPriority(selectedPriority === 'Medium' ? 'all' : 'Medium')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                selectedPriority === 'Medium'
+                  ? 'bg-amber-600 text-white shadow-2xs'
+                  : 'bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200'
+              }`}
+            >
+              <span>🟠 Medium Priority</span>
+            </button>
+
+            {/* Optional Roles */}
+            <button
+              onClick={() => setSelectedPriority(selectedPriority === 'Optional' ? 'all' : 'Optional')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                selectedPriority === 'Optional'
+                  ? 'bg-slate-700 text-white shadow-2xs'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
+              }`}
+            >
+              <span>🟡 Optional Roles</span>
+            </button>
+
+            {/* Female Preferred */}
+            <button
+              onClick={() => setSelectedGender(selectedGender === 'female' ? 'all' : 'female')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                selectedGender === 'female'
+                  ? 'bg-pink-600 text-white shadow-2xs'
+                  : 'bg-pink-50 text-pink-700 hover:bg-pink-100 border border-pink-200'
+              }`}
+            >
+              <span>👩 Female Preferred</span>
+            </button>
+
+            {/* Any Gender */}
+            <button
+              onClick={() => setSelectedGender(selectedGender === 'any' ? 'all' : 'any')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                selectedGender === 'any'
+                  ? 'bg-indigo-600 text-white shadow-2xs'
+                  : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200'
+              }`}
+            >
+              <span>👥 Any Gender</span>
+            </button>
+
+            {/* Part-Time Only */}
+            <button
+              onClick={() => setActiveTab(activeTab === 'part-time' ? 'all' : 'part-time')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                activeTab === 'part-time'
+                  ? 'bg-purple-600 text-white shadow-2xs'
+                  : 'bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200'
+              }`}
+            >
+              <span>⏱️ Part-Time (₹2k-5k)</span>
+            </button>
+
+            {/* Internships Only */}
+            <button
+              onClick={() => setActiveTab(activeTab === 'internship' ? 'all' : 'internship')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                activeTab === 'internship'
+                  ? 'bg-emerald-600 text-white shadow-2xs'
+                  : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
+              }`}
+            >
+              <span>🎓 Internships (₹2k-6k)</span>
+            </button>
+
+            {/* Full-Time Only */}
+            <button
+              onClick={() => setActiveTab(activeTab === 'full-time' ? 'all' : 'full-time')}
+              className={`px-2 py-0.5 rounded-md font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ${
+                activeTab === 'full-time'
+                  ? 'bg-blue-600 text-white shadow-2xs'
+                  : 'bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200'
+              }`}
+            >
+              <span>💼 Full-Time</span>
+            </button>
+
+            {/* Reset shortcut if any filter active */}
+            {isAnyFilterActive && (
+              <button
+                onClick={handleResetFilters}
+                className="px-2 py-0.5 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer ml-auto"
+                title="Reset all filters"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            )}
+          </div>
+
+          {/* Row 3: Active Filters Tags Ribbon */}
+          {isAnyFilterActive && (
+            <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-border-subtle/50 text-[11px] text-text-muted">
+              <span className="font-bold text-primary text-[10px] uppercase tracking-wider">Active:</span>
+              {activeTab !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 text-primary font-bold">
+                  <span>Type: {activeTab === 'full-time' ? 'Full-time' : activeTab === 'part-time' ? 'Part-time' : 'Internship'}</span>
+                  <button onClick={() => setActiveTab('all')} className="hover:text-red-500 cursor-pointer">
+                    <X className="w-2.5 h-2.5" />
+                  </button>
+                </span>
+              )}
+              {selectedPriority !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 font-bold">
+                  <span>{selectedPriority}</span>
+                  <button onClick={() => setSelectedPriority('all')} className="hover:text-red-500 cursor-pointer">
+                    <X className="w-2.5 h-2.5" />
+                  </button>
+                </span>
+              )}
+              {selectedGender !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-pink-50 text-pink-700 border border-pink-200 font-bold">
+                  <span>{selectedGender === 'female' ? 'Female' : 'Any'}</span>
+                  <button onClick={() => setSelectedGender('all')} className="hover:text-red-500 cursor-pointer">
+                    <X className="w-2.5 h-2.5" />
+                  </button>
+                </span>
+              )}
+              {searchQuery.trim() && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200 font-bold">
+                  <span>&ldquo;{searchQuery}&rdquo;</span>
+                  <button onClick={() => setSearchQuery('')} className="hover:text-red-500 cursor-pointer">
+                    <X className="w-2.5 h-2.5" />
+                  </button>
+                </span>
+              )}
+              <button
+                onClick={handleResetFilters}
+                className="text-[10px] text-secondary hover:text-secondary-light hover:underline font-bold ml-auto cursor-pointer"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
+            </div>
+          </div>
+        )}
 
         {/* Listings Grid / Empty state */}
         <div className="mt-8 space-y-4">
@@ -417,17 +774,31 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
             filteredCareers.map((item) => {
               const isExpanded = expandedCareerId === item.id;
               const isIntern = item.type === 'internship';
+              const isHighlighted = highlightedJobId === item.id;
 
               return (
                 <div
                   key={item.id}
-                  className="bg-white rounded-2xl border border-border-subtle hover:border-slate-300 transition-all shadow-xs hover:shadow-md overflow-hidden group"
+                  id={item.id}
+                  className={`bg-white rounded-2xl border scroll-mt-36 transition-all duration-300 overflow-hidden group ${
+                    isHighlighted
+                      ? 'border-secondary ring-4 ring-secondary/30 shadow-xl scale-[1.005]'
+                      : 'border-border-subtle hover:border-slate-300 shadow-xs hover:shadow-md'
+                  }`}
                 >
                   <div className="p-5 sm:p-6 space-y-4">
                     {/* Header Row: Title, Badges, Pay */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2 flex-wrap">
+                          {/* Deep Link Target Indicator */}
+                          {isHighlighted && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-black bg-secondary text-primary animate-pulse shadow-2xs">
+                              <Sparkles className="w-3.5 h-3.5" />
+                              🎯 Selected Opening
+                            </span>
+                          )}
+
                           {/* Priority Pill */}
                           {item.priority === 'High' && (
                             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
@@ -561,6 +932,16 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                       </button>
 
                       <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenShareModal(item)}
+                          className="px-3.5 py-2 rounded-xl bg-surface hover:bg-slate-100 border border-border-subtle text-primary font-bold text-xs sm:text-sm shadow-2xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer"
+                          title="Share this job opening with full details and direct link"
+                        >
+                          <Share2 className="w-3.5 h-3.5 text-secondary" />
+                          <span>Share Job</span>
+                        </button>
+
                         <button
                           onClick={() => setSelectedCareerForApply(item)}
                           className="px-4 py-2 rounded-xl bg-secondary hover:bg-secondary-light text-primary font-bold text-xs sm:text-sm shadow-2xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer"
@@ -957,6 +1338,165 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
             </form>
           </div>
         </div>
+      )}
+
+      {/* Share Job Modal */}
+      {selectedCareerForShare && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl border border-border-subtle max-w-md w-full p-5 sm:p-6 space-y-4 relative shadow-2xl animate-in zoom-in-95 duration-150">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedCareerForShare(null)}
+              className="absolute top-4 right-4 p-1.5 rounded-full text-text-muted hover:text-primary hover:bg-surface transition-colors cursor-pointer"
+              aria-label="Close share dialog"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Title */}
+            <div className="space-y-1 pr-7">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
+                  <Share2 className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold text-secondary uppercase tracking-wider block">
+                    Share Job Opening
+                  </span>
+                  <h3 className="text-base sm:text-lg font-black text-primary leading-snug">
+                    {selectedCareerForShare.title}
+                  </h3>
+                </div>
+              </div>
+              <p className="text-xs text-text-muted leading-relaxed pt-0.5">
+                Share this opportunity with candidates or groups. The complete role details, salary/stipend, and application link are included.
+              </p>
+            </div>
+
+            {/* Job Summary Highlight Card */}
+            <div className="p-3.5 bg-surface rounded-2xl border border-border-subtle/80 flex items-center justify-between gap-3 text-xs">
+              <div className="space-y-0.5">
+                <span className="font-bold text-primary flex items-center gap-1">
+                  <MapPin className="w-3 h-3 text-secondary" />
+                  On-site (Shikohabad Campus)
+                </span>
+                <span className="text-text-muted font-medium">
+                  {selectedCareerForShare.workType || (selectedCareerForShare.type === 'internship' ? 'Internship' : 'Full-time')} • {selectedCareerForShare.department}
+                </span>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <span className="font-black text-emerald-600 block text-xs sm:text-sm">
+                  {selectedCareerForShare.stipendOrSalary}
+                </span>
+                <span className="text-[10px] text-text-muted">
+                  {selectedCareerForShare.openings} {selectedCareerForShare.openings === 1 ? 'Opening' : 'Openings'}
+                </span>
+              </div>
+            </div>
+
+            {/* Direct Job Application Link Bar */}
+            <div className="space-y-1.5 pt-1">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="font-bold text-slate-600 flex items-center gap-1">
+                  <Link2 className="w-3 h-3 text-secondary" />
+                  Direct Job Link:
+                </span>
+                {isCopiedLinkOnly && (
+                  <span className="text-emerald-600 font-bold flex items-center gap-1">
+                    <Check className="w-3 h-3" /> Link Copied!
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2 p-1.5 pl-3 bg-surface rounded-xl border border-border-subtle hover:border-slate-300 focus-within:border-secondary transition-colors">
+                <Globe className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+                <input
+                  type="text"
+                  readOnly
+                  value={`${typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in'}/careers#${selectedCareerForShare.id}`}
+                  className="w-full bg-transparent text-xs text-slate-700 font-mono select-all focus:outline-none truncate"
+                  onClick={(e) => (e.target as HTMLInputElement).select()}
+                />
+                <button
+                  type="button"
+                  onClick={handleCopyLinkOnly}
+                  className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-light text-white font-bold text-xs transition-colors flex items-center gap-1.5 flex-shrink-0 cursor-pointer shadow-2xs"
+                  title="Copy direct job link"
+                >
+                  {isCopiedLinkOnly ? (
+                    <>
+                      <Check className="w-3 h-3 text-emerald-300" />
+                      <span>Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3 h-3" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="space-y-2.5 pt-1">
+              {/* WhatsApp Share Button */}
+              <button
+                type="button"
+                onClick={handleShareViaWhatsApp}
+                className="w-full py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>Share via WhatsApp (Details & Link)</span>
+              </button>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                {/* Copy Full Info Button */}
+                <button
+                  type="button"
+                  onClick={handleCopyShareContent}
+                  className="py-2.5 px-3 bg-surface hover:bg-slate-100 border border-border-subtle text-primary font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  {isCopiedShareText ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-600" />
+                      <span className="text-emerald-700">Copied Details!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 text-secondary" />
+                      <span>Copy Full Details</span>
+                    </>
+                  )}
+                </button>
+
+                {/* More / System Share Button */}
+                <button
+                  type="button"
+                  onClick={handleNativeShare}
+                  className="py-2.5 px-3 bg-primary hover:bg-primary-light text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Share2 className="w-4 h-4 text-secondary" />
+                  <span>More Options</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={() => {
+            const el = document.getElementById('listings-container');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-primary text-white shadow-xl hover:bg-primary-light hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer border border-white/20"
+          aria-label="Back to top of openings"
+          title="Back to top of openings"
+        >
+          <ArrowUp className="w-5 h-5 text-secondary" />
+        </button>
       )}
     </div>
   );

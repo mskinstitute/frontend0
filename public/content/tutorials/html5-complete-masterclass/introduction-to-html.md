@@ -23,6 +23,7 @@ keywords:
 lastUpdated: 2026-09-02
 author: MSK Institute
 version: 1.2
+hideOnThisPage: true
 ---
 
 # Introduction to HTML & Web Architecture
@@ -214,6 +215,7 @@ Here is the exact production-ready template that every professional web page sta
 ```
 
 ### Dissecting the Boilerplate Line-by-Line:
+
 1. `<!DOCTYPE html>`: Tells the browser this document uses modern **HTML5**. Without this, browsers fall back into "quirks mode" and render pages with outdated legacy bugs!
 2. `<html lang="en">`: The root element wrapping all content. `lang="en"` informs search engines and screen readers that the document is in English.
 3. `<head>`: The container for **invisible metadata** (page title, SEO keywords, character set, stylesheets, fonts, favicon).
@@ -273,6 +275,7 @@ Save the following code as `index.html` on your computer, then double-click the 
 # Common Beginner Mistakes to Avoid
 
 ### ❌ Mistake 1: Forgetting to close tags
+
 ```html
 <!-- Wrong: Unclosed strong tag spills formatting into the paragraph -->
 <p>This is <strong>important text and this should be normal.</p>
@@ -282,7 +285,9 @@ Save the following code as `index.html` on your computer, then double-click the 
 ```
 
 ### ❌ Mistake 2: Incorrect Tag Nesting
+
 Tags must close in the reverse order of opening (LIFO - Last In, First Out):
+
 ```html
 <!-- Wrong: Overlapping tags -->
 <p>This is <em>italic and <strong>bold</p></em>

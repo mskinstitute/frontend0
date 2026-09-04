@@ -1,24 +1,24 @@
 [
   {
     "featured": true,
-    "id": "tut-html-fundamentals",
-    "slug": "html-fundamentals",
+    "id": "tut-html5-complete-masterclass",
+    "slug": "html5-complete-masterclass",
     "courseSlug": "html5-complete-masterclass",
     "title": "HTML5",
     "icon": "html",
     "badge": "Beginner to Pro",
-    "tags": ["Beginner", "frontend", "html5", "accessibility", "seo"],
-    "documentationTitle": "Complete HTML5 Masterclass Documentation",
-    "shortDescription": "The definitive, all-in-one HTML5 full course. Master document anatomy, semantic layout architecture, accessible forms, responsive media, ARIA, and modern web APIs.",
+    "tags": ["Beginner to Pro", "frontend", "html5", "web development"],
+    "documentationTitle": "HTML5 Complete Masterclass: From Beginner to Pro",
+    "shortDescription": "Master HTML5 from basics to advanced concepts. Learn document structure, semantic layouts, accessible forms, audio/video media, tables, ARIA, and modern web standards.",
     "lessonsCount": 12,
     "totalHours": "30h",
     "topicsCount": 24,
-    "githubRepo": "github.com/msk-institute/html5-complete-course",
-    "updatedAt": "2026-09-02",
+    "githubRepo": "github.com/msk-institute/html5-complete-masterclass",
+    "updatedAt": "2026-09-05",
     "seo": {
-      "title": "Complete HTML5 Full Course Tutorial - MSK Notes | MSK Institute",
-      "description": "Exhaustive, beginner-to-advanced HTML5 course covering semantics, forms, tables, media, canvas, SEO meta tags, and web accessibility.",
-      "keywords": ["html tutorial", "complete html course", "learn html5", "html for beginners", "semantic html", "web accessibility", "html forms", "web development"]
+      "title": "HTML5 Complete Masterclass: From Beginner to Pro - MSK Notes | MSK Institute",
+      "description": "Learn HTML5 from scratch to pro with structured lessons, code snippets, and quizzes based on the HTML5 Complete Masterclass at MSK Institute.",
+      "keywords": ["html5 complete masterclass", "html tutorial", "learn html5", "html beginner to pro", "html documentation", "html notes", "msk notes"]
     }
   },
   {

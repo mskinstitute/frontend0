@@ -23,6 +23,7 @@ keywords:
 lastUpdated: 2026-09-02
 author: MSK Institute
 version: 1.2
+hideOnThisPage: true
 ---
 
 # Introduction to HTML & Web Architecture

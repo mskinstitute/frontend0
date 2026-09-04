@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { trackPwaInstall, trackEvent } from '@/lib/tracking';
+import { requestNotificationPermission } from '@/lib/pushNotifications';
+import { setAppBadge, clearAppBadge } from '@/lib/badging';
 
 // Define the BeforeInstallPromptEvent interface
 export interface BeforeInstallPromptEvent extends Event {
@@ -32,6 +34,9 @@ interface PwaContextType {
   openInstallModal: () => void;
   closeInstallModal: () => void;
   installApp: () => Promise<boolean>;
+  requestNotificationPermission: () => Promise<NotificationPermission>;
+  setBadge: (count?: number) => Promise<boolean>;
+  clearBadge: () => Promise<boolean>;
 }
 
 const PwaContext = createContext<PwaContextType | undefined>(undefined);
@@ -240,6 +245,9 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
         openInstallModal,
         closeInstallModal,
         installApp,
+        requestNotificationPermission,
+        setBadge: setAppBadge,
+        clearBadge: clearAppBadge,
       }}
     >
       {children}

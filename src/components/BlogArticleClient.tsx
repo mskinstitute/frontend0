@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { BlogPost, Course } from '@/types';
+import WebShareButton from '@/components/WebShareButton';
 
 interface BlogArticleClientProps {
   blog: BlogPost;
@@ -61,14 +62,12 @@ export default function BlogArticleClient({ blog, relatedCourses }: BlogArticleC
           Back to all articles
         </Link>
 
-        <button
-          onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface hover:bg-slate-100 border border-border-subtle text-xs font-semibold text-text-muted hover:text-primary rounded-xl transition-colors cursor-pointer"
-          aria-label="Share article"
-        >
-          <Share2 className="w-3.5 h-3.5" />
-          Share
-        </button>
+        <WebShareButton
+          title={`${blog.title} | MSK Institute`}
+          text={blog.excerpt}
+          variant="compact"
+          label="Share Article"
+        />
       </div>
 
       {/* Article Header */}

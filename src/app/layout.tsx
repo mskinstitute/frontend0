@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import MobileBottomNav from '@/components/MobileBottomNav';
 import PwaRegister from '@/components/PwaRegister';
 import InstallAppModal from '@/components/InstallAppModal';
+import PwaUpdateToast from '@/components/PwaUpdateToast';
 import { PwaProvider } from '@/context/PwaContext';
 import Analytics from '@/components/Analytics';
 import './globals.css';
@@ -139,6 +140,7 @@ export default function RootLayout({
           <Analytics />
           <PwaRegister />
           <InstallAppModal />
+          <PwaUpdateToast />
           <Navbar />
           <main className="flex-grow pb-16 md:pb-0">
             {children}

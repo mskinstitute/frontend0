@@ -9,6 +9,7 @@ import {
 import { fetchCourses } from '@/services/api';
 import DemoBookingForm from '@/components/DemoBookingForm';
 import CourseCurriculumAccordion from '@/components/CourseCurriculumAccordion';
+import WebShareButton from '@/components/WebShareButton';
 import { Course } from '@/types';
 
 type Params = Promise<{ slug: string }>;
@@ -141,18 +142,26 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
           <div className="lg:col-span-2 space-y-8">
             {/* Header info */}
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
-                {isCombo && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-secondary to-amber-600 text-white text-xs font-extrabold rounded-md shadow-sm uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Combo Bundle Package
-                  </span>
-                )}
-                {course.categories.map((cat, i) => (
-                  <span key={i} className="px-2.5 py-1 bg-[#B83A00]/10 text-[#B83A00] text-xs font-black rounded-md uppercase tracking-wider">
-                    {cat}
-                  </span>
-                ))}
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  {isCombo && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-secondary to-amber-600 text-white text-xs font-extrabold rounded-md shadow-sm uppercase tracking-wider">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      Combo Bundle Package
+                    </span>
+                  )}
+                  {course.categories.map((cat, i) => (
+                    <span key={i} className="px-2.5 py-1 bg-[#B83A00]/10 text-[#B83A00] text-xs font-black rounded-md uppercase tracking-wider">
+                      {cat}
+                    </span>
+                  ))}
+                </div>
+                <WebShareButton
+                  title={`${course.title} in Shikohabad | MSK Institute`}
+                  text={course.shortDescription}
+                  variant="compact"
+                  label="Share Course"
+                />
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                 {course.title}

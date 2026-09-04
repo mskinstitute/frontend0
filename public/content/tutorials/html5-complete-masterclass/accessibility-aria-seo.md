@@ -123,15 +123,15 @@ When a link to your web page is pasted into WhatsApp, Twitter, LinkedIn, or Slac
 ```html
 <head>
   <!-- Primary Canonical URL (Prevents duplicate content penalties) -->
-  <link rel="canonical" href="https://mskinstitute.in/tutorials/html-fundamentals">
+  <link rel="canonical" href="https://mskinstitute.in/tutorials/html5-complete-masterclass">
 
   <!-- Open Graph Protocol (WhatsApp, Facebook, LinkedIn) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MSK Institute">
-  <meta property="og:url" content="https://mskinstitute.in/tutorials/html-fundamentals">
-  <meta property="og:title" content="Complete HTML5 Masterclass Tutorial | MSK Institute">
-  <meta property="og:description" content="Master modern semantic HTML5, accessible forms, tables, and web performance.">
-  <meta property="og:image" content="https://mskinstitute.in/images/og-html5.jpg">
+  <meta property="og:url" content="https://mskinstitute.in/tutorials/html5-complete-masterclass">
+  <meta property="og:title" content="HTML5 Complete Masterclass - MSK Institute">
+  <meta property="og:description" content="Master modern HTML5 semantics, accessible forms, and SEO.">
+  <meta property="og:image" content="https://mskinstitute.in/images/og-html.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 

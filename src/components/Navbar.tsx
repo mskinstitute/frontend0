@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, BookOpen, FileText, Home, Video, Search, Newspaper, Briefcase } from 'lucide-react';
+import { Menu, X, BookOpen, FileText, Home, Video, Search, Newspaper, Briefcase, Code2 } from 'lucide-react';
 
 import InstallAppButton from '@/components/InstallAppButton';
 import SearchModal from '@/components/SearchModal';
@@ -64,6 +64,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
+    { name: 'Playground', href: '/playground', icon: Code2 },
     { name: 'Live', href: '/live', icon: Video },
     { name: 'Study Material', href: '/study-material', icon: FileText },
     { name: 'Careers', href: '/careers', icon: Briefcase },

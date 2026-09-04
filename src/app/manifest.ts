@@ -58,6 +58,22 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
     ],
+    screenshots: [
+      {
+        src: '/brand/screenshot-mobile.png',
+        sizes: '1080x1920',
+        type: 'image/png',
+        form_factor: 'narrow',
+        label: 'MSK Institute Mobile App & Live Batches',
+      },
+      {
+        src: '/brand/screenshot-desktop.png',
+        sizes: '1920x1080',
+        type: 'image/png',
+        form_factor: 'wide',
+        label: 'MSK Institute Course Catalog & Study Material',
+      },
+    ],
     shortcuts: [
       {
         name: 'Courses',

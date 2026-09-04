@@ -1,6 +1,8 @@
 // public/sw.js - MSK Institute Progressive Web App Service Worker
-const CACHE_VERSION = 'v-1.8.0';
-const CACHE_NAME = `msk-institute-${CACHE_VERSION}`;
+const CACHE_VERSION = 'v-2.0.0';
+const STATIC_CACHE = `msk-static-${CACHE_VERSION}`;
+const CONTENT_CACHE = `msk-content-${CACHE_VERSION}`;
+const OFFLINE_LESSONS_CACHE = 'msk-offline-lessons';
 
 const urlsToCache = [
   '/',
@@ -25,11 +27,11 @@ const urlsToCache = [
   '/icons/icon-maskable-512x512.png'
 ];
 
-// Install event: cache assets & activate immediately
+// Install: pre-cache critical shell assets & activate immediately
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(STATIC_CACHE).then((cache) => {
       return Promise.allSettled(
         urlsToCache.map((url) =>
           cache.add(url).catch((err) => {
@@ -41,12 +43,15 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate event: clean up old caches and claim clients
+// Activate: purge stale caches and notify client windows
 self.addEventListener('activate', (event) => {
+  const currentCaches = [STATIC_CACHE, CONTENT_CACHE, OFFLINE_LESSONS_CACHE];
   event.waitUntil(
     caches.keys().then((cacheNames) =>
       Promise.all(
-        cacheNames.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
+        cacheNames
+          .filter((name) => !currentCaches.includes(name))
+          .map((name) => caches.delete(name))
       )
     ).then(() => self.clients.claim())
      .then(() => {
@@ -59,7 +64,11 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event: serve from cache, fallback to network, then to offline.html
+// Multi-Tier Fetch Strategy:
+// 1. Static assets (_next/static, images, fonts): Cache-First
+// 2. Tutorials & study material: Stale-While-Revalidate
+// 3. HTML Navigations: Network-First with offline.html fallback
+// 4. APIs: Network-Only
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
@@ -67,42 +76,217 @@ self.addEventListener('fetch', (event) => {
   if (!url.protocol.startsWith('http')) return;
   if (url.pathname.includes('/_next/webpack-hmr')) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+  // 1. API calls: Network-only
+  if (url.pathname.startsWith('/api/')) {
+    return;
+  }
 
-      return fetch(event.request)
-        .then((networkResponse) => {
-          // Check for valid response
-          if (
-            !networkResponse ||
-            networkResponse.status !== 200 ||
-            networkResponse.type !== 'basic'
-          ) {
+  // 2. Tutorials, Blogs & Study Material: Stale-While-Revalidate
+  // Serves instant cached version to student while fetching updates in background
+  const isContentRoute =
+    url.pathname.startsWith('/tutorials/') ||
+    url.pathname.startsWith('/blogs/') ||
+    url.pathname.startsWith('/study-material') ||
+    url.pathname.startsWith('/content/');
+
+  if (isContentRoute) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        // Also check if saved in explicit offline lessons cache
+        const fetchPromise = fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const clone = networkResponse.clone();
+              caches.open(CONTENT_CACHE).then((cache) => cache.put(event.request, clone));
+            }
             return networkResponse;
-          }
-
-          // Clone and store in cache
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
+          })
+          .catch(async () => {
+            // Check offline lessons cache if network fails
+            const offlineLessonCache = await caches.open(OFFLINE_LESSONS_CACHE);
+            const savedLesson = await offlineLessonCache.match(event.request);
+            if (savedLesson) return savedLesson;
+            if (cachedResponse) return cachedResponse;
+            return caches.match('/offline.html');
           });
 
+        return cachedResponse || fetchPromise;
+      })
+    );
+    return;
+  }
+
+  // 3. Static Assets (scripts, stylesheets, brand images): Cache-First
+  const isStaticAsset =
+    url.pathname.includes('/_next/static/') ||
+    url.pathname.startsWith('/brand/') ||
+    url.pathname.startsWith('/icons/') ||
+    url.pathname.endsWith('.png') ||
+    url.pathname.endsWith('.jpg') ||
+    url.pathname.endsWith('.svg') ||
+    url.pathname.endsWith('.woff2');
+
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+        return fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            caches.open(STATIC_CACHE).then((cache) => cache.put(event.request, clone));
+          }
+          return networkResponse;
+        });
+      })
+    );
+    return;
+  }
+
+  // 4. HTML Page Navigations: Network-First with cache & offline fallback
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            caches.open(STATIC_CACHE).then((cache) => cache.put(event.request, clone));
+          }
           return networkResponse;
         })
-        .catch(() => {
-          // Serve offline fallback for HTML pages
-          if (event.request.destination === 'document' || event.request.mode === 'navigate') {
-            return caches.match('/offline.html');
-          }
-        });
+        .catch(async () => {
+          const cached = await caches.match(event.request);
+          if (cached) return cached;
+          const fallback = await caches.match('/offline.html');
+          return fallback || new Response('Offline - MSK Institute', { headers: { 'Content-Type': 'text/plain' } });
+        })
+    );
+    return;
+  }
+
+  // Default fallback
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      return cachedResponse || fetch(event.request);
     })
   );
 });
 
-// Listen for skipWaiting message from client
+// Background Sync: Flush offline queued admission leads
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-leads') {
+    event.waitUntil(flushPendingLeadsInWorker());
+  }
+});
+
+async function flushPendingLeadsInWorker() {
+  try {
+    // Open IndexedDB inside service worker
+    const db = await openLeadsDatabase();
+    const leads = await getAllPendingLeads(db);
+
+    for (const lead of leads) {
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lead.data),
+        });
+        if (res.ok) {
+          await deletePendingLead(db, lead.id);
+        }
+      } catch (err) {
+        console.warn('Sync lead attempt failed:', err);
+      }
+    }
+  } catch (err) {
+    console.warn('Background sync worker error:', err);
+  }
+}
+
+function openLeadsDatabase() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open('msk_offline_db', 1);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains('pending_leads')) {
+        db.createObjectStore('pending_leads', { keyPath: 'id', autoIncrement: true });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+function getAllPendingLeads(db) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('pending_leads', 'readonly');
+    const store = tx.objectStore('pending_leads');
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function deletePendingLead(db, id) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('pending_leads', 'readwrite');
+    const store = tx.objectStore('pending_leads');
+    const req = store.delete(id);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
+// Web Push Notifications: Display native push notifications
+self.addEventListener('push', (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = { title: 'MSK Institute', body: event.data ? event.data.text() : 'New update available!' };
+  }
+
+  const title = data.title || 'MSK Institute';
+  const options = {
+    body: data.body || 'Upcoming live class or new coding tutorial published.',
+    icon: data.icon || '/brand/icon-192x192.png',
+    badge: data.badge || '/brand/android-icon-96x96.png',
+    vibrate: [100, 50, 100],
+    data: {
+      url: data.url || '/live-batches',
+    },
+    actions: [
+      { action: 'open', title: 'Open App' },
+      { action: 'dismiss', title: 'Dismiss' }
+    ]
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Notification Click: Focus existing app window or open URL
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  if (event.action === 'dismiss') return;
+
+  const targetUrl = (event.notification.data && event.notification.data.url) || '/';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
+      for (const client of windowClients) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          client.navigate(targetUrl);
+          return client.focus();
+        }
+      }
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(targetUrl);
+      }
+    })
+  );
+});
+
+// Skip Waiting
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();

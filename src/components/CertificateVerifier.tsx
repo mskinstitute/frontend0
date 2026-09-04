@@ -8,6 +8,7 @@ import { Search, Printer, CheckCircle, AlertTriangle, ShieldCheck, Award, Calend
 import { fetchCertificateById, fetchStudentById, fetchCourses } from '@/services/api';
 import { Certificate, Student, Course } from '@/types';
 import { trackCertificateVerification } from '@/lib/tracking';
+import WebShareButton from '@/components/WebShareButton';
 
 function CertificateVerifierContent() {
   const searchParams = useSearchParams();
@@ -251,7 +252,7 @@ function CertificateVerifierContent() {
           </div>
 
           {/* Action button (No Print) */}
-          <div className="flex justify-center gap-4 no-print">
+          <div className="flex flex-wrap justify-center gap-3 no-print">
             <button
               onClick={handlePrint}
               className="px-6 py-3 bg-primary hover:bg-primary-light text-white font-bold text-sm rounded-lg shadow hover:shadow-md transition-all duration-150 flex items-center gap-2 cursor-pointer"
@@ -259,6 +260,14 @@ function CertificateVerifierContent() {
               <Printer className="w-4.5 h-4.5" />
               Print Certificate (A4 PDF)
             </button>
+
+            <WebShareButton
+              title={`MSK Institute Verified Certificate - ${student?.name || 'Student'}`}
+              text={`Authentic graduation certificate verified for ${student?.name || 'Student'} in ${course?.title || 'Certification Course'} at MSK Institute.`}
+              label="Share Credential"
+              className="!border-border-subtle"
+            />
+
             <button
               onClick={() => {
                 setCertificate(null);

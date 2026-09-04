@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { LiveBatch } from '@/types';
 import { trackBatchEnrollment } from '@/lib/tracking';
+import { queueLeadOffline } from '@/lib/offlineSync';
 
 interface BatchEnrollmentFormProps {
   batch: LiveBatch;
@@ -94,6 +95,23 @@ export default function BatchEnrollmentForm({
       }
     } catch (err: any) {
       console.error('Lead submission failed:', err);
+
+      // Queue offline in IndexedDB for automatic background sync when internet connects
+      queueLeadOffline({
+        name: name.trim(),
+        phone: cleanPhone,
+        email: email.trim(),
+        city: city.trim() || 'Shikohabad',
+        learningMode: mode,
+        batchId: batch.id,
+        batchTitle: batch.title,
+        courseTitle: courseTitle || batch.courseTitle || batch.title,
+        price: batch.price,
+        startDate: batch.startDate,
+        schedule: batch.schedule,
+        query: query.trim(),
+      }).catch(() => null);
+
       // Fallback: build client-side WhatsApp URL directly so student is NEVER blocked!
       const fallbackMsg = `🎓 *NEW ADMISSION ENQUIRY - MSK INSTITUTE*\n━━━━━━━━━━━━━━━━━━━━━━\n📌 *Batch:* ${batch.title}\n📚 *Course:* ${courseTitle}\n📅 *Start Date:* ${batch.startDate}\n⏰ *Schedule:* ${batch.schedule}\n💰 *Fee:* ${batch.price}\n\n👤 *STUDENT DETAILS:*\n• *Name:* ${name}\n• *Phone:* ${cleanPhone}\n• *City:* ${city || 'Shikohabad'}\n• *Mode:* ${mode}\n${query ? `• *Query:* ${query}\n` : ''}\n━━━━━━━━━━━━━━━━━━━━━━\n🚀 Sent from Official Website`;
       const fallbackUrl = `https://wa.me/918393042166?text=${encodeURIComponent(fallbackMsg)}`;
@@ -101,7 +119,7 @@ export default function BatchEnrollmentForm({
       setIsSuccess(true);
       setWhatsappRedirectUrl(fallbackUrl);
       window.open(fallbackUrl, '_blank');
-      toast.success('Enquiry processed! Opening WhatsApp...');
+      toast.success('Offline enquiry saved! Also opening WhatsApp...');
     } finally {
       setIsSubmitting(false);
     }

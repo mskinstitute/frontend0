@@ -41,7 +41,7 @@ function resolveTopicTutorialUrl(
   let tutorialSlug: string | null = null;
 
   if (cSlug.includes('html5-complete') || (cSlug.includes('html') && !chTitle.includes('css') && !chTitle.includes('tailwind'))) {
-    tutorialSlug = 'html-fundamentals';
+    tutorialSlug = 'html5-complete-masterclass';
   } else if (cSlug.includes('python')) {
     tutorialSlug = 'python-for-beginners';
   } else if (cSlug.includes('javascript') || cSlug.includes('react')) {
@@ -49,7 +49,7 @@ function resolveTopicTutorialUrl(
   } else if (cSlug.includes('css') || chTitle.includes('css') || chTitle.includes('tailwind')) {
     tutorialSlug = 'css-mastery';
   } else if (cSlug.includes('full-stack') || cSlug.includes('bootcamp')) {
-    if (chTitle.includes('html')) tutorialSlug = 'html-fundamentals';
+    if (chTitle.includes('html')) tutorialSlug = 'html5-complete-masterclass';
     else if (chTitle.includes('css') || chTitle.includes('tailwind')) tutorialSlug = 'css-mastery';
     else if (chTitle.includes('javascript') || chTitle.includes('js') || chTitle.includes('react')) tutorialSlug = 'javascript-essentials';
     else if (chTitle.includes('python')) tutorialSlug = 'python-for-beginners';
@@ -61,7 +61,7 @@ function resolveTopicTutorialUrl(
   if (tutorialSlug === 'python-for-beginners') {
     if (rawSlug === 'introduction' || rawSlug === 'introduction-to-python' || rawSlug === 'python-introduction') topicSlug = 'python-introduction';
     else if (rawSlug === 'vscode-setup' || rawSlug === 'vs-code-setup') topicSlug = 'vs-code-setup';
-  } else if (tutorialSlug === 'html-fundamentals') {
+  } else if (tutorialSlug === 'html5-complete-masterclass') {
     if (rawSlug === 'introduction' || rawSlug.includes('introduction-to-html') || rawSlug.includes('introduction')) {
       topicSlug = 'introduction-to-html';
     }

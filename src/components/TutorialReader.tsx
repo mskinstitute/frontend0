@@ -15,15 +15,20 @@ import {
   CheckCircle2,
   Circle,
   Menu,
-  X
+  X,
+  DownloadCloud
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { TutorialItem, Course, TutorialTopicFrontmatter } from '@/types';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import TutorialSidebar from '@/components/TutorialSidebar';
-import TutorialOnThisPage from '@/components/TutorialOnThisPage';
 import PracticeQuizModal, { QuizQuestion } from '@/components/PracticeQuizModal';
-import { extractHeadings, extractQuizQuestions } from '@/lib/markdown';
+import { extractQuizQuestions } from '@/lib/markdown';
+import {
+  isTutorialSavedOffline,
+  saveTutorialOffline,
+  removeTutorialOffline,
+} from '@/lib/offlineTutorials';
 
 interface TutorialReaderProps {
   tutorial: TutorialItem;
@@ -48,6 +53,8 @@ export default function TutorialReader({
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [fontSize, setFontSize] = useState<'normal' | 'large'>('normal');
+  const [isOfflineReady, setIsOfflineReady] = useState(false);
+  const [isDownloadingOffline, setIsDownloadingOffline] = useState(false);
 
   // Track scroll percentage for top progress bar
   useEffect(() => {
@@ -63,7 +70,7 @@ export default function TutorialReader({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Load completion state and saved state from localStorage
+  // Load completion state, saved state, and offline status
   useEffect(() => {
     try {
       const savedKey = `saved_tut_${tutorial.slug}_${frontmatter.slug}`;
@@ -75,7 +82,36 @@ export default function TutorialReader({
         setCompletedTopics(list);
       }
     } catch {}
+
+    isTutorialSavedOffline(tutorial.slug, frontmatter.slug)
+      .then(setIsOfflineReady)
+      .catch(() => null);
   }, [tutorial.slug, frontmatter.slug]);
+
+  // Toggle Save for Offline Reading
+  const toggleOfflineDownload = async () => {
+    if (isDownloadingOffline) return;
+    setIsDownloadingOffline(true);
+
+    try {
+      if (isOfflineReady) {
+        await removeTutorialOffline(tutorial.slug, frontmatter.slug);
+        setIsOfflineReady(false);
+        toast('Lesson removed from offline storage');
+      } else {
+        await saveTutorialOffline(tutorial.slug, frontmatter.slug, frontmatter.title);
+        setIsOfflineReady(true);
+        toast.success('Saved! This lesson is now available completely offline.', {
+          icon: '⚡',
+          duration: 4000,
+        });
+      }
+    } catch {
+      toast.error('Could not save lesson offline. Please check network.');
+    } finally {
+      setIsDownloadingOffline(false);
+    }
+  };
 
   // Toggle Mark as Complete
   const toggleComplete = () => {
@@ -127,9 +163,6 @@ export default function TutorialReader({
       toast.success('Lesson link copied to clipboard!');
     }
   };
-
-  // Headings for Table of Contents
-  const headings = React.useMemo(() => extractHeadings(markdownContent), [markdownContent]);
 
   // Extract or fallback quiz questions
   const quizQuestions: QuizQuestion[] = React.useMemo(() => {
@@ -314,6 +347,31 @@ export default function TutorialReader({
                   <span>{isSaved ? 'Saved' : 'Save'}</span>
                 </button>
 
+                {/* Save for Offline Reading Button (PWA Offline Capability) */}
+                <button
+                  onClick={toggleOfflineDownload}
+                  disabled={isDownloadingOffline}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 border rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    isOfflineReady
+                      ? 'bg-emerald-50 border-emerald-300 text-emerald-700 font-bold shadow-2xs'
+                      : 'bg-white border-border-subtle hover:bg-surface text-text-muted hover:text-primary'
+                  }`}
+                  title={isOfflineReady ? 'Available offline without internet' : 'Download lesson for offline reading'}
+                  aria-label="Save lesson for offline reading"
+                >
+                  {isOfflineReady ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Offline Ready</span>
+                    </>
+                  ) : (
+                    <>
+                      <DownloadCloud className={`w-3.5 h-3.5 ${isDownloadingOffline ? 'animate-bounce text-secondary' : ''}`} />
+                      <span>{isDownloadingOffline ? 'Saving...' : 'Save Offline'}</span>
+                    </>
+                  )}
+                </button>
+
                 <button
                   onClick={handlePrint}
                   className="p-2 bg-white border border-border-subtle hover:bg-surface text-text-muted hover:text-primary rounded-xl text-xs transition-colors cursor-pointer"
@@ -463,11 +521,6 @@ export default function TutorialReader({
             </div>
           </div>
         </main>
-
-        {/* Right Sticky Table of Contents (Image 3, 4, 5) */}
-        <div className="no-print">
-          <TutorialOnThisPage headings={headings} />
-        </div>
       </div>
 
       {/* Mobile Sticky Bottom Floating Quick-Bar */}

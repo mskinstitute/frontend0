@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { 
   BookOpen, Award, GraduationCap, CheckCircle2, ChevronRight, 
   MapPin, Users, Calendar, Trophy, Sparkles, ShieldCheck, 
-  HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video 
+  HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -309,7 +309,7 @@ export default async function HomePage() {
               <p className="home-hero-desc text-base sm:text-lg text-text-muted max-w-xl leading-relaxed">
                 Join <strong>MSK Institute</strong> in Shikohabad to learn Python, Full-Stack Web Development, and essential computer concepts with hands-on lab projects and direct mentorship by <strong>Er. Sumit Kumar</strong>.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <div className="flex flex-wrap gap-3 pt-2">
                 <Link
                   href="/courses"
                   className="inline-flex items-center justify-center px-6 py-3.5 bg-secondary hover:bg-secondary-light text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
@@ -318,10 +318,17 @@ export default async function HomePage() {
                   <ChevronRight className="w-5 h-5 ml-1" />
                 </Link>
                 <Link
-                  href="/verify-certificate"
-                  className="inline-flex items-center justify-center px-6 py-3.5 border border-primary text-primary hover:bg-surface font-bold rounded-xl transition-colors duration-200"
+                  href="/playground"
+                  className="inline-flex items-center justify-center px-5 py-3.5 border border-secondary/40 bg-secondary/10 hover:bg-secondary text-secondary hover:text-white font-bold rounded-xl transition-all duration-200 gap-2 shadow-sm"
                 >
-                  Verify Graduate Certificate
+                  <Code2 className="w-4 h-4" />
+                  Try Code Playground
+                </Link>
+                <Link
+                  href="/verify-certificate"
+                  className="inline-flex items-center justify-center px-5 py-3.5 border border-border-subtle text-text-muted hover:text-primary hover:bg-surface font-semibold rounded-xl transition-colors duration-200 text-sm"
+                >
+                  Verify Certificate
                 </Link>
               </div>
             </header>
