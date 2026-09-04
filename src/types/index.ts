@@ -302,7 +302,7 @@ export interface LeadSubmission {
 }
 
 export type CareerType = 'internship' | 'job';
-export type WorkMode = 'On-site' | 'Remote' | 'Hybrid';
+export type WorkMode = 'On-site' | 'Remote';
 
 export interface CareerOpportunity {
   id: string;
@@ -320,6 +320,9 @@ export interface CareerOpportunity {
   deadline?: string;
   featured?: boolean;
   active: boolean;
+  priority?: 'High' | 'Medium' | 'Optional';
+  gender?: string;
+  isStage1?: boolean;
   shortDescription: string;
   description: string;
   responsibilities: string[];

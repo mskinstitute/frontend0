@@ -38,7 +38,7 @@ const WHATSAPP_NUMBER = '918393042166';
 
 export default function CareersClient({ initialCareers }: CareersClientProps) {
   const [activeTab, setActiveTab] = useState<'all' | 'internship' | 'job'>('all');
-  const [selectedMode, setSelectedMode] = useState<string>('all');
+  const [selectedPriority, setSelectedPriority] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCareerId, setExpandedCareerId] = useState<string | null>(null);
 
@@ -58,7 +58,7 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
   const [recruiterName, setRecruiterName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [recruiterPhone, setRecruiterPhone] = useState('');
-  const [recruiterRoleRequired, setRecruiterRoleRequired] = useState('Python / Full Stack Developers');
+  const [recruiterRoleRequired, setRecruiterRoleRequired] = useState('Trainers & Education Counselors');
 
   // Filtered list
   const filteredCareers = useMemo(() => {
@@ -67,9 +67,13 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
       if (activeTab !== 'all' && item.type !== activeTab) {
         return false;
       }
-      // Mode filter
-      if (selectedMode !== 'all' && item.mode !== selectedMode) {
-        return false;
+      // Priority filter
+      if (selectedPriority !== 'all') {
+        if (selectedPriority === 'stage1' && !item.isStage1) {
+          return false;
+        } else if (selectedPriority !== 'stage1' && item.priority !== selectedPriority) {
+          return false;
+        }
       }
       // Search query
       if (searchQuery.trim()) {
@@ -79,20 +83,22 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
         const matchesDesc = item.shortDescription.toLowerCase().includes(query);
         const matchesSkills = item.skills?.some((s) => s.toLowerCase().includes(query));
         const matchesLocation = item.location.toLowerCase().includes(query);
-        if (!matchesTitle && !matchesDept && !matchesDesc && !matchesSkills && !matchesLocation) {
+        const matchesWorkType = item.workType?.toLowerCase().includes(query);
+        if (!matchesTitle && !matchesDept && !matchesDesc && !matchesSkills && !matchesLocation && !matchesWorkType) {
           return false;
         }
       }
       return true;
     });
-  }, [initialCareers, activeTab, selectedMode, searchQuery]);
+  }, [initialCareers, activeTab, selectedPriority, searchQuery]);
 
   // Counts
   const counts = useMemo(() => {
     const total = initialCareers.length;
     const internships = initialCareers.filter((c) => c.type === 'internship').length;
     const jobs = initialCareers.filter((c) => c.type === 'job').length;
-    return { total, internships, jobs };
+    const stage1 = initialCareers.filter((c) => c.isStage1).length;
+    return { total, internships, jobs, stage1 };
   }, [initialCareers]);
 
   // Handle Application Submit
@@ -115,32 +121,35 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
           name: applicantName,
           phone: applicantPhone,
           email: applicantEmail,
-          city: applicantCity || 'Shikohabad / Remote',
-          learningMode: 'BOTH',
+          city: applicantCity || 'Shikohabad',
+          learningMode: 'OFFLINE',
           batchId: selectedCareerForApply.id,
           batchTitle: `Career Application: ${selectedCareerForApply.title}`,
-          courseTitle: `${selectedCareerForApply.type === 'internship' ? 'Internship' : 'Job'} Application`,
+          courseTitle: `${selectedCareerForApply.type === 'internship' ? 'Internship' : 'Job'} Application (${selectedCareerForApply.workType || 'On-site'})`,
           price: selectedCareerForApply.stipendOrSalary,
-          query: `Status: ${applicantStatus} | Portfolio: ${applicantPortfolio || 'N/A'} | Note: ${applicantNote || 'N/A'}`,
+          query: `Status: ${applicantStatus} | Priority: ${selectedCareerForApply.priority || 'Standard'} | Portfolio: ${applicantPortfolio || 'N/A'} | Note: ${applicantNote || 'N/A'}`,
           utm_source: 'careers_page',
         }),
       });
 
       // 2. Format WhatsApp Application text
-      const msg = `💼 *NEW CAREER APPLICATION - MSK CAREERS*
+      const msg = `💼 *NEW ON-SITE CAREER APPLICATION - MSK CAREERS*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎯 *Position:* ${selectedCareerForApply.title}
-🏢 *Type:* ${selectedCareerForApply.type === 'internship' ? 'Industry Internship' : 'Full-time Job'}
-📍 *Location / Mode:* ${selectedCareerForApply.location} (${selectedCareerForApply.mode})
+🏢 *Type:* ${selectedCareerForApply.workType || (selectedCareerForApply.type === 'internship' ? 'Internship' : 'Full-time Job')}
+📍 *Location:* On-site (Shikohabad Campus)
 💰 *Offered Pay:* ${selectedCareerForApply.stipendOrSalary}
+⚡ *Hiring Priority:* ${selectedCareerForApply.priority ? `${selectedCareerForApply.priority} Priority` : 'Standard'}
+👥 *Gender:* ${selectedCareerForApply.gender || 'Any'}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 *APPLICANT DETAILS:*
 • *Full Name:* ${applicantName}
 • *WhatsApp Phone:* ${applicantPhone}
 • *Email:* ${applicantEmail}
-• *Current Location:* ${applicantCity || 'Not specified'}
+• *Current Location / City:* ${applicantCity || 'Shikohabad'}
 • *Profile / Status:* ${applicantStatus}
-${applicantPortfolio ? `• *Portfolio / GitHub:* ${applicantPortfolio}\n` : ''}${applicantNote ? `• *Applicant Statement:* ${applicantNote}\n` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━
+${applicantPortfolio ? `• *Portfolio / Resume Link:* ${applicantPortfolio}\n` : ''}${applicantNote ? `• *Applicant Statement:* ${applicantNote}\n` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏛️ *Campus:* MSK Institute, Station Road, Shikohabad (Firozabad, UP)
 🚀 _Sent via MSK Institute Official Careers Portal_`;
 
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -204,11 +213,11 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-              Build Your Career with <span className="text-secondary">Live Internships</span> & Full-Time Jobs
+              Build Your Career with <span className="text-secondary">On-Site Tech Roles</span> & Live Internships
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              Bridge the gap between textbook knowledge and high-paying industry tech careers. Explore verified internships, apprenticeships, and engineering jobs in Shikohabad, Delhi-NCR, and Remote.
+              Join the academic, technical, and counseling team at MSK Institute Shikohabad Campus. Explore verified on-site trainer roles, student counseling, sales, digital marketing, and industry internship tracks.
             </p>
 
             {/* Metrics Ribbon */}
@@ -218,16 +227,16 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                 <div className="text-xs text-slate-400 font-medium">Active Openings</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-secondary">₹15,000/mo</div>
+                <div className="text-2xl sm:text-3xl font-black text-secondary">₹12,000/mo</div>
                 <div className="text-xs text-slate-400 font-medium">Max Internship Stipend</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-emerald-400">100%</div>
-                <div className="text-xs text-slate-400 font-medium">Placement Guidance</div>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-400">100% On-Site</div>
+                <div className="text-xs text-slate-400 font-medium">Shikohabad Campus</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-white">Verified</div>
-                <div className="text-xs text-slate-400 font-medium">Industry Credentials</div>
+                <div className="text-2xl sm:text-3xl font-black text-white">Any Gender</div>
+                <div className="text-xs text-slate-400 font-medium">Equal Opportunity</div>
               </div>
             </div>
 
@@ -256,7 +265,50 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
       </section>
 
       {/* Main Content Area */}
-      <div id="listings-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <div id="listings-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-6">
+        {/* Recommended Hiring Structure Callout */}
+        <div className="bg-gradient-to-r from-blue-900 via-slate-900 to-indigo-950 text-white rounded-3xl border border-white/20 p-5 sm:p-6 shadow-xl relative overflow-hidden">
+          <div className="absolute right-0 top-0 translate-x-10 -translate-y-10 w-48 h-48 bg-secondary/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+            <div className="space-y-2 max-w-3xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-secondary" />
+                Stage 1 Recommended Hiring Track • On-site Shikohabad
+              </div>
+              <h3 className="text-lg sm:text-xl font-black text-white">
+                Active Priority Recruitment: Full-Time Core &amp; Internship Cohorts
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Currently hiring for <strong>Education Counselor</strong>, <strong>Sales Executive</strong>, <strong>Digital Marketing Executive</strong>, <strong>Programming Trainer</strong>, and <strong>Data Analytics Trainer</strong>, plus our fast-track <strong>Internship Track</strong> (3–6 months).
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+              <button
+                onClick={() => {
+                  setSelectedPriority('stage1');
+                  setActiveTab('all');
+                }}
+                className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer ${
+                  selectedPriority === 'stage1'
+                    ? 'bg-secondary text-primary ring-2 ring-white'
+                    : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                }`}
+              >
+                <Sparkles className="w-4 h-4 text-secondary" />
+                View Stage 1 Roles ({counts.stage1})
+              </button>
+              {selectedPriority !== 'all' && (
+                <button
+                  onClick={() => setSelectedPriority('all')}
+                  className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  Show All ({counts.total})
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* Controls Card: Tabs & Search */}
         <div className="bg-white rounded-2xl border border-border-subtle p-4 sm:p-5 shadow-sm space-y-4">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
@@ -296,19 +348,21 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
               </button>
             </div>
 
-            {/* Mode Filter & Search Input */}
+            {/* Priority Filter & Search Input */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-              {/* Mode Dropdown */}
+              {/* Priority Dropdown */}
               <div className="flex-shrink-0">
                 <select
-                  value={selectedMode}
-                  onChange={(e) => setSelectedMode(e.target.value)}
+                  value={selectedPriority}
+                  onChange={(e) => setSelectedPriority(e.target.value)}
+                  aria-label="Filter by hiring priority"
                   className="w-full sm:w-auto px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 cursor-pointer"
                 >
-                  <option value="all">All Work Modes</option>
-                  <option value="Remote">Remote Only</option>
-                  <option value="On-site">On-site (Shikohabad)</option>
-                  <option value="Hybrid">Hybrid</option>
+                  <option value="all">All Hiring Priorities ({counts.total})</option>
+                  <option value="stage1">⭐ Stage 1 Openings ({counts.stage1})</option>
+                  <option value="High">🔴 High Priority</option>
+                  <option value="Medium">🟠 Medium Priority</option>
+                  <option value="Optional">🟡 Optional Roles</option>
                 </select>
               </div>
 
@@ -317,7 +371,7 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                 <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Search by role, Python, React..."
+                  placeholder="Search by role, Python, Trainer, Sales..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-secondary/50"
@@ -344,12 +398,12 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
               </div>
               <h3 className="text-lg font-bold text-primary">No opportunities found</h3>
               <p className="text-sm text-text-muted max-w-md mx-auto">
-                No active openings match your current search or mode filters. Try resetting the filters or check back soon.
+                No active openings match your current search or priority filters. Try resetting the filters or check back soon.
               </p>
               <button
                 onClick={() => {
                   setActiveTab('all');
-                  setSelectedMode('all');
+                  setSelectedPriority('all');
                   setSearchQuery('');
                 }}
                 className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-light transition-colors cursor-pointer"
@@ -372,9 +426,36 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2 flex-wrap">
+                          {/* Priority Pill */}
+                          {item.priority === 'High' && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+                              🔴 High Priority
+                            </span>
+                          )}
+                          {item.priority === 'Medium' && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                              🟠 Medium Priority
+                            </span>
+                          )}
+                          {item.priority === 'Optional' && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200">
+                              🟡 Optional
+                            </span>
+                          )}
+
+                          {/* Stage 1 Hiring Tag */}
+                          {item.isStage1 && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-50 text-amber-800 border border-amber-300">
+                              <Sparkles className="w-3 h-3 text-amber-600" />
+                              Stage 1 Immediate
+                            </span>
+                          )}
+
                           {/* Type Pill */}
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider ${
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold tracking-wider ${
                               isIntern
                                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                                 : 'bg-blue-50 text-blue-700 border border-blue-200'
@@ -385,13 +466,19 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                             ) : (
                               <Briefcase className="w-3.5 h-3.5" />
                             )}
-                            {isIntern ? 'Internship' : 'Full-Time Job'}
+                            {item.workType || (isIntern ? 'Internship' : 'Full-Time')}
                           </span>
 
                           {/* Mode Pill */}
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-surface border border-border-subtle text-slate-700">
                             <MapPin className="w-3 h-3 text-secondary" />
-                            {item.mode}
+                            On-site (Shikohabad)
+                          </span>
+
+                          {/* Gender Pill */}
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-medium bg-surface border border-border-subtle text-slate-600">
+                            <Users className="w-3 h-3 text-text-muted" />
+                            Gender: {item.gender || 'Any'}
                           </span>
 
                           {/* Openings Pill */}

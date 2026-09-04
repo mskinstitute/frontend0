@@ -6,24 +6,25 @@ export const revalidate = 1800; // Revalidate every 30 minutes
 
 export const metadata: Metadata = {
   title: 'Careers, Internships & Jobs | MSK Institute Shikohabad',
-  description: 'Explore live software development internships, full-time engineering jobs, and tech roles at MSK Institute and partner companies. Gain verified industry experience in Python, React, and Full-Stack development.',
+  description: 'Explore verified on-site jobs, faculty trainer roles, admission counseling, sales, digital marketing, and live internships at MSK Institute Shikohabad Campus.',
   keywords: [
     'MSK Institute Careers',
+    'Computer Teacher Jobs Shikohabad',
+    'Programming Trainer Jobs Shikohabad',
+    'Admission Counselor Jobs UP',
+    'Digital Marketing Jobs Firozabad',
+    'Data Analytics Trainer Shikohabad',
     'Computer Internships Shikohabad',
-    'Python Developer Internship',
-    'Frontend Developer Jobs Shikohabad',
-    'Web Development Internships UP',
-    'Software Jobs Firozabad',
     'Coding Apprenticeship Shikohabad',
     'MSK Institute Jobs',
-    'IT Placements Shikohabad'
+    'Jobs in Shikohabad'
   ],
   alternates: {
     canonical: 'https://mskinstitute.in/careers',
   },
   openGraph: {
     title: 'Careers, Internships & Jobs | MSK Institute Shikohabad',
-    description: 'Explore live tech internships and jobs at MSK Institute and partner companies. Freshers and students welcome.',
+    description: 'Explore verified on-site jobs, faculty trainer roles, and live internships at MSK Institute Shikohabad Campus. All genders welcome.',
     url: 'https://mskinstitute.in/careers',
     siteName: 'MSK Institute',
     locale: 'en_IN',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Careers, Internships & Jobs | MSK Institute',
-    description: 'Explore verified internships and software jobs at MSK Institute & partners.',
+    description: 'Explore verified on-site jobs, trainer positions, and paid internships at MSK Institute Shikohabad.',
     images: ['https://mskinstitute.in/logo.jpg'],
   },
 };
@@ -53,8 +54,8 @@ export default async function CareersPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'MSK Institute Tech Careers & Internships',
-    description: 'Active internship and full-time job openings at MSK Institute and partner organizations.',
+    name: 'MSK Institute On-Site Careers & Internships (Shikohabad)',
+    description: 'Active on-site job and internship openings at MSK Institute Shikohabad campus.',
     itemListElement: activeCareers.map((c, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -64,7 +65,7 @@ export default async function CareersPage() {
         description: c.description,
         datePosted: c.postedAt,
         validThrough: c.deadline || '2026-12-31',
-        employmentType: c.type === 'internship' ? 'INTERN' : 'FULL_TIME',
+        employmentType: c.type === 'internship' ? 'INTERN' : (c.workType?.includes('Part-time') ? 'PART_TIME' : 'FULL_TIME'),
         hiringOrganization: {
           '@type': 'Organization',
           name: c.company || 'MSK Institute of Technology',
