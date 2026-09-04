@@ -67,7 +67,7 @@ export default async function CoursesPage() {
 
   try {
     const allCourses = await fetchCourses();
-    courses = allCourses.filter((course) => course.status === 'PUBLISH');
+    courses = (allCourses || []).filter((course) => course && course.status === 'PUBLISH');
   } catch (error) {
     console.error('Failed to load courses:', error);
     errorMsg = 'Unable to load the course catalog. Please try again later.';
@@ -259,7 +259,7 @@ export default async function CoursesPage() {
           </p>
         </header>
 
-        {errorMsg ? (
+        {errorMsg && courses.length === 0 ? (
           <div className="text-center py-12 bg-red-50 text-red-700 border border-red-200 rounded-xl">
             <p className="font-semibold">{errorMsg}</p>
           </div>

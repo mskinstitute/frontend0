@@ -23,7 +23,7 @@ export default async function BlogsPage() {
   let errorMsg = '';
 
   try {
-    blogs = await fetchBlogs();
+    blogs = (await fetchBlogs()) || [];
   } catch (error) {
     console.error('Failed to load blog posts:', error);
     errorMsg = 'Unable to load blog articles at this moment. Please try again shortly.';
@@ -44,7 +44,7 @@ export default async function BlogsPage() {
         </p>
       </div>
 
-      {errorMsg ? (
+      {errorMsg && blogs.length === 0 ? (
         <div className="text-center py-12 bg-red-50 text-red-700 border border-red-200 rounded-xl">
           <p className="font-semibold">{errorMsg}</p>
         </div>

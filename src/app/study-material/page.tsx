@@ -29,8 +29,8 @@ export default async function StudyMaterialPage() {
       fetchStudyMaterials(),
       fetchTutorials(),
     ]);
-    materials = matRes;
-    tutorials = tutRes;
+    materials = matRes || [];
+    tutorials = tutRes || [];
   } catch (error) {
     console.error('Failed to load study materials:', error);
     errorMsg = 'Unable to load study materials repository. Please try again later.';
@@ -51,7 +51,7 @@ export default async function StudyMaterialPage() {
         </p>
       </div>
 
-      {errorMsg ? (
+      {errorMsg && materials.length === 0 && tutorials.length === 0 ? (
         <div className="text-center py-12 bg-red-50 text-red-700 border border-red-200 rounded-xl">
           <p className="font-semibold">{errorMsg}</p>
         </div>
