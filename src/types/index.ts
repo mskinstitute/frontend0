@@ -6,7 +6,7 @@ export interface Course {
   featuredImageUrl: string;
   shortDescription: string;
   categories: string[];
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Beginner to Intermediate' | 'Beginner to Advanced' | 'Beginners to Advanced' | string;
   language: string[];
   duration: {
     value: number;
@@ -322,7 +322,6 @@ export interface CareerOpportunity {
   active: boolean;
   priority?: 'High' | 'Medium' | 'Optional';
   gender?: string;
-  isStage1?: boolean;
   shortDescription: string;
   description: string;
   responsibilities: string[];

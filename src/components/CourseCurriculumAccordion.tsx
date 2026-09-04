@@ -120,8 +120,8 @@ export default function CourseCurriculumAccordion({
     }
   };
 
-  // COMBO COURSE RENDER
-  if (isCombo) {
+  // COMBO COURSE RENDER (with bundled subcourses)
+  if (isCombo && includedCourses.length > 0) {
     return (
       <section className="space-y-6">
         {/* Section Header */}
@@ -140,9 +140,8 @@ export default function CourseCurriculumAccordion({
           </span>
         </div>
 
-        {includedCourses.length > 0 ? (
-          <div className="space-y-4">
-            {includedCourses.map((courseItem, courseIndex) => {
+        <div className="space-y-4">
+          {includedCourses.map((courseItem, courseIndex) => {
               const isCourseOpen = activeCourseId === courseItem.id;
               const courseChapters = courseItem.chapters || [];
 
@@ -384,13 +383,30 @@ export default function CourseCurriculumAccordion({
                 </div>
               );
             })}
+        </div>
+      </section>
+    );
+  }
+
+  // COMBO COURSE RENDER (when no bundled subcourses and no chapters yet)
+  if (isCombo && (!chapters || chapters.length === 0)) {
+    return (
+      <section className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border-subtle pb-3 gap-2">
+          <div>
+            <h2 className="text-2xl font-extrabold text-primary flex items-center gap-2">
+              <PackageCheck className="w-6 h-6 text-secondary" />
+              Courses Included in this Combo
+            </h2>
+            <p className="text-xs text-text-muted mt-1">
+              Course syllabus and curriculum modules are being compiled.
+            </p>
           </div>
-        ) : (
-          <div className="p-8 bg-surface rounded-xl border border-border-subtle text-center text-text-muted">
-            <PackageCheck className="w-8 h-8 text-secondary mx-auto mb-2 opacity-60" />
-            <p className="font-semibold text-sm">Included course curricula details are being compiled.</p>
-          </div>
-        )}
+        </div>
+        <div className="p-8 bg-surface rounded-xl border border-border-subtle text-center text-text-muted">
+          <PackageCheck className="w-8 h-8 text-secondary mx-auto mb-2 opacity-60" />
+          <p className="font-semibold text-sm">Included course curricula details are being compiled.</p>
+        </div>
       </section>
     );
   }

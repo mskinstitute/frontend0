@@ -37,8 +37,9 @@ interface CareersClientProps {
 const WHATSAPP_NUMBER = '918393042166';
 
 export default function CareersClient({ initialCareers }: CareersClientProps) {
-  const [activeTab, setActiveTab] = useState<'all' | 'internship' | 'job'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'full-time' | 'part-time' | 'internship'>('all');
   const [selectedPriority, setSelectedPriority] = useState<string>('all');
+  const [selectedGender, setSelectedGender] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCareerId, setExpandedCareerId] = useState<string | null>(null);
 
@@ -64,17 +65,33 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
   const filteredCareers = useMemo(() => {
     return initialCareers.filter((item) => {
       // Tab filter
-      if (activeTab !== 'all' && item.type !== activeTab) {
-        return false;
-      }
-      // Priority filter
-      if (selectedPriority !== 'all') {
-        if (selectedPriority === 'stage1' && !item.isStage1) {
+      if (activeTab === 'full-time') {
+        if (item.type !== 'job' || item.workType?.toLowerCase().includes('part-time')) {
           return false;
-        } else if (selectedPriority !== 'stage1' && item.priority !== selectedPriority) {
+        }
+      } else if (activeTab === 'part-time') {
+        if (!item.workType?.toLowerCase().includes('part-time')) {
+          return false;
+        }
+      } else if (activeTab === 'internship') {
+        if (item.type !== 'internship') {
           return false;
         }
       }
+
+      // Priority filter
+      if (selectedPriority !== 'all' && item.priority !== selectedPriority) {
+        return false;
+      }
+
+      // Gender filter
+      if (selectedGender === 'female' && !item.gender?.toLowerCase().includes('female')) {
+        return false;
+      }
+      if (selectedGender === 'any' && item.gender !== 'Any') {
+        return false;
+      }
+
       // Search query
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim();
@@ -84,21 +101,24 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
         const matchesSkills = item.skills?.some((s) => s.toLowerCase().includes(query));
         const matchesLocation = item.location.toLowerCase().includes(query);
         const matchesWorkType = item.workType?.toLowerCase().includes(query);
-        if (!matchesTitle && !matchesDept && !matchesDesc && !matchesSkills && !matchesLocation && !matchesWorkType) {
+        const matchesGender = item.gender?.toLowerCase().includes(query);
+        if (!matchesTitle && !matchesDept && !matchesDesc && !matchesSkills && !matchesLocation && !matchesWorkType && !matchesGender) {
           return false;
         }
       }
       return true;
     });
-  }, [initialCareers, activeTab, selectedPriority, searchQuery]);
+  }, [initialCareers, activeTab, selectedPriority, selectedGender, searchQuery]);
 
   // Counts
   const counts = useMemo(() => {
     const total = initialCareers.length;
+    const fullTime = initialCareers.filter((c) => c.type === 'job' && !c.workType?.toLowerCase().includes('part-time')).length;
+    const partTime = initialCareers.filter((c) => c.workType?.toLowerCase().includes('part-time')).length;
     const internships = initialCareers.filter((c) => c.type === 'internship').length;
-    const jobs = initialCareers.filter((c) => c.type === 'job').length;
-    const stage1 = initialCareers.filter((c) => c.isStage1).length;
-    return { total, internships, jobs, stage1 };
+    const female = initialCareers.filter((c) => c.gender?.toLowerCase().includes('female')).length;
+    const anyGender = initialCareers.filter((c) => c.gender === 'Any').length;
+    return { total, fullTime, partTime, internships, female, anyGender };
   }, [initialCareers]);
 
   // Handle Application Submit
@@ -227,16 +247,16 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                 <div className="text-xs text-slate-400 font-medium">Active Openings</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-secondary">₹12,000/mo</div>
-                <div className="text-xs text-slate-400 font-medium">Max Internship Stipend</div>
+                <div className="text-2xl sm:text-3xl font-black text-secondary">₹2,000–₹6,000</div>
+                <div className="text-xs text-slate-400 font-medium">Internship Stipend</div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-black text-purple-300">₹2,000–₹5,000</div>
+                <div className="text-xs text-slate-400 font-medium">Part-Time Salary</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-black text-emerald-400">100% On-Site</div>
                 <div className="text-xs text-slate-400 font-medium">Shikohabad Campus</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-black text-white">Any Gender</div>
-                <div className="text-xs text-slate-400 font-medium">Equal Opportunity</div>
               </div>
             </div>
 
@@ -266,49 +286,6 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
 
       {/* Main Content Area */}
       <div id="listings-container" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-6">
-        {/* Recommended Hiring Structure Callout */}
-        <div className="bg-gradient-to-r from-blue-900 via-slate-900 to-indigo-950 text-white rounded-3xl border border-white/20 p-5 sm:p-6 shadow-xl relative overflow-hidden">
-          <div className="absolute right-0 top-0 translate-x-10 -translate-y-10 w-48 h-48 bg-secondary/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-            <div className="space-y-2 max-w-3xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-secondary" />
-                Stage 1 Recommended Hiring Track • On-site Shikohabad
-              </div>
-              <h3 className="text-lg sm:text-xl font-black text-white">
-                Active Priority Recruitment: Full-Time Core &amp; Internship Cohorts
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Currently hiring for <strong>Education Counselor</strong>, <strong>Sales Executive</strong>, <strong>Digital Marketing Executive</strong>, <strong>Programming Trainer</strong>, and <strong>Data Analytics Trainer</strong>, plus our fast-track <strong>Internship Track</strong> (3–6 months).
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
-              <button
-                onClick={() => {
-                  setSelectedPriority('stage1');
-                  setActiveTab('all');
-                }}
-                className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer ${
-                  selectedPriority === 'stage1'
-                    ? 'bg-secondary text-primary ring-2 ring-white'
-                    : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
-                }`}
-              >
-                <Sparkles className="w-4 h-4 text-secondary" />
-                View Stage 1 Roles ({counts.stage1})
-              </button>
-              {selectedPriority !== 'all' && (
-                <button
-                  onClick={() => setSelectedPriority('all')}
-                  className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
-                >
-                  Show All ({counts.total})
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-
         {/* Controls Card: Tabs & Search */}
         <div className="bg-white rounded-2xl border border-border-subtle p-4 sm:p-5 shadow-sm space-y-4">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
@@ -322,7 +299,29 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                     : 'text-text-muted hover:text-primary'
                 }`}
               >
-                All Opportunities ({counts.total})
+                All Openings ({counts.total})
+              </button>
+              <button
+                onClick={() => setActiveTab('full-time')}
+                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                  activeTab === 'full-time'
+                    ? 'bg-blue-600 text-white shadow-2xs'
+                    : 'text-text-muted hover:text-blue-700'
+                }`}
+              >
+                <Briefcase className="w-4 h-4" />
+                Full-Time ({counts.fullTime})
+              </button>
+              <button
+                onClick={() => setActiveTab('part-time')}
+                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                  activeTab === 'part-time'
+                    ? 'bg-purple-600 text-white shadow-2xs'
+                    : 'text-text-muted hover:text-purple-700'
+                }`}
+              >
+                <Clock className="w-4 h-4" />
+                Part-Time ({counts.partTime})
               </button>
               <button
                 onClick={() => setActiveTab('internship')}
@@ -335,20 +334,9 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                 <GraduationCap className="w-4 h-4" />
                 Internships ({counts.internships})
               </button>
-              <button
-                onClick={() => setActiveTab('job')}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
-                  activeTab === 'job'
-                    ? 'bg-blue-600 text-white shadow-2xs'
-                    : 'text-text-muted hover:text-blue-700'
-                }`}
-              >
-                <Briefcase className="w-4 h-4" />
-                Full-Time Jobs ({counts.jobs})
-              </button>
             </div>
 
-            {/* Priority Filter & Search Input */}
+            {/* Filters & Search Input */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
               {/* Priority Dropdown */}
               <div className="flex-shrink-0">
@@ -358,16 +346,29 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                   aria-label="Filter by hiring priority"
                   className="w-full sm:w-auto px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 cursor-pointer"
                 >
-                  <option value="all">All Hiring Priorities ({counts.total})</option>
-                  <option value="stage1">⭐ Stage 1 Openings ({counts.stage1})</option>
+                  <option value="all">All Priorities</option>
                   <option value="High">🔴 High Priority</option>
                   <option value="Medium">🟠 Medium Priority</option>
                   <option value="Optional">🟡 Optional Roles</option>
                 </select>
               </div>
 
+              {/* Gender Dropdown */}
+              <div className="flex-shrink-0">
+                <select
+                  value={selectedGender}
+                  onChange={(e) => setSelectedGender(e.target.value)}
+                  aria-label="Filter by gender preference"
+                  className="w-full sm:w-auto px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm font-semibold text-primary focus:outline-none focus:ring-2 focus:ring-secondary/50 cursor-pointer"
+                >
+                  <option value="all">All Genders</option>
+                  <option value="female">👩 Female Preferred ({counts.female})</option>
+                  <option value="any">👥 Open to Any ({counts.anyGender})</option>
+                </select>
+              </div>
+
               {/* Search Bar */}
-              <div className="relative flex-1 sm:w-72">
+              <div className="relative flex-1 sm:w-64">
                 <Search className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
@@ -398,12 +399,13 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
               </div>
               <h3 className="text-lg font-bold text-primary">No opportunities found</h3>
               <p className="text-sm text-text-muted max-w-md mx-auto">
-                No active openings match your current search or priority filters. Try resetting the filters or check back soon.
+                No active openings match your current search or filters. Try resetting the filters or check back soon.
               </p>
               <button
                 onClick={() => {
                   setActiveTab('all');
                   setSelectedPriority('all');
+                  setSelectedGender('all');
                   setSearchQuery('');
                 }}
                 className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-light transition-colors cursor-pointer"
@@ -445,24 +447,20 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                             </span>
                           )}
 
-                          {/* Stage 1 Hiring Tag */}
-                          {item.isStage1 && (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-amber-50 text-amber-800 border border-amber-300">
-                              <Sparkles className="w-3 h-3 text-amber-600" />
-                              Stage 1 Immediate
-                            </span>
-                          )}
-
                           {/* Type Pill */}
                           <span
                             className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold tracking-wider ${
                               isIntern
                                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                : item.workType === 'Part-time'
+                                ? 'bg-purple-50 text-purple-700 border border-purple-200'
                                 : 'bg-blue-50 text-blue-700 border border-blue-200'
                             }`}
                           >
                             {isIntern ? (
                               <GraduationCap className="w-3.5 h-3.5" />
+                            ) : item.workType === 'Part-time' ? (
+                              <Clock className="w-3.5 h-3.5" />
                             ) : (
                               <Briefcase className="w-3.5 h-3.5" />
                             )}
@@ -476,10 +474,17 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                           </span>
 
                           {/* Gender Pill */}
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-medium bg-surface border border-border-subtle text-slate-600">
-                            <Users className="w-3 h-3 text-text-muted" />
-                            Gender: {item.gender || 'Any'}
-                          </span>
+                          {item.gender && item.gender.toLowerCase().includes('female') ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-xs font-bold bg-pink-50 text-pink-700 border border-pink-200">
+                              <User className="w-3 h-3 text-pink-600" />
+                              👩 Female Preferred
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium bg-surface border border-border-subtle text-slate-600">
+                              <Users className="w-3 h-3 text-text-muted" />
+                              Gender: Any
+                            </span>
+                          )}
 
                           {/* Openings Pill */}
                           <span className="text-xs font-medium text-text-muted">
