@@ -76,8 +76,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="/playground" className="hover:text-white transition-colors duration-150 flex items-center gap-1.5">
-                  Online Code Playground
-                  <span className="bg-emerald-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Monaco</span>
+                  MSK Code Editor
+                  <span className="bg-emerald-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Playground</span>
                 </Link>
               </li>
               <li>
@@ -88,15 +88,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/study-material?type=handbook" className="hover:text-white transition-colors duration-150">Developer Handbooks</Link>
-              </li>
-              <li className="pt-2">
-                <Link
-                  href="/admin"
-                  className="text-xs hover:underline transition-colors duration-150 text-gray-400 hover:text-white flex items-center gap-1.5 w-fit"
-                >
-                  Developer / Admin Panel
-                  <ShieldAlert className="w-3.5 h-3.5 text-secondary-light" />
-                </Link>
               </li>
             </ul>
           </div>

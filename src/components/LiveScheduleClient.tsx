@@ -7,10 +7,11 @@ import {
   Video, Calendar, Clock, User, CheckCircle2, 
   ExternalLink, Sparkles, BookOpen, AlertCircle, Play,
   Bell, BellRing, ArrowRight, ShieldCheck, HelpCircle,
-  ChevronDown, GraduationCap, Laptop, MapPin
+  ChevronDown, GraduationCap, Laptop, MapPin, Share2
 } from 'lucide-react';
 import { LiveClass, LiveBatch } from '@/types';
 import DemoBookingForm from './DemoBookingForm';
+import WebShareButton from '@/components/WebShareButton';
 
 interface LiveScheduleClientProps {
   initialClasses: LiveClass[];
@@ -24,6 +25,44 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
   const [reminders, setReminders] = useState<string[]>([]);
   const [notifiedList, setNotifiedList] = useState<string[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [highlightedId, setHighlightedId] = useState<string | null>(null);
+
+  // Sync hash for deep linking and brief visual highlight
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleHashChange = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+          setHighlightedId(hash);
+          const timer = setTimeout(() => {
+            setHighlightedId(null);
+          }, 4000);
+          return () => clearTimeout(timer);
+        }
+      };
+
+      handleHashChange();
+      window.addEventListener('hashchange', handleHashChange);
+      return () => window.removeEventListener('hashchange', handleHashChange);
+    }
+  }, []);
+
+  const getClassShareData = (c: LiveClass, isLive: boolean) => {
+    const title = `🔴 Live Class: ${c.batchTitle || c.courseTitle || 'Live Computer Class'} | MSK Institute`;
+    const topicsStr = c.topics && c.topics.length > 0 ? ` Topics: ${c.topics.slice(0, 3).join(', ')}.` : '';
+    const text = isLive
+      ? `🔴 LIVE NOW: ${c.batchTitle || c.courseTitle} on ${c.platform || 'Online Live'} by ${c.instructor}!${topicsStr} Join live:`
+      : `📅 Live Class: ${c.batchTitle || c.courseTitle} (${c.startTime}${c.endTime ? ' - ' + c.endTime : ''}) by ${c.instructor}!${topicsStr} Set reminder & join live:`;
+    const url = `/live#class-${c.id}`;
+    return { title, text, url };
+  };
+
+  const getBatchShareData = (b: LiveBatch, startDateStr: string) => {
+    const title = `🎓 Live Batch: ${b.title} | MSK Institute Admissions`;
+    const text = `Enroll in ${b.title} (${b.courseTitle || 'Live Coding Track'}) starting ${startDateStr} with ${b.instructor}! Fee: ${b.price}. Only ${b.leftSeats} seats left! Details:`;
+    const url = `/live-batches/${b.id}`;
+    return { title, text, url };
+  };
 
   const liveFaqs = [
     {
@@ -275,11 +314,21 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
               <p className="text-xs text-text-muted">Real-time schedule of active and upcoming live sessions for today</p>
             </div>
           </div>
-          {todayClasses.length > 0 && (
-            <span className="text-xs font-bold px-3 py-1 bg-surface border border-border-subtle rounded-full text-text-muted w-fit">
-              {todayClasses.length} session{todayClasses.length === 1 ? '' : 's'} scheduled
-            </span>
-          )}
+          <div className="flex items-center gap-2 flex-wrap">
+            {todayClasses.length > 0 && (
+              <span className="text-xs font-bold px-3 py-1 bg-surface border border-border-subtle rounded-full text-text-muted w-fit">
+                {todayClasses.length} session{todayClasses.length === 1 ? '' : 's'} scheduled
+              </span>
+            )}
+            <WebShareButton
+              variant="compact"
+              title="MSK Institute Live Classroom & Batches Schedule"
+              text="Check out today's live coding classes and upcoming batches timetable at MSK Institute Shikohabad:"
+              url="/live"
+              label="Share Schedule"
+              className="bg-surface hover:bg-surface/80"
+            />
+          </div>
         </div>
 
         {todayClasses.length > 0 ? (
@@ -304,12 +353,19 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       const isLive = status.type === 'live';
                       const isCompleted = status.type === 'completed';
                       const platformVisual = getPlatformVisual(c.platform);
+                      const shareData = getClassShareData(c, isLive);
+                      const isTargeted = highlightedId === `class-${c.id}`;
 
                       return (
                         <tr 
+                          id={`class-${c.id}`}
                           key={c.id} 
-                          className={`hover:bg-surface/50 transition-colors ${
-                            isLive ? 'bg-red-50/20' : ''
+                          className={`scroll-mt-24 transition-all ${
+                            isTargeted 
+                              ? 'bg-[#B83A00]/10 ring-2 ring-inset ring-[#B83A00]' 
+                              : isLive 
+                                ? 'bg-red-50/20 hover:bg-red-50/40' 
+                                : 'hover:bg-surface/50'
                           }`}
                         >
                           {/* 1. Topics Covered (Show ONLY topics, no title & description) */}
@@ -397,46 +453,55 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                           </td>
 
                           {/* 6. Action */}
-                          <td className="py-4 px-6 align-top text-right min-w-[140px]">
-                            {isLive ? (
-                              <a 
-                                href={c.joinUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow-sm transition-colors animate-pulse"
-                              >
-                                <span>Join Now</span>
-                                <ExternalLink className="w-3.5 h-3.5" />
-                              </a>
-                            ) : isCompleted ? (
-                              <button 
-                                disabled
-                                className="px-3 py-1.5 bg-gray-100 text-gray-400 text-xs font-bold rounded-lg cursor-not-allowed"
-                              >
-                                Completed
-                              </button>
-                            ) : (
-                              <button 
-                                onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
-                                className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
-                                  reminders.includes(c.id)
-                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
-                                    : 'bg-primary hover:bg-primary/95 text-white'
-                                }`}
-                              >
-                                {reminders.includes(c.id) ? (
-                                  <>
-                                    <BellRing className="w-3.5 h-3.5 text-emerald-600" />
-                                    <span>Reminder Set ✓</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Bell className="w-3.5 h-3.5" />
-                                    <span>Set Reminder</span>
-                                  </>
-                                )}
-                              </button>
-                            )}
+                          <td className="py-4 px-6 align-top text-right min-w-[170px]">
+                            <div className="flex items-center justify-end gap-2">
+                              <WebShareButton
+                                variant="icon"
+                                title={shareData.title}
+                                text={shareData.text}
+                                url={shareData.url}
+                                label="Share Class"
+                              />
+                              {isLive ? (
+                                <a 
+                                  href={c.joinUrl} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow-sm transition-colors animate-pulse"
+                                >
+                                  <span>Join Now</span>
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                              ) : isCompleted ? (
+                                <button 
+                                  disabled
+                                  className="px-3 py-1.5 bg-gray-100 text-gray-400 text-xs font-bold rounded-lg cursor-not-allowed"
+                                >
+                                  Completed
+                                </button>
+                              ) : (
+                                <button 
+                                  onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
+                                  className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
+                                    reminders.includes(c.id)
+                                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
+                                      : 'bg-primary hover:bg-primary/95 text-white'
+                                  }`}
+                                >
+                                  {reminders.includes(c.id) ? (
+                                    <>
+                                      <BellRing className="w-3.5 h-3.5 text-emerald-600" />
+                                      <span>Reminder Set ✓</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Bell className="w-3.5 h-3.5" />
+                                      <span>Set Reminder</span>
+                                    </>
+                                  )}
+                                </button>
+                              )}
+                            </div>
                           </td>
                         </tr>
                       );
@@ -453,20 +518,27 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                 const isLive = status.type === 'live';
                 const isCompleted = status.type === 'completed';
                 const platformVisual = getPlatformVisual(c.platform);
+                const shareData = getClassShareData(c, isLive);
+                const isTargeted = highlightedId === `class-${c.id}`;
 
                 return (
                   <div 
+                    id={`class-${c.id}`}
                     key={c.id} 
-                    className={`bg-white rounded-2xl border p-5 shadow-sm space-y-4 ${
-                      isLive ? 'border-red-400 ring-2 ring-red-500/10' : 'border-border-subtle'
+                    className={`scroll-mt-24 bg-white rounded-2xl border p-4 sm:p-5 shadow-sm space-y-4 transition-all ${
+                      isTargeted
+                        ? 'border-[#B83A00] ring-2 ring-[#B83A00]'
+                        : isLive 
+                          ? 'border-red-400 ring-2 ring-red-500/10' 
+                          : 'border-border-subtle'
                     }`}
                   >
                     {/* Header: Course badge & Status */}
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded">
+                      <span className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded truncate">
                         {c.courseTitle}
                       </span>
-                      <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-md ${status.color}`}>
+                      <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-md shrink-0 ${status.color}`}>
                         {isLive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping mr-0.5" />}
                         {status.label}
                       </span>
@@ -479,7 +551,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </p>
                     )}
 
-                    {/* Topics Covered (Only topics, no title & description) */}
+                    {/* Topics Covered */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted block">
                         Topics Covered:
@@ -498,7 +570,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                     </div>
 
                     {/* Schedule & Timing with Platform Badge */}
-                    <div className="bg-surface/80 rounded-xl p-3 border border-border-subtle flex items-center justify-between text-xs">
+                    <div className="bg-surface/80 rounded-xl p-3 border border-border-subtle flex flex-wrap items-center justify-between gap-2 text-xs">
                       <div className="space-y-0.5">
                         <div className="flex items-center gap-1.5 font-bold text-primary">
                           <Clock className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
@@ -508,15 +580,15 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                           Duration: {c.durationMinutes} mins
                         </div>
                       </div>
-                      <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded border ${platformVisual.badge}`}>
+                      <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded border shrink-0 ${platformVisual.badge}`}>
                         {platformVisual.icon}
                         {c.platform || 'Online Live'}
                       </span>
                     </div>
 
                     {/* Mentor & Action */}
-                    <div className="flex items-center justify-between pt-3 border-t border-border-subtle gap-3">
-                      <div className="flex items-center gap-2">
+                    <div className="flex flex-col xs:flex-row xs:items-center justify-between pt-3 border-t border-border-subtle gap-3">
+                      <div className="flex items-center gap-2 min-w-0">
                         {c.instructorPicture ? (
                           <img
                             src={c.instructorPicture}
@@ -531,51 +603,61 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                             {(c.instructor && c.instructor[0]) || 'S'}
                           </div>
                         )}
-                        <div>
-                          <div className="text-xs font-bold text-primary">{c.instructor}</div>
+                        <div className="min-w-0">
+                          <div className="text-xs font-bold text-primary truncate">{c.instructor}</div>
                           <div className="text-[10px] text-text-muted">Lead Mentor</div>
                         </div>
                       </div>
 
-                      {isLive ? (
-                        <a 
-                          href={c.joinUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow-sm transition-colors animate-pulse"
-                        >
-                          <span>Join Now</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      ) : isCompleted ? (
-                        <button 
-                          disabled
-                          className="px-3 py-1.5 bg-gray-100 text-gray-400 text-xs font-bold rounded-lg cursor-not-allowed"
-                        >
-                          Completed
-                        </button>
-                      ) : (
-                        <button 
-                          onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
-                          className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
-                            reminders.includes(c.id)
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
-                              : 'bg-primary hover:bg-primary/95 text-white'
-                          }`}
-                        >
-                          {reminders.includes(c.id) ? (
-                            <>
-                              <BellRing className="w-3.5 h-3.5 text-emerald-600" />
-                              <span>Reminder Set</span>
-                            </>
-                          ) : (
-                            <>
-                              <Bell className="w-3.5 h-3.5" />
-                              <span>Set Reminder</span>
-                            </>
-                          )}
-                        </button>
-                      )}
+                      <div className="flex items-center gap-2 w-full xs:w-auto shrink-0">
+                        <WebShareButton
+                          variant="compact"
+                          title={shareData.title}
+                          text={shareData.text}
+                          url={shareData.url}
+                          label="Share"
+                          className="flex-1 xs:flex-initial justify-center py-2"
+                        />
+                        {isLive ? (
+                          <a 
+                            href={c.joinUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow-sm transition-colors animate-pulse text-center"
+                          >
+                            <span>Join Now</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        ) : isCompleted ? (
+                          <button 
+                            disabled
+                            className="flex-1 xs:flex-initial px-3 py-2 bg-gray-100 text-gray-400 text-xs font-bold rounded-lg cursor-not-allowed text-center"
+                          >
+                            Completed
+                          </button>
+                        ) : (
+                          <button 
+                            onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
+                            className={`flex-1 xs:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer text-center ${
+                              reminders.includes(c.id)
+                                ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
+                                : 'bg-primary hover:bg-primary/95 text-white'
+                            }`}
+                          >
+                            {reminders.includes(c.id) ? (
+                              <>
+                                <BellRing className="w-3.5 h-3.5 text-emerald-600" />
+                                <span>Reminder Set</span>
+                              </>
+                            ) : (
+                              <>
+                                <Bell className="w-3.5 h-3.5" />
+                                <span>Set Reminder</span>
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
@@ -631,9 +713,19 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                         ? 'Tomorrow' 
                         : classDate.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
                       const platformVisual = getPlatformVisual(c.platform);
+                      const shareData = getClassShareData(c, false);
+                      const isTargeted = highlightedId === `class-${c.id}`;
 
                       return (
-                        <tr key={c.id} className="hover:bg-surface/50 transition-colors">
+                        <tr 
+                          id={`class-${c.id}`}
+                          key={c.id} 
+                          className={`scroll-mt-24 transition-all ${
+                            isTargeted 
+                              ? 'bg-[#B83A00]/10 ring-2 ring-inset ring-[#B83A00]' 
+                              : 'hover:bg-surface/50'
+                          }`}
+                        >
                           {/* 1. Date & Schedule */}
                           <td className="py-4 px-6 align-top min-w-[160px]">
                             <div className="space-y-1.5">
@@ -716,27 +808,36 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                           </td>
 
                           {/* 6. Action */}
-                          <td className="py-4 px-6 align-top text-right min-w-[140px]">
-                            <button 
-                              onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
-                              className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
-                                reminders.includes(c.id)
-                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
-                                  : 'bg-primary hover:bg-primary/95 text-white'
-                              }`}
-                            >
-                              {reminders.includes(c.id) ? (
-                                <>
-                                  <BellRing className="w-3.5 h-3.5 text-emerald-600" />
-                                  <span>Reminder Set ✓</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Bell className="w-3.5 h-3.5" />
-                                  <span>Set Reminder</span>
-                                </>
-                              )}
-                            </button>
+                          <td className="py-4 px-6 align-top text-right min-w-[170px]">
+                            <div className="flex items-center justify-end gap-2">
+                              <WebShareButton
+                                variant="icon"
+                                title={shareData.title}
+                                text={shareData.text}
+                                url={shareData.url}
+                                label="Share Class"
+                              />
+                              <button 
+                                onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
+                                className={`inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
+                                  reminders.includes(c.id)
+                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100'
+                                    : 'bg-primary hover:bg-primary/95 text-white'
+                                }`}
+                              >
+                                {reminders.includes(c.id) ? (
+                                  <>
+                                    <BellRing className="w-3.5 h-3.5 text-emerald-600" />
+                                    <span>Reminder Set ✓</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Bell className="w-3.5 h-3.5" />
+                                    <span>Set Reminder</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       );
@@ -755,9 +856,17 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                   ? 'Tomorrow' 
                   : classDate.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
                 const platformVisual = getPlatformVisual(c.platform);
+                const shareData = getClassShareData(c, false);
+                const isTargeted = highlightedId === `class-${c.id}`;
 
                 return (
-                  <div key={c.id} className="bg-white rounded-2xl border border-border-subtle p-5 shadow-sm space-y-4">
+                  <div 
+                    id={`class-${c.id}`}
+                    key={c.id} 
+                    className={`scroll-mt-24 bg-white rounded-2xl border p-4 sm:p-5 shadow-sm space-y-4 transition-all ${
+                      isTargeted ? 'border-[#B83A00] ring-2 ring-[#B83A00]' : 'border-border-subtle'
+                    }`}
+                  >
                     {/* Header: Date badge & Course */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2 py-0.5 rounded uppercase">
@@ -774,7 +883,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </p>
                     )}
 
-                    {/* Topics Covered (Only topics, no title & description) */}
+                    {/* Topics Covered */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted block">
                         Topics Covered:
@@ -794,7 +903,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
 
                     {/* Mentor & Platform Info */}
                     <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-border-subtle items-center">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
                         {c.instructorPicture ? (
                           <img
                             src={c.instructorPicture}
@@ -813,34 +922,44 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </div>
 
                       <div className="text-right">
-                        <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded border ${platformVisual.badge}`}>
+                        <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded border shrink-0 ${platformVisual.badge}`}>
                           {platformVisual.icon}
                           {c.platform || 'Online Live'}
                         </span>
                       </div>
                     </div>
 
-                    {/* Action Button */}
-                    <button 
-                      onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
-                      className={`w-full py-2.5 inline-flex items-center justify-center gap-1.5 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
-                        reminders.includes(c.id)
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
-                          : 'bg-primary hover:bg-primary/95 text-white'
-                      }`}
-                    >
-                      {reminders.includes(c.id) ? (
-                        <>
-                          <BellRing className="w-3.5 h-3.5 text-emerald-600" />
-                          <span>Reminder Set ✓</span>
-                        </>
-                      ) : (
-                        <>
-                          <Bell className="w-3.5 h-3.5" />
-                          <span>Set Reminder</span>
-                        </>
-                      )}
-                    </button>
+                    {/* Action Buttons: 2-column balanced grid */}
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <WebShareButton
+                        variant="button"
+                        title={shareData.title}
+                        text={shareData.text}
+                        url={shareData.url}
+                        label="Share"
+                        className="w-full py-2.5"
+                      />
+                      <button 
+                        onClick={() => toggleReminder(c.id, c.batchTitle || c.courseTitle || 'Live Class')}
+                        className={`w-full py-2.5 inline-flex items-center justify-center gap-1.5 text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer ${
+                          reminders.includes(c.id)
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
+                            : 'bg-primary hover:bg-primary/95 text-white'
+                        }`}
+                      >
+                        {reminders.includes(c.id) ? (
+                          <>
+                            <BellRing className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>Reminder Set ✓</span>
+                          </>
+                        ) : (
+                          <>
+                            <Bell className="w-3.5 h-3.5" />
+                            <span>Set Reminder</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -893,9 +1012,19 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                   
                   const remainingSeats = b.leftSeats ?? 5;
                   const total = b.totalSeats || 20;
+                  const batchShareData = getBatchShareData(b, startDateStr);
+                  const isTargeted = highlightedId === `batch-${b.id}`;
 
                   return (
-                    <tr key={b.id} className="hover:bg-surface/50 transition-colors">
+                    <tr 
+                      id={`batch-${b.id}`}
+                      key={b.id} 
+                      className={`scroll-mt-24 transition-all ${
+                        isTargeted 
+                          ? 'bg-[#B83A00]/10 ring-2 ring-inset ring-[#B83A00]' 
+                          : 'hover:bg-surface/50'
+                      }`}
+                    >
                       {/* 1. Batch Name & Course */}
                       <td className="py-4 px-6 align-top min-w-[280px]">
                         <div className="space-y-1.5">
@@ -986,14 +1115,23 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </td>
 
                       {/* 6. Action */}
-                      <td className="py-4 px-6 align-top text-right min-w-[140px]">
-                        <Link 
-                          href={`/live-batches/${b.id}`}
-                          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-lg shadow-sm transition-colors cursor-pointer"
-                        >
-                          <span>View Details</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                      <td className="py-4 px-6 align-top text-right min-w-[180px]">
+                        <div className="flex items-center justify-end gap-2">
+                          <WebShareButton
+                            variant="icon"
+                            title={batchShareData.title}
+                            text={batchShareData.text}
+                            url={batchShareData.url}
+                            label="Share Batch"
+                          />
+                          <Link 
+                            href={`/live-batches/${b.id}`}
+                            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-lg shadow-sm transition-colors cursor-pointer"
+                          >
+                            <span>View Details</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -1016,17 +1154,25 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
             
             const remainingSeats = b.leftSeats ?? 5;
             const total = b.totalSeats || 20;
+            const batchShareData = getBatchShareData(b, startDateStr);
+            const isTargeted = highlightedId === `batch-${b.id}`;
 
             return (
-              <div key={b.id} className="bg-white rounded-2xl border border-border-subtle p-5 shadow-sm space-y-4">
+              <div 
+                id={`batch-${b.id}`}
+                key={b.id} 
+                className={`scroll-mt-24 bg-white rounded-2xl border p-4 sm:p-5 shadow-sm space-y-4 transition-all ${
+                  isTargeted ? 'border-[#B83A00] ring-2 ring-[#B83A00]' : 'border-border-subtle'
+                }`}
+              >
                 <div className="flex justify-between items-start gap-2">
-                  <div className="space-y-1">
+                  <div className="space-y-1 min-w-0">
                     <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2 py-0.5 rounded uppercase">
                       Starting {startDateStr}
                     </span>
                     <Link 
                       href={`/live-batches/${b.id}`}
-                      className="block font-bold text-primary text-base hover:text-secondary"
+                      className="block font-bold text-primary text-base hover:text-secondary truncate"
                     >
                       {b.title}
                     </Link>
@@ -1059,22 +1205,33 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                     </div>
                   )}
                   <div className="min-w-0 flex-1">
-                    <div className="font-bold text-primary">{b.instructor}</div>
+                    <div className="font-bold text-primary truncate">{b.instructor}</div>
                     <div className="text-[11px] text-text-muted truncate">{b.schedule}</div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-border-subtle gap-3">
-                  <span className="text-xs text-red-500 font-bold flex items-center gap-1.5 animate-pulse">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                <div className="flex flex-col xs:flex-row xs:items-center justify-between pt-3 border-t border-border-subtle gap-3">
+                  <span className="text-xs text-red-500 font-bold flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                     Only {remainingSeats} of {total} Left
                   </span>
-                  <Link 
-                    href={`/live-batches/${b.id}`}
-                    className="px-4 py-2 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-lg shadow-sm transition-colors"
-                  >
-                    View Details ➔
-                  </Link>
+                  <div className="grid grid-cols-2 xs:flex xs:items-center gap-2 w-full xs:w-auto shrink-0">
+                    <WebShareButton
+                      variant="compact"
+                      title={batchShareData.title}
+                      text={batchShareData.text}
+                      url={batchShareData.url}
+                      label="Share"
+                      className="w-full xs:w-auto justify-center py-2"
+                    />
+                    <Link 
+                      href={`/live-batches/${b.id}`}
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-lg shadow-sm transition-colors text-center"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
@@ -1163,7 +1320,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
               >
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-left font-bold text-sm text-primary hover:text-secondary transition-colors cursor-pointer gap-4"
+                  className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-bold text-sm text-primary hover:text-secondary transition-colors cursor-pointer gap-3 sm:gap-4"
                   aria-expanded={isOpen}
                 >
                   <span className="flex items-center gap-2.5">
@@ -1175,7 +1332,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                   <ChevronDown className={`w-4 h-4 text-text-muted transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180 text-secondary' : ''}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs text-text-muted leading-relaxed border-t border-border-subtle/50 live-faq-answer">
+                  <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-xs text-text-muted leading-relaxed border-t border-border-subtle/50 live-faq-answer">
                     {faq.a}
                   </div>
                 )}
@@ -1186,22 +1343,22 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
       </section>
 
       {/* 6. Help & Support */}
-      <section className="bg-primary text-white rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-md">
+      <section className="bg-primary text-white rounded-2xl p-6 sm:p-8 md:p-12 relative overflow-hidden shadow-md">
         <div className="max-w-2xl space-y-4 relative z-10">
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">Need assistance joining a Live Class?</h2>
           <p className="text-sm text-gray-200 leading-relaxed">
             If you are registered for a live batch and haven't received your classroom codes, or if you face connection issues, reach out to our coordinator immediately.
           </p>
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 pt-2">
             <a 
               href="tel:+918393042166" 
-              className="px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow transition-colors"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-lg shadow transition-colors text-center"
             >
               Call Coordinator: +91 83930 42166
             </a>
             <a 
               href="mailto:mskshikohabad@gmail.com" 
-              className="px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold rounded-lg transition-colors"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold rounded-lg transition-colors text-center"
             >
               Email Technical Support
             </a>

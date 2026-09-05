@@ -9,35 +9,15 @@ import {
   X, RotateCcw, Check
 } from 'lucide-react';
 import { Course } from '@/types';
+import WebShareButton from '@/components/WebShareButton';
 
 export default function CourseCatalogClient({ initialCourses }: { initialCourses: Course[] }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedMode, setSelectedMode] = useState('All');
   const [sortBy, setSortBy] = useState<'featured' | 'duration-asc' | 'duration-desc' | 'alphabetical'>('featured');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  // Extract all categories dynamically
-  const categories = useMemo(() => {
-    const cats = new Set<string>();
-    initialCourses.forEach((course) => {
-      course.categories.forEach((cat) => cats.add(cat));
-    });
-    return ['All', ...Array.from(cats)];
-  }, [initialCourses]);
-
-  // Compute category counts
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: initialCourses.length };
-    initialCourses.forEach((course) => {
-      course.categories.forEach((cat) => {
-        counts[cat] = (counts[cat] || 0) + 1;
-      });
-    });
-    return counts;
-  }, [initialCourses]);
 
   // Extract all levels dynamically
   const levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
@@ -67,9 +47,6 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
         course.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.categories.some((c) => c.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCategory =
-        selectedCategory === 'All' || course.categories.includes(selectedCategory);
-
       const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
 
       const matchesMode =
@@ -78,7 +55,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
         (selectedMode === 'ONLINE' && course.mode === 'BOTH') ||
         (selectedMode === 'OFFLINE' && course.mode === 'BOTH');
 
-      return matchesSearch && matchesCategory && matchesLevel && matchesMode;
+      return matchesSearch && matchesLevel && matchesMode;
     });
 
     const toDays = (d: { value: number; unit: 'HOURS' | 'DAYS' | 'MONTHS' }) => {
@@ -97,25 +74,22 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     }
 
     return result;
-  }, [initialCourses, searchQuery, selectedCategory, selectedLevel, selectedMode, sortBy]);
+  }, [initialCourses, searchQuery, selectedLevel, selectedMode, sortBy]);
 
   const hasActiveFilters = Boolean(
     searchQuery ||
-    selectedCategory !== 'All' ||
     selectedLevel !== 'All' ||
     selectedMode !== 'All'
   );
 
   const activeFilterCount = [
     Boolean(searchQuery),
-    selectedCategory !== 'All',
     selectedLevel !== 'All',
     selectedMode !== 'All',
   ].filter(Boolean).length;
 
   const resetFilters = () => {
     setSearchQuery('');
-    setSelectedCategory('All');
     setSelectedLevel('All');
     setSelectedMode('All');
     setSortBy('featured');
@@ -251,22 +225,22 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
             </button>
           </div>
 
-          {/* Quick-Scroll Category Pills on Phone */}
+          {/* Quick-Scroll Difficulty Level Pills on Phone */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
-            {categories.map((cat) => {
-              const isSel = selectedCategory === cat;
-              const count = cat === 'All' ? initialCourses.length : categoryCounts[cat] || 0;
+            {levels.map((lvl) => {
+              const isSel = selectedLevel === lvl;
+              const count = lvl === 'All' ? initialCourses.length : levelCounts[lvl] || 0;
               return (
                 <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  key={lvl}
+                  onClick={() => setSelectedLevel(lvl)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
                     isSel
-                      ? 'bg-secondary text-white font-bold shadow-2xs'
+                      ? 'bg-primary text-white font-bold shadow-2xs'
                       : 'bg-white border border-border-subtle text-text-muted hover:text-primary hover:bg-surface'
                   }`}
                 >
-                  {cat} <span className="opacity-75 text-[10px] ml-0.5">({count})</span>
+                  {lvl} <span className="opacity-75 text-[10px] ml-0.5">({count})</span>
                 </button>
               );
             })}
@@ -323,51 +297,8 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                 </div>
               </div>
 
-              {/* Category Filter */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">
-                    Categories
-                  </span>
-                  {selectedCategory !== 'All' && (
-                    <button
-                      onClick={() => setSelectedCategory('All')}
-                      className="text-[10px] font-bold text-secondary hover:underline cursor-pointer"
-                    >
-                      Clear
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1 max-h-56 overflow-y-auto pr-1 no-scrollbar">
-                  {categories.map((cat) => {
-                    const isSel = selectedCategory === cat;
-                    const count = cat === 'All' ? initialCourses.length : categoryCounts[cat] || 0;
-                    return (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
-                          isSel
-                            ? 'bg-secondary/10 text-secondary font-bold border-l-4 border-l-secondary pl-2 shadow-2xs'
-                            : 'text-text-muted hover:text-primary hover:bg-surface font-medium'
-                        }`}
-                      >
-                        <span className="truncate">{cat}</span>
-                        <span
-                          className={`text-[10px] px-2 py-0.5 rounded-full ${
-                            isSel ? 'bg-secondary text-white font-bold' : 'bg-surface text-text-muted'
-                          }`}
-                        >
-                          {count}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Difficulty Level Filter */}
-              <div className="space-y-2 pt-3 border-t border-border-subtle">
+              <div className="space-y-2 pt-2 border-t border-border-subtle">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">
                     Difficulty Level
@@ -516,18 +447,6 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                   </span>
                 )}
 
-                {selectedCategory !== 'All' && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-surface border border-border-subtle rounded-lg text-xs text-primary font-medium">
-                    <span>Category: {selectedCategory}</span>
-                    <button
-                      onClick={() => setSelectedCategory('All')}
-                      className="hover:text-secondary cursor-pointer"
-                      aria-label="Remove category filter"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  </span>
-                )}
 
                 {selectedLevel !== 'All' && (
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-surface border border-border-subtle rounded-lg text-xs text-primary font-medium">
@@ -566,13 +485,17 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
 
             {/* Course Grid Results */}
             {filteredCourses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-5 sm:gap-6">
                 {filteredCourses.map((course) => (
                   <div
                     key={course.id}
-                    className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-200 flex flex-col"
+                    className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
                   >
-                    <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
+                    <Link
+                      href={`/courses/${course.slug}`}
+                      className="relative h-44 sm:h-48 w-full bg-gray-100 overflow-hidden block"
+                      aria-label={course.title}
+                    >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={course.featuredImageUrl}
@@ -582,12 +505,12 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <span className="absolute top-4 right-4 bg-primary/95 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs">
+                      <span className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary/95 text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs">
                         {course.level}
                       </span>
-                    </div>
+                    </Link>
 
-                    <div className="p-5 sm:p-6 flex-grow flex flex-col gap-4">
+                    <div className="p-4 sm:p-5 flex-grow flex flex-col gap-3.5 sm:gap-4">
                       <div className="space-y-2">
                         <div className="flex flex-wrap gap-1.5">
                           {course.categories.slice(0, 2).map((cat, i) => (
@@ -599,47 +522,60 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                             </span>
                           ))}
                         </div>
-                        <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2">
-                          {course.title}
+                        <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
+                          <Link href={`/courses/${course.slug}`} className="hover:underline">
+                            {course.title}
+                          </Link>
                         </h2>
                         <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
                           {course.shortDescription}
                         </p>
                       </div>
 
-                      <div className="space-y-3 mt-auto pt-4 border-t border-border-subtle">
+                      <div className="space-y-3 mt-auto pt-3 sm:pt-4 border-t border-border-subtle">
                         <div className="flex items-center justify-between text-xs text-text-muted">
                           <span className="flex items-center gap-1.5 font-medium">
-                            <Clock className="w-4 h-4 text-secondary flex-shrink-0" />
-                            {course.duration.value} {course.duration.unit}
+                            <Clock className="w-4 h-4 text-secondary shrink-0" />
+                            <span>{course.duration.value} {course.duration.unit}</span>
                           </span>
                           <span className="flex items-center gap-1 font-semibold">
                             {course.mode === 'BOTH' ? (
                               <>
-                                <Laptop className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                                Online & Offline
+                                <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                <span>Online & Offline</span>
                               </>
                             ) : course.mode === 'OFFLINE' ? (
                               <>
-                                <Laptop className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                                Offline Lab
+                                <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                <span>Offline Lab</span>
                               </>
                             ) : (
                               <>
-                                <Globe className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                                Online Only
+                                <Globe className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                <span>Online Only</span>
                               </>
                             )}
                           </span>
                         </div>
 
-                        <Link
-                          href={`/courses/${course.slug}`}
-                          className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer"
-                        >
-                          <span>View Syllabus & Enroll</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        {/* Card Action Row: Enroll CTA + Share Button */}
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={`/courses/${course.slug}`}
+                            className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer text-center"
+                          >
+                            <span className="truncate">View Syllabus & Enroll</span>
+                            <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+                          </Link>
+                          <WebShareButton
+                            variant="icon"
+                            title={`${course.title} | MSK Institute Shikohabad`}
+                            text={`Explore ${course.title} course at MSK Institute Shikohabad: ${course.shortDescription}`}
+                            url={`/courses/${course.slug}`}
+                            label={`Share ${course.title}`}
+                            className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-border-subtle bg-surface hover:bg-white text-text-muted hover:text-secondary shadow-2xs hover:border-secondary/40 transition-all shrink-0 cursor-pointer"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -711,34 +647,6 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                 </select>
               </div>
 
-              {/* Categories */}
-              <div className="space-y-2">
-                <span className="text-xs font-bold text-text-muted uppercase tracking-wider">
-                  Categories
-                </span>
-                <div className="space-y-1">
-                  {categories.map((cat) => {
-                    const isSel = selectedCategory === cat;
-                    const count = cat === 'All' ? initialCourses.length : categoryCounts[cat] || 0;
-                    return (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
-                          isSel
-                            ? 'bg-secondary/10 text-secondary font-bold border-l-4 border-l-secondary pl-2'
-                            : 'text-text-muted hover:text-primary hover:bg-surface font-medium'
-                        }`}
-                      >
-                        <span className="truncate">{cat}</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-surface text-text-muted">
-                          {count}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
 
               {/* Difficulty Level */}
               <div className="space-y-2 pt-2 border-t border-border-subtle">

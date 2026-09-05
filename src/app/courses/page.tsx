@@ -236,25 +236,25 @@ export default async function CoursesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12">
         {/* Page Header */}
         <header className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="flex flex-wrap justify-center items-center gap-2">
-            <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 bg-[#B83A00]/10 text-[#B83A00] rounded-full">
+          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2">
+            <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-2.5 sm:px-3 py-1 bg-[#B83A00]/10 text-[#B83A00] rounded-full">
               Industry Ready Curriculum
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-surface border border-border-subtle text-text-muted rounded-full">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-2.5 sm:px-3 py-1 bg-surface border border-border-subtle text-text-muted rounded-full">
               100% Practical Labs
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-2.5 sm:px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
               Govt & ISO Certified
             </span>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-primary leading-tight sm:leading-normal">
             Computer & Programming Courses in Shikohabad
           </h1>
-          <p className="courses-hero-desc text-text-muted text-base sm:text-lg leading-relaxed">
+          <p className="courses-hero-desc text-text-muted text-sm sm:text-lg leading-relaxed">
             Select from beginner and advanced programs tailored to industry standards, complete with live mentorship by <strong>Er. Sumit Kumar</strong>, practical project building, and online certificate verification.
           </p>
         </header>

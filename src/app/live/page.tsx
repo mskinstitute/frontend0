@@ -270,17 +270,17 @@ export default async function LivePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12">
         {/* Page Header */}
-        <header className="text-center max-w-3xl mx-auto space-y-3">
+        <header className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold tracking-wider bg-[#B83A00]/10 text-[#B83A00]">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             Live Classroom Schedule
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
             Live Coding & Computer Training Classes
           </h1>
-          <p className="live-hero-desc text-text-muted text-base sm:text-lg leading-relaxed">
+          <p className="live-hero-desc text-text-muted text-sm sm:text-base md:text-lg leading-relaxed">
             Attend interactive live computer lectures in Shikohabad by <strong>Er. Sumit Kumar</strong>. Join active sessions on Google Meet, YouTube Live, or Zoom, review 7-day upcoming class topics, and enroll in upcoming live cohorts.
           </p>
         </header>

@@ -64,9 +64,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
-    { name: 'Playground', href: '/playground', icon: Code2 },
     { name: 'Live', href: '/live', icon: Video },
-    { name: 'Study Material', href: '/study-material', icon: FileText },
     { name: 'Careers', href: '/careers', icon: Briefcase },
     { name: 'Blogs', href: '/blogs', icon: Newspaper },
   ];

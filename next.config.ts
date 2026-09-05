@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         destination: '/study-material',
         permanent: true,
       },
+      {
+        source: '/course',
+        destination: '/courses',
+        permanent: true,
+      },
     ];
   },
 };
