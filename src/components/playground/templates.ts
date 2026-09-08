@@ -29,6 +29,39 @@ print("\\n✅ Try editing this code and press 'Run Code' (Ctrl + Enter)!")
 `,
     },
     {
+      id: 'py-matplotlib',
+      title: '📊 Matplotlib & Data Science Chart',
+      language: 'python',
+      description: 'Generate plots and data science visualizations with Matplotlib in Pyodide.',
+      code: `# MSK Institute - Data Science & Matplotlib Visualization
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample Data: Student course enrollment at MSK Institute
+courses = ['Python', 'Full Stack', 'C / C++', 'Java', 'Data Science', 'CCC']
+students = [95, 80, 65, 55, 70, 110]
+colors = ['#FF6B00', '#007ACC', '#4EBA6F', '#E76F51', '#9B5DE5', '#F15BB5']
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 4))
+
+# 1. Bar Chart
+ax1.bar(courses, students, color=colors, edgecolor='#333', linewidth=1.2)
+ax1.set_title('Course Enrollment (2026)', fontsize=11, fontweight='bold')
+ax1.set_ylabel('Number of Students')
+ax1.tick_params(axis='x', rotation=25)
+ax1.grid(axis='y', linestyle='--', alpha=0.5)
+
+# 2. Pie Chart
+ax2.pie(students, labels=courses, autopct='%1.1f%%', colors=colors, startangle=140)
+ax2.set_title('Batch Distribution Ratio', fontsize=11, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+
+print("✅ Chart rendered! Check the '📊 Plots / Visuals' tab.")
+`,
+    },
+    {
       id: 'py-marksheet',
       title: 'Student Marksheet & Grading',
       language: 'python',
@@ -502,6 +535,100 @@ public class Main {
         sumitSir.introduce();
     }
 }
+`,
+    },
+  ],
+  sql: [
+    {
+      id: 'sql-students',
+      title: 'Student Database & Grades',
+      language: 'sql',
+      description: 'CREATE TABLE, INSERT students, and query performance statistics with SQLite.',
+      code: `-- MSK Institute - SQLite In-Browser Database
+-- Run SQL queries and view real-time table results!
+
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    course TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    city TEXT DEFAULT 'Shikohabad'
+);
+
+INSERT INTO students (name, course, score, city) VALUES 
+    ('Aman Sharma', 'Python Full Stack', 92, 'Shikohabad'),
+    ('Priya Verma', 'Web Development', 88, 'Firozabad'),
+    ('Rahul Kumar', 'Data Science & AI', 95, 'Agra'),
+    ('Neha Gupta', 'Python Full Stack', 84, 'Shikohabad'),
+    ('Vikas Yadav', 'Java Masterclass', 78, 'Mainpuri'),
+    ('Anjali Singh', 'Web Development', 91, 'Shikohabad');
+
+-- 1. Query Top Performers with Grading
+SELECT id, name, course, score, city,
+       CASE 
+           WHEN score >= 90 THEN 'A+ (Distinction)'
+           WHEN score >= 80 THEN 'A (Excellent)'
+           ELSE 'B (Good)'
+       END AS grade
+FROM students
+ORDER BY score DESC;
+
+-- 2. Calculate Course Batch Averages
+SELECT course, 
+       COUNT(*) AS total_enrolled, 
+       ROUND(AVG(score), 1) AS avg_score,
+       MAX(score) AS top_score
+FROM students
+GROUP BY course
+ORDER BY avg_score DESC;
+`,
+    },
+    {
+      id: 'sql-joins',
+      title: 'Course Enrollment & Joins',
+      language: 'sql',
+      description: 'Relational database schema with INNER and LEFT JOINs.',
+      code: `-- MSK Institute - Relational Database Schema & Joins
+
+CREATE TABLE courses (
+    course_id INTEGER PRIMARY KEY,
+    course_name TEXT NOT NULL,
+    fee INTEGER NOT NULL,
+    duration_months INTEGER NOT NULL
+);
+
+CREATE TABLE enrollments (
+    enroll_id INTEGER PRIMARY KEY,
+    student_name TEXT NOT NULL,
+    course_id INTEGER,
+    enrolled_date TEXT NOT NULL,
+    FOREIGN KEY(course_id) REFERENCES courses(course_id)
+);
+
+INSERT INTO courses VALUES 
+    (101, 'Python Full-Stack', 6500, 4),
+    (102, 'MERN Stack Web Dev', 7500, 5),
+    (103, 'C / C++ with DSA', 4500, 3),
+    (104, 'Core & Advanced Java', 5500, 4);
+
+INSERT INTO enrollments VALUES 
+    (1, 'Rohan Sharma', 101, '2026-01-10'),
+    (2, 'Kavita Singh', 102, '2026-01-15'),
+    (3, 'Deepak Verma', 101, '2026-01-18'),
+    (4, 'Sneha Patel', 103, '2026-02-01'),
+    (5, 'Amit Kumar', 104, '2026-02-05');
+
+-- INNER JOIN: Students with Course Details
+SELECT 
+    e.enroll_id,
+    e.student_name,
+    c.course_name,
+    c.duration_months || ' Months' AS duration,
+    '₹' || c.fee AS course_fee,
+    e.enrolled_date
+FROM enrollments e
+JOIN courses c ON e.course_id = c.course_id
+ORDER BY e.enroll_id;
 `,
     },
   ],

@@ -12,8 +12,13 @@ import {
   AlertTriangle,
   CheckCircle2,
   FileText,
+  BarChart3,
+  Download,
+  Sparkles,
+  ArrowRight,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ActionTooltip from './ActionTooltip';
 
 interface ConsoleOutputProps {
   logs: ConsoleMessage[];
@@ -21,6 +26,10 @@ interface ConsoleOutputProps {
   isRunning?: boolean;
   stdin?: string;
   onStdinChange?: (newStdin: string) => void;
+  plots?: string[];
+  onJumpToLine?: (lineNumber: number) => void;
+  onExplainError?: (errorText: string) => void;
+  activeFileName?: string;
 }
 
 export default function ConsoleOutput({
@@ -29,10 +38,14 @@ export default function ConsoleOutput({
   isRunning = false,
   stdin = '',
   onStdinChange,
+  plots = [],
+  onJumpToLine,
+  onExplainError,
+  activeFileName,
 }: ConsoleOutputProps) {
   const scrollBottomRef = useRef<HTMLDivElement | null>(null);
   const [copied, setCopied] = useState(false);
-  const [activeConsoleTab, setActiveConsoleTab] = useState<'output' | 'stdin'>('output');
+  const [activeConsoleTab, setActiveConsoleTab] = useState<'output' | 'stdin' | 'plots'>('output');
 
   // Automatically scroll to bottom when new logs arrive and output tab is active
   useEffect(() => {
@@ -48,6 +61,13 @@ export default function ConsoleOutput({
     }
   }, [isRunning]);
 
+  // When new plot arrives, automatically switch to plots tab
+  useEffect(() => {
+    if (plots.length > 0) {
+      setActiveConsoleTab('plots');
+    }
+  }, [plots.length]);
+
   const handleCopyAll = () => {
     if (logs.length === 0) return;
     const text = logs
@@ -57,6 +77,26 @@ export default function ConsoleOutput({
     setCopied(true);
     toast.success('Console output copied!');
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadPlot = (plotUrl: string, idx: number) => {
+    const link = document.createElement('a');
+    link.href = plotUrl;
+    link.download = `msk-plot-${idx + 1}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success('Downloaded plot image');
+  };
+
+  // Extract line number from error text (e.g. line 4 or file.c:12:5)
+  const extractLineNumber = (text: string): number | null => {
+    const lineMatch = text.match(/line\s+(\d+)/i) || text.match(/:(\d+):\d+/) || text.match(/:(\d+):/);
+    if (lineMatch && lineMatch[1]) {
+      const num = parseInt(lineMatch[1], 10);
+      if (!isNaN(num) && num > 0) return num;
+    }
+    return null;
   };
 
   const renderIcon = (type: ConsoleMessage['type']) => {
@@ -97,7 +137,7 @@ export default function ConsoleOutput({
     <div className="w-full h-full flex flex-col bg-[#0d1117] text-slate-300 overflow-hidden font-mono text-xs">
       {/* Console Header Bar */}
       <div className="flex items-center justify-between px-3 py-1.5 bg-[#161b22] border-b border-slate-800 select-none">
-        {/* Left: Tab Switcher (Output vs Stdin) */}
+        {/* Left: Tab Switcher (Output vs Stdin vs Plots) */}
         <div className="flex items-center gap-1">
           <button
             type="button"
@@ -136,6 +176,25 @@ export default function ConsoleOutput({
             )}
           </button>
 
+          {/* Plots Tab */}
+          {plots.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setActiveConsoleTab('plots')}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded transition-colors cursor-pointer text-xs font-medium ${
+                activeConsoleTab === 'plots'
+                  ? 'bg-[#21262d] text-sky-400 font-bold border border-slate-700'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-sky-400" />
+              <span>Plots / Visuals</span>
+              <span className="text-[10px] px-1.5 py-0.2 bg-sky-500/20 text-sky-300 rounded font-bold">
+                {plots.length}
+              </span>
+            </button>
+          )}
+
           {isRunning && (
             <span className="ml-1.5 flex items-center gap-1 text-[10px] text-amber-400 font-sans font-medium px-1.5 py-0.5 bg-amber-400/10 rounded border border-amber-400/20 animate-pulse">
               Running...
@@ -145,41 +204,56 @@ export default function ConsoleOutput({
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1.5">
+          {activeFileName && (
+            <span
+              title={`Active File: ${activeFileName}`}
+              className="text-[10px] px-2 py-0.5 bg-[#21262d] text-slate-300 font-mono rounded border border-slate-700/60 hidden sm:inline-block"
+            >
+              📄 {activeFileName}
+            </span>
+          )}
           {activeConsoleTab === 'output' && logs.length > 0 && (
             <>
-              <button
-                onClick={handleCopyAll}
-                className="p-1 hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded transition-colors flex items-center gap-1 px-1.5 text-[10px] cursor-pointer"
-                title="Copy terminal output"
-              >
-                {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                <span className="hidden sm:inline">Copy</span>
-              </button>
-              <button
-                onClick={onClear}
-                className="p-1 hover:bg-slate-800 text-slate-400 hover:text-rose-400 rounded transition-colors flex items-center gap-1 px-1.5 text-[10px] cursor-pointer"
-                title="Clear console"
-              >
-                <Trash2 className="w-3 h-3" />
-                <span className="hidden sm:inline">Clear</span>
-              </button>
+              <ActionTooltip label="Copy Terminal Output" shortcut="Copy" placement="bottom-end">
+                <button
+                  type="button"
+                  onClick={handleCopyAll}
+                  aria-label="Copy Terminal Output"
+                  className="w-6 h-6 flex items-center justify-center hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded transition-colors cursor-pointer"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </ActionTooltip>
+
+              <ActionTooltip label="Clear Console Output" shortcut="Clear" placement="bottom-end">
+                <button
+                  type="button"
+                  onClick={onClear}
+                  aria-label="Clear Console Output"
+                  className="w-6 h-6 flex items-center justify-center hover:bg-slate-800 text-slate-400 hover:text-rose-400 rounded transition-colors cursor-pointer"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </ActionTooltip>
             </>
           )}
 
           {activeConsoleTab === 'stdin' && hasStdin && (
-            <button
-              onClick={() => onStdinChange?.('')}
-              className="p-1 hover:bg-slate-800 text-slate-400 hover:text-rose-400 rounded transition-colors flex items-center gap-1 px-1.5 text-[10px] cursor-pointer"
-              title="Clear stdin"
-            >
-              <Trash2 className="w-3 h-3" />
-              <span>Clear Input</span>
-            </button>
+            <ActionTooltip label="Clear Stdin Input" shortcut="Clear" placement="bottom-end">
+              <button
+                type="button"
+                onClick={() => onStdinChange?.('')}
+                aria-label="Clear Stdin Input"
+                className="w-6 h-6 flex items-center justify-center hover:bg-slate-800 text-slate-400 hover:text-rose-400 rounded transition-colors cursor-pointer"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+            </ActionTooltip>
           )}
         </div>
       </div>
 
-      {/* Terminal Content or Stdin Textarea */}
+      {/* Terminal Content / Stdin Textarea / Plots Viewer */}
       {activeConsoleTab === 'stdin' ? (
         <div className="flex-1 p-3 flex flex-col gap-2 bg-[#0a0d12]">
           <div className="flex items-center justify-between text-[11px] text-slate-400">
@@ -192,6 +266,33 @@ export default function ConsoleOutput({
             placeholder={`e.g.\n10\n20\nJohn Doe\n(Enter each input value on a new line)`}
             className="flex-1 w-full p-3 bg-[#11161d] border border-slate-700/80 rounded-lg text-slate-100 font-mono text-xs resize-none focus:outline-none focus:border-amber-400/60 leading-relaxed placeholder:text-slate-600"
           />
+        </div>
+      ) : activeConsoleTab === 'plots' ? (
+        <div className="flex-1 p-4 overflow-y-auto bg-[#0a0d12] flex flex-col items-center gap-4">
+          {plots.map((plotUrl, pIdx) => (
+            <div
+              key={pIdx}
+              className="w-full max-w-xl bg-[#161b22] border border-slate-800 rounded-xl p-3 flex flex-col items-center gap-2 shadow-lg"
+            >
+              <div className="w-full flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800 font-sans">
+                <span className="font-semibold text-slate-200">Plot #{pIdx + 1}</span>
+                <button
+                  type="button"
+                  onClick={() => handleDownloadPlot(plotUrl, pIdx)}
+                  className="flex items-center gap-1 text-[11px] text-secondary hover:underline cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download Image</span>
+                </button>
+              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={plotUrl}
+                alt={`Generated Plot ${pIdx + 1}`}
+                className="rounded-lg max-w-full h-auto bg-white p-2 shadow-inner"
+              />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="flex-1 overflow-y-auto p-3 space-y-1.5 selection:bg-secondary/30 selection:text-white">
@@ -218,24 +319,58 @@ export default function ConsoleOutput({
               </p>
             </div>
           ) : (
-            logs.map((log) => (
-              <div
-                key={log.id}
-                className="flex items-start gap-2 leading-relaxed hover:bg-white/5 px-1 py-0.5 rounded transition-colors"
-              >
-                {renderIcon(log.type)}
-                <span className="text-slate-500 text-[10px] select-none font-sans mt-0.5">
-                  {log.timestamp}
-                </span>
-                <pre
-                  className={`flex-1 whitespace-pre-wrap break-all ${getLogTextColor(
-                    log.type
-                  )} font-mono`}
+            logs.map((log) => {
+              const lineNum = log.type === 'error' ? extractLineNumber(log.content) : null;
+              return (
+                <div
+                  key={log.id}
+                  className="group flex items-start gap-2 leading-relaxed hover:bg-white/5 px-1 py-0.5 rounded transition-colors"
                 >
-                  {log.content}
-                </pre>
-              </div>
-            ))
+                  {renderIcon(log.type)}
+                  <span className="text-slate-500 text-[10px] select-none font-sans mt-0.5 shrink-0">
+                    {log.timestamp}
+                  </span>
+                  <div className="flex-1 flex flex-wrap items-center justify-between gap-1 overflow-hidden">
+                    <pre
+                      className={`whitespace-pre-wrap break-all ${getLogTextColor(
+                        log.type
+                      )} font-mono text-xs`}
+                    >
+                      {log.content}
+                    </pre>
+
+                    {/* Interactive Badges for Errors: Jump to Line & Explain */}
+                    {log.type === 'error' && (
+                      <div className="flex items-center gap-1.5 select-none shrink-0 font-sans">
+                        {lineNum && onJumpToLine && (
+                          <button
+                            type="button"
+                            onClick={() => onJumpToLine(lineNum)}
+                            className="flex items-center gap-1 px-1.5 py-0.5 bg-rose-950/80 hover:bg-rose-900 border border-rose-700/60 rounded text-[10px] text-rose-300 font-bold transition-colors cursor-pointer"
+                            title={`Jump to line ${lineNum} in editor`}
+                          >
+                            <span>Line {lineNum}</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                        )}
+
+                        {onExplainError && (
+                          <button
+                            type="button"
+                            onClick={() => onExplainError(log.content)}
+                            className="flex items-center gap-1 px-1.5 py-0.5 bg-secondary/20 hover:bg-secondary/30 border border-secondary/40 rounded text-[10px] text-secondary font-bold transition-colors cursor-pointer"
+                            title="Diagnose with MSK AI Tutor"
+                          >
+                            <Sparkles className="w-3 h-3" />
+                            <span>Explain</span>
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })
           )}
           <div ref={scrollBottomRef} />
         </div>
@@ -243,3 +378,4 @@ export default function ConsoleOutput({
     </div>
   );
 }
+

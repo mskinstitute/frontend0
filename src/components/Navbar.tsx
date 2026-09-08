@@ -225,8 +225,8 @@ export default function Navbar() {
       {/* Search Modal Component */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       
-      {/* Dynamic Announcement Bar */}
-      {activeAnnouncements.length > 0 && (
+      {/* Dynamic Announcement Bar - Only shown on Home Page */}
+      {pathname === '/' && activeAnnouncements.length > 0 && (
         <div className="bg-primary text-white py-1 border-b border-border-subtle text-xs font-semibold overflow-hidden relative select-none">
           <div className="whitespace-nowrap flex gap-8 justify-start w-fit animate-marquee hover:[animation-play-state:paused] cursor-pointer">
             {activeAnnouncements.map((ann, idx) => (

@@ -2,16 +2,18 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search, X, ChevronDown, FileText } from 'lucide-react';
-import { PlaygroundFile, SearchMatch } from './types';
+import { PlaygroundFile, PlaygroundFolder, SearchMatch } from './types';
 import { getFileIcon } from './FileExplorerSidebar';
+import ActionTooltip from './ActionTooltip';
 
 interface SearchSidebarProps {
   files: PlaygroundFile[];
+  folders?: PlaygroundFolder[];
   onSelectResult: (fileId: string, lineNumber: number, column: number) => void;
   onClose: () => void;
 }
 
-export default function SearchSidebar({ files, onSelectResult, onClose }: SearchSidebarProps) {
+export default function SearchSidebar({ files, folders = [], onSelectResult, onClose }: SearchSidebarProps) {
   const [query, setQuery] = useState('');
 
   // Find all matches across all files
@@ -67,14 +69,16 @@ export default function SearchSidebar({ files, onSelectResult, onClose }: Search
           <ChevronDown className="w-3.5 h-3.5" />
           <span>Search in Files</span>
         </span>
-        <button
-          type="button"
-          onClick={onClose}
-          className="p-1 hover:text-white hover:bg-[#333] rounded transition-colors"
-          title="Close Search"
-        >
-          <X className="w-3.5 h-3.5" />
-        </button>
+        <ActionTooltip label="Close Search" shortcut="Esc" placement="bottom">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close Search"
+            className="p-1 hover:text-white hover:bg-[#333] rounded transition-colors cursor-pointer"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </ActionTooltip>
       </div>
 
       {/* Search Input */}
@@ -127,6 +131,11 @@ export default function SearchSidebar({ files, onSelectResult, onClose }: Search
             {/* File Group Header */}
             <div className="flex items-center gap-1.5 px-3 py-1 bg-[#2a2d2e]/60 text-slate-200 font-semibold font-mono text-[11px]">
               <span>{getFileIcon(file.language)}</span>
+              {file.folderId && (
+                <span className="text-amber-300/80 font-normal">
+                  {folders.find((f) => f.id === file.folderId)?.name}/
+                </span>
+              )}
               <span className="truncate flex-1">{file.name}</span>
               <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#1e1e1e] text-slate-400">
                 {matches.length}

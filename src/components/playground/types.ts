@@ -6,7 +6,8 @@ export type SupportedLanguage =
   | 'css'
   | 'cpp'
   | 'c'
-  | 'java';
+  | 'java'
+  | 'sql';
 
 export interface CodeTemplate {
   id: string;
@@ -65,7 +66,14 @@ export const DEFAULT_PLAYGROUND_SETTINGS: PlaygroundSettings = {
   focusMode: false,
 };
 
-export type SidebarView = 'explorer' | 'search' | null;
+export type SidebarView = 'explorer' | 'search' | 'challenges' | 'examples' | null;
+
+export interface PlaygroundFolder {
+  id: string;
+  name: string;
+  parentId?: string | null;
+  isOpen?: boolean;
+}
 
 export interface PlaygroundFile {
   id: string;
@@ -73,6 +81,7 @@ export interface PlaygroundFile {
   language: SupportedLanguage;
   content: string;
   isRemovable: boolean;
+  folderId?: string | null;
 }
 
 export interface SearchMatch {
@@ -81,5 +90,34 @@ export interface SearchMatch {
   lineNumber: number;
   lineContent: string;
   matchIndex: number;
+}
+
+export interface SqlQueryResult {
+  columns: string[];
+  values: (string | number | boolean | null)[][];
+  affectedRows?: number;
+  executionTimeMs?: number;
+  error?: string;
+  query?: string;
+  isSelected?: boolean;
+}
+
+export interface ChallengeTestCase {
+  input: string;
+  expectedOutput: string;
+  explanation?: string;
+  isHidden?: boolean;
+}
+
+export interface CodeChallenge {
+  id: string;
+  title: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  language: SupportedLanguage;
+  category: string;
+  description: string;
+  starterCode: string;
+  testCases: ChallengeTestCase[];
+  hints: string[];
 }
 

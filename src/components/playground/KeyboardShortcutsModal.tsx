@@ -17,7 +17,7 @@ interface ShortcutItem {
 const SHORTCUTS: ShortcutItem[] = [
   {
     keys: ['Ctrl', 'Enter'],
-    description: 'Execute current code program (Run Code)',
+    description: 'Auto-save & Run Code (executes only selected query if text is highlighted in SQL)',
     category: 'execution',
   },
   {
@@ -48,6 +48,16 @@ const SHORTCUTS: ShortcutItem[] = [
   {
     keys: ['Ctrl', 'Shift', 'F'],
     description: 'Toggle Search in all files',
+    category: 'navigation',
+  },
+  {
+    keys: ['Ctrl', 'O'],
+    description: 'Open code/text file(s) from computer or phone',
+    category: 'navigation',
+  },
+  {
+    keys: ['Alt', 'O'],
+    description: 'Open project folder from device',
     category: 'navigation',
   },
   {

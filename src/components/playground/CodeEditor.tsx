@@ -488,6 +488,7 @@ interface CodeEditorProps {
   onToggleTerminal?: () => void;
   onToggleExplorer?: () => void;
   onToggleSearch?: () => void;
+  onOpenFile?: () => void;
   onCursorChange?: (pos: CursorPosition) => void;
   readOnly?: boolean;
   onMountEditor?: (editor: editor.IStandaloneCodeEditor) => void;
@@ -504,12 +505,32 @@ export default function CodeEditor({
   onToggleTerminal,
   onToggleExplorer,
   onToggleSearch,
+  onOpenFile,
   onCursorChange,
   readOnly = false,
   onMountEditor,
 }: CodeEditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<typeof import('monaco-editor') | null>(null);
+
+  // Keep callback refs synchronized to prevent stale closures in Monaco commands
+  const onRunRef = useRef(onRun);
+  const onSaveRef = useRef(onSave);
+  const onTogglePanelRef = useRef(onTogglePanel);
+  const onToggleTerminalRef = useRef(onToggleTerminal);
+  const onToggleExplorerRef = useRef(onToggleExplorer);
+  const onToggleSearchRef = useRef(onToggleSearch);
+  const onOpenFileRef = useRef(onOpenFile);
+
+  React.useEffect(() => {
+    onRunRef.current = onRun;
+    onSaveRef.current = onSave;
+    onTogglePanelRef.current = onTogglePanel;
+    onToggleTerminalRef.current = onToggleTerminal;
+    onToggleExplorerRef.current = onToggleExplorer;
+    onToggleSearchRef.current = onToggleSearch;
+    onOpenFileRef.current = onOpenFile;
+  });
 
   // Dynamically apply settings whenever changed in settings modal
   React.useEffect(() => {
@@ -556,6 +577,8 @@ export default function CodeEditor({
         return 'c';
       case 'java':
         return 'java';
+      case 'sql':
+        return 'sql';
       default:
         return 'plaintext';
     }
@@ -643,54 +666,60 @@ export default function CodeEditor({
       }
     });
 
-    // 1. Ctrl+Enter / Cmd+Enter: Run Code
-    if (onRun) {
-      editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
-        onRun();
-      });
-    }
-
-    // 2. Ctrl+S / Cmd+S: Format & Save
-    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-      editorInstance.getAction('editor.action.formatDocument')?.run();
-      if (onSave) {
-        onSave();
+    // 1. Ctrl+Enter / Cmd+Enter: Auto-save & Run Code (Preserves active selection)
+    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+      const selection = editorInstance.getSelection();
+      const hasSelection = selection && !selection.isEmpty();
+      if (!hasSelection) {
+        try {
+          editorInstance.getAction('editor.action.formatDocument')?.run();
+        } catch {}
       }
+      onRunRef.current?.();
+    });
+
+    // 2. Ctrl+S / Cmd+S: Format & Save Active File
+    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+      const selection = editorInstance.getSelection();
+      const hasSelection = selection && !selection.isEmpty();
+      if (!hasSelection) {
+        try {
+          editorInstance.getAction('editor.action.formatDocument')?.run();
+        } catch {}
+      }
+      onSaveRef.current?.();
     });
 
     // 3. Ctrl+B / Cmd+B: Toggle Output Panel
-    if (onTogglePanel) {
-      editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB, () => {
-        onTogglePanel();
-      });
-    }
+    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB, () => {
+      onTogglePanelRef.current?.();
+    });
 
     // 4. Ctrl+` (backtick): Toggle Terminal
-    if (onToggleTerminal) {
-      editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote, () => {
-        onToggleTerminal();
-      });
-    }
+    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote, () => {
+      onToggleTerminalRef.current?.();
+    });
 
     // 5. Ctrl+Shift+E: Toggle File Explorer
-    if (onToggleExplorer) {
-      editorInstance.addCommand(
-        monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyE,
-        () => {
-          onToggleExplorer();
-        }
-      );
-    }
+    editorInstance.addCommand(
+      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyE,
+      () => {
+        onToggleExplorerRef.current?.();
+      }
+    );
 
     // 6. Ctrl+Shift+F: Toggle Search in Files
-    if (onToggleSearch) {
-      editorInstance.addCommand(
-        monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF,
-        () => {
-          onToggleSearch();
-        }
-      );
-    }
+    editorInstance.addCommand(
+      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF,
+      () => {
+        onToggleSearchRef.current?.();
+      }
+    );
+
+    // 7. Ctrl+O / Cmd+O: Open Local File from Device
+    editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyO, () => {
+      onOpenFileRef.current?.();
+    });
   };
 
   return (

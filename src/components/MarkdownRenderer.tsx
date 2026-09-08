@@ -112,17 +112,22 @@ export function renderFormattedText(text: string): React.ReactNode {
 const PLAYGROUND_SUPPORTED_LANGS: Record<string, SupportedLanguage> = {
   python: 'python',
   py: 'python',
+  python3: 'python',
+  py3: 'python',
   html: 'html',
   htm: 'html',
   javascript: 'javascript',
   js: 'javascript',
+  jsx: 'javascript',
   typescript: 'typescript',
   ts: 'typescript',
+  tsx: 'typescript',
   css: 'css',
   cpp: 'cpp',
   'c++': 'cpp',
   c: 'c',
   java: 'java',
+  sql: 'sql',
 };
 
 type Block =

@@ -13,6 +13,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { ConsoleMessage } from './types';
+import ActionTooltip from './ActionTooltip';
 
 interface WebPreviewProps {
   htmlCode: string;
@@ -184,42 +185,50 @@ export default function WebPreview({ htmlCode, onConsoleLog }: WebPreviewProps) 
         {/* Left: Viewport Size Switcher */}
         <div className="flex items-center gap-1">
           <div className="flex items-center bg-[#252526] p-0.5 rounded-md border border-slate-700">
-            <button
-              type="button"
-              onClick={() => setViewport('desktop')}
-              title="Desktop (100% full width)"
-              className={`p-1 rounded transition-colors cursor-pointer ${
-                viewport === 'desktop'
-                  ? 'bg-secondary text-white'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Monitor className="w-3.5 h-3.5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewport('tablet')}
-              title="Tablet Viewport (768px)"
-              className={`p-1 rounded transition-colors cursor-pointer ${
-                viewport === 'tablet'
-                  ? 'bg-secondary text-white'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Tablet className="w-3.5 h-3.5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewport('mobile')}
-              title="Mobile Viewport (375px)"
-              className={`p-1 rounded transition-colors cursor-pointer ${
-                viewport === 'mobile'
-                  ? 'bg-secondary text-white'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-            </button>
+            <ActionTooltip label="Desktop Viewport (100%)" shortcut="Desktop" placement="bottom-start">
+              <button
+                type="button"
+                onClick={() => setViewport('desktop')}
+                aria-label="Desktop Viewport (100%)"
+                className={`p-1 rounded transition-colors cursor-pointer ${
+                  viewport === 'desktop'
+                    ? 'bg-secondary text-white'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Monitor className="w-3.5 h-3.5" />
+              </button>
+            </ActionTooltip>
+
+            <ActionTooltip label="Tablet Viewport (768px)" shortcut="Tablet" placement="bottom">
+              <button
+                type="button"
+                onClick={() => setViewport('tablet')}
+                aria-label="Tablet Viewport (768px)"
+                className={`p-1 rounded transition-colors cursor-pointer ${
+                  viewport === 'tablet'
+                    ? 'bg-secondary text-white'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Tablet className="w-3.5 h-3.5" />
+              </button>
+            </ActionTooltip>
+
+            <ActionTooltip label="Mobile Viewport (375px)" shortcut="Mobile" placement="bottom">
+              <button
+                type="button"
+                onClick={() => setViewport('mobile')}
+                aria-label="Mobile Viewport (375px)"
+                className={`p-1 rounded transition-colors cursor-pointer ${
+                  viewport === 'mobile'
+                    ? 'bg-secondary text-white'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+              </button>
+            </ActionTooltip>
           </div>
 
           <span className="text-[10px] text-slate-500 font-mono hidden sm:inline ml-1">
@@ -232,40 +241,52 @@ export default function WebPreview({ htmlCode, onConsoleLog }: WebPreviewProps) 
         {/* Right: CDN injector, Auto-reload, Refresh, Popout */}
         <div className="flex items-center gap-1 relative">
           {/* Auto Reload Toggle */}
-          <button
-            type="button"
-            onClick={() => setIsAutoReload(!isAutoReload)}
-            title={isAutoReload ? 'Live Auto-reload enabled' : 'Click to enable live auto-reload'}
-            className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] transition-colors cursor-pointer ${
-              isAutoReload
-                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-medium'
-                : 'bg-[#252526] text-slate-400 hover:text-slate-200 border border-slate-700'
-            }`}
+          <ActionTooltip
+            label={isAutoReload ? 'Live Auto-reload (Active)' : 'Enable Live Auto-reload'}
+            shortcut="Auto"
+            placement="bottom"
           >
-            <Zap className={`w-3 h-3 ${isAutoReload ? 'text-emerald-400 fill-emerald-400' : ''}`} />
-            <span className="hidden md:inline">Auto-reload</span>
-          </button>
-
-          {/* CDN Libraries Dropdown Trigger */}
-          <div className="relative">
             <button
               type="button"
-              onClick={() => setIsCdnMenuOpen(!isCdnMenuOpen)}
-              title="Inject CDN Libraries (Tailwind, Bootstrap, FontAwesome, jQuery)"
+              onClick={() => setIsAutoReload(!isAutoReload)}
+              aria-label="Toggle Live Auto-reload"
               className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] transition-colors cursor-pointer ${
-                activeCdns.length > 0
-                  ? 'bg-secondary/20 text-secondary border border-secondary/40 font-semibold'
+                isAutoReload
+                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-medium'
                   : 'bg-[#252526] text-slate-400 hover:text-slate-200 border border-slate-700'
               }`}
             >
-              <Library className="w-3 h-3" />
-              <span>Libraries</span>
-              {activeCdns.length > 0 && (
-                <span className="px-1 py-0.2 bg-secondary text-white rounded text-[9px] font-bold">
-                  {activeCdns.length}
-                </span>
-              )}
+              <Zap className={`w-3 h-3 ${isAutoReload ? 'text-emerald-400 fill-emerald-400' : ''}`} />
+              <span className="hidden md:inline">Auto-reload</span>
             </button>
+          </ActionTooltip>
+
+          {/* CDN Libraries Dropdown Trigger */}
+          <div className="relative">
+            <ActionTooltip
+              label="Quick CDN Libraries (Tailwind, Bootstrap, FontAwesome...)"
+              shortcut="CDN"
+              placement="bottom"
+            >
+              <button
+                type="button"
+                onClick={() => setIsCdnMenuOpen(!isCdnMenuOpen)}
+                aria-label="Inject CDN Libraries"
+                className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] transition-colors cursor-pointer ${
+                  activeCdns.length > 0
+                    ? 'bg-secondary/20 text-secondary border border-secondary/40 font-semibold'
+                    : 'bg-[#252526] text-slate-400 hover:text-slate-200 border border-slate-700'
+                }`}
+              >
+                <Library className="w-3 h-3" />
+                <span>Libraries</span>
+                {activeCdns.length > 0 && (
+                  <span className="px-1 py-0.2 bg-secondary text-white rounded text-[9px] font-bold">
+                    {activeCdns.length}
+                  </span>
+                )}
+              </button>
+            </ActionTooltip>
 
             {/* CDN Selection Popover */}
             {isCdnMenuOpen && (
@@ -274,7 +295,7 @@ export default function WebPreview({ htmlCode, onConsoleLog }: WebPreviewProps) 
                   <span>Quick CDN Libraries</span>
                   <button
                     onClick={() => setIsCdnMenuOpen(false)}
-                    className="text-slate-400 hover:text-white"
+                    className="text-slate-400 hover:text-white cursor-pointer"
                   >
                     ✕
                   </button>
@@ -306,24 +327,28 @@ export default function WebPreview({ htmlCode, onConsoleLog }: WebPreviewProps) 
           </div>
 
           {/* Manual Refresh */}
-          <button
-            type="button"
-            onClick={handleManualReload}
-            title="Refresh Preview"
-            className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors cursor-pointer"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-          </button>
+          <ActionTooltip label="Refresh Web Preview" shortcut="Reload" placement="bottom-end">
+            <button
+              type="button"
+              onClick={handleManualReload}
+              aria-label="Refresh Preview"
+              className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+          </ActionTooltip>
 
           {/* Popout New Window */}
-          <button
-            type="button"
-            onClick={handleOpenNewWindow}
-            title="Open in new browser tab"
-            className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors cursor-pointer"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-          </button>
+          <ActionTooltip label="Open Preview in New Tab" shortcut="Popout" placement="bottom-end">
+            <button
+              type="button"
+              onClick={handleOpenNewWindow}
+              aria-label="Open in new browser tab"
+              className="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+            </button>
+          </ActionTooltip>
         </div>
       </div>
 

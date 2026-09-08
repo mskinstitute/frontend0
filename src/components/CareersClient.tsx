@@ -30,6 +30,7 @@ import {
   Copy,
   RotateCcw,
   MessageCircle,
+  MessageSquare,
   Globe,
   Layers,
   ArrowUp
@@ -60,6 +61,13 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
   const [applicantStatus, setApplicantStatus] = useState('College Student / Final Year');
   const [applicantPortfolio, setApplicantPortfolio] = useState('');
   const [applicantNote, setApplicantNote] = useState('');
+  const [applySuccessData, setApplySuccessData] = useState<{
+    whatsappUrl: string;
+    waMeUrl: string;
+    jobTitle: string;
+    msg: string;
+  } | null>(null);
+  const [isCopiedApplicationText, setIsCopiedApplicationText] = useState(false);
 
   // Share Modal state
   const [selectedCareerForShare, setSelectedCareerForShare] = useState<CareerOpportunity | null>(null);
@@ -291,76 +299,96 @@ ${jobUrl}
     return { total, fullTime, partTime, internships, female, anyGender };
   }, [initialCareers]);
 
+  // Open Apply Modal helper
+  const handleOpenApplyModal = (career: CareerOpportunity) => {
+    setApplySuccessData(null);
+    setIsCopiedApplicationText(false);
+    setSelectedCareerForApply(career);
+  };
+
   // Handle Application Submit
   const handleApplicationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedCareerForApply) return;
 
-    if (!applicantName.trim() || !applicantPhone.trim() || !applicantEmail.trim()) {
+    const trimmedName = applicantName.trim();
+    const trimmedPhone = applicantPhone.trim();
+    const trimmedEmail = applicantEmail.trim();
+
+    if (!trimmedName || !trimmedPhone || !trimmedEmail) {
       toast.error('Please enter your full name, phone number, and email.');
       return;
     }
 
     setIsApplying(true);
-    try {
-      // 1. Submit lead to server backup
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: applicantName,
-          phone: applicantPhone,
-          email: applicantEmail,
-          city: applicantCity || 'Shikohabad',
-          learningMode: 'OFFLINE',
-          batchId: selectedCareerForApply.id,
-          batchTitle: `Career Application: ${selectedCareerForApply.title}`,
-          courseTitle: `${selectedCareerForApply.type === 'internship' ? 'Internship' : 'Job'} Application (${selectedCareerForApply.workType || 'On-site'})`,
-          price: selectedCareerForApply.stipendOrSalary,
-          query: `Status: ${applicantStatus} | Priority: ${selectedCareerForApply.priority || 'Standard'} | Portfolio: ${applicantPortfolio || 'N/A'} | Note: ${applicantNote || 'N/A'}`,
-          utm_source: 'careers_page',
-        }),
-      });
 
-      // 2. Format WhatsApp Application text
-      const msg = `💼 *NEW ON-SITE CAREER APPLICATION - MSK CAREERS*
+    const career = selectedCareerForApply;
+
+    // 1. Format WhatsApp Application text
+    const msg = `💼 *NEW ON-SITE CAREER APPLICATION - MSK CAREERS*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎯 *Position:* ${selectedCareerForApply.title}
-🏢 *Type:* ${selectedCareerForApply.workType || (selectedCareerForApply.type === 'internship' ? 'Internship' : 'Full-time Job')}
+🎯 *Position:* ${career.title}
+🏢 *Type:* ${career.workType || (career.type === 'internship' ? 'Internship' : 'Full-time Job')}
 📍 *Location:* On-site (Shikohabad Campus)
-💰 *Offered Pay:* ${selectedCareerForApply.stipendOrSalary}
-⚡ *Hiring Priority:* ${selectedCareerForApply.priority ? `${selectedCareerForApply.priority} Priority` : 'Standard'}
-👥 *Gender:* ${selectedCareerForApply.gender || 'Any'}
+💰 *Offered Pay:* ${career.stipendOrSalary}
+⚡ *Hiring Priority:* ${career.priority ? `${career.priority} Priority` : 'Standard'}
+👥 *Gender:* ${career.gender || 'Any'}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 *APPLICANT DETAILS:*
-• *Full Name:* ${applicantName}
-• *WhatsApp Phone:* ${applicantPhone}
-• *Email:* ${applicantEmail}
-• *Current Location / City:* ${applicantCity || 'Shikohabad'}
+• *Full Name:* ${trimmedName}
+• *WhatsApp Phone:* ${trimmedPhone}
+• *Email:* ${trimmedEmail}
+• *Current Location / City:* ${applicantCity.trim() || 'Shikohabad'}
 • *Profile / Status:* ${applicantStatus}
-${applicantPortfolio ? `• *Portfolio / Resume Link:* ${applicantPortfolio}\n` : ''}${applicantNote ? `• *Applicant Statement:* ${applicantNote}\n` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━
+${applicantPortfolio.trim() ? `• *Portfolio / Resume Link:* ${applicantPortfolio.trim()}\n` : ''}${applicantNote.trim() ? `• *Applicant Statement:* ${applicantNote.trim()}\n` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏛️ *Campus:* MSK Institute, Station Road, Shikohabad (Firozabad, UP)
 🚀 _Sent via MSK Institute Official Careers Portal_`;
 
-      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    const encodedText = encodeURIComponent(msg);
+    const whatsappApiUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedText}`;
+    const waMeUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
 
-      toast.success('Application submitted! Redirecting to WhatsApp...');
-      setSelectedCareerForApply(null);
-      // Reset form
-      setApplicantName('');
-      setApplicantPhone('');
-      setApplicantEmail('');
-      setApplicantCity('');
-      setApplicantPortfolio('');
-      setApplicantNote('');
+    // 2. Set the Success state in the modal with unblockable direct action button!
+    setApplySuccessData({
+      whatsappUrl: whatsappApiUrl,
+      waMeUrl,
+      jobTitle: career.title,
+      msg,
+    });
 
-      // Open WhatsApp
-      window.open(whatsappUrl, '_blank');
-    } catch (err) {
-      console.error('Error submitting application:', err);
-      toast.error('Network error. Opening WhatsApp directly.');
-      const directMsg = `Hello MSK Institute, I want to apply for the position: ${selectedCareerForApply.title}. My name is ${applicantName}, Phone: ${applicantPhone}.`;
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(directMsg)}`, '_blank');
+    toast.success('Application recorded! Opening WhatsApp...');
+
+    // 3. Fire lead registration to server in background (non-blocking so network latency never stalls WhatsApp)
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: trimmedName,
+        phone: trimmedPhone,
+        email: trimmedEmail,
+        city: applicantCity.trim() || 'Shikohabad',
+        learningMode: 'OFFLINE',
+        batchId: career.id,
+        batchTitle: `Career Application: ${career.title}`,
+        courseTitle: `${career.type === 'internship' ? 'Internship' : 'Job'} Application (${career.workType || 'On-site'})`,
+        price: career.stipendOrSalary,
+        query: `Status: ${applicantStatus} | Priority: ${career.priority || 'Standard'} | Portfolio: ${applicantPortfolio.trim() || 'N/A'} | Note: ${applicantNote.trim() || 'N/A'}`,
+        utm_source: 'careers_page',
+      }),
+    }).catch((err) => console.error('Error recording career lead:', err));
+
+    // 4. Trigger WhatsApp redirection synchronously in user gesture
+    try {
+      const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) {
+        // On mobile, window.location.href triggers native WhatsApp app directly
+        window.location.href = whatsappApiUrl;
+      } else {
+        // On desktop, window.open opens WhatsApp Web
+        window.open(whatsappApiUrl, '_blank');
+      }
+    } catch (openErr) {
+      console.error('Auto-redirect to WhatsApp prevented:', openErr);
     } finally {
       setIsApplying(false);
     }
@@ -943,7 +971,7 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                         </button>
 
                         <button
-                          onClick={() => setSelectedCareerForApply(item)}
+                          onClick={() => handleOpenApplyModal(item)}
                           className="px-4 py-2 rounded-xl bg-secondary hover:bg-secondary-light text-primary font-bold text-xs sm:text-sm shadow-2xs hover:shadow transition-all flex items-center gap-1.5 cursor-pointer"
                         >
                           Apply Now
@@ -1022,7 +1050,7 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                         {/* Bottom Quick Apply inside expander */}
                         <div className="pt-2 flex justify-end">
                           <button
-                            onClick={() => setSelectedCareerForApply(item)}
+                            onClick={() => handleOpenApplyModal(item)}
                             className="px-4 py-2 bg-primary hover:bg-primary-light text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                           >
                             Proceed to Apply for {item.title}
@@ -1091,158 +1119,265 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl border border-border-subtle max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 relative">
             <button
-              onClick={() => setSelectedCareerForApply(null)}
+              onClick={() => {
+                setSelectedCareerForApply(null);
+                setApplySuccessData(null);
+              }}
               className="absolute top-5 right-5 p-1.5 rounded-full text-text-muted hover:text-primary hover:bg-surface transition-colors cursor-pointer"
+              aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="space-y-1">
-              <span className="text-[11px] font-bold text-secondary uppercase tracking-wider">
-                Direct Application
-              </span>
-              <h3 className="text-xl font-black text-primary">
-                Apply for {selectedCareerForApply.title}
-              </h3>
-              <p className="text-xs text-text-muted">
-                {selectedCareerForApply.type === 'internship' ? 'Internship' : 'Full-time Position'} • {selectedCareerForApply.stipendOrSalary} • {selectedCareerForApply.location}
-              </p>
-            </div>
-
-            <form onSubmit={handleApplicationSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Full Name *
-                </label>
-                <div className="relative">
-                  <User className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Rahul Sharma"
-                    value={applicantName}
-                    onChange={(e) => setApplicantName(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    WhatsApp Number *
-                  </label>
-                  <div className="relative">
-                    <Phone className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="tel"
-                      required
-                      placeholder="e.g. 9876543210"
-                      value={applicantPhone}
-                      onChange={(e) => setApplicantPhone(e.target.value)}
-                      className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
-                    />
-                  </div>
+            {applySuccessData ? (
+              /* Success & Direct WhatsApp Action Screen */
+              <div className="text-center py-2 space-y-4 animate-in fade-in zoom-in-95 duration-200">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
+                  <CheckCircle2 className="w-9 h-9" />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Email Address *
-                  </label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="email"
-                      required
-                      placeholder="e.g. rahul@gmail.com"
-                      value={applicantEmail}
-                      onChange={(e) => setApplicantEmail(e.target.value)}
-                      className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Current Location / City
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Shikohabad, Firozabad, Agra"
-                    value={applicantCity}
-                    onChange={(e) => setApplicantCity(e.target.value)}
-                    className="w-full px-3 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
-                  />
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block">
+                    Application Logged Successfully
+                  </span>
+                  <h3 className="text-xl font-black text-primary pt-1">
+                    Apply for {applySuccessData.jobTitle}
+                  </h3>
+                  <p className="text-xs text-text-muted max-w-sm mx-auto leading-relaxed">
+                    Your details are registered! Click the button below to send your pre-filled application directly to the MSK Hiring Desk on WhatsApp.
+                  </p>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Current Status
-                  </label>
-                  <select
-                    value={applicantStatus}
-                    onChange={(e) => setApplicantStatus(e.target.value)}
-                    className="w-full px-3 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none cursor-pointer"
+                {/* Primary WhatsApp Action Button (Unblockable by Popup Blockers) */}
+                <div className="pt-2 space-y-2.5">
+                  <a
+                    href={applySuccessData.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-sm rounded-xl shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] active:scale-95 cursor-pointer"
                   >
-                    <option value="College Student / Final Year">College Student / Final Year</option>
-                    <option value="Recent Graduate (BCA/B.Tech/B.Sc)">Recent Graduate (BCA/B.Tech/B.Sc)</option>
-                    <option value="MSK Institute Certified Student">MSK Institute Student</option>
-                    <option value="Working Professional">Working Professional</option>
-                  </select>
+                    <MessageSquare className="w-5 h-5 fill-white" />
+                    <span>Send Application on WhatsApp Now</span>
+                  </a>
+
+                  <div className="flex items-center justify-center gap-3 text-xs text-text-muted">
+                    <span>Alternate link:</span>
+                    <a
+                      href={applySuccessData.waMeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-secondary font-bold hover:underline"
+                    >
+                      Open via wa.me link
+                    </a>
+                  </div>
+                </div>
+
+                {/* Message preview and copy option */}
+                <div className="p-3.5 bg-surface rounded-2xl border border-border-subtle text-left space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                      <MessageCircle className="w-3.5 h-3.5 text-secondary" />
+                      Application Message Preview:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(applySuccessData.msg);
+                        setIsCopiedApplicationText(true);
+                        toast.success('Application message copied!');
+                        setTimeout(() => setIsCopiedApplicationText(false), 2500);
+                      }}
+                      className="text-[11px] font-bold text-secondary hover:text-secondary-dark flex items-center gap-1 cursor-pointer"
+                    >
+                      {isCopiedApplicationText ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-600" />
+                          <span className="text-emerald-600">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span>Copy Message</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <pre className="text-[11px] font-mono text-slate-600 bg-white p-2.5 rounded-xl border border-border-subtle/80 max-h-32 overflow-y-auto whitespace-pre-wrap leading-relaxed">
+                    {applySuccessData.msg}
+                  </pre>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCareerForApply(null);
+                      setApplySuccessData(null);
+                      setApplicantName('');
+                      setApplicantPhone('');
+                      setApplicantEmail('');
+                      setApplicantCity('');
+                      setApplicantPortfolio('');
+                      setApplicantNote('');
+                    }}
+                    className="w-full py-2.5 bg-surface hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-border-subtle transition-colors cursor-pointer"
+                  >
+                    Done / Close
+                  </button>
                 </div>
               </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  GitHub / LinkedIn / Portfolio / Resume Link
-                </label>
-                <div className="relative">
-                  <Link2 className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="url"
-                    placeholder="https://github.com/your-profile or Google Drive link"
-                    value={applicantPortfolio}
-                    onChange={(e) => setApplicantPortfolio(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
-                  />
+            ) : (
+              /* Application Form */
+              <>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-secondary uppercase tracking-wider">
+                    Direct Application
+                  </span>
+                  <h3 className="text-xl font-black text-primary">
+                    Apply for {selectedCareerForApply.title}
+                  </h3>
+                  <p className="text-xs text-text-muted">
+                    {selectedCareerForApply.type === 'internship' ? 'Internship' : 'Full-time Position'} • {selectedCareerForApply.stipendOrSalary} • {selectedCareerForApply.location}
+                  </p>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Why are you interested in this role?
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Share a brief overview of your projects, skills, and availability..."
-                  value={applicantNote}
-                  onChange={(e) => setApplicantNote(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none resize-none"
-                />
-              </div>
+                <form onSubmit={handleApplicationSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Rahul Sharma"
+                        value={applicantName}
+                        onChange={(e) => setApplicantName(e.target.value)}
+                        className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
+                      />
+                    </div>
+                  </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isApplying}
-                  className="w-full py-3 bg-secondary hover:bg-secondary-light text-primary font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                >
-                  {isApplying ? (
-                    'Submitting Application...'
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Submit Application via WhatsApp
-                    </>
-                  )}
-                </button>
-                <p className="text-[11px] text-text-muted text-center mt-2">
-                  🔒 Your application is recorded securely and sent to MSK Institute's hiring desk.
-                </p>
-              </div>
-            </form>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        WhatsApp Number *
+                      </label>
+                      <div className="relative">
+                        <Phone className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="tel"
+                          required
+                          placeholder="e.g. 9876543210"
+                          value={applicantPhone}
+                          onChange={(e) => setApplicantPhone(e.target.value)}
+                          className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Email Address *
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="email"
+                          required
+                          placeholder="e.g. rahul@gmail.com"
+                          value={applicantEmail}
+                          onChange={(e) => setApplicantEmail(e.target.value)}
+                          className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Current Location / City
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Shikohabad, Firozabad, Agra"
+                        value={applicantCity}
+                        onChange={(e) => setApplicantCity(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Current Status
+                      </label>
+                      <select
+                        value={applicantStatus}
+                        onChange={(e) => setApplicantStatus(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none cursor-pointer"
+                      >
+                        <option value="College Student / Final Year">College Student / Final Year</option>
+                        <option value="Recent Graduate (BCA/B.Tech/B.Sc)">Recent Graduate (BCA/B.Tech/B.Sc)</option>
+                        <option value="MSK Institute Certified Student">MSK Institute Student</option>
+                        <option value="Working Professional">Working Professional</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      GitHub / LinkedIn / Portfolio / Resume Link
+                    </label>
+                    <div className="relative">
+                      <Link2 className="w-4 h-4 text-text-muted absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="url"
+                        placeholder="https://github.com/your-profile or Google Drive link"
+                        value={applicantPortfolio}
+                        onChange={(e) => setApplicantPortfolio(e.target.value)}
+                        className="w-full pl-9 pr-4 py-2.5 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Why are you interested in this role?
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="Share a brief overview of your projects, skills, and availability..."
+                      value={applicantNote}
+                      onChange={(e) => setApplicantNote(e.target.value)}
+                      className="w-full px-3 py-2 bg-surface border border-border-subtle rounded-xl text-xs sm:text-sm text-primary focus:ring-2 focus:ring-secondary/50 focus:outline-none resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isApplying}
+                      className="w-full py-3 bg-secondary hover:bg-secondary-light text-primary font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    >
+                      {isApplying ? (
+                        'Submitting Application...'
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Submit Application via WhatsApp
+                        </>
+                      )}
+                    </button>
+                    <p className="text-[11px] text-text-muted text-center mt-2">
+                      🔒 Your application is recorded securely and sent to MSK Institute's hiring desk.
+                    </p>
+                  </div>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}
