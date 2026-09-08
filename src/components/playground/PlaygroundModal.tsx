@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PlaygroundClient from './PlaygroundClient';
 import { SupportedLanguage } from './types';
-import { X, ExternalLink } from 'lucide-react';
 
 interface PlaygroundModalProps {
   isOpen: boolean;
@@ -18,61 +17,57 @@ export default function PlaygroundModal({
   onClose,
   initialLanguage = 'python',
   initialCode,
-  title = 'Interactive Code Playground',
 }: PlaygroundModalProps) {
-  // Handle Escape key to close modal
+  const scrollPositionRef = useRef<number>(0);
+
+  // Preserve background scroll position and lock background scroll while modal is open
   useEffect(() => {
+    if (!isOpen) return;
+
+    // Capture the exact vertical scroll position of the tutorial page
+    scrollPositionRef.current = window.scrollY;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    // Handle Escape key to close modal
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape') {
         onClose();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+
+      // Return exactly to where the student was reading the tutorial
+      window.scrollTo({
+        top: scrollPositionRef.current,
+        behavior: 'instant' as ScrollBehavior,
+      });
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200">
-      <div className="relative w-full max-w-6xl h-[92vh] max-h-[900px] flex flex-col bg-[#12161f] rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
-        {/* Modal Top Header */}
-        <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-800 text-slate-300">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" />
-            <span className="text-xs sm:text-sm font-bold text-white tracking-tight">{title}</span>
-          </div>
-
-          <div className="flex items-center gap-1.5">
-            <a
-              href={`/playground?lang=${encodeURIComponent(initialLanguage)}&code=${encodeURIComponent(initialCode || '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 text-slate-400 hover:text-secondary hover:bg-slate-800/80 rounded-lg transition-colors cursor-pointer flex items-center gap-1 text-xs"
-              title="Open full playground page in new tab"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Open Full Page</span>
-            </a>
-            <button
-              onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-              title="Close Playground (Esc)"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Modal Body */}
-        <div className="flex-1 overflow-hidden p-2 sm:p-3">
-          <PlaygroundClient
-            initialLanguage={initialLanguage}
-            initialCode={initialCode}
-            isModal={true}
-            onCloseModal={onClose}
-          />
-        </div>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200"
+      onClick={(e) => {
+        // Close modal when clicking on backdrop outside the editor card
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div className="relative w-full max-w-7xl h-[94vh] max-h-[960px] flex flex-col rounded-2xl shadow-2xl overflow-hidden border border-slate-700/80 animate-in zoom-in-95 duration-200">
+        <PlaygroundClient
+          initialLanguage={initialLanguage}
+          initialCode={initialCode}
+          isModal={true}
+          onCloseModal={onClose}
+        />
       </div>
     </div>
   );

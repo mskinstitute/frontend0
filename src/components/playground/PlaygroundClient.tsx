@@ -40,13 +40,15 @@ import {
   Keyboard, SplitSquareHorizontal, SplitSquareVertical, 
   GitBranch, GripVertical, GripHorizontal, EyeOff, Layout,
   X, CheckCircle2, ChevronRight, FilePlus, Share2, Archive, ChevronDown, Save, Camera,
-  XCircle, FolderPlus, ChevronsDownUp, FileUp, FolderUp, FolderInput, Upload, BookOpen
+  XCircle, FolderPlus, ChevronsDownUp, FileUp, FolderUp, FolderInput, Upload, BookOpen,
+  Printer, ExternalLink
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { editor } from 'monaco-editor';
 import JSZip from 'jszip';
 import ShareModal from './ShareModal';
 import { runRemoteCode } from './compilerApi';
+import { mysqlEngine } from './mysqlEngine';
 import {
   readUploadedFiles,
   parseDirectoryFiles,
@@ -304,12 +306,12 @@ export default function PlaygroundClient({
     setSidebarView((prev) => (prev !== null ? null : (lastSidebarViewRef.current || 'explorer')));
   }, []);
 
-  // Ensure window stays at top when opening playground (prevent unwanted auto-scroll)
+  // Ensure window stays at top when opening standalone playground page (prevent unwanted auto-scroll when in modal)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (!isModal && typeof window !== 'undefined') {
       window.scrollTo(0, 0);
     }
-  }, []);
+  }, [isModal]);
 
   // Active terminal / preview tab
   const [activeTab, setActiveTab] = useState<'preview' | 'terminal'>(
@@ -333,10 +335,12 @@ export default function PlaygroundClient({
   // Matplotlib Plots State
   const [plots, setPlots] = useState<string[]>([]);
 
-  // SQLite WebAssembly State
+  // SQLite & MySQL WebAssembly State
   const [sqlResults, setSqlResults] = useState<SqlQueryResult[]>([]);
   const [isSqlLoading, setIsSqlLoading] = useState<boolean>(false);
   const [sqlViewMode, setSqlViewMode] = useState<'table' | 'log'>('table');
+  const [activeSqlDbName, setActiveSqlDbName] = useState<string>('default');
+  const [schemaVersion, setSchemaVersion] = useState<number>(0);
 
   // New Modals: Code Screenshot & AI Explainer
   const [isScreenshotOpen, setIsScreenshotOpen] = useState<boolean>(false);
@@ -471,21 +475,6 @@ export default function PlaygroundClient({
   // Persist settings changes
   const updateSettings = useCallback((newSettings: Partial<PlaygroundSettings>) => {
     setSettings((prev) => {
-      if (newSettings.focusMode !== undefined && newSettings.focusMode !== prev.focusMode) {
-        if (newSettings.focusMode) {
-          toast('Zen Mode Active (Press Esc to exit)', {
-            duration: 2000,
-            icon: '🧘',
-            id: 'zen-mode-toast',
-          });
-        } else {
-          toast('Exited Zen Mode', {
-            duration: 2000,
-            icon: '⚡',
-            id: 'zen-mode-toast',
-          });
-        }
-      }
       const updated = { ...prev, ...newSettings };
       try {
         localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(updated));
@@ -496,8 +485,28 @@ export default function PlaygroundClient({
     });
   }, []);
 
-  // Handle True 100vh Zen Mode (Esc key & body scroll lock)
+  const prevFocusModeRef = useRef<boolean | undefined>(undefined);
+
+  // Handle True 100vh Zen Mode (Esc key, body scroll lock, and safe post-render toast)
   useEffect(() => {
+    // Show toast only on explicit user toggle, not on initial mount
+    if (prevFocusModeRef.current !== undefined && prevFocusModeRef.current !== settings.focusMode) {
+      if (settings.focusMode) {
+        toast('Zen Mode Active (Press Esc to exit)', {
+          duration: 2000,
+          icon: '🧘',
+          id: 'zen-mode-toast',
+        });
+      } else {
+        toast('Exited Zen Mode', {
+          duration: 2000,
+          icon: '⚡',
+          id: 'zen-mode-toast',
+        });
+      }
+    }
+    prevFocusModeRef.current = settings.focusMode;
+
     if (settings.focusMode) {
       document.body.style.overflow = 'hidden';
       const handleEsc = (e: KeyboardEvent) => {
@@ -571,6 +580,51 @@ export default function PlaygroundClient({
     const spaces = ' '.repeat(settings.tabSize);
     insertTextAtCursor(spaces);
   }, [insertTextAtCursor, settings.tabSize]);
+
+  // Switch active SQL database (from Schemas explorer or script)
+  const handleSwitchDatabase = useCallback((dbName: string) => {
+    try {
+      mysqlEngine.useDatabase(dbName);
+      setActiveSqlDbName(dbName);
+      setSchemaVersion((v) => v + 1);
+      toast.success(`Active database: '${dbName}'`);
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to switch database');
+    }
+  }, []);
+
+  // Insert SQL snippet into Monaco editor
+  const handleInsertSqlSnippet = useCallback((snippet: string) => {
+    if (editorInstanceRef.current) {
+      const ed = editorInstanceRef.current;
+      const model = ed.getModel();
+      if (model) {
+        const selection = ed.getSelection();
+        const currentVal = ed.getValue();
+        const separator = currentVal.trim().length > 0 ? '\n\n' : '';
+        if (selection && !selection.isEmpty()) {
+          ed.executeEdits('insert-sql-snippet', [
+            { range: selection, text: snippet, forceMoveMarkers: true },
+          ]);
+        } else {
+          const lineCount = model.getLineCount();
+          const lastLineLength = model.getLineMaxColumn(lineCount);
+          const range = {
+            startLineNumber: lineCount,
+            startColumn: lastLineLength,
+            endLineNumber: lineCount,
+            endColumn: lastLineLength,
+          };
+          ed.executeEdits('insert-sql-snippet', [
+            { range, text: separator + snippet, forceMoveMarkers: true },
+          ]);
+          ed.revealLine(model.getLineCount());
+        }
+        ed.focus();
+        toast.success('Inserted SQL query snippet into editor');
+      }
+    }
+  }, []);
 
   // File management
   const handleSelectFile = (fileId: string) => {
@@ -1234,10 +1288,13 @@ export default function PlaygroundClient({
         const SQL = await window.initSqlJs({
           locateFile: (file: string) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`,
         });
-        const db = new SQL.Database();
         window.__mskSqlInstance = SQL;
+        mysqlEngine.init(SQL);
+        const db = mysqlEngine.getActiveDb();
         window.__mskSqlDb = db;
-        addLog('success', '✅ In-memory SQLite Database ready.');
+        setActiveSqlDbName(mysqlEngine.getActiveDbName());
+        setSchemaVersion((v) => v + 1);
+        addLog('success', '✅ In-memory MySQL & SQLite Database Environment ready.');
         setIsSqlLoading(false);
         return db;
       }
@@ -1360,9 +1417,9 @@ finally:
         try {
           const db = await initSql();
           if (!db) throw new Error('SQL engine not available');
-          const execRes = db.exec(activeFile.content);
-          if (execRes && execRes.length > 0) {
-            const last = execRes[execRes.length - 1];
+          const results = await mysqlEngine.executeScript(activeFile.content, false);
+          if (results && results.length > 0) {
+            const last = results[results.length - 1];
             actualOutput = last.values.map((r: any[]) => r.join(', ')).join('\n').trim();
             passed = actualOutput === testCase.expectedOutput.trim();
           } else {
@@ -1690,53 +1747,35 @@ _err_result = _stderr_buffer.getvalue()
         const lineCount = queryToRun.split('\n').length;
         addLog(
           'info',
-          `⚡ Executing selected SQL query from ${fileToRun.name} (${lineCount} line${lineCount === 1 ? '' : 's'})...`
+          `⚡ Executing selected SQL statement(s) from ${fileToRun.name} (${lineCount} line${lineCount === 1 ? '' : 's'})...`
         );
       } else {
-        addLog('info', `⚡ Executing all SQL statements from ${fileToRun.name}...`);
+        addLog('info', `⚡ Executing SQL script from ${fileToRun.name}...`);
       }
 
       try {
         const db = await initSql();
-        if (!db) throw new Error('SQLite database engine could not be initialized.');
+        if (!db) throw new Error('SQL database engine could not be initialized.');
 
         const queryStartTime = performance.now();
-        const execResults = db.exec(queryToRun);
+        const formattedResults = await mysqlEngine.executeScript(queryToRun, isSelectedQuery);
         const queryDuration = performance.now() - queryStartTime;
 
-        const formattedResults: SqlQueryResult[] = [];
+        setSqlResults(formattedResults);
+        setSqlViewMode('table');
 
-        if (execResults && execResults.length > 0) {
-          execResults.forEach((res: any) => {
-            formattedResults.push({
-              columns: res.columns,
-              values: res.values,
-              executionTimeMs: queryDuration,
-              query: isSelectedQuery ? queryToRun : undefined,
-              isSelected: isSelectedQuery,
-            });
-          });
-          setSqlResults(formattedResults);
-          setSqlViewMode('table');
-          addLog(
-            'success',
-            `${isSelectedQuery ? 'Selected SQL query' : 'SQL query'} executed successfully (${formattedResults.length} result table(s), ${queryDuration.toFixed(1)}ms).`
-          );
+        const activeDb = mysqlEngine.getActiveDbName();
+        setActiveSqlDbName(activeDb);
+        setSchemaVersion((v) => v + 1);
+        const hasErrors = formattedResults.some((r) => r.error);
+
+        if (hasErrors) {
+          const firstErr = formattedResults.find((r) => r.error);
+          addLog('error', `❌ SQL Error [${activeDb}]: ${firstErr?.error}`);
         } else {
-          const rowsModified = db.getRowsModified ? db.getRowsModified() : 0;
-          formattedResults.push({
-            columns: [],
-            values: [],
-            affectedRows: rowsModified,
-            executionTimeMs: queryDuration,
-            query: isSelectedQuery ? queryToRun : undefined,
-            isSelected: isSelectedQuery,
-          });
-          setSqlResults(formattedResults);
-          setSqlViewMode('table');
           addLog(
             'success',
-            `${isSelectedQuery ? 'Selected SQL' : 'SQL'} executed successfully. Database state updated (${queryDuration.toFixed(1)}ms).`
+            `✅ ${isSelectedQuery ? 'Selected SQL' : 'SQL script'} executed successfully in [${activeDb}] (${formattedResults.length} statement(s), ${queryDuration.toFixed(1)}ms).`
           );
         }
       } catch (sqlErr: any) {
@@ -1748,10 +1787,11 @@ _err_result = _stderr_buffer.getvalue()
             error: errorMsg,
             query: isSelectedQuery ? queryToRun : undefined,
             isSelected: isSelectedQuery,
+            database: mysqlEngine.getActiveDbName(),
           },
         ]);
         setSqlViewMode('table');
-        addLog('error', `SQLite error: ${errorMsg}`);
+        addLog('error', `❌ SQL execution failed: ${errorMsg}`);
       } finally {
         setIsSqlLoading(false);
         setIsRunning(false);
@@ -1947,12 +1987,10 @@ _err_result = _stderr_buffer.getvalue()
         localStorage.removeItem(`${SAVED_FOLDERS_PREFIX}${language}`);
       } catch {}
       if (language === 'sql') {
-        if (window.__mskSqlDb) {
-          try {
-            window.__mskSqlDb.close();
-          } catch {}
-          window.__mskSqlDb = null;
-        }
+        mysqlEngine.reset();
+        window.__mskSqlDb = mysqlEngine.getActiveDb();
+        setActiveSqlDbName(mysqlEngine.getActiveDbName());
+        setSchemaVersion((v) => v + 1);
         setSqlResults([]);
       }
       try {
@@ -2211,22 +2249,6 @@ _err_result = _stderr_buffer.getvalue()
               )}
             </button>
           </ActionTooltip>
-
-          {/* Reset Template */}
-          <ActionTooltip
-            label="Reset to Starter Template"
-            shortcut="Reset"
-            placement="bottom"
-          >
-            <button
-              onClick={handleResetCode}
-              aria-label="Reset to Starter Template"
-              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </button>
-          </ActionTooltip>
-
           {/* Share Code & QR Code */}
           <ActionTooltip
             label="Share Code via Link & QR Code"
@@ -2241,85 +2263,6 @@ _err_result = _stderr_buffer.getvalue()
               <Share2 className="w-4 h-4" />
             </button>
           </ActionTooltip>
-
-          {/* Copy Code */}
-          <ActionTooltip
-            label={copiedCode ? 'Code Copied!' : 'Copy All Code'}
-            shortcut="Ctrl + C"
-            placement="bottom"
-          >
-            <button
-              onClick={handleCopyCode}
-              aria-label="Copy Editor Code"
-              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
-            >
-              {copiedCode ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-            </button>
-          </ActionTooltip>
-
-          {/* Open / Import from Device Menu */}
-          <div className="relative">
-            <ActionTooltip
-              label="Open File or Folder from Device"
-              shortcut="Ctrl + O"
-              placement="bottom-end"
-            >
-              <button
-                onClick={() => setIsOpenMenuOpen((prev) => !prev)}
-                aria-label="Open File or Folder from Device"
-                className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
-              >
-                <FolderInput className="w-4 h-4 text-sky-400" />
-              </button>
-            </ActionTooltip>
-
-            {isOpenMenuOpen && (
-              <div className="absolute right-0 top-full mt-1.5 w-60 bg-[#1e1e1e] border border-slate-700 rounded-xl shadow-2xl p-1.5 z-50 text-xs animate-in fade-in">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpenMenuOpen(false);
-                    triggerOpenFilePicker();
-                  }}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-2 hover:bg-slate-800 text-slate-200 rounded-lg transition-colors text-left cursor-pointer"
-                >
-                  <FileUp className="w-4 h-4 text-sky-400 shrink-0" />
-                  <div className="flex flex-col truncate">
-                    <span className="font-semibold text-[11px]">Open File(s)...</span>
-                    <span className="text-[10px] text-slate-400">Select files from phone / PC (Ctrl + O)</span>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpenMenuOpen(false);
-                    triggerOpenFolderPicker();
-                  }}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-2 hover:bg-slate-800 text-slate-200 rounded-lg transition-colors text-left border-t border-slate-800/80 mt-1 cursor-pointer"
-                >
-                  <FolderUp className="w-4 h-4 text-amber-400 shrink-0" />
-                  <div className="flex flex-col truncate">
-                    <span className="font-semibold text-[11px]">Open Folder...</span>
-                    <span className="text-[10px] text-slate-400">Open full directory (Alt + O)</span>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpenMenuOpen(false);
-                    triggerOpenZipPicker();
-                  }}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-2 hover:bg-slate-800 text-slate-200 rounded-lg transition-colors text-left border-t border-slate-800/80 mt-1 cursor-pointer"
-                >
-                  <Archive className="w-4 h-4 text-purple-400 shrink-0" />
-                  <div className="flex flex-col truncate">
-                    <span className="font-semibold text-[11px]">Open ZIP Project...</span>
-                    <span className="text-[10px] text-slate-400">Unpack .zip archive client-side</span>
-                  </div>
-                </button>
-              </div>
-            )}
-          </div>
 
           {/* Download Menu (File vs ZIP) */}
           <div className="relative hidden sm:block">
@@ -2365,36 +2308,6 @@ _err_result = _stderr_buffer.getvalue()
             )}
           </div>
 
-          {/* Keyboard Shortcuts Dialog */}
-          <ActionTooltip
-            label="Keyboard Shortcuts Cheat Sheet"
-            shortcut="Shortcuts"
-            placement="bottom-end"
-          >
-            <button
-              onClick={() => setIsShortcutsOpen(true)}
-              aria-label="Keyboard Shortcuts Cheat Sheet"
-              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
-            >
-              <Keyboard className="w-4 h-4" />
-            </button>
-          </ActionTooltip>
-
-          {/* Settings Modal Trigger */}
-          <ActionTooltip
-            label="VS Code Editor Settings"
-            shortcut="Preferences"
-            placement="bottom-end"
-          >
-            <button
-              onClick={() => setIsSettingsOpen(true)}
-              aria-label="VS Code Editor Settings"
-              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
-            >
-              <Settings className="w-4 h-4" />
-            </button>
-          </ActionTooltip>
-
           {/* Focus Mode (Zen Mode) */}
           <ActionTooltip
             label={settings.focusMode ? 'Exit Zen Focus Mode' : 'Zen Distraction-Free Focus Mode'}
@@ -2414,6 +2327,25 @@ _err_result = _stderr_buffer.getvalue()
             </button>
           </ActionTooltip>
 
+          {/* Open in Full Page (when opened inside modal from tutorial page) */}
+          {isModal && (
+            <ActionTooltip label="Open Full Page in New Tab" placement="bottom-end">
+              <a
+                href={`/playground?lang=${encodeURIComponent(
+                  activeFile?.language || resolvedInitialLang
+                )}&code=${encodeURIComponent(
+                  editorInstanceRef.current?.getValue() || activeFile?.content || initialCode || ''
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Full Page in New Tab"
+                className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-secondary hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </ActionTooltip>
+          )}
+
           {/* Fullscreen toggle */}
           <ActionTooltip
             label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
@@ -2431,12 +2363,17 @@ _err_result = _stderr_buffer.getvalue()
 
           {/* Close Modal if inside dialog */}
           {isModal && onCloseModal && (
-            <button
-              onClick={onCloseModal}
-              className="ml-1 px-2 py-1 text-slate-300 hover:text-white bg-[#333] hover:bg-[#444] rounded text-xs font-semibold cursor-pointer"
-            >
-              Close
-            </button>
+            <ActionTooltip label="Close Playground" shortcut="Esc" placement="bottom-end">
+              <button
+                type="button"
+                onClick={onCloseModal}
+                aria-label="Close Playground"
+                className="ml-1 px-2.5 py-1.5 text-slate-300 hover:text-white bg-[#2a2d2e] hover:bg-rose-600/90 border border-slate-700/80 rounded-lg text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5 shadow-xs active:scale-95"
+              >
+                <X className="w-3.5 h-3.5" />
+                <span>Close</span>
+              </button>
+            </ActionTooltip>
           )}
         </div>
       </div>
@@ -2496,6 +2433,11 @@ _err_result = _stderr_buffer.getvalue()
             onOpenLocalFolder={triggerOpenFolderPicker}
             onOpenLocalZip={triggerOpenZipPicker}
             onClose={() => setSidebarView(null)}
+            currentLanguage={language}
+            activeSqlDbName={activeSqlDbName}
+            onSwitchDatabase={handleSwitchDatabase}
+            onInsertSqlSnippet={handleInsertSqlSnippet}
+            schemaVersion={schemaVersion}
           />
         )}
 
@@ -2807,6 +2749,20 @@ _err_result = _stderr_buffer.getvalue()
 
                 {/* Panel Actions: Move Right/Bottom + Close */}
                 <div className="flex items-center gap-1">
+                  {language === 'markdown' && activeTab === 'preview' && (
+                    <ActionTooltip label="Print / Save as PDF (Ctrl + P)" placement="bottom-end">
+                      <button
+                        type="button"
+                        onClick={() => window.print()}
+                        aria-label="Print Document as PDF"
+                        className="flex items-center gap-1 px-2 py-0.5 text-slate-300 hover:text-white bg-[#2d2d2e] hover:bg-[#383838] border border-[#444] rounded transition-colors cursor-pointer text-[11px] mr-1"
+                      >
+                        <Printer className="w-3.5 h-3.5 text-amber-400" />
+                        <span className="hidden sm:inline">Print / PDF</span>
+                      </button>
+                    </ActionTooltip>
+                  )}
+
                   <ActionTooltip
                     label={settings.panelPosition === 'right' ? 'Move Panel to Bottom' : 'Move Panel to Right'}
                     shortcut="Layout"
@@ -2939,6 +2895,16 @@ _err_result = _stderr_buffer.getvalue()
               Ln {cursorPos.lineNumber}, Col {cursorPos.column}
             </span>
           </div>
+
+          {language === 'sql' && (
+            <span
+              title={`Active MySQL Database: ${activeSqlDbName}`}
+              className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 bg-sky-500/20 text-sky-200 border border-sky-400/30 rounded text-[10px] font-mono"
+            >
+              <span>🗄️</span>
+              <span className="font-semibold text-white/90">{activeSqlDbName}</span>
+            </span>
+          )}
 
           {language === 'sql' && hasSelection && (
             <span

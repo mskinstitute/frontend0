@@ -540,6 +540,52 @@ public class Main {
   ],
   sql: [
     {
+      id: 'sql-mysql-starter',
+      title: 'MySQL Environment (Databases & Tables)',
+      language: 'sql',
+      description: 'Full MySQL support: CREATE DATABASE, USE, SHOW DATABASES, SHOW TABLES, DESCRIBE, AUTO_INCREMENT.',
+      code: `-- MSK Institute - MySQL & Standard SQL In-Browser Environment
+-- Fully supports MySQL commands: CREATE DATABASE, USE, SHOW DATABASES, SHOW TABLES, DESCRIBE, etc.
+
+-- 1. Create a database and switch to it
+CREATE DATABASE IF NOT EXISTS school_db;
+USE school_db;
+
+-- 2. Create tables with MySQL AUTO_INCREMENT & VARCHAR types
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    course VARCHAR(50) NOT NULL,
+    score INT NOT NULL,
+    city VARCHAR(50) DEFAULT 'Shikohabad'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 3. Insert student records
+INSERT INTO students (name, course, score, city) VALUES 
+    ('Aman Sharma', 'Python Full Stack', 92, 'Shikohabad'),
+    ('Priya Verma', 'Web Development', 88, 'Firozabad'),
+    ('Rahul Kumar', 'Data Science & AI', 95, 'Agra'),
+    ('Neha Gupta', 'Python Full Stack', 84, 'Shikohabad'),
+    ('Vikas Yadav', 'Java Masterclass', 78, 'Mainpuri'),
+    ('Anjali Singh', 'Web Development', 91, 'Shikohabad');
+
+-- 4. Inspect MySQL schemas and structure
+SHOW DATABASES;
+SHOW TABLES;
+DESCRIBE students;
+
+-- 5. Query top performers with conditional grading
+SELECT id, name, course, score, city,
+       CASE 
+           WHEN score >= 90 THEN 'A+ (Distinction)'
+           WHEN score >= 80 THEN 'A (Excellent)'
+           ELSE 'B (Good)'
+       END AS grade
+FROM students
+ORDER BY score DESC;
+`,
+    },
+    {
       id: 'sql-students',
       title: 'Student Database & Grades',
       language: 'sql',

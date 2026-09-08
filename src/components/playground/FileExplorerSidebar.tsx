@@ -20,6 +20,7 @@ import {
 import { PlaygroundFile, PlaygroundFolder, SupportedLanguage } from './types';
 import toast from 'react-hot-toast';
 import ActionTooltip from './ActionTooltip';
+import DatabaseSchemasSection from './DatabaseSchemasSection';
 
 interface FileExplorerSidebarProps {
   files: PlaygroundFile[];
@@ -38,6 +39,11 @@ interface FileExplorerSidebarProps {
   onOpenLocalFolder?: () => void;
   onOpenLocalZip?: () => void;
   onClose: () => void;
+  currentLanguage?: SupportedLanguage;
+  activeSqlDbName?: string;
+  onSwitchDatabase?: (dbName: string) => void;
+  onInsertSqlSnippet?: (snippet: string) => void;
+  schemaVersion?: number;
 }
 
 export function detectLanguageFromExtension(fileName: string): SupportedLanguage {
@@ -120,7 +126,15 @@ export default function FileExplorerSidebar({
   onOpenLocalFolder,
   onOpenLocalZip,
   onClose,
+  currentLanguage,
+  activeSqlDbName,
+  onSwitchDatabase,
+  onInsertSqlSnippet,
+  schemaVersion,
 }: FileExplorerSidebarProps) {
+  // State for collapsible workspace files section
+  const [isWorkspaceFilesOpen, setIsWorkspaceFilesOpen] = useState(true);
+
   // State for creating files & folders
   const [isCreatingFile, setIsCreatingFile] = useState(false);
   const [creatingFileFolderId, setCreatingFileFolderId] = useState<string | null>(null);
@@ -244,6 +258,11 @@ export default function FileExplorerSidebar({
   // Root files (files not in any folder)
   const rootFiles = files.filter((f) => !f.folderId);
 
+  // Check if SQL context is active (language is SQL or any .sql file in workspace)
+  const isSqlContext =
+    currentLanguage === 'sql' ||
+    files.some((f) => f.language === 'sql' || f.name.toLowerCase().endsWith('.sql'));
+
   return (
     <div className="w-56 sm:w-60 bg-[#252526] border-r border-[#1e1e1e] flex flex-col select-none text-xs text-slate-300 z-10">
       {/* Explorer Header Toolbar */}
@@ -339,13 +358,28 @@ export default function FileExplorerSidebar({
 
       {/* Files & Folders Tree */}
       <div className="flex-1 overflow-y-auto py-1">
-        <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
-          <span>WORKSPACE FILES</span>
+        <div
+          onClick={() => setIsWorkspaceFilesOpen(!isWorkspaceFilesOpen)}
+          className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-slate-300 flex items-center justify-between cursor-pointer select-none group"
+        >
+          <div className="flex items-center gap-1.5">
+            <span className="text-slate-400 group-hover:text-slate-200">
+              {isWorkspaceFilesOpen ? (
+                <ChevronDown className="w-3 h-3" />
+              ) : (
+                <ChevronRight className="w-3 h-3" />
+              )}
+            </span>
+            <span>WORKSPACE FILES</span>
+          </div>
           <span className="font-mono text-[9px] text-slate-600">
             {files.length} {files.length === 1 ? 'file' : 'files'}
             {folders.length > 0 && `, ${folders.length} dir`}
           </span>
         </div>
+
+        {isWorkspaceFilesOpen && (
+          <>
 
         {/* Inline Create Folder Input (Root) */}
         {isCreatingFolder && (
@@ -706,6 +740,18 @@ export default function FileExplorerSidebar({
             </div>
           );
         })}
+          </>
+        )}
+
+        {/* Schemas Section (When SQL context is active) */}
+        {isSqlContext && (
+          <DatabaseSchemasSection
+            activeDatabaseName={activeSqlDbName}
+            onSwitchDatabase={onSwitchDatabase}
+            onInsertSqlSnippet={onInsertSqlSnippet}
+            schemaVersion={schemaVersion}
+          />
+        )}
       </div>
 
       {/* Quick Open from Device */}

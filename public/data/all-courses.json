@@ -8158,7 +8158,7 @@
     "chapters": [
       {
         "id": "sql-for-beginners-ch1",
-        "title": "Chapter 1: Introduction to Databases",
+        "title": "Introduction to Databases",
         "sortOrder": 1,
         "topics": [
           {
@@ -8180,7 +8180,7 @@
       },
       {
         "id": "sql-for-beginners-ch2",
-        "title": "Chapter 2: Basic SQL Queries",
+        "title": "Basic SQL Queries",
         "sortOrder": 2,
         "topics": [
           {
@@ -8202,7 +8202,7 @@
       },
       {
         "id": "sql-for-beginners-ch3",
-        "title": "Chapter 3: SQL Functions",
+        "title": "SQL Functions",
         "sortOrder": 3,
         "topics": [
           {
@@ -8224,7 +8224,7 @@
       },
       {
         "id": "sql-for-beginners-ch4",
-        "title": "Chapter 4: Data Manipulation",
+        "title": "Data Manipulation",
         "sortOrder": 4,
         "topics": [
           {
@@ -8246,7 +8246,7 @@
       },
       {
         "id": "sql-for-beginners-ch5",
-        "title": "Chapter 5: Table Constraints & Keys",
+        "title": "Table Constraints & Keys",
         "sortOrder": 5,
         "topics": [
           {
@@ -8268,7 +8268,7 @@
       },
       {
         "id": "sql-for-beginners-ch6",
-        "title": "Chapter 6: Joins",
+        "title": "Joins",
         "sortOrder": 6,
         "topics": [
           {
@@ -8290,7 +8290,7 @@
       },
       {
         "id": "sql-for-beginners-ch7",
-        "title": "Chapter 7: Grouping Data",
+        "title": "Grouping Data",
         "sortOrder": 7,
         "topics": [
           {
@@ -8312,7 +8312,7 @@
       },
       {
         "id": "sql-for-beginners-ch8",
-        "title": "Chapter 8: Normalization",
+        "title": "Normalization",
         "sortOrder": 8,
         "topics": [
           {
@@ -8334,7 +8334,7 @@
       },
       {
         "id": "sql-for-beginners-ch9",
-        "title": "Chapter 9: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 9,
         "topics": [
           {

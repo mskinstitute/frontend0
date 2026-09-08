@@ -1,292 +1,583 @@
 'use client';
 
 import React, { useState, useMemo, useRef } from 'react';
-import {
-  FileText,
-  Printer,
-  Copy,
-  Download,
-  Check,
-  Eye,
-  Code2,
-  Clock,
-  Type,
-  Hash,
-} from 'lucide-react';
+import { FileText, Copy, Check } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import MarkdownRenderer from '@/components/MarkdownRenderer';
-import { EditorTheme } from './types';
-import ActionTooltip from './ActionTooltip';
+import { highlightCode } from '@/lib/prism-highlighter';
 
 interface MarkdownPreviewProps {
   content: string;
   fileName?: string;
-  theme?: EditorTheme;
+  theme?: string;
 }
 
-export default function MarkdownPreview({
-  content,
-  fileName = 'document.md',
-  theme = 'vs-dark',
-}: MarkdownPreviewProps) {
-  const [viewMode, setViewMode] = useState<'preview' | 'html'>('preview');
-  const [copiedHtml, setCopiedHtml] = useState(false);
+/**
+ * Standard inline formatting:
+ * - `code` -> inline code
+ * - **bold** -> strong
+ * - *italic* -> em
+ * - ~~strikethrough~~ -> del
+ * - ![alt](url) -> img
+ * - [text](url) -> link
+ */
+function renderStandardInlineText(text: string): React.ReactNode {
+  if (!text) return null;
+
+  const parts: React.ReactNode[] = [];
+  const regex =
+    /(!\[[^\]\n]*\]\([^)\n]+\)|`[^`\n]+`|\*\*[^*\n]+\*\*|~~[^~\n]+~~|\[[^\]\n]+\]\([^)\n]+\)|\*[^*\n]+\*)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+    const token = match[0];
+
+    // Image: ![alt](url)
+    if (token.startsWith('![') && token.includes('](')) {
+      const imgMatch = token.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (imgMatch) {
+        parts.push(
+          <img
+            key={match.index}
+            src={imgMatch[2]}
+            alt={imgMatch[1]}
+            className="max-w-full h-auto rounded border border-[#d0d7de] my-2 inline-block"
+            loading="lazy"
+          />
+        );
+      } else {
+        parts.push(token);
+      }
+    }
+    // Inline code: `code`
+    else if (token.startsWith('`') && token.endsWith('`')) {
+      const code = token.slice(1, -1);
+      parts.push(
+        <code
+          key={match.index}
+          className="px-1.5 py-0.5 rounded bg-[#eff1f3] text-[#1f2328] border border-[#d0d7de] font-mono text-[85%] font-medium mx-0.5"
+        >
+          {code}
+        </code>
+      );
+    }
+    // Bold: **text**
+    else if (token.startsWith('**') && token.endsWith('**')) {
+      const inner = token.slice(2, -2);
+      parts.push(
+        <strong key={match.index} className="font-semibold text-[#1f2328]">
+          {renderStandardInlineText(inner)}
+        </strong>
+      );
+    }
+    // Strikethrough: ~~text~~
+    else if (token.startsWith('~~') && token.endsWith('~~')) {
+      const inner = token.slice(2, -2);
+      parts.push(
+        <del key={match.index} className="line-through text-[#656d76]">
+          {renderStandardInlineText(inner)}
+        </del>
+      );
+    }
+    // Italic: *text*
+    else if (token.startsWith('*') && token.endsWith('*')) {
+      const inner = token.slice(1, -1);
+      parts.push(
+        <em key={match.index} className="italic text-[#1f2328]">
+          {renderStandardInlineText(inner)}
+        </em>
+      );
+    }
+    // Link: [text](url)
+    else if (token.startsWith('[') && token.includes('](')) {
+      const linkMatch = token.match(/^\[(.*?)\]\((.*?)\)$/);
+      if (linkMatch) {
+        const isExternal = linkMatch[2].startsWith('http');
+        parts.push(
+          <a
+            key={match.index}
+            href={linkMatch[2]}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+            className="text-[#0969da] hover:underline font-medium"
+          >
+            {renderStandardInlineText(linkMatch[1])}
+          </a>
+        );
+      } else {
+        parts.push(token);
+      }
+    } else {
+      parts.push(token);
+    }
+
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
+type StandardBlock =
+  | { type: 'hr' }
+  | { type: 'heading'; level: number; text: string }
+  | { type: 'code'; lang: string; code: string }
+  | { type: 'table'; headers: string[]; rows: string[][] }
+  | { type: 'blockquote'; lines: string[] }
+  | { type: 'ordered-list'; items: string[] }
+  | { type: 'unordered-list'; items: string[] }
+  | { type: 'paragraph'; lines: string[] };
+
+/**
+ * Standard Markdown Parser: converts Markdown text directly into standard blocks
+ */
+function parseStandardMarkdown(content: string): StandardBlock[] {
+  const blocks: StandardBlock[] = [];
+  const lines = content.split(/\r?\n/);
+  let currentBlock: string[] = [];
+  let currentType: 'paragraph' | 'blockquote' | 'table' | 'ordered-list' | 'unordered-list' | null =
+    null;
+  let inCode = false;
+  let codeLang = 'text';
+  let codeLines: string[] = [];
+
+  const flush = () => {
+    if (currentBlock.length === 0) return;
+
+    if (currentType === 'table') {
+      const tableLines = currentBlock.filter(
+        (l) => l.trim().startsWith('|') && l.trim().endsWith('|')
+      );
+      if (tableLines.length >= 2) {
+        const headers = tableLines[0]
+          .slice(1, -1)
+          .split('|')
+          .map((c) => c.trim());
+        const rows = tableLines.slice(2).map((r) =>
+          r
+            .slice(1, -1)
+            .split('|')
+            .map((c) => c.trim())
+        );
+        blocks.push({ type: 'table', headers, rows });
+      } else {
+        blocks.push({ type: 'paragraph', lines: currentBlock });
+      }
+    } else if (currentType === 'blockquote') {
+      blocks.push({ type: 'blockquote', lines: currentBlock });
+    } else if (currentType === 'ordered-list') {
+      const items: string[] = [];
+      let curItem: string[] = [];
+      for (const l of currentBlock) {
+        if (/^\d+\.\s/.test(l.trim())) {
+          if (curItem.length > 0) items.push(curItem.join(' '));
+          curItem = [l.trim().replace(/^\d+\.\s*/, '')];
+        } else if (curItem.length > 0) {
+          curItem.push(l.trim());
+        }
+      }
+      if (curItem.length > 0) items.push(curItem.join(' '));
+      blocks.push({ type: 'ordered-list', items });
+    } else if (currentType === 'unordered-list') {
+      const items: string[] = [];
+      let curItem: string[] = [];
+      for (const l of currentBlock) {
+        if (/^[-*]\s+/.test(l.trim())) {
+          if (curItem.length > 0) items.push(curItem.join(' '));
+          curItem = [l.trim().replace(/^[-*]\s+/, '')];
+        } else if (curItem.length > 0) {
+          curItem.push(l.trim());
+        }
+      }
+      if (curItem.length > 0) items.push(curItem.join(' '));
+      blocks.push({ type: 'unordered-list', items });
+    } else {
+      blocks.push({ type: 'paragraph', lines: currentBlock });
+    }
+
+    currentBlock = [];
+    currentType = null;
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Code blocks
+    if (trimmed.startsWith('```')) {
+      if (!inCode) {
+        flush();
+        inCode = true;
+        const match = trimmed.match(/^```(\w+)?/);
+        codeLang = (match?.[1] || 'text').toLowerCase();
+        codeLines = [];
+      } else {
+        inCode = false;
+        blocks.push({ type: 'code', lang: codeLang, code: codeLines.join('\n') });
+        codeLines = [];
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(line);
+      continue;
+    }
+
+    // Blank line -> break block
+    if (!trimmed) {
+      flush();
+      continue;
+    }
+
+    // Horizontal Rule (---, ***, ___)
+    if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+      flush();
+      blocks.push({ type: 'hr' });
+      continue;
+    }
+
+    // Headings (#)
+    if (trimmed.startsWith('#')) {
+      flush();
+      const match = trimmed.match(/^(#{1,6})\s+(.*)$/);
+      if (match) {
+        blocks.push({ type: 'heading', level: match[1].length, text: match[2] });
+        continue;
+      }
+    }
+
+    // Table row (| ... |)
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      if (currentType !== 'table') {
+        flush();
+        currentType = 'table';
+      }
+      currentBlock.push(line);
+      continue;
+    }
+
+    // Blockquote (> ...)
+    if (trimmed.startsWith('>')) {
+      if (currentType !== 'blockquote') {
+        flush();
+        currentType = 'blockquote';
+      }
+      currentBlock.push(line);
+      continue;
+    }
+
+    // Ordered list (1. ...)
+    if (/^\d+\.\s/.test(trimmed)) {
+      if (currentType !== 'ordered-list') {
+        flush();
+        currentType = 'ordered-list';
+      }
+      currentBlock.push(line);
+      continue;
+    }
+
+    // Unordered list (- ... or * ...)
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      if (currentType !== 'unordered-list') {
+        flush();
+        currentType = 'unordered-list';
+      }
+      currentBlock.push(line);
+      continue;
+    }
+
+    // Regular paragraph continuation
+    if (currentType && currentType !== 'paragraph') {
+      flush();
+    }
+    currentType = 'paragraph';
+    currentBlock.push(line);
+  }
+
+  flush();
+  return blocks;
+}
+
+export default function MarkdownPreview({ content }: MarkdownPreviewProps) {
+  const [copiedCodeIdx, setCopiedCodeIdx] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Compute live document statistics
-  const stats = useMemo(() => {
-    const trimmed = content.trim();
-    if (!trimmed) {
-      return { words: 0, chars: 0, headings: 0, readTimeMinutes: 0 };
-    }
+  const blocks = useMemo(() => parseStandardMarkdown(content), [content]);
 
-    // Word count
-    const wordsArray = trimmed.split(/\s+/).filter(Boolean);
-    const words = wordsArray.length;
-    const chars = trimmed.length;
-
-    // Headings count
-    const headings = (content.match(/^#{1,6}\s+/gm) || []).length;
-
-    // Estimated reading time (~200 words per minute)
-    const readTimeMinutes = Math.max(1, Math.ceil(words / 200));
-
-    return { words, chars, headings, readTimeMinutes };
-  }, [content]);
-
-  // Generate clean exportable HTML
-  const generatedHtml = useMemo(() => {
-    // Basic conversion for export
-    const title = fileName.replace(/\.[^/.]+$/, '');
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title} - MSK Markdown Document</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
-      color: #24292e;
-      max-width: 860px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    h1, h2, h3, h4, h5, h6 { color: #1f2328; margin-top: 24px; margin-bottom: 12px; font-weight: 700; }
-    h1 { font-size: 2em; border-bottom: 1px solid #d0d7de; padding-bottom: 0.3em; }
-    h2 { font-size: 1.5em; border-bottom: 1px solid #d0d7de; padding-bottom: 0.3em; }
-    pre { background: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto; font-family: monospace; }
-    code { background: #f1f2f4; padding: 2px 5px; border-radius: 4px; font-size: 85%; font-family: monospace; }
-    blockquote { border-left: 4px solid #0969da; color: #57606a; padding: 0 16px; margin: 16px 0; }
-    table { border-collapse: collapse; width: 100%; margin: 16px 0; }
-    th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
-    th { background: #f6f8fa; font-weight: 600; }
-    tr:nth-child(even) { background: #fbfbfc; }
-    hr { height: 0.25em; padding: 0; margin: 24px 0; background-color: #d0d7de; border: 0; }
-    a { color: #0969da; text-decoration: none; font-weight: 500; }
-    a:hover { text-decoration: underline; }
-  </style>
-</head>
-<body>
-  ${containerRef.current ? containerRef.current.innerHTML : content}
-</body>
-</html>`;
-  }, [content, fileName]);
-
-  // 1. Copy Rendered HTML to Clipboard
-  const handleCopyHtml = async () => {
-    try {
-      const htmlToCopy = containerRef.current
-        ? containerRef.current.innerHTML
-        : generatedHtml;
-      await navigator.clipboard.writeText(htmlToCopy);
-      setCopiedHtml(true);
-      toast.success('Rendered HTML copied to clipboard!', { icon: '📋' });
-      setTimeout(() => setCopiedHtml(false), 2000);
-    } catch {
-      toast.error('Failed to copy HTML to clipboard.');
-    }
+  const handleCopyCode = (idx: number, codeText: string) => {
+    navigator.clipboard.writeText(codeText);
+    setCopiedCodeIdx(idx);
+    toast.success('Code copied!');
+    setTimeout(() => setCopiedCodeIdx(null), 2000);
   };
-
-  // 2. Download Standalone HTML file
-  const handleDownloadHtml = () => {
-    try {
-      const blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName.replace(/\.md$/i, '') + '.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      toast.success(`Downloaded ${a.download}`, { icon: '💾' });
-    } catch {
-      toast.error('Could not download HTML file.');
-    }
-  };
-
-  // 3. Print / Save as PDF
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const isDark = theme === 'vs-dark' || theme === 'hc-black';
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden select-text bg-[#1e1e1e]">
-      {/* 1. TOP HEADER TOOLBAR */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2 bg-[#252526] border-b border-[#2d2d2d] text-xs select-none">
-        {/* Left: Document Info & View Switcher */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-300 font-semibold">
-            <span className="text-base">📝</span>
-            <span className="truncate max-w-[140px] sm:max-w-[200px]">{fileName}</span>
-          </div>
-
-          <div className="h-4 w-[1px] bg-[#3c3c3c] hidden sm:block" />
-
-          {/* View Mode Toggle: Preview vs HTML Source */}
-          <div className="flex items-center bg-[#1e1e1e] p-0.5 rounded-lg border border-[#333]">
-            <button
-              type="button"
-              onClick={() => setViewMode('preview')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold transition-colors cursor-pointer ${
-                viewMode === 'preview'
-                  ? 'bg-secondary text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Eye className="w-3 h-3" />
-              <span>Preview</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode('html')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold transition-colors cursor-pointer ${
-                viewMode === 'html'
-                  ? 'bg-secondary text-white shadow-xs'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Code2 className="w-3 h-3" />
-              <span>Raw HTML</span>
-            </button>
-          </div>
+    <div
+      ref={containerRef}
+      className="w-full h-full overflow-y-auto bg-white text-[#1f2328] px-4 py-4 sm:px-6 sm:py-6 font-sans leading-relaxed text-sm sm:text-base select-text"
+      style={{
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif',
+      }}
+    >
+      {content.trim().length === 0 ? (
+        <div className="py-16 text-center text-[#656d76] space-y-2">
+          <FileText className="w-10 h-10 mx-auto opacity-30 text-[#656d76]" />
+          <p className="font-semibold text-sm text-[#1f2328]">Markdown document is empty.</p>
+          <p className="text-xs text-[#656d76]">
+            Type markdown on the left to see how standard Markdown renders.
+          </p>
         </div>
+      ) : (
+        <div className="standard-markdown-content space-y-3">
+          {blocks.map((block, idx) => {
+            // 1. Horizontal Rule
+            if (block.type === 'hr') {
+              return <hr key={idx} className="my-5 border-t-2 border-[#d0d7de]" />;
+            }
 
-        {/* Center: Live Stats Badges */}
-        <div className="hidden md:flex items-center gap-2.5 font-mono text-[10px] text-slate-400 bg-[#1e1e1e] px-2.5 py-1 rounded-md border border-[#333]">
-          <div className="flex items-center gap-1">
-            <Type className="w-3 h-3 text-secondary" />
-            <span>
-              <strong className="text-slate-200">{stats.words}</strong> words
-            </span>
-          </div>
-          <div className="w-[1px] h-3 bg-[#333]" />
-          <div className="flex items-center gap-1">
-            <Hash className="w-3 h-3 text-amber-400" />
-            <span>
-              <strong className="text-slate-200">{stats.chars}</strong> chars
-            </span>
-          </div>
-          <div className="w-[1px] h-3 bg-[#333]" />
-          <div className="flex items-center gap-1">
-            <Clock className="w-3 h-3 text-emerald-400" />
-            <span>
-              ~<strong className="text-slate-200">{stats.readTimeMinutes}</strong> min read
-            </span>
-          </div>
+            // 2. Headings
+            if (block.type === 'heading') {
+              switch (block.level) {
+                case 1:
+                  return (
+                    <h1
+                      key={idx}
+                      className="text-2xl sm:text-3xl font-bold text-[#1f2328] tracking-tight pb-2 border-b border-[#d0d7de] mt-4 mb-3"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h1>
+                  );
+                case 2:
+                  return (
+                    <h2
+                      key={idx}
+                      className="text-xl sm:text-2xl font-semibold text-[#1f2328] tracking-tight pb-1.5 border-b border-[#d0d7de] mt-4 mb-2.5"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h2>
+                  );
+                case 3:
+                  return (
+                    <h3
+                      key={idx}
+                      className="text-lg sm:text-xl font-semibold text-[#1f2328] mt-3.5 mb-2"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h3>
+                  );
+                case 4:
+                  return (
+                    <h4
+                      key={idx}
+                      className="text-base sm:text-lg font-semibold text-[#1f2328] mt-3 mb-1.5"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h4>
+                  );
+                case 5:
+                  return (
+                    <h5
+                      key={idx}
+                      className="text-sm sm:text-base font-semibold text-[#1f2328] mt-2 mb-1"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h5>
+                  );
+                default:
+                  return (
+                    <h6
+                      key={idx}
+                      className="text-xs sm:text-sm font-semibold text-[#656d76] uppercase tracking-wider mt-2 mb-1"
+                    >
+                      {renderStandardInlineText(block.text)}
+                    </h6>
+                  );
+              }
+            }
+
+            // 3. Fenced Code Block
+            if (block.type === 'code') {
+              const highlightedHtml = highlightCode(block.code, block.lang);
+              return (
+                <div
+                  key={idx}
+                  className="group relative my-3.5 rounded-md border border-[#d0d7de] bg-[#f6f8fa] overflow-hidden"
+                >
+                  <div className="flex items-center justify-between px-3 py-1 bg-[#eaeef2] border-b border-[#d0d7de] text-[11px] font-mono text-[#656d76]">
+                    <span className="uppercase font-semibold">{block.lang || 'code'}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyCode(idx, block.code)}
+                      className="flex items-center gap-1 text-[#656d76] hover:text-[#1f2328] px-1.5 py-0.5 rounded hover:bg-white transition-colors cursor-pointer text-[10px]"
+                    >
+                      {copiedCodeIdx === idx ? (
+                        <>
+                          <Check className="w-3 h-3 text-[#1a7f37]" />
+                          <span className="text-[#1a7f37] font-semibold">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <pre className="p-3.5 font-mono text-xs sm:text-sm overflow-x-auto leading-relaxed text-[#1f2328]">
+                    <code dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+                  </pre>
+                </div>
+              );
+            }
+
+            // 4. Standard Blockquote (pure markdown quote: > text)
+            if (block.type === 'blockquote') {
+              const quoteText = block.lines.map((l) => l.replace(/^>\s*/, '')).join('\n');
+              return (
+                <blockquote
+                  key={idx}
+                  className="border-l-4 border-[#d0d7de] pl-4 py-1 text-[#656d76] my-2.5 italic leading-relaxed"
+                >
+                  {renderStandardInlineText(quoteText)}
+                </blockquote>
+              );
+            }
+
+            // 5. Tables
+            if (block.type === 'table') {
+              return (
+                <div key={idx} className="my-3.5 overflow-x-auto rounded-md border border-[#d0d7de]">
+                  <table className="w-full text-left text-sm border-collapse">
+                    <thead className="bg-[#f6f8fa] border-b border-[#d0d7de]">
+                      <tr>
+                        {block.headers.map((h, hIdx) => (
+                          <th
+                            key={hIdx}
+                            className="px-4 py-2 font-semibold text-[#1f2328] border-r border-[#d0d7de] last:border-r-0"
+                          >
+                            {renderStandardInlineText(h)}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {block.rows.map((row, rIdx) => (
+                        <tr
+                          key={rIdx}
+                          className="even:bg-[#fbfbfc] hover:bg-[#f6f8fa] transition-colors"
+                        >
+                          {row.map((cell, cIdx) => (
+                            <td
+                              key={cIdx}
+                              className="px-4 py-2 border-t border-r border-[#d0d7de] last:border-r-0 text-[#1f2328]"
+                            >
+                              {renderStandardInlineText(cell)}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
+
+            // 6. Ordered List
+            if (block.type === 'ordered-list') {
+              return (
+                <ol
+                  key={idx}
+                  className="list-decimal pl-6 my-2.5 text-[#1f2328] text-sm sm:text-base space-y-1"
+                >
+                  {block.items.map((item, itemIdx) => (
+                    <li key={itemIdx} className="my-0.5 leading-relaxed">
+                      {renderStandardInlineText(item)}
+                    </li>
+                  ))}
+                </ol>
+              );
+            }
+
+            // 7. Unordered List & Task List
+            if (block.type === 'unordered-list') {
+              return (
+                <ul
+                  key={idx}
+                  className="pl-5 my-2.5 text-[#1f2328] text-sm sm:text-base space-y-1"
+                >
+                  {block.items.map((item, itemIdx) => {
+                    const isTaskDone = item.startsWith('[x] ') || item.startsWith('[X] ');
+                    const isTaskPending = item.startsWith('[ ] ');
+
+                    if (isTaskDone) {
+                      return (
+                        <li
+                          key={itemIdx}
+                          className="list-none flex items-start gap-2 text-[#656d76] line-through my-1"
+                        >
+                          <input
+                            type="checkbox"
+                            checked
+                            disabled
+                            className="mt-1 accent-[#0969da] cursor-default"
+                          />
+                          <span className="leading-relaxed">
+                            {renderStandardInlineText(item.replace(/^\[[xX]\]\s*/, ''))}
+                          </span>
+                        </li>
+                      );
+                    }
+
+                    if (isTaskPending) {
+                      return (
+                        <li
+                          key={itemIdx}
+                          className="list-none flex items-start gap-2 text-[#1f2328] my-1"
+                        >
+                          <input
+                            type="checkbox"
+                            disabled
+                            className="mt-1 cursor-default"
+                          />
+                          <span className="leading-relaxed">
+                            {renderStandardInlineText(item.replace(/^\[ \]\s*/, ''))}
+                          </span>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={itemIdx} className="list-disc my-0.5 leading-relaxed">
+                        {renderStandardInlineText(item)}
+                      </li>
+                    );
+                  })}
+                </ul>
+              );
+            }
+
+            // 8. Paragraph
+            return (
+              <p
+                key={idx}
+                className="my-2.5 text-[#1f2328] leading-7 text-sm sm:text-base font-normal"
+              >
+                {renderStandardInlineText(block.lines.join(' '))}
+              </p>
+            );
+          })}
         </div>
+      )}
 
-        {/* Right: Export Tools */}
-        <div className="flex items-center gap-1">
-          {/* Copy HTML */}
-          <ActionTooltip label="Copy Rendered HTML" placement="bottom">
-            <button
-              type="button"
-              onClick={handleCopyHtml}
-              aria-label="Copy Rendered HTML"
-              className="flex items-center gap-1 px-2 py-1 text-slate-300 hover:text-white hover:bg-[#333] rounded transition-colors cursor-pointer text-[11px]"
-            >
-              {copiedHtml ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-emerald-400 font-semibold hidden sm:inline">Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Copy HTML</span>
-                </>
-              )}
-            </button>
-          </ActionTooltip>
-
-          {/* Download HTML */}
-          <ActionTooltip label="Download Standalone .html" placement="bottom">
-            <button
-              type="button"
-              onClick={handleDownloadHtml}
-              aria-label="Download Standalone HTML"
-              className="flex items-center gap-1 px-2 py-1 text-slate-300 hover:text-white hover:bg-[#333] rounded transition-colors cursor-pointer text-[11px]"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Export HTML</span>
-            </button>
-          </ActionTooltip>
-
-          {/* Print / PDF */}
-          <ActionTooltip label="Print / Save as PDF (Ctrl + P)" placement="bottom-end">
-            <button
-              type="button"
-              onClick={handlePrint}
-              aria-label="Print Document as PDF"
-              className="flex items-center gap-1 px-2 py-1 text-slate-300 hover:text-white hover:bg-[#333] rounded transition-colors cursor-pointer text-[11px]"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Print / PDF</span>
-            </button>
-          </ActionTooltip>
-        </div>
-      </div>
-
-      {/* 2. BODY CONTENT */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-        {viewMode === 'preview' ? (
-          <div
-            ref={containerRef}
-            className={`max-w-4xl mx-auto rounded-xl p-4 sm:p-8 transition-colors ${
-              isDark
-                ? 'bg-[#181818] text-slate-100 shadow-xl border border-[#2a2a2a]'
-                : 'bg-white text-slate-900 shadow-md border border-slate-200'
-            }`}
-          >
-            {content.trim().length === 0 ? (
-              <div className="py-16 text-center text-slate-500 space-y-2">
-                <FileText className="w-10 h-10 mx-auto opacity-30" />
-                <p className="font-semibold text-sm">Markdown document is empty.</p>
-                <p className="text-xs text-slate-400">
-                  Type markdown content in the editor on the left to see live formatting.
-                </p>
-              </div>
-            ) : (
-              <div className={isDark ? 'markdown-preview-dark' : 'markdown-preview-light'}>
-                <MarkdownRenderer content={content} />
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-[#141414] border border-[#2d2d2d] rounded-xl p-4 font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed overflow-x-auto selection:bg-emerald-900 selection:text-white">
-              {containerRef.current ? containerRef.current.innerHTML : generatedHtml}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Embedded Scoped Print Styles */}
+      {/* Embedded Clean Print Styles */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -294,15 +585,11 @@ export default function MarkdownPreview({
               body * {
                 visibility: hidden !important;
               }
-              .markdown-preview-root,
-              .markdown-preview-dark,
-              .markdown-preview-light,
-              .markdown-preview-dark *,
-              .markdown-preview-light * {
+              .standard-markdown-content,
+              .standard-markdown-content * {
                 visibility: visible !important;
               }
-              .markdown-preview-dark,
-              .markdown-preview-light {
+              .standard-markdown-content {
                 position: absolute;
                 left: 0;
                 top: 0;

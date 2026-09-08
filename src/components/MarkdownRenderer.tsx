@@ -465,14 +465,17 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   {PLAYGROUND_SUPPORTED_LANGS[lang] && (
                     <button
-                      onClick={() =>
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         setPlaygroundModal({
                           isOpen: true,
                           language: PLAYGROUND_SUPPORTED_LANGS[lang],
                           code,
                           title: `Interactive Playground (${displayName})`,
-                        })
-                      }
+                        });
+                      }}
                       className="flex items-center gap-1.5 text-secondary hover:text-white bg-secondary/15 hover:bg-secondary transition-all cursor-pointer py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-secondary/40 shadow-xs"
                       title="Open and run in Playground"
                     >
@@ -504,7 +507,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
               {/* Code Editor Body */}
               <div className="overflow-x-auto p-4 sm:p-5">
-                <pre className={`font-mono text-xs sm:text-sm leading-relaxed language-${lang}`}>
+                <pre
+                  tabIndex={0}
+                  suppressHydrationWarning
+                  className={`font-mono text-xs sm:text-sm leading-relaxed language-${lang}`}
+                >
                   <code
                     className={`language-${lang}`}
                     dangerouslySetInnerHTML={{ __html: highlightedHtml }}
@@ -566,7 +573,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Note Callout
           if (firstLineLower.includes('📌') || firstLineLower.includes('note')) {
-            const body = fullText.replace(/^[📌:]*\s*(\*\*Note:?\*\*|Note:?)?\s*/i, '').trim();
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:[A-Za-z0-9\s]+)?Note:?\*\*|(?:[A-Za-z0-9\s]+)?Note:?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -587,7 +599,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Tip Callout
           if (firstLineLower.includes('💡') || firstLineLower.includes('tip')) {
-            const body = fullText.replace(/^[💡:]*\s*(\*\*Tip(?:\s*\d+)?:?\*\*|Tip(?:\s*\d+)?:?)?\s*/i, '').trim();
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:[A-Za-z0-9\s]+)?Tip(?:\s*\d+)?:?\*\*|(?:[A-Za-z0-9\s]+)?Tip(?:\s*\d+)?:?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -607,8 +624,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           }
 
           // Warning Callout
-          if (firstLineLower.includes('⚠️') || firstLineLower.includes('warning')) {
-            const body = fullText.replace(/^[⚠️:]*\s*(\*\*Warning:?\*\*|Warning:?)?\s*/i, '').trim();
+          if (firstLineLower.includes('⚠️') || firstLineLower.includes('warning') || firstLineLower.includes('caution')) {
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:[A-Za-z0-9\s]+)?(?:Warning|Caution):?\*\*|(?:[A-Za-z0-9\s]+)?(?:Warning|Caution):?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -629,6 +651,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Best Practices
           if (firstLineLower.includes('✅') || firstLineLower.includes('best practice')) {
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:[A-Za-z0-9\s]+)?Best Practice:?\*\*|(?:[A-Za-z0-9\s]+)?Best Practice:?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -636,7 +664,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               >
                 <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm text-emerald-950 leading-relaxed font-medium flex-1">
-                  {renderFormattedText(fullText.replace(/^[✅:]*\s*/, ''))}
+                  {renderFormattedText(body || fullText)}
                 </div>
               </div>
             );
@@ -644,6 +672,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Common Mistakes
           if (firstLineLower.includes('❌') || firstLineLower.includes('mistake')) {
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:Common )?Mistake:?\*\*|(?:Common )?Mistake:?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -651,7 +685,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               >
                 <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm text-red-950 leading-relaxed font-medium flex-1">
-                  {renderFormattedText(fullText.replace(/^[❌:]*\s*/, ''))}
+                  {renderFormattedText(body || fullText)}
                 </div>
               </div>
             );
@@ -659,6 +693,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Fun Fact
           if (firstLineLower.includes('🎉') || firstLineLower.includes('fun fact')) {
+            const body = fullText
+              .replace(
+                /^(?:[📌💡ℹ️⚠️✅❌🎉:]|\s)*(\*\*(?:[A-Za-z0-9\s]+)?Fun Fact:?\*\*|(?:[A-Za-z0-9\s]+)?Fun Fact:?)?\s*/iu,
+                ''
+              )
+              .trim();
             return (
               <div
                 key={idx}
@@ -670,7 +710,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                     Fun Fact
                   </span>
                   <div className="text-xs sm:text-sm text-purple-950 leading-relaxed font-medium">
-                    {renderFormattedText(fullText.replace(/^[🎉:]*\s*(\*\*Fun Fact:?\*\*|Fun Fact:?)?\s*/i, ''))}
+                    {renderFormattedText(body || fullText)}
                   </div>
                 </div>
               </div>
@@ -725,7 +765,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   ? item.replace(/^\[[xX]\]\s*/, '')
                   : isTaskPending
                   ? item.replace(/^\[ \]\s*/, '')
-                  : item.replace(/^[✅✔❌]\s*/, '');
+                  : item.replace(/^[✅✔❌]\s*/u, '');
 
                 return (
                   <li key={itemIdx} className={`flex items-start gap-2.5 ${isTaskDone ? 'line-through opacity-75' : ''}`}>

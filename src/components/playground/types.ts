@@ -101,6 +101,8 @@ export interface SqlQueryResult {
   error?: string;
   query?: string;
   isSelected?: boolean;
+  message?: string;
+  database?: string;
 }
 
 export interface ChallengeTestCase {

@@ -47,7 +47,7 @@ export default function SqlTableOutput({ results, isLoading = false }: SqlTableO
     return (
       <div className="w-full h-full flex flex-col items-center justify-center p-6 text-slate-400 gap-3">
         <div className="w-7 h-7 rounded-full border-2 border-secondary border-t-transparent animate-spin" />
-        <span className="text-xs font-mono">Executing SQLite Query...</span>
+        <span className="text-xs font-mono">Executing SQL / MySQL Query...</span>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export default function SqlTableOutput({ results, isLoading = false }: SqlTableO
         <Database className="w-8 h-8 opacity-40 text-secondary" />
         <span className="text-xs font-semibold text-slate-300">No Query Results Yet</span>
         <span className="text-[11px] text-slate-400 max-w-xs">
-          Press &apos;Run&apos; (Ctrl + Enter) to execute SQL commands and view formatted result tables here.
+          Press &apos;Run&apos; (Ctrl + Enter) to execute SQL / MySQL queries and view formatted result tables here.
         </span>
       </div>
     );
@@ -77,7 +77,7 @@ export default function SqlTableOutput({ results, isLoading = false }: SqlTableO
                 <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-red-300">SQLite Error</span>
+                    <span className="font-semibold text-red-300">SQL / MySQL Error</span>
                     {res.isSelected && (
                       <span className="px-1.5 py-0.5 bg-emerald-950/80 border border-emerald-700/60 rounded text-emerald-300 font-mono text-[10px]">
                         ⚡ Selected Query
@@ -112,6 +112,12 @@ export default function SqlTableOutput({ results, isLoading = false }: SqlTableO
                   <Database className="w-3.5 h-3.5" />
                   Result #{idx + 1}
                 </span>
+
+                {res.database && (
+                  <span className="px-1.5 py-0.5 bg-sky-950/70 border border-sky-700/50 rounded text-sky-300 font-mono text-[10px] flex items-center gap-1">
+                    🗄️ {res.database}
+                  </span>
+                )}
 
                 {res.isSelected && (
                   <span className="px-1.5 py-0.5 bg-emerald-500/20 border border-emerald-500/40 rounded text-emerald-300 font-mono text-[10px] flex items-center gap-1">
@@ -164,12 +170,12 @@ export default function SqlTableOutput({ results, isLoading = false }: SqlTableO
             {/* DDL/DML Notice */}
             {isDmlOrDdl ? (
               <div className="p-3 text-slate-300 text-xs flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-400" />
-                <span>
-                  Query executed successfully.{' '}
-                  {res.affectedRows !== undefined && res.affectedRows > 0
-                    ? `${res.affectedRows} row(s) affected.`
-                    : 'Schema/state updated.'}
+                <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="font-mono text-emerald-300">
+                  {res.message ||
+                    (res.affectedRows !== undefined && res.affectedRows > 0
+                      ? `Query OK, ${res.affectedRows} row(s) affected.`
+                      : 'Query OK, schema/state updated.')}
                 </span>
               </div>
             ) : (
