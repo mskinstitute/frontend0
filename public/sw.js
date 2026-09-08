@@ -1,5 +1,5 @@
 // public/sw.js - MSK Institute Progressive Web App Service Worker
-const CACHE_VERSION = 'v-2.0.0';
+const CACHE_VERSION = 'v-2.1.1';
 const STATIC_CACHE = `msk-static-${CACHE_VERSION}`;
 const CONTENT_CACHE = `msk-content-${CACHE_VERSION}`;
 const OFFLINE_LESSONS_CACHE = 'msk-offline-lessons';

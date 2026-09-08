@@ -12,7 +12,9 @@ import {
   Sparkles,
   Play,
   Quote,
-  Flame
+  Flame,
+  CheckSquare,
+  Square,
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { slugify } from '@/lib/markdown';
@@ -715,13 +717,23 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           return (
             <ul key={idx} className="my-4 space-y-2.5 text-text-muted text-sm sm:text-base">
               {block.items.map((item, itemIdx) => {
-                const isCheck = item.startsWith('✅') || item.startsWith('✔');
+                const isTaskDone = item.startsWith('[x] ') || item.startsWith('[X] ');
+                const isTaskPending = item.startsWith('[ ] ');
+                const isCheck = !isTaskDone && !isTaskPending && (item.startsWith('✅') || item.startsWith('✔'));
                 const isCross = item.startsWith('❌');
-                const clean = item.replace(/^[✅✔❌]\s*/, '');
+                const clean = isTaskDone
+                  ? item.replace(/^\[[xX]\]\s*/, '')
+                  : isTaskPending
+                  ? item.replace(/^\[ \]\s*/, '')
+                  : item.replace(/^[✅✔❌]\s*/, '');
 
                 return (
-                  <li key={itemIdx} className="flex items-start gap-2.5">
-                    {isCheck ? (
+                  <li key={itemIdx} className={`flex items-start gap-2.5 ${isTaskDone ? 'line-through opacity-75' : ''}`}>
+                    {isTaskDone ? (
+                      <CheckSquare className="w-4 h-4 text-emerald-500 shrink-0 mt-1" />
+                    ) : isTaskPending ? (
+                      <Square className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                    ) : isCheck ? (
                       <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-1" />
                     ) : isCross ? (
                       <XCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />

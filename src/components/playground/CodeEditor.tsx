@@ -487,6 +487,7 @@ interface CodeEditorProps {
   onTogglePanel?: () => void;
   onToggleTerminal?: () => void;
   onToggleExplorer?: () => void;
+  onToggleSidebar?: () => void;
   onToggleSearch?: () => void;
   onOpenFile?: () => void;
   onCursorChange?: (pos: CursorPosition) => void;
@@ -504,6 +505,7 @@ export default function CodeEditor({
   onTogglePanel,
   onToggleTerminal,
   onToggleExplorer,
+  onToggleSidebar,
   onToggleSearch,
   onOpenFile,
   onCursorChange,
@@ -519,6 +521,7 @@ export default function CodeEditor({
   const onTogglePanelRef = useRef(onTogglePanel);
   const onToggleTerminalRef = useRef(onToggleTerminal);
   const onToggleExplorerRef = useRef(onToggleExplorer);
+  const onToggleSidebarRef = useRef(onToggleSidebar);
   const onToggleSearchRef = useRef(onToggleSearch);
   const onOpenFileRef = useRef(onOpenFile);
 
@@ -528,6 +531,7 @@ export default function CodeEditor({
     onTogglePanelRef.current = onTogglePanel;
     onToggleTerminalRef.current = onToggleTerminal;
     onToggleExplorerRef.current = onToggleExplorer;
+    onToggleSidebarRef.current = onToggleSidebar;
     onToggleSearchRef.current = onToggleSearch;
     onOpenFileRef.current = onOpenFile;
   });
@@ -579,6 +583,8 @@ export default function CodeEditor({
         return 'java';
       case 'sql':
         return 'sql';
+      case 'markdown':
+        return 'markdown';
       default:
         return 'plaintext';
     }
@@ -690,14 +696,14 @@ export default function CodeEditor({
       onSaveRef.current?.();
     });
 
-    // 3. Ctrl+B / Cmd+B: Toggle Output Panel
+    // 3. Ctrl+B / Cmd+B: Toggle Primary Side Bar (just like VS Code)
     editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB, () => {
-      onTogglePanelRef.current?.();
+      onToggleSidebarRef.current?.();
     });
 
-    // 4. Ctrl+` (backtick): Toggle Terminal
+    // 4. Ctrl+` (backtick): Toggle Terminal / Output Panel (just like VS Code)
     editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote, () => {
-      onToggleTerminalRef.current?.();
+      onTogglePanelRef.current?.();
     });
 
     // 5. Ctrl+Shift+E: Toggle File Explorer

@@ -20,6 +20,7 @@ const LANGUAGE_OPTIONS: { value: SupportedLanguage; label: string; icon: string 
   { value: 'c', label: 'C Programming', icon: '🔧' },
   { value: 'java', label: 'Java', icon: '☕' },
   { value: 'sql', label: 'SQL (SQLite)', icon: '🗄️' },
+  { value: 'markdown', label: 'Markdown (.md)', icon: '📝' },
 ];
 
 export default function ExamplesSidebar({

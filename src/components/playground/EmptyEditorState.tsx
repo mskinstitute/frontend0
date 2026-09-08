@@ -171,11 +171,21 @@ export default function EmptyEditorState({
 
             <div className="flex items-center justify-between">
               <span className="text-slate-400 flex items-center gap-1.5">
-                <Terminal className="w-3 h-3 text-sky-400" />
-                <span>Toggle Output Panel</span>
+                <Folder className="w-3 h-3 text-amber-400" />
+                <span>Toggle Primary Side Bar</span>
               </span>
               <kbd className="px-1.5 py-0.5 bg-[#252526] text-slate-300 border border-slate-700 rounded font-mono text-[10px]">
                 Ctrl + B
+              </kbd>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400 flex items-center gap-1.5">
+                <Terminal className="w-3 h-3 text-sky-400" />
+                <span>Toggle Terminal / Output Panel</span>
+              </span>
+              <kbd className="px-1.5 py-0.5 bg-[#252526] text-slate-300 border border-slate-700 rounded font-mono text-[10px]">
+                Ctrl + `
               </kbd>
             </div>
 

@@ -43,14 +43,14 @@ export default function ConsoleOutput({
   onExplainError,
   activeFileName,
 }: ConsoleOutputProps) {
-  const scrollBottomRef = useRef<HTMLDivElement | null>(null);
+  const outputContainerRef = useRef<HTMLDivElement | null>(null);
   const [copied, setCopied] = useState(false);
   const [activeConsoleTab, setActiveConsoleTab] = useState<'output' | 'stdin' | 'plots'>('output');
 
-  // Automatically scroll to bottom when new logs arrive and output tab is active
+  // Automatically scroll to bottom of the console messages container ONLY (never the outer window)
   useEffect(() => {
-    if (activeConsoleTab === 'output') {
-      scrollBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (activeConsoleTab === 'output' && outputContainerRef.current && logs.length > 0) {
+      outputContainerRef.current.scrollTop = outputContainerRef.current.scrollHeight;
     }
   }, [logs, activeConsoleTab]);
 
@@ -295,7 +295,7 @@ export default function ConsoleOutput({
           ))}
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto p-3 space-y-1.5 selection:bg-secondary/30 selection:text-white">
+        <div ref={outputContainerRef} className="flex-1 overflow-y-auto p-3 space-y-1.5 selection:bg-secondary/30 selection:text-white">
           {hasStdin && (
             <div
               onClick={() => setActiveConsoleTab('stdin')}
@@ -372,7 +372,6 @@ export default function ConsoleOutput({
               );
             })
           )}
-          <div ref={scrollBottomRef} />
         </div>
       )}
     </div>

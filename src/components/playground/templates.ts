@@ -632,4 +632,217 @@ ORDER BY e.enroll_id;
 `,
     },
   ],
+  markdown: [
+    {
+      id: 'md-readme',
+      title: '📋 Project README.md Template',
+      language: 'markdown',
+      description: 'Professional GitHub-ready project README with badges, tables, and code snippets.',
+      code: `# 🚀 Awesome Web Project
+
+A fast, responsive, and modern full-stack web application built for the **MSK Institute of Technology** learning ecosystem.
+
+---
+
+## ✨ Features
+
+| Feature | Description | Status |
+| :--- | :--- | :---: |
+| **Authentication** | Secure JWT-based user login & registration | ✅ Done |
+| **Monaco Editor** | Real-time code playground with multi-language runtimes | ✅ Done |
+| **Live Preview** | Side-by-side instant Markdown & Web rendering | ⚡ Live |
+| **Dark Theme** | Authentic VS Code dark and high-contrast colorways | 🎨 Active |
+
+---
+
+## 📦 Getting Started
+
+### 1. Prerequisites
+- Node.js \`>= 18.0.0\`
+- npm or yarn package manager
+
+### 2. Installation
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/msk-institute/my-project.git
+
+# Navigate to project folder
+cd my-project
+
+# Install dependencies
+npm install
+\`\`\`
+
+### 3. Running the Development Server
+\`\`\`bash
+npm run dev
+\`\`\`
+Visit \`http://localhost:3000\` in your browser to see the live app.
+
+---
+
+> 💡 **Pro Tip**: Press \`Ctrl + Enter\` in the playground to trigger real-time preview and compilation instantly!
+
+> ⚠️ **Important Warning**: Never commit sensitive API credentials or private environment secrets to public GitHub repositories.
+
+---
+
+## 📜 License
+Distributed under the **MIT License**. Created with ❤️ by Er. Sumit Kumar.
+`,
+    },
+    {
+      id: 'md-notes',
+      title: '🎓 Student Lecture & Study Notes',
+      language: 'markdown',
+      description: 'Structured academic study notes template with callouts, formulas, and checklists.',
+      code: `# 📘 Lecture Notes: Python Data Structures & Algorithms
+
+- **Course**: Full-Stack Python Masterclass (2026)
+- **Instructor**: Er. Sumit Kumar (MSK Institute)
+- **Topic**: Lists, Dictionaries, and Time Complexity
+
+---
+
+## 🎯 Learning Objectives
+1. Understand Python \`list\` vs \`tuple\` internal memory allocations.
+2. Master Dictionary hash-map lookups with \`O(1)\` average time.
+3. Apply binary search algorithms to sorted collections.
+
+---
+
+## 📌 Key Concepts
+
+> 📌 **Note**: In Python, lists are dynamic arrays. Appending an element has an amortized time complexity of \`O(1)\`.
+
+### Time Complexity Comparison
+
+| Data Structure | Access | Search | Insertion | Deletion |
+| :--- | :---: | :---: | :---: | :---: |
+| **Array / List** | \`O(1)\` | \`O(n)\` | \`O(n)\` | \`O(n)\` |
+| **Hash Map / Dict** | \`O(1)\` | \`O(1)\` | \`O(1)\` | \`O(1)\` |
+| **Binary Search Tree** | \`O(log n)\` | \`O(log n)\` | \`O(log n)\` | \`O(log n)\` |
+
+---
+
+## 💻 Code Example: Binary Search
+
+\`\`\`python
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid  # Found at index
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+            
+    return -1  # Not found
+
+numbers = [10, 25, 33, 47, 59, 72, 88, 99]
+print("Index of 47:", binary_search(numbers, 47))
+\`\`\`
+
+---
+
+## ✅ Revision Checklist
+- [x] Review Big-O notation fundamentals
+- [x] Implement linear search vs binary search
+- [ ] Practice 5 LeetCode array challenges
+- [ ] Submit Assignment 3 on MSK Portal
+`,
+    },
+    {
+      id: 'md-cheatsheet',
+      title: '⚡ Markdown & Coding Cheatsheet',
+      language: 'markdown',
+      description: 'Quick reference sheet for Markdown syntax, shortcuts, and styling rules.',
+      code: `# ⚡ Markdown Quick Reference Cheatsheet
+
+A handy guide for writing clean documentation, blogs, and project guides in the MSK Playground.
+
+---
+
+## 🔤 Text Formatting
+
+| Style | Syntax | Output Example |
+| :--- | :--- | :--- |
+| **Bold** | \`**bold text**\` | **bold text** |
+| *Italic* | \`*italic text*\` | *italic text* |
+| ~~Strikethrough~~ | \`~~deleted text~~\` | ~~deleted text~~ |
+| \`Inline Code\` | \` \\\`code\\\` \` | \`print("hello")\` |
+| [Hyperlink](https://mskinstitute.in) | \`[MSK](https://mskinstitute.in)\` | [MSK Institute](https://mskinstitute.in) |
+
+---
+
+## 📑 Headings Hierarchy
+# Heading Level 1 (\`# \`)
+## Heading Level 2 (\`## \`)
+### Heading Level 3 (\`### \`)
+#### Heading Level 4 (\`#### \`)
+
+---
+
+## 🛠️ VS Code Playground Shortcuts
+
+| Shortcut | Action |
+| :--- | :--- |
+| \`Ctrl + Enter\` | Run Code / Toggle Live Preview |
+| \`Ctrl + S\` | Save Workspace File |
+| \`Ctrl + B\` | Toggle Left Side Bar (Explorer, Search, Examples) |
+| \`Ctrl + \`\` | Toggle Output Panel & Terminal |
+| \`Esc\` | Exit Focus / Zen Mode |
+
+---
+
+> 💡 **Tip**: Fenced code blocks support syntax highlighting for python, javascript, html, css, cpp, c, java, sql, and bash!
+`,
+    },
+    {
+      id: 'md-tasklist',
+      title: '☑️ Project Sprint & Task Tracker',
+      language: 'markdown',
+      description: 'Interactive sprint planner and checklist with project milestones.',
+      code: `# 🎯 Project Sprint Tracker & Milestones
+
+- **Sprint**: Q1 - Product Launch
+- **Target Deadline**: March 31, 2026
+- **Status**: 🟢 In Progress
+
+---
+
+## 📌 High Priority Deliverables
+- [x] Setup Next.js 15 App Router architecture
+- [x] Integrate Monaco Editor with multi-language WebAssembly compilers
+- [x] Implement VS Code-style tabs and file explorer
+- [ ] Deploy staging environment for beta students
+- [ ] Configure automatic cloud backup for user code
+
+---
+
+## 📋 Weekly Backlog
+
+### Phase 1: Core Features
+- [x] Responsive layout with mobile support
+- [x] Python Pyodide runtime integration
+- [x] Web preview iframe sandbox
+- [x] SQLite in-browser database engine
+
+### Phase 2: User Experience
+- [x] Search across workspace files
+- [x] Coding challenges and practice drills
+- [x] Examples and starter templates
+- [ ] Export workspace as ZIP archive
+
+---
+
+> 📌 **Note**: All completed items will update visually with strike-through styling and checkmarks!
+`,
+    },
+  ],
 };
+

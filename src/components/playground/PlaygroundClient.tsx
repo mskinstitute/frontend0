@@ -19,6 +19,8 @@ import { STARTER_TEMPLATES } from './templates';
 import CodeEditor from './CodeEditor';
 import EmptyEditorState from './EmptyEditorState';
 import WebPreview from './WebPreview';
+import MarkdownPreview from './MarkdownPreview';
+import MarkdownToolbar from './MarkdownToolbar';
 import ConsoleOutput from './ConsoleOutput';
 import SqlTableOutput from './SqlTableOutput';
 import PlaygroundSettingsModal from './PlaygroundSettingsModal';
@@ -38,7 +40,7 @@ import {
   Keyboard, SplitSquareHorizontal, SplitSquareVertical, 
   GitBranch, GripVertical, GripHorizontal, EyeOff, Layout,
   X, CheckCircle2, ChevronRight, FilePlus, Share2, Archive, ChevronDown, Save, Camera,
-  XCircle, FolderPlus, ChevronsDownUp, FileUp, FolderUp, FolderInput, Upload
+  XCircle, FolderPlus, ChevronsDownUp, FileUp, FolderUp, FolderInput, Upload, BookOpen
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { editor } from 'monaco-editor';
@@ -270,7 +272,7 @@ export default function PlaygroundClient({
   // Multi-file state
   const [language, setLanguage] = useState<SupportedLanguage>(resolvedInitialLang);
   const [files, setFiles] = useState<PlaygroundFile[]>(() =>
-    buildInitialFiles(resolvedInitialLang, resolvedInitialCode)
+    hasIncomingCode ? buildInitialFiles(resolvedInitialLang, resolvedInitialCode) : []
   );
   const [folders, setFolders] = useState<PlaygroundFolder[]>([]);
   const [activeFileId, setActiveFileId] = useState<string>(() => {
@@ -288,8 +290,26 @@ export default function PlaygroundClient({
     return [];
   });
 
-  // Sidebar view ('explorer', 'search', or closed/null)
+  // Sidebar view ('explorer', 'search', 'challenges', 'examples', or closed/null)
   const [sidebarView, setSidebarView] = useState<SidebarView>(null);
+  const lastSidebarViewRef = useRef<SidebarView>('explorer');
+
+  useEffect(() => {
+    if (sidebarView !== null) {
+      lastSidebarViewRef.current = sidebarView;
+    }
+  }, [sidebarView]);
+
+  const toggleSidebar = useCallback(() => {
+    setSidebarView((prev) => (prev !== null ? null : (lastSidebarViewRef.current || 'explorer')));
+  }, []);
+
+  // Ensure window stays at top when opening playground (prevent unwanted auto-scroll)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
   // Active terminal / preview tab
   const [activeTab, setActiveTab] = useState<'preview' | 'terminal'>(
@@ -335,8 +355,8 @@ export default function PlaygroundClient({
   // Status bar cursor line & column
   const [cursorPos, setCursorPos] = useState<CursorPosition>({ lineNumber: 1, column: 1 });
 
-  // Output panel open/close state
-  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(true);
+  // Output panel open/close state (hidden by default, opens automatically when code is run or via Ctrl+`)
+  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
 
   // Mobile mode tab switch (editor vs output on screens < 768px)
   const [mobileActiveView, setMobileActiveView] = useState<'editor' | 'output'>('editor');
@@ -429,27 +449,8 @@ export default function PlaygroundClient({
       console.warn('Could not parse shared URL hash:', hashErr);
     }
 
-    // Load saved workspace files for current language if available (unless incoming code is provided or shared URL is opened)
-    try {
-      if (typeof window !== 'undefined' && !window.location.hash && !queryCode && !initialCode) {
-        const savedFilesJson = localStorage.getItem(`${SAVED_FILES_PREFIX}${resolvedInitialLang}`);
-        if (savedFilesJson) {
-          const parsed = JSON.parse(savedFilesJson);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            setFiles(parsed);
-          }
-        }
-        const savedFoldersJson = localStorage.getItem(`${SAVED_FOLDERS_PREFIX}${resolvedInitialLang}`);
-        if (savedFoldersJson) {
-          const parsedFolders = JSON.parse(savedFoldersJson);
-          if (Array.isArray(parsedFolders)) {
-            setFolders(parsedFolders);
-          }
-        }
-      }
-    } catch (err) {
-      console.warn('Could not restore saved files or folders from localStorage:', err);
-    }
+    // Do not auto-populate default files on initial mount so workspace starts with no files open
+    // Files are created on demand, loaded from examples, or loaded from tutorial code.
   }, [resolvedInitialLang, queryCode, initialCode]);
 
   // Synchronize incoming initialCode or initialLanguage prop changes (e.g. clicking different examples in tutorial)
@@ -734,14 +735,11 @@ export default function PlaygroundClient({
 
   const handleCreateFile = (name: string, lang: SupportedLanguage, folderId?: string | null) => {
     setLanguage(lang);
-    if (lang === 'html') {
-      setActiveTab('preview');
-    }
     const newFile: PlaygroundFile = {
       id: 'file-' + Math.random().toString(36).substring(2, 9),
       name,
       language: lang,
-      content: lang === 'python' ? `# ${name}\n` : `/* ${name} */\n`,
+      content: '', // Completely blank file with zero boilerplate
       isRemovable: true,
       folderId: folderId || null,
     };
@@ -1058,30 +1056,35 @@ export default function PlaygroundClient({
     }
   };
 
-  // Global keyboard shortcuts (Ctrl+`, Ctrl+Shift+E, Ctrl+Shift+F, Ctrl+O, Alt+O)
+  // Global keyboard shortcuts (Ctrl+B, Ctrl+`, Ctrl+Shift+E, Ctrl+Shift+F, Ctrl+O, Alt+O)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // 1. Ctrl + ` (backtick) -> toggle terminal
+      // 1. Ctrl + B / Cmd + B -> toggle primary side bar (Explorer, Search, Challenges, Examples) just like VS Code
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && (e.key.toLowerCase() === 'b' || e.code === 'KeyB')) {
+        e.preventDefault();
+        toggleSidebar();
+      }
+      // 2. Ctrl + ` (backtick) -> toggle terminal / output panel just like VS Code
       if ((e.ctrlKey || e.metaKey) && (e.key === '`' || e.code === 'Backquote')) {
         e.preventDefault();
         setIsPanelOpen((prev) => !prev);
       }
-      // 2. Ctrl + Shift + E -> toggle explorer
+      // 3. Ctrl + Shift + E -> toggle explorer
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
         e.preventDefault();
         setSidebarView((prev) => (prev === 'explorer' ? null : 'explorer'));
       }
-      // 3. Ctrl + Shift + F -> toggle search
+      // 4. Ctrl + Shift + F -> toggle search
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'f') {
         e.preventDefault();
         setSidebarView((prev) => (prev === 'search' ? null : 'search'));
       }
-      // 4. Ctrl + O / Cmd + O -> Open local file from device
+      // 5. Ctrl + O / Cmd + O -> Open local file from device
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'o') {
         e.preventDefault();
         triggerOpenFilePicker();
       }
-      // 5. Alt + O -> Open local folder from device
+      // 6. Alt + O -> Open local folder from device
       if (e.altKey && e.key.toLowerCase() === 'o') {
         e.preventDefault();
         triggerOpenFolderPicker();
@@ -1089,7 +1092,7 @@ export default function PlaygroundClient({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [triggerOpenFilePicker, triggerOpenFolderPicker]);
+  }, [triggerOpenFilePicker, triggerOpenFolderPicker, toggleSidebar]);
 
   // Jump to line from Search result
   const handleSelectSearchResult = (fileId: string, lineNumber: number, column: number) => {
@@ -1459,6 +1462,33 @@ finally:
     [getLatestFiles, language, activeFile, activeFileId]
   );
 
+  // Insert Markdown formatting snippet or wrap selected text in Monaco editor
+  const handleInsertMarkdownSnippet = useCallback(
+    (prefix: string, suffix: string = '', placeholder: string = '') => {
+      const editor = editorInstanceRef.current;
+      if (!editor) return;
+      const selection = editor.getSelection();
+      if (!selection) return;
+
+      const model = editor.getModel();
+      if (!model) return;
+
+      const selectedText = model.getValueInRange(selection);
+      const textToInsert = selectedText || placeholder;
+      const newText = `${prefix}${textToInsert}${suffix}`;
+
+      editor.executeEdits('markdown-toolbar', [
+        {
+          range: selection,
+          text: newText,
+          forceMoveMarkers: true,
+        },
+      ]);
+      editor.focus();
+    },
+    []
+  );
+
   // Execute Code Logic
   const handleRunCode = async () => {
     // If no tab is open, automatically open the first file or prompt
@@ -1494,11 +1524,15 @@ finally:
     setMobileActiveView('output');
     const startTime = performance.now();
 
-    if (language === 'html') {
+    if (language === 'html' || language === 'markdown') {
       const currentActiveId = activeFileIdRef.current || activeFileId;
       const activeFileObj = currentFiles.find((f) => f.id === currentActiveId) || currentFiles[0];
       setActiveTab('preview');
-      addLog('success', `🚀 Rendered Web Preview (${activeFileObj?.name || 'index.html'}).`);
+      if (language === 'markdown') {
+        addLog('success', `📝 Rendered Live Markdown Preview (${activeFileObj?.name || 'document.md'}).`);
+      } else {
+        addLog('success', `🚀 Rendered Web Preview (${activeFileObj?.name || 'index.html'}).`);
+      }
       setIsRunning(false);
       return;
     }
@@ -2076,27 +2110,6 @@ _err_result = _stderr_buffer.getvalue()
               <span className="text-secondary font-extrabold">MSK</span> Code Playground
             </span>
           </div>
-
-          {/* Active Language Badge (Click to open Examples & Templates panel) */}
-          <ActionTooltip label="Active Language (Click to browse Examples & Templates)" placement="bottom">
-            <button
-              type="button"
-              onClick={() => setSidebarView((prev) => (prev === 'examples' ? null : 'examples'))}
-              className="flex items-center gap-1.5 px-2.5 py-1 bg-[#252526] hover:bg-[#2d2d2e] border border-[#3c3c3c] hover:border-emerald-500/60 rounded-lg text-slate-200 text-xs font-semibold cursor-pointer transition-colors shadow-xs"
-            >
-              <span>{getFileIcon(language)}</span>
-              <span className="capitalize text-[11px] font-medium">
-                {language === 'cpp'
-                  ? 'C++'
-                  : language === 'html'
-                  ? 'Web (HTML)'
-                  : language === 'sql'
-                  ? 'SQL (SQLite)'
-                  : language}
-              </span>
-              <ChevronRight className="w-3 h-3 text-slate-400" />
-            </button>
-          </ActionTooltip>
         </div>
 
         {/* Right: Primary Run Button & Toolbar Controls */}
@@ -2104,7 +2117,9 @@ _err_result = _stderr_buffer.getvalue()
           {/* PRIMARY RUN CODE BUTTON */}
           <ActionTooltip
             label={
-              language === 'sql' && hasSelection
+              language === 'markdown'
+                ? `Preview Markdown (${activeFile?.name || 'document.md'})`
+                : language === 'sql' && hasSelection
                 ? 'Run Selected SQL Query'
                 : `Run Active File (${activeFile?.name || 'Code'})`
             }
@@ -2115,14 +2130,20 @@ _err_result = _stderr_buffer.getvalue()
               onClick={handleRunCode}
               disabled={isRunning || isPyodideLoading || isSqlLoading}
               className={`w-8 h-8 flex items-center justify-center ${
-                language === 'sql' && hasSelection
+                language === 'markdown' || (language === 'sql' && hasSelection)
                   ? 'bg-emerald-600 hover:bg-emerald-500 shadow-sm shadow-emerald-950/40 text-white'
                   : 'bg-[#0e639c] hover:bg-[#1177bb] text-white'
               } active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer disabled:opacity-50`}
-              aria-label={`Run ${activeFile?.name || 'Code'} (Ctrl + Enter)`}
+              aria-label={
+                language === 'markdown'
+                  ? `Preview Markdown (${activeFile?.name || 'document.md'}) (Ctrl + Enter)`
+                  : `Run ${activeFile?.name || 'Code'} (Ctrl + Enter)`
+              }
             >
               {isRunning || isPyodideLoading || isSqlLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
+              ) : language === 'markdown' ? (
+                <Eye className="w-4 h-4" />
               ) : language === 'sql' && hasSelection ? (
                 <Sparkles className="w-4 h-4 text-emerald-200" />
               ) : (
@@ -2171,7 +2192,7 @@ _err_result = _stderr_buffer.getvalue()
                 ? 'Move Output Panel to Bottom'
                 : 'Move Output Panel to Right'
             }
-            shortcut="Ctrl + B"
+            shortcut="Layout"
             placement="bottom"
           >
             <button
@@ -2188,25 +2209,6 @@ _err_result = _stderr_buffer.getvalue()
               ) : (
                 <SplitSquareHorizontal className="w-4 h-4" />
               )}
-            </button>
-          </ActionTooltip>
-
-          {/* Focus Mode (Zen Mode) */}
-          <ActionTooltip
-            label={settings.focusMode ? 'Exit Zen Focus Mode' : 'Zen Distraction-Free Focus Mode'}
-            shortcut="Esc"
-            placement="bottom"
-          >
-            <button
-              onClick={() => updateSettings({ focusMode: !settings.focusMode })}
-              aria-label="Toggle Zen Focus Mode"
-              className={`w-8 h-8 rounded-lg transition-colors cursor-pointer flex items-center justify-center ${
-                settings.focusMode
-                  ? 'bg-secondary text-white'
-                  : 'text-slate-400 hover:text-white hover:bg-[#2a2d2e]'
-              }`}
-            >
-              {settings.focusMode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </ActionTooltip>
 
@@ -2393,6 +2395,25 @@ _err_result = _stderr_buffer.getvalue()
             </button>
           </ActionTooltip>
 
+          {/* Focus Mode (Zen Mode) */}
+          <ActionTooltip
+            label={settings.focusMode ? 'Exit Zen Focus Mode' : 'Zen Distraction-Free Focus Mode'}
+            shortcut="Esc"
+            placement="bottom-end"
+          >
+            <button
+              onClick={() => updateSettings({ focusMode: !settings.focusMode })}
+              aria-label="Toggle Zen Focus Mode"
+              className={`w-8 h-8 rounded-lg transition-colors cursor-pointer flex items-center justify-center ${
+                settings.focusMode
+                  ? 'bg-secondary text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-[#2a2d2e]'
+              }`}
+            >
+              {settings.focusMode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
+          </ActionTooltip>
+
           {/* Fullscreen toggle */}
           <ActionTooltip
             label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
@@ -2543,11 +2564,6 @@ _err_result = _stderr_buffer.getvalue()
                     >
                       <span>{getFileIcon(file.language)}</span>
                       <span>{file.name}</span>
-                      {isActive && (
-                        <span className="text-[9px] px-1 py-0.2 bg-secondary/25 text-amber-300 font-sans rounded font-semibold ml-0.5 select-none">
-                          active
-                        </span>
-                      )}
                       {isUnsaved && (
                         <span
                           className="w-2 h-2 rounded-full bg-amber-400 shrink-0 shadow-xs ml-0.5"
@@ -2570,6 +2586,39 @@ _err_result = _stderr_buffer.getvalue()
 
               {/* Right Tab Bar Controls: Close All Editors + Toggle Output Panel */}
               <div className="flex items-center gap-1">
+                {/* Open Preview to the Side (when Markdown or HTML is active) */}
+                {(language === 'markdown' || language === 'html') && openTabIds.length > 0 && (
+                  <ActionTooltip
+                    label={
+                      isPanelOpen && activeTab === 'preview'
+                        ? 'Close Live Preview'
+                        : 'Open Preview to the Side'
+                    }
+                    shortcut="Ctrl + Enter"
+                    placement="bottom-end"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (isPanelOpen && activeTab === 'preview') {
+                          setIsPanelOpen(false);
+                        } else {
+                          setIsPanelOpen(true);
+                          setActiveTab('preview');
+                        }
+                      }}
+                      aria-label="Open Preview to the Side"
+                      className={`p-1 rounded transition-colors cursor-pointer ${
+                        isPanelOpen && activeTab === 'preview'
+                          ? 'text-secondary bg-secondary/20'
+                          : 'text-slate-400 hover:text-white hover:bg-[#333]'
+                      }`}
+                    >
+                      <BookOpen className="w-3.5 h-3.5" />
+                    </button>
+                  </ActionTooltip>
+                )}
+
                 {openTabIds.length > 0 && (
                   <ActionTooltip
                     label="Close All Editors"
@@ -2590,12 +2639,12 @@ _err_result = _stderr_buffer.getvalue()
                 {/* Quick action: toggle output panel */}
                 <ActionTooltip
                   label={isPanelOpen ? 'Hide Terminal / Preview Panel' : 'Show Terminal / Preview Panel'}
-                  shortcut="Ctrl + B"
+                  shortcut="Ctrl + `"
                   placement="bottom-end"
                 >
                   <button
                     onClick={() => setIsPanelOpen((prev) => !prev)}
-                    aria-label="Toggle Output Panel (Ctrl + B)"
+                    aria-label="Toggle Output Panel (Ctrl + `)"
                     className="p-1 text-slate-400 hover:text-white rounded hover:bg-[#333] transition-colors hidden md:block"
                   >
                     {settings.panelPosition === 'right' ? (
@@ -2630,39 +2679,54 @@ _err_result = _stderr_buffer.getvalue()
                   hasFiles={files.length > 0}
                 />
               ) : (
-                <CodeEditor
-                  value={activeCode}
-                  onChange={handleCodeChange}
-                  language={activeFile?.language || language}
-                  settings={settings}
-                  onRun={handleRunCode}
-                  onSave={handleSaveDocument}
-                  onOpenFile={() => triggerOpenFilePicker()}
-                  onTogglePanel={() => setIsPanelOpen((prev) => !prev)}
-                  onToggleTerminal={() => {
-                    setIsPanelOpen(true);
-                    setActiveTab('terminal');
-                  }}
-                  onToggleExplorer={() =>
-                    setSidebarView((prev) => (prev === 'explorer' ? null : 'explorer'))
-                  }
-                  onToggleSearch={() =>
-                    setSidebarView((prev) => (prev === 'search' ? null : 'search'))
-                  }
-                  onCursorChange={(pos) => setCursorPos(pos)}
-                  onMountEditor={(ed) => {
-                    editorInstanceRef.current = ed;
-                    ed.onDidChangeCursorSelection((e) => {
-                      const model = ed.getModel();
-                      if (model && !e.selection.isEmpty()) {
-                        const text = model.getValueInRange(e.selection).trim();
-                        setHasSelection(text.length > 0);
-                      } else {
-                        setHasSelection(false);
+                <div className="w-full h-full flex flex-col overflow-hidden">
+                  {language === 'markdown' && (
+                    <MarkdownToolbar
+                      onInsertMarkdown={handleInsertMarkdownSnippet}
+                      onOpenPreview={() => {
+                        setIsPanelOpen(true);
+                        setActiveTab('preview');
+                      }}
+                      isPreviewOpen={isPanelOpen && activeTab === 'preview'}
+                    />
+                  )}
+                  <div className="flex-1 w-full h-full relative overflow-hidden">
+                    <CodeEditor
+                      value={activeCode}
+                      onChange={handleCodeChange}
+                      language={activeFile?.language || language}
+                      settings={settings}
+                      onRun={handleRunCode}
+                      onSave={handleSaveDocument}
+                      onOpenFile={() => triggerOpenFilePicker()}
+                      onTogglePanel={() => setIsPanelOpen((prev) => !prev)}
+                      onToggleSidebar={toggleSidebar}
+                      onToggleTerminal={() => {
+                        setIsPanelOpen(true);
+                        setActiveTab('terminal');
+                      }}
+                      onToggleExplorer={() =>
+                        setSidebarView((prev) => (prev === 'explorer' ? null : 'explorer'))
                       }
-                    });
-                  }}
-                />
+                      onToggleSearch={() =>
+                        setSidebarView((prev) => (prev === 'search' ? null : 'search'))
+                      }
+                      onCursorChange={(pos) => setCursorPos(pos)}
+                      onMountEditor={(ed) => {
+                        editorInstanceRef.current = ed;
+                        ed.onDidChangeCursorSelection((e) => {
+                          const model = ed.getModel();
+                          if (model && !e.selection.isEmpty()) {
+                            const text = model.getValueInRange(e.selection).trim();
+                            setHasSelection(text.length > 0);
+                          } else {
+                            setHasSelection(false);
+                          }
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
               )}
             </div>
 
@@ -2709,7 +2773,7 @@ _err_result = _stderr_buffer.getvalue()
               {/* Panel Tabs Bar (VS Code Integrated Terminal / Output Tab) */}
               <div className="flex items-center justify-between px-3 bg-[#252526] border-b border-[#1e1e1e] text-xs">
                 <div className="flex items-center gap-1">
-                  {language === 'html' && (
+                  {(language === 'html' || language === 'markdown') && (
                     <button
                       onClick={() => setActiveTab('preview')}
                       className={`flex items-center gap-1.5 px-3 py-1.5 font-medium transition-colors cursor-pointer text-xs ${
@@ -2719,7 +2783,7 @@ _err_result = _stderr_buffer.getvalue()
                       }`}
                     >
                       <Eye className="w-3.5 h-3.5 text-secondary" />
-                      <span>Live Preview</span>
+                      <span>{language === 'markdown' ? 'Markdown Preview' : 'Live Preview'}</span>
                     </button>
                   )}
 
@@ -2767,7 +2831,7 @@ _err_result = _stderr_buffer.getvalue()
 
                   <ActionTooltip
                     label="Close Terminal / Preview Panel"
-                    shortcut="Ctrl + B"
+                    shortcut="Ctrl + `"
                     placement="bottom-end"
                   >
                     <button
@@ -2823,6 +2887,12 @@ _err_result = _stderr_buffer.getvalue()
                       )}
                     </div>
                   </div>
+                ) : activeTab === 'preview' && language === 'markdown' ? (
+                  <MarkdownPreview
+                    content={activeFile?.content || activeCode || ''}
+                    fileName={activeFile?.name || 'document.md'}
+                    theme={settings.theme}
+                  />
                 ) : activeTab === 'preview' && language === 'html' ? (
                   <WebPreview
                     htmlCode={getCompositeHtml()}
@@ -2877,6 +2947,16 @@ _err_result = _stderr_buffer.getvalue()
             >
               <Sparkles className="w-2.5 h-2.5 text-emerald-300" />
               <span>Query Selected</span>
+            </span>
+          )}
+
+          {language === 'markdown' && (
+            <span
+              title="Markdown Live Preview Ready (Ctrl + Enter)"
+              className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 bg-white/15 text-white border border-white/20 rounded text-[10px] font-mono"
+            >
+              <Eye className="w-2.5 h-2.5 text-emerald-300" />
+              <span>Markdown</span>
             </span>
           )}
 

@@ -27,12 +27,12 @@ const SHORTCUTS: ShortcutItem[] = [
   },
   {
     keys: ['Ctrl', 'B'],
-    description: 'Toggle Output / Terminal panel',
-    category: 'execution',
+    description: 'Toggle Primary Side Bar (File Explorer, Search, Challenges, Examples)',
+    category: 'navigation',
   },
   {
     keys: ['Ctrl', '`'],
-    description: 'Toggle Terminal Console view',
+    description: 'Toggle Terminal / Output panel (opens automatically on code run)',
     category: 'execution',
   },
   {

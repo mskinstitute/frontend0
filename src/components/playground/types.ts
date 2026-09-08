@@ -7,7 +7,8 @@ export type SupportedLanguage =
   | 'cpp'
   | 'c'
   | 'java'
-  | 'sql';
+  | 'sql'
+  | 'markdown';
 
 export interface CodeTemplate {
   id: string;

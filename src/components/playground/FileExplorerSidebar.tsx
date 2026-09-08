@@ -68,6 +68,9 @@ export function detectLanguageFromExtension(fileName: string): SupportedLanguage
       return 'java';
     case 'sql':
       return 'sql';
+    case 'md':
+    case 'markdown':
+      return 'markdown';
     default:
       return 'python';
   }
@@ -93,6 +96,8 @@ export function getFileIcon(lang: SupportedLanguage): string {
       return '☕';
     case 'sql':
       return '🗄️';
+    case 'markdown':
+      return '📝';
     default:
       return '📄';
   }
@@ -584,12 +589,6 @@ export default function FileExplorerSidebar({
                           ) : (
                             <span className="truncate font-mono text-[11px]">{file.name}</span>
                           )}
-
-                          {isActive && (
-                            <span className="text-[8px] px-1 py-0.2 bg-secondary/30 text-amber-300 border border-secondary/40 font-sans rounded font-bold uppercase shrink-0">
-                              Active
-                            </span>
-                          )}
                         </div>
 
                         {/* File actions on hover */}
@@ -669,12 +668,6 @@ export default function FileExplorerSidebar({
                   />
                 ) : (
                   <span className="truncate font-mono text-[11px]">{file.name}</span>
-                )}
-
-                {isActive && (
-                  <span className="text-[9px] px-1.5 py-0.2 bg-secondary/30 text-amber-300 border border-secondary/40 font-sans rounded font-bold uppercase tracking-wider shrink-0">
-                    Active
-                  </span>
                 )}
               </div>
 
