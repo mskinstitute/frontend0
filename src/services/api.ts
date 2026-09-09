@@ -112,8 +112,12 @@ export async function fetchTutorialBySlug(slug: string): Promise<{ tutorial: Tut
     fetchCourses(),
   ]);
 
+  const normalized = slug.toLowerCase().trim();
   const tutorial = tutorials.find(
-    (t) => t.slug.toLowerCase() === slug.toLowerCase() || t.id.toLowerCase() === slug.toLowerCase()
+    (t) =>
+      t.slug.toLowerCase() === normalized ||
+      t.id.toLowerCase() === normalized ||
+      (normalized === 'html5-complete-masterclass' && t.slug === 'html5-complete-course')
   );
   if (!tutorial) return null;
 

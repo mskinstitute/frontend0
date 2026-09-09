@@ -78,6 +78,8 @@ export async function fetchTutorialTopic(
     normalizedSlug === 'introduction' ? 'introduction-to-html.md' : null,
     normalizedSlug === 'vs-code-setup' ? 'vscode-setup.md' : null,
     normalizedSlug === 'vscode-setup' ? 'vs-code-setup.md' : null,
+    normalizedSlug === 'elements' || normalizedSlug === 'html-elements' ? 'elements.md' : null,
+    normalizedSlug === 'attributes' || normalizedSlug === 'html-attributes' ? 'attributes.md' : null,
     normalizedSlug.includes('document-structure') ? 'basic-document-structure.md' : null,
     normalizedSlug.includes('document-structure') ? 'basic-document-structure-boilerplate.md' : null,
     normalizedSlug.includes('heading') ? 'html-headings.md' : null,

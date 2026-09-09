@@ -1,9 +1,9 @@
 [
   {
-    "id": "course-html5-masterclass",
+    "id": "course-html5-complete-course",
     "status": "PUBLISH",
-    "title": "HTML5 Complete Masterclass: From Beginner to Pro",
-    "slug": "html5-complete-masterclass",
+    "title": "HTML5 Complete Course",
+    "slug": "html5-complete-course",
     "featuredImageUrl": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=450&auto=format&fit=crop",
     "shortDescription": "The definitive, comprehensive HTML5 full course. Master modern semantic architecture, accessible web forms, responsive multimedia, ARIA, SEO meta tags, and browser APIs with live hands-on projects.",
     "categories": [
@@ -46,6 +46,21 @@
             "id": "html5-t1.2",
             "title": "Basic Document Structure",
             "sortOrder": 2
+          },
+          {
+            "id": "html5-t1.3",
+            "title": "VS-Code Setup",
+            "sortOrder": 3
+          },
+          {
+            "id": "html5-t1.4",
+            "title": "Elements",
+            "sortOrder": 4
+          },
+          {
+            "id": "html5-t1.5",
+            "title": "Attributes",
+            "sortOrder": 5
           }
         ]
       },
@@ -5889,297 +5904,6 @@
             "id": "react-js-for-advanced-t18.1",
             "title": "Topic 1",
             "sortOrder": 1
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-html-complete-course",
-    "status": "PUBLISH",
-    "title": "HTML Complete Course",
-    "slug": "html-complete-course",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Learn HTML step-by-step: structure pages, semantic tags, forms, media, accessibility, and SEO. Build real pages and mini projects for hands-on practice.",
-    "categories": [
-      "Web Development",
-      "Frontend",
-      "HTML"
-    ],
-    "level": "Beginner",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 1,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "ONLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "html-complete-course-ch1",
-        "title": "Chapter 1: Introduction to the Web and HTML",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "html-complete-course-t1.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t1.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t1.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch2",
-        "title": "Chapter 2: Basic HTML Structure & Elements",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "html-complete-course-t2.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t2.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t2.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch3",
-        "title": "Chapter 3: Text Formatting & Quotations",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "html-complete-course-t3.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t3.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t3.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch4",
-        "title": "Chapter 4: Links, Images and Multimedia",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "html-complete-course-t4.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t4.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t4.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch5",
-        "title": "Chapter 5: Lists, Tables and Semantic Grouping",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "html-complete-course-t5.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t5.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t5.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch6",
-        "title": "Chapter 6: Forms and User Input",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "html-complete-course-t6.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t6.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t6.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch7",
-        "title": "Chapter 7: Attributes, Metadata and Head Elements",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "html-complete-course-t7.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t7.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t7.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch8",
-        "title": "Chapter 8: HTML5 APIs Basics",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "html-complete-course-t8.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t8.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t8.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch9",
-        "title": "Chapter 9: Accessibility and Semantic Markup",
-        "sortOrder": 9,
-        "topics": [
-          {
-            "id": "html-complete-course-t9.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t9.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t9.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch10",
-        "title": "Chapter 10: Responsive HTML Concepts",
-        "sortOrder": 10,
-        "topics": [
-          {
-            "id": "html-complete-course-t10.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t10.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t10.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch11",
-        "title": "Chapter 11: SEO and Best Practices",
-        "sortOrder": 11,
-        "topics": [
-          {
-            "id": "html-complete-course-t11.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t11.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t11.3",
-            "title": "Topic 3",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "html-complete-course-ch12",
-        "title": "Chapter 12: Final Projects",
-        "sortOrder": 12,
-        "topics": [
-          {
-            "id": "html-complete-course-t12.1",
-            "title": "Topic 1",
-            "sortOrder": 1
-          },
-          {
-            "id": "html-complete-course-t12.2",
-            "title": "Topic 2",
-            "sortOrder": 2
-          },
-          {
-            "id": "html-complete-course-t12.3",
-            "title": "Topic 3",
-            "sortOrder": 3
           }
         ]
       }

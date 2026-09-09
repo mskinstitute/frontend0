@@ -1,24 +1,24 @@
 [
   {
     "featured": true,
-    "id": "tut-html5-complete-masterclass",
-    "slug": "html5-complete-masterclass",
-    "courseSlug": "html5-complete-masterclass",
+    "id": "tut-html5-complete-course",
+    "slug": "html5-complete-course",
+    "courseSlug": "html5-complete-course",
     "title": "HTML5",
     "icon": "html",
     "badge": "Beginner to Pro",
     "tags": ["Beginner to Pro", "frontend", "html5", "web development"],
-    "documentationTitle": "HTML5 Complete Masterclass: From Beginner to Pro",
+    "documentationTitle": "HTML5 Complete Course",
     "shortDescription": "Master HTML5 from basics to advanced concepts. Learn document structure, semantic layouts, accessible forms, audio/video media, tables, ARIA, and modern web standards.",
     "lessonsCount": 12,
     "totalHours": "30h",
     "topicsCount": 24,
-    "githubRepo": "github.com/msk-institute/html5-complete-masterclass",
+    "githubRepo": "github.com/msk-institute/html5-complete-course",
     "updatedAt": "2026-09-05",
     "seo": {
-      "title": "HTML5 Complete Masterclass: From Beginner to Pro - MSK Notes | MSK Institute",
-      "description": "Learn HTML5 from scratch to pro with structured lessons, code snippets, and quizzes based on the HTML5 Complete Masterclass at MSK Institute.",
-      "keywords": ["html5 complete masterclass", "html tutorial", "learn html5", "html beginner to pro", "html documentation", "html notes", "msk notes"]
+      "title": "HTML5 Complete Course: From Beginner to Pro - MSK Notes | MSK Institute",
+      "description": "Learn HTML5 from scratch to pro with structured lessons, code snippets, and quizzes based on the HTML5 Complete Course at MSK Institute.",
+      "keywords": ["html5 complete course", "html tutorial", "learn html5", "html beginner to pro", "html documentation", "html notes", "msk notes"]
     }
   },
   {
