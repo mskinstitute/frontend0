@@ -46,6 +46,10 @@ function resolveTopicTutorialUrl(
     tutorialSlug = 'python-for-beginners';
   } else if (cSlug.includes('javascript') || cSlug.includes('react')) {
     tutorialSlug = 'javascript-essentials';
+  } else if (cSlug.includes('css-for-advanced')) {
+    tutorialSlug = 'css-for-advanced';
+  } else if (cSlug.includes('css-for-intermediate')) {
+    tutorialSlug = 'css-for-intermediate';
   } else if (cSlug.includes('css-for-beginners') || cSlug.includes('css') || chTitle.includes('css') || chTitle.includes('tailwind')) {
     tutorialSlug = 'css-for-beginners';
   } else if (cSlug.includes('full-stack') || cSlug.includes('bootcamp')) {
@@ -200,6 +204,154 @@ function resolveTopicTutorialUrl(
       topicSlug = 'project-simple-landing-page-layout';
     } else if (rawSlug === 'project-navigation-bar-styling' || (rawSlug.includes('navigation') && rawSlug.includes('bar')) || rawSlug.includes('navbar')) {
       topicSlug = 'project-navigation-bar-styling';
+    }
+  } else if (tutorialSlug === 'css-for-intermediate') {
+    if (rawSlug === 'attribute-selectors-attr-patterns' || rawSlug.includes('attribute')) {
+      topicSlug = 'attribute-selectors-attr-patterns';
+    } else if (rawSlug === 'child-descendant-sibling-selectors' || rawSlug.includes('sibling') || rawSlug.includes('descendant') || rawSlug.includes('child')) {
+      topicSlug = 'child-descendant-sibling-selectors';
+    } else if (rawSlug === 'pseudo-classes-and-pseudo-elements' || (rawSlug.includes('pseudo') && (rawSlug.includes('class') || rawSlug.includes('element')))) {
+      topicSlug = 'pseudo-classes-and-pseudo-elements';
+    } else if (rawSlug === 'complex-combinators-and-chaining' || rawSlug.includes('combinator') || rawSlug.includes('chaining')) {
+      topicSlug = 'complex-combinators-and-chaining';
+    } else if (rawSlug === 'css-specificity-calculation-and-cascade' || rawSlug.includes('specificity') || rawSlug.includes('cascade')) {
+      topicSlug = 'css-specificity-calculation-and-cascade';
+    } else if (rawSlug === 'using-important-rule-best-practices' || rawSlug.includes('important')) {
+      topicSlug = 'using-important-rule-best-practices';
+    } else if (rawSlug === 'opacity-and-rgba-hsla-colors' || rawSlug.includes('opacity') || rawSlug.includes('rgba') || rawSlug.includes('hsla')) {
+      topicSlug = 'opacity-and-rgba-hsla-colors';
+    } else if (rawSlug === 'advanced-linear-radial-gradients' || (rawSlug.includes('gradient') && (rawSlug.includes('radial') || rawSlug.includes('advanced')))) {
+      topicSlug = 'advanced-linear-radial-gradients';
+    } else if (rawSlug === 'background-blend-modes-css' || rawSlug.includes('blend')) {
+      topicSlug = 'background-blend-modes-css';
+    } else if (rawSlug === 'flex-container-and-flex-items' || (rawSlug.includes('container') && rawSlug.includes('items'))) {
+      topicSlug = 'flex-container-and-flex-items';
+    } else if (rawSlug === 'justify-content-align-items-align-self' || rawSlug.includes('justify') || rawSlug.includes('align-items') || rawSlug.includes('align-self')) {
+      topicSlug = 'justify-content-align-items-align-self';
+    } else if (rawSlug === 'flex-grow-flex-shrink-flex-basis' || rawSlug.includes('grow') || rawSlug.includes('shrink') || rawSlug.includes('basis')) {
+      topicSlug = 'flex-grow-flex-shrink-flex-basis';
+    } else if (rawSlug === 'row-vs-column-direction-responsive-flipping' || (rawSlug.includes('row') && rawSlug.includes('column'))) {
+      topicSlug = 'row-vs-column-direction-responsive-flipping';
+    } else if (rawSlug === 'flex-wrapping-and-nested-flexbox' || rawSlug.includes('wrap') || rawSlug.includes('nested')) {
+      topicSlug = 'flex-wrapping-and-nested-flexbox';
+    } else if (rawSlug === 'building-responsive-navbar-with-flexbox' || rawSlug.includes('navbar')) {
+      topicSlug = 'building-responsive-navbar-with-flexbox';
+    } else if (rawSlug === 'grid-container-and-grid-items' || (rawSlug.includes('grid') && rawSlug.includes('container'))) {
+      topicSlug = 'grid-container-and-grid-items';
+    } else if (rawSlug === 'grid-template-columns-and-rows' || (rawSlug.includes('template') && (rawSlug.includes('columns') || rawSlug.includes('rows')))) {
+      topicSlug = 'grid-template-columns-and-rows';
+    } else if (rawSlug === 'grid-gap-fractional-units-fr-repeat' || rawSlug.includes('fractional') || rawSlug.includes('repeat') || rawSlug.includes('fr')) {
+      topicSlug = 'grid-gap-fractional-units-fr-repeat';
+    } else if (rawSlug === 'grid-template-areas-and-named-lines' || rawSlug.includes('areas') || rawSlug.includes('named-lines')) {
+      topicSlug = 'grid-template-areas-and-named-lines';
+    } else if (rawSlug === 'auto-fit-vs-auto-fill-minmax' || rawSlug.includes('auto-fit') || rawSlug.includes('auto-fill') || rawSlug.includes('minmax')) {
+      topicSlug = 'auto-fit-vs-auto-fill-minmax';
+    } else if (rawSlug === 'building-page-layouts-with-css-grid' || (rawSlug.includes('building') && rawSlug.includes('layout'))) {
+      topicSlug = 'building-page-layouts-with-css-grid';
+    } else if (rawSlug === 'min-width-max-width-media-queries' || (rawSlug.includes('min-width') || rawSlug.includes('max-width'))) {
+      topicSlug = 'min-width-max-width-media-queries';
+    } else if (rawSlug === 'mobile-first-vs-desktop-first' || (rawSlug.includes('mobile-first') || rawSlug.includes('desktop-first'))) {
+      topicSlug = 'mobile-first-vs-desktop-first';
+    } else if (rawSlug === 'responsive-breakpoints-best-practices' || rawSlug.includes('breakpoint')) {
+      topicSlug = 'responsive-breakpoints-best-practices';
+    } else if (rawSlug === 'css-transitions-timing-functions-delays' || rawSlug.includes('transition')) {
+      topicSlug = 'css-transitions-timing-functions-delays';
+    } else if (rawSlug === 'css-animations-keyframes-and-performance' || rawSlug.includes('keyframe') || rawSlug.includes('animation')) {
+      topicSlug = 'css-animations-keyframes-and-performance';
+    } else if (rawSlug === 'practical-interactive-button-and-card-effects' || (rawSlug.includes('button') && rawSlug.includes('effect')) || rawSlug.includes('micro-interaction')) {
+      topicSlug = 'practical-interactive-button-and-card-effects';
+    } else if (rawSlug === 'declaring-and-using-css-variables' || (rawSlug.includes('declaring') && rawSlug.includes('variables'))) {
+      topicSlug = 'declaring-and-using-css-variables';
+    } else if (rawSlug === 'the-root-pseudo-class-design-tokens' || rawSlug.includes('root') || rawSlug.includes('token')) {
+      topicSlug = 'the-root-pseudo-class-design-tokens';
+    } else if (rawSlug === 'theme-switching-light-dark-mode-css-variables' || rawSlug.includes('theme') || rawSlug.includes('dark-mode')) {
+      topicSlug = 'theme-switching-light-dark-mode-css-variables';
+    } else if (rawSlug === 'box-shadow-text-shadow-advanced-tricks' || (rawSlug.includes('shadow') && rawSlug.includes('trick'))) {
+      topicSlug = 'box-shadow-text-shadow-advanced-tricks';
+    } else if (rawSlug === 'css-filters-and-backdrop-filter' || rawSlug.includes('filter')) {
+      topicSlug = 'css-filters-and-backdrop-filter';
+    } else if (rawSlug === 'glassmorphism-and-modern-visual-effects' || rawSlug.includes('glass') || rawSlug.includes('neumorphism')) {
+      topicSlug = 'glassmorphism-and-modern-visual-effects';
+    } else if (rawSlug === 'project-1-responsive-landing-page-with-flexbox' || (rawSlug.includes('project') && rawSlug.includes('landing'))) {
+      topicSlug = 'project-1-responsive-landing-page-with-flexbox';
+    } else if (rawSlug === 'project-2-blog-layout-using-css-grid' || (rawSlug.includes('project') && rawSlug.includes('blog'))) {
+      topicSlug = 'project-2-blog-layout-using-css-grid';
+    } else if (rawSlug === 'project-3-animated-pricing-table' || (rawSlug.includes('project') && rawSlug.includes('pricing'))) {
+      topicSlug = 'project-3-animated-pricing-table';
+    }
+  } else if (tutorialSlug === 'css-for-advanced') {
+    if (rawSlug === 'calc-min-max-clamp-mathematical-functions' || rawSlug.includes('calc') || rawSlug.includes('clamp') || rawSlug.includes('min-max')) {
+      topicSlug = 'calc-min-max-clamp-mathematical-functions';
+    } else if (rawSlug === 'advanced-nth-child-and-nth-of-type-patterns' || rawSlug.includes('nth-child') || rawSlug.includes('nth-of-type')) {
+      topicSlug = 'advanced-nth-child-and-nth-of-type-patterns';
+    } else if (rawSlug === 'custom-properties-with-fallback-values' || (rawSlug.includes('custom-properties') || (rawSlug.includes('fallback') && rawSlug.includes('value')))) {
+      topicSlug = 'custom-properties-with-fallback-values';
+    } else if (rawSlug === '2d-transforms-translate-rotate-scale-skew' || (rawSlug.includes('2d') && rawSlug.includes('transform'))) {
+      topicSlug = '2d-transforms-translate-rotate-scale-skew';
+    } else if (rawSlug === '3d-transforms-perspective-rotatex-rotatey' || (rawSlug.includes('3d') && rawSlug.includes('transform')) || rawSlug.includes('perspective')) {
+      topicSlug = '3d-transforms-perspective-rotatex-rotatey';
+    } else if (rawSlug === 'combining-transforms-for-advanced-effects' || (rawSlug.includes('combining') && rawSlug.includes('transform'))) {
+      topicSlug = 'combining-transforms-for-advanced-effects';
+    } else if (rawSlug === 'keyframes-deep-dive-animation-choreography' || (rawSlug.includes('keyframes') && (rawSlug.includes('deep') || rawSlug.includes('choreography')))) {
+      topicSlug = 'keyframes-deep-dive-animation-choreography';
+    } else if (rawSlug === 'chaining-animations-and-delays' || (rawSlug.includes('chaining') && rawSlug.includes('animation'))) {
+      topicSlug = 'chaining-animations-and-delays';
+    } else if (rawSlug === 'css-animation-performance-optimization' || (rawSlug.includes('animation') && rawSlug.includes('performance'))) {
+      topicSlug = 'css-animation-performance-optimization';
+    } else if (rawSlug === 'css-shapes-clip-path-and-shape-outside' || rawSlug.includes('shape') || rawSlug.includes('clip-path')) {
+      topicSlug = 'css-shapes-clip-path-and-shape-outside';
+    } else if (rawSlug === 'css-multi-column-layouts' || rawSlug.includes('multi-column')) {
+      topicSlug = 'css-multi-column-layouts';
+    } else if (rawSlug === 'combining-grid-and-flexbox-advanced-layouts' || (rawSlug.includes('grid') && rawSlug.includes('flexbox'))) {
+      topicSlug = 'combining-grid-and-flexbox-advanced-layouts';
+    } else if (rawSlug === 'advanced-image-effects-with-css-filters' || (rawSlug.includes('image') && rawSlug.includes('filter'))) {
+      topicSlug = 'advanced-image-effects-with-css-filters';
+    } else if (rawSlug === 'mix-blend-mode-and-background-blend-mode-mastery' || rawSlug.includes('blend-mode')) {
+      topicSlug = 'mix-blend-mode-and-background-blend-mode-mastery';
+    } else if (rawSlug === 'creative-ui-effects-with-filters-and-gradients' || (rawSlug.includes('creative') && rawSlug.includes('effect'))) {
+      topicSlug = 'creative-ui-effects-with-filters-and-gradients';
+    } else if (rawSlug === 'dynamic-theming-with-css-variables' || (rawSlug.includes('dynamic') && rawSlug.includes('theming'))) {
+      topicSlug = 'dynamic-theming-with-css-variables';
+    } else if (rawSlug === 'advanced-dark-light-mode-system-tokens' || ((rawSlug.includes('dark') || rawSlug.includes('light')) && rawSlug.includes('mode'))) {
+      topicSlug = 'advanced-dark-light-mode-system-tokens';
+    } else if (rawSlug === 'scoped-variables-and-runtime-performance' || (rawSlug.includes('scoped') && rawSlug.includes('variable'))) {
+      topicSlug = 'scoped-variables-and-runtime-performance';
+    } else if (rawSlug === 'sass-scss-variables-nesting-and-partials' || (rawSlug.includes('sass') && rawSlug.includes('variable')) || rawSlug.includes('nesting')) {
+      topicSlug = 'sass-scss-variables-nesting-and-partials';
+    } else if (rawSlug === 'sass-mixins-functions-and-inheritance' || rawSlug.includes('mixin') || rawSlug.includes('inheritance')) {
+      topicSlug = 'sass-mixins-functions-and-inheritance';
+    } else if (rawSlug === 'compiling-and-organizing-scss-architecture' || (rawSlug.includes('compiling') || rawSlug.includes('organizing')) && rawSlug.includes('scss')) {
+      topicSlug = 'compiling-and-organizing-scss-architecture';
+    } else if (rawSlug === 'fluid-typography-and-responsive-units' || rawSlug.includes('fluid') || rawSlug.includes('typography')) {
+      topicSlug = 'fluid-typography-and-responsive-units';
+    } else if (rawSlug === 'css-container-queries-modern-modular-responsive' || rawSlug.includes('container-quer')) {
+      topicSlug = 'css-container-queries-modern-modular-responsive';
+    } else if (rawSlug === 'multi-device-testing-and-responsive-debugging' || rawSlug.includes('multi-device') || rawSlug.includes('debugging')) {
+      topicSlug = 'multi-device-testing-and-responsive-debugging';
+    } else if (rawSlug === 'bem-methodology-block-element-modifier' || rawSlug.includes('bem')) {
+      topicSlug = 'bem-methodology-block-element-modifier';
+    } else if (rawSlug === 'utility-first-vs-component-based-css' || (rawSlug.includes('utility') && rawSlug.includes('component'))) {
+      topicSlug = 'utility-first-vs-component-based-css';
+    } else if (rawSlug === 'writing-maintainable-and-scalable-css' || (rawSlug.includes('maintainable') || rawSlug.includes('scalable'))) {
+      topicSlug = 'writing-maintainable-and-scalable-css';
+    } else if (rawSlug === 'advanced-glassmorphism-and-neumorphism-patterns' || (rawSlug.includes('glassmorphism') || rawSlug.includes('neumorphism'))) {
+      topicSlug = 'advanced-glassmorphism-and-neumorphism-patterns';
+    } else if (rawSlug === 'pure-css-parallax-scrolling-effects' || rawSlug.includes('parallax')) {
+      topicSlug = 'pure-css-parallax-scrolling-effects';
+    } else if (rawSlug === 'loading-spinners-and-skeleton-screens' || rawSlug.includes('spinner') || rawSlug.includes('skeleton')) {
+      topicSlug = 'loading-spinners-and-skeleton-screens';
+    } else if (rawSlug === 'critical-css-and-eliminating-render-blocking' || rawSlug.includes('critical-css') || rawSlug.includes('render-blocking')) {
+      topicSlug = 'critical-css-and-eliminating-render-blocking';
+    } else if (rawSlug === 'css-minification-purging-and-tree-shaking' || rawSlug.includes('minification') || rawSlug.includes('purging')) {
+      topicSlug = 'css-minification-purging-and-tree-shaking';
+    } else if (rawSlug === 'improving-lighthouse-performance-and-core-web-vitals' || rawSlug.includes('lighthouse') || rawSlug.includes('vitals')) {
+      topicSlug = 'improving-lighthouse-performance-and-core-web-vitals';
+    } else if (rawSlug === 'project-1-interactive-dashboard-ui' || (rawSlug.includes('project-1') || (rawSlug.includes('dashboard') && rawSlug.includes('project')))) {
+      topicSlug = 'project-1-interactive-dashboard-ui';
+    } else if (rawSlug === 'project-2-portfolio-website-with-dark-light-theme' || (rawSlug.includes('project-2') || (rawSlug.includes('portfolio') && rawSlug.includes('project')))) {
+      topicSlug = 'project-2-portfolio-website-with-dark-light-theme';
+    } else if (rawSlug === 'project-3-responsive-ecommerce-product-page' || (rawSlug.includes('project-3') || (rawSlug.includes('ecommerce') && rawSlug.includes('project')))) {
+      topicSlug = 'project-3-responsive-ecommerce-product-page';
     }
   }
 

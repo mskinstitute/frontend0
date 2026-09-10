@@ -186,28 +186,6 @@ export default function TutorialOverviewClient({
             </Link>
           </div>
 
-          {/* Chapter Outline Preview */}
-          <div className="pt-10 space-y-4 border-t border-border-subtle">
-            <h2 className="text-lg font-bold text-primary">Curriculum Overview</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {course.chapters?.map((ch, idx) => (
-                <div
-                  key={ch.id}
-                  className="p-4 rounded-2xl bg-surface border border-border-subtle space-y-1.5"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-secondary">
-                      Chapter {idx + 1}
-                    </span>
-                    <span className="text-[11px] text-text-muted font-medium">
-                      {ch.topics.length} topics
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-sm text-primary">{ch.title}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
         </main>
       </div>
     </div>

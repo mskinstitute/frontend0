@@ -16,7 +16,10 @@ import {
   Circle,
   Menu,
   X,
-  DownloadCloud
+  DownloadCloud,
+  PanelLeftOpen,
+  PanelLeftClose,
+  GraduationCap,
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { TutorialItem, Course, TutorialTopicFrontmatter } from '@/types';
@@ -55,6 +58,7 @@ export default function TutorialReader({
   const [fontSize, setFontSize] = useState<'normal' | 'large'>('normal');
   const [isOfflineReady, setIsOfflineReady] = useState(false);
   const [isDownloadingOffline, setIsDownloadingOffline] = useState(false);
+  const [isCurriculumHidden, setIsCurriculumHidden] = useState(false);
 
   // Track scroll percentage for top progress bar
   useEffect(() => {
@@ -70,7 +74,7 @@ export default function TutorialReader({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Load completion state, saved state, and offline status
+  // Load completion state, saved state, curriculum collapse state, and offline status
   useEffect(() => {
     try {
       const savedKey = `saved_tut_${tutorial.slug}_${frontmatter.slug}`;
@@ -81,12 +85,27 @@ export default function TutorialReader({
       if (Array.isArray(list)) {
         setCompletedTopics(list);
       }
+
+      const hiddenPref = localStorage.getItem('tutorial_curriculum_hidden') === 'true';
+      setIsCurriculumHidden(hiddenPref);
     } catch {}
 
     isTutorialSavedOffline(tutorial.slug, frontmatter.slug)
       .then(setIsOfflineReady)
       .catch(() => null);
   }, [tutorial.slug, frontmatter.slug]);
+
+  // Toggle curriculum sidebar visibility
+  const toggleCurriculum = () => {
+    const next = !isCurriculumHidden;
+    setIsCurriculumHidden(next);
+    try {
+      localStorage.setItem('tutorial_curriculum_hidden', String(next));
+    } catch {}
+    toast(next ? 'Curriculum hidden for full-width focus reading' : 'Curriculum sidebar visible', {
+      icon: next ? '📖' : '📑',
+    });
+  };
 
   // Toggle Save for Offline Reading
   const toggleOfflineDownload = async () => {
@@ -220,15 +239,18 @@ export default function TutorialReader({
       {/* Main Container Layout */}
       <div className="flex-1 flex max-w-[1700px] w-full mx-auto">
         {/* Left Sidebar (Desktop: Sticky, Mobile: Modal Overlay) */}
-        <div className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-hidden no-print">
-          <TutorialSidebar
-            tutorialSlug={tutorial.slug}
-            tutorialTitle={tutorial.title || course.title}
-            chapters={course.chapters || []}
-            currentTopicSlug={frontmatter.slug}
-            completedTopics={completedTopics}
-          />
-        </div>
+        {!isCurriculumHidden && (
+          <div className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-hidden no-print">
+            <TutorialSidebar
+              tutorialSlug={tutorial.slug}
+              tutorialTitle={tutorial.title || course.title}
+              chapters={course.chapters || []}
+              currentTopicSlug={frontmatter.slug}
+              completedTopics={completedTopics}
+              onToggleHide={toggleCurriculum}
+            />
+          </div>
+        )}
 
         {/* Mobile Sidebar Drawer */}
         {isMobileSidebarOpen && (
@@ -251,6 +273,7 @@ export default function TutorialReader({
                 chapters={course.chapters || []}
                 currentTopicSlug={frontmatter.slug}
                 completedTopics={completedTopics}
+                onToggleHide={() => setIsMobileSidebarOpen(false)}
               />
             </div>
           </div>
@@ -258,19 +281,34 @@ export default function TutorialReader({
 
         {/* Center Main Reading Content */}
         <main className="flex-1 min-w-0 p-4 sm:p-8 lg:p-12 space-y-8">
-          {/* Breadcrumb & Quick Next Navigation (Image 3) */}
+          {/* Breadcrumb & Quick Next Navigation */}
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted no-print">
-            <nav className="flex items-center gap-1.5 font-medium">
-              <Link href="/" className="hover:text-primary">Home</Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <Link href="/courses" className="hover:text-primary">Courses</Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <Link href={`/tutorials/${tutorial.slug}`} className="hover:text-primary font-semibold text-primary">
-                {tutorial.title || course.title}
-              </Link>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-              <span className="text-text-muted">{frontmatter.title}</span>
-            </nav>
+            <div className="flex items-center gap-2.5 flex-wrap">
+              {isCurriculumHidden && (
+                <button
+                  onClick={toggleCurriculum}
+                  className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-secondary border border-secondary/30 rounded-xl text-xs font-bold shadow-2xs transition-all cursor-pointer group"
+                  title="Open curriculum sidebar"
+                >
+                  <PanelLeftOpen className="w-3.5 h-3.5 text-secondary group-hover:scale-110 transition-transform" />
+                  <span>Show Curriculum</span>
+                </button>
+              )}
+
+              <nav className="flex items-center gap-1.5 font-medium flex-wrap">
+                <Link href="/" className="hover:text-primary">Home</Link>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                <Link href="/study-material" className="hover:text-secondary font-semibold text-secondary">
+                  Study Materials
+                </Link>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                <Link href={`/tutorials/${tutorial.slug}`} className="hover:text-primary font-semibold text-primary">
+                  {tutorial.title || course.title}
+                </Link>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                <span className="text-text-muted">{frontmatter.title}</span>
+              </nav>
+            </div>
 
             {nextTopic && (
               <Link
@@ -386,6 +424,36 @@ export default function TutorialReader({
                   aria-label="Share lesson"
                 >
                   <Share2 className="w-4 h-4" />
+                </button>
+
+                {/* Direct link to Study Material Hub */}
+                <Link
+                  href="/study-material"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 hover:bg-orange-100/90 text-secondary border border-secondary/30 rounded-xl text-xs font-bold transition-all shadow-2xs group"
+                  title="Browse all Study Materials, Cheatsheets & PDF Notes"
+                >
+                  <GraduationCap className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
+                  <span>Study Materials</span>
+                </Link>
+
+                {/* Hide / Show Curriculum Sidebar Button (Desktop) */}
+                <button
+                  onClick={toggleCurriculum}
+                  className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-surface border border-border-subtle text-text-muted hover:text-primary rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-2xs"
+                  title={isCurriculumHidden ? 'Show curriculum sidebar' : 'Hide curriculum sidebar (distraction-free reading)'}
+                  aria-label={isCurriculumHidden ? 'Show curriculum sidebar' : 'Hide curriculum sidebar'}
+                >
+                  {isCurriculumHidden ? (
+                    <>
+                      <PanelLeftOpen className="w-3.5 h-3.5 text-secondary" />
+                      <span>Show Curriculum</span>
+                    </>
+                  ) : (
+                    <>
+                      <PanelLeftClose className="w-3.5 h-3.5" />
+                      <span>Hide Curriculum</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

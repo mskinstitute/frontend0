@@ -88,6 +88,9 @@ declare global {
 interface PlaygroundClientProps {
   initialLanguage?: SupportedLanguage;
   initialCode?: string;
+  initialCss?: string;
+  initialHtml?: string;
+  initialJs?: string;
   isModal?: boolean;
   onCloseModal?: () => void;
 }
@@ -152,7 +155,14 @@ export function getLangIcon(lang: SupportedLanguage): string {
   }
 }
 
-function buildInitialFiles(lang: SupportedLanguage, code: string): PlaygroundFile[] {
+export { generateHtmlFromCss } from '@/lib/webPreviewUtils';
+import { generateHtmlFromCss } from '@/lib/webPreviewUtils';
+
+function buildInitialFiles(
+  lang: SupportedLanguage,
+  code: string,
+  companion?: { css?: string; html?: string; js?: string }
+): PlaygroundFile[] {
   switch (lang) {
     case 'html':
       return [
@@ -167,14 +177,17 @@ function buildInitialFiles(lang: SupportedLanguage, code: string): PlaygroundFil
           id: 'file-css-1',
           name: 'style.css',
           language: 'css',
-          content: `/* Custom CSS for MSK Web Project */\n.card:hover {\n  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.4);\n}\n`,
+          content:
+            companion?.css?.trim() ||
+            `/* Custom CSS for MSK Web Project */\n.card:hover {\n  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.4);\n}\n`,
           isRemovable: true,
         },
         {
           id: 'file-js-1',
           name: 'script.js',
           language: 'javascript',
-          content: `// Custom JavaScript\nconsole.log("Interactive script initialized!");\n`,
+          content:
+            companion?.js || `// Custom JavaScript\nconsole.log("Interactive script initialized!");\n`,
           isRemovable: true,
         },
       ];
@@ -191,7 +204,7 @@ function buildInitialFiles(lang: SupportedLanguage, code: string): PlaygroundFil
           id: 'file-html-main',
           name: 'index.html',
           language: 'html',
-          content: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>CSS Demo</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <div class="container">\n    <h1>CSS Live Demo</h1>\n    <p>Live preview for custom styles</p>\n    <button class="btn">Styled Button</button>\n  </div>\n</body>\n</html>`,
+          content: companion?.html?.trim() || generateHtmlFromCss(code),
           isRemovable: true,
         },
       ];
@@ -295,6 +308,9 @@ function buildInitialFiles(lang: SupportedLanguage, code: string): PlaygroundFil
 export default function PlaygroundClient({
   initialLanguage = 'python',
   initialCode,
+  initialCss,
+  initialHtml,
+  initialJs,
   isModal = false,
   onCloseModal,
 }: PlaygroundClientProps) {
@@ -323,19 +339,36 @@ export default function PlaygroundClient({
   // Multi-file state
   const [language, setLanguage] = useState<SupportedLanguage>(resolvedInitialLang);
   const [files, setFiles] = useState<PlaygroundFile[]>(() =>
-    hasIncomingCode ? buildInitialFiles(resolvedInitialLang, resolvedInitialCode) : []
+    hasIncomingCode
+      ? buildInitialFiles(resolvedInitialLang, resolvedInitialCode, {
+          css: initialCss,
+          html: initialHtml,
+          js: initialJs,
+        })
+      : []
   );
   const [folders, setFolders] = useState<PlaygroundFolder[]>([]);
   const [activeFileId, setActiveFileId] = useState<string>(() => {
     if (hasIncomingCode) {
-      const initFiles = buildInitialFiles(resolvedInitialLang, resolvedInitialCode);
+      const initFiles = buildInitialFiles(resolvedInitialLang, resolvedInitialCode, {
+        css: initialCss,
+        html: initialHtml,
+        js: initialJs,
+      });
       return initFiles[0]?.id || '';
     }
     return '';
   });
   const [openTabIds, setOpenTabIds] = useState<string[]>(() => {
     if (hasIncomingCode) {
-      const initFiles = buildInitialFiles(resolvedInitialLang, resolvedInitialCode);
+      const initFiles = buildInitialFiles(resolvedInitialLang, resolvedInitialCode, {
+        css: initialCss,
+        html: initialHtml,
+        js: initialJs,
+      });
+      if (resolvedInitialLang === 'html' || resolvedInitialLang === 'css') {
+        return initFiles.slice(0, 2).map((f) => f.id);
+      }
       return initFiles.length > 0 ? [initFiles[0].id] : [];
     }
     return [];
@@ -364,7 +397,7 @@ export default function PlaygroundClient({
 
   // Active terminal / preview tab
   const [activeTab, setActiveTab] = useState<'preview' | 'terminal'>(
-    resolvedInitialLang === 'html' || resolvedInitialLang === 'css' ? 'preview' : 'terminal'
+    resolvedInitialLang === 'html' || resolvedInitialLang === 'css' || resolvedInitialLang === 'markdown' ? 'preview' : 'terminal'
   );
   const [logs, setLogs] = useState<ConsoleMessage[]>([]);
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -409,8 +442,10 @@ export default function PlaygroundClient({
   // Status bar cursor line & column
   const [cursorPos, setCursorPos] = useState<CursorPosition>({ lineNumber: 1, column: 1 });
 
-  // Output panel open/close state (hidden by default, opens automatically when code is run or via Ctrl+`)
-  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
+  // Output panel open/close state (automatically open in modal, or when code is run / web preview)
+  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(() => {
+    return isModal || resolvedInitialLang === 'html' || resolvedInitialLang === 'css' || resolvedInitialLang === 'markdown';
+  });
 
   // Mobile mode tab switch (editor vs output on screens < 768px)
   const [mobileActiveView, setMobileActiveView] = useState<'editor' | 'output'>('editor');
@@ -512,15 +547,31 @@ export default function PlaygroundClient({
     if (initialCode !== undefined && initialCode.trim().length > 0) {
       const targetLang = initialLanguage || language;
       setLanguage(targetLang);
-      const newFiles = buildInitialFiles(targetLang, initialCode);
+      const newFiles = buildInitialFiles(targetLang, initialCode, {
+        css: initialCss,
+        html: initialHtml,
+        js: initialJs,
+      });
       setFiles(newFiles);
       if (newFiles.length > 0) {
         setActiveFileId(newFiles[0].id);
-        setOpenTabIds([newFiles[0].id]);
+        activeFileIdRef.current = newFiles[0].id;
+        if (targetLang === 'html' || targetLang === 'css') {
+          setOpenTabIds(newFiles.slice(0, 2).map((f) => f.id));
+        } else {
+          setOpenTabIds([newFiles[0].id]);
+        }
       }
-      setActiveTab(targetLang === 'html' || targetLang === 'css' ? 'preview' : 'terminal');
+      setActiveTab(
+        targetLang === 'html' || targetLang === 'css' || targetLang === 'markdown'
+          ? 'preview'
+          : 'terminal'
+      );
+      if (isModal || targetLang === 'html' || targetLang === 'css' || targetLang === 'markdown') {
+        setIsPanelOpen(true);
+      }
     }
-  }, [initialCode, initialLanguage]);
+  }, [initialCode, initialLanguage, initialCss, initialHtml, initialJs, isModal]);
 
   // Persist settings changes
   const updateSettings = useCallback((newSettings: Partial<PlaygroundSettings>) => {
@@ -1631,14 +1682,14 @@ finally:
     setMobileActiveView('output');
     const startTime = performance.now();
 
-    if (language === 'html' || language === 'markdown') {
+    if (language === 'html' || language === 'css' || language === 'markdown') {
       const currentActiveId = activeFileIdRef.current || activeFileId;
       const activeFileObj = currentFiles.find((f) => f.id === currentActiveId) || currentFiles[0];
       setActiveTab('preview');
       if (language === 'markdown') {
         addLog('success', `📝 Rendered Live Markdown Preview (${activeFileObj?.name || 'document.md'}).`);
       } else {
-        addLog('success', `🚀 Rendered Web Preview (${activeFileObj?.name || 'index.html'}).`);
+        addLog('success', `🚀 Rendered Web Preview (${activeFileObj?.name || (language === 'css' ? 'style.css' : 'index.html')}).`);
       }
       setIsRunning(false);
       return;
@@ -2836,7 +2887,7 @@ _err_result = _stderr_buffer.getvalue()
               {/* Panel Tabs Bar (VS Code Integrated Terminal / Output Tab) */}
               <div className="flex items-center justify-between px-3 bg-[#252526] border-b border-[#1e1e1e] text-xs">
                 <div className="flex items-center gap-1">
-                  {(language === 'html' || language === 'markdown') && (
+                  {(language === 'html' || language === 'css' || language === 'markdown') && (
                     <button
                       onClick={() => setActiveTab('preview')}
                       className={`flex items-center gap-1.5 px-3 py-1.5 font-medium transition-colors cursor-pointer text-xs ${
@@ -2970,7 +3021,7 @@ _err_result = _stderr_buffer.getvalue()
                     fileName={activeFile?.name || 'document.md'}
                     theme={settings.theme}
                   />
-                ) : activeTab === 'preview' && language === 'html' ? (
+                ) : activeTab === 'preview' && (language === 'html' || language === 'css') ? (
                   <WebPreview
                     htmlCode={getCompositeHtml()}
                     onConsoleLog={(msg) => addLog(msg.type, msg.content)}

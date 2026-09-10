@@ -9,7 +9,9 @@ import {
   CheckCircle2,
   Circle,
   ArrowLeft,
-  BookOpen
+  BookOpen,
+  PanelLeftClose,
+  Layers
 } from 'lucide-react';
 import { Chapter, ChapterTopic } from '@/types';
 
@@ -19,6 +21,7 @@ interface TutorialSidebarProps {
   chapters: Chapter[];
   currentTopicSlug?: string;
   completedTopics: string[];
+  onToggleHide?: () => void;
 }
 
 export default function TutorialSidebar({
@@ -27,6 +30,7 @@ export default function TutorialSidebar({
   chapters,
   currentTopicSlug,
   completedTopics,
+  onToggleHide,
 }: TutorialSidebarProps) {
   // Keep chapters expanded if current topic is inside it
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>(() => {
@@ -77,20 +81,39 @@ export default function TutorialSidebar({
     <aside className="w-full lg:w-72 flex-shrink-0 bg-white border-r border-border-subtle flex flex-col h-full select-none">
       {/* Top Header Card */}
       <div className="p-4 sm:p-5 border-b border-border-subtle/80 space-y-3">
-        <Link
-          href={`/tutorials/${tutorialSlug}`}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-text-muted hover:text-primary transition-colors mb-1"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          {tutorialTitle}
-        </Link>
+        {/* Navigation Actions Row: Back to Study Material & Tutorial Overview */}
+        <div className="flex items-center justify-between gap-1">
+          <Link
+            href="/study-material"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-secondary hover:bg-orange-50/70 border border-border-subtle/70 transition-colors group"
+            title="Browse all Study Materials, Cheatsheets & PDF Notes"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+            <span>Study Materials</span>
+          </Link>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          {onToggleHide && (
+            <button
+              onClick={onToggleHide}
+              className="p-1.5 text-text-muted hover:text-primary hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              title="Hide Curriculum Sidebar (distraction-free mode)"
+              aria-label="Hide curriculum sidebar"
+            >
+              <PanelLeftClose className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between pt-1">
+          <Link
+            href={`/tutorials/${tutorialSlug}`}
+            className="flex items-center gap-2 min-w-0 hover:opacity-80 transition-opacity"
+            title="View Tutorial Documentation Overview"
+          >
             {renderTechIcon()}
-            <span className="font-bold text-base text-primary">{tutorialTitle}</span>
-          </div>
-          <span className="text-xs font-semibold text-text-muted">
+            <span className="font-bold text-base text-primary truncate">{tutorialTitle}</span>
+          </Link>
+          <span className="text-xs font-semibold text-text-muted flex-shrink-0">
             Progress <strong className="text-primary">{progressPercent}%</strong>
           </span>
         </div>

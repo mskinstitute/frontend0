@@ -1,5 +1,691 @@
 [
   {
+    "id": "course-ccc-nielit",
+    "status": "PUBLISH",
+    "title": "CCC",
+    "slug": "ccc",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
+    "shortDescription": "Become digitally literate with the complete CCC program. Learn computer fundamentals, MS Office tools, Internet, Email, Digital Payments, Cyber Security, and Future Skills.",
+    "categories": [
+      "Computer Literacy",
+      "Digital Skills",
+      "Office Productivity"
+    ],
+    "level": "Beginner",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 3,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "ONLINE",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "ccc-ch1",
+        "title": "Introduction to Computer",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "ccc-t1.1",
+            "title": "Evolution of Computers and IT Gadgets",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t1.2",
+            "title": "Applications of Computers in Daily Life",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t1.3",
+            "title": "Basics of Hardware and Software",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t1.4",
+            "title": "CPU, Memory, Storage, Input & Output Devices",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t1.5",
+            "title": "Types of Software: Application, System, Utility",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t1.6",
+            "title": "Open Source vs Proprietary Software",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t1.7",
+            "title": "Introduction to Mobile Applications",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch2",
+        "title": "Introduction to Operating System",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "ccc-t2.1",
+            "title": "Basics and Types of Operating Systems",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t2.2",
+            "title": "Operating Systems for Desktop, Laptop, and Mobile",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t2.3",
+            "title": "Desktop Interface: Taskbar, Icons, Shortcuts",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t2.4",
+            "title": "Running and Managing Applications",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t2.5",
+            "title": "System Settings: Date, Time, Display, Mouse",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t2.6",
+            "title": "Add/Remove Programs, Printers, and Features",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t2.7",
+            "title": "File and Folder Management",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t2.8",
+            "title": "Common File Extensions",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch3",
+        "title": "Word Processing (MS Word / LibreOffice Writer)",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "ccc-t3.1",
+            "title": "Introduction and Interface Overview",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t3.2",
+            "title": "Creating, Opening, Saving, and Printing Documents",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t3.3",
+            "title": "Text Editing: Cut, Copy, Paste, Undo, Redo",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t3.4",
+            "title": "Formatting Text: Font, Color, Size, Alignment",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t3.5",
+            "title": "Spelling Check, Find and Replace, AutoCorrect",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t3.6",
+            "title": "Page Setup, Header, Footer, and Page Numbering",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t3.7",
+            "title": "Table Insertion and Manipulation",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t3.8",
+            "title": "Mail Merge: Creating Bulk Letters and Labels",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch4",
+        "title": "Spreadsheet (MS Excel / LibreOffice Calc)",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "ccc-t4.1",
+            "title": "Introduction to Spreadsheets and Interface",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t4.2",
+            "title": "Creating and Saving Worksheets",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t4.3",
+            "title": "Cell Addressing and Data Entry",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t4.4",
+            "title": "Editing, Formatting Cells, Rows, and Columns",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t4.5",
+            "title": "Basic Formulas and Functions (SUM, AVG, MAX, MIN)",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t4.6",
+            "title": "Sorting, Filtering, and Freezing Panes",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t4.7",
+            "title": "Charts and Graphs (Bar, Pie, Line)",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t4.8",
+            "title": "Printing and Page Setup for Sheets",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch5",
+        "title": "Presentation (MS PowerPoint / LibreOffice Impress)",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "ccc-t5.1",
+            "title": "Creating a New Presentation (Template / Blank)",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t5.2",
+            "title": "Adding and Editing Text on Slides",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t5.3",
+            "title": "Inserting Tables, Images, and Media",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t5.4",
+            "title": "Slide Layouts and Master Slide",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t5.5",
+            "title": "Transitions, Animations, and Slide Timings",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t5.6",
+            "title": "Running Slide Shows and Printing Handouts",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t5.7",
+            "title": "Enhancing Presentation with Design and Color Themes",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch6",
+        "title": "Introduction to Internet and WWW",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "ccc-t6.1",
+            "title": "Basics of Computer Networks (LAN, WAN, Topology)",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t6.2",
+            "title": "Concept of Internet, WWW, and IP Address",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t6.3",
+            "title": "Modes of Internet Connection (WiFi, Broadband, Mobile)",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t6.4",
+            "title": "Web Browsers: Chrome, Firefox, Edge, Opera",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t6.5",
+            "title": "Using Search Engines and Surfing Websites",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t6.6",
+            "title": "Downloading and Printing Web Pages",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t6.7",
+            "title": "Understanding URLs and Website Navigation",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch7",
+        "title": "Email, Social Networking, and e-Governance",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "ccc-t7.1",
+            "title": "Creating and Managing an Email Account",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t7.2",
+            "title": "Composing, Sending, and Attaching Files in Email",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t7.3",
+            "title": "Social Media Basics: Facebook, Instagram, LinkedIn, X",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t7.4",
+            "title": "Instant Messaging: WhatsApp, Telegram, Messenger",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t7.5",
+            "title": "Introduction to Blogs and Netiquettes",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t7.6",
+            "title": "e-Governance Applications: Passport, Railway, eHospital",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t7.7",
+            "title": "Using UMANG App and Digital Locker",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch8",
+        "title": "Digital Financial Tools and Applications",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "ccc-t8.1",
+            "title": "Introduction to OTP and QR Code",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t8.2",
+            "title": "UPI, AEPS, and eWallet Concepts",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t8.3",
+            "title": "Internet Banking: NEFT, RTGS, IMPS",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t8.4",
+            "title": "Online Bill Payment and Recharge",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t8.5",
+            "title": "Using PoS Devices and Secure Transactions",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t8.6",
+            "title": "Government Financial Schemes and Awareness",
+            "sortOrder": 6
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch9",
+        "title": "Overview of Cyber Security",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "ccc-t9.1",
+            "title": "Introduction to Cyber Security and its Need",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t9.2",
+            "title": "Securing PC, Browsers, and Emails",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t9.3",
+            "title": "Social Media Safety and Password Protection",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t9.4",
+            "title": "Safe Practices for Mobile Devices",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t9.5",
+            "title": "Recognizing Online Fraud and Phishing",
+            "sortOrder": 5
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch10",
+        "title": "Future Skills and Artificial Intelligence",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "ccc-t10.1",
+            "title": "Introduction to Future Technologies",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t10.2",
+            "title": "Internet of Things (IoT) and Big Data Analytics",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t10.3",
+            "title": "Cloud Computing and Virtual Reality",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t10.4",
+            "title": "Artificial Intelligence: Concept, Goals, and Ethics",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t10.5",
+            "title": "Applications of AI in Daily Life",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t10.6",
+            "title": "Robotic Process Automation and 3D Printing",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t10.7",
+            "title": "Future Trends in ICT and AI-driven Innovation",
+            "sortOrder": 7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-adca",
+    "status": "PUBLISH",
+    "title": "ADCA - Advance Diploma in Computer Applications",
+    "slug": "adca",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
+    "shortDescription": "Master Advanced Diploma in Computer Applications (ADCA). Learn MS Office, Internet, Email, Cyber Security, Digital Payments, and modern computer applications with hands-on projects.",
+    "categories": [
+      "Computer Literacy",
+      "Digital Skills",
+      "Office Productivity",
+      "ADCA"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 6,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "adca-ch1",
+        "title": "Module 1: Fundamentals of Computer Systems",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "adca-t1.1",
+            "title": "Computer Hardware and Architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t1.2",
+            "title": "Operating Systems",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t1.3",
+            "title": "Computer Networks and Internet",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t1.4",
+            "title": "Data Security and Cyber Threats",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch2",
+        "title": "Module 2: Advanced MS Word",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "adca-t2.1",
+            "title": "Advanced Formatting and Styles",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t2.2",
+            "title": "Mail Merge and Automation",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t2.3",
+            "title": "Collaborative Document Editing",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t2.4",
+            "title": "Professional Document Creation",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch3",
+        "title": "Module 3: Advanced MS Excel",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "adca-t3.1",
+            "title": "Advanced Formulas and Functions",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t3.2",
+            "title": "Pivot Tables and Data Analysis",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t3.3",
+            "title": "Data Visualization with Charts",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t3.4",
+            "title": "Macros and Automation",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch4",
+        "title": "Module 4: MS PowerPoint",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "adca-t4.1",
+            "title": "Creating Professional Presentations",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t4.2",
+            "title": "Animations and Transitions",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t4.3",
+            "title": "Multimedia Integration",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t4.4",
+            "title": "Presentation Delivery Skills",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch5",
+        "title": "Module 5: Internet and Web Technologies",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "adca-t5.1",
+            "title": "Web Browsers and Search Engines",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t5.2",
+            "title": "Email Management",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t5.3",
+            "title": "Cloud Computing Basics",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t5.4",
+            "title": "Introduction to Web Development",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch6",
+        "title": "Module 6: Digital Financial Literacy",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "adca-t6.1",
+            "title": "Online Banking and Transactions",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t6.2",
+            "title": "Digital Payment Systems",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t6.3",
+            "title": "E-commerce Basics",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t6.4",
+            "title": "Financial Cybersecurity",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch7",
+        "title": "Module 7: Cyber Security and Safety",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "adca-t7.1",
+            "title": "Internet Security Threats",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t7.2",
+            "title": "Protecting Personal Data",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t7.3",
+            "title": "Safe Online Practices",
+            "sortOrder": 3
+          },
+          {
+            "id": "adca-t7.4",
+            "title": "Privacy and Data Protection",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "adca-ch8",
+        "title": "Module 8: Capstone Project",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "adca-t8.1",
+            "title": "Real-World Application Development",
+            "sortOrder": 1
+          },
+          {
+            "id": "adca-t8.2",
+            "title": "Integration of Learned Skills",
+            "sortOrder": 2
+          },
+          {
+            "id": "adca-t8.3",
+            "title": "Project Presentation and Evaluation",
+            "sortOrder": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "course-html5-complete-course",
     "status": "PUBLISH",
     "title": "HTML5 Complete Course",
@@ -297,17 +983,349 @@
     ]
   },
   {
-    "id": "course-js-react",
+    "id": "course-css-for-beginners",
     "status": "PUBLISH",
-    "title": "JavaScript & React Frontend Engineering",
-    "slug": "javascript-react-frontend-engineering",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=450&auto=format&fit=crop",
-    "shortDescription": "Deep dive into modern ES6+ JavaScript, DOM events, asynchronous operations, React components, state hooks, and dynamic client routing.",
+    "title": "CSS for Beginners",
+    "slug": "css-for-beginners",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
+    "shortDescription": "Learn CSS step-by-step: selectors, colors, box model, typography, backgrounds, and basic layouts. Build mini projects to practice styling web pages.",
     "categories": [
       "Web Development",
-      "JavaScript",
-      "React",
-      "Frontend"
+      "Frontend",
+      "CSS"
+    ],
+    "level": "Beginner",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "ONLINE",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "css-for-beginners-ch1",
+        "title": "Introduction to CSS",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "css-for-beginners-t1.1",
+            "title": "What is CSS and Why it Matters",
+            "sortOrder": 1,
+            "slug": "what-is-css-and-why-it-matters"
+          },
+          {
+            "id": "css-for-beginners-t1.2",
+            "title": "How CSS Works with HTML",
+            "sortOrder": 2,
+            "slug": "how-css-works-with-html"
+          },
+          {
+            "id": "css-for-beginners-t1.3",
+            "title": "Inline, Internal, External CSS",
+            "sortOrder": 3,
+            "slug": "inline-internal-external-css"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch2",
+        "title": "CSS Syntax & Selectors Basics",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "css-for-beginners-t2.1",
+            "title": "CSS Syntax, Comments, and Code Structure",
+            "sortOrder": 1,
+            "slug": "css-syntax-comments-and-structure"
+          },
+          {
+            "id": "css-for-beginners-t2.2",
+            "title": "Universal and Element Selectors",
+            "sortOrder": 2,
+            "slug": "universal-and-element-selectors"
+          },
+          {
+            "id": "css-for-beginners-t2.3",
+            "title": "Class and ID Selectors",
+            "sortOrder": 3,
+            "slug": "class-and-id-selectors"
+          },
+          {
+            "id": "css-for-beginners-t2.4",
+            "title": "Grouping and Combinator Selectors",
+            "sortOrder": 4,
+            "slug": "grouping-and-combinator-selectors"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch3",
+        "title": "Colors and Backgrounds",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "css-for-beginners-t3.1",
+            "title": "Color Formats: Names, HEX, RGB, and HSL",
+            "sortOrder": 1,
+            "slug": "color-formats-names-hex-rgb-hsl"
+          },
+          {
+            "id": "css-for-beginners-t3.2",
+            "title": "Background Color, Image, Position, and Size",
+            "sortOrder": 2,
+            "slug": "background-color-image-position-size"
+          },
+          {
+            "id": "css-for-beginners-t3.3",
+            "title": "CSS Gradients: Linear and Radial Gradients",
+            "sortOrder": 3,
+            "slug": "css-gradients-linear-radial"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch4",
+        "title": "The CSS Box Model",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "css-for-beginners-t4.1",
+            "title": "The CSS Box Model: Content, Padding, Border, Margin",
+            "sortOrder": 1,
+            "slug": "css-box-model-content-padding-border-margin"
+          },
+          {
+            "id": "css-for-beginners-t4.2",
+            "title": "Width, Height, Max-Width, and Min-Width",
+            "sortOrder": 2,
+            "slug": "width-height-max-min-dimensions"
+          },
+          {
+            "id": "css-for-beginners-t4.3",
+            "title": "The Box-Sizing Property: border-box vs content-box",
+            "sortOrder": 3,
+            "slug": "box-sizing-border-box-vs-content-box"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch5",
+        "title": "Text and Fonts",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "css-for-beginners-t5.1",
+            "title": "Font Families and Web-Safe Fonts",
+            "sortOrder": 1,
+            "slug": "font-families-web-safe-fonts"
+          },
+          {
+            "id": "css-for-beginners-t5.2",
+            "title": "Font Size, Weight, Style, and Line Height",
+            "sortOrder": 2,
+            "slug": "font-size-weight-style-line-height"
+          },
+          {
+            "id": "css-for-beginners-t5.3",
+            "title": "Text Alignment, Decoration, Transform, and Spacing",
+            "sortOrder": 3,
+            "slug": "text-align-decoration-transform-spacing"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch6",
+        "title": "CSS Units and Measurements",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "css-for-beginners-t6.1",
+            "title": "Absolute Units: Pixels (px), Points (pt)",
+            "sortOrder": 1,
+            "slug": "css-units-absolute-px-pt"
+          },
+          {
+            "id": "css-for-beginners-t6.2",
+            "title": "Relative Units: %, rem, em, vh, vw",
+            "sortOrder": 2,
+            "slug": "css-units-relative-percentages-rem-em-vh-vw"
+          },
+          {
+            "id": "css-for-beginners-t6.3",
+            "title": "Responsive Units & The calc() Function",
+            "sortOrder": 3,
+            "slug": "responsive-units-and-calc-function"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch7",
+        "title": "Borders, Shadows and Rounded Corners",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "css-for-beginners-t7.1",
+            "title": "Border Styles, Colors, and Shorthand",
+            "sortOrder": 1,
+            "slug": "border-styles-colors-shorthand"
+          },
+          {
+            "id": "css-for-beginners-t7.2",
+            "title": "Border Radius: Rounded Corners, Pills, and Circular Avatars",
+            "sortOrder": 2,
+            "slug": "border-radius-rounded-corners-circles"
+          },
+          {
+            "id": "css-for-beginners-t7.3",
+            "title": "Box Shadows and Text Shadows: Depth and Elevation",
+            "sortOrder": 3,
+            "slug": "box-shadows-and-text-shadows"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch8",
+        "title": "Links, Lists and Tables Styling",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "css-for-beginners-t8.1",
+            "title": "Styling Links with Pseudo-classes",
+            "sortOrder": 1,
+            "slug": "styling-links-pseudo-classes"
+          },
+          {
+            "id": "css-for-beginners-t8.2",
+            "title": "Styling Ordered and Unordered Lists",
+            "sortOrder": 2,
+            "slug": "styling-ordered-unordered-lists"
+          },
+          {
+            "id": "css-for-beginners-t8.3",
+            "title": "Styling Tables: Borders, Striping, and Responsive Tables",
+            "sortOrder": 3,
+            "slug": "styling-tables-borders-striping"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch9",
+        "title": "Display and Visibility",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "css-for-beginners-t9.1",
+            "title": "Block vs Inline vs Inline-Block: Mastering CSS Display",
+            "sortOrder": 1,
+            "slug": "display-block-inline-inline-block"
+          },
+          {
+            "id": "css-for-beginners-t9.2",
+            "title": "Display: none vs Visibility: hidden: Hiding Elements in CSS",
+            "sortOrder": 2,
+            "slug": "display-none-vs-visibility-hidden"
+          },
+          {
+            "id": "css-for-beginners-t9.3",
+            "title": "CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto",
+            "sortOrder": 3,
+            "slug": "css-overflow-visible-hidden-scroll-auto"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch10",
+        "title": "Introduction to Positioning",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "css-for-beginners-t10.1",
+            "title": "CSS Positioning: Static, Relative, and Absolute Explained",
+            "sortOrder": 1,
+            "slug": "position-static-relative-absolute"
+          },
+          {
+            "id": "css-for-beginners-t10.2",
+            "title": "Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners",
+            "sortOrder": 2,
+            "slug": "position-fixed-and-sticky"
+          },
+          {
+            "id": "css-for-beginners-t10.3",
+            "title": "z-index Basics: Controlling 3D Layering and Stacking Order",
+            "sortOrder": 3,
+            "slug": "z-index-and-stacking-context"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch11",
+        "title": "Basic Layout Techniques",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "css-for-beginners-t11.1",
+            "title": "Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts",
+            "sortOrder": 1,
+            "slug": "float-and-clear-basics"
+          },
+          {
+            "id": "css-for-beginners-t11.2",
+            "title": "Aligning Elements: Mastering text-align, margin auto, and Centering Tricks",
+            "sortOrder": 2,
+            "slug": "aligning-elements-text-align-and-margin"
+          },
+          {
+            "id": "css-for-beginners-t11.3",
+            "title": "Intro to Flexbox: The Modern 1D Layout Powerhouse",
+            "sortOrder": 3,
+            "slug": "intro-to-flexbox-basics"
+          }
+        ]
+      },
+      {
+        "id": "css-for-beginners-ch12",
+        "title": "Beginner Projects",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "css-for-beginners-t12.1",
+            "title": "Project 1: Styled Student Profile & ID Card",
+            "sortOrder": 1,
+            "slug": "project-styled-profile-card"
+          },
+          {
+            "id": "css-for-beginners-t12.2",
+            "title": "Project 2: Simple School Club Landing Page",
+            "sortOrder": 2,
+            "slug": "project-simple-landing-page-layout"
+          },
+          {
+            "id": "css-for-beginners-t12.3",
+            "title": "Project 3: Modern Responsive Navigation Bar & Dropdown",
+            "sortOrder": 3,
+            "slug": "project-navigation-bar-styling"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-css-for-intermediate",
+    "status": "PUBLISH",
+    "title": "CSS for Intermediate",
+    "slug": "css-for-intermediate",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
+    "shortDescription": "Master modern CSS: flexbox, grid, responsive design, transitions, animations, and practical layouts. Build interactive, mobile-friendly web pages.",
+    "categories": [
+      "Web Development",
+      "Frontend",
+      "CSS"
     ],
     "level": "Intermediate",
     "language": [
@@ -315,71 +1333,643 @@
       "Hindi"
     ],
     "duration": {
-      "value": 3,
+      "value": 1,
       "unit": "MONTHS"
     },
     "certificate": true,
-    "mode": "BOTH",
+    "mode": "ONLINE",
     "courseType": "SINGLE",
     "chapters": [
       {
-        "id": "js-ch1",
-        "title": "Modern ES6+ JavaScript Core",
+        "id": "css-for-intermediate-ch1",
+        "title": "Advanced Selectors",
         "sortOrder": 1,
         "topics": [
           {
-            "id": "js-t1.1",
-            "title": "Arrow Functions, Destructuring & Rest/Spread",
-            "sortOrder": 1
+            "id": "css-for-intermediate-t1.1",
+            "title": "Attribute Selectors: Targeting Elements with [attr], ^=, $=, and *=",
+            "sortOrder": 1,
+            "slug": "attribute-selectors-attr-patterns"
           },
           {
-            "id": "js-t1.2",
-            "title": "DOM Manipulation, Events & LocalStorage",
-            "sortOrder": 2
+            "id": "css-for-intermediate-t1.2",
+            "title": "Child, Descendant, and Sibling Selectors: Navigating the DOM Tree",
+            "sortOrder": 2,
+            "slug": "child-descendant-sibling-selectors"
           },
           {
-            "id": "js-t1.3",
-            "title": "Promises, Async/Await & Fetch API",
-            "sortOrder": 3
+            "id": "css-for-intermediate-t1.3",
+            "title": "Deep Dive: Pseudo-classes and Pseudo-elements",
+            "sortOrder": 3,
+            "slug": "pseudo-classes-and-pseudo-elements"
           }
         ]
       },
       {
-        "id": "react-ch2",
-        "title": "React Fundamentals & Hooks",
+        "id": "css-for-intermediate-ch2",
+        "title": "Combinators and Specificity",
         "sortOrder": 2,
         "topics": [
           {
-            "id": "react-t2.1",
-            "title": "JSX, Props, and Component Tree Architecture",
-            "sortOrder": 1
+            "id": "css-for-intermediate-t2.1",
+            "title": "Complex Combinators and Selector Chaining: Building Precision Targets",
+            "sortOrder": 1,
+            "slug": "complex-combinators-and-chaining"
           },
           {
-            "id": "react-t2.2",
-            "title": "useState, useEffect, useRef & Custom Hooks",
-            "sortOrder": 2
+            "id": "css-for-intermediate-t2.2",
+            "title": "CSS Specificity Calculation & The Cascade: Who Wins the Style Battle?",
+            "sortOrder": 2,
+            "slug": "css-specificity-calculation-and-cascade"
+          },
+          {
+            "id": "css-for-intermediate-t2.3",
+            "title": "Using !important Carefully: Best Practices and Anti-Patterns",
+            "sortOrder": 3,
+            "slug": "using-important-rule-best-practices"
           }
         ]
       },
       {
-        "id": "react-ch3",
-        "title": "React State Management & Single Page Apps",
+        "id": "css-for-intermediate-ch3",
+        "title": "Advanced Colors and Gradients",
         "sortOrder": 3,
         "topics": [
           {
-            "id": "react-t3.1",
-            "title": "React Router DOM & Protected Routes",
-            "sortOrder": 1
+            "id": "css-for-intermediate-t3.1",
+            "title": "Opacity vs RGBA/HSLA Alpha: Controlling Transparency Without Side Effects",
+            "sortOrder": 1,
+            "slug": "opacity-and-rgba-hsla-colors"
           },
           {
-            "id": "react-t3.2",
-            "title": "Context API & Global App State",
-            "sortOrder": 2
+            "id": "css-for-intermediate-t3.2",
+            "title": "Advanced Linear and Radial Gradients: Multi-Stop, Angles, and Repeating Patterns",
+            "sortOrder": 2,
+            "slug": "advanced-linear-radial-gradients"
+          },
+          {
+            "id": "css-for-intermediate-t3.3",
+            "title": "Background Blend Modes: Creating Photographic and Artistic Overlays",
+            "sortOrder": 3,
+            "slug": "background-blend-modes-css"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch4",
+        "title": "Flexbox Fundamentals",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t4.1",
+            "title": "Flex Container vs Flex Items: The Main Axis and Cross Axis Anatomy",
+            "sortOrder": 1,
+            "slug": "flex-container-and-flex-items"
+          },
+          {
+            "id": "css-for-intermediate-t4.2",
+            "title": "Alignment Mastery: Justify-Content, Align-Items, and Align-Self Explained",
+            "sortOrder": 2,
+            "slug": "justify-content-align-items-align-self"
+          },
+          {
+            "id": "css-for-intermediate-t4.3",
+            "title": "The Flex Sizing Equation: Flex-Grow, Flex-Shrink, and Flex-Basis Demystified",
+            "sortOrder": 3,
+            "slug": "flex-grow-flex-shrink-flex-basis"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch5",
+        "title": "Flexbox Layouts",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t5.1",
+            "title": "Row vs Column Direction: Responsive Layout Flipping from Desktop to Mobile",
+            "sortOrder": 1,
+            "slug": "row-vs-column-direction-responsive-flipping"
+          },
+          {
+            "id": "css-for-intermediate-t5.2",
+            "title": "Flex Wrapping and Nested Flexbox: Multi-Row Grids and Micro-Components",
+            "sortOrder": 2,
+            "slug": "flex-wrapping-and-nested-flexbox"
+          },
+          {
+            "id": "css-for-intermediate-t5.3",
+            "title": "Building a Complete Responsive Navigation Bar with Flexbox",
+            "sortOrder": 3,
+            "slug": "building-responsive-navbar-with-flexbox"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch6",
+        "title": "Introduction to CSS Grid",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t6.1",
+            "title": "CSS Grid Anatomy: Grid Container, Grid Items, and Grid Lines",
+            "sortOrder": 1,
+            "slug": "grid-container-and-grid-items"
+          },
+          {
+            "id": "css-for-intermediate-t6.2",
+            "title": "Grid Template Columns & Rows: Explicit Tracks and Sizing Syntax",
+            "sortOrder": 2,
+            "slug": "grid-template-columns-and-rows"
+          },
+          {
+            "id": "css-for-intermediate-t6.3",
+            "title": "Grid Gap, Fractional Units (fr), and the repeat() Function",
+            "sortOrder": 3,
+            "slug": "grid-gap-fractional-units-fr-repeat"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch7",
+        "title": "Advanced CSS Grid",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t7.1",
+            "title": "Grid Template Areas and Named Lines: Visualizing Layouts Like ASCII Art",
+            "sortOrder": 1,
+            "slug": "grid-template-areas-and-named-lines"
+          },
+          {
+            "id": "css-for-intermediate-t7.2",
+            "title": "Auto-fit vs Auto-fill with minmax(): The Zero-Media-Query Responsive Formula",
+            "sortOrder": 2,
+            "slug": "auto-fit-vs-auto-fill-minmax"
+          },
+          {
+            "id": "css-for-intermediate-t7.3",
+            "title": "Building Modern Page Layouts with CSS Grid: The Full Application Dashboard",
+            "sortOrder": 3,
+            "slug": "building-page-layouts-with-css-grid"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch8",
+        "title": "Responsive Design with Media Queries",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t8.1",
+            "title": "Min-Width and Max-Width Media Queries: Modern Range Syntax and Logic",
+            "sortOrder": 1,
+            "slug": "min-width-max-width-media-queries"
+          },
+          {
+            "id": "css-for-intermediate-t8.2",
+            "title": "Mobile-First vs Desktop-First Approach: Clean Architecture and Overriding Rules",
+            "sortOrder": 2,
+            "slug": "mobile-first-vs-desktop-first"
+          },
+          {
+            "id": "css-for-intermediate-t8.3",
+            "title": "Responsive Breakpoints and Device Best Practices: Designing for Reality",
+            "sortOrder": 3,
+            "slug": "responsive-breakpoints-best-practices"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch9",
+        "title": "Transitions and Animations",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t9.1",
+            "title": "CSS Transitions: Timing Functions, Delays, and Smooth State Shifts",
+            "sortOrder": 1,
+            "slug": "css-transitions-timing-functions-delays"
+          },
+          {
+            "id": "css-for-intermediate-t9.2",
+            "title": "CSS Keyframe Animations: Syntax, Infinite Loops, and Performance",
+            "sortOrder": 2,
+            "slug": "css-animations-keyframes-and-performance"
+          },
+          {
+            "id": "css-for-intermediate-t9.3",
+            "title": "Practical Interactive Button and Card Effects: Micro-Interactions in Action",
+            "sortOrder": 3,
+            "slug": "practical-interactive-button-and-card-effects"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch10",
+        "title": "CSS Variables and Custom Properties",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t10.1",
+            "title": "Declaring and Using CSS Variables: Syntax, Fallbacks, and Scope",
+            "sortOrder": 1,
+            "slug": "declaring-and-using-css-variables"
+          },
+          {
+            "id": "css-for-intermediate-t10.2",
+            "title": "The :root Pseudo-Class: Global Design Tokens and Architectural Systems",
+            "sortOrder": 2,
+            "slug": "the-root-pseudo-class-design-tokens"
+          },
+          {
+            "id": "css-for-intermediate-t10.3",
+            "title": "Complete Theme Switching with CSS Variables: Building Light and Dark Modes",
+            "sortOrder": 3,
+            "slug": "theme-switching-light-dark-mode-css-variables"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch11",
+        "title": "Shadows, Filters, and Advanced Effects",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t11.1",
+            "title": "Box-Shadow and Text-Shadow Tricks: Inset, Multi-Layering, and Neon Glows",
+            "sortOrder": 1,
+            "slug": "box-shadow-text-shadow-advanced-tricks"
+          },
+          {
+            "id": "css-for-intermediate-t11.2",
+            "title": "CSS Filters: Blur, Brightness, Contrast, and Backdrop-Filter Deep Dive",
+            "sortOrder": 2,
+            "slug": "css-filters-and-backdrop-filter"
+          },
+          {
+            "id": "css-for-intermediate-t11.3",
+            "title": "Glassmorphism and Modern Visual Effects: Frosted Glass and Soft UI Design",
+            "sortOrder": 3,
+            "slug": "glassmorphism-and-modern-visual-effects"
+          }
+        ]
+      },
+      {
+        "id": "css-for-intermediate-ch12",
+        "title": "Intermediate Projects",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "css-for-intermediate-t12.1",
+            "title": "Project 1: Responsive Landing Page with Flexbox",
+            "sortOrder": 1,
+            "slug": "project-1-responsive-landing-page-with-flexbox"
+          },
+          {
+            "id": "css-for-intermediate-t12.2",
+            "title": "Project 2: Blog Layout using CSS Grid",
+            "sortOrder": 2,
+            "slug": "project-2-blog-layout-using-css-grid"
+          },
+          {
+            "id": "css-for-intermediate-t12.3",
+            "title": "Project 3: Animated Pricing Table",
+            "sortOrder": 3,
+            "slug": "project-3-animated-pricing-table"
           }
         ]
       }
     ]
   },
+  {
+    "id": "course-css-for-advanced",
+    "status": "PUBLISH",
+    "title": "CSS for Advanced",
+    "slug": "css-for-advanced",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
+    "shortDescription": "Advance your CSS skills: 3D transforms, keyframe animations, CSS variables, SASS, advanced responsive techniques, and modern UI/UX design projects.",
+    "categories": [
+      "Web Development",
+      "Frontend",
+      "CSS"
+    ],
+    "level": "Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "ONLINE",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "css-for-advanced-ch1",
+        "title": "Advanced CSS Functions",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "css-for-advanced-t1.1",
+            "title": "calc(), min(), max(), and clamp(): Modern Mathematical Layouts",
+            "sortOrder": 1,
+            "slug": "calc-min-max-clamp-mathematical-functions"
+          },
+          {
+            "id": "css-for-advanced-t1.2",
+            "title": "Advanced nth-child and nth-of-type Patterns: Formula Slicing & Grids",
+            "sortOrder": 2,
+            "slug": "advanced-nth-child-and-nth-of-type-patterns"
+          },
+          {
+            "id": "css-for-advanced-t1.3",
+            "title": "Custom Properties with Fallback Values and Runtime Dynamic Control",
+            "sortOrder": 3,
+            "slug": "custom-properties-with-fallback-values"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch2",
+        "title": "2D and 3D Transforms",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "css-for-advanced-t2.1",
+            "title": "2D Transforms: translate, rotate, scale, and skew Dynamics",
+            "sortOrder": 1,
+            "slug": "2d-transforms-translate-rotate-scale-skew"
+          },
+          {
+            "id": "css-for-advanced-t2.2",
+            "title": "3D Transforms: perspective, preserve-3d, rotateX, rotateY, and rotateZ",
+            "sortOrder": 2,
+            "slug": "3d-transforms-perspective-rotatex-rotatey"
+          },
+          {
+            "id": "css-for-advanced-t2.3",
+            "title": "Combining Transforms for Advanced 3D Interactive Card Flips",
+            "sortOrder": 3,
+            "slug": "combining-transforms-for-advanced-effects"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch3",
+        "title": "Mastering Animations",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "css-for-advanced-t3.1",
+            "title": "@keyframes Deep Dive: Complex Choreography and Multi-Stage Timelines",
+            "sortOrder": 1,
+            "slug": "keyframes-deep-dive-animation-choreography"
+          },
+          {
+            "id": "css-for-advanced-t3.2",
+            "title": "Chaining Animations, Staggered Delays, and Sequence Management",
+            "sortOrder": 2,
+            "slug": "chaining-animations-and-delays"
+          },
+          {
+            "id": "css-for-advanced-t3.3",
+            "title": "CSS Animation Performance: 60 FPS GPU Acceleration & DevTools Profiling",
+            "sortOrder": 3,
+            "slug": "css-animation-performance-optimization"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch4",
+        "title": "CSS Shapes and Advanced Layouts",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "css-for-advanced-t4.1",
+            "title": "CSS Shapes and clip-path: Wrapping Text with shape-outside and Polygons",
+            "sortOrder": 1,
+            "slug": "css-shapes-clip-path-and-shape-outside"
+          },
+          {
+            "id": "css-for-advanced-t4.2",
+            "title": "CSS Multi-Column Layouts: Newspaper Columns, Gaps, and Column Rules",
+            "sortOrder": 2,
+            "slug": "css-multi-column-layouts"
+          },
+          {
+            "id": "css-for-advanced-t4.3",
+            "title": "Combining Grid and Flexbox: The Ultimate Hybrid Layout Strategy",
+            "sortOrder": 3,
+            "slug": "combining-grid-and-flexbox-advanced-layouts"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch5",
+        "title": "CSS Filters and Blend Modes",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "css-for-advanced-t5.1",
+            "title": "Advanced Image Effects: Chaining Filters, Invert, Hue-Rotate, and SVG Filters",
+            "sortOrder": 1,
+            "slug": "advanced-image-effects-with-css-filters"
+          },
+          {
+            "id": "css-for-advanced-t5.2",
+            "title": "mix-blend-mode and background-blend-mode Mastery: Dual-Tone Imagery",
+            "sortOrder": 2,
+            "slug": "mix-blend-mode-and-background-blend-mode-mastery"
+          },
+          {
+            "id": "css-for-advanced-t5.3",
+            "title": "Creative UI Effects with Conic Gradients, Mesh Patterns, and Masking",
+            "sortOrder": 3,
+            "slug": "creative-ui-effects-with-filters-and-gradients"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch6",
+        "title": "CSS Variables (Advanced Usage)",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "css-for-advanced-t6.1",
+            "title": "Dynamic Theming with CSS Variables and JavaScript DOM Integration",
+            "sortOrder": 1,
+            "slug": "dynamic-theming-with-css-variables"
+          },
+          {
+            "id": "css-for-advanced-t6.2",
+            "title": "Advanced Dark and Light Mode System: Token Architecture and Contrast",
+            "sortOrder": 2,
+            "slug": "advanced-dark-light-mode-system-tokens"
+          },
+          {
+            "id": "css-for-advanced-t6.3",
+            "title": "Scoped Variables, Component Tokens, and Runtime Performance",
+            "sortOrder": 3,
+            "slug": "scoped-variables-and-runtime-performance"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch7",
+        "title": "Introduction to Preprocessors (SASS/SCSS)",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "css-for-advanced-t7.1",
+            "title": "SASS/SCSS Fundamentals: Variables, Nesting Rules, and Partials Architecture",
+            "sortOrder": 1,
+            "slug": "sass-scss-variables-nesting-and-partials"
+          },
+          {
+            "id": "css-for-advanced-t7.2",
+            "title": "SASS Mixins, Functions, Loops (@each, @for), and Inheritance (@extend)",
+            "sortOrder": 2,
+            "slug": "sass-mixins-functions-and-inheritance"
+          },
+          {
+            "id": "css-for-advanced-t7.3",
+            "title": "Compiling and Organizing Enterprise SCSS: The 7-1 Architecture Pattern",
+            "sortOrder": 3,
+            "slug": "compiling-and-organizing-scss-architecture"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch8",
+        "title": "Advanced Responsive Design",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "css-for-advanced-t8.1",
+            "title": "Fluid Typography and Responsive Units: Perfect Proportions with vw, vh, and rem",
+            "sortOrder": 1,
+            "slug": "fluid-typography-and-responsive-units"
+          },
+          {
+            "id": "css-for-advanced-t8.2",
+            "title": "CSS Container Queries: The Modern Modular Component Revolution (@container)",
+            "sortOrder": 2,
+            "slug": "css-container-queries-modern-modular-responsive"
+          },
+          {
+            "id": "css-for-advanced-t8.3",
+            "title": "Multi-Device Responsive Testing, Device Pixel Ratios, and Viewport Quirks",
+            "sortOrder": 3,
+            "slug": "multi-device-testing-and-responsive-debugging"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch9",
+        "title": "CSS Architecture and Best Practices",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "css-for-advanced-t9.1",
+            "title": "BEM Methodology: Structuring Scalable Blocks, Elements, and Modifiers",
+            "sortOrder": 1,
+            "slug": "bem-methodology-block-element-modifier"
+          },
+          {
+            "id": "css-for-advanced-t9.2",
+            "title": "Utility-First vs Component-Based CSS: Tailwind vs BEM Architecture",
+            "sortOrder": 2,
+            "slug": "utility-first-vs-component-based-css"
+          },
+          {
+            "id": "css-for-advanced-t9.3",
+            "title": "Writing Maintainable, Scalable, and Self-Documenting CSS Codebases",
+            "sortOrder": 3,
+            "slug": "writing-maintainable-and-scalable-css"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch10",
+        "title": "Advanced UI/UX Effects",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "css-for-advanced-t10.1",
+            "title": "Advanced Glassmorphism, Neumorphism, and Claymorphism UI Patterns",
+            "sortOrder": 1,
+            "slug": "advanced-glassmorphism-and-neumorphism-patterns"
+          },
+          {
+            "id": "css-for-advanced-t10.2",
+            "title": "Pure CSS Parallax Scrolling Effects: 3D Depth without JavaScript",
+            "sortOrder": 2,
+            "slug": "pure-css-parallax-scrolling-effects"
+          },
+          {
+            "id": "css-for-advanced-t10.3",
+            "title": "Modern Loading Spinners, Shimmer Placeholders, and Skeleton Screens",
+            "sortOrder": 3,
+            "slug": "loading-spinners-and-skeleton-screens"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch11",
+        "title": "Optimization and Performance",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "css-for-advanced-t11.1",
+            "title": "Critical CSS, Render-Blocking Elimination, and content-visibility",
+            "sortOrder": 1,
+            "slug": "critical-css-and-eliminating-render-blocking"
+          },
+          {
+            "id": "css-for-advanced-t11.2",
+            "title": "CSS Minification, Purging Unused CSS, and Build-Step Bundling",
+            "sortOrder": 2,
+            "slug": "css-minification-purging-and-tree-shaking"
+          },
+          {
+            "id": "css-for-advanced-t11.3",
+            "title": "Improving Google Lighthouse Scores: Core Web Vitals (LCP, CLS, INP)",
+            "sortOrder": 3,
+            "slug": "improving-lighthouse-performance-and-core-web-vitals"
+          }
+        ]
+      },
+      {
+        "id": "css-for-advanced-ch12",
+        "title": "Final Projects",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "css-for-advanced-t12.1",
+            "title": "Project 1: Interactive Analytics Dashboard UI with Grid & Container Queries",
+            "sortOrder": 1,
+            "slug": "project-1-interactive-dashboard-ui"
+          },
+          {
+            "id": "css-for-advanced-t12.2",
+            "title": "Project 2: Dark/Light Animated Portfolio with CSS 3D Card Interactions",
+            "sortOrder": 2,
+            "slug": "project-2-portfolio-website-with-dark-light-theme"
+          },
+          {
+            "id": "css-for-advanced-t12.3",
+            "title": "Project 3: Responsive E-Commerce Product Page with Parallax & Shimmer",
+            "sortOrder": 3,
+            "slug": "project-3-responsive-ecommerce-product-page"
+          }
+        ]
+      }
+    ]
+  },
+  
   {
     "id": "course-backend-node",
     "status": "PUBLISH",
@@ -490,114 +2080,6 @@
       "course-html-css",
       "course-js-react",
       "course-backend-node"
-    ]
-  },
-  {
-    "id": "course-ccc",
-    "status": "PUBLISH",
-    "title": "CCC (Course on Computer Concepts)",
-    "slug": "ccc-computer-concepts",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=450&auto=format&fit=crop",
-    "shortDescription": "NIELIT syllabus compliant computer literacy course. Learn MS Office, internet surfing, email, digital financial services, and cyber security.",
-    "categories": [
-      "Computer Literacy",
-      "MS Office",
-      "General"
-    ],
-    "level": "Beginner",
-    "language": [
-      "Hindi"
-    ],
-    "duration": {
-      "value": 80,
-      "unit": "HOURS"
-    },
-    "certificate": true,
-    "mode": "OFFLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "ccc-ch1",
-        "title": "Introduction to Computer & GUI OS",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "ccc-t1.1",
-            "title": "Hardware & Software Fundamentals",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t1.2",
-            "title": "Operating Systems & UI Settings",
-            "sortOrder": 2
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch2",
-        "title": "MS Word (Word Processing)",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "ccc-t2.1",
-            "title": "Creating & Formatting Documents",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t2.2",
-            "title": "Tables, Mail Merge, and Templates",
-            "sortOrder": 2
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch3",
-        "title": "MS Excel (Spreadsheets)",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "ccc-t3.1",
-            "title": "Formulas, Functions, and Cell References",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t3.2",
-            "title": "Charts and Data Sorting",
-            "sortOrder": 2
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-master-diploma",
-    "status": "PUBLISH",
-    "title": "Master Computer & Coding Diploma (ADCA + Python)",
-    "slug": "master-computer-coding-diploma",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=450&auto=format&fit=crop",
-    "shortDescription": "Comprehensive all-in-one bundle covering basic computer concepts (CCC), foundational web page creation (HTML/CSS), and advanced Python software engineering.",
-    "categories": [
-      "Diploma",
-      "Python",
-      "Computer Literacy",
-      "Combo"
-    ],
-    "level": "Beginner",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 6,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "BOTH",
-    "courseType": "COMBO",
-    "includedCourseIds": [
-      "course-ccc",
-      "course-html-css",
-      "course-python-basics"
     ]
   },
   {
@@ -5957,1368 +7439,6 @@
             "id": "react-js-for-advanced-t18.1",
             "title": "Topic 1",
             "sortOrder": 1
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-css-for-beginners",
-    "status": "PUBLISH",
-    "title": "CSS for Beginners",
-    "slug": "css-for-beginners",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Learn CSS step-by-step: selectors, colors, box model, typography, backgrounds, and basic layouts. Build mini projects to practice styling web pages.",
-    "categories": [
-      "Web Development",
-      "Frontend",
-      "CSS"
-    ],
-    "level": "Beginner",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 1,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "ONLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "css-for-beginners-ch1",
-        "title": "Introduction to CSS",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "css-for-beginners-t1.1",
-            "title": "What is CSS and Why it Matters",
-            "sortOrder": 1,
-            "slug": "what-is-css-and-why-it-matters"
-          },
-          {
-            "id": "css-for-beginners-t1.2",
-            "title": "How CSS Works with HTML",
-            "sortOrder": 2,
-            "slug": "how-css-works-with-html"
-          },
-          {
-            "id": "css-for-beginners-t1.3",
-            "title": "Inline, Internal, External CSS",
-            "sortOrder": 3,
-            "slug": "inline-internal-external-css"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch2",
-        "title": "CSS Syntax & Selectors Basics",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "css-for-beginners-t2.1",
-            "title": "CSS Syntax, Comments, and Code Structure",
-            "sortOrder": 1,
-            "slug": "css-syntax-comments-and-structure"
-          },
-          {
-            "id": "css-for-beginners-t2.2",
-            "title": "Universal and Element Selectors",
-            "sortOrder": 2,
-            "slug": "universal-and-element-selectors"
-          },
-          {
-            "id": "css-for-beginners-t2.3",
-            "title": "Class and ID Selectors",
-            "sortOrder": 3,
-            "slug": "class-and-id-selectors"
-          },
-          {
-            "id": "css-for-beginners-t2.4",
-            "title": "Grouping and Combinator Selectors",
-            "sortOrder": 4,
-            "slug": "grouping-and-combinator-selectors"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch3",
-        "title": "Colors and Backgrounds",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "css-for-beginners-t3.1",
-            "title": "Color Formats: Names, HEX, RGB, and HSL",
-            "sortOrder": 1,
-            "slug": "color-formats-names-hex-rgb-hsl"
-          },
-          {
-            "id": "css-for-beginners-t3.2",
-            "title": "Background Color, Image, Position, and Size",
-            "sortOrder": 2,
-            "slug": "background-color-image-position-size"
-          },
-          {
-            "id": "css-for-beginners-t3.3",
-            "title": "CSS Gradients: Linear and Radial Gradients",
-            "sortOrder": 3,
-            "slug": "css-gradients-linear-radial"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch4",
-        "title": "The CSS Box Model",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "css-for-beginners-t4.1",
-            "title": "The CSS Box Model: Content, Padding, Border, Margin",
-            "sortOrder": 1,
-            "slug": "css-box-model-content-padding-border-margin"
-          },
-          {
-            "id": "css-for-beginners-t4.2",
-            "title": "Width, Height, Max-Width, and Min-Width",
-            "sortOrder": 2,
-            "slug": "width-height-max-min-dimensions"
-          },
-          {
-            "id": "css-for-beginners-t4.3",
-            "title": "The Box-Sizing Property: border-box vs content-box",
-            "sortOrder": 3,
-            "slug": "box-sizing-border-box-vs-content-box"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch5",
-        "title": "Text and Fonts",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "css-for-beginners-t5.1",
-            "title": "Font Families and Web-Safe Fonts",
-            "sortOrder": 1,
-            "slug": "font-families-web-safe-fonts"
-          },
-          {
-            "id": "css-for-beginners-t5.2",
-            "title": "Font Size, Weight, Style, and Line Height",
-            "sortOrder": 2,
-            "slug": "font-size-weight-style-line-height"
-          },
-          {
-            "id": "css-for-beginners-t5.3",
-            "title": "Text Alignment, Decoration, Transform, and Spacing",
-            "sortOrder": 3,
-            "slug": "text-align-decoration-transform-spacing"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch6",
-        "title": "CSS Units and Measurements",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "css-for-beginners-t6.1",
-            "title": "Absolute Units: Pixels (px), Points (pt)",
-            "sortOrder": 1,
-            "slug": "css-units-absolute-px-pt"
-          },
-          {
-            "id": "css-for-beginners-t6.2",
-            "title": "Relative Units: %, rem, em, vh, vw",
-            "sortOrder": 2,
-            "slug": "css-units-relative-percentages-rem-em-vh-vw"
-          },
-          {
-            "id": "css-for-beginners-t6.3",
-            "title": "Responsive Units & The calc() Function",
-            "sortOrder": 3,
-            "slug": "responsive-units-and-calc-function"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch7",
-        "title": "Borders, Shadows and Rounded Corners",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "css-for-beginners-t7.1",
-            "title": "Border Styles, Colors, and Shorthand",
-            "sortOrder": 1,
-            "slug": "border-styles-colors-shorthand"
-          },
-          {
-            "id": "css-for-beginners-t7.2",
-            "title": "Border Radius: Rounded Corners, Pills, and Circular Avatars",
-            "sortOrder": 2,
-            "slug": "border-radius-rounded-corners-circles"
-          },
-          {
-            "id": "css-for-beginners-t7.3",
-            "title": "Box Shadows and Text Shadows: Depth and Elevation",
-            "sortOrder": 3,
-            "slug": "box-shadows-and-text-shadows"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch8",
-        "title": "Links, Lists and Tables Styling",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "css-for-beginners-t8.1",
-            "title": "Styling Links with Pseudo-classes",
-            "sortOrder": 1,
-            "slug": "styling-links-pseudo-classes"
-          },
-          {
-            "id": "css-for-beginners-t8.2",
-            "title": "Styling Ordered and Unordered Lists",
-            "sortOrder": 2,
-            "slug": "styling-ordered-unordered-lists"
-          },
-          {
-            "id": "css-for-beginners-t8.3",
-            "title": "Styling Tables: Borders, Striping, and Responsive Tables",
-            "sortOrder": 3,
-            "slug": "styling-tables-borders-striping"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch9",
-        "title": "Display and Visibility",
-        "sortOrder": 9,
-        "topics": [
-          {
-            "id": "css-for-beginners-t9.1",
-            "title": "Block vs Inline vs Inline-Block: Mastering CSS Display",
-            "sortOrder": 1,
-            "slug": "display-block-inline-inline-block"
-          },
-          {
-            "id": "css-for-beginners-t9.2",
-            "title": "Display: none vs Visibility: hidden: Hiding Elements in CSS",
-            "sortOrder": 2,
-            "slug": "display-none-vs-visibility-hidden"
-          },
-          {
-            "id": "css-for-beginners-t9.3",
-            "title": "CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto",
-            "sortOrder": 3,
-            "slug": "css-overflow-visible-hidden-scroll-auto"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch10",
-        "title": "Introduction to Positioning",
-        "sortOrder": 10,
-        "topics": [
-          {
-            "id": "css-for-beginners-t10.1",
-            "title": "CSS Positioning: Static, Relative, and Absolute Explained",
-            "sortOrder": 1,
-            "slug": "position-static-relative-absolute"
-          },
-          {
-            "id": "css-for-beginners-t10.2",
-            "title": "Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners",
-            "sortOrder": 2,
-            "slug": "position-fixed-and-sticky"
-          },
-          {
-            "id": "css-for-beginners-t10.3",
-            "title": "z-index Basics: Controlling 3D Layering and Stacking Order",
-            "sortOrder": 3,
-            "slug": "z-index-and-stacking-context"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch11",
-        "title": "Basic Layout Techniques",
-        "sortOrder": 11,
-        "topics": [
-          {
-            "id": "css-for-beginners-t11.1",
-            "title": "Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts",
-            "sortOrder": 1,
-            "slug": "float-and-clear-basics"
-          },
-          {
-            "id": "css-for-beginners-t11.2",
-            "title": "Aligning Elements: Mastering text-align, margin auto, and Centering Tricks",
-            "sortOrder": 2,
-            "slug": "aligning-elements-text-align-and-margin"
-          },
-          {
-            "id": "css-for-beginners-t11.3",
-            "title": "Intro to Flexbox: The Modern 1D Layout Powerhouse",
-            "sortOrder": 3,
-            "slug": "intro-to-flexbox-basics"
-          }
-        ]
-      },
-      {
-        "id": "css-for-beginners-ch12",
-        "title": "Beginner Projects",
-        "sortOrder": 12,
-        "topics": [
-          {
-            "id": "css-for-beginners-t12.1",
-            "title": "Project 1: Styled Student Profile & ID Card",
-            "sortOrder": 1,
-            "slug": "project-styled-profile-card"
-          },
-          {
-            "id": "css-for-beginners-t12.2",
-            "title": "Project 2: Simple School Club Landing Page",
-            "sortOrder": 2,
-            "slug": "project-simple-landing-page-layout"
-          },
-          {
-            "id": "css-for-beginners-t12.3",
-            "title": "Project 3: Modern Responsive Navigation Bar & Dropdown",
-            "sortOrder": 3,
-            "slug": "project-navigation-bar-styling"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-css-for-intermediate",
-    "status": "PUBLISH",
-    "title": "CSS for Intermediate",
-    "slug": "css-for-intermediate",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Master modern CSS: flexbox, grid, responsive design, transitions, animations, and practical layouts. Build interactive, mobile-friendly web pages.",
-    "categories": [
-      "Web Development",
-      "Frontend",
-      "CSS"
-    ],
-    "level": "Intermediate",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 1,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "ONLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "css-for-intermediate-ch1",
-        "title": "Advanced Selectors",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t1.1",
-            "title": "Attribute Selectors ([attr], ^=, $=, *=)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t1.2",
-            "title": "Child, Descendant, Sibling Selectors",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t1.3",
-            "title": "Pseudo-classes and Pseudo-elements",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch2",
-        "title": "Combinators and Specificity",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t2.1",
-            "title": "Understanding Combinators (>, +, ~)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t2.2",
-            "title": "CSS Specificity Rules",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t2.3",
-            "title": "Using !important carefully",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch3",
-        "title": "Advanced Colors and Gradients",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t3.1",
-            "title": "Opacity and RGBA/HSLA colors",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t3.2",
-            "title": "Linear and Radial Gradients (advanced)",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t3.3",
-            "title": "Background Blend Modes",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch4",
-        "title": "Flexbox Fundamentals",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t4.1",
-            "title": "Flex Container and Flex Items",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t4.2",
-            "title": "Justify-content, Align-items, Align-self",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t4.3",
-            "title": "Flex-grow, Flex-shrink, Flex-basis",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch5",
-        "title": "Flexbox Layouts",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t5.1",
-            "title": "Row vs Column Direction",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t5.2",
-            "title": "Wrapping and Nested Flexbox",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t5.3",
-            "title": "Building a Responsive Navbar with Flexbox",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch6",
-        "title": "Introduction to CSS Grid",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t6.1",
-            "title": "Grid Container and Grid Items",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t6.2",
-            "title": "Grid Template Columns & Rows",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t6.3",
-            "title": "Gap, Fractional Units (fr), Repeat()",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch7",
-        "title": "Advanced CSS Grid",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t7.1",
-            "title": "Grid Areas and Named Lines",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t7.2",
-            "title": "Auto-fit and Auto-fill Concepts",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t7.3",
-            "title": "Building Page Layouts with Grid",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch8",
-        "title": "Responsive Design with Media Queries",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t8.1",
-            "title": "Min-width, Max-width Queries",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t8.2",
-            "title": "Mobile-first vs Desktop-first",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t8.3",
-            "title": "Breakpoints and Best Practices",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch9",
-        "title": "Transitions and Animations",
-        "sortOrder": 9,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t9.1",
-            "title": "CSS Transitions (hover, focus effects)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t9.2",
-            "title": "CSS Animations and @keyframes",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t9.3",
-            "title": "Practical Button Hover Effects",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch10",
-        "title": "CSS Variables and Custom Properties",
-        "sortOrder": 10,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t10.1",
-            "title": "Declaring and Using Variables",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t10.2",
-            "title": "The :root Selector",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t10.3",
-            "title": "Theme Switching with CSS Variables",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch11",
-        "title": "Shadows, Filters, and Advanced Effects",
-        "sortOrder": 11,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t11.1",
-            "title": "Box-shadow and Text-shadow Tricks",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t11.2",
-            "title": "CSS Filters (blur, brightness, grayscale)",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t11.3",
-            "title": "Glassmorphism and Neumorphism Basics",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-intermediate-ch12",
-        "title": "Intermediate Projects",
-        "sortOrder": 12,
-        "topics": [
-          {
-            "id": "css-for-intermediate-t12.1",
-            "title": "Project 1: Responsive Landing Page with Flexbox",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-intermediate-t12.2",
-            "title": "Project 2: Blog Layout using CSS Grid",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-intermediate-t12.3",
-            "title": "Project 3: Animated Pricing Table",
-            "sortOrder": 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-css-for-advanced",
-    "status": "PUBLISH",
-    "title": "CSS for Advanced",
-    "slug": "css-for-advanced",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Advance your CSS skills: 3D transforms, keyframe animations, CSS variables, SASS, advanced responsive techniques, and modern UI/UX design projects.",
-    "categories": [
-      "Web Development",
-      "Frontend",
-      "CSS"
-    ],
-    "level": "Advanced",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 1,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "ONLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "css-for-advanced-ch1",
-        "title": "Advanced CSS Functions",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "css-for-advanced-t1.1",
-            "title": "calc(), min(), max(), clamp()",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t1.2",
-            "title": "Advanced nth-child and nth-of-type patterns",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t1.3",
-            "title": "Custom properties with fallback values",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch2",
-        "title": "2D and 3D Transforms",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "css-for-advanced-t2.1",
-            "title": "2D Transforms: translate, rotate, scale, skew",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t2.2",
-            "title": "3D Transforms: perspective, rotateX, rotateY",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t2.3",
-            "title": "Combining transforms for advanced effects",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch3",
-        "title": "Mastering Animations",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "css-for-advanced-t3.1",
-            "title": "@keyframes deep dive",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t3.2",
-            "title": "Chaining animations and delays",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t3.3",
-            "title": "CSS Animation Performance Optimization",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch4",
-        "title": "CSS Shapes and Advanced Layouts",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "css-for-advanced-t4.1",
-            "title": "CSS Shapes for text wrapping (circle, polygon)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t4.2",
-            "title": "Multi-column layouts",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t4.3",
-            "title": "Advanced responsive layouts with Grid + Flexbox",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch5",
-        "title": "CSS Filters and Blend Modes",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "css-for-advanced-t5.1",
-            "title": "Image effects with CSS filters",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t5.2",
-            "title": "Mix-blend-mode and background-blend-mode",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t5.3",
-            "title": "Creative UI effects with filters + gradients",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch6",
-        "title": "CSS Variables (Advanced Usage)",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "css-for-advanced-t6.1",
-            "title": "Dynamic theming with CSS variables",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t6.2",
-            "title": "Dark/Light Mode Implementation",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t6.3",
-            "title": "Scoped variables and performance considerations",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch7",
-        "title": "Introduction to Preprocessors (SASS/SCSS)",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "css-for-advanced-t7.1",
-            "title": "Variables, Nesting, and Partials",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t7.2",
-            "title": "Mixins, Functions, and Inheritance",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t7.3",
-            "title": "Compiling and Organizing SCSS files",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch8",
-        "title": "Advanced Responsive Design",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "css-for-advanced-t8.1",
-            "title": "Fluid typography and responsive units (vw, vh, rem)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t8.2",
-            "title": "Container Queries (modern CSS)",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t8.3",
-            "title": "Best Practices for Multi-device Testing",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch9",
-        "title": "CSS Architecture and Best Practices",
-        "sortOrder": 9,
-        "topics": [
-          {
-            "id": "css-for-advanced-t9.1",
-            "title": "BEM Methodology (Block, Element, Modifier)",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t9.2",
-            "title": "Utility-first vs Component-based CSS",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t9.3",
-            "title": "Writing Maintainable and Scalable CSS",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch10",
-        "title": "Advanced UI/UX Effects",
-        "sortOrder": 10,
-        "topics": [
-          {
-            "id": "css-for-advanced-t10.1",
-            "title": "Glassmorphism and Neumorphism Designs",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t10.2",
-            "title": "CSS Parallax Scrolling Effects",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t10.3",
-            "title": "Modern Loading Spinners and Skeleton Screens",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch11",
-        "title": "Optimization and Performance",
-        "sortOrder": 11,
-        "topics": [
-          {
-            "id": "css-for-advanced-t11.1",
-            "title": "Critical CSS and Render Blocking",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t11.2",
-            "title": "Minification and Purging unused CSS",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t11.3",
-            "title": "Improving Lighthouse CSS Scores",
-            "sortOrder": 3
-          }
-        ]
-      },
-      {
-        "id": "css-for-advanced-ch12",
-        "title": "Final Projects",
-        "sortOrder": 12,
-        "topics": [
-          {
-            "id": "css-for-advanced-t12.1",
-            "title": "Project 1: Interactive Dashboard UI",
-            "sortOrder": 1
-          },
-          {
-            "id": "css-for-advanced-t12.2",
-            "title": "Project 2: Portfolio Website with Dark/Light Theme",
-            "sortOrder": 2
-          },
-          {
-            "id": "css-for-advanced-t12.3",
-            "title": "Project 3: Responsive E-commerce Product Page",
-            "sortOrder": 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "course-ccc-nielit",
-    "status": "PUBLISH",
-    "title": "CCC",
-    "slug": "ccc",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Become digitally literate with the complete CCC program. Learn computer fundamentals, MS Office tools, Internet, Email, Digital Payments, Cyber Security, and Future Skills.",
-    "categories": [
-      "Computer Literacy",
-      "Digital Skills",
-      "Office Productivity"
-    ],
-    "level": "Beginner",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 3,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "ONLINE",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "ccc-ch1",
-        "title": "Introduction to Computer",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "ccc-t1.1",
-            "title": "Evolution of Computers and IT Gadgets",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t1.2",
-            "title": "Applications of Computers in Daily Life",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t1.3",
-            "title": "Basics of Hardware and Software",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t1.4",
-            "title": "CPU, Memory, Storage, Input & Output Devices",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t1.5",
-            "title": "Types of Software: Application, System, Utility",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t1.6",
-            "title": "Open Source vs Proprietary Software",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t1.7",
-            "title": "Introduction to Mobile Applications",
-            "sortOrder": 7
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch2",
-        "title": "Introduction to Operating System",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "ccc-t2.1",
-            "title": "Basics and Types of Operating Systems",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t2.2",
-            "title": "Operating Systems for Desktop, Laptop, and Mobile",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t2.3",
-            "title": "Desktop Interface: Taskbar, Icons, Shortcuts",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t2.4",
-            "title": "Running and Managing Applications",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t2.5",
-            "title": "System Settings: Date, Time, Display, Mouse",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t2.6",
-            "title": "Add/Remove Programs, Printers, and Features",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t2.7",
-            "title": "File and Folder Management",
-            "sortOrder": 7
-          },
-          {
-            "id": "ccc-t2.8",
-            "title": "Common File Extensions",
-            "sortOrder": 8
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch3",
-        "title": "Word Processing (MS Word / LibreOffice Writer)",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "ccc-t3.1",
-            "title": "Introduction and Interface Overview",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t3.2",
-            "title": "Creating, Opening, Saving, and Printing Documents",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t3.3",
-            "title": "Text Editing: Cut, Copy, Paste, Undo, Redo",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t3.4",
-            "title": "Formatting Text: Font, Color, Size, Alignment",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t3.5",
-            "title": "Spelling Check, Find and Replace, AutoCorrect",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t3.6",
-            "title": "Page Setup, Header, Footer, and Page Numbering",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t3.7",
-            "title": "Table Insertion and Manipulation",
-            "sortOrder": 7
-          },
-          {
-            "id": "ccc-t3.8",
-            "title": "Mail Merge: Creating Bulk Letters and Labels",
-            "sortOrder": 8
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch4",
-        "title": "Spreadsheet (MS Excel / LibreOffice Calc)",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "ccc-t4.1",
-            "title": "Introduction to Spreadsheets and Interface",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t4.2",
-            "title": "Creating and Saving Worksheets",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t4.3",
-            "title": "Cell Addressing and Data Entry",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t4.4",
-            "title": "Editing, Formatting Cells, Rows, and Columns",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t4.5",
-            "title": "Basic Formulas and Functions (SUM, AVG, MAX, MIN)",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t4.6",
-            "title": "Sorting, Filtering, and Freezing Panes",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t4.7",
-            "title": "Charts and Graphs (Bar, Pie, Line)",
-            "sortOrder": 7
-          },
-          {
-            "id": "ccc-t4.8",
-            "title": "Printing and Page Setup for Sheets",
-            "sortOrder": 8
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch5",
-        "title": "Presentation (MS PowerPoint / LibreOffice Impress)",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "ccc-t5.1",
-            "title": "Creating a New Presentation (Template / Blank)",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t5.2",
-            "title": "Adding and Editing Text on Slides",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t5.3",
-            "title": "Inserting Tables, Images, and Media",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t5.4",
-            "title": "Slide Layouts and Master Slide",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t5.5",
-            "title": "Transitions, Animations, and Slide Timings",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t5.6",
-            "title": "Running Slide Shows and Printing Handouts",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t5.7",
-            "title": "Enhancing Presentation with Design and Color Themes",
-            "sortOrder": 7
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch6",
-        "title": "Introduction to Internet and WWW",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "ccc-t6.1",
-            "title": "Basics of Computer Networks (LAN, WAN, Topology)",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t6.2",
-            "title": "Concept of Internet, WWW, and IP Address",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t6.3",
-            "title": "Modes of Internet Connection (WiFi, Broadband, Mobile)",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t6.4",
-            "title": "Web Browsers: Chrome, Firefox, Edge, Opera",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t6.5",
-            "title": "Using Search Engines and Surfing Websites",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t6.6",
-            "title": "Downloading and Printing Web Pages",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t6.7",
-            "title": "Understanding URLs and Website Navigation",
-            "sortOrder": 7
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch7",
-        "title": "Email, Social Networking, and e-Governance",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "ccc-t7.1",
-            "title": "Creating and Managing an Email Account",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t7.2",
-            "title": "Composing, Sending, and Attaching Files in Email",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t7.3",
-            "title": "Social Media Basics: Facebook, Instagram, LinkedIn, X",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t7.4",
-            "title": "Instant Messaging: WhatsApp, Telegram, Messenger",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t7.5",
-            "title": "Introduction to Blogs and Netiquettes",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t7.6",
-            "title": "e-Governance Applications: Passport, Railway, eHospital",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t7.7",
-            "title": "Using UMANG App and Digital Locker",
-            "sortOrder": 7
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch8",
-        "title": "Digital Financial Tools and Applications",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "ccc-t8.1",
-            "title": "Introduction to OTP and QR Code",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t8.2",
-            "title": "UPI, AEPS, and eWallet Concepts",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t8.3",
-            "title": "Internet Banking: NEFT, RTGS, IMPS",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t8.4",
-            "title": "Online Bill Payment and Recharge",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t8.5",
-            "title": "Using PoS Devices and Secure Transactions",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t8.6",
-            "title": "Government Financial Schemes and Awareness",
-            "sortOrder": 6
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch9",
-        "title": "Overview of Cyber Security",
-        "sortOrder": 9,
-        "topics": [
-          {
-            "id": "ccc-t9.1",
-            "title": "Introduction to Cyber Security and its Need",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t9.2",
-            "title": "Securing PC, Browsers, and Emails",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t9.3",
-            "title": "Social Media Safety and Password Protection",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t9.4",
-            "title": "Safe Practices for Mobile Devices",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t9.5",
-            "title": "Recognizing Online Fraud and Phishing",
-            "sortOrder": 5
-          }
-        ]
-      },
-      {
-        "id": "ccc-ch10",
-        "title": "Future Skills and Artificial Intelligence",
-        "sortOrder": 10,
-        "topics": [
-          {
-            "id": "ccc-t10.1",
-            "title": "Introduction to Future Technologies",
-            "sortOrder": 1
-          },
-          {
-            "id": "ccc-t10.2",
-            "title": "Internet of Things (IoT) and Big Data Analytics",
-            "sortOrder": 2
-          },
-          {
-            "id": "ccc-t10.3",
-            "title": "Cloud Computing and Virtual Reality",
-            "sortOrder": 3
-          },
-          {
-            "id": "ccc-t10.4",
-            "title": "Artificial Intelligence: Concept, Goals, and Ethics",
-            "sortOrder": 4
-          },
-          {
-            "id": "ccc-t10.5",
-            "title": "Applications of AI in Daily Life",
-            "sortOrder": 5
-          },
-          {
-            "id": "ccc-t10.6",
-            "title": "Robotic Process Automation and 3D Printing",
-            "sortOrder": 6
-          },
-          {
-            "id": "ccc-t10.7",
-            "title": "Future Trends in ICT and AI-driven Innovation",
-            "sortOrder": 7
           }
         ]
       }
@@ -13202,245 +13322,6 @@
       "course-javascript-for-beginners",
       "course-react-js-for-beginners",
       "course-git--github-basics"
-    ]
-  },
-  {
-    "id": "course-adca",
-    "status": "PUBLISH",
-    "title": "ADCA - Advance Diploma in Computer Applications",
-    "slug": "adca",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Master Advanced Diploma in Computer Applications (ADCA). Learn MS Office, Internet, Email, Cyber Security, Digital Payments, and modern computer applications with hands-on projects.",
-    "categories": [
-      "Computer Literacy",
-      "Digital Skills",
-      "Office Productivity",
-      "ADCA"
-    ],
-    "level": "Intermediate",
-    "language": [
-      "English",
-      "Hindi"
-    ],
-    "duration": {
-      "value": 6,
-      "unit": "MONTHS"
-    },
-    "certificate": true,
-    "mode": "BOTH",
-    "courseType": "SINGLE",
-    "chapters": [
-      {
-        "id": "adca-ch1",
-        "title": "Module 1: Fundamentals of Computer Systems",
-        "sortOrder": 1,
-        "topics": [
-          {
-            "id": "adca-t1.1",
-            "title": "Computer Hardware and Architecture",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t1.2",
-            "title": "Operating Systems",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t1.3",
-            "title": "Computer Networks and Internet",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t1.4",
-            "title": "Data Security and Cyber Threats",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch2",
-        "title": "Module 2: Advanced MS Word",
-        "sortOrder": 2,
-        "topics": [
-          {
-            "id": "adca-t2.1",
-            "title": "Advanced Formatting and Styles",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t2.2",
-            "title": "Mail Merge and Automation",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t2.3",
-            "title": "Collaborative Document Editing",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t2.4",
-            "title": "Professional Document Creation",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch3",
-        "title": "Module 3: Advanced MS Excel",
-        "sortOrder": 3,
-        "topics": [
-          {
-            "id": "adca-t3.1",
-            "title": "Advanced Formulas and Functions",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t3.2",
-            "title": "Pivot Tables and Data Analysis",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t3.3",
-            "title": "Data Visualization with Charts",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t3.4",
-            "title": "Macros and Automation",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch4",
-        "title": "Module 4: MS PowerPoint",
-        "sortOrder": 4,
-        "topics": [
-          {
-            "id": "adca-t4.1",
-            "title": "Creating Professional Presentations",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t4.2",
-            "title": "Animations and Transitions",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t4.3",
-            "title": "Multimedia Integration",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t4.4",
-            "title": "Presentation Delivery Skills",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch5",
-        "title": "Module 5: Internet and Web Technologies",
-        "sortOrder": 5,
-        "topics": [
-          {
-            "id": "adca-t5.1",
-            "title": "Web Browsers and Search Engines",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t5.2",
-            "title": "Email Management",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t5.3",
-            "title": "Cloud Computing Basics",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t5.4",
-            "title": "Introduction to Web Development",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch6",
-        "title": "Module 6: Digital Financial Literacy",
-        "sortOrder": 6,
-        "topics": [
-          {
-            "id": "adca-t6.1",
-            "title": "Online Banking and Transactions",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t6.2",
-            "title": "Digital Payment Systems",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t6.3",
-            "title": "E-commerce Basics",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t6.4",
-            "title": "Financial Cybersecurity",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch7",
-        "title": "Module 7: Cyber Security and Safety",
-        "sortOrder": 7,
-        "topics": [
-          {
-            "id": "adca-t7.1",
-            "title": "Internet Security Threats",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t7.2",
-            "title": "Protecting Personal Data",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t7.3",
-            "title": "Safe Online Practices",
-            "sortOrder": 3
-          },
-          {
-            "id": "adca-t7.4",
-            "title": "Privacy and Data Protection",
-            "sortOrder": 4
-          }
-        ]
-      },
-      {
-        "id": "adca-ch8",
-        "title": "Module 8: Capstone Project",
-        "sortOrder": 8,
-        "topics": [
-          {
-            "id": "adca-t8.1",
-            "title": "Real-World Application Development",
-            "sortOrder": 1
-          },
-          {
-            "id": "adca-t8.2",
-            "title": "Integration of Learned Skills",
-            "sortOrder": 2
-          },
-          {
-            "id": "adca-t8.3",
-            "title": "Project Presentation and Evaluation",
-            "sortOrder": 3
-          }
-        ]
-      }
     ]
   },
   {

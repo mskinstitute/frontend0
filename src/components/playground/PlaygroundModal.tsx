@@ -1,14 +1,26 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import PlaygroundClient from './PlaygroundClient';
+import dynamic from 'next/dynamic';
 import { SupportedLanguage } from './types';
+
+const PlaygroundClient = dynamic(() => import('./PlaygroundClient'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full min-h-[500px] flex items-center justify-center bg-slate-900 text-white">
+      <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+    </div>
+  ),
+});
 
 interface PlaygroundModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialLanguage?: SupportedLanguage;
   initialCode?: string;
+  initialCss?: string;
+  initialHtml?: string;
+  initialJs?: string;
   title?: string;
 }
 
@@ -17,6 +29,9 @@ export default function PlaygroundModal({
   onClose,
   initialLanguage = 'python',
   initialCode,
+  initialCss,
+  initialHtml,
+  initialJs,
 }: PlaygroundModalProps) {
   const scrollPositionRef = useRef<number>(0);
 
@@ -65,6 +80,9 @@ export default function PlaygroundModal({
         <PlaygroundClient
           initialLanguage={initialLanguage}
           initialCode={initialCode}
+          initialCss={initialCss}
+          initialHtml={initialHtml}
+          initialJs={initialJs}
           isModal={true}
           onCloseModal={onClose}
         />

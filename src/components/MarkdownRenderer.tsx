@@ -15,12 +15,23 @@ import {
   Flame,
   CheckSquare,
   Square,
+  ExternalLink,
+  Link2,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { toast } from 'react-hot-toast';
 import { slugify } from '@/lib/markdown';
 import { highlightCode, getLanguageDisplayName } from '@/lib/prism-highlighter';
-import PlaygroundModal from '@/components/playground/PlaygroundModal';
 import { SupportedLanguage } from '@/components/playground/types';
+import { detectAndRenderVisualDiagram } from '@/components/MarkdownDiagrams';
+import InlineCodePreview from '@/components/InlineCodePreview';
+import { isWebPreviewSupported } from '@/lib/webPreviewUtils';
+
+const PlaygroundModal = dynamic(() => import('@/components/playground/PlaygroundModal'), {
+  ssr: false,
+});
 
 interface MarkdownRendererProps {
   content: string;
@@ -132,10 +143,22 @@ const PLAYGROUND_SUPPORTED_LANGS: Record<string, SupportedLanguage> = {
   sql: 'sql',
 };
 
+export interface CodeBlockMeta {
+  enableTry?: boolean;
+  enableCopy?: boolean;
+  enablePreview?: boolean;
+  autoPreview?: boolean;
+  mdnUrl?: string;
+  exampleUrl?: string;
+  title?: string;
+  companionCode?: string;
+  companionLang?: string;
+}
+
 type Block =
   | { type: 'hr' }
   | { type: 'heading'; level: number; text: string; cleanId: string }
-  | { type: 'code'; lang: string; code: string }
+  | { type: 'code'; lang: string; code: string; meta: CodeBlockMeta }
   | { type: 'table'; headers: string[]; rows: string[][] }
   | { type: 'blockquote'; lines: string[] }
   | { type: 'ordered-list'; items: string[] }
@@ -150,6 +173,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     isOpen: boolean;
     language: SupportedLanguage;
     code: string;
+    companionCss?: string;
+    companionHtml?: string;
     title: string;
   }>({
     isOpen: false,
@@ -157,6 +182,24 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     code: '',
     title: 'Code Playground',
   });
+  const [openPreviewMap, setOpenPreviewMap] = useState<Record<number, boolean>>({});
+
+  const isPreviewActive = (blockIndex: number, meta: CodeBlockMeta) => {
+    if (openPreviewMap[blockIndex] !== undefined) {
+      return openPreviewMap[blockIndex];
+    }
+    return Boolean(meta.autoPreview);
+  };
+
+  const togglePreviewActive = (blockIndex: number, meta: CodeBlockMeta) => {
+    setOpenPreviewMap((prev) => {
+      const current = prev[blockIndex] !== undefined ? prev[blockIndex] : Boolean(meta.autoPreview);
+      return {
+        ...prev,
+        [blockIndex]: !current,
+      };
+    });
+  };
 
   const handleCopy = (index: number, code: string) => {
     navigator.clipboard.writeText(code);
@@ -173,6 +216,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     let currentType: 'paragraph' | 'blockquote' | 'table' | 'ordered-list' | 'unordered-list' | null = null;
     let inCode = false;
     let codeLang = 'text';
+    let currentCodeMeta: CodeBlockMeta = {};
     let codeLines: string[] = [];
 
     const flushCurrent = () => {
@@ -253,13 +297,79 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         if (!inCode) {
           flushCurrent();
           inCode = true;
-          const match = trimmed.match(/^```(\w+)?/);
-          codeLang = (match?.[1] || 'text').toLowerCase();
+          const fenceHeader = trimmed.slice(3).trim();
+          const tokens = fenceHeader.split(/\s+/);
+          codeLang = (tokens[0] || 'text').toLowerCase();
+
+          const restStr = fenceHeader.slice(tokens[0]?.length || 0).trim();
+          const meta: CodeBlockMeta = {};
+
+          // 1. Try in playground disable/enable
+          if (/\b(no-try|no-playground|try=false|playground=false|try:false)\b/i.test(restStr)) {
+            meta.enableTry = false;
+          } else if (/\b(try=true|playground=true|try:true|try)\b/i.test(restStr)) {
+            meta.enableTry = true;
+          }
+
+          // 2. Copy button disable/enable
+          if (/\b(no-copy|copy=false|copy:false)\b/i.test(restStr)) {
+            meta.enableCopy = false;
+          } else if (/\b(copy=true|copy:true|copy)\b/i.test(restStr)) {
+            meta.enableCopy = true;
+          }
+
+          // 3. Inline Live Preview disable/enable / auto-open
+          const isWebLang = isWebPreviewSupported(codeLang);
+          if (
+            /\b(preview-true|preview=true|preview:true|ispreview|preview-enable|preview_enable|live-preview|run=true)\b/i.test(
+              restStr
+            )
+          ) {
+            meta.enablePreview = true;
+            meta.autoPreview = true;
+          } else if (
+            /\b(no-preview|preview=false|preview:false|preview-false)\b/i.test(restStr)
+          ) {
+            meta.enablePreview = false;
+            meta.autoPreview = false;
+          } else if (/\bpreview\b/i.test(restStr)) {
+            meta.enablePreview = true;
+            meta.autoPreview = true;
+          } else if (isWebLang) {
+            meta.enablePreview = true;
+            meta.autoPreview = false;
+          }
+
+          // 4. MDN or Doc URL
+          const mdnMatch = restStr.match(/\b(?:mdn|doc|docs)=["']?([^"'\s>]+)["']?/i);
+          if (mdnMatch) {
+            meta.mdnUrl = mdnMatch[1];
+          }
+
+          // 5. Example or external demo URL
+          const exampleMatch = restStr.match(/\b(?:example|link|demo)=["']?([^"'\s>]+)["']?/i);
+          if (exampleMatch) {
+            meta.exampleUrl = exampleMatch[1];
+          }
+
+          // 5. Custom Title
+          const titleMatch = restStr.match(/\btitle=["']([^"']+)["']/i);
+          if (titleMatch) {
+            meta.title = titleMatch[1];
+          }
+
+          currentCodeMeta = meta;
           codeLines = [];
         } else {
           inCode = false;
-          blocks.push({ type: 'code', lang: codeLang, code: codeLines.join('\n') });
+          blocks.push({
+            type: 'code',
+            lang: codeLang,
+            code: codeLines.join('\n'),
+            meta: currentCodeMeta || {},
+          });
           codeLines = [];
+          currentCodeMeta = {};
         }
         continue;
       }
@@ -344,6 +454,46 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     }
 
     flushCurrent();
+
+    // Automatic Companion Pairing for HTML & CSS:
+    // If an HTML block is followed by or near a CSS block (or vice versa),
+    // pair them up so running either in Playground passes both HTML and CSS!
+    for (let i = 0; i < blocks.length; i++) {
+      const cur = blocks[i];
+      if (cur.type !== 'code') continue;
+
+      if ((cur.lang === 'html' || cur.lang === 'htm') && !cur.meta.companionCode) {
+        for (let j = i + 1; j <= Math.min(i + 3, blocks.length - 1); j++) {
+          const target = blocks[j];
+          if (target.type === 'heading') break; // do not cross section boundaries
+          if (target.type === 'code' && (target.lang === 'css' || target.lang === 'style')) {
+            cur.meta.companionCode = target.code;
+            cur.meta.companionLang = 'css';
+            if (!target.meta.companionCode) {
+              target.meta.companionCode = cur.code;
+              target.meta.companionLang = 'html';
+            }
+            break;
+          }
+        }
+      } else if (cur.lang === 'css' && !cur.meta.companionCode) {
+        // Look backwards for previous HTML
+        for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
+          const target = blocks[j];
+          if (target.type === 'heading') break;
+          if (target.type === 'code' && (target.lang === 'html' || target.lang === 'htm')) {
+            cur.meta.companionCode = target.code;
+            cur.meta.companionLang = 'html';
+            if (!target.meta.companionCode) {
+              target.meta.companionCode = cur.code;
+              target.meta.companionLang = 'css';
+            }
+            break;
+          }
+        }
+      }
+    }
+
     return blocks;
   }, [content]);
 
@@ -405,6 +555,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
         // 3. Fenced Code Block
         if (block.type === 'code') {
+          // Check if block represents an architectural process flow, anatomy diagram, or interactive CSS demo
+          const visualDiagram = detectAndRenderVisualDiagram(block.code, block.lang);
+          if (visualDiagram) {
+            return <React.Fragment key={idx}>{visualDiagram}</React.Fragment>;
+          }
+
           codeBlockCounter++;
           const codeIdx = codeBlockCounter;
           const lang = block.lang;
@@ -438,6 +594,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             }
           };
 
+          const enableTry = block.meta.enableTry !== false && Boolean(PLAYGROUND_SUPPORTED_LANGS[lang]);
+          const enableCopy = block.meta.enableCopy !== false;
+          const canPreview = block.meta.enablePreview !== false && isWebPreviewSupported(lang);
+          const hasCompanion = Boolean(block.meta.companionCode);
+          const companionLang = block.meta.companionLang;
+
           return (
             <div
               key={idx}
@@ -445,7 +607,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             >
               {/* Code Editor Header */}
               <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-slate-800/90 text-xs font-mono">
-                {/* Left: macOS dots + Language Badge */}
+                {/* Left: macOS dots + Language Badge + Linked Companion Badge */}
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-1.5" aria-hidden="true">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-2xs" />
@@ -459,49 +621,141 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   >
                     {displayName}
                   </span>
+
+                  {hasCompanion && (
+                    <span
+                      className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-sans text-slate-300 shadow-2xs"
+                      title={`This example has companion ${companionLang?.toUpperCase()} that will be automatically loaded in the playground!`}
+                    >
+                      <Link2 className="w-2.5 h-2.5 text-secondary" />
+                      <span>Linked with {companionLang?.toUpperCase()}</span>
+                    </span>
+                  )}
                 </div>
 
                 {/* Right: Actions */}
                 <div className="flex items-center gap-1.5 sm:gap-2">
-                  {PLAYGROUND_SUPPORTED_LANGS[lang] && (
+                  {/* MDN Docs Reference Link */}
+                  {block.meta.mdnUrl && (
+                    <a
+                      href={block.meta.mdnUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-400 hover:text-white bg-sky-400/10 hover:bg-sky-500 transition-all py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-sky-400/30 shadow-xs"
+                      title="Read official documentation on MDN Web Docs"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span className="hidden sm:inline">MDN Docs</span>
+                      <span className="sm:hidden">MDN</span>
+                    </a>
+                  )}
+
+                  {/* External Live Example / Demo Link */}
+                  {block.meta.exampleUrl && (
+                    <a
+                      href={block.meta.exampleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-emerald-400 hover:text-white bg-emerald-400/10 hover:bg-emerald-500 transition-all py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-emerald-400/30 shadow-xs"
+                      title="Open external live demo / example"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span className="hidden sm:inline">Live Example</span>
+                      <span className="sm:hidden">Demo</span>
+                    </a>
+                  )}
+
+                  {/* Inline Live Preview / Run Button (respects canPreview) */}
+                  {canPreview && (
                     <button
                       type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        togglePreviewActive(idx, block.meta);
+                      }}
+                      className={`flex items-center gap-1.5 transition-all cursor-pointer py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border shadow-xs ${
+                        isPreviewActive(idx, block.meta)
+                          ? 'text-white bg-emerald-600 border-emerald-500 hover:bg-emerald-700'
+                          : 'text-emerald-400 hover:text-white bg-emerald-500/15 hover:bg-emerald-600 border-emerald-500/40'
+                      }`}
+                      title={
+                        isPreviewActive(idx, block.meta)
+                          ? 'Hide inline live preview output'
+                          : 'Run code and show live preview output right here'
+                      }
+                    >
+                      {isPreviewActive(idx, block.meta) ? (
+                        <>
+                          <EyeOff className="w-3 h-3" />
+                          <span className="hidden sm:inline">Hide Preview</span>
+                          <span className="sm:hidden">Hide</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-3 h-3 fill-current" />
+                          <span className="hidden sm:inline">Run Preview</span>
+                          <span className="sm:hidden">Run</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+
+                  {/* Try in Playground Button (respects enableTry) */}
+                  {enableTry && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const isHtml = lang === 'html' || lang === 'markup';
+                        const isCss = lang === 'css';
                         setPlaygroundModal({
                           isOpen: true,
                           language: PLAYGROUND_SUPPORTED_LANGS[lang],
                           code,
-                          title: `Interactive Playground (${displayName})`,
+                          companionCss:
+                            isHtml && block.meta.companionLang === 'css' ? block.meta.companionCode : undefined,
+                          companionHtml:
+                            isCss && block.meta.companionLang === 'html' ? block.meta.companionCode : undefined,
+                          title: block.meta.title || `Interactive Playground (${displayName})`,
                         });
                       }}
                       className="flex items-center gap-1.5 text-secondary hover:text-white bg-secondary/15 hover:bg-secondary transition-all cursor-pointer py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-secondary/40 shadow-xs"
-                      title="Open and run in Playground"
+                      title={
+                        hasCompanion
+                          ? `Open in Playground with linked ${companionLang?.toUpperCase()}`
+                          : 'Open and run in Playground'
+                      }
                     >
                       <Play className="w-3 h-3 fill-current" />
-                      <span className="hidden sm:inline">Try in Playground</span>
+                      <span className="hidden sm:inline">
+                        {hasCompanion ? `Try with ${companionLang === 'css' ? 'CSS' : 'HTML'}` : 'Try in Playground'}
+                      </span>
                       <span className="sm:hidden">Try</span>
                     </button>
                   )}
 
-                  <button
-                    onClick={() => handleCopy(codeIdx, code)}
-                    className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/10 active:scale-95"
-                    aria-label="Copy code"
-                  >
-                    {copiedIndex === codeIdx ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400 font-semibold text-xs font-sans">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span className="text-xs font-sans">Copy Code</span>
-                      </>
-                    )}
-                  </button>
+                  {/* Copy Code Button (respects enableCopy) */}
+                  {enableCopy && (
+                    <button
+                      onClick={() => handleCopy(codeIdx, code)}
+                      className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/10 active:scale-95"
+                      aria-label="Copy code"
+                    >
+                      {copiedIndex === codeIdx ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400 font-semibold text-xs font-sans">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span className="text-xs font-sans">Copy Code</span>
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -518,6 +772,32 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   />
                 </pre>
               </div>
+
+              {/* Inline Live Preview / Output Window */}
+              {canPreview && isPreviewActive(idx, block.meta) && (
+                <InlineCodePreview
+                  lang={lang}
+                  code={code}
+                  companionLang={block.meta.companionLang}
+                  companionCode={block.meta.companionCode}
+                  title={block.meta.title}
+                  onClose={() => togglePreviewActive(idx, block.meta)}
+                  onOpenPlayground={() => {
+                    const isHtml = lang === 'html' || lang === 'markup';
+                    const isCss = lang === 'css';
+                    setPlaygroundModal({
+                      isOpen: true,
+                      language: PLAYGROUND_SUPPORTED_LANGS[lang] || 'html',
+                      code,
+                      companionCss:
+                        isHtml && block.meta.companionLang === 'css' ? block.meta.companionCode : undefined,
+                      companionHtml:
+                        isCss && block.meta.companionLang === 'html' ? block.meta.companionCode : undefined,
+                      title: block.meta.title || `Interactive Playground (${displayName})`,
+                    });
+                  }}
+                />
+              )}
             </div>
           );
         }
@@ -830,6 +1110,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           onClose={() => setPlaygroundModal((prev) => ({ ...prev, isOpen: false }))}
           initialLanguage={playgroundModal.language}
           initialCode={playgroundModal.code}
+          initialCss={playgroundModal.companionCss}
+          initialHtml={playgroundModal.companionHtml}
           title={playgroundModal.title}
         />
       )}
