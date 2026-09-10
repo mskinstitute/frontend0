@@ -218,6 +218,26 @@ D. `Shift + Esc`
 
 ---
 
+### 4. What is the standard name for the default home page file in any website project?
+A. `home.docx`
+B. `index.html`
+C. `main.txt`
+D. `page1.html`
+**Answer:** B
+**Explanation:** Web servers automatically look for `index.html` as the default landing page of a website directory.
+
+---
+
+### 5. Which keyboard shortcut in VS Code neatly formats and indents your code?
+A. `Ctrl + S`
+B. `Shift + Alt + F`
+C. `Ctrl + C`
+D. `Alt + F4`
+**Answer:** B
+**Explanation:** `Shift + Alt + F` triggers code formatting in VS Code (using formatters like Prettier).
+
+---
+
 # Practice Challenge (Today's Homework)
 
 1. If you haven't installed VS Code yet, download and install it from `code.visualstudio.com`.

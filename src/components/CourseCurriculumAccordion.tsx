@@ -72,6 +72,58 @@ function resolveTopicTutorialUrl(
       topicSlug = 'elements';
     } else if (rawSlug === 'attributes' || rawSlug === 'html-attributes') {
       topicSlug = 'attributes';
+    } else if (rawSlug === 'html-headings' || rawSlug === 'headings') {
+      topicSlug = 'html-headings';
+    } else if (rawSlug === 'paragraphs-line-breaks' || rawSlug === 'paragraphs') {
+      topicSlug = 'paragraphs-line-breaks';
+    } else if (rawSlug === 'text-formatting-elements' || rawSlug === 'text-elements-formatting' || rawSlug.includes('formatting')) {
+      topicSlug = 'text-formatting-elements';
+    } else if (rawSlug === 'quotations-citations' || rawSlug === 'quotations' || rawSlug.includes('quotation')) {
+      topicSlug = 'quotations-citations';
+    } else if (rawSlug === 'html-entities-symbols' || rawSlug.includes('entity') || rawSlug.includes('symbol') || rawSlug.includes('emoji')) {
+      topicSlug = 'html-entities-symbols';
+    } else if (rawSlug === 'html-comments' || rawSlug === 'comments' || rawSlug.includes('comment')) {
+      topicSlug = 'html-comments';
+    } else if (rawSlug === 'html-colors-rgb' || rawSlug === 'colors' || rawSlug === 'html-colors' || rawSlug === 'html-colors-color-codes') {
+      topicSlug = 'html-colors-rgb';
+    } else if (rawSlug === 'hex-hsl-color-codes' || rawSlug.includes('hex') || rawSlug.includes('hsl')) {
+      topicSlug = 'hex-hsl-color-codes';
+    } else if (rawSlug === 'links-hyperlinks' || rawSlug === 'links' || rawSlug === 'hyperlinks' || rawSlug === 'links-navigation-lists') {
+      topicSlug = 'links-hyperlinks';
+    } else if (rawSlug === 'target-attributes-security' || rawSlug.includes('target') || rawSlug.includes('security')) {
+      topicSlug = 'target-attributes-security';
+    } else if (rawSlug === 'unordered-ordered-lists' || rawSlug === 'lists' || rawSlug.includes('unordered') || rawSlug.includes('ordered')) {
+      topicSlug = 'unordered-ordered-lists';
+    } else if (rawSlug === 'description-lists' || rawSlug.includes('description')) {
+      topicSlug = 'description-lists';
+    } else if (rawSlug === 'html-tables' || rawSlug === 'tables' || rawSlug === 'table' || rawSlug === 'tables-structured-data') {
+      topicSlug = 'html-tables';
+    } else if (rawSlug === 'colspan-rowspan' || rawSlug.includes('colspan') || rawSlug.includes('rowspan')) {
+      topicSlug = 'colspan-rowspan';
+    } else if (rawSlug === 'block-vs-inline-elements' || rawSlug === 'block-and-inline' || rawSlug.includes('block') || rawSlug.includes('inline')) {
+      topicSlug = 'block-vs-inline-elements';
+    } else if (rawSlug === 'div-span-containers' || rawSlug.includes('div') || rawSlug.includes('span')) {
+      topicSlug = 'div-span-containers';
+    } else if (rawSlug === 'images-responsive-art' || rawSlug === 'images-multimedia-embeds' || rawSlug.includes('image')) {
+      topicSlug = 'images-responsive-art';
+    } else if (rawSlug === 'audio-video' || rawSlug.includes('audio') || rawSlug.includes('video') || rawSlug.includes('media')) {
+      topicSlug = 'audio-video';
+    } else if (rawSlug === 'iframes-web-embeds' || rawSlug.includes('iframe') || rawSlug.includes('embed')) {
+      topicSlug = 'iframes-web-embeds';
+    } else if (rawSlug === 'html5-svg-canvas' || rawSlug.includes('svg') || rawSlug.includes('canvas')) {
+      topicSlug = 'html5-svg-canvas';
+    } else if (rawSlug === 'forms-input-types' || rawSlug === 'forms' || rawSlug === 'form' || rawSlug === 'forms-inputs-validations') {
+      topicSlug = 'forms-input-types';
+    } else if (rawSlug === 'form-controls-validations' || rawSlug.includes('validation') || rawSlug.includes('control')) {
+      topicSlug = 'form-controls-validations';
+    } else if (rawSlug === 'semantic-layout-elements' || rawSlug === 'html5-semantic-architecture' || rawSlug.includes('semantic') || rawSlug.includes('layout')) {
+      topicSlug = 'semantic-layout-elements';
+    } else if (rawSlug === 'accessibility-aria' || rawSlug === 'accessibility-aria-seo' || rawSlug.includes('accessibility') || rawSlug.includes('aria')) {
+      topicSlug = 'accessibility-aria';
+    } else if (rawSlug === 'interactive-elements-dialog' || rawSlug.includes('dialog') || rawSlug.includes('interactive') || rawSlug.includes('detail')) {
+      topicSlug = 'interactive-elements-dialog';
+    } else if (rawSlug === 'html5-apis-storage-best-practices' || rawSlug.includes('api') || rawSlug.includes('storage')) {
+      topicSlug = 'html5-apis-storage-best-practices';
     }
   }
 

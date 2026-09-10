@@ -89,12 +89,20 @@
           {
             "id": "html5-t3.1",
             "title": "Text Formatting Elements",
+            "slug": "text-formatting-elements",
             "sortOrder": 1
           },
           {
             "id": "html5-t3.2",
             "title": "Quotations & Citations",
+            "slug": "quotations-citations",
             "sortOrder": 2
+          },
+          {
+            "id": "html5-t3.3",
+            "title": "HTML Entities, Symbols & Emojis",
+            "slug": "html-entities-symbols",
+            "sortOrder": 3
           }
         ]
       },
@@ -117,8 +125,15 @@
         "topics": [
           {
             "id": "html5-t5.1",
-            "title": "HTML Colors & Color Codes",
+            "title": "HTML Colors & RGB",
+            "slug": "html-colors-rgb",
             "sortOrder": 1
+          },
+          {
+            "id": "html5-t5.2",
+            "title": "HEX & HSL Color Codes",
+            "slug": "hex-hsl-color-codes",
+            "sortOrder": 2
           }
         ]
       },
@@ -130,11 +145,13 @@
           {
             "id": "html5-t6.1",
             "title": "Links & Hyperlinks",
+            "slug": "links-hyperlinks",
             "sortOrder": 1
           },
           {
             "id": "html5-t6.2",
             "title": "Target Attributes & Security",
+            "slug": "target-attributes-security",
             "sortOrder": 2
           }
         ]
@@ -147,11 +164,13 @@
           {
             "id": "html5-t7.1",
             "title": "Unordered & Ordered Lists",
+            "slug": "unordered-ordered-lists",
             "sortOrder": 1
           },
           {
             "id": "html5-t7.2",
             "title": "Description Lists",
+            "slug": "description-lists",
             "sortOrder": 2
           }
         ]
@@ -164,11 +183,13 @@
           {
             "id": "html5-t8.1",
             "title": "HTML Tables",
+            "slug": "html-tables",
             "sortOrder": 1
           },
           {
             "id": "html5-t8.2",
             "title": "Colspan & Rowspan",
+            "slug": "colspan-rowspan",
             "sortOrder": 2
           }
         ]
@@ -181,11 +202,13 @@
           {
             "id": "html5-t9.1",
             "title": "Block vs Inline Elements",
+            "slug": "block-vs-inline-elements",
             "sortOrder": 1
           },
           {
             "id": "html5-t9.2",
             "title": "Div & Span Containers",
+            "slug": "div-span-containers",
             "sortOrder": 2
           }
         ]
@@ -198,12 +221,26 @@
           {
             "id": "html5-t10.1",
             "title": "Images & Responsive Art",
+            "slug": "images-responsive-art",
             "sortOrder": 1
           },
           {
             "id": "html5-t10.2",
             "title": "Audio & Video",
+            "slug": "audio-video",
             "sortOrder": 2
+          },
+          {
+            "id": "html5-t10.3",
+            "title": "Iframes & Web Embeds",
+            "slug": "iframes-web-embeds",
+            "sortOrder": 3
+          },
+          {
+            "id": "html5-t10.4",
+            "title": "HTML5 Graphics: SVG & Canvas",
+            "slug": "html5-svg-canvas",
+            "sortOrder": 4
           }
         ]
       },
@@ -215,11 +252,13 @@
           {
             "id": "html5-t11.1",
             "title": "Forms & Input Types",
+            "slug": "forms-input-types",
             "sortOrder": 1
           },
           {
             "id": "html5-t11.2",
             "title": "Form Controls & Validations",
+            "slug": "form-controls-validations",
             "sortOrder": 2
           }
         ]
@@ -232,12 +271,26 @@
           {
             "id": "html5-t12.1",
             "title": "Semantic Layout Elements",
+            "slug": "semantic-layout-elements",
             "sortOrder": 1
           },
           {
             "id": "html5-t12.2",
             "title": "Accessibility & ARIA",
+            "slug": "accessibility-aria",
             "sortOrder": 2
+          },
+          {
+            "id": "html5-t12.3",
+            "title": "Interactive Elements: Dialog & Details",
+            "slug": "interactive-elements-dialog",
+            "sortOrder": 3
+          },
+          {
+            "id": "html5-t12.4",
+            "title": "HTML5 APIs & Storage Best Practices",
+            "slug": "html5-apis-storage-best-practices",
+            "sortOrder": 4
           }
         ]
       }
@@ -3504,7 +3557,7 @@
     "chapters": [
       {
         "id": "javascript-for-beginners-ch1",
-        "title": "Chapter 1: Introduction to JavaScript",
+        "title": "Introduction to JavaScript",
         "sortOrder": 1,
         "topics": [
           {
@@ -3526,7 +3579,7 @@
       },
       {
         "id": "javascript-for-beginners-ch2",
-        "title": "Chapter 2: Basics of JavaScript",
+        "title": "Basics of JavaScript",
         "sortOrder": 2,
         "topics": [
           {
@@ -3548,7 +3601,7 @@
       },
       {
         "id": "javascript-for-beginners-ch3",
-        "title": "Chapter 3: Operators in JavaScript",
+        "title": "Operators in JavaScript",
         "sortOrder": 3,
         "topics": [
           {
@@ -3575,7 +3628,7 @@
       },
       {
         "id": "javascript-for-beginners-ch4",
-        "title": "Chapter 4: Control Flow",
+        "title": "Control Flow",
         "sortOrder": 4,
         "topics": [
           {
@@ -3597,7 +3650,7 @@
       },
       {
         "id": "javascript-for-beginners-ch5",
-        "title": "Chapter 5: Loops",
+        "title": "Loops",
         "sortOrder": 5,
         "topics": [
           {
@@ -3619,7 +3672,7 @@
       },
       {
         "id": "javascript-for-beginners-ch6",
-        "title": "Chapter 6: Strings and Template Literals",
+        "title": "Strings and Template Literals",
         "sortOrder": 6,
         "topics": [
           {
@@ -3641,7 +3694,7 @@
       },
       {
         "id": "javascript-for-beginners-ch7",
-        "title": "Chapter 7: Functions",
+        "title": "Functions",
         "sortOrder": 7,
         "topics": [
           {
@@ -3663,7 +3716,7 @@
       },
       {
         "id": "javascript-for-beginners-ch8",
-        "title": "Chapter 8: Arrays and Objects",
+        "title": "Arrays and Objects",
         "sortOrder": 8,
         "topics": [
           {
@@ -3685,7 +3738,7 @@
       },
       {
         "id": "javascript-for-beginners-ch9",
-        "title": "Chapter 9: Date, Math & Built-in Objects",
+        "title": "Date, Math & Built-in Objects",
         "sortOrder": 9,
         "topics": [
           {
@@ -3707,7 +3760,7 @@
       },
       {
         "id": "javascript-for-beginners-ch10",
-        "title": "Chapter 10: DOM Basics",
+        "title": "DOM Basics",
         "sortOrder": 10,
         "topics": [
           {
@@ -3729,7 +3782,7 @@
       },
       {
         "id": "javascript-for-beginners-ch11",
-        "title": "Chapter 11: Debugging & Best Practices",
+        "title": "Debugging & Best Practices",
         "sortOrder": 11,
         "topics": [
           {
@@ -3751,7 +3804,7 @@
       },
       {
         "id": "javascript-for-beginners-ch12",
-        "title": "Chapter 12: Beginner Projects",
+        "title": "Beginner Projects",
         "sortOrder": 12,
         "topics": [
           {
@@ -3805,7 +3858,7 @@
     "chapters": [
       {
         "id": "javascript-for-intermediate-ch1",
-        "title": "Chapter 1: ES6+ Deep Dive",
+        "title": "ES6+ Deep Dive",
         "sortOrder": 1,
         "topics": [
           {
@@ -3837,7 +3890,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch2",
-        "title": "Chapter 2: Functions Advanced",
+        "title": "Functions Advanced",
         "sortOrder": 2,
         "topics": [
           {
@@ -3864,7 +3917,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch3",
-        "title": "Chapter 3: DOM Advanced",
+        "title": "DOM Advanced",
         "sortOrder": 3,
         "topics": [
           {
@@ -3891,7 +3944,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch4",
-        "title": "Chapter 4: Events in Depth",
+        "title": "Events in Depth",
         "sortOrder": 4,
         "topics": [
           {
@@ -3918,7 +3971,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch5",
-        "title": "Chapter 5: Arrays Advanced",
+        "title": "Arrays Advanced",
         "sortOrder": 5,
         "topics": [
           {
@@ -3945,7 +3998,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch6",
-        "title": "Chapter 6: Objects Advanced",
+        "title": "Objects Advanced",
         "sortOrder": 6,
         "topics": [
           {
@@ -3972,7 +4025,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch7",
-        "title": "Chapter 7: Asynchronous JavaScript",
+        "title": "Asynchronous JavaScript",
         "sortOrder": 7,
         "topics": [
           {
@@ -3999,7 +4052,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch8",
-        "title": "Chapter 8: Fetch API",
+        "title": "Fetch API",
         "sortOrder": 8,
         "topics": [
           {
@@ -4026,7 +4079,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch9",
-        "title": "Chapter 9: Error Handling",
+        "title": "Error Handling",
         "sortOrder": 9,
         "topics": [
           {
@@ -4053,7 +4106,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch10",
-        "title": "Chapter 10: Modules Introduction",
+        "title": "Modules Introduction",
         "sortOrder": 10,
         "topics": [
           {
@@ -4075,7 +4128,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch11",
-        "title": "Chapter 11: Browser Storage",
+        "title": "Browser Storage",
         "sortOrder": 11,
         "topics": [
           {
@@ -4097,7 +4150,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch12",
-        "title": "Chapter 12: Iterators & Generators",
+        "title": "Iterators & Generators",
         "sortOrder": 12,
         "topics": [
           {
@@ -4119,7 +4172,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch13",
-        "title": "Chapter 13: Debugging & Tools",
+        "title": "Debugging & Tools",
         "sortOrder": 13,
         "topics": [
           {
@@ -4141,7 +4194,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch14",
-        "title": "Chapter 14: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 14,
         "topics": [
           {
@@ -4163,7 +4216,7 @@
       },
       {
         "id": "javascript-for-intermediate-ch15",
-        "title": "Chapter 15: Final Project",
+        "title": "Final Project",
         "sortOrder": 15,
         "topics": [
           {
@@ -4202,7 +4255,7 @@
     "chapters": [
       {
         "id": "javascript-for-advanced-ch1",
-        "title": "Chapter 1: Advanced Functions",
+        "title": "Advanced Functions",
         "sortOrder": 1,
         "topics": [
           {
@@ -4234,7 +4287,7 @@
       },
       {
         "id": "javascript-for-advanced-ch2",
-        "title": "Chapter 2: ES6+ Classes & Inheritance",
+        "title": "ES6+ Classes & Inheritance",
         "sortOrder": 2,
         "topics": [
           {
@@ -4266,7 +4319,7 @@
       },
       {
         "id": "javascript-for-advanced-ch3",
-        "title": "Chapter 3: JavaScript Modules",
+        "title": "JavaScript Modules",
         "sortOrder": 3,
         "topics": [
           {
@@ -4293,7 +4346,7 @@
       },
       {
         "id": "javascript-for-advanced-ch4",
-        "title": "Chapter 4: Advanced Asynchronous Patterns",
+        "title": "Advanced Asynchronous Patterns",
         "sortOrder": 4,
         "topics": [
           {
@@ -4320,7 +4373,7 @@
       },
       {
         "id": "javascript-for-advanced-ch5",
-        "title": "Chapter 5: Error Handling & Debugging",
+        "title": "Error Handling & Debugging",
         "sortOrder": 5,
         "topics": [
           {
@@ -4352,7 +4405,7 @@
       },
       {
         "id": "javascript-for-advanced-ch6",
-        "title": "Chapter 6: Advanced DOM Manipulation",
+        "title": "Advanced DOM Manipulation",
         "sortOrder": 6,
         "topics": [
           {
@@ -4384,7 +4437,7 @@
       },
       {
         "id": "javascript-for-advanced-ch7",
-        "title": "Chapter 7: Browser Storage",
+        "title": "Browser Storage",
         "sortOrder": 7,
         "topics": [
           {
@@ -4411,7 +4464,7 @@
       },
       {
         "id": "javascript-for-advanced-ch8",
-        "title": "Chapter 8: Advanced Event Handling",
+        "title": "Advanced Event Handling",
         "sortOrder": 8,
         "topics": [
           {
@@ -4438,7 +4491,7 @@
       },
       {
         "id": "javascript-for-advanced-ch9",
-        "title": "Chapter 9: Design Patterns in JavaScript",
+        "title": "Design Patterns in JavaScript",
         "sortOrder": 9,
         "topics": [
           {
@@ -4470,7 +4523,7 @@
       },
       {
         "id": "javascript-for-advanced-ch10",
-        "title": "Chapter 10: Advanced Array & Object Techniques",
+        "title": "Advanced Array & Object Techniques",
         "sortOrder": 10,
         "topics": [
           {
@@ -4497,7 +4550,7 @@
       },
       {
         "id": "javascript-for-advanced-ch11",
-        "title": "Chapter 11: Working with APIs in Depth",
+        "title": "Working with APIs in Depth",
         "sortOrder": 11,
         "topics": [
           {
@@ -4524,7 +4577,7 @@
       },
       {
         "id": "javascript-for-advanced-ch12",
-        "title": "Chapter 12: JavaScript and JSON",
+        "title": "JavaScript and JSON",
         "sortOrder": 12,
         "topics": [
           {
@@ -4551,7 +4604,7 @@
       },
       {
         "id": "javascript-for-advanced-ch13",
-        "title": "Chapter 13: Performance Optimization",
+        "title": "Performance Optimization",
         "sortOrder": 13,
         "topics": [
           {
@@ -4578,7 +4631,7 @@
       },
       {
         "id": "javascript-for-advanced-ch14",
-        "title": "Chapter 14: Regular Expressions Advanced",
+        "title": "Regular Expressions Advanced",
         "sortOrder": 14,
         "topics": [
           {
@@ -4605,7 +4658,7 @@
       },
       {
         "id": "javascript-for-advanced-ch15",
-        "title": "Chapter 15: JavaScript and the Browser",
+        "title": "JavaScript and the Browser",
         "sortOrder": 15,
         "topics": [
           {
@@ -4632,7 +4685,7 @@
       },
       {
         "id": "javascript-for-advanced-ch16",
-        "title": "Chapter 16: Error Monitoring in Applications",
+        "title": "Error Monitoring in Applications",
         "sortOrder": 16,
         "topics": [
           {
@@ -4659,7 +4712,7 @@
       },
       {
         "id": "javascript-for-advanced-ch17",
-        "title": "Chapter 17: Advanced Patterns with ES6+",
+        "title": "Advanced Patterns with ES6+",
         "sortOrder": 17,
         "topics": [
           {
@@ -4686,7 +4739,7 @@
       },
       {
         "id": "javascript-for-advanced-ch18",
-        "title": "Chapter 18: Capstone Project",
+        "title": "Capstone Project",
         "sortOrder": 18,
         "topics": [
           {
@@ -4740,7 +4793,7 @@
     "chapters": [
       {
         "id": "react-js-for-beginners-ch1",
-        "title": "Chapter 1: Introduction to React",
+        "title": "Introduction to React",
         "sortOrder": 1,
         "topics": [
           {
@@ -4767,7 +4820,7 @@
       },
       {
         "id": "react-js-for-beginners-ch2",
-        "title": "Chapter 2: JSX Basics",
+        "title": "JSX Basics",
         "sortOrder": 2,
         "topics": [
           {
@@ -4794,7 +4847,7 @@
       },
       {
         "id": "react-js-for-beginners-ch3",
-        "title": "Chapter 3: Components",
+        "title": "Components",
         "sortOrder": 3,
         "topics": [
           {
@@ -4821,7 +4874,7 @@
       },
       {
         "id": "react-js-for-beginners-ch4",
-        "title": "Chapter 4: State Management",
+        "title": "State Management",
         "sortOrder": 4,
         "topics": [
           {
@@ -4848,7 +4901,7 @@
       },
       {
         "id": "react-js-for-beginners-ch5",
-        "title": "Chapter 5: Event Handling",
+        "title": "Event Handling",
         "sortOrder": 5,
         "topics": [
           {
@@ -4875,7 +4928,7 @@
       },
       {
         "id": "react-js-for-beginners-ch6",
-        "title": "Chapter 6: Lists & Keys",
+        "title": "Lists & Keys",
         "sortOrder": 6,
         "topics": [
           {
@@ -4902,7 +4955,7 @@
       },
       {
         "id": "react-js-for-beginners-ch7",
-        "title": "Chapter 7: Conditional Rendering",
+        "title": "Conditional Rendering",
         "sortOrder": 7,
         "topics": [
           {
@@ -4929,7 +4982,7 @@
       },
       {
         "id": "react-js-for-beginners-ch8",
-        "title": "Chapter 8: Hooks Basics",
+        "title": "Hooks Basics",
         "sortOrder": 8,
         "topics": [
           {
@@ -4956,7 +5009,7 @@
       },
       {
         "id": "react-js-for-beginners-ch9",
-        "title": "Chapter 9: Styling in React",
+        "title": "Styling in React",
         "sortOrder": 9,
         "topics": [
           {
@@ -4983,7 +5036,7 @@
       },
       {
         "id": "react-js-for-beginners-ch10",
-        "title": "Chapter 10: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 10,
         "topics": [
           {
@@ -5005,7 +5058,7 @@
       },
       {
         "id": "react-js-for-beginners-ch11",
-        "title": "Chapter 11: Debugging in React",
+        "title": "Debugging in React",
         "sortOrder": 11,
         "topics": [
           {
@@ -5032,7 +5085,7 @@
       },
       {
         "id": "react-js-for-beginners-ch12",
-        "title": "Chapter 12: Final Project",
+        "title": "Final Project",
         "sortOrder": 12,
         "topics": [
           {
@@ -5071,7 +5124,7 @@
     "chapters": [
       {
         "id": "react-js-for-intermediate-ch1",
-        "title": "Chapter 1: Advanced JSX & Components",
+        "title": "Advanced JSX & Components",
         "sortOrder": 1,
         "topics": [
           {
@@ -5098,7 +5151,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch2",
-        "title": "Chapter 2: State & useEffect Hook in Depth",
+        "title": "State & useEffect Hook in Depth",
         "sortOrder": 2,
         "topics": [
           {
@@ -5125,7 +5178,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch3",
-        "title": "Chapter 3: Handling Forms",
+        "title": "Handling Forms",
         "sortOrder": 3,
         "topics": [
           {
@@ -5152,7 +5205,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch4",
-        "title": "Chapter 4: React Router Basics",
+        "title": "React Router Basics",
         "sortOrder": 4,
         "topics": [
           {
@@ -5179,7 +5232,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch5",
-        "title": "Chapter 5: Context API",
+        "title": "Context API",
         "sortOrder": 5,
         "topics": [
           {
@@ -5206,7 +5259,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch6",
-        "title": "Chapter 6: useReducer Hook",
+        "title": "useReducer Hook",
         "sortOrder": 6,
         "topics": [
           {
@@ -5233,7 +5286,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch7",
-        "title": "Chapter 7: API Integration",
+        "title": "API Integration",
         "sortOrder": 7,
         "topics": [
           {
@@ -5260,7 +5313,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch8",
-        "title": "Chapter 8: Performance Optimization",
+        "title": "Performance Optimization",
         "sortOrder": 8,
         "topics": [
           {
@@ -5287,7 +5340,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch9",
-        "title": "Chapter 9: Custom Hooks",
+        "title": "Custom Hooks",
         "sortOrder": 9,
         "topics": [
           {
@@ -5309,7 +5362,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch10",
-        "title": "Chapter 10: Error Handling",
+        "title": "Error Handling",
         "sortOrder": 10,
         "topics": [
           {
@@ -5331,7 +5384,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch11",
-        "title": "Chapter 11: React Portals",
+        "title": "React Portals",
         "sortOrder": 11,
         "topics": [
           {
@@ -5353,7 +5406,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch12",
-        "title": "Chapter 12: Prop Drilling Alternatives",
+        "title": "Prop Drilling Alternatives",
         "sortOrder": 12,
         "topics": [
           {
@@ -5375,7 +5428,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch13",
-        "title": "Chapter 13: Testing Basics",
+        "title": "Testing Basics",
         "sortOrder": 13,
         "topics": [
           {
@@ -5397,7 +5450,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch14",
-        "title": "Chapter 14: Debugging Advanced",
+        "title": "Debugging Advanced",
         "sortOrder": 14,
         "topics": [
           {
@@ -5419,7 +5472,7 @@
       },
       {
         "id": "react-js-for-intermediate-ch15",
-        "title": "Chapter 15: Final Project",
+        "title": "Final Project",
         "sortOrder": 15,
         "topics": [
           {
@@ -5458,7 +5511,7 @@
     "chapters": [
       {
         "id": "react-js-for-advanced-ch1",
-        "title": "Chapter 1: Advanced React Patterns",
+        "title": "Advanced React Patterns",
         "sortOrder": 1,
         "topics": [
           {
@@ -5485,7 +5538,7 @@
       },
       {
         "id": "react-js-for-advanced-ch2",
-        "title": "Chapter 2: Advanced State Management",
+        "title": "Advanced State Management",
         "sortOrder": 2,
         "topics": [
           {
@@ -5512,7 +5565,7 @@
       },
       {
         "id": "react-js-for-advanced-ch3",
-        "title": "Chapter 3: Advanced Context API",
+        "title": "Advanced Context API",
         "sortOrder": 3,
         "topics": [
           {
@@ -5534,7 +5587,7 @@
       },
       {
         "id": "react-js-for-advanced-ch4",
-        "title": "Chapter 4: Advanced React Router",
+        "title": "Advanced React Router",
         "sortOrder": 4,
         "topics": [
           {
@@ -5561,7 +5614,7 @@
       },
       {
         "id": "react-js-for-advanced-ch5",
-        "title": "Chapter 5: Server-Side Rendering (SSR)",
+        "title": "Server-Side Rendering (SSR)",
         "sortOrder": 5,
         "topics": [
           {
@@ -5588,7 +5641,7 @@
       },
       {
         "id": "react-js-for-advanced-ch6",
-        "title": "Chapter 6: Code Splitting & Lazy Loading",
+        "title": "Code Splitting & Lazy Loading",
         "sortOrder": 6,
         "topics": [
           {
@@ -5615,7 +5668,7 @@
       },
       {
         "id": "react-js-for-advanced-ch7",
-        "title": "Chapter 7: Advanced Hooks",
+        "title": "Advanced Hooks",
         "sortOrder": 7,
         "topics": [
           {
@@ -5642,7 +5695,7 @@
       },
       {
         "id": "react-js-for-advanced-ch8",
-        "title": "Chapter 8: Performance Optimization Deep Dive",
+        "title": "Performance Optimization Deep Dive",
         "sortOrder": 8,
         "topics": [
           {
@@ -5669,7 +5722,7 @@
       },
       {
         "id": "react-js-for-advanced-ch9",
-        "title": "Chapter 9: TypeScript with React",
+        "title": "TypeScript with React",
         "sortOrder": 9,
         "topics": [
           {
@@ -5696,7 +5749,7 @@
       },
       {
         "id": "react-js-for-advanced-ch10",
-        "title": "Chapter 10: Authentication & Authorization",
+        "title": "Authentication & Authorization",
         "sortOrder": 10,
         "topics": [
           {
@@ -5723,7 +5776,7 @@
       },
       {
         "id": "react-js-for-advanced-ch11",
-        "title": "Chapter 11: Testing in Depth",
+        "title": "Testing in Depth",
         "sortOrder": 11,
         "topics": [
           {
@@ -5750,7 +5803,7 @@
       },
       {
         "id": "react-js-for-advanced-ch12",
-        "title": "Chapter 12: Advanced Forms with Formik & Yup",
+        "title": "Advanced Forms with Formik & Yup",
         "sortOrder": 12,
         "topics": [
           {
@@ -5777,7 +5830,7 @@
       },
       {
         "id": "react-js-for-advanced-ch13",
-        "title": "Chapter 13: GraphQL with React",
+        "title": "GraphQL with React",
         "sortOrder": 13,
         "topics": [
           {
@@ -5804,7 +5857,7 @@
       },
       {
         "id": "react-js-for-advanced-ch14",
-        "title": "Chapter 14: Real-Time Applications",
+        "title": "Real-Time Applications",
         "sortOrder": 14,
         "topics": [
           {
@@ -5826,7 +5879,7 @@
       },
       {
         "id": "react-js-for-advanced-ch15",
-        "title": "Chapter 15: Internationalization (i18n)",
+        "title": "Internationalization (i18n)",
         "sortOrder": 15,
         "topics": [
           {
@@ -5848,7 +5901,7 @@
       },
       {
         "id": "react-js-for-advanced-ch16",
-        "title": "Chapter 16: React with Micro-Frontends",
+        "title": "React with Micro-Frontends",
         "sortOrder": 16,
         "topics": [
           {
@@ -5870,7 +5923,7 @@
       },
       {
         "id": "react-js-for-advanced-ch17",
-        "title": "Chapter 17: Deployment & CI/CD",
+        "title": "Deployment & CI/CD",
         "sortOrder": 17,
         "topics": [
           {
@@ -5897,7 +5950,7 @@
       },
       {
         "id": "react-js-for-advanced-ch18",
-        "title": "Chapter 18: Final Capstone Project",
+        "title": "Final Capstone Project",
         "sortOrder": 18,
         "topics": [
           {
@@ -5936,7 +5989,7 @@
     "chapters": [
       {
         "id": "css-for-beginners-ch1",
-        "title": "Chapter 1: Introduction to CSS",
+        "title": "Introduction to CSS",
         "sortOrder": 1,
         "topics": [
           {
@@ -5958,7 +6011,7 @@
       },
       {
         "id": "css-for-beginners-ch2",
-        "title": "Chapter 2: CSS Syntax & Selectors Basics",
+        "title": "CSS Syntax & Selectors Basics",
         "sortOrder": 2,
         "topics": [
           {
@@ -5980,7 +6033,7 @@
       },
       {
         "id": "css-for-beginners-ch3",
-        "title": "Chapter 3: Colors and Backgrounds",
+        "title": "Colors and Backgrounds",
         "sortOrder": 3,
         "topics": [
           {
@@ -6002,7 +6055,7 @@
       },
       {
         "id": "css-for-beginners-ch4",
-        "title": "Chapter 4: The CSS Box Model",
+        "title": "The CSS Box Model",
         "sortOrder": 4,
         "topics": [
           {
@@ -6024,7 +6077,7 @@
       },
       {
         "id": "css-for-beginners-ch5",
-        "title": "Chapter 5: Text and Fonts",
+        "title": "Text and Fonts",
         "sortOrder": 5,
         "topics": [
           {
@@ -6046,7 +6099,7 @@
       },
       {
         "id": "css-for-beginners-ch6",
-        "title": "Chapter 6: CSS Units and Measurements",
+        "title": "CSS Units and Measurements",
         "sortOrder": 6,
         "topics": [
           {
@@ -6068,7 +6121,7 @@
       },
       {
         "id": "css-for-beginners-ch7",
-        "title": "Chapter 7: Borders, Shadows and Rounded Corners",
+        "title": "Borders, Shadows and Rounded Corners",
         "sortOrder": 7,
         "topics": [
           {
@@ -6090,7 +6143,7 @@
       },
       {
         "id": "css-for-beginners-ch8",
-        "title": "Chapter 8: Links, Lists and Tables Styling",
+        "title": "Links, Lists and Tables Styling",
         "sortOrder": 8,
         "topics": [
           {
@@ -6112,7 +6165,7 @@
       },
       {
         "id": "css-for-beginners-ch9",
-        "title": "Chapter 9: Display and Visibility",
+        "title": "Display and Visibility",
         "sortOrder": 9,
         "topics": [
           {
@@ -6134,7 +6187,7 @@
       },
       {
         "id": "css-for-beginners-ch10",
-        "title": "Chapter 10: Introduction to Positioning",
+        "title": "Introduction to Positioning",
         "sortOrder": 10,
         "topics": [
           {
@@ -6156,7 +6209,7 @@
       },
       {
         "id": "css-for-beginners-ch11",
-        "title": "Chapter 11: Basic Layout Techniques",
+        "title": "Basic Layout Techniques",
         "sortOrder": 11,
         "topics": [
           {
@@ -6178,7 +6231,7 @@
       },
       {
         "id": "css-for-beginners-ch12",
-        "title": "Chapter 12: Beginner Projects",
+        "title": "Beginner Projects",
         "sortOrder": 12,
         "topics": [
           {
@@ -6227,7 +6280,7 @@
     "chapters": [
       {
         "id": "css-for-intermediate-ch1",
-        "title": "Chapter 1: Advanced Selectors",
+        "title": "Advanced Selectors",
         "sortOrder": 1,
         "topics": [
           {
@@ -6249,7 +6302,7 @@
       },
       {
         "id": "css-for-intermediate-ch2",
-        "title": "Chapter 2: Combinators and Specificity",
+        "title": "Combinators and Specificity",
         "sortOrder": 2,
         "topics": [
           {
@@ -6271,7 +6324,7 @@
       },
       {
         "id": "css-for-intermediate-ch3",
-        "title": "Chapter 3: Advanced Colors and Gradients",
+        "title": "Advanced Colors and Gradients",
         "sortOrder": 3,
         "topics": [
           {
@@ -6293,7 +6346,7 @@
       },
       {
         "id": "css-for-intermediate-ch4",
-        "title": "Chapter 4: Flexbox Fundamentals",
+        "title": "Flexbox Fundamentals",
         "sortOrder": 4,
         "topics": [
           {
@@ -6315,7 +6368,7 @@
       },
       {
         "id": "css-for-intermediate-ch5",
-        "title": "Chapter 5: Flexbox Layouts",
+        "title": "Flexbox Layouts",
         "sortOrder": 5,
         "topics": [
           {
@@ -6337,7 +6390,7 @@
       },
       {
         "id": "css-for-intermediate-ch6",
-        "title": "Chapter 6: Introduction to CSS Grid",
+        "title": "Introduction to CSS Grid",
         "sortOrder": 6,
         "topics": [
           {
@@ -6359,7 +6412,7 @@
       },
       {
         "id": "css-for-intermediate-ch7",
-        "title": "Chapter 7: Advanced CSS Grid",
+        "title": "Advanced CSS Grid",
         "sortOrder": 7,
         "topics": [
           {
@@ -6381,7 +6434,7 @@
       },
       {
         "id": "css-for-intermediate-ch8",
-        "title": "Chapter 8: Responsive Design with Media Queries",
+        "title": "Responsive Design with Media Queries",
         "sortOrder": 8,
         "topics": [
           {
@@ -6403,7 +6456,7 @@
       },
       {
         "id": "css-for-intermediate-ch9",
-        "title": "Chapter 9: Transitions and Animations",
+        "title": "Transitions and Animations",
         "sortOrder": 9,
         "topics": [
           {
@@ -6425,7 +6478,7 @@
       },
       {
         "id": "css-for-intermediate-ch10",
-        "title": "Chapter 10: CSS Variables and Custom Properties",
+        "title": "CSS Variables and Custom Properties",
         "sortOrder": 10,
         "topics": [
           {
@@ -6447,7 +6500,7 @@
       },
       {
         "id": "css-for-intermediate-ch11",
-        "title": "Chapter 11: Shadows, Filters, and Advanced Effects",
+        "title": "Shadows, Filters, and Advanced Effects",
         "sortOrder": 11,
         "topics": [
           {
@@ -6469,7 +6522,7 @@
       },
       {
         "id": "css-for-intermediate-ch12",
-        "title": "Chapter 12: Intermediate Projects",
+        "title": "Intermediate Projects",
         "sortOrder": 12,
         "topics": [
           {
@@ -6518,7 +6571,7 @@
     "chapters": [
       {
         "id": "css-for-advanced-ch1",
-        "title": "Chapter 1: Advanced CSS Functions",
+        "title": "Advanced CSS Functions",
         "sortOrder": 1,
         "topics": [
           {
@@ -6540,7 +6593,7 @@
       },
       {
         "id": "css-for-advanced-ch2",
-        "title": "Chapter 2: 2D and 3D Transforms",
+        "title": "2D and 3D Transforms",
         "sortOrder": 2,
         "topics": [
           {
@@ -6562,7 +6615,7 @@
       },
       {
         "id": "css-for-advanced-ch3",
-        "title": "Chapter 3: Mastering Animations",
+        "title": "Mastering Animations",
         "sortOrder": 3,
         "topics": [
           {
@@ -6584,7 +6637,7 @@
       },
       {
         "id": "css-for-advanced-ch4",
-        "title": "Chapter 4: CSS Shapes and Advanced Layouts",
+        "title": "CSS Shapes and Advanced Layouts",
         "sortOrder": 4,
         "topics": [
           {
@@ -6606,7 +6659,7 @@
       },
       {
         "id": "css-for-advanced-ch5",
-        "title": "Chapter 5: CSS Filters and Blend Modes",
+        "title": "CSS Filters and Blend Modes",
         "sortOrder": 5,
         "topics": [
           {
@@ -6628,7 +6681,7 @@
       },
       {
         "id": "css-for-advanced-ch6",
-        "title": "Chapter 6: CSS Variables (Advanced Usage)",
+        "title": "CSS Variables (Advanced Usage)",
         "sortOrder": 6,
         "topics": [
           {
@@ -6650,7 +6703,7 @@
       },
       {
         "id": "css-for-advanced-ch7",
-        "title": "Chapter 7: Introduction to Preprocessors (SASS/SCSS)",
+        "title": "Introduction to Preprocessors (SASS/SCSS)",
         "sortOrder": 7,
         "topics": [
           {
@@ -6672,7 +6725,7 @@
       },
       {
         "id": "css-for-advanced-ch8",
-        "title": "Chapter 8: Advanced Responsive Design",
+        "title": "Advanced Responsive Design",
         "sortOrder": 8,
         "topics": [
           {
@@ -6694,7 +6747,7 @@
       },
       {
         "id": "css-for-advanced-ch9",
-        "title": "Chapter 9: CSS Architecture and Best Practices",
+        "title": "CSS Architecture and Best Practices",
         "sortOrder": 9,
         "topics": [
           {
@@ -6716,7 +6769,7 @@
       },
       {
         "id": "css-for-advanced-ch10",
-        "title": "Chapter 10: Advanced UI/UX Effects",
+        "title": "Advanced UI/UX Effects",
         "sortOrder": 10,
         "topics": [
           {
@@ -6738,7 +6791,7 @@
       },
       {
         "id": "css-for-advanced-ch11",
-        "title": "Chapter 11: Optimization and Performance",
+        "title": "Optimization and Performance",
         "sortOrder": 11,
         "topics": [
           {
@@ -6760,7 +6813,7 @@
       },
       {
         "id": "css-for-advanced-ch12",
-        "title": "Chapter 12: Final Projects",
+        "title": "Final Projects",
         "sortOrder": 12,
         "topics": [
           {
@@ -6809,7 +6862,7 @@
     "chapters": [
       {
         "id": "ccc-ch1",
-        "title": "Chapter 1: Introduction to Computer",
+        "title": "Introduction to Computer",
         "sortOrder": 1,
         "topics": [
           {
@@ -6851,7 +6904,7 @@
       },
       {
         "id": "ccc-ch2",
-        "title": "Chapter 2: Introduction to Operating System",
+        "title": "Introduction to Operating System",
         "sortOrder": 2,
         "topics": [
           {
@@ -6898,7 +6951,7 @@
       },
       {
         "id": "ccc-ch3",
-        "title": "Chapter 3: Word Processing (MS Word / LibreOffice Writer)",
+        "title": "Word Processing (MS Word / LibreOffice Writer)",
         "sortOrder": 3,
         "topics": [
           {
@@ -6945,7 +6998,7 @@
       },
       {
         "id": "ccc-ch4",
-        "title": "Chapter 4: Spreadsheet (MS Excel / LibreOffice Calc)",
+        "title": "Spreadsheet (MS Excel / LibreOffice Calc)",
         "sortOrder": 4,
         "topics": [
           {
@@ -6992,7 +7045,7 @@
       },
       {
         "id": "ccc-ch5",
-        "title": "Chapter 5: Presentation (MS PowerPoint / LibreOffice Impress)",
+        "title": "Presentation (MS PowerPoint / LibreOffice Impress)",
         "sortOrder": 5,
         "topics": [
           {
@@ -7034,7 +7087,7 @@
       },
       {
         "id": "ccc-ch6",
-        "title": "Chapter 6: Introduction to Internet and WWW",
+        "title": "Introduction to Internet and WWW",
         "sortOrder": 6,
         "topics": [
           {
@@ -7076,7 +7129,7 @@
       },
       {
         "id": "ccc-ch7",
-        "title": "Chapter 7: Email, Social Networking, and e-Governance",
+        "title": "Email, Social Networking, and e-Governance",
         "sortOrder": 7,
         "topics": [
           {
@@ -7118,7 +7171,7 @@
       },
       {
         "id": "ccc-ch8",
-        "title": "Chapter 8: Digital Financial Tools and Applications",
+        "title": "Digital Financial Tools and Applications",
         "sortOrder": 8,
         "topics": [
           {
@@ -7155,7 +7208,7 @@
       },
       {
         "id": "ccc-ch9",
-        "title": "Chapter 9: Overview of Cyber Security",
+        "title": "Overview of Cyber Security",
         "sortOrder": 9,
         "topics": [
           {
@@ -7187,7 +7240,7 @@
       },
       {
         "id": "ccc-ch10",
-        "title": "Chapter 10: Future Skills and Artificial Intelligence",
+        "title": "Future Skills and Artificial Intelligence",
         "sortOrder": 10,
         "topics": [
           {
@@ -7256,7 +7309,7 @@
     "chapters": [
       {
         "id": "bootstrap-for-beginner-ch1",
-        "title": "Chapter 1: Introduction to Bootstrap",
+        "title": "Introduction to Bootstrap",
         "sortOrder": 1,
         "topics": [
           {
@@ -7278,7 +7331,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch2",
-        "title": "Chapter 2: Bootstrap Container and Grid System",
+        "title": "Bootstrap Container and Grid System",
         "sortOrder": 2,
         "topics": [
           {
@@ -7300,7 +7353,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch3",
-        "title": "Chapter 3: Typography and Text Utilities",
+        "title": "Typography and Text Utilities",
         "sortOrder": 3,
         "topics": [
           {
@@ -7322,7 +7375,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch4",
-        "title": "Chapter 4: Colors, Backgrounds, and Spacing",
+        "title": "Colors, Backgrounds, and Spacing",
         "sortOrder": 4,
         "topics": [
           {
@@ -7344,7 +7397,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch5",
-        "title": "Chapter 5: Buttons and Badges",
+        "title": "Buttons and Badges",
         "sortOrder": 5,
         "topics": [
           {
@@ -7366,7 +7419,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch6",
-        "title": "Chapter 6: Images and Media Objects",
+        "title": "Images and Media Objects",
         "sortOrder": 6,
         "topics": [
           {
@@ -7388,7 +7441,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch7",
-        "title": "Chapter 7: Navigation and Navbar",
+        "title": "Navigation and Navbar",
         "sortOrder": 7,
         "topics": [
           {
@@ -7410,7 +7463,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch8",
-        "title": "Chapter 8: Cards and Layout Components",
+        "title": "Cards and Layout Components",
         "sortOrder": 8,
         "topics": [
           {
@@ -7432,7 +7485,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch9",
-        "title": "Chapter 9: Forms Basics",
+        "title": "Forms Basics",
         "sortOrder": 9,
         "topics": [
           {
@@ -7454,7 +7507,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch10",
-        "title": "Chapter 10: Tables and Alerts",
+        "title": "Tables and Alerts",
         "sortOrder": 10,
         "topics": [
           {
@@ -7476,7 +7529,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch11",
-        "title": "Chapter 11: Bootstrap Utilities",
+        "title": "Bootstrap Utilities",
         "sortOrder": 11,
         "topics": [
           {
@@ -7498,7 +7551,7 @@
       },
       {
         "id": "bootstrap-for-beginner-ch12",
-        "title": "Chapter 12: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 12,
         "topics": [
           {
@@ -7547,7 +7600,7 @@
     "chapters": [
       {
         "id": "bootstrap-for-advanced-ch1",
-        "title": "Chapter 1: Advanced Grid System",
+        "title": "Advanced Grid System",
         "sortOrder": 1,
         "topics": [
           {
@@ -7569,7 +7622,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch2",
-        "title": "Chapter 2: Advanced Flexbox Utilities",
+        "title": "Advanced Flexbox Utilities",
         "sortOrder": 2,
         "topics": [
           {
@@ -7591,7 +7644,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch3",
-        "title": "Chapter 3: Advanced Forms",
+        "title": "Advanced Forms",
         "sortOrder": 3,
         "topics": [
           {
@@ -7613,7 +7666,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch4",
-        "title": "Chapter 4: Advanced Tables",
+        "title": "Advanced Tables",
         "sortOrder": 4,
         "topics": [
           {
@@ -7635,7 +7688,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch5",
-        "title": "Chapter 5: JavaScript Components Basics",
+        "title": "JavaScript Components Basics",
         "sortOrder": 5,
         "topics": [
           {
@@ -7657,7 +7710,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch6",
-        "title": "Chapter 6: Modals and Popups",
+        "title": "Modals and Popups",
         "sortOrder": 6,
         "topics": [
           {
@@ -7679,7 +7732,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch7",
-        "title": "Chapter 7: Carousels and Sliders",
+        "title": "Carousels and Sliders",
         "sortOrder": 7,
         "topics": [
           {
@@ -7701,7 +7754,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch8",
-        "title": "Chapter 8: Accordions, Collapse, and Tabs",
+        "title": "Accordions, Collapse, and Tabs",
         "sortOrder": 8,
         "topics": [
           {
@@ -7723,7 +7776,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch9",
-        "title": "Chapter 9: Tooltips and Popovers",
+        "title": "Tooltips and Popovers",
         "sortOrder": 9,
         "topics": [
           {
@@ -7745,7 +7798,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch10",
-        "title": "Chapter 10: Toasts and Spinners",
+        "title": "Toasts and Spinners",
         "sortOrder": 10,
         "topics": [
           {
@@ -7767,7 +7820,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch11",
-        "title": "Chapter 11: Customizing Bootstrap",
+        "title": "Customizing Bootstrap",
         "sortOrder": 11,
         "topics": [
           {
@@ -7789,7 +7842,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch12",
-        "title": "Chapter 12: Advanced Utilities",
+        "title": "Advanced Utilities",
         "sortOrder": 12,
         "topics": [
           {
@@ -7811,7 +7864,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch13",
-        "title": "Chapter 13: Integration with JavaScript",
+        "title": "Integration with JavaScript",
         "sortOrder": 13,
         "topics": [
           {
@@ -7833,7 +7886,7 @@
       },
       {
         "id": "bootstrap-for-advanced-ch14",
-        "title": "Chapter 14: Final Projects",
+        "title": "Final Projects",
         "sortOrder": 14,
         "topics": [
           {
@@ -8107,7 +8160,7 @@
     "chapters": [
       {
         "id": "sql-for-advanced-ch1",
-        "title": "Chapter 1: Complex Joins",
+        "title": "Complex Joins",
         "sortOrder": 1,
         "topics": [
           {
@@ -8129,7 +8182,7 @@
       },
       {
         "id": "sql-for-advanced-ch2",
-        "title": "Chapter 2: Subqueries",
+        "title": "Subqueries",
         "sortOrder": 2,
         "topics": [
           {
@@ -8151,7 +8204,7 @@
       },
       {
         "id": "sql-for-advanced-ch3",
-        "title": "Chapter 3: Views",
+        "title": "Views",
         "sortOrder": 3,
         "topics": [
           {
@@ -8173,7 +8226,7 @@
       },
       {
         "id": "sql-for-advanced-ch4",
-        "title": "Chapter 4: Stored Procedures",
+        "title": "Stored Procedures",
         "sortOrder": 4,
         "topics": [
           {
@@ -8195,7 +8248,7 @@
       },
       {
         "id": "sql-for-advanced-ch5",
-        "title": "Chapter 5: Triggers",
+        "title": "Triggers",
         "sortOrder": 5,
         "topics": [
           {
@@ -8217,7 +8270,7 @@
       },
       {
         "id": "sql-for-advanced-ch6",
-        "title": "Chapter 6: Transactions",
+        "title": "Transactions",
         "sortOrder": 6,
         "topics": [
           {
@@ -8239,7 +8292,7 @@
       },
       {
         "id": "sql-for-advanced-ch7",
-        "title": "Chapter 7: Indexing & Optimization",
+        "title": "Indexing & Optimization",
         "sortOrder": 7,
         "topics": [
           {
@@ -8261,7 +8314,7 @@
       },
       {
         "id": "sql-for-advanced-ch8",
-        "title": "Chapter 8: Advanced Constraints",
+        "title": "Advanced Constraints",
         "sortOrder": 8,
         "topics": [
           {
@@ -8283,7 +8336,7 @@
       },
       {
         "id": "sql-for-advanced-ch9",
-        "title": "Chapter 9: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 9,
         "topics": [
           {
@@ -8305,7 +8358,7 @@
       },
       {
         "id": "sql-for-advanced-ch10",
-        "title": "Chapter 10: Final Project",
+        "title": "Final Project",
         "sortOrder": 10,
         "topics": [
           {
@@ -8344,7 +8397,7 @@
     "chapters": [
       {
         "id": "ms-word-for-beginners-ch1",
-        "title": "Chapter 1: Introduction to MS Word",
+        "title": "Introduction to MS Word",
         "sortOrder": 1,
         "topics": [
           {
@@ -8366,7 +8419,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch2",
-        "title": "Chapter 2: Text Formatting",
+        "title": "Text Formatting",
         "sortOrder": 2,
         "topics": [
           {
@@ -8388,7 +8441,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch3",
-        "title": "Chapter 3: Paragraph Formatting",
+        "title": "Paragraph Formatting",
         "sortOrder": 3,
         "topics": [
           {
@@ -8410,7 +8463,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch4",
-        "title": "Chapter 4: Working with Tables",
+        "title": "Working with Tables",
         "sortOrder": 4,
         "topics": [
           {
@@ -8432,7 +8485,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch5",
-        "title": "Chapter 5: Images, Shapes & SmartArt",
+        "title": "Images, Shapes & SmartArt",
         "sortOrder": 5,
         "topics": [
           {
@@ -8454,7 +8507,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch6",
-        "title": "Chapter 6: Page Layout",
+        "title": "Page Layout",
         "sortOrder": 6,
         "topics": [
           {
@@ -8476,7 +8529,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch7",
-        "title": "Chapter 7: References & Review",
+        "title": "References & Review",
         "sortOrder": 7,
         "topics": [
           {
@@ -8498,7 +8551,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch8",
-        "title": "Chapter 8: Shortcuts & Productivity Tips",
+        "title": "Shortcuts & Productivity Tips",
         "sortOrder": 8,
         "topics": [
           {
@@ -8520,7 +8573,7 @@
       },
       {
         "id": "ms-word-for-beginners-ch9",
-        "title": "Chapter 9: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 9,
         "topics": [
           {
@@ -8569,7 +8622,7 @@
     "chapters": [
       {
         "id": "ms-word-for-advanced-ch1",
-        "title": "Chapter 1: Advanced Tables",
+        "title": "Advanced Tables",
         "sortOrder": 1,
         "topics": [
           {
@@ -8591,7 +8644,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch2",
-        "title": "Chapter 2: Mail Merge",
+        "title": "Mail Merge",
         "sortOrder": 2,
         "topics": [
           {
@@ -8613,7 +8666,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch3",
-        "title": "Chapter 3: Macros",
+        "title": "Macros",
         "sortOrder": 3,
         "topics": [
           {
@@ -8635,7 +8688,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch4",
-        "title": "Chapter 4: Templates & Styles",
+        "title": "Templates & Styles",
         "sortOrder": 4,
         "topics": [
           {
@@ -8657,7 +8710,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch5",
-        "title": "Chapter 5: Collaboration Tools",
+        "title": "Collaboration Tools",
         "sortOrder": 5,
         "topics": [
           {
@@ -8679,7 +8732,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch6",
-        "title": "Chapter 6: Advanced Text & Paragraph Formatting",
+        "title": "Advanced Text & Paragraph Formatting",
         "sortOrder": 6,
         "topics": [
           {
@@ -8701,7 +8754,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch7",
-        "title": "Chapter 7: Graphics & Objects",
+        "title": "Graphics & Objects",
         "sortOrder": 7,
         "topics": [
           {
@@ -8723,7 +8776,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch8",
-        "title": "Chapter 8: Productivity Tips",
+        "title": "Productivity Tips",
         "sortOrder": 8,
         "topics": [
           {
@@ -8745,7 +8798,7 @@
       },
       {
         "id": "ms-word-for-advanced-ch9",
-        "title": "Chapter 9: Mini Projects",
+        "title": "Mini Projects",
         "sortOrder": 9,
         "topics": [
           {

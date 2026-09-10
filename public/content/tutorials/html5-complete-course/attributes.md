@@ -262,6 +262,26 @@ D. It automatically adds animation to the image
 
 ---
 
+### 4. What type of attribute is `disabled` or `required`?
+A. Text Attribute
+B. Boolean Attribute (presence alone means true)
+C. Numeric Attribute
+D. CSS Attribute
+**Answer:** B
+**Explanation:** Boolean attributes do not need a value; their presence on an element automatically sets their state to true.
+
+---
+
+### 5. What value of the `target` attribute opens a link in a fresh, new browser tab?
+A. `_self`
+B. `_parent`
+C. `_blank`
+D. `_new`
+**Answer:** C
+**Explanation:** Setting `target="_blank"` instructs the browser to open the linked document in a new tab or window.
+
+---
+
 # Practice Challenge (Try It Yourself)
 
 1. Open your `index.html` file in VS Code.

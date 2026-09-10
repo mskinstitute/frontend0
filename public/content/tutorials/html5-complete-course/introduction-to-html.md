@@ -216,6 +216,26 @@ D. HTML was created by Google in 2020
 
 ---
 
+### 4. Who invented HTML in the year 1991?
+A. Bill Gates
+B. Steve Jobs
+C. Sir Tim Berners-Lee
+D. Mark Zuckerberg
+**Answer:** C
+**Explanation:** Sir Tim Berners-Lee invented the World Wide Web and HTML in 1991 at CERN.
+
+---
+
+### 5. What file extension must be used when saving an HTML document?
+A. `.txt`
+B. `.docx`
+C. `.html` or `.htm`
+D. `.css`
+**Answer:** C
+**Explanation:** Web browsers recognize HTML documents by their `.html` (or `.htm`) extension.
+
+---
+
 # Practice Challenge (Try It Yourself)
 
 1. Open **Notepad** on your computer.

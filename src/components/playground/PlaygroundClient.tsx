@@ -103,6 +103,55 @@ export function getFileRelativePath(file: PlaygroundFile, allFolders: Playground
   return folder ? `${folder.name}/${file.name}` : file.name;
 }
 
+export const PLAYGROUND_LANGUAGES: {
+  lang: SupportedLanguage;
+  label: string;
+  desc: string;
+  icon: string;
+}[] = [
+  { lang: 'cpp', label: 'C++', desc: 'GCC 14.1 (C++20/23 & STL)', icon: '⚙️' },
+  { lang: 'c', label: 'C Programming', desc: 'GCC 14.1 (C17/C23)', icon: '🔧' },
+  { lang: 'python', label: 'Python', desc: 'Pyodide WebAssembly 3.12', icon: '🐍' },
+  { lang: 'sql', label: 'SQL / MySQL', desc: 'Multi-DB & MySQL Engine', icon: '🗄️' },
+  { lang: 'java', label: 'Java', desc: 'JDK 17 Runtime', icon: '☕' },
+  { lang: 'html', label: 'Web (HTML/CSS)', desc: 'Live Browser Sandbox', icon: '🌐' },
+  { lang: 'javascript', label: 'JavaScript', desc: 'ES6+ Runtime', icon: '⚡' },
+  { lang: 'typescript', label: 'TypeScript', desc: 'Typed JavaScript', icon: '🔷' },
+  { lang: 'markdown', label: 'Markdown', desc: 'Live Markdown Preview', icon: '📝' },
+];
+
+export function getLangDisplayName(lang: SupportedLanguage): string {
+  switch (lang) {
+    case 'cpp': return 'C++';
+    case 'c': return 'C';
+    case 'python': return 'Python';
+    case 'sql': return 'SQL / MySQL';
+    case 'java': return 'Java';
+    case 'html': return 'HTML / Web';
+    case 'javascript': return 'JavaScript';
+    case 'typescript': return 'TypeScript';
+    case 'markdown': return 'Markdown';
+    case 'css': return 'CSS';
+    default: return lang;
+  }
+}
+
+export function getLangIcon(lang: SupportedLanguage): string {
+  switch (lang) {
+    case 'cpp': return '⚙️';
+    case 'c': return '🔧';
+    case 'python': return '🐍';
+    case 'sql': return '🗄️';
+    case 'java': return '☕';
+    case 'html': return '🌐';
+    case 'javascript': return '⚡';
+    case 'typescript': return '🔷';
+    case 'markdown': return '📝';
+    case 'css': return '🎨';
+    default: return '📄';
+  }
+}
+
 function buildInitialFiles(lang: SupportedLanguage, code: string): PlaygroundFile[] {
   switch (lang) {
     case 'html':
@@ -341,6 +390,7 @@ export default function PlaygroundClient({
   const [sqlViewMode, setSqlViewMode] = useState<'table' | 'log'>('table');
   const [activeSqlDbName, setActiveSqlDbName] = useState<string>('default');
   const [schemaVersion, setSchemaVersion] = useState<number>(0);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState<boolean>(false);
 
   // New Modals: Code Screenshot & AI Explainer
   const [isScreenshotOpen, setIsScreenshotOpen] = useState<boolean>(false);
@@ -1872,6 +1922,13 @@ _err_result = _stderr_buffer.getvalue()
         currentFiles.find((f) => f.language === language) ||
         currentFiles[0];
 
+      if (!stdin.trim() && (fileToRun.content.includes('cin') || fileToRun.content.includes('scanf'))) {
+        addLog(
+          'info',
+          "💡 Tip: If your program asks for user input (cin / scanf), enter input values in the 'Input (stdin)' tab before clicking Run."
+        );
+      }
+
       addLog('info', `⚡ Compiling and executing ${fileToRun.name} (${fileToRun.language.toUpperCase()})...`);
 
       try {
@@ -1886,6 +1943,13 @@ _err_result = _stderr_buffer.getvalue()
         }
         if (result.stdout) {
           addLog('log', result.stdout);
+        }
+
+        if (result.wasAutoWrapped) {
+          addLog(
+            'info',
+            "💡 Tip: Code snippet was automatically executed inside 'int main()'. In standard C/C++, loops, variables, and statements should be enclosed inside 'int main() { ... }'."
+          );
         }
 
         if (result.success) {
@@ -2147,6 +2211,63 @@ _err_result = _stderr_buffer.getvalue()
             <span className="font-bold text-white tracking-tight hidden sm:inline">
               <span className="text-secondary font-extrabold">MSK</span> Code Playground
             </span>
+          </div>
+
+          {/* Quick Language Selector */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+              className="flex items-center gap-1.5 px-2.5 py-1 bg-[#252526] hover:bg-[#2d2d2e] border border-[#3c3c3c] text-slate-200 hover:text-white rounded-lg text-xs font-semibold cursor-pointer transition-colors shadow-2xs"
+              title="Select Programming Language / Compiler"
+            >
+              <span className="text-sm">{getLangIcon(language)}</span>
+              <span>{getLangDisplayName(language)}</span>
+              <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${isLangMenuOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isLangMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setIsLangMenuOpen(false)}
+                />
+                <div className="absolute left-0 top-full mt-1.5 w-60 bg-[#1e1e1e] border border-slate-700/90 rounded-xl shadow-2xl p-1.5 z-50 text-xs animate-in fade-in">
+                  <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 mb-1">
+                    Select Language / Compiler
+                  </div>
+                  <div className="max-h-80 overflow-y-auto space-y-0.5">
+                    {PLAYGROUND_LANGUAGES.map((item) => {
+                      const isSelected = item.lang === language;
+                      return (
+                        <button
+                          key={item.lang}
+                          type="button"
+                          onClick={() => {
+                            setIsLangMenuOpen(false);
+                            handleLanguageChange(item.lang);
+                          }}
+                          className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition-colors cursor-pointer ${
+                            isSelected
+                              ? 'bg-secondary/20 text-secondary font-semibold border border-secondary/30'
+                              : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-base shrink-0">{item.icon}</span>
+                            <div className="flex flex-col truncate">
+                              <span className="text-xs font-medium">{item.label}</span>
+                              <span className="text-[10px] text-slate-400 truncate">{item.desc}</span>
+                            </div>
+                          </div>
+                          {isSelected && <Check className="w-3.5 h-3.5 text-secondary shrink-0 ml-1" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -2975,7 +3096,15 @@ _err_result = _stderr_buffer.getvalue()
           <span className="hidden sm:inline">UTF-8</span>
           <span className="hidden sm:inline">LF</span>
 
-          <span className="capitalize font-semibold">{activeFile?.language || language}</span>
+          <ActionTooltip label="Change Language Mode" shortcut="Select Language" placement="top">
+            <button
+              onClick={() => setIsLangMenuOpen((prev) => !prev)}
+              className="capitalize font-semibold hover:bg-white/20 px-1.5 py-0.5 rounded cursor-pointer transition-colors flex items-center gap-1"
+            >
+              <span>{getLangIcon(activeFile?.language || language)}</span>
+              <span>{getLangDisplayName(activeFile?.language || language)}</span>
+            </button>
+          </ActionTooltip>
 
           <ActionTooltip label="Keyboard Shortcuts Cheat Sheet" shortcut="Shortcuts" placement="top-end">
             <button

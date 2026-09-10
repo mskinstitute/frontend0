@@ -233,6 +233,26 @@ D. There is no difference at all
 
 ---
 
+### 4. Which of the following is another example of a void / empty HTML element?
+A. `<div>`
+B. `<hr>`
+C. `<span>`
+D. `<h2>`
+**Answer:** B
+**Explanation:** `<hr>` creates a horizontal line divider across the page. It is a void element with no content or closing tag.
+
+---
+
+### 5. Why should all HTML tag names be written in lowercase according to W3C standards?
+A. Uppercase tags cause computers to overheat
+B. Lowercase tags are the modern web standard, cleaner to read, and strictly required by XHTML
+C. Browsers refuse to open uppercase tags
+D. Uppercase tags delete your CSS styles
+**Answer:** B
+**Explanation:** While HTML is technically case-insensitive, writing tags in lowercase (e.g. `<h1>` instead of `<H1>`) is the universal industry best practice.
+
+---
+
 # Practice Challenge (Try It Yourself)
 
 1. Open VS Code and open your `index.html` file.

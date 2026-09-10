@@ -47,7 +47,16 @@ export async function fetchTutorialTopic(
       (normalizedSlug === 'python-introduction' && (s === 'introduction' || s === 'introduction-to-python' || s === 'python-introduction')) ||
       (normalizedSlug === 'introduction-to-html' && (s === 'introduction' || s === 'introduction-to-html')) ||
       (normalizedSlug === 'vs-code-setup' && s === 'vscode-setup') ||
-      (normalizedSlug === 'vscode-setup' && s === 'vs-code-setup')
+      (normalizedSlug === 'vscode-setup' && s === 'vs-code-setup') ||
+      ((normalizedSlug === 'colors' || normalizedSlug === 'html-colors' || normalizedSlug === 'html-colors-color-codes') && s === 'html-colors-rgb') ||
+      ((normalizedSlug === 'links' || normalizedSlug === 'hyperlinks' || normalizedSlug === 'links-navigation-lists') && s === 'links-hyperlinks') ||
+      ((normalizedSlug === 'lists' || normalizedSlug === 'html-lists') && s === 'unordered-ordered-lists') ||
+      ((normalizedSlug === 'tables' || normalizedSlug === 'table' || normalizedSlug === 'tables-structured-data') && s === 'html-tables') ||
+      ((normalizedSlug === 'block-and-inline' || normalizedSlug === 'block-inline') && s === 'block-vs-inline-elements') ||
+      ((normalizedSlug === 'images-multimedia-embeds' || normalizedSlug === 'images' || normalizedSlug === 'multimedia') && s === 'images-responsive-art') ||
+      ((normalizedSlug === 'forms-inputs-validations' || normalizedSlug === 'forms' || normalizedSlug === 'form') && s === 'forms-input-types') ||
+      (normalizedSlug === 'html5-semantic-architecture' && s === 'semantic-layout-elements') ||
+      (normalizedSlug === 'accessibility-aria-seo' && s === 'accessibility-aria')
     );
   });
 
@@ -84,20 +93,31 @@ export async function fetchTutorialTopic(
     normalizedSlug.includes('document-structure') ? 'basic-document-structure-boilerplate.md' : null,
     normalizedSlug.includes('heading') ? 'html-headings.md' : null,
     normalizedSlug.includes('paragraph') ? 'paragraphs-line-breaks.md' : null,
-    normalizedSlug.includes('formatting') ? 'text-elements-formatting.md' : null,
+    normalizedSlug.includes('formatting') ? 'text-formatting-elements.md' : null,
+    normalizedSlug.includes('quotation') ? 'quotations-citations.md' : null,
+    normalizedSlug.includes('entity') || normalizedSlug.includes('symbol') || normalizedSlug.includes('emoji') ? 'html-entities-symbols.md' : null,
     normalizedSlug.includes('comment') ? 'html-comments.md' : null,
     normalizedSlug.includes('comment') ? 'comments.md' : null,
-    normalizedSlug.includes('color') ? 'html-colors-color-codes.md' : null,
-    normalizedSlug.includes('color') ? 'colors.md' : null,
-    normalizedSlug.includes('link') ? 'links-navigation-lists.md' : null,
-    normalizedSlug.includes('list') ? 'links-navigation-lists.md' : null,
-    normalizedSlug.includes('table') ? 'tables-structured-data.md' : null,
+    normalizedSlug.includes('hex') || normalizedSlug.includes('hsl') ? 'hex-hsl-color-codes.md' : null,
+    normalizedSlug.includes('color') || normalizedSlug.includes('rgb') ? 'html-colors-rgb.md' : null,
+    normalizedSlug.includes('target') || normalizedSlug.includes('security') ? 'target-attributes-security.md' : null,
+    normalizedSlug.includes('link') || normalizedSlug === 'links-hyperlinks' ? 'links-hyperlinks.md' : null,
+    normalizedSlug.includes('description') ? 'description-lists.md' : null,
+    normalizedSlug.includes('unordered') || normalizedSlug.includes('ordered') || normalizedSlug.includes('list') ? 'unordered-ordered-lists.md' : null,
+    normalizedSlug.includes('colspan') || normalizedSlug.includes('rowspan') ? 'colspan-rowspan.md' : null,
+    normalizedSlug.includes('table') || normalizedSlug === 'html-tables' ? 'html-tables.md' : null,
+    normalizedSlug.includes('div') || normalizedSlug.includes('span') ? 'div-span-containers.md' : null,
     normalizedSlug.includes('inline') || normalizedSlug.includes('block') ? 'block-vs-inline-elements.md' : null,
-    normalizedSlug.includes('inline') || normalizedSlug.includes('block') ? 'block-and-inline.md' : null,
-    normalizedSlug.includes('media') || normalizedSlug.includes('image') || normalizedSlug.includes('video') ? 'images-multimedia-embeds.md' : null,
-    normalizedSlug.includes('form') ? 'forms-inputs-validations.md' : null,
-    normalizedSlug.includes('semantic') ? 'html5-semantic-architecture.md' : null,
-    normalizedSlug.includes('accessibility') || normalizedSlug.includes('aria') ? 'accessibility-aria-seo.md' : null,
+    normalizedSlug.includes('iframe') || normalizedSlug.includes('embed') ? 'iframes-web-embeds.md' : null,
+    normalizedSlug.includes('svg') || normalizedSlug.includes('canvas') ? 'html5-svg-canvas.md' : null,
+    normalizedSlug.includes('audio') || normalizedSlug.includes('video') ? 'audio-video.md' : null,
+    normalizedSlug.includes('image') || normalizedSlug.includes('art') || normalizedSlug.includes('media') ? 'images-responsive-art.md' : null,
+    normalizedSlug.includes('control') || normalizedSlug.includes('validation') ? 'form-controls-validations.md' : null,
+    normalizedSlug.includes('form') || normalizedSlug.includes('input') ? 'forms-input-types.md' : null,
+    normalizedSlug.includes('layout') || normalizedSlug.includes('semantic') ? 'semantic-layout-elements.md' : null,
+    normalizedSlug.includes('accessibility') || normalizedSlug.includes('aria') ? 'accessibility-aria.md' : null,
+    normalizedSlug.includes('dialog') || normalizedSlug.includes('detail') || normalizedSlug.includes('interactive') ? 'interactive-elements-dialog.md' : null,
+    normalizedSlug.includes('api') || normalizedSlug.includes('storage') ? 'html5-apis-storage-best-practices.md' : null,
     'introduction.md',
     'introduction-to-html.md',
     'introduction-to-python.md',

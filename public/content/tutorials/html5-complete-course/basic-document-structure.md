@@ -197,6 +197,26 @@ D. To add an image to the webpage
 
 ---
 
+### 4. What is the role of `<meta charset="UTF-8">` inside `<head>`?
+A. To make the text bold
+B. To tell the browser to support universal characters, including Indian Rupee symbols, Hindi, and emojis
+C. To connect to Wi-Fi
+D. To set the font size to 8px
+**Answer:** B
+**Explanation:** UTF-8 character encoding allows the browser to display virtually all written languages, symbols, and emojis without corruption.
+
+---
+
+### 5. Why is the `<title>` tag placed inside `<head>` instead of `<body>`?
+A. Because it is metadata displayed on the browser tab and Google search results, not inside the page body
+B. Because body does not support English
+C. Because title only works on mobile phones
+D. Because head makes the title colorful
+**Answer:** A
+**Explanation:** The `<title>` is metadata about the document and appears on the browser tab strip and in search engine search snippets.
+
+---
+
 # Practice Challenge (Hands-on Exercise)
 
 1. Open Notepad or any text editor on your computer.

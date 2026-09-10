@@ -149,6 +149,73 @@ int main() {
     ],
     hints: ['Use long long for the accumulator to prevent integer overflow.'],
   },
+  {
+    id: 'cpp-vector-sum',
+    title: 'Array Sum & Maximum in C++',
+    difficulty: 'Easy',
+    language: 'cpp',
+    category: 'Vectors & Math',
+    description: `Read N followed by N space-separated integers. Print the sum and maximum element separated by space.`,
+    starterCode: `#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    if (!(cin >> n)) return 0;
+    vector<int> arr(n);
+    long long sum = 0;
+    int maxVal = -1e9;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        sum += arr[i];
+        if (arr[i] > maxVal) maxVal = arr[i];
+    }
+
+    cout << sum << " " << maxVal << endl;
+    return 0;
+}
+`,
+    testCases: [
+      { input: '5 10 20 5 40 15', expectedOutput: '90 40' },
+      { input: '3 -5 -2 -10', expectedOutput: '-17 -2' },
+      { input: '1 42', expectedOutput: '42 42' },
+    ],
+    hints: ['Accumulate sum in long long and track maximum with std::max or an if check.'],
+  },
+  {
+    id: 'c-pointer-swap',
+    title: 'Swap Two Numbers with Pointers in C',
+    difficulty: 'Easy',
+    language: 'c',
+    category: 'Pointers',
+    description: `Read two integers A and B, call a swap function with pointers, and print the swapped values separated by a space.`,
+    starterCode: `#include <stdio.h>
+
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int main() {
+    int a, b;
+    if (scanf("%d %d", &a, &b) == 2) {
+        swap(&a, &b);
+        printf("%d %d\\n", a, b);
+    }
+    return 0;
+}
+`,
+    testCases: [
+      { input: '10 20', expectedOutput: '20 10' },
+      { input: '-5 99', expectedOutput: '99 -5' },
+      { input: '0 0', expectedOutput: '0 0' },
+    ],
+    hints: ['Pass the addresses (&a, &b) to the swap function and dereference them (*x, *y).'],
+  },
 
   // JAVA CHALLENGES
   {

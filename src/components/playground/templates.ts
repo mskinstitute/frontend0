@@ -419,10 +419,51 @@ console.log("Total Enrolled Students:", registry.getEnrolled().length);
   ],
   cpp: [
     {
-      id: 'cpp-oop',
-      title: 'C++ Classes & Objects',
+      id: 'cpp-basics',
+      title: '⚡ C++ Basics (I/O, Loops & Functions)',
       language: 'cpp',
-      description: 'Object-Oriented Programming in C++ with constructors and methods.',
+      description: 'Standard I/O with cin/cout, functions, and conditional logic.',
+      code: `// MSK Institute - C++ Standard Programming
+// Powered by GCC 14.1 Compiler Engine
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Function to calculate student percentage and grade
+void evaluateStudent(string name, int marks[], int count) {
+    int total = 0;
+    for (int i = 0; i < count; i++) {
+        total += marks[i];
+    }
+    double percentage = static_cast<double>(total) / count;
+
+    cout << "========================================" << endl;
+    cout << "🎓 Student Name: " << name << endl;
+    cout << "📊 Total Marks: " << total << " / " << (count * 100) << endl;
+    cout << "📈 Percentage: " << percentage << "%" << endl;
+    cout << "🏆 Result: " << (percentage >= 40.0 ? "PASSED" : "FAILED") << endl;
+    cout << "========================================" << endl;
+}
+
+int main() {
+    cout << "🚀 Welcome to MSK Institute C++ Playground!" << endl;
+    cout << "Compiler: GCC 14.1.0 (C++20 / C++23 ready)\n" << endl;
+
+    int marks[] = {85, 92, 78, 88, 95};
+    int count = sizeof(marks) / sizeof(marks[0]);
+
+    evaluateStudent("Aman Sharma", marks, count);
+
+    return 0;
+}
+`,
+    },
+    {
+      id: 'cpp-oop',
+      title: '🏛️ C++ Classes & Object-Oriented Programming',
+      language: 'cpp',
+      description: 'Object-Oriented Programming in C++ with constructors, methods, and encapsulation.',
       code: `// MSK Institute - C++ Object-Oriented Programming
 #include <iostream>
 #include <string>
@@ -435,24 +476,74 @@ private:
     string name;
     string course;
     int rollNo;
+    double cgpa;
 
 public:
-    Student(string n, string c, int r) : name(n), course(c), rollNo(r) {}
+    // Constructor
+    Student(string n, string c, int r, double g) 
+        : name(n), course(c), rollNo(r), cgpa(g) {}
 
-    void displayDetails() {
-        cout << "Roll No: " << rollNo << " | Name: " << name << " | Course: " << course << endl;
+    // Display student details
+    void display() const {
+        cout << "[" << rollNo << "] " << name 
+             << " | Course: " << course 
+             << " | CGPA: " << cgpa << endl;
     }
+
+    double getCgpa() const { return cgpa; }
 };
 
 int main() {
-    cout << "MSK Institute - C++ Student Database" << endl;
-    cout << "------------------------------------" << endl;
+    cout << "MSK Institute - Batch Enrolled Students (C++ OOP)" << endl;
+    cout << "-------------------------------------------------" << endl;
 
-    Student s1("Aman Kumar", "Data Structures with C++", 101);
-    Student s2("Ravi Singh", "C++ Masterclass", 102);
+    vector<Student> batch = {
+        Student("Aman Sharma", "B.Tech CSE", 101, 8.8),
+        Student("Priya Verma", "MCA Web Dev", 102, 9.2),
+        Student("Rahul Kumar", "Data Science", 103, 8.4)
+    };
 
-    s1.displayDetails();
-    s2.displayDetails();
+    for (const auto& student : batch) {
+        student.display();
+    }
+
+    return 0;
+}
+`,
+    },
+    {
+      id: 'cpp-stl-vector',
+      title: '📦 Modern C++ STL (Vectors & Sorting)',
+      language: 'cpp',
+      description: 'Standard Template Library (STL) vectors, sort algorithm, and lambda functions.',
+      code: `// MSK Institute - Modern C++ STL & Algorithms
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+int main() {
+    vector<int> scores = {92, 74, 88, 65, 99, 81, 70, 95};
+
+    cout << "Original Scores:" << endl;
+    for (int s : scores) cout << s << " ";
+    cout << "\\n\\n";
+
+    // 1. Sort in ascending order
+    sort(scores.begin(), scores.end());
+    cout << "Sorted Scores (Ascending):" << endl;
+    for (int s : scores) cout << s << " ";
+    cout << "\\n\\n";
+
+    // 2. Compute Sum and Average using std::accumulate
+    int sum = accumulate(scores.begin(), scores.end(), 0);
+    double avg = static_cast<double>(sum) / scores.size();
+
+    cout << "Highest Score: " << scores.back() << endl;
+    cout << "Lowest Score:  " << scores.front() << endl;
+    cout << "Class Average: " << avg << endl;
 
     return 0;
 }
@@ -462,16 +553,48 @@ int main() {
   c: [
     {
       id: 'c-basics',
-      title: 'C Programming - Pointers & Arrays',
+      title: '⚡ C Basics (Functions & Formatted I/O)',
       language: 'c',
-      description: 'Pointer arithmetic and array processing in C.',
+      description: 'Standard C programming with printf, loops, and custom functions.',
       code: `// MSK Institute - C Programming Core
+// Powered by GCC 14.1 Compiler
 #include <stdio.h>
 
-void calculateStats(int arr[], int size, int *sum, float *avg) {
+void printHeader(const char* title) {
+    printf("========================================\\n");
+    printf("🚀 %s\\n", title);
+    printf("Mentor: Er. Sumit Kumar | MSK Institute\\n");
+    printf("========================================\\n\\n");
+}
+
+int main() {
+    printHeader("Learning C Programming Language");
+
+    printf("Registered Students for C Masterclass:\\n");
+    const char* students[] = {"Aman", "Priya", "Rahul", "Neha", "Vikas"};
+    int count = sizeof(students) / sizeof(students[0]);
+
+    for (int i = 0; i < count; i++) {
+        printf("  %d. %-10s - Enrolled\\n", i + 1, students[i]);
+    }
+
+    printf("\\n✅ Code compiled and executed with GCC 14.1!\\n");
+    return 0;
+}
+`,
+    },
+    {
+      id: 'c-pointers',
+      title: '🎯 C Pointers & Array Processing',
+      language: 'c',
+      description: 'Pointer arithmetic, address dereferencing, and array statistics.',
+      code: `// MSK Institute - Pointer Arithmetic & Functions
+#include <stdio.h>
+
+void calculateStats(int *arr, int size, int *sum, float *avg) {
     *sum = 0;
     for (int i = 0; i < size; i++) {
-        *sum += *(arr + i); // Pointer arithmetic
+        *sum += *(arr + i); // Pointer arithmetic: *(arr + i) is arr[i]
     }
     *avg = (float)(*sum) / size;
 }
@@ -479,14 +602,54 @@ void calculateStats(int arr[], int size, int *sum, float *avg) {
 int main() {
     int marks[] = {85, 92, 78, 89, 95};
     int size = sizeof(marks) / sizeof(marks[0]);
-    int sum;
-    float avg;
+    int sum = 0;
+    float avg = 0.0f;
 
     printf("MSK Institute - Lab Evaluation in C\\n");
+    printf("----------------------------------\\n");
     calculateStats(marks, size, &sum, &avg);
 
-    printf("Total Marks: %d\\n", sum);
+    printf("Total Marks:   %d\\n", sum);
     printf("Average Score: %.2f\\n", avg);
+
+    return 0;
+}
+`,
+    },
+    {
+      id: 'c-structures',
+      title: '🏗️ C Structures (struct) & Records',
+      language: 'c',
+      description: 'Defining and organizing records with C struct and functions.',
+      code: `// MSK Institute - C Struct & Records Management
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    int id;
+    char name[50];
+    char course[30];
+    float fee;
+};
+
+void printStudent(const struct Student *s) {
+    printf("ID: %-4d | Name: %-15s | Course: %-15s | Fee: ₹%.2f\\n",
+           s->id, s->name, s->course, s->fee);
+}
+
+int main() {
+    printf("MSK Institute - Student Directory (struct)\\n");
+    printf("-------------------------------------------\\n");
+
+    struct Student batch[3] = {
+        {101, "Aman Sharma", "Full Stack C/C++", 4500.0f},
+        {102, "Pooja Verma", "Data Structures", 5000.0f},
+        {103, "Rohan Kumar", "Core Programming", 3500.0f}
+    };
+
+    for (int i = 0; i < 3; i++) {
+        printStudent(&batch[i]);
+    }
 
     return 0;
 }
