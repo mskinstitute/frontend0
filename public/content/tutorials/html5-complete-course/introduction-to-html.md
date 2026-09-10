@@ -132,9 +132,10 @@ An attribute gives **extra information** about a tag.
 - They follow the format: `name="value"`.
 
 **Example:**
-```html
+```html no-try no-copy  preview-enable mdn="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
 <a href="https://google.com">Go to Google</a>
 ```
+
 - Here, `<a>` is the link tag.
 - `href` is the **Attribute**, which tells the browser the exact website address to open when someone clicks on the link.
 

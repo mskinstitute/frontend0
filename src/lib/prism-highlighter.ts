@@ -141,7 +141,22 @@ function flattenTokens(
     if (typeof token === 'string') {
       result.push({ text: token, type: parentType });
     } else if (typeof token.content === 'string') {
-      result.push({ text: token.content, type: token.type || parentType });
+      const isAttrEquals =
+        token.type === 'punctuation' &&
+        (token.content === '=' || (token as { alias?: string }).alias === 'attr-equals');
+      const isStringQuote =
+        token.type === 'punctuation' &&
+        (token.content === '"' || token.content === "'" || token.content === '`') &&
+        (parentType === 'attr-value' || parentType === 'string');
+
+      let resolvedType = token.type || parentType;
+      if (isAttrEquals) {
+        resolvedType = 'punctuation';
+      } else if (isStringQuote) {
+        resolvedType = parentType;
+      }
+
+      result.push({ text: token.content, type: resolvedType });
     } else if (Array.isArray(token.content)) {
       result.push(...flattenTokens(token.content, token.type || parentType));
     } else if (typeof token.content === 'object' && token.content !== null) {
@@ -175,10 +190,17 @@ function splitTokensIntoLines(tokens: { text: string; type?: string }[]): Tokeni
  */
 export function tokenizeCodeToLines(code: string, language: string): TokenizedLine[] {
   const normLang = normalizeLanguage(language);
-  const grammar = Prism.languages[normLang] || Prism.languages.javascript || Prism.languages.clike;
+  if (!code) return [[]];
+
+  // Plain text / output should not be treated as code
+  if (normLang === 'text' || normLang === 'output' || normLang === 'plain') {
+    return code.split(/\r?\n/).map((line) => (line.length > 0 ? [{ text: line }] : []));
+  }
+
+  const grammar = Prism.languages[normLang] || Prism.languages.markup || Prism.languages.javascript || Prism.languages.clike;
 
   if (!grammar) {
-    return code.split('\n').map((line) => [{ text: line }]);
+    return code.split(/\r?\n/).map((line) => (line.length > 0 ? [{ text: line }] : []));
   }
 
   try {
@@ -187,12 +209,100 @@ export function tokenizeCodeToLines(code: string, language: string): TokenizedLi
     return splitTokensIntoLines(flatTokens);
   } catch (err) {
     console.warn('Prism tokenize error:', err);
-    return code.split('\n').map((line) => [{ text: line }]);
+    return code.split(/\r?\n/).map((line) => (line.length > 0 ? [{ text: line }] : []));
   }
 }
 
 /**
- * Provides vibrant One Dark / VS Code Dark syntax colors for each token type
+ * Authentic VS Code Dark+ / Dark Modern syntax color token mapper
+ */
+export function getVSCodeTokenColor(type?: string, text?: string, lang?: string): string {
+  const trimmed = (text || '').trim();
+  const normalizedLang = (lang || '').toLowerCase().trim();
+
+  // 1. Comments & documentation
+  if (type === 'comment' || type === 'prolog' || type === 'doctype' || type === 'cdata') {
+    return '#6a9955'; // VS Code Green (italic)
+  }
+
+  // 2. Strings, Character literals & Attribute values
+  if (type === 'string' || type === 'char' || type === 'attr-value' || type === 'template-string') {
+    return '#ce9178'; // VS Code Warm Salmon / Orange
+  }
+
+  // 3. Numbers & Units
+  if (type === 'number' || type === 'unit') {
+    return '#b5cea8'; // VS Code Sage Green
+  }
+
+  // 4. HTML / Markup tags, angle brackets & attribute names
+  if (normalizedLang === 'html' || normalizedLang === 'markup' || normalizedLang === 'xml') {
+    if (type === 'tag') {
+      return '#569cd6'; // VS Code Blue for tag names (h1, p, div, button)
+    }
+    if (type === 'attr-name') {
+      return '#9cdcfe'; // VS Code Light Blue for attributes (class, id, src, href)
+    }
+    if (type === 'punctuation') {
+      if (/^[<>\/]+$/.test(trimmed)) {
+        return '#808080'; // VS Code Grey for < > </ />
+      }
+      return '#d4d4d4';
+    }
+  }
+
+  // 5. CSS Selectors & Properties
+  if (normalizedLang === 'css') {
+    if (type === 'selector') return '#d7ba7d'; // VS Code Gold
+    if (type === 'property') return '#9cdcfe'; // VS Code Light Blue
+    if (type === 'function') return '#dcdcaa'; // VS Code Yellow
+  }
+
+  // 6. Keywords (Control flow purple vs Declaration/Type blue)
+  if (type === 'keyword' || type === 'atrule' || type === 'important') {
+    if (
+      /^(if|else|elif|for|while|return|switch|case|break|continue|try|catch|finally|throw|import|export|from|in|is|not|and|or|as|with|yield|default)$/.test(
+        trimmed
+      )
+    ) {
+      return '#c586c0'; // VS Code Control Flow Purple
+    }
+    return '#569cd6'; // VS Code Declaration / Type Blue (const, let, var, function, def, class)
+  }
+
+  if (type === 'boolean') {
+    return '#569cd6'; // VS Code Blue for true/false/None
+  }
+
+  // 7. Functions & Methods
+  if (type === 'function' || type === 'function-variable' || type === 'builtin') {
+    return '#dcdcaa'; // VS Code Function Yellow
+  }
+
+  // 8. Class names, Interfaces, Types
+  if (type === 'class-name') {
+    return '#4ec9b0'; // VS Code Teal
+  }
+
+  // 9. Variables & Properties
+  if (type === 'variable' || type === 'property' || type === 'interpolation') {
+    return '#9cdcfe'; // VS Code Light Blue
+  }
+
+  // 10. Operators & Punctuation
+  if (type === 'operator') {
+    return '#d4d4d4';
+  }
+  if (type === 'punctuation') {
+    return '#d4d4d4';
+  }
+
+  // Default VS Code editor text foreground
+  return '#d4d4d4';
+}
+
+/**
+ * Provides One Dark / legacy syntax colors for backwards compatibility
  */
 export function getTokenColor(type?: string, text?: string): string {
   const trimmed = (text || '').trim();
@@ -203,7 +313,7 @@ export function getTokenColor(type?: string, text?: string): string {
       trimmed
     )
   ) {
-    return '#e5c07b'; // Golden yellow built-in function
+    return '#e5c07b';
   }
   if (
     /^(console|log|warn|error|Math|JSON|Promise|Array|Object|String|Number|Boolean|window|document)$/.test(
@@ -213,53 +323,53 @@ export function getTokenColor(type?: string, text?: string): string {
     return '#e5c07b';
   }
 
-  if (!type) return '#e6edf3'; // Default clean off-white text
+  if (!type) return '#e6edf3';
 
   switch (type) {
     case 'comment':
     case 'prolog':
     case 'doctype':
     case 'cdata':
-      return '#768390'; // Muted slate gray for comments
+      return '#768390';
 
     case 'string':
     case 'char':
     case 'attr-value':
-      return '#98c379'; // Crisp vibrant green for strings
+      return '#98c379';
 
     case 'keyword':
     case 'boolean':
     case 'important':
-      return '#c678dd'; // Radiant purple for keywords (for, in, def, class, return, etc.)
+      return '#c678dd';
 
     case 'function':
     case 'function-variable':
     case 'builtin':
-      return '#e5c07b'; // Golden yellow for function calls
+      return '#e5c07b';
 
     case 'number':
     case 'constant':
-      return '#d19a66'; // Warm peach orange for numbers
+      return '#d19a66';
 
     case 'operator':
-      return '#56b6c2'; // Soft cyan for operators (=, +, -, etc.)
+      return '#56b6c2';
 
     case 'punctuation':
-      return '#abb2bf'; // Muted gray for brackets and delimiters
+      return '#abb2bf';
 
     case 'class-name':
-      return '#e5c07b'; // Golden amber for class names
+      return '#e5c07b';
 
     case 'tag':
-      return '#e06c75'; // Soft coral red for HTML tags
+      return '#569cd6';
 
     case 'attr-name':
     case 'property':
-      return '#d19a66'; // Warm orange for attributes & object keys
+      return '#9cdcfe';
 
     case 'variable':
     case 'interpolation':
-      return '#e06c75'; // Soft coral for f-string variables / interpolations
+      return '#e06c75';
 
     case 'regex':
       return '#98c379';

@@ -51,9 +51,7 @@ is_active = True
 print(f"Course: {course}")
 print(f"Duration: {duration_months} Month | Active: {is_active}")
 ```
-
-**Expected Output:**
-```text
+```output
 Hello, MSK Institute!
 Course: Python for Beginners
 Duration: 1 Month | Active: True

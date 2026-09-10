@@ -203,45 +203,45 @@ D. They require an expensive paid software license
 
 1. Open your code editor (like **VS Code** or **Notepad**).
 2. Create a file named `plain.html` and paste this code:
-   ```html
-   <!DOCTYPE html>
-   <html>
-     <head>
-       <title>Without CSS vs With CSS</title>
-     </head>
-     <body>
-       <h1>Welcome to MSK Public School</h1>
-       <p>Admissions are now open for Classes 6th to 12th.</p>
-       <button>Apply Online</button>
-     </body>
-   </html>
-   ```
+```html no-run no-try copy
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Without CSS vs With CSS</title>
+  </head>
+  <body>
+    <h1>Welcome to MSK Public School</h1>
+    <p>Admissions are now open for Classes 6th to 12th.</p>
+    <button>Apply Online</button>
+  </body>
+</html>
+```
 3. Open `plain.html` in your browser. Notice how plain, white, and raw it looks.
 4. Now, add this simple CSS style tag inside your `<head>` section:
-   ```html
-   <style>
-     body {
-       background-color: #f0f7ff;
-       font-family: Arial, sans-serif;
-       text-align: center;
-       padding-top: 50px;
-     }
-     h1 {
-       color: #1e3a8a;
-     }
-     p {
-       color: #4b5563;
-       font-size: 18px;
-     }
-     button {
-       background-color: #2563eb;
-       color: white;
-       border: none;
-       padding: 12px 24px;
-       border-radius: 8px;
-       font-size: 16px;
-       cursor: pointer;
-     }
-   </style>
-   ```
+```html no-run no-try copy
+<style>
+  body {
+    background-color: #f0f7ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+  }
+  h1 {
+    color: #1e3a8a;
+  }
+  p {
+    color: #4b5563;
+    font-size: 18px;
+  }
+  button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+```
 5. Save and refresh your browser! Compare how magical the difference is between the unstyled page and the styled page. 🚀

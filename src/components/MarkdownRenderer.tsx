@@ -23,7 +23,12 @@ import {
 import dynamic from 'next/dynamic';
 import { toast } from 'react-hot-toast';
 import { slugify } from '@/lib/markdown';
-import { highlightCode, getLanguageDisplayName } from '@/lib/prism-highlighter';
+import {
+  highlightCode,
+  getLanguageDisplayName,
+  tokenizeCodeToLines,
+  getVSCodeTokenColor,
+} from '@/lib/prism-highlighter';
 import { SupportedLanguage } from '@/components/playground/types';
 import { detectAndRenderVisualDiagram } from '@/components/MarkdownDiagrams';
 import InlineCodePreview from '@/components/InlineCodePreview';
@@ -311,24 +316,26 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             meta.enableTry = true;
           }
 
-          // 2. Copy button disable/enable
-          if (/\b(no-copy|copy=false|copy:false)\b/i.test(restStr)) {
+          // 2. Copy button: hidden by default, only enabled if explicitly requested in markdown via "copy"
+          if (/\b(no-copy|copy=false|copy:false|copy-false)\b/i.test(restStr)) {
             meta.enableCopy = false;
-          } else if (/\b(copy=true|copy:true|copy)\b/i.test(restStr)) {
+          } else if (/\b(copy=true|copy:true|copy-true|copy)\b/i.test(restStr)) {
             meta.enableCopy = true;
+          } else {
+            meta.enableCopy = false;
           }
 
           // 3. Inline Live Preview disable/enable / auto-open
           const isWebLang = isWebPreviewSupported(codeLang);
           if (
-            /\b(preview-true|preview=true|preview:true|ispreview|preview-enable|preview_enable|live-preview|run=true)\b/i.test(
+            /\b(preview-true|preview|live-preview)\b/i.test(
               restStr
             )
           ) {
             meta.enablePreview = true;
             meta.autoPreview = true;
           } else if (
-            /\b(no-preview|preview=false|preview:false|preview-false)\b/i.test(restStr)
+            /\b(no-run|run-false)\b/i.test(restStr)
           ) {
             meta.enablePreview = false;
             meta.autoPreview = false;
@@ -565,8 +572,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           const codeIdx = codeBlockCounter;
           const lang = block.lang;
           const code = block.code;
-          const highlightedHtml = highlightCode(code, lang);
           const displayName = getLanguageDisplayName(lang);
+          const tokenizedLines = tokenizeCodeToLines(code, lang);
 
           const getLangBadgeStyle = (l: string) => {
             switch (l) {
@@ -575,7 +582,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 return 'text-amber-300 bg-amber-400/10 border-amber-400/30';
               case 'html':
               case 'markup':
-                return 'text-rose-300 bg-rose-400/10 border-rose-400/30';
+                return 'text-orange-300 bg-orange-400/10 border-orange-400/30';
               case 'css':
                 return 'text-cyan-300 bg-cyan-400/10 border-cyan-400/30';
               case 'javascript':
@@ -590,12 +597,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               case 'java':
                 return 'text-orange-300 bg-orange-400/10 border-orange-400/30';
               default:
-                return 'text-slate-300 bg-slate-800 border-slate-700';
+                return 'text-slate-300 bg-white/5 border-white/10';
             }
           };
 
           const enableTry = block.meta.enableTry !== false && Boolean(PLAYGROUND_SUPPORTED_LANGS[lang]);
-          const enableCopy = block.meta.enableCopy !== false;
+          const enableCopy = Boolean(block.meta.enableCopy);
           const canPreview = block.meta.enablePreview !== false && isWebPreviewSupported(lang);
           const hasCompanion = Boolean(block.meta.companionCode);
           const companionLang = block.meta.companionLang;
@@ -603,19 +610,19 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           return (
             <div
               key={idx}
-              className="relative my-6 rounded-2xl overflow-hidden border border-slate-800 bg-[#0d1117] shadow-xl"
+              className="relative my-6 rounded-2xl overflow-hidden border border-[#2d2d2d] bg-[#1e1e1e] shadow-xl"
             >
-              {/* Code Editor Header */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-slate-800/90 text-xs font-mono">
+              {/* Code Editor Header - Compact VS Code Titlebar */}
+              <div className="flex items-center justify-between px-3.5 py-1.5 bg-[#252526] border-b border-[#2d2d2d] text-xs font-mono select-none">
                 {/* Left: macOS dots + Language Badge + Linked Companion Badge */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <div className="flex items-center gap-1.5" aria-hidden="true">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block shadow-2xs" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block shadow-2xs" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block shadow-2xs" />
                   </div>
                   <span
-                    className={`px-2 py-0.5 rounded-md border text-[11px] font-bold uppercase tracking-wider font-mono ${getLangBadgeStyle(
+                    className={`px-2 py-0.5 rounded border text-[10.5px] font-bold uppercase tracking-wider font-mono ${getLangBadgeStyle(
                       lang
                     )}`}
                   >
@@ -624,7 +631,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
                   {hasCompanion && (
                     <span
-                      className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-sans text-slate-300 shadow-2xs"
+                      className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-sans text-slate-300 shadow-2xs"
                       title={`This example has companion ${companionLang?.toUpperCase()} that will be automatically loaded in the playground!`}
                     >
                       <Link2 className="w-2.5 h-2.5 text-secondary" />
@@ -634,17 +641,17 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 </div>
 
                 {/* Right: Actions */}
-                <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="flex items-center gap-1.5">
                   {/* MDN Docs Reference Link */}
                   {block.meta.mdnUrl && (
                     <a
                       href={block.meta.mdnUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-400 hover:text-white bg-sky-400/10 hover:bg-sky-500 transition-all py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-sky-400/30 shadow-xs"
+                      className="flex items-center gap-1 text-sky-400 hover:text-white bg-sky-400/10 hover:bg-sky-500 transition-all py-0.5 px-2 sm:px-2.5 rounded-md active:scale-95 text-[11px] font-sans font-semibold border border-sky-400/30 shadow-xs"
                       title="Read official documentation on MDN Web Docs"
                     >
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-2.5 h-2.5" />
                       <span className="hidden sm:inline">MDN Docs</span>
                       <span className="sm:hidden">MDN</span>
                     </a>
@@ -656,10 +663,10 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                       href={block.meta.exampleUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-emerald-400 hover:text-white bg-emerald-400/10 hover:bg-emerald-500 transition-all py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-emerald-400/30 shadow-xs"
+                      className="flex items-center gap-1 text-emerald-400 hover:text-white bg-emerald-400/10 hover:bg-emerald-500 transition-all py-0.5 px-2 sm:px-2.5 rounded-md active:scale-95 text-[11px] font-sans font-semibold border border-emerald-400/30 shadow-xs"
                       title="Open external live demo / example"
                     >
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-2.5 h-2.5" />
                       <span className="hidden sm:inline">Live Example</span>
                       <span className="sm:hidden">Demo</span>
                     </a>
@@ -674,7 +681,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                         e.stopPropagation();
                         togglePreviewActive(idx, block.meta);
                       }}
-                      className={`flex items-center gap-1.5 transition-all cursor-pointer py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border shadow-xs ${
+                      className={`flex items-center gap-1.5 transition-all cursor-pointer py-0.5 px-2.5 rounded-md active:scale-95 text-[11.5px] font-sans font-semibold border shadow-xs ${
                         isPreviewActive(idx, block.meta)
                           ? 'text-white bg-emerald-600 border-emerald-500 hover:bg-emerald-700'
                           : 'text-emerald-400 hover:text-white bg-emerald-500/15 hover:bg-emerald-600 border-emerald-500/40'
@@ -688,14 +695,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                       {isPreviewActive(idx, block.meta) ? (
                         <>
                           <EyeOff className="w-3 h-3" />
-                          <span className="hidden sm:inline">Hide Preview</span>
-                          <span className="sm:hidden">Hide</span>
+                          <span>Hide</span>
                         </>
                       ) : (
                         <>
                           <Play className="w-3 h-3 fill-current" />
-                          <span className="hidden sm:inline">Run Preview</span>
-                          <span className="sm:hidden">Run</span>
+                          <span>Run</span>
                         </>
                       )}
                     </button>
@@ -721,7 +726,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                           title: block.meta.title || `Interactive Playground (${displayName})`,
                         });
                       }}
-                      className="flex items-center gap-1.5 text-secondary hover:text-white bg-secondary/15 hover:bg-secondary transition-all cursor-pointer py-1 px-2.5 rounded-lg active:scale-95 text-xs font-sans font-semibold border border-secondary/40 shadow-xs"
+                      className="flex items-center gap-1.5 text-secondary hover:text-white bg-secondary/15 hover:bg-secondary transition-all cursor-pointer py-0.5 px-2.5 rounded-md active:scale-95 text-[11.5px] font-sans font-semibold border border-secondary/40 shadow-xs"
                       title={
                         hasCompanion
                           ? `Open in Playground with linked ${companionLang?.toUpperCase()}`
@@ -729,29 +734,26 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                       }
                     >
                       <Play className="w-3 h-3 fill-current" />
-                      <span className="hidden sm:inline">
-                        {hasCompanion ? `Try with ${companionLang === 'css' ? 'CSS' : 'HTML'}` : 'Try in Playground'}
-                      </span>
-                      <span className="sm:hidden">Try</span>
+                      <span>Try</span>
                     </button>
                   )}
 
-                  {/* Copy Code Button (respects enableCopy) */}
+                  {/* Copy Code Button (respects enableCopy - hidden by default, shown when 'copy' is set in markdown) */}
                   {enableCopy && (
                     <button
                       onClick={() => handleCopy(codeIdx, code)}
-                      className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/10 active:scale-95"
+                      className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer py-0.5 px-2.5 rounded-md hover:bg-white/10 active:scale-95 text-[11.5px] font-sans font-medium"
                       aria-label="Copy code"
                     >
                       {copiedIndex === codeIdx ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400 font-semibold text-xs font-sans">Copied!</span>
+                          <span className="text-emerald-400 font-semibold">Copied!</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span className="text-xs font-sans">Copy Code</span>
+                          <span>Copy</span>
                         </>
                       )}
                     </button>
@@ -759,18 +761,46 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 </div>
               </div>
 
-              {/* Code Editor Body */}
-              <div className="overflow-x-auto p-4 sm:p-5">
-                <pre
+              {/* Code Editor Body - VS Code Dark+ with Sticky Line Numbers */}
+              <div className="overflow-x-auto py-3">
+                <div
                   tabIndex={0}
-                  suppressHydrationWarning
-                  className={`font-mono text-xs sm:text-sm leading-relaxed language-${lang}`}
+                  className="min-w-full inline-block font-mono text-[14px] sm:text-[15px] leading-6 select-text"
+                  style={{
+                    fontFamily:
+                      "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+                  }}
                 >
-                  <code
-                    className={`language-${lang}`}
-                    dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-                  />
-                </pre>
+                  {tokenizedLines.map((lineTokens, lineIdx) => (
+                    <div
+                      key={lineIdx}
+                      className="flex items-center hover:bg-[#282828] group min-w-full transition-colors"
+                    >
+                      {/* Sticky Line Number Gutter */}
+                      <span
+                        className="sticky left-0 bg-[#1e1e1e] group-hover:bg-[#282828] select-none text-right text-[#858585] group-hover:text-[#c6c6c6] text-[13px] sm:text-[14px] font-mono pr-3.5 pl-3 border-r border-[#333333] w-11 sm:w-13 shrink-0 transition-colors"
+                        aria-hidden="true"
+                      >
+                        {lineIdx + 1}
+                      </span>
+                      {/* Code Line */}
+                      <span className="pl-3.5 pr-4 whitespace-pre font-mono text-[#d4d4d4] flex-1">
+                        {lineTokens.length === 0 ? (
+                          '\u00A0'
+                        ) : (
+                          lineTokens.map((tok, tokIdx) => (
+                            <span
+                              key={tokIdx}
+                              style={{ color: getVSCodeTokenColor(tok.type, tok.text, lang) }}
+                            >
+                              {tok.text}
+                            </span>
+                          ))
+                        )}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Inline Live Preview / Output Window */}
@@ -781,21 +811,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                   companionLang={block.meta.companionLang}
                   companionCode={block.meta.companionCode}
                   title={block.meta.title}
-                  onClose={() => togglePreviewActive(idx, block.meta)}
-                  onOpenPlayground={() => {
-                    const isHtml = lang === 'html' || lang === 'markup';
-                    const isCss = lang === 'css';
-                    setPlaygroundModal({
-                      isOpen: true,
-                      language: PLAYGROUND_SUPPORTED_LANGS[lang] || 'html',
-                      code,
-                      companionCss:
-                        isHtml && block.meta.companionLang === 'css' ? block.meta.companionCode : undefined,
-                      companionHtml:
-                        isCss && block.meta.companionLang === 'html' ? block.meta.companionCode : undefined,
-                      title: block.meta.title || `Interactive Playground (${displayName})`,
-                    });
-                  }}
                 />
               )}
             </div>

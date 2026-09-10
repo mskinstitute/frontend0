@@ -166,9 +166,20 @@ export function generateHtmlFromCss(cssCode: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSS Live Preview</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+  </style>
 </head>
-<body style="font-family: system-ui, -apple-system, sans-serif; padding: 20px; line-height: 1.5;">
+<body style="font-family: system-ui, -apple-system, sans-serif; padding: 20px; line-height: 1.5; margin: 0;">
+  <div id="msk-preview-root" style="display: flow-root;">
 ${elements.join('\n\n')}
+  </div>
 </body>
 </html>`;
 }
@@ -250,18 +261,27 @@ export function buildCompositeWebSrcDoc(
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+    #msk-preview-root {
+      display: flow-root;
       font-family: system-ui, -apple-system, sans-serif;
       padding: 16px;
       margin: 0;
       color: #0f172a;
-      background: #ffffff;
       line-height: 1.5;
     }
   </style>
 </head>
 <body>
+  <div id="msk-preview-root">
 ${html}
+  </div>
 </body>
 </html>`;
   }
@@ -296,6 +316,52 @@ ${html}
     window.onerror = function(msg, url, line) {
       send('error', ['[Uncaught] ' + msg + (line ? ' (Line ' + line + ')' : '')]);
     };
+
+    // Auto-calculate and report exact content height (isolated to container, never viewport)
+    var lastSentHeight = 0;
+    function reportContentHeight() {
+      try {
+        var root = document.getElementById('msk-preview-root');
+        var h = 0;
+        if (root) {
+          h = Math.ceil(root.getBoundingClientRect().height);
+        } else if (document.body) {
+          var children = document.body.children;
+          var maxBottom = 0;
+          for (var i = 0; i < children.length; i++) {
+            if (children[i].tagName !== 'SCRIPT' && children[i].tagName !== 'STYLE') {
+              var rect = children[i].getBoundingClientRect();
+              if (rect.bottom > maxBottom) {
+                maxBottom = rect.bottom;
+              }
+            }
+          }
+          h = maxBottom > 0 ? Math.ceil(maxBottom + 16) : Math.ceil(document.body.scrollHeight || 50);
+        }
+
+        if (h > 0 && Math.abs(h - lastSentHeight) >= 2) {
+          lastSentHeight = h;
+          window.parent.postMessage({ type: 'MSK_PREVIEW_RESIZE', height: h }, '*');
+        }
+      } catch(e) {}
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      reportContentHeight();
+    } else {
+      window.addEventListener('DOMContentLoaded', reportContentHeight);
+    }
+    window.addEventListener('load', reportContentHeight);
+
+    var targetEl = document.getElementById('msk-preview-root') || document.body;
+    if (typeof ResizeObserver !== 'undefined' && targetEl) {
+      try {
+        var ro = new ResizeObserver(function() {
+          reportContentHeight();
+        });
+        ro.observe(targetEl);
+      } catch(e) {}
+    }
   })();
 </script>
 `;
@@ -309,13 +375,6 @@ ${html}
     }
   }
 
-  // Inject console bridge
-  if (html.includes('<head>')) {
-    html = html.replace('<head>', `<head>\n${consoleScript}`);
-  } else {
-    html = consoleScript + html;
-  }
-
   // Inject JavaScript
   if (js) {
     const wrappedJs = `<script>\ntry {\n${js}\n} catch (err) {\n  console.error(err && err.message ? err.message : String(err));\n}\n</script>`;
@@ -324,6 +383,13 @@ ${html}
     } else {
       html = html + `\n${wrappedJs}`;
     }
+  }
+
+  // Inject console & resize bridge right before </body> so elements are fully parsed
+  if (html.includes('</body>')) {
+    html = html.replace('</body>', `${consoleScript}\n</body>`);
+  } else {
+    html = html + consoleScript;
   }
 
   return html;

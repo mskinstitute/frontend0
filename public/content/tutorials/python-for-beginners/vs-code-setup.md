@@ -47,9 +47,7 @@ print("Python Executable:", sys.executable)
 print("Current Working Dir:", os.getcwd())
 print("VS Code Python Environment is working perfectly!")
 ```
-
-**Expected Output:**
-```text
+```output
 Python Executable: C:\Users\...\python.exe
 Current Working Dir: D:\MSK-Institute
 VS Code Python Environment is working perfectly!
