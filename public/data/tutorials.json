@@ -23,6 +23,28 @@
   },
   {
     "featured": true,
+    "id": "tut-css-for-beginners",
+    "slug": "css-for-beginners",
+    "courseSlug": "css-for-beginners",
+    "title": "CSS for Beginners",
+    "icon": "css",
+    "badge": "Beginner (Level 1)",
+    "tags": ["Beginner", "styling", "css", "frontend", "web development"],
+    "documentationTitle": "CSS for Beginners Complete Course",
+    "shortDescription": "Master CSS styling fundamentals from scratch. Learn syntax, selectors, box model, colors, typography, layout fundamentals, and hands-on projects designed for beginners.",
+    "lessonsCount": 12,
+    "totalHours": "25h",
+    "topicsCount": 37,
+    "githubRepo": "github.com/msk-institute/css-for-beginners",
+    "updatedAt": "2026-09-10",
+    "seo": {
+      "title": "CSS for Beginners: Level 1 Course & Notes - MSK Notes | MSK Institute",
+      "description": "Learn CSS from scratch with structured lessons, Indian school analogies, code snippets, and quizzes based on the CSS for Beginners course at MSK Institute.",
+      "keywords": ["css for beginners", "css tutorial", "learn css", "css beginner to pro", "css documentation", "css notes", "msk notes"]
+    }
+  },
+  {
+    "featured": false,
     "id": "tut-css-mastery",
     "slug": "css-mastery",
     "courseSlug": "html5-css3-modern-ui-design",

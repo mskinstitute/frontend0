@@ -5995,17 +5995,20 @@
           {
             "id": "css-for-beginners-t1.1",
             "title": "What is CSS and Why it Matters",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "what-is-css-and-why-it-matters"
           },
           {
             "id": "css-for-beginners-t1.2",
             "title": "How CSS Works with HTML",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "how-css-works-with-html"
           },
           {
             "id": "css-for-beginners-t1.3",
             "title": "Inline, Internal, External CSS",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "inline-internal-external-css"
           }
         ]
       },
@@ -6016,18 +6019,27 @@
         "topics": [
           {
             "id": "css-for-beginners-t2.1",
-            "title": "CSS Syntax: Selectors, Properties, Values",
-            "sortOrder": 1
+            "title": "CSS Syntax, Comments, and Code Structure",
+            "sortOrder": 1,
+            "slug": "css-syntax-comments-and-structure"
           },
           {
             "id": "css-for-beginners-t2.2",
-            "title": "Basic Selectors: element, class, id",
-            "sortOrder": 2
+            "title": "Universal and Element Selectors",
+            "sortOrder": 2,
+            "slug": "universal-and-element-selectors"
           },
           {
             "id": "css-for-beginners-t2.3",
-            "title": "Grouping & Combining Selectors",
-            "sortOrder": 3
+            "title": "Class and ID Selectors",
+            "sortOrder": 3,
+            "slug": "class-and-id-selectors"
+          },
+          {
+            "id": "css-for-beginners-t2.4",
+            "title": "Grouping and Combinator Selectors",
+            "sortOrder": 4,
+            "slug": "grouping-and-combinator-selectors"
           }
         ]
       },
@@ -6038,18 +6050,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t3.1",
-            "title": "Color Formats: Names, HEX, RGB, HSL",
-            "sortOrder": 1
+            "title": "Color Formats: Names, HEX, RGB, and HSL",
+            "sortOrder": 1,
+            "slug": "color-formats-names-hex-rgb-hsl"
           },
           {
             "id": "css-for-beginners-t3.2",
-            "title": "Background Color, Image, Position",
-            "sortOrder": 2
+            "title": "Background Color, Image, Position, and Size",
+            "sortOrder": 2,
+            "slug": "background-color-image-position-size"
           },
           {
             "id": "css-for-beginners-t3.3",
-            "title": "Gradients (linear, radial)",
-            "sortOrder": 3
+            "title": "CSS Gradients: Linear and Radial Gradients",
+            "sortOrder": 3,
+            "slug": "css-gradients-linear-radial"
           }
         ]
       },
@@ -6060,18 +6075,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t4.1",
-            "title": "Content, Padding, Border, Margin",
-            "sortOrder": 1
+            "title": "The CSS Box Model: Content, Padding, Border, Margin",
+            "sortOrder": 1,
+            "slug": "css-box-model-content-padding-border-margin"
           },
           {
             "id": "css-for-beginners-t4.2",
-            "title": "Width, Height, Max/Min Values",
-            "sortOrder": 2
+            "title": "Width, Height, Max-Width, and Min-Width",
+            "sortOrder": 2,
+            "slug": "width-height-max-min-dimensions"
           },
           {
             "id": "css-for-beginners-t4.3",
-            "title": "Box-Sizing Property",
-            "sortOrder": 3
+            "title": "The Box-Sizing Property: border-box vs content-box",
+            "sortOrder": 3,
+            "slug": "box-sizing-border-box-vs-content-box"
           }
         ]
       },
@@ -6082,18 +6100,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t5.1",
-            "title": "Font Families and Web-safe Fonts",
-            "sortOrder": 1
+            "title": "Font Families and Web-Safe Fonts",
+            "sortOrder": 1,
+            "slug": "font-families-web-safe-fonts"
           },
           {
             "id": "css-for-beginners-t5.2",
-            "title": "Font Size, Weight, Style",
-            "sortOrder": 2
+            "title": "Font Size, Weight, Style, and Line Height",
+            "sortOrder": 2,
+            "slug": "font-size-weight-style-line-height"
           },
           {
             "id": "css-for-beginners-t5.3",
-            "title": "Text Alignment, Decoration, Transform",
-            "sortOrder": 3
+            "title": "Text Alignment, Decoration, Transform, and Spacing",
+            "sortOrder": 3,
+            "slug": "text-align-decoration-transform-spacing"
           }
         ]
       },
@@ -6104,18 +6125,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t6.1",
-            "title": "Absolute Units: px, pt",
-            "sortOrder": 1
+            "title": "Absolute Units: Pixels (px), Points (pt)",
+            "sortOrder": 1,
+            "slug": "css-units-absolute-px-pt"
           },
           {
             "id": "css-for-beginners-t6.2",
-            "title": "Relative Units: %, em, rem, vh, vw",
-            "sortOrder": 2
+            "title": "Relative Units: %, rem, em, vh, vw",
+            "sortOrder": 2,
+            "slug": "css-units-relative-percentages-rem-em-vh-vw"
           },
           {
             "id": "css-for-beginners-t6.3",
-            "title": "Best Practices for Responsive Units",
-            "sortOrder": 3
+            "title": "Responsive Units & The calc() Function",
+            "sortOrder": 3,
+            "slug": "responsive-units-and-calc-function"
           }
         ]
       },
@@ -6126,18 +6150,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t7.1",
-            "title": "Border Styles and Shorthand",
-            "sortOrder": 1
+            "title": "Border Styles, Colors, and Shorthand",
+            "sortOrder": 1,
+            "slug": "border-styles-colors-shorthand"
           },
           {
             "id": "css-for-beginners-t7.2",
-            "title": "Box Shadows and Text Shadows",
-            "sortOrder": 2
+            "title": "Border Radius: Rounded Corners, Pills, and Circular Avatars",
+            "sortOrder": 2,
+            "slug": "border-radius-rounded-corners-circles"
           },
           {
             "id": "css-for-beginners-t7.3",
-            "title": "Border Radius and Rounded Elements",
-            "sortOrder": 3
+            "title": "Box Shadows and Text Shadows: Depth and Elevation",
+            "sortOrder": 3,
+            "slug": "box-shadows-and-text-shadows"
           }
         ]
       },
@@ -6149,17 +6176,20 @@
           {
             "id": "css-for-beginners-t8.1",
             "title": "Styling Links with Pseudo-classes",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "styling-links-pseudo-classes"
           },
           {
             "id": "css-for-beginners-t8.2",
             "title": "Styling Ordered and Unordered Lists",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "styling-ordered-unordered-lists"
           },
           {
             "id": "css-for-beginners-t8.3",
-            "title": "Styling Tables: Borders, Striping",
-            "sortOrder": 3
+            "title": "Styling Tables: Borders, Striping, and Responsive Tables",
+            "sortOrder": 3,
+            "slug": "styling-tables-borders-striping"
           }
         ]
       },
@@ -6170,18 +6200,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t9.1",
-            "title": "Block vs Inline vs Inline-Block",
-            "sortOrder": 1
+            "title": "Block vs Inline vs Inline-Block: Mastering CSS Display",
+            "sortOrder": 1,
+            "slug": "display-block-inline-inline-block"
           },
           {
             "id": "css-for-beginners-t9.2",
-            "title": "Display: none vs Visibility: hidden",
-            "sortOrder": 2
+            "title": "Display: none vs Visibility: hidden: Hiding Elements in CSS",
+            "sortOrder": 2,
+            "slug": "display-none-vs-visibility-hidden"
           },
           {
             "id": "css-for-beginners-t9.3",
-            "title": "Overflow Property (scroll, hidden, auto)",
-            "sortOrder": 3
+            "title": "CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto",
+            "sortOrder": 3,
+            "slug": "css-overflow-visible-hidden-scroll-auto"
           }
         ]
       },
@@ -6192,18 +6225,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t10.1",
-            "title": "Static, Relative, Absolute Positioning",
-            "sortOrder": 1
+            "title": "CSS Positioning: Static, Relative, and Absolute Explained",
+            "sortOrder": 1,
+            "slug": "position-static-relative-absolute"
           },
           {
             "id": "css-for-beginners-t10.2",
-            "title": "Fixed and Sticky Positioning",
-            "sortOrder": 2
+            "title": "Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners",
+            "sortOrder": 2,
+            "slug": "position-fixed-and-sticky"
           },
           {
             "id": "css-for-beginners-t10.3",
-            "title": "z-index Basics",
-            "sortOrder": 3
+            "title": "z-index Basics: Controlling 3D Layering and Stacking Order",
+            "sortOrder": 3,
+            "slug": "z-index-and-stacking-context"
           }
         ]
       },
@@ -6214,18 +6250,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t11.1",
-            "title": "Float and Clear Basics",
-            "sortOrder": 1
+            "title": "Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts",
+            "sortOrder": 1,
+            "slug": "float-and-clear-basics"
           },
           {
             "id": "css-for-beginners-t11.2",
-            "title": "Aligning Elements with Text-align and Margin",
-            "sortOrder": 2
+            "title": "Aligning Elements: Mastering text-align, margin auto, and Centering Tricks",
+            "sortOrder": 2,
+            "slug": "aligning-elements-text-align-and-margin"
           },
           {
             "id": "css-for-beginners-t11.3",
-            "title": "Intro to Flexbox (concept only)",
-            "sortOrder": 3
+            "title": "Intro to Flexbox: The Modern 1D Layout Powerhouse",
+            "sortOrder": 3,
+            "slug": "intro-to-flexbox-basics"
           }
         ]
       },
@@ -6236,18 +6275,21 @@
         "topics": [
           {
             "id": "css-for-beginners-t12.1",
-            "title": "Styled Profile Card",
-            "sortOrder": 1
+            "title": "Project 1: Styled Student Profile & ID Card",
+            "sortOrder": 1,
+            "slug": "project-styled-profile-card"
           },
           {
             "id": "css-for-beginners-t12.2",
-            "title": "Simple Landing Page Layout",
-            "sortOrder": 2
+            "title": "Project 2: Simple School Club Landing Page",
+            "sortOrder": 2,
+            "slug": "project-simple-landing-page-layout"
           },
           {
             "id": "css-for-beginners-t12.3",
-            "title": "Navigation Bar Styling",
-            "sortOrder": 3
+            "title": "Project 3: Modern Responsive Navigation Bar & Dropdown",
+            "sortOrder": 3,
+            "slug": "project-navigation-bar-styling"
           }
         ]
       }
@@ -12965,7 +13007,7 @@
     "mode": "ONLINE",
     "courseType": "COMBO",
     "includedCourseIds": [
-      "course-html-complete-course",
+      "course-html5-complete-course",
       "course-css-for-beginners",
       "course-css-for-intermediate",
       "course-bootstrap-for-beginner"
@@ -13155,7 +13197,7 @@
     "mode": "BOTH",
     "courseType": "COMBO",
     "includedCourseIds": [
-      "course-html-complete-course",
+      "course-html5-complete-course",
       "course-css-for-beginners",
       "course-javascript-for-beginners",
       "course-react-js-for-beginners",
@@ -13671,7 +13713,8 @@
     "mode": "BOTH",
     "courseType": "COMBO",
     "includedCourseIds": [
-      "course-html-complete-course",
+      "course-html5-complete-course",
+      "course-css-for-beginners",
       "course-javascript-for-beginners",
       "course-react-js-for-beginners",
       "course-python-for-beginners",

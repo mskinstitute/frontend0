@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/tutorials/css',
+        destination: '/tutorials/css-for-beginners',
+        permanent: true,
+      },
+      {
         source: '/tutorials/html5-complete-masterclass/:topicSlug*',
         destination: '/tutorials/html5-complete-course/:topicSlug*',
         permanent: true,

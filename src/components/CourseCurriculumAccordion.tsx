@@ -46,11 +46,11 @@ function resolveTopicTutorialUrl(
     tutorialSlug = 'python-for-beginners';
   } else if (cSlug.includes('javascript') || cSlug.includes('react')) {
     tutorialSlug = 'javascript-essentials';
-  } else if (cSlug.includes('css') || chTitle.includes('css') || chTitle.includes('tailwind')) {
-    tutorialSlug = 'css-mastery';
+  } else if (cSlug.includes('css-for-beginners') || cSlug.includes('css') || chTitle.includes('css') || chTitle.includes('tailwind')) {
+    tutorialSlug = 'css-for-beginners';
   } else if (cSlug.includes('full-stack') || cSlug.includes('bootcamp')) {
     if (chTitle.includes('html')) tutorialSlug = 'html5-complete-course';
-    else if (chTitle.includes('css') || chTitle.includes('tailwind')) tutorialSlug = 'css-mastery';
+    else if (chTitle.includes('css') || chTitle.includes('tailwind')) tutorialSlug = 'css-for-beginners';
     else if (chTitle.includes('javascript') || chTitle.includes('js') || chTitle.includes('react')) tutorialSlug = 'javascript-essentials';
     else if (chTitle.includes('python')) tutorialSlug = 'python-for-beginners';
   }
@@ -124,6 +124,82 @@ function resolveTopicTutorialUrl(
       topicSlug = 'interactive-elements-dialog';
     } else if (rawSlug === 'html5-apis-storage-best-practices' || rawSlug.includes('api') || rawSlug.includes('storage')) {
       topicSlug = 'html5-apis-storage-best-practices';
+    }
+  } else if (tutorialSlug === 'css-for-beginners') {
+    if (rawSlug === 'what-is-css-and-why-it-matters' || rawSlug === 'what-is-css' || rawSlug.includes('what-is-css')) {
+      topicSlug = 'what-is-css-and-why-it-matters';
+    } else if (rawSlug === 'how-css-works-with-html' || rawSlug === 'how-css-works' || rawSlug.includes('how-css-works')) {
+      topicSlug = 'how-css-works-with-html';
+    } else if (rawSlug === 'inline-internal-external-css' || rawSlug.includes('inline') || rawSlug.includes('internal') || rawSlug.includes('external')) {
+      topicSlug = 'inline-internal-external-css';
+    } else if (rawSlug === 'css-syntax-comments-and-structure' || rawSlug.includes('syntax') || rawSlug.includes('comment')) {
+      topicSlug = 'css-syntax-comments-and-structure';
+    } else if (rawSlug === 'universal-and-element-selectors' || rawSlug.includes('universal') || rawSlug.includes('element')) {
+      topicSlug = 'universal-and-element-selectors';
+    } else if (rawSlug === 'class-and-id-selectors' || (rawSlug.includes('class') && rawSlug.includes('id')) || rawSlug === 'basic-selectors-element-class-id') {
+      topicSlug = 'class-and-id-selectors';
+    } else if (rawSlug === 'grouping-and-combinator-selectors' || rawSlug.includes('grouping') || rawSlug.includes('combin')) {
+      topicSlug = 'grouping-and-combinator-selectors';
+    } else if (rawSlug === 'color-formats-names-hex-rgb-hsl' || rawSlug.includes('color-format') || rawSlug.includes('hex') || rawSlug.includes('rgb') || rawSlug.includes('hsl')) {
+      topicSlug = 'color-formats-names-hex-rgb-hsl';
+    } else if (rawSlug === 'background-color-image-position-size' || rawSlug.includes('background') || rawSlug.includes('position') || (rawSlug.includes('image') && rawSlug.includes('background'))) {
+      topicSlug = 'background-color-image-position-size';
+    } else if (rawSlug === 'css-gradients-linear-radial' || rawSlug.includes('gradient')) {
+      topicSlug = 'css-gradients-linear-radial';
+    } else if (rawSlug === 'css-box-model-content-padding-border-margin' || rawSlug.includes('box-model') || (rawSlug.includes('content') && rawSlug.includes('padding')) || (rawSlug.includes('margin') && rawSlug.includes('border'))) {
+      topicSlug = 'css-box-model-content-padding-border-margin';
+    } else if (rawSlug === 'width-height-max-min-dimensions' || rawSlug.includes('width') || rawSlug.includes('height') || rawSlug.includes('dimension')) {
+      topicSlug = 'width-height-max-min-dimensions';
+    } else if (rawSlug === 'box-sizing-border-box-vs-content-box' || rawSlug.includes('box-sizing') || rawSlug.includes('border-box') || rawSlug.includes('content-box')) {
+      topicSlug = 'box-sizing-border-box-vs-content-box';
+    } else if (rawSlug === 'font-families-web-safe-fonts' || rawSlug.includes('font-famil') || rawSlug.includes('web-safe')) {
+      topicSlug = 'font-families-web-safe-fonts';
+    } else if (rawSlug === 'font-size-weight-style-line-height' || rawSlug.includes('font-size') || rawSlug.includes('weight') || rawSlug.includes('line-height')) {
+      topicSlug = 'font-size-weight-style-line-height';
+    } else if (rawSlug === 'text-align-decoration-transform-spacing' || rawSlug.includes('text-align') || rawSlug.includes('transform') || rawSlug.includes('decoration')) {
+      topicSlug = 'text-align-decoration-transform-spacing';
+    } else if (rawSlug === 'css-units-absolute-px-pt' || rawSlug.includes('absolute') || rawSlug.includes('px-pt')) {
+      topicSlug = 'css-units-absolute-px-pt';
+    } else if (rawSlug === 'css-units-relative-percentages-rem-em-vh-vw' || rawSlug.includes('relative') || rawSlug.includes('vh-vw') || (rawSlug.includes('rem') && rawSlug.includes('em'))) {
+      topicSlug = 'css-units-relative-percentages-rem-em-vh-vw';
+    } else if (rawSlug === 'responsive-units-and-calc-function' || rawSlug.includes('calc') || rawSlug.includes('best-practice') || (rawSlug.includes('responsive') && rawSlug.includes('unit'))) {
+      topicSlug = 'responsive-units-and-calc-function';
+    } else if (rawSlug === 'border-styles-colors-shorthand' || (rawSlug.includes('border') && (rawSlug.includes('style') || rawSlug.includes('shorthand')))) {
+      topicSlug = 'border-styles-colors-shorthand';
+    } else if (rawSlug === 'border-radius-rounded-corners-circles' || rawSlug.includes('border-radius') || rawSlug.includes('rounded') || rawSlug.includes('circle')) {
+      topicSlug = 'border-radius-rounded-corners-circles';
+    } else if (rawSlug === 'box-shadows-and-text-shadows' || rawSlug.includes('shadow')) {
+      topicSlug = 'box-shadows-and-text-shadows';
+    } else if (rawSlug === 'styling-links-pseudo-classes' || (rawSlug.includes('link') && (rawSlug.includes('pseudo') || rawSlug.includes('style')))) {
+      topicSlug = 'styling-links-pseudo-classes';
+    } else if (rawSlug === 'styling-ordered-unordered-lists' || rawSlug.includes('list') || rawSlug.includes('ordered') || rawSlug.includes('unordered')) {
+      topicSlug = 'styling-ordered-unordered-lists';
+    } else if (rawSlug === 'styling-tables-borders-striping' || rawSlug.includes('table') || rawSlug.includes('striping')) {
+      topicSlug = 'styling-tables-borders-striping';
+    } else if (rawSlug === 'display-block-inline-inline-block' || (rawSlug.includes('block') && rawSlug.includes('inline'))) {
+      topicSlug = 'display-block-inline-inline-block';
+    } else if (rawSlug === 'display-none-vs-visibility-hidden' || (rawSlug.includes('visibility') || (rawSlug.includes('display') && rawSlug.includes('none')))) {
+      topicSlug = 'display-none-vs-visibility-hidden';
+    } else if (rawSlug === 'css-overflow-visible-hidden-scroll-auto' || rawSlug.includes('overflow')) {
+      topicSlug = 'css-overflow-visible-hidden-scroll-auto';
+    } else if (rawSlug === 'position-static-relative-absolute' || (rawSlug.includes('position') && (rawSlug.includes('static') || rawSlug.includes('relative') || rawSlug.includes('absolute')))) {
+      topicSlug = 'position-static-relative-absolute';
+    } else if (rawSlug === 'position-fixed-and-sticky' || rawSlug.includes('fixed') || rawSlug.includes('sticky')) {
+      topicSlug = 'position-fixed-and-sticky';
+    } else if (rawSlug === 'z-index-and-stacking-context' || rawSlug.includes('z-index') || rawSlug.includes('stacking')) {
+      topicSlug = 'z-index-and-stacking-context';
+    } else if (rawSlug === 'float-and-clear-basics' || rawSlug.includes('float') || rawSlug.includes('clear')) {
+      topicSlug = 'float-and-clear-basics';
+    } else if (rawSlug === 'aligning-elements-text-align-and-margin' || (rawSlug.includes('align') && (rawSlug.includes('margin') || rawSlug.includes('text-align')))) {
+      topicSlug = 'aligning-elements-text-align-and-margin';
+    } else if (rawSlug === 'intro-to-flexbox-basics' || rawSlug.includes('flex')) {
+      topicSlug = 'intro-to-flexbox-basics';
+    } else if (rawSlug === 'project-styled-profile-card' || rawSlug.includes('profile') || rawSlug.includes('id-card')) {
+      topicSlug = 'project-styled-profile-card';
+    } else if (rawSlug === 'project-simple-landing-page-layout' || rawSlug.includes('landing')) {
+      topicSlug = 'project-simple-landing-page-layout';
+    } else if (rawSlug === 'project-navigation-bar-styling' || (rawSlug.includes('navigation') && rawSlug.includes('bar')) || rawSlug.includes('navbar')) {
+      topicSlug = 'project-navigation-bar-styling';
     }
   }
 
