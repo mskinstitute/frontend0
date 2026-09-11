@@ -1,27 +1,27 @@
 [
   {
-    "id": "batch-python-fasttrack",
-    "courseSlug": "python-programming-masterclass",
-    "title": "Python Developer Fast-Track Live Batch",
+    "id": "batch-data-analysis-mastery",
+    "courseSlug": "data-analysis-mastery-combo-course--12-months",
+    "title": "Data Analysis Mastery - Live Batch",
     "startDate": "2026-09-15",
-    "schedule": "Mon, Wed, Fri (04:30 PM - 06:00 PM)",
+    "schedule": "Mon, Tue, Wed, Thu, Fri, Sat (04:30 PM - 06:00 PM)",
     "instructorId": "sumit-kumar",
-    "price": "₹4,999",
-    "originalPrice": "₹8,999",
+    "price": "₹17,999",
+    "originalPrice": "₹54,999",
     "totalSeats": 20,
-    "leftSeats": 4
+    "leftSeats": 18
   },
   {
-    "id": "batch-mern-morning",
-    "courseSlug": "full-stack-web-dev-bootcamp",
-    "title": "Full-Stack MERN Developer Flagship Batch",
-    "startDate": "2026-09-18",
-    "schedule": "Tue, Thu, Sat (09:00 AM - 11:00 AM)",
+    "id": "batch-python-mastery-3-months",
+    "courseSlug": "python-mastery-beginner-to-advanced--3-months",
+    "title": "Python Programming Mastery (Beginner to Advanced) - Live Batch",
+    "startDate": "2026-09-20",
+    "schedule": "Mon, Wed, Fri (05:00 PM - 06:30 PM)",
     "instructorId": "sumit-kumar",
-    "price": "₹12,499",
-    "originalPrice": "₹19,999",
+    "price": "₹2,999",
+    "originalPrice": "₹9,999",
     "totalSeats": 20,
-    "leftSeats": 6
+    "leftSeats": 20
   },
   {
     "id": "batch-web-frontend",

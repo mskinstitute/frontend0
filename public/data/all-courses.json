@@ -2,7 +2,7 @@
   {
     "id": "course-ccc-nielit",
     "status": "PUBLISH",
-    "title": "CCC",
+    "title": "CCC (Basic Computer Course)",
     "slug": "ccc",
     "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
     "shortDescription": "Become digitally literate with the complete CCC program. Learn computer fundamentals, MS Office tools, Internet, Email, Digital Payments, Cyber Security, and Future Skills.",
@@ -2925,8 +2925,9 @@
       }
     ]
   },
+
   {
-    "id": "course-python-basics",
+    "id": "course-python-for-beginners",
     "status": "PUBLISH",
     "title": "Python for Beginners",
     "slug": "python-for-beginners",
@@ -5012,6 +5013,9 @@
       }
     ]
   },
+  
+  
+
   {
     "id": "course-javascript-for-beginners",
     "status": "PUBLISH",
@@ -8070,6 +8074,7 @@
       }
     ]
   },
+
   {
     "id": "course-sql-for-beginners",
     "status": "PUBLISH",
@@ -11642,6 +11647,9 @@
       }
     ]
   },
+
+
+
   {
     "id": "course-django-for-backend-development",
     "status": "PUBLISH",
@@ -13163,6 +13171,37 @@
     ]
   },
   {
+    "id": "course-python-mastery-beginner-to-advanced--3-months",
+    "status": "PUBLISH",
+    "title": "Python Mastery (Beginner to Advanced) - 3 Months",
+    "slug": "python-mastery-beginner-to-advanced--3-months",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop",
+    "shortDescription": "Master Python programming from scratch to advanced engineering in 3 months. This comprehensive 3-in-1 combo covers Python for Beginners, Python for Intermediate, and Python for Advanced — covering syntax, data structures, OOP, modules, exception handling, decorators, multithreading, APIs, databases, and capstone projects.",
+    "categories": [
+      "Programming",
+      "Python",
+      "Software Engineering",
+      "Combo"
+    ],
+    "level": "Beginner to Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 3,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "COMBO",
+    "includedCourseIds": [
+      "course-python-for-beginners",
+      "course-python-for-intermediate",
+      "course-python-for-advanced"
+    ]
+  },
+  {
     "id": "course-python-backend-development-mastery-combo--8-months",
     "status": "PUBLISH",
     "title": "Python Backend Development Mastery Combo - 8 Months",
@@ -13197,6 +13236,8 @@
       "course-deployment--hosting-for-backend"
     ]
   },
+
+
   {
     "id": "course-data-analysis-mastery-combo-course--12-months",
     "status": "PUBLISH",
@@ -13226,13 +13267,17 @@
     "mode": "BOTH",
     "courseType": "COMBO",
     "includedCourseIds": [
-      "course-python-for-beginners",
       "course-ms-excel-for-beginners",
+      "course-ms-excel-for-intermediate",
+      "course-ms-excel-for-advanced",
       "course-sql-for-beginners",
+      "course-sql-for-advanced",
+      "course-python-for-beginners",
       "course-power-bi-for-beginners",
       "course-tableau-for-beginners"
     ]
   },
+
   {
     "id": "course-power-bi-mastery-beginner-to-advanced--3-months",
     "status": "PUBLISH",
@@ -13262,6 +13307,7 @@
       "course-power-bi-for-advanced"
     ]
   },
+
   {
     "id": "course-ms-excel-beginners-to-advanced--6-months",
     "status": "PUBLISH",
