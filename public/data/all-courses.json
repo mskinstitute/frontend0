@@ -1969,7 +1969,6 @@
       }
     ]
   },
-  
   {
     "id": "course-backend-node",
     "status": "PUBLISH",
@@ -2925,7 +2924,6 @@
       }
     ]
   },
-
   {
     "id": "course-python-for-beginners",
     "status": "PUBLISH",
@@ -4118,27 +4116,62 @@
           {
             "id": "python-for-intermediate-t1.1",
             "title": "List Comprehensions Advanced",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "list-comprehensions-advanced",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/list-comprehensions-advanced"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t1.2",
             "title": "Set Comprehensions",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "set-comprehensions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/set-comprehensions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t1.3",
             "title": "Dictionary Comprehensions",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "dictionary-comprehensions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/dictionary-comprehensions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t1.4",
             "title": "Nested Comprehensions",
-            "sortOrder": 4
+            "sortOrder": 4,
+            "slug": "nested-comprehensions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/nested-comprehensions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t1.5",
             "title": "Project: Data Filtering with Comprehensions",
-            "sortOrder": 5
+            "sortOrder": 5,
+            "slug": "project-data-filtering-with-comprehensions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-data-filtering-with-comprehensions"
+              }
+            ]
           }
         ]
       },
@@ -4150,27 +4183,62 @@
           {
             "id": "python-for-intermediate-t2.1",
             "title": "Arguments Recap (*args, **kwargs)",
-            "sortOrder": 1
+            "sortOrder": 6,
+            "slug": "arguments-recap-args-kwargs",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/arguments-recap-args-kwargs"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t2.2",
             "title": "Default vs Keyword Arguments",
-            "sortOrder": 2
+            "sortOrder": 7,
+            "slug": "default-vs-keyword-arguments",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/default-vs-keyword-arguments"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t2.3",
             "title": "Closures",
-            "sortOrder": 3
+            "sortOrder": 8,
+            "slug": "closures",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/closures"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t2.4",
             "title": "Decorators Basics",
-            "sortOrder": 4
+            "sortOrder": 9,
+            "slug": "decorators-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/decorators-basics"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t2.5",
             "title": "Project: Function Decorator Example",
-            "sortOrder": 5
+            "sortOrder": 10,
+            "slug": "project-function-decorator-example",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-function-decorator-example"
+              }
+            ]
           }
         ]
       },
@@ -4182,27 +4250,62 @@
           {
             "id": "python-for-intermediate-t3.1",
             "title": "Creating and Importing Modules",
-            "sortOrder": 1
+            "sortOrder": 11,
+            "slug": "creating-and-importing-modules",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/creating-and-importing-modules"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t3.2",
             "title": "Using __name__ == '__main__'",
-            "sortOrder": 2
+            "sortOrder": 12,
+            "slug": "using-name-main",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/using-name-main"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t3.3",
             "title": "Package Structure and __init__.py",
-            "sortOrder": 3
+            "sortOrder": 13,
+            "slug": "package-structure-and-init-py",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/package-structure-and-init-py"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t3.4",
             "title": "Popular Python Modules Overview",
-            "sortOrder": 4
+            "sortOrder": 14,
+            "slug": "popular-python-modules-overview",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/popular-python-modules-overview"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t3.5",
             "title": "Project: Custom Utility Package",
-            "sortOrder": 5
+            "sortOrder": 15,
+            "slug": "project-custom-utility-package",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-custom-utility-package"
+              }
+            ]
           }
         ]
       },
@@ -4214,27 +4317,62 @@
           {
             "id": "python-for-intermediate-t4.1",
             "title": "Working with Context Managers (with statement)",
-            "sortOrder": 1
+            "sortOrder": 16,
+            "slug": "working-with-context-managers-with-statement",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/working-with-context-managers-with-statement"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t4.2",
             "title": "Reading & Writing CSV Files",
-            "sortOrder": 2
+            "sortOrder": 17,
+            "slug": "reading-writing-csv-files",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/reading-writing-csv-files"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t4.3",
             "title": "Working with JSON Files",
-            "sortOrder": 3
+            "sortOrder": 18,
+            "slug": "working-with-json-files",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/working-with-json-files"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t4.4",
             "title": "File Exceptions and Error Handling",
-            "sortOrder": 4
+            "sortOrder": 19,
+            "slug": "file-exceptions-and-error-handling",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/file-exceptions-and-error-handling"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t4.5",
             "title": "Project: CSV Contact Manager",
-            "sortOrder": 5
+            "sortOrder": 20,
+            "slug": "project-csv-contact-manager",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-csv-contact-manager"
+              }
+            ]
           }
         ]
       },
@@ -4246,27 +4384,62 @@
           {
             "id": "python-for-intermediate-t5.1",
             "title": "Creating Classes & Objects (Review)",
-            "sortOrder": 1
+            "sortOrder": 21,
+            "slug": "creating-classes-objects-review",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/creating-classes-objects-review"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t5.2",
             "title": "Inheritance & Method Overriding",
-            "sortOrder": 2
+            "sortOrder": 22,
+            "slug": "inheritance-method-overriding",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/inheritance-method-overriding"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t5.3",
             "title": "Polymorphism Basics",
-            "sortOrder": 3
+            "sortOrder": 23,
+            "slug": "polymorphism-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/polymorphism-basics"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t5.4",
             "title": "Encapsulation and Abstraction",
-            "sortOrder": 4
+            "sortOrder": 24,
+            "slug": "encapsulation-and-abstraction",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/encapsulation-and-abstraction"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t5.5",
             "title": "Project: Bank Account Class System",
-            "sortOrder": 5
+            "sortOrder": 25,
+            "slug": "project-bank-account-class-system",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-bank-account-class-system"
+              }
+            ]
           }
         ]
       },
@@ -4278,27 +4451,62 @@
           {
             "id": "python-for-intermediate-t6.1",
             "title": "Types of Exceptions",
-            "sortOrder": 1
+            "sortOrder": 26,
+            "slug": "types-of-exceptions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/types-of-exceptions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t6.2",
             "title": "Try-Except-Else-Finally",
-            "sortOrder": 2
+            "sortOrder": 27,
+            "slug": "try-except-else-finally",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/try-except-else-finally"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t6.3",
             "title": "Raising Exceptions",
-            "sortOrder": 3
+            "sortOrder": 28,
+            "slug": "raising-exceptions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/raising-exceptions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t6.4",
             "title": "Creating Custom Exceptions",
-            "sortOrder": 4
+            "sortOrder": 29,
+            "slug": "creating-custom-exceptions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/creating-custom-exceptions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t6.5",
             "title": "Project: Error-Handled Calculator",
-            "sortOrder": 5
+            "sortOrder": 30,
+            "slug": "project-error-handled-calculator",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-error-handled-calculator"
+              }
+            ]
           }
         ]
       },
@@ -4310,27 +4518,62 @@
           {
             "id": "python-for-intermediate-t7.1",
             "title": "Understanding Iterators",
-            "sortOrder": 1
+            "sortOrder": 31,
+            "slug": "understanding-iterators",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/understanding-iterators"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t7.2",
             "title": "Custom Iterators",
-            "sortOrder": 2
+            "sortOrder": 32,
+            "slug": "custom-iterators",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/custom-iterators"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t7.3",
             "title": "Using Generators with yield",
-            "sortOrder": 3
+            "sortOrder": 33,
+            "slug": "using-generators-with-yield",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/using-generators-with-yield"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t7.4",
             "title": "Generator Expressions",
-            "sortOrder": 4
+            "sortOrder": 34,
+            "slug": "generator-expressions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/generator-expressions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t7.5",
             "title": "Project: Infinite Sequence Generator",
-            "sortOrder": 5
+            "sortOrder": 35,
+            "slug": "project-infinite-sequence-generator",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-infinite-sequence-generator"
+              }
+            ]
           }
         ]
       },
@@ -4342,27 +4585,62 @@
           {
             "id": "python-for-intermediate-t8.1",
             "title": "HTTP Requests using requests",
-            "sortOrder": 1
+            "sortOrder": 36,
+            "slug": "http-requests-using-requests",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/http-requests-using-requests"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t8.2",
             "title": "GET & POST Methods",
-            "sortOrder": 2
+            "sortOrder": 37,
+            "slug": "get-post-methods",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/get-post-methods"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t8.3",
             "title": "Parsing JSON Data",
-            "sortOrder": 3
+            "sortOrder": 38,
+            "slug": "parsing-json-data",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/parsing-json-data"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t8.4",
             "title": "Practical API Example",
-            "sortOrder": 4
+            "sortOrder": 39,
+            "slug": "practical-api-example",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/practical-api-example"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t8.5",
             "title": "Project: Weather Data Fetcher",
-            "sortOrder": 5
+            "sortOrder": 40,
+            "slug": "project-weather-data-fetcher",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-weather-data-fetcher"
+              }
+            ]
           }
         ]
       },
@@ -4374,27 +4652,62 @@
           {
             "id": "python-for-intermediate-t9.1",
             "title": "Using print vs logging",
-            "sortOrder": 1
+            "sortOrder": 41,
+            "slug": "using-print-vs-logging",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/using-print-vs-logging"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t9.2",
             "title": "Logging Levels",
-            "sortOrder": 2
+            "sortOrder": 42,
+            "slug": "logging-levels",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/logging-levels"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t9.3",
             "title": "Basic Debugging with pdb",
-            "sortOrder": 3
+            "sortOrder": 43,
+            "slug": "basic-debugging-with-pdb",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/basic-debugging-with-pdb"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t9.4",
             "title": "Assertions",
-            "sortOrder": 4
+            "sortOrder": 44,
+            "slug": "assertions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/assertions"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t9.5",
             "title": "Project: Debugging a Student Grading App",
-            "sortOrder": 5
+            "sortOrder": 45,
+            "slug": "project-debugging-a-student-grading-app",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-debugging-a-student-grading-app"
+              }
+            ]
           }
         ]
       },
@@ -4406,27 +4719,62 @@
           {
             "id": "python-for-intermediate-t10.1",
             "title": "Math and Random Module",
-            "sortOrder": 1
+            "sortOrder": 46,
+            "slug": "math-and-random-module",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/math-and-random-module"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t10.2",
             "title": "Datetime Module",
-            "sortOrder": 2
+            "sortOrder": 47,
+            "slug": "datetime-module",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/datetime-module"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t10.3",
             "title": "Collections Module",
-            "sortOrder": 3
+            "sortOrder": 48,
+            "slug": "collections-module",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/collections-module"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t10.4",
             "title": "OS and Sys Modules",
-            "sortOrder": 4
+            "sortOrder": 49,
+            "slug": "os-and-sys-modules",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/os-and-sys-modules"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t10.5",
             "title": "Project: File & Directory Utility Tool",
-            "sortOrder": 5
+            "sortOrder": 50,
+            "slug": "project-file-directory-utility-tool",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-file-directory-utility-tool"
+              }
+            ]
           }
         ]
       },
@@ -4438,27 +4786,62 @@
           {
             "id": "python-for-intermediate-t11.1",
             "title": "Introduction to Databases",
-            "sortOrder": 1
+            "sortOrder": 51,
+            "slug": "introduction-to-databases",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/introduction-to-databases"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t11.2",
             "title": "SQLite Installation & Setup",
-            "sortOrder": 2
+            "sortOrder": 52,
+            "slug": "sqlite-installation-setup",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/sqlite-installation-setup"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t11.3",
             "title": "Connecting Python with SQLite",
-            "sortOrder": 3
+            "sortOrder": 53,
+            "slug": "connecting-python-with-sqlite",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/connecting-python-with-sqlite"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t11.4",
             "title": "CRUD Operations",
-            "sortOrder": 4
+            "sortOrder": 54,
+            "slug": "crud-operations",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/crud-operations"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t11.5",
             "title": "Project: Student Records Database",
-            "sortOrder": 5
+            "sortOrder": 55,
+            "slug": "project-student-records-database",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-student-records-database"
+              }
+            ]
           }
         ]
       },
@@ -4470,27 +4853,62 @@
           {
             "id": "python-for-intermediate-t12.1",
             "title": "Why Use Virtual Environments",
-            "sortOrder": 1
+            "sortOrder": 56,
+            "slug": "why-use-virtual-environments",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/why-use-virtual-environments"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t12.2",
             "title": "Creating Virtual Environments",
-            "sortOrder": 2
+            "sortOrder": 57,
+            "slug": "creating-virtual-environments",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/creating-virtual-environments"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t12.3",
             "title": "Using pip for Package Management",
-            "sortOrder": 3
+            "sortOrder": 58,
+            "slug": "using-pip-for-package-management",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/using-pip-for-package-management"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t12.4",
             "title": "Requirements.txt",
-            "sortOrder": 4
+            "sortOrder": 59,
+            "slug": "requirements-txt",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/requirements-txt"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t12.5",
             "title": "Project: Package-Ready Mini App",
-            "sortOrder": 5
+            "sortOrder": 60,
+            "slug": "project-package-ready-mini-app",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-package-ready-mini-app"
+              }
+            ]
           }
         ]
       },
@@ -4502,27 +4920,62 @@
           {
             "id": "python-for-intermediate-t13.1",
             "title": "Introduction to Matplotlib",
-            "sortOrder": 1
+            "sortOrder": 61,
+            "slug": "introduction-to-matplotlib",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/introduction-to-matplotlib"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t13.2",
             "title": "Line, Bar and Pie Charts",
-            "sortOrder": 2
+            "sortOrder": 62,
+            "slug": "line-bar-and-pie-charts",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/line-bar-and-pie-charts"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t13.3",
             "title": "Customizing Graphs",
-            "sortOrder": 3
+            "sortOrder": 63,
+            "slug": "customizing-graphs",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/customizing-graphs"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t13.4",
             "title": "Seaborn Basics",
-            "sortOrder": 4
+            "sortOrder": 64,
+            "slug": "seaborn-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/seaborn-basics"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t13.5",
             "title": "Project: Visualizing Sales Data",
-            "sortOrder": 5
+            "sortOrder": 65,
+            "slug": "project-visualizing-sales-data",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-visualizing-sales-data"
+              }
+            ]
           }
         ]
       },
@@ -4534,17 +4987,38 @@
           {
             "id": "python-for-intermediate-t14.1",
             "title": "Project 1: Expense Tracker with CSV",
-            "sortOrder": 1
+            "sortOrder": 66,
+            "slug": "project-1-expense-tracker-with-csv",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-1-expense-tracker-with-csv"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t14.2",
             "title": "Project 2: API-based Dictionary App",
-            "sortOrder": 2
+            "sortOrder": 67,
+            "slug": "project-2-api-based-dictionary-app",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-2-api-based-dictionary-app"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t14.3",
             "title": "Project 3: CLI-based To-do App",
-            "sortOrder": 3
+            "sortOrder": 68,
+            "slug": "project-3-cli-based-to-do-app",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/project-3-cli-based-to-do-app"
+              }
+            ]
           }
         ]
       },
@@ -4556,12 +5030,26 @@
           {
             "id": "python-for-intermediate-t15.1",
             "title": "Library Management System",
-            "sortOrder": 1
+            "sortOrder": 69,
+            "slug": "library-management-system",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/library-management-system"
+              }
+            ]
           },
           {
             "id": "python-for-intermediate-t15.2",
             "title": "Student Report Card Generator",
-            "sortOrder": 2
+            "sortOrder": 70,
+            "slug": "student-report-card-generator",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-intermediate/student-report-card-generator"
+              }
+            ]
           }
         ]
       }
@@ -4599,27 +5087,62 @@
           {
             "id": "python-for-advanced-t1.1",
             "title": "Class and Static Methods Advanced",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "class-and-static-methods-advanced",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/class-and-static-methods-advanced"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t1.2",
             "title": "Property Decorator",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "property-decorator",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/property-decorator"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t1.3",
             "title": "Method Resolution Order (MRO)",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "method-resolution-order-mro",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/method-resolution-order-mro"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t1.4",
             "title": "Multiple Inheritance",
-            "sortOrder": 4
+            "sortOrder": 4,
+            "slug": "multiple-inheritance",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/multiple-inheritance"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t1.5",
             "title": "Project: Employee Management System",
-            "sortOrder": 5
+            "sortOrder": 5,
+            "slug": "project-employee-management-system",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-employee-management-system"
+              }
+            ]
           }
         ]
       },
@@ -4631,27 +5154,62 @@
           {
             "id": "python-for-advanced-t2.1",
             "title": "Introduction to Dunder Methods",
-            "sortOrder": 1
+            "sortOrder": 6,
+            "slug": "introduction-to-dunder-methods",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/introduction-to-dunder-methods"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t2.2",
             "title": "__str__, __repr__, __len__",
-            "sortOrder": 2
+            "sortOrder": 7,
+            "slug": "str-repr-len",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/str-repr-len"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t2.3",
             "title": "Operator Overloading",
-            "sortOrder": 3
+            "sortOrder": 8,
+            "slug": "operator-overloading",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/operator-overloading"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t2.4",
             "title": "Customizing Classes with Magic Methods",
-            "sortOrder": 4
+            "sortOrder": 9,
+            "slug": "customizing-classes-with-magic-methods",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/customizing-classes-with-magic-methods"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t2.5",
             "title": "Project: Vector Class with Overloaded Operators",
-            "sortOrder": 5
+            "sortOrder": 10,
+            "slug": "project-vector-class-with-overloaded-operators",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-vector-class-with-overloaded-operators"
+              }
+            ]
           }
         ]
       },
@@ -4663,27 +5221,62 @@
           {
             "id": "python-for-advanced-t3.1",
             "title": "Function Decorators Deep Dive",
-            "sortOrder": 1
+            "sortOrder": 11,
+            "slug": "function-decorators-deep-dive",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/function-decorators-deep-dive"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t3.2",
             "title": "Class Decorators",
-            "sortOrder": 2
+            "sortOrder": 12,
+            "slug": "class-decorators",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/class-decorators"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t3.3",
             "title": "Context Managers with __enter__ and __exit__",
-            "sortOrder": 3
+            "sortOrder": 13,
+            "slug": "context-managers-with-enter-and-exit",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/context-managers-with-enter-and-exit"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t3.4",
             "title": "Using contextlib",
-            "sortOrder": 4
+            "sortOrder": 14,
+            "slug": "using-contextlib",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/using-contextlib"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t3.5",
             "title": "Project: Resource Manager with Context Manager",
-            "sortOrder": 5
+            "sortOrder": 15,
+            "slug": "project-resource-manager-with-context-manager",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-resource-manager-with-context-manager"
+              }
+            ]
           }
         ]
       },
@@ -4695,22 +5288,50 @@
           {
             "id": "python-for-advanced-t4.1",
             "title": "Itertools for Iteration Tools",
-            "sortOrder": 1
+            "sortOrder": 16,
+            "slug": "itertools-for-iteration-tools",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/itertools-for-iteration-tools"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t4.2",
             "title": "functools for Higher-Order Functions",
-            "sortOrder": 2
+            "sortOrder": 17,
+            "slug": "functools-for-higher-order-functions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/functools-for-higher-order-functions"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t4.3",
             "title": "lru_cache and Partial Functions",
-            "sortOrder": 3
+            "sortOrder": 18,
+            "slug": "lru-cache-and-partial-functions",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/lru-cache-and-partial-functions"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t4.4",
             "title": "Project: Data Pipeline with Itertools",
-            "sortOrder": 4
+            "sortOrder": 19,
+            "slug": "project-data-pipeline-with-itertools",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-data-pipeline-with-itertools"
+              }
+            ]
           }
         ]
       },
@@ -4722,22 +5343,50 @@
           {
             "id": "python-for-advanced-t5.1",
             "title": "Advanced Generator Patterns",
-            "sortOrder": 1
+            "sortOrder": 20,
+            "slug": "advanced-generator-patterns",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/advanced-generator-patterns"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t5.2",
             "title": "Yield from Expression",
-            "sortOrder": 2
+            "sortOrder": 21,
+            "slug": "yield-from-expression",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/yield-from-expression"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t5.3",
             "title": "Coroutines with send()",
-            "sortOrder": 3
+            "sortOrder": 22,
+            "slug": "coroutines-with-send",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/coroutines-with-send"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t5.4",
             "title": "Project: Stream Data Processor",
-            "sortOrder": 4
+            "sortOrder": 23,
+            "slug": "project-stream-data-processor",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-stream-data-processor"
+              }
+            ]
           }
         ]
       },
@@ -4749,22 +5398,50 @@
           {
             "id": "python-for-advanced-t6.1",
             "title": "Threading Module Basics",
-            "sortOrder": 1
+            "sortOrder": 24,
+            "slug": "threading-module-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/threading-module-basics"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t6.2",
             "title": "Thread Synchronization",
-            "sortOrder": 2
+            "sortOrder": 25,
+            "slug": "thread-synchronization",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/thread-synchronization"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t6.3",
             "title": "Daemon vs Non-Daemon Threads",
-            "sortOrder": 3
+            "sortOrder": 26,
+            "slug": "daemon-vs-non-daemon-threads",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/daemon-vs-non-daemon-threads"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t6.4",
             "title": "Project: Multithreaded Downloader",
-            "sortOrder": 4
+            "sortOrder": 27,
+            "slug": "project-multithreaded-downloader",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-multithreaded-downloader"
+              }
+            ]
           }
         ]
       },
@@ -4776,22 +5453,50 @@
           {
             "id": "python-for-advanced-t7.1",
             "title": "Multiprocessing Basics",
-            "sortOrder": 1
+            "sortOrder": 28,
+            "slug": "multiprocessing-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/multiprocessing-basics"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t7.2",
             "title": "Process vs Thread",
-            "sortOrder": 2
+            "sortOrder": 29,
+            "slug": "process-vs-thread",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/process-vs-thread"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t7.3",
             "title": "Shared Memory & Queues",
-            "sortOrder": 3
+            "sortOrder": 30,
+            "slug": "shared-memory-queues",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/shared-memory-queues"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t7.4",
             "title": "Project: Parallel File Processor",
-            "sortOrder": 4
+            "sortOrder": 31,
+            "slug": "project-parallel-file-processor",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-parallel-file-processor"
+              }
+            ]
           }
         ]
       },
@@ -4803,22 +5508,50 @@
           {
             "id": "python-for-advanced-t8.1",
             "title": "Introduction to Asyncio",
-            "sortOrder": 1
+            "sortOrder": 32,
+            "slug": "introduction-to-asyncio",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/introduction-to-asyncio"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t8.2",
             "title": "Async and Await Syntax",
-            "sortOrder": 2
+            "sortOrder": 33,
+            "slug": "async-and-await-syntax",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/async-and-await-syntax"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t8.3",
             "title": "Creating and Managing Tasks",
-            "sortOrder": 3
+            "sortOrder": 34,
+            "slug": "creating-and-managing-tasks",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/creating-and-managing-tasks"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t8.4",
             "title": "Project: Async Web Scraper",
-            "sortOrder": 4
+            "sortOrder": 35,
+            "slug": "project-async-web-scraper",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-async-web-scraper"
+              }
+            ]
           }
         ]
       },
@@ -4830,22 +5563,50 @@
           {
             "id": "python-for-advanced-t9.1",
             "title": "SQLAlchemy ORM Basics",
-            "sortOrder": 1
+            "sortOrder": 36,
+            "slug": "sqlalchemy-orm-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/sqlalchemy-orm-basics"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t9.2",
             "title": "Relationships in Databases",
-            "sortOrder": 2
+            "sortOrder": 37,
+            "slug": "relationships-in-databases",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/relationships-in-databases"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t9.3",
             "title": "Transactions and Rollbacks",
-            "sortOrder": 3
+            "sortOrder": 38,
+            "slug": "transactions-and-rollbacks",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/transactions-and-rollbacks"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t9.4",
             "title": "Project: Blogging Platform Database",
-            "sortOrder": 4
+            "sortOrder": 39,
+            "slug": "project-blogging-platform-database",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-blogging-platform-database"
+              }
+            ]
           }
         ]
       },
@@ -4857,22 +5618,50 @@
           {
             "id": "python-for-advanced-t10.1",
             "title": "Socket Programming Basics",
-            "sortOrder": 1
+            "sortOrder": 40,
+            "slug": "socket-programming-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/socket-programming-basics"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t10.2",
             "title": "TCP vs UDP",
-            "sortOrder": 2
+            "sortOrder": 41,
+            "slug": "tcp-vs-udp",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/tcp-vs-udp"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t10.3",
             "title": "Building a Chat Server",
-            "sortOrder": 3
+            "sortOrder": 42,
+            "slug": "building-a-chat-server",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/building-a-chat-server"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t10.4",
             "title": "Project: Simple Client-Server Application",
-            "sortOrder": 4
+            "sortOrder": 43,
+            "slug": "project-simple-client-server-application",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-simple-client-server-application"
+              }
+            ]
           }
         ]
       },
@@ -4884,22 +5673,50 @@
           {
             "id": "python-for-advanced-t11.1",
             "title": "Regex Patterns and Groups",
-            "sortOrder": 1
+            "sortOrder": 44,
+            "slug": "regex-patterns-and-groups",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/regex-patterns-and-groups"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t11.2",
             "title": "Greedy vs Non-Greedy Matching",
-            "sortOrder": 2
+            "sortOrder": 45,
+            "slug": "greedy-vs-non-greedy-matching",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/greedy-vs-non-greedy-matching"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t11.3",
             "title": "Substitution and Splitting",
-            "sortOrder": 3
+            "sortOrder": 46,
+            "slug": "substitution-and-splitting",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/substitution-and-splitting"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t11.4",
             "title": "Project: Log File Analyzer",
-            "sortOrder": 4
+            "sortOrder": 47,
+            "slug": "project-log-file-analyzer",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-log-file-analyzer"
+              }
+            ]
           }
         ]
       },
@@ -4911,22 +5728,50 @@
           {
             "id": "python-for-advanced-t12.1",
             "title": "Pickle Module",
-            "sortOrder": 1
+            "sortOrder": 48,
+            "slug": "pickle-module",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/pickle-module"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t12.2",
             "title": "Working with JSON",
-            "sortOrder": 2
+            "sortOrder": 49,
+            "slug": "working-with-json",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/working-with-json"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t12.3",
             "title": "Working with YAML",
-            "sortOrder": 3
+            "sortOrder": 50,
+            "slug": "working-with-yaml",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/working-with-yaml"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t12.4",
             "title": "Project: Config File Manager",
-            "sortOrder": 4
+            "sortOrder": 51,
+            "slug": "project-config-file-manager",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-config-file-manager"
+              }
+            ]
           }
         ]
       },
@@ -4938,27 +5783,62 @@
           {
             "id": "python-for-advanced-t13.1",
             "title": "Unit Testing with unittest",
-            "sortOrder": 1
+            "sortOrder": 52,
+            "slug": "unit-testing-with-unittest",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/unit-testing-with-unittest"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t13.2",
             "title": "Pytest for Advanced Testing",
-            "sortOrder": 2
+            "sortOrder": 53,
+            "slug": "pytest-for-advanced-testing",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/pytest-for-advanced-testing"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t13.3",
             "title": "Mocking and Fixtures",
-            "sortOrder": 3
+            "sortOrder": 54,
+            "slug": "mocking-and-fixtures",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/mocking-and-fixtures"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t13.4",
             "title": "Test-Driven Development",
-            "sortOrder": 4
+            "sortOrder": 55,
+            "slug": "test-driven-development",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/test-driven-development"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t13.5",
             "title": "Project: Tested Calculator Application",
-            "sortOrder": 5
+            "sortOrder": 56,
+            "slug": "project-tested-calculator-application",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-tested-calculator-application"
+              }
+            ]
           }
         ]
       },
@@ -4970,22 +5850,50 @@
           {
             "id": "python-for-advanced-t14.1",
             "title": "Tkinter Basics",
-            "sortOrder": 1
+            "sortOrder": 57,
+            "slug": "tkinter-basics",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/tkinter-basics"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t14.2",
             "title": "Common Widgets",
-            "sortOrder": 2
+            "sortOrder": 58,
+            "slug": "common-widgets",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/common-widgets"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t14.3",
             "title": "Event Handling",
-            "sortOrder": 3
+            "sortOrder": 59,
+            "slug": "event-handling",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/event-handling"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t14.4",
             "title": "Project: GUI-based To-Do App",
-            "sortOrder": 4
+            "sortOrder": 60,
+            "slug": "project-gui-based-to-do-app",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-gui-based-to-do-app"
+              }
+            ]
           }
         ]
       },
@@ -4997,25 +5905,43 @@
           {
             "id": "python-for-advanced-t15.1",
             "title": "Project 1: Inventory Management System",
-            "sortOrder": 1
+            "sortOrder": 61,
+            "slug": "project-1-inventory-management-system",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-1-inventory-management-system"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t15.2",
             "title": "Project 2: API-based Weather Dashboard",
-            "sortOrder": 2
+            "sortOrder": 62,
+            "slug": "project-2-api-based-weather-dashboard",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-2-api-based-weather-dashboard"
+              }
+            ]
           },
           {
             "id": "python-for-advanced-t15.3",
             "title": "Project 3: Personal Finance Tracker with Database",
-            "sortOrder": 3
+            "sortOrder": 63,
+            "slug": "project-3-personal-finance-tracker-with-database",
+            "notes": [
+              {
+                "title": "Tutorial & Notes",
+                "url": "/tutorials/python-for-advanced/project-3-personal-finance-tracker-with-database"
+              }
+            ]
           }
         ]
       }
     ]
   },
-  
-  
-
   {
     "id": "course-javascript-for-beginners",
     "status": "PUBLISH",
@@ -8074,18 +9000,18 @@
       }
     ]
   },
-
   {
     "id": "course-sql-for-beginners",
     "status": "PUBLISH",
-    "title": "SQL for Beginners",
+    "title": "SQL & MySQL for Beginners",
     "slug": "sql-for-beginners",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Learn SQL from scratch: database fundamentals, queries, joins, aggregate functions, keys, constraints, normalization, and hands-on mini projects.",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop",
+    "shortDescription": "Master SQL fundamentals and MySQL database administration from scratch. Learn relational concepts, database and table lifecycle (DDL), constraints, DML manipulation, filtering (WHERE), sorting, scalar functions, grouping, and database backups.",
     "categories": [
-      "Web Development",
       "Database",
-      "SQL"
+      "SQL",
+      "MySQL",
+      "Backend"
     ],
     "level": "Beginner",
     "language": [
@@ -8097,203 +9023,845 @@
       "unit": "MONTHS"
     },
     "certificate": true,
-    "mode": "ONLINE",
+    "mode": "BOTH",
     "courseType": "SINGLE",
     "chapters": [
       {
-        "id": "sql-for-beginners-ch1",
-        "title": "Introduction to Databases",
+        "id": "sql-beg-ch1",
+        "title": "Database Fundamentals & RDBMS Architecture",
         "sortOrder": 1,
         "topics": [
           {
-            "id": "sql-for-beginners-t1.1",
-            "title": "What is a Database?",
+            "id": "sql-beg-t1.1",
+            "title": "What is a Database & RDBMS",
+            "slug": "what-is-a-database-and-rdbms",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t1.2",
+            "id": "sql-beg-t1.2",
             "title": "Relational Database Concepts",
+            "slug": "relational-database-concepts",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t1.3",
-            "title": "Tables, Rows, Columns",
+            "id": "sql-beg-t1.3",
+            "title": "SQL vs NoSQL Overview",
+            "slug": "sql-vs-nosql-overview",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t1.4",
+            "title": "MySQL Architecture & Client-Server Model",
+            "slug": "mysql-architecture-and-overview",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch2",
-        "title": "Basic SQL Queries",
+        "id": "sql-beg-ch2",
+        "title": "MySQL Installation & Tooling Setup",
         "sortOrder": 2,
         "topics": [
           {
-            "id": "sql-for-beginners-t2.1",
-            "title": "SELECT Statement",
+            "id": "sql-beg-t2.1",
+            "title": "Installing MySQL Server",
+            "slug": "installing-mysql-server",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t2.2",
-            "title": "Filtering Data with WHERE",
+            "id": "sql-beg-t2.2",
+            "title": "MySQL Command-Line Client (CLI)",
+            "slug": "mysql-command-line-client-cli",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t2.3",
-            "title": "Sorting Data with ORDER BY",
+            "id": "sql-beg-t2.3",
+            "title": "Setting Up MySQL Workbench",
+            "slug": "mysql-workbench-setup",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t2.4",
+            "title": "Writing & Running Your First SQL Script",
+            "slug": "executing-first-sql-script",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch3",
-        "title": "SQL Functions",
+        "id": "sql-beg-ch3",
+        "title": "Database Administration Basics (MySQL DDL)",
         "sortOrder": 3,
         "topics": [
           {
-            "id": "sql-for-beginners-t3.1",
-            "title": "Aggregate Functions: COUNT, SUM, AVG",
+            "id": "sql-beg-t3.1",
+            "title": "Creating & Listing Databases",
+            "slug": "creating-and-listing-databases",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t3.2",
-            "title": "MIN & MAX Functions",
+            "id": "sql-beg-t3.2",
+            "title": "Selecting & Dropping Databases",
+            "slug": "selecting-and-dropping-databases",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t3.3",
-            "title": "String Functions in SQL",
+            "id": "sql-beg-t3.3",
+            "title": "Character Sets & Collations (utf8mb4)",
+            "slug": "character-sets-and-collations",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t3.4",
+            "title": "Database Metadata & Server Status",
+            "slug": "database-metadata-and-status",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch4",
-        "title": "Data Manipulation",
+        "id": "sql-beg-ch4",
+        "title": "MySQL Data Types in Depth",
         "sortOrder": 4,
         "topics": [
           {
-            "id": "sql-for-beginners-t4.1",
-            "title": "INSERT INTO",
+            "id": "sql-beg-t4.1",
+            "title": "Numeric Data Types",
+            "slug": "numeric-data-types",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t4.2",
-            "title": "UPDATE Statement",
+            "id": "sql-beg-t4.2",
+            "title": "String & Text Types",
+            "slug": "string-and-text-types",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t4.3",
-            "title": "DELETE Statement",
+            "id": "sql-beg-t4.3",
+            "title": "Date & Time Types",
+            "slug": "date-and-time-types",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t4.4",
+            "title": "Specialized Types: ENUM, BOOLEAN, JSON",
+            "slug": "specialized-data-types",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch5",
-        "title": "Table Constraints & Keys",
+        "id": "sql-beg-ch5",
+        "title": "Table Creation & Management (DDL)",
         "sortOrder": 5,
         "topics": [
           {
-            "id": "sql-for-beginners-t5.1",
-            "title": "Primary Key & Foreign Key",
+            "id": "sql-beg-t5.1",
+            "title": "Creating Tables Syntax & Rules",
+            "slug": "creating-tables-syntax-and-rules",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t5.2",
-            "title": "Unique, Not Null, Default",
+            "id": "sql-beg-t5.2",
+            "title": "Inspecting Tables with DESCRIBE & SHOW CREATE",
+            "slug": "inspecting-tables",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t5.3",
-            "title": "Auto Increment & Index",
+            "id": "sql-beg-t5.3",
+            "title": "Modifying Tables with ALTER TABLE",
+            "slug": "altering-tables-add-drop-modify",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t5.4",
+            "title": "Truncating vs Dropping Tables",
+            "slug": "truncating-and-dropping-tables",
+            "sortOrder": 4
+          },
+          {
+            "id": "sql-beg-t5.5",
+            "title": "MySQL Storage Engines: InnoDB vs MyISAM",
+            "slug": "mysql-storage-engines-innodb-myisam",
+            "sortOrder": 5
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch6",
-        "title": "Joins",
+        "id": "sql-beg-ch6",
+        "title": "Data Integrity & Table Constraints",
         "sortOrder": 6,
         "topics": [
           {
-            "id": "sql-for-beginners-t6.1",
-            "title": "INNER JOIN",
+            "id": "sql-beg-t6.1",
+            "title": "Primary Key & AUTO_INCREMENT",
+            "slug": "primary-key-and-auto-increment",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t6.2",
-            "title": "LEFT, RIGHT & FULL JOIN",
+            "id": "sql-beg-t6.2",
+            "title": "Foreign Key & Referential Integrity",
+            "slug": "foreign-key-referential-integrity",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t6.3",
-            "title": "Self Join & Cross Join",
+            "id": "sql-beg-t6.3",
+            "title": "NOT NULL and DEFAULT Constraints",
+            "slug": "not-null-and-default-constraints",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t6.4",
+            "title": "UNIQUE Constraint & Candidate Keys",
+            "slug": "unique-constraint-candidate-keys",
+            "sortOrder": 4
+          },
+          {
+            "id": "sql-beg-t6.5",
+            "title": "CHECK Constraints in MySQL",
+            "slug": "check-constraints-in-mysql",
+            "sortOrder": 5
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch7",
-        "title": "Grouping Data",
+        "id": "sql-beg-ch7",
+        "title": "Data Manipulation Language (DML)",
         "sortOrder": 7,
         "topics": [
           {
-            "id": "sql-for-beginners-t7.1",
-            "title": "GROUP BY Clause",
+            "id": "sql-beg-t7.1",
+            "title": "Inserting Records with INSERT INTO",
+            "slug": "inserting-data-insert-into",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t7.2",
-            "title": "HAVING Clause",
+            "id": "sql-beg-t7.2",
+            "title": "INSERT IGNORE & ON DUPLICATE KEY UPDATE",
+            "slug": "insert-ignore-and-on-duplicate-key",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t7.3",
-            "title": "Combining GROUP BY with Functions",
+            "id": "sql-beg-t7.3",
+            "title": "Modifying Records with UPDATE",
+            "slug": "updating-records-update-statement",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t7.4",
+            "title": "Removing Records with DELETE vs TRUNCATE",
+            "slug": "deleting-records-delete-statement",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch8",
-        "title": "Normalization",
+        "id": "sql-beg-ch8",
+        "title": "Data Querying Basics (DQL)",
         "sortOrder": 8,
         "topics": [
           {
-            "id": "sql-for-beginners-t8.1",
-            "title": "Introduction to Normalization",
+            "id": "sql-beg-t8.1",
+            "title": "SELECT Statement & Column Aliases",
+            "slug": "select-statement-and-aliases",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t8.2",
-            "title": "1NF, 2NF, 3NF Explained",
+            "id": "sql-beg-t8.2",
+            "title": "Filtering Rows with WHERE Clause",
+            "slug": "filtering-with-where-clause",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t8.3",
-            "title": "Designing Efficient Tables",
+            "id": "sql-beg-t8.3",
+            "title": "Comparison Operators in SQL",
+            "slug": "comparison-operators",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t8.4",
+            "title": "Logical Operators: AND, OR, NOT",
+            "slug": "logical-operators-and-or-not",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-beg-ch9",
+        "title": "Advanced Filtering & Searching",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "sql-beg-t9.1",
+            "title": "Range Filtering with BETWEEN",
+            "slug": "range-filtering-between",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-beg-t9.2",
+            "title": "Membership Filtering with IN Operator",
+            "slug": "membership-testing-in-operator",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-beg-t9.3",
+            "title": "Pattern Matching with LIKE & Wildcards",
+            "slug": "pattern-matching-like-wildcards",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t9.4",
+            "title": "Handling NULL Values (IS NULL)",
+            "slug": "handling-null-values-is-null",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-beg-ch10",
+        "title": "Sorting, Limiting & Pagination",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "sql-beg-t10.1",
+            "title": "Sorting Data with ORDER BY",
+            "slug": "sorting-with-order-by",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-beg-t10.2",
+            "title": "Multi-Column Sorting",
+            "slug": "multi-column-sorting",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-beg-t10.3",
+            "title": "Restricting Rows with LIMIT",
+            "slug": "limiting-results-limit",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t10.4",
+            "title": "Pagination with LIMIT and OFFSET",
+            "slug": "pagination-with-limit-and-offset",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-beg-ch11",
+        "title": "SQL Built-in Scalar Functions",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "sql-beg-t11.1",
+            "title": "SQL String Functions",
+            "slug": "string-functions",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-beg-t11.2",
+            "title": "Numeric & Math Functions",
+            "slug": "numeric-and-math-functions",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-beg-t11.3",
+            "title": "Date & Time Functions",
+            "slug": "date-and-time-functions",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t11.4",
+            "title": "Control Flow Functions (IF, IFNULL, COALESCE)",
+            "slug": "control-flow-functions",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-beg-ch12",
+        "title": "Aggregate Functions & Grouping",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "sql-beg-t12.1",
+            "title": "Aggregate Functions: COUNT, SUM, AVG, MIN, MAX",
+            "slug": "aggregate-functions-count-sum-avg",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-beg-t12.2",
+            "title": "Grouping Data with GROUP BY",
+            "slug": "grouping-data-with-group-by",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-beg-t12.3",
+            "title": "Filtering Groups with HAVING vs WHERE",
+            "slug": "filtering-groups-with-having",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-beg-t12.4",
+            "title": "Using DISTINCT with Aggregate Functions",
+            "slug": "distinct-aggregates-and-rules",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-beg-ch13",
+        "title": "Database Backup, Export & Import",
+        "sortOrder": 13,
+        "topics": [
+          {
+            "id": "sql-beg-t13.1",
+            "title": "Database Backups with mysqldump",
+            "slug": "exporting-databases-with-mysqldump",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-beg-t13.2",
+            "title": "Restoring Databases & Running SQL Dump Scripts",
+            "slug": "importing-sql-scripts",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-beg-t13.3",
+            "title": "Exporting & Importing CSV Data",
+            "slug": "exporting-and-importing-csv-data",
             "sortOrder": 3
           }
         ]
       },
       {
-        "id": "sql-for-beginners-ch9",
-        "title": "Mini Projects",
-        "sortOrder": 9,
+        "id": "sql-beg-ch14",
+        "title": "Practical Capstone Projects",
+        "sortOrder": 14,
         "topics": [
           {
-            "id": "sql-for-beginners-t9.1",
-            "title": "Student Management Database",
+            "id": "sql-beg-t14.1",
+            "title": "Project 1: Student Information System Database",
+            "slug": "project-student-information-system",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-beginners-t9.2",
-            "title": "Inventory Management Database",
+            "id": "sql-beg-t14.2",
+            "title": "Project 2: Retail Store Inventory Management System",
+            "slug": "project-retail-inventory-management",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-beginners-t9.3",
-            "title": "Simple Blog Database",
+            "id": "sql-beg-t14.3",
+            "title": "Project 3: Library Book Lending & Member Tracking System",
+            "slug": "project-library-management-system",
+            "sortOrder": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-sql-for-intermediate",
+    "status": "PUBLISH",
+    "title": "SQL & MySQL for Intermediate",
+    "slug": "sql-for-intermediate",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
+    "shortDescription": "Take your SQL and MySQL skills to the professional level. Master multi-table relational design, comprehensive SQL Joins (Inner, Left, Right, Full, Cross, Self), Set operations, subqueries, conditional logic, 1NF-3NF normalization, views, CTEs, window functions, ACID transactions, and MySQL user security.",
+    "categories": [
+      "Database",
+      "SQL",
+      "MySQL",
+      "Data Engineering"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "sql-int-ch1",
+        "title": "Multi-Table Relationships & Relational Design",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "sql-int-t1.1",
+            "title": "One-to-One (1:1) Relationships",
+            "slug": "one-to-one-relationships",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t1.2",
+            "title": "One-to-Many (1:N) Relationships",
+            "slug": "one-to-many-relationships",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t1.3",
+            "title": "Many-to-Many (M:N) Relationships & Junction Tables",
+            "slug": "many-to-many-relationships",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t1.4",
+            "title": "Entity-Relationship (ER) Modeling & Schema Diagrams",
+            "slug": "entity-relationship-modeling",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch2",
+        "title": "SQL Joins Masterclass",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "sql-int-t2.1",
+            "title": "INNER JOIN Syntax & Mechanics",
+            "slug": "inner-join-mechanics",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t2.2",
+            "title": "LEFT JOIN (Left Outer Join)",
+            "slug": "left-outer-join",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t2.3",
+            "title": "RIGHT JOIN (Right Outer Join)",
+            "slug": "right-outer-join",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t2.4",
+            "title": "Emulating FULL OUTER JOIN in MySQL",
+            "slug": "emulating-full-outer-join",
+            "sortOrder": 4
+          },
+          {
+            "id": "sql-int-t2.5",
+            "title": "CROSS JOIN & Cartesian Products",
+            "slug": "cross-join-cartesian-products",
+            "sortOrder": 5
+          },
+          {
+            "id": "sql-int-t2.6",
+            "title": "SELF JOIN for Hierarchical Structures",
+            "slug": "self-join-hierarchical-data",
+            "sortOrder": 6
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch3",
+        "title": "Set Operations in SQL",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "sql-int-t3.1",
+            "title": "Combining Results with UNION & UNION ALL",
+            "slug": "union-and-union-all",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t3.2",
+            "title": "Emulating INTERSECT in MySQL",
+            "slug": "emulating-intersect-in-mysql",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t3.3",
+            "title": "Emulating EXCEPT / MINUS in MySQL",
+            "slug": "emulating-except-minus-in-mysql",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch4",
+        "title": "Subqueries & Nested Queries",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "sql-int-t4.1",
+            "title": "Single-Row & Multi-Row Subqueries",
+            "slug": "single-and-multi-row-subqueries",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t4.2",
+            "title": "Subqueries in SELECT, FROM & WHERE",
+            "slug": "subqueries-in-select-from-where",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t4.3",
+            "title": "Correlated Subqueries",
+            "slug": "correlated-subqueries",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t4.4",
+            "title": "Semi-Joins & Anti-Joins with EXISTS & NOT EXISTS",
+            "slug": "exists-and-not-exists",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch5",
+        "title": "Conditional Logic & Expressions",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "sql-int-t5.1",
+            "title": "Simple CASE Expression",
+            "slug": "simple-case-expression",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t5.2",
+            "title": "Searched CASE Expression",
+            "slug": "searched-case-expression",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t5.3",
+            "title": "Conditional Aggregation & Data Pivoting",
+            "slug": "conditional-aggregation-pivoting",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t5.4",
+            "title": "Advanced Null Handling with NULLIF & COALESCE",
+            "slug": "nullif-and-coalesce-patterns",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch6",
+        "title": "Database Normalization & Schema Design",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "sql-int-t6.1",
+            "title": "Database Anomalies (Insert, Update, Delete)",
+            "slug": "database-anomalies-overview",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t6.2",
+            "title": "First Normal Form (1NF)",
+            "slug": "first-normal-form-1nf",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t6.3",
+            "title": "Second Normal Form (2NF) & Functional Dependencies",
+            "slug": "second-normal-form-2nf",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t6.4",
+            "title": "Third Normal Form (3NF) & Transitive Dependencies",
+            "slug": "third-normal-form-3nf",
+            "sortOrder": 4
+          },
+          {
+            "id": "sql-int-t6.5",
+            "title": "Denormalization Strategies & Performance Trade-offs",
+            "slug": "denormalization-and-tradeoffs",
+            "sortOrder": 5
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch7",
+        "title": "Database Views",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "sql-int-t7.1",
+            "title": "Creating & Querying Views (CREATE VIEW)",
+            "slug": "creating-and-querying-views",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t7.2",
+            "title": "Updatable Views & WITH CHECK OPTION",
+            "slug": "updatable-views-and-with-check-option",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t7.3",
+            "title": "Managing & Dropping Views",
+            "slug": "altering-and-dropping-views",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t7.4",
+            "title": "Security & Data Abstraction with Views",
+            "slug": "security-and-data-abstraction-views",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch8",
+        "title": "Common Table Expressions (CTEs)",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "sql-int-t8.1",
+            "title": "Non-Recursive CTEs with WITH Clause",
+            "slug": "non-recursive-ctes-with-clause",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t8.2",
+            "title": "Chaining Multiple CTEs in a Single Query",
+            "slug": "multiple-ctes-in-query",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t8.3",
+            "title": "Recursive CTEs for Hierarchies & Trees",
+            "slug": "recursive-ctes-hierarchies",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t8.4",
+            "title": "CTEs vs Subqueries vs Views Comparison",
+            "slug": "ctes-vs-subqueries-vs-views",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch9",
+        "title": "Window Functions Fundamentals",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "sql-int-t9.1",
+            "title": "Window Functions Introduction vs GROUP BY",
+            "slug": "window-functions-introduction",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t9.2",
+            "title": "The OVER() Clause & PARTITION BY Mechanics",
+            "slug": "over-clause-and-partition-by",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t9.3",
+            "title": "Ranking Functions: ROW_NUMBER, RANK, DENSE_RANK",
+            "slug": "ranking-functions-row-number-rank",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t9.4",
+            "title": "Positional Value Functions: LEAD and LAG",
+            "slug": "value-functions-lead-lag",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch10",
+        "title": "Transactions & Concurrency Control",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "sql-int-t10.1",
+            "title": "ACID Properties in Relational Databases",
+            "slug": "acid-properties-in-databases",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t10.2",
+            "title": "Transaction Control: START TRANSACTION, COMMIT, ROLLBACK",
+            "slug": "transaction-control-commit-rollback",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t10.3",
+            "title": "Using SAVEPOINT & ROLLBACK TO SAVEPOINT",
+            "slug": "transaction-savepoints",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t10.4",
+            "title": "Transaction Isolation Levels in MySQL",
+            "slug": "transaction-isolation-levels",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch11",
+        "title": "MySQL User Management & Security",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "sql-int-t11.1",
+            "title": "Creating & Managing MySQL Users",
+            "slug": "creating-and-managing-mysql-users",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t11.2",
+            "title": "Granting Privileges (GRANT Statement)",
+            "slug": "granting-privileges",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t11.3",
+            "title": "Revoking Privileges & FLUSH PRIVILEGES",
+            "slug": "revoking-privileges-and-flushing",
+            "sortOrder": 3
+          },
+          {
+            "id": "sql-int-t11.4",
+            "title": "Password Management & Account Locking",
+            "slug": "password-management-and-account-locking",
+            "sortOrder": 4
+          }
+        ]
+      },
+      {
+        "id": "sql-int-ch12",
+        "title": "Intermediate Capstone Projects",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "sql-int-t12.1",
+            "title": "Project 1: Multi-Table E-Commerce Platform Database",
+            "slug": "project-ecommerce-relational-database",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-int-t12.2",
+            "title": "Project 2: Banking Transaction & Ledger System with ACID Guarantees",
+            "slug": "project-banking-transaction-ledger",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-int-t12.3",
+            "title": "Project 3: Corporate Employee Hierarchy & Departmental Analytics Engine",
+            "slug": "project-employee-hierarchy-analytics",
             "sortOrder": 3
           }
         ]
@@ -8303,14 +9871,16 @@
   {
     "id": "course-sql-for-advanced",
     "status": "PUBLISH",
-    "title": "SQL for Advanced",
+    "title": "SQL & MySQL for Advanced",
     "slug": "sql-for-advanced",
-    "featuredImageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Advance your SQL skills: complex joins, subqueries, views, triggers, stored procedures, transactions, and build real-world database projects.",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop",
+    "shortDescription": "Master enterprise database engineering, deep MySQL internals, and query performance tuning. Learn sliding window frames, B-Tree & InnoDB clustered indexing, EXPLAIN execution plan optimization, stored procedures, stored functions, event triggers, deadlock mitigation, JSON indexing, table partitioning, and high-performance capstones.",
     "categories": [
-      "Web Development",
       "Database",
-      "SQL"
+      "SQL",
+      "MySQL",
+      "Performance Tuning",
+      "DBA"
     ],
     "level": "Advanced",
     "language": [
@@ -8322,216 +9892,335 @@
       "unit": "MONTHS"
     },
     "certificate": true,
-    "mode": "ONLINE",
+    "mode": "BOTH",
     "courseType": "SINGLE",
     "chapters": [
       {
-        "id": "sql-for-advanced-ch1",
-        "title": "Complex Joins",
+        "id": "sql-adv-ch1",
+        "title": "Advanced Window Functions & Frame Specifications",
         "sortOrder": 1,
         "topics": [
           {
-            "id": "sql-for-advanced-t1.1",
-            "title": "Self Join & Multi-table Joins",
+            "id": "sql-adv-t1.1",
+            "title": "Sliding Window Frames: ROWS & RANGE",
+            "slug": "sliding-window-frames-rows-range",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t1.2",
-            "title": "Cross Joins & Natural Joins",
+            "id": "sql-adv-t1.2",
+            "title": "Cumulative Aggregates: Running Totals & Moving Averages",
+            "slug": "cumulative-aggregates-running-totals",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t1.3",
-            "title": "Combining Joins with Subqueries",
+            "id": "sql-adv-t1.3",
+            "title": "Value Boundary Functions: FIRST_VALUE, LAST_VALUE, NTH_VALUE",
+            "slug": "first-value-last-value-nth-value",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t1.4",
+            "title": "Statistical Distribution Functions: NTILE, CUME_DIST, PERCENT_RANK",
+            "slug": "distribution-functions-ntile-percent-rank",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch2",
-        "title": "Subqueries",
+        "id": "sql-adv-ch2",
+        "title": "Indexing Architecture & Deep Internals",
         "sortOrder": 2,
         "topics": [
           {
-            "id": "sql-for-advanced-t2.1",
-            "title": "Scalar & Correlated Subqueries",
+            "id": "sql-adv-t2.1",
+            "title": "B-Tree vs Hash Index Data Structures",
+            "slug": "b-tree-vs-hash-index-internals",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t2.2",
-            "title": "Nested Subqueries",
+            "id": "sql-adv-t2.2",
+            "title": "Clustered vs Secondary Indexes in MySQL InnoDB",
+            "slug": "clustered-vs-secondary-indexes",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t2.3",
-            "title": "Using Subqueries with Joins",
+            "id": "sql-adv-t2.3",
+            "title": "Composite Multi-Column Indexes & Leftmost Prefix Rule",
+            "slug": "composite-indexes-leftmost-prefix",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t2.4",
+            "title": "Covering Indexes & Index Condition Pushdown (ICP)",
+            "slug": "covering-indexes-and-index-condition-pushdown",
+            "sortOrder": 4
+          },
+          {
+            "id": "sql-adv-t2.5",
+            "title": "Full-Text Search Indexes (MATCH ... AGAINST)",
+            "slug": "full-text-search-indexes",
+            "sortOrder": 5
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch3",
-        "title": "Views",
+        "id": "sql-adv-ch3",
+        "title": "Query Optimization & Performance Tuning",
         "sortOrder": 3,
         "topics": [
           {
-            "id": "sql-for-advanced-t3.1",
-            "title": "Creating Views",
+            "id": "sql-adv-t3.1",
+            "title": "Execution Plan Analysis with EXPLAIN & EXPLAIN ANALYZE",
+            "slug": "explain-and-explain-analyze",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t3.2",
-            "title": "Updating Views",
+            "id": "sql-adv-t3.2",
+            "title": "Interpreting EXPLAIN Output (type, key, rows, Extra)",
+            "slug": "interpreting-explain-output",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t3.3",
-            "title": "Using Views in Queries",
+            "id": "sql-adv-t3.3",
+            "title": "Identifying & Fixing Slow Queries & Filesort",
+            "slug": "identifying-and-fixing-slow-queries",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t3.4",
+            "title": "SQL Query Anti-Patterns & Best Practices",
+            "slug": "query-anti-patterns-and-best-practices",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch4",
-        "title": "Stored Procedures",
+        "id": "sql-adv-ch4",
+        "title": "Stored Procedures Masterclass",
         "sortOrder": 4,
         "topics": [
           {
-            "id": "sql-for-advanced-t4.1",
-            "title": "Creating Stored Procedures",
+            "id": "sql-adv-t4.1",
+            "title": "Defining Stored Procedures (DELIMITER //, CREATE PROCEDURE)",
+            "slug": "creating-stored-procedures",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t4.2",
-            "title": "Parameters & Return Values",
+            "id": "sql-adv-t4.2",
+            "title": "Procedure Parameters: IN, OUT, and INOUT",
+            "slug": "procedure-parameters-in-out-inout",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t4.3",
-            "title": "Executing Stored Procedures",
+            "id": "sql-adv-t4.3",
+            "title": "Control Flow: Variables, Branches & Loops",
+            "slug": "control-flow-in-procedures",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t4.4",
+            "title": "Error Handling & Handlers in Stored Programs",
+            "slug": "error-handling-and-handlers",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch5",
-        "title": "Triggers",
+        "id": "sql-adv-ch5",
+        "title": "Stored Functions & Cursors",
         "sortOrder": 5,
         "topics": [
           {
-            "id": "sql-for-advanced-t5.1",
-            "title": "Introduction to Triggers",
+            "id": "sql-adv-t5.1",
+            "title": "Creating User-Defined Functions (CREATE FUNCTION)",
+            "slug": "creating-stored-functions",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t5.2",
-            "title": "Creating Before & After Triggers",
+            "id": "sql-adv-t5.2",
+            "title": "Deterministic vs Non-Deterministic Functions",
+            "slug": "deterministic-vs-non-deterministic",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t5.3",
-            "title": "Trigger Use Cases",
+            "id": "sql-adv-t5.3",
+            "title": "Working with Cursors: Declare, Open, Fetch, Close",
+            "slug": "cursors-in-stored-programs",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t5.4",
+            "title": "Stored Functions vs Stored Procedures Architecture",
+            "slug": "stored-functions-vs-procedures",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch6",
-        "title": "Transactions",
+        "id": "sql-adv-ch6",
+        "title": "Database Triggers",
         "sortOrder": 6,
         "topics": [
           {
-            "id": "sql-for-advanced-t6.1",
-            "title": "BEGIN, COMMIT & ROLLBACK",
+            "id": "sql-adv-t6.1",
+            "title": "Trigger Fundamentals & Event Hooks",
+            "slug": "trigger-architecture-and-events",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t6.2",
-            "title": "Transaction Isolation Levels",
+            "id": "sql-adv-t6.2",
+            "title": "Utilizing OLD and NEW Pseudo-Records",
+            "slug": "old-and-new-pseudo-records",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t6.3",
-            "title": "Handling Concurrency",
+            "id": "sql-adv-t6.3",
+            "title": "Building an Automated Audit Logging System with Triggers",
+            "slug": "implementing-audit-logging-with-triggers",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t6.4",
+            "title": "Trigger Caveats, Cascading Risks & Performance",
+            "slug": "trigger-caveats-and-performance",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch7",
-        "title": "Indexing & Optimization",
+        "id": "sql-adv-ch7",
+        "title": "Database Locking & Deadlock Resolution",
         "sortOrder": 7,
         "topics": [
           {
-            "id": "sql-for-advanced-t7.1",
-            "title": "Creating Indexes",
+            "id": "sql-adv-t7.1",
+            "title": "Shared Locks (FOR SHARE) vs Exclusive Locks (FOR UPDATE)",
+            "slug": "shared-vs-exclusive-locks",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t7.2",
-            "title": "Query Optimization Techniques",
+            "id": "sql-adv-t7.2",
+            "title": "InnoDB Row-Level Locking, Gap Locks & Next-Key Locks",
+            "slug": "row-level-vs-table-level-locking",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t7.3",
-            "title": "Using EXPLAIN for Query Analysis",
+            "id": "sql-adv-t7.3",
+            "title": "Detecting & Mitigating Database Deadlocks",
+            "slug": "detecting-and-resolving-deadlocks",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t7.4",
+            "title": "Optimistic vs Pessimistic Concurrency Architecture",
+            "slug": "optimistic-vs-pessimistic-locking",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch8",
-        "title": "Advanced Constraints",
+        "id": "sql-adv-ch8",
+        "title": "Advanced MySQL Features & JSON Operations",
         "sortOrder": 8,
         "topics": [
           {
-            "id": "sql-for-advanced-t8.1",
-            "title": "CHECK Constraints",
+            "id": "sql-adv-t8.1",
+            "title": "Storing & Querying Native JSON in MySQL",
+            "slug": "native-json-data-type",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t8.2",
-            "title": "Composite Keys",
+            "id": "sql-adv-t8.2",
+            "title": "Modifying JSON Documents (JSON_SET, JSON_INSERT, JSON_REMOVE)",
+            "slug": "modifying-json-documents",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t8.3",
-            "title": "Enforcing Data Integrity",
+            "id": "sql-adv-t8.3",
+            "title": "Indexing JSON via Virtual Generated Columns",
+            "slug": "indexing-json-generated-columns",
             "sortOrder": 3
+          },
+          {
+            "id": "sql-adv-t8.4",
+            "title": "Advanced Analytical JSON Queries",
+            "slug": "window-functions-with-json",
+            "sortOrder": 4
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch9",
-        "title": "Mini Projects",
+        "id": "sql-adv-ch9",
+        "title": "Table Partitioning & Scaling",
         "sortOrder": 9,
         "topics": [
           {
-            "id": "sql-for-advanced-t9.1",
-            "title": "Inventory Management System",
+            "id": "sql-adv-t9.1",
+            "title": "Table Partitioning Principles: Range, List, Hash, Key",
+            "slug": "partitioning-concepts-and-types",
             "sortOrder": 1
           },
           {
-            "id": "sql-for-advanced-t9.2",
-            "title": "E-commerce Database",
+            "id": "sql-adv-t9.2",
+            "title": "Creating & Managing Partitioned Tables",
+            "slug": "managing-partitioned-tables",
             "sortOrder": 2
           },
           {
-            "id": "sql-for-advanced-t9.3",
-            "title": "Student Management System",
+            "id": "sql-adv-t9.3",
+            "title": "Partition Pruning Mechanics & Horizontal Scaling",
+            "slug": "partition-pruning-and-scaling",
             "sortOrder": 3
           }
         ]
       },
       {
-        "id": "sql-for-advanced-ch10",
-        "title": "Final Project",
+        "id": "sql-adv-ch10",
+        "title": "Database Administration & Maintenance",
         "sortOrder": 10,
         "topics": [
           {
-            "id": "sql-for-advanced-t10.1",
-            "title": "Complete Real-world Database Design",
+            "id": "sql-adv-t10.1",
+            "title": "InnoDB Architecture: Buffer Pool, Redo Log, Undo Log",
+            "slug": "innodb-architecture-buffer-pool-redo-undo",
             "sortOrder": 1
+          },
+          {
+            "id": "sql-adv-t10.2",
+            "title": "Database Maintenance: CHECK, ANALYZE & OPTIMIZE TABLE",
+            "slug": "table-maintenance-analyze-optimize",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-adv-t10.3",
+            "title": "Configuring my.cnf, Server Variables & Slow Query Log",
+            "slug": "slow-query-log-and-server-configuration",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "sql-adv-ch11",
+        "title": "Production Capstone Projects",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "sql-adv-t11.1",
+            "title": "Project 1: Fintech High-Performance Transaction Engine",
+            "slug": "project-fintech-transaction-processing-engine",
+            "sortOrder": 1
+          },
+          {
+            "id": "sql-adv-t11.2",
+            "title": "Project 2: Multi-Tenant Analytics Warehouse with Partitioning",
+            "slug": "project-multitenant-analytics-data-warehouse",
+            "sortOrder": 2
+          },
+          {
+            "id": "sql-adv-t11.3",
+            "title": "Project 3: Enterprise Compliance & Automated Event Audit Engine",
+            "slug": "project-enterprise-audit-and-compliance-system",
+            "sortOrder": 3
           }
         ]
       }
@@ -11647,9 +13336,6 @@
       }
     ]
   },
-
-
-
   {
     "id": "course-django-for-backend-development",
     "status": "PUBLISH",
@@ -13236,8 +14922,6 @@
       "course-deployment--hosting-for-backend"
     ]
   },
-
-
   {
     "id": "course-data-analysis-mastery-combo-course--12-months",
     "status": "PUBLISH",
@@ -13277,7 +14961,6 @@
       "course-tableau-for-beginners"
     ]
   },
-
   {
     "id": "course-power-bi-mastery-beginner-to-advanced--3-months",
     "status": "PUBLISH",
@@ -13307,7 +14990,6 @@
       "course-power-bi-for-advanced"
     ]
   },
-
   {
     "id": "course-ms-excel-beginners-to-advanced--6-months",
     "status": "PUBLISH",
@@ -13890,6 +15572,39 @@
           }
         ]
       }
+    ]
+  },
+  {
+    "id": "course-sql-mysql-mastery-beginner-to-advanced--3-months",
+    "status": "PUBLISH",
+    "title": "SQL & MySQL Mastery (Beginner to Advanced) - 3 Months",
+    "slug": "sql-mysql-mastery-beginner-to-advanced--3-months",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop",
+    "shortDescription": "Master SQL and MySQL from complete beginner to enterprise DBA level in 3 months. This comprehensive 3-in-1 combo covers SQL for Beginners, SQL for Intermediate, and SQL for Advanced — encompassing database administration, DDL/DML, complex Joins, Normalization, CTEs, Window Functions, Stored Procedures, Triggers, Indexing, EXPLAIN query tuning, and production capstones.",
+    "categories": [
+      "Database",
+      "SQL",
+      "MySQL",
+      "Data Engineering",
+      "Software Engineering",
+      "Combo"
+    ],
+    "level": "Beginner to Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 3,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "COMBO",
+    "includedCourseIds": [
+      "course-sql-for-beginners",
+      "course-sql-for-intermediate",
+      "course-sql-for-advanced"
     ]
   }
 ]

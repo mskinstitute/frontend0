@@ -98,7 +98,7 @@ export function extractQuizQuestions(markdown: string): {
   correctAnswer: string;
   explanation?: string;
 }[] {
-  const mcqSectionMatch = markdown.match(/# (?:Multiple Choice Questions|MCQs|Practice Quiz)[\s\S]*?(?=# [A-Z]|$)/i);
+  const mcqSectionMatch = markdown.match(/# (?:Multiple Choice Questions|MCQs|Practice Quiz)[\s\S]*?(?=(?:\r?\n# [A-Z])|$)/i);
   if (!mcqSectionMatch) return [];
 
   const sectionText = mcqSectionMatch[0];

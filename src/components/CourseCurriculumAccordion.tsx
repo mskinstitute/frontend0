@@ -42,8 +42,18 @@ function resolveTopicTutorialUrl(
 
   if (cSlug.includes('html5-complete') || (cSlug.includes('html') && !chTitle.includes('css') && !chTitle.includes('tailwind'))) {
     tutorialSlug = 'html5-complete-course';
+  } else if (cSlug.includes('python-for-advanced')) {
+    tutorialSlug = 'python-for-advanced';
+  } else if (cSlug.includes('python-for-intermediate')) {
+    tutorialSlug = 'python-for-intermediate';
   } else if (cSlug.includes('python')) {
     tutorialSlug = 'python-for-beginners';
+  } else if (cSlug.includes('sql-for-advanced')) {
+    tutorialSlug = 'sql-for-advanced';
+  } else if (cSlug.includes('sql-for-intermediate')) {
+    tutorialSlug = 'sql-for-intermediate';
+  } else if (cSlug.includes('sql')) {
+    tutorialSlug = 'sql-for-beginners';
   } else if (cSlug.includes('javascript') || cSlug.includes('react')) {
     tutorialSlug = 'javascript-essentials';
   } else if (cSlug.includes('css-for-advanced')) {

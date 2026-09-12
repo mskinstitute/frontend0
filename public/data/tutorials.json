@@ -7,7 +7,12 @@
     "title": "HTML5",
     "icon": "html",
     "badge": "Beginner to Pro",
-    "tags": ["Beginner to Pro", "frontend", "html5", "web development"],
+    "tags": [
+      "Beginner to Pro",
+      "frontend",
+      "html5",
+      "web development"
+    ],
     "documentationTitle": "HTML5 Complete Course",
     "shortDescription": "Master HTML5 from basics to advanced concepts. Learn document structure, semantic layouts, accessible forms, audio/video media, tables, ARIA, and modern web standards.",
     "lessonsCount": 12,
@@ -18,7 +23,15 @@
     "seo": {
       "title": "HTML5 Complete Course: From Beginner to Pro - MSK Notes | MSK Institute",
       "description": "Learn HTML5 from scratch to pro with structured lessons, code snippets, and quizzes based on the HTML5 Complete Course at MSK Institute.",
-      "keywords": ["html5 complete course", "html tutorial", "learn html5", "html beginner to pro", "html documentation", "html notes", "msk notes"]
+      "keywords": [
+        "html5 complete course",
+        "html tutorial",
+        "learn html5",
+        "html beginner to pro",
+        "html documentation",
+        "html notes",
+        "msk notes"
+      ]
     }
   },
   {
@@ -29,7 +42,13 @@
     "title": "CSS for Beginners",
     "icon": "css",
     "badge": "Beginner (Level 1)",
-    "tags": ["Beginner", "styling", "css", "frontend", "web development"],
+    "tags": [
+      "Beginner",
+      "styling",
+      "css",
+      "frontend",
+      "web development"
+    ],
     "documentationTitle": "CSS for Beginners Complete Course",
     "shortDescription": "Master CSS styling fundamentals from scratch. Learn syntax, selectors, box model, colors, typography, layout fundamentals, and hands-on projects designed for beginners.",
     "lessonsCount": 12,
@@ -40,7 +59,15 @@
     "seo": {
       "title": "CSS for Beginners: Level 1 Course & Notes - MSK Notes | MSK Institute",
       "description": "Learn CSS from scratch with structured lessons, Indian school analogies, code snippets, and quizzes based on the CSS for Beginners course at MSK Institute.",
-      "keywords": ["css for beginners", "css tutorial", "learn css", "css beginner to pro", "css documentation", "css notes", "msk notes"]
+      "keywords": [
+        "css for beginners",
+        "css tutorial",
+        "learn css",
+        "css beginner to pro",
+        "css documentation",
+        "css notes",
+        "msk notes"
+      ]
     }
   },
   {
@@ -51,7 +78,14 @@
     "title": "CSS for Intermediate",
     "icon": "css",
     "badge": "Intermediate (Level 2)",
-    "tags": ["Intermediate", "styling", "css", "flexbox", "grid", "responsive"],
+    "tags": [
+      "Intermediate",
+      "styling",
+      "css",
+      "flexbox",
+      "grid",
+      "responsive"
+    ],
     "documentationTitle": "CSS for Intermediate Complete Course",
     "shortDescription": "Take your CSS skills to the professional level. Master advanced selectors, deep Flexbox, CSS Grid mastery, responsive media queries, keyframe animations, CSS variables, and interactive UI projects.",
     "lessonsCount": 12,
@@ -62,7 +96,15 @@
     "seo": {
       "title": "CSS for Intermediate: Level 2 Course & Notes - MSK Notes | MSK Institute",
       "description": "Learn modern CSS layouts, Flexbox, CSS Grid, media queries, animations, and variables with structured lessons and practice quizzes at MSK Institute.",
-      "keywords": ["css for intermediate", "css grid", "css flexbox", "responsive web design", "css animations", "learn css", "msk notes"]
+      "keywords": [
+        "css for intermediate",
+        "css grid",
+        "css flexbox",
+        "responsive web design",
+        "css animations",
+        "learn css",
+        "msk notes"
+      ]
     }
   },
   {
@@ -73,7 +115,15 @@
     "title": "CSS for Advanced",
     "icon": "css",
     "badge": "Advanced (Level 3)",
-    "tags": ["Advanced", "styling", "css", "3d transforms", "container queries", "performance", "sass"],
+    "tags": [
+      "Advanced",
+      "styling",
+      "css",
+      "3d transforms",
+      "container queries",
+      "performance",
+      "sass"
+    ],
     "documentationTitle": "CSS for Advanced Complete Course",
     "shortDescription": "Master high-performance modern CSS. Dive deep into 3D transforms, perspective, container queries, modern math functions (clamp, min, max), SASS preprocessor, CSS architecture (BEM), Lighthouse optimization, and commercial-grade projects.",
     "lessonsCount": 12,
@@ -84,29 +134,17 @@
     "seo": {
       "title": "CSS for Advanced: Level 3 Course & Notes - MSK Notes | MSK Institute",
       "description": "Master advanced CSS: 3D transforms, container queries, fluid math functions, SASS, CSS architecture, Core Web Vitals, and real-world projects at MSK Institute.",
-      "keywords": ["css for advanced", "advanced css", "css 3d transforms", "container queries", "sass scss", "css architecture", "css performance", "learn css", "msk notes"]
-    }
-  },
-  {
-    "featured": false,
-    "id": "tut-javascript-essentials",
-    "slug": "javascript-essentials",
-    "courseSlug": "javascript-react-frontend-engineering",
-    "title": "JavaScript",
-    "icon": "javascript",
-    "badge": "Beginner",
-    "tags": ["Beginner", "programming"],
-    "documentationTitle": "JavaScript Documentation",
-    "shortDescription": "Learn modern ES6+ JavaScript, DOM manipulation, asynchronous programming, APIs, and modern frontend tools.",
-    "lessonsCount": 12,
-    "totalHours": "45h",
-    "topicsCount": 54,
-    "githubRepo": "github.com/msk-javascript",
-    "updatedAt": "2026-08-28",
-    "seo": {
-      "title": "JavaScript Tutorial - MSK Notes | MSK Institute",
-      "description": "Complete beginner to advanced JavaScript course notes, DOM, and async programming.",
-      "keywords": ["javascript tutorial", "learn javascript", "js es6", "web development"]
+      "keywords": [
+        "css for advanced",
+        "advanced css",
+        "css 3d transforms",
+        "container queries",
+        "sass scss",
+        "css architecture",
+        "css performance",
+        "learn css",
+        "msk notes"
+      ]
     }
   },
   {
@@ -117,7 +155,13 @@
     "title": "Python",
     "icon": "python",
     "badge": "Beginner to Pro",
-    "tags": ["Beginner", "programming", "python", "backend", "scripting"],
+    "tags": [
+      "Beginner",
+      "programming",
+      "python",
+      "backend",
+      "scripting"
+    ],
     "documentationTitle": "Complete Python for Beginners Documentation",
     "shortDescription": "Master Python programming from the ground up in 1 month. Comprehensive guide covering syntax, variables, data structures, control flow, functions, file handling, and 4 practical projects.",
     "lessonsCount": 16,
@@ -128,7 +172,200 @@
     "seo": {
       "title": "Python for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
       "description": "Exhaustive Python for Beginners tutorial notes. Step-by-step curriculum covering syntax, variables, lists, dictionaries, loops, functions, file handling, and real projects.",
-      "keywords": ["python tutorial", "python for beginners", "learn python", "python documentation", "python notes", "python full course"]
+      "keywords": [
+        "python tutorial",
+        "python for beginners",
+        "learn python",
+        "python documentation",
+        "python notes",
+        "python full course"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-python-intermediate",
+    "slug": "python-for-intermediate",
+    "courseSlug": "python-for-intermediate",
+    "title": "Python for Intermediate",
+    "icon": "python",
+    "badge": "Intermediate (Level 2)",
+    "tags": [
+      "Intermediate",
+      "programming",
+      "python",
+      "backend",
+      "oop",
+      "sqlite"
+    ],
+    "documentationTitle": "Python for Intermediate Complete Course",
+    "shortDescription": "Take your Python skills to the professional level. Master advanced comprehensions, closures, decorators, packages, OOP inheritance, exceptions, iterators, REST APIs, logging, SQLite databases, data visualization, and 5 real-world projects.",
+    "lessonsCount": 15,
+    "totalHours": "35h",
+    "topicsCount": 70,
+    "githubRepo": "github.com/msk-institute/python-for-intermediate",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "Python for Intermediate: Level 2 Course & Notes - MSK Notes | MSK Institute",
+      "description": "Master intermediate Python: comprehensions, closures, decorators, OOP, exceptions, generators, APIs, SQLite, and projects with structured lessons and quizzes at MSK Institute.",
+      "keywords": [
+        "python for intermediate",
+        "learn python intermediate",
+        "python decorators",
+        "python oop",
+        "python sqlite",
+        "python apis",
+        "python notes",
+        "msk notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-python-advanced",
+    "slug": "python-for-advanced",
+    "courseSlug": "python-for-advanced",
+    "title": "Python for Advanced",
+    "icon": "python",
+    "badge": "Advanced (Level 3)",
+    "tags": [
+      "Advanced",
+      "programming",
+      "python",
+      "multithreading",
+      "multiprocessing",
+      "asyncio",
+      "metaprogramming"
+    ],
+    "documentationTitle": "Python for Advanced Complete Course",
+    "shortDescription": "Master advanced Python engineering. Master advanced OOP & descriptors, metaclasses, concurrency with threading, multiprocessing & asyncio, networking, socket programming, design patterns, testing with pytest, Cython/C extensions, and production capstone projects.",
+    "lessonsCount": 15,
+    "totalHours": "40h",
+    "topicsCount": 63,
+    "githubRepo": "github.com/msk-institute/python-for-advanced",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "Python for Advanced: Level 3 Course & Notes - MSK Notes | MSK Institute",
+      "description": "Master advanced Python concepts: descriptors, metaclasses, multithreading, multiprocessing, asyncio, sockets, design patterns, and testing at MSK Institute.",
+      "keywords": [
+        "python for advanced",
+        "advanced python tutorial",
+        "python concurrency",
+        "python asyncio",
+        "python multithreading",
+        "python multiprocessing",
+        "python metaclasses",
+        "python notes",
+        "msk notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-sql-beginners",
+    "slug": "sql-for-beginners",
+    "courseSlug": "sql-for-beginners",
+    "title": "SQL & MySQL for Beginners",
+    "icon": "database",
+    "badge": "Beginner (Level 1)",
+    "tags": [
+      "Beginner",
+      "database",
+      "sql",
+      "mysql",
+      "backend"
+    ],
+    "documentationTitle": "Complete SQL & MySQL for Beginners Documentation",
+    "shortDescription": "Master SQL queries and MySQL database administration from the ground up. Learn DDL, DML, constraints, WHERE filtering, scalar functions, grouping, and database backups with 56 structured topics and interactive quizzes.",
+    "lessonsCount": 14,
+    "totalHours": "30h",
+    "topicsCount": 56,
+    "githubRepo": "github.com/msk-institute/sql-for-beginners",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "SQL & MySQL for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Complete SQL and MySQL for Beginners tutorial notes. Master database and table creation, constraints, queries, filtering, sorting, functions, and backups.",
+      "keywords": [
+        "sql tutorial",
+        "sql for beginners",
+        "mysql tutorial",
+        "learn sql",
+        "mysql database tutorial",
+        "sql notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-sql-intermediate",
+    "slug": "sql-for-intermediate",
+    "courseSlug": "sql-for-intermediate",
+    "title": "SQL & MySQL for Intermediate",
+    "icon": "database",
+    "badge": "Intermediate (Level 2)",
+    "tags": [
+      "Intermediate",
+      "database",
+      "sql",
+      "mysql",
+      "joins",
+      "normalization"
+    ],
+    "documentationTitle": "Complete SQL & MySQL for Intermediate Documentation",
+    "shortDescription": "Elevate your database engineering skills. Master relational design, SQL joins masterclass, set operations, subqueries, conditional logic, normalization (1NF-3NF), views, CTEs, window functions, and ACID transactions.",
+    "lessonsCount": 12,
+    "totalHours": "35h",
+    "topicsCount": 49,
+    "githubRepo": "github.com/msk-institute/sql-for-intermediate",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "SQL & MySQL for Intermediate Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Intermediate SQL and MySQL tutorial. Master multi-table Joins, Subqueries, Normalization, Views, CTEs, Window Functions, and ACID transactions with interactive quizzes.",
+      "keywords": [
+        "sql intermediate",
+        "sql joins tutorial",
+        "sql cte tutorial",
+        "mysql normalization",
+        "sql window functions",
+        "sql notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-sql-advanced",
+    "slug": "sql-for-advanced",
+    "courseSlug": "sql-for-advanced",
+    "title": "SQL & MySQL for Advanced",
+    "icon": "database",
+    "badge": "Advanced (Level 3)",
+    "tags": [
+      "Advanced",
+      "database",
+      "sql",
+      "mysql",
+      "indexing",
+      "stored-procedures",
+      "dba"
+    ],
+    "documentationTitle": "Complete SQL & MySQL for Advanced Documentation",
+    "shortDescription": "Master enterprise database architecture and query optimization. Master sliding window frames, B-Tree & clustered indexing, EXPLAIN execution plans, stored procedures, functions, triggers, deadlock resolution, JSON operations, and partitioning.",
+    "lessonsCount": 11,
+    "totalHours": "40h",
+    "topicsCount": 42,
+    "githubRepo": "github.com/msk-institute/sql-for-advanced",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "SQL & MySQL for Advanced Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Advanced SQL and MySQL DBA tutorial. Master indexing, EXPLAIN query optimization, stored procedures, triggers, locking, deadlocks, and partitioning with interactive quizzes.",
+      "keywords": [
+        "advanced sql tutorial",
+        "mysql indexing",
+        "mysql stored procedures",
+        "mysql triggers",
+        "mysql performance tuning",
+        "sql notes"
+      ]
     }
   }
 ]
