@@ -20,19 +20,31 @@ import {
   Briefcase
 } from 'lucide-react';
 import { Course, LiveBatch, StudyMaterial, BlogPost, SearchResultItem } from '@/types';
+import { resolveTopicTutorialUrl, isTutorialCourse } from '@/lib/curriculum-utils';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type FilterCategory = 'all' | 'courses' | 'live' | 'study-material' | 'careers' | 'blogs';
+type FilterCategory = 'all' | 'courses' | 'tutorials' | 'live' | 'study-material' | 'careers' | 'blogs';
+
+const FILTER_CATEGORIES: { id: FilterCategory; label: string }[] = [
+  { id: 'all', label: 'All Resources' },
+  { id: 'courses', label: 'Courses' },
+  { id: 'tutorials', label: 'Tutorials' },
+  { id: 'live', label: 'Live Schedule' },
+  { id: 'study-material', label: 'Study Material' },
+  { id: 'careers', label: 'Internships & Jobs' },
+  { id: 'blogs', label: 'Blogs' },
+];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsContainerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const filterRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
@@ -112,18 +124,90 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const allSearchItems = useMemo<SearchResultItem[]>(() => {
     const items: SearchResultItem[] = [];
 
-    // Courses
+    // Courses, Chapters, and Topics
     courses.forEach((c) => {
       if (c.status === 'PUBLISH') {
+        // 1. Standalone Course
         items.push({
           id: `course-${c.id}`,
           type: 'course',
           title: c.title,
-          description: c.shortDescription || `Level: ${c.level} • Duration: ${c.duration.value} ${c.duration.unit}`,
+          description: c.shortDescription || `Level: ${c.level} • Duration: ${c.duration?.value} ${c.duration?.unit}`,
           category: c.categories?.join(', ') || 'Coding Course',
           url: `/courses/${c.slug}`,
           badge: 'Course',
           actionLabel: 'View Course',
+        });
+
+        const isTutCourse = isTutorialCourse(c.slug);
+
+        // 2. Chapters from Course Curriculum
+        c.chapters?.forEach((ch) => {
+          const topicCount = ch.topics?.length || 0;
+          const firstTopic = ch.topics?.[0];
+
+          if (isTutCourse) {
+            const firstTopicSlug = firstTopic?.slug;
+            const chapterUrl = firstTopicSlug
+              ? `/tutorials/${c.slug}/${firstTopicSlug}`
+              : `/tutorials/${c.slug}`;
+
+            items.push({
+              id: `chapter-${c.slug}-${ch.id}`,
+              type: 'tutorial',
+              title: ch.title,
+              description: `Module ${ch.sortOrder} • ${c.title} (${topicCount} topic${topicCount === 1 ? '' : 's'})`,
+              category: `${c.title} • Module ${ch.sortOrder}`,
+              url: chapterUrl,
+              badge: 'Tutorial',
+              actionLabel: 'Read Chapter',
+            });
+          } else {
+            items.push({
+              id: `chapter-${c.slug}-${ch.id}`,
+              type: 'chapter',
+              title: ch.title,
+              description: `Module ${ch.sortOrder} • ${c.title} (${topicCount} topic${topicCount === 1 ? '' : 's'})`,
+              category: `${c.title} • Module ${ch.sortOrder}`,
+              url: `/courses/${c.slug}#${ch.id}`,
+              badge: 'Chapter',
+              actionLabel: 'View Chapter',
+            });
+          }
+
+          // 3. Topics from Chapter
+          ch.topics?.forEach((top) => {
+            if (isTutCourse) {
+              const topicSlug = top.slug;
+              const topicUrl = topicSlug
+                ? `/tutorials/${c.slug}/${topicSlug}`
+                : (resolveTopicTutorialUrl(c.slug, ch.title, top.title, top.notes, top.slug) || `/tutorials/${c.slug}`);
+
+              items.push({
+                id: `topic-${c.slug}-${ch.id}-${top.id}`,
+                type: 'tutorial',
+                title: top.title,
+                description: `Topic ${ch.sortOrder}.${top.sortOrder} in "${ch.title}" • ${c.title}`,
+                category: `${c.title} • Module ${ch.sortOrder}`,
+                url: topicUrl,
+                badge: 'Tutorial',
+                actionLabel: 'Read Lesson',
+              });
+            } else {
+              const resolvedTutorialUrl = resolveTopicTutorialUrl(c.slug, ch.title, top.title, top.notes, top.slug);
+
+              items.push({
+                id: `topic-${c.slug}-${ch.id}-${top.id}`,
+                type: resolvedTutorialUrl ? 'tutorial' : 'topic',
+                title: top.title,
+                description: `Topic ${ch.sortOrder}.${top.sortOrder} in "${ch.title}" • ${c.title}`,
+                category: `${c.title} • Module ${ch.sortOrder}`,
+                url: resolvedTutorialUrl || `/courses/${c.slug}#${ch.id}`,
+                badge: resolvedTutorialUrl ? 'Tutorial' : 'Topic',
+                actionLabel: resolvedTutorialUrl ? 'Read Lesson' : 'View Topic',
+              });
+            }
+          });
         });
       }
     });
@@ -165,10 +249,24 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         type: m.type,
         title: m.title,
         description: m.description,
-        category: `${m.category} • ${m.level}`,
+        category: `${m.category} • ${m.level}${m.topicsCovered?.length ? ` • ${m.topicsCovered.slice(0, 4).join(', ')}` : ''}`,
         url: `/study-material?id=${m.id}&type=${m.type}`,
         badge,
         actionLabel,
+      });
+
+      // Index Handbook chapters
+      m.handbookContent?.chapters?.forEach((hCh) => {
+        items.push({
+          id: `hb-ch-${m.id}-${hCh.number}`,
+          type: 'chapter',
+          title: hCh.title,
+          description: hCh.summary || `Chapter ${hCh.number} of ${m.title}`,
+          category: `${m.title} • Handbook Chapter ${hCh.number}`,
+          url: `/study-material?id=${m.id}&type=${m.type}#chapter-${hCh.number}`,
+          badge: 'Chapter',
+          actionLabel: 'Read Chapter',
+        });
       });
     });
 
@@ -223,7 +321,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     // Apply category filter
     if (activeCategory === 'courses') {
-      list = list.filter((i) => i.type === 'course');
+      list = list.filter((i) => i.type === 'course' || i.type === 'chapter' || i.type === 'topic');
+    } else if (activeCategory === 'tutorials') {
+      list = list.filter((i) => i.type === 'tutorial' || i.badge === 'Tutorial' || i.url.startsWith('/tutorials/'));
     } else if (activeCategory === 'live') {
       list = list.filter((i) => i.type === 'live');
     } else if (activeCategory === 'study-material') {
@@ -236,23 +336,79 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     const trimmed = query.trim().toLowerCase();
     if (!trimmed) {
-      // When empty query, return top 10 recommended items
+      if (activeCategory === 'all') {
+        // Show primary courses, materials, tutorials, live on initial view (exclude granular topics & chapters)
+        return list.filter((i) => i.type !== 'chapter' && i.type !== 'topic' && !i.id.startsWith('topic-') && !i.id.startsWith('chapter-')).slice(0, 10);
+      }
+      if (activeCategory === 'courses') {
+        return list.filter((i) => i.type === 'course').slice(0, 10);
+      }
+      if (activeCategory === 'tutorials') {
+        // Show primary tutorial guides on initial view
+        const mainTuts = list.filter((i) => i.id.startsWith('tut-'));
+        return (mainTuts.length > 0 ? mainTuts : list).slice(0, 10);
+      }
       return list.slice(0, 10);
     }
 
     // Split search into words for multi-term matching
     const searchTerms = trimmed.split(/\s+/).filter(Boolean);
 
-    return list.filter((item) => {
+    const matches = list.filter((item) => {
       const targetText = `${item.title} ${item.description} ${item.category || ''} ${item.badge}`.toLowerCase();
       return searchTerms.every((term) => targetText.includes(term));
     });
+
+    // Smart relevance ranking
+    matches.sort((a, b) => {
+      const aTitle = a.title.toLowerCase();
+      const bTitle = b.title.toLowerCase();
+
+      const aStarts = aTitle.startsWith(trimmed);
+      const bStarts = bTitle.startsWith(trimmed);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      const aIncludes = aTitle.includes(trimmed);
+      const bIncludes = bTitle.includes(trimmed);
+      if (aIncludes && !bIncludes) return -1;
+      if (!aIncludes && bIncludes) return 1;
+
+      const typePriority: Record<string, number> = {
+        course: 1,
+        tutorial: 2,
+        chapter: 3,
+        topic: 4,
+        cheatsheet: 5,
+        note: 6,
+        handbook: 7,
+        live: 8,
+        blog: 9,
+        career: 10,
+      };
+      const aPrio = typePriority[a.type] || 99;
+      const bPrio = typePriority[b.type] || 99;
+      return aPrio - bPrio;
+    });
+
+    return matches.slice(0, 35);
   }, [allSearchItems, activeCategory, query]);
 
   // Keep selected index in bounds whenever results change
   useEffect(() => {
     setSelectedIndex(0);
   }, [query, activeCategory]);
+
+  // Auto-scroll active filter pill into view
+  useEffect(() => {
+    if (activeCategory && filterRefs.current[activeCategory]) {
+      filterRefs.current[activeCategory]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [activeCategory]);
 
   // Auto-scroll selected item into view
   useEffect(() => {
@@ -269,6 +425,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     (item: SearchResultItem) => {
       onClose();
       router.push(item.url);
+      if (item.url.includes('#') && typeof window !== 'undefined') {
+        const hash = item.url.split('#')[1];
+        if (hash) {
+          setTimeout(() => {
+            const el = document.getElementById(hash);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 200);
+        }
+      }
     },
     [router, onClose]
   );
@@ -276,7 +443,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   // Keyboard navigation handler inside modal
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === 'ArrowDown') {
+      if (e.key === 'ArrowRight' && !e.shiftKey) {
+        e.preventDefault();
+        const currentIndex = FILTER_CATEGORIES.findIndex((c) => c.id === activeCategory);
+        const nextIndex = (currentIndex + 1) % FILTER_CATEGORIES.length;
+        setActiveCategory(FILTER_CATEGORIES[nextIndex].id);
+      } else if (e.key === 'ArrowLeft' && !e.shiftKey) {
+        e.preventDefault();
+        const currentIndex = FILTER_CATEGORIES.findIndex((c) => c.id === activeCategory);
+        const prevIndex = (currentIndex - 1 + FILTER_CATEGORIES.length) % FILTER_CATEGORIES.length;
+        setActiveCategory(FILTER_CATEGORIES[prevIndex].id);
+      } else if (e.key === 'ArrowDown') {
         e.preventDefault();
         setSelectedIndex((prev) => (filteredResults.length > 0 ? (prev + 1) % filteredResults.length : 0));
       } else if (e.key === 'ArrowUp') {
@@ -294,7 +471,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         onClose();
       }
     },
-    [filteredResults, selectedIndex, handleSelect, onClose]
+    [activeCategory, filteredResults, selectedIndex, handleSelect, onClose]
   );
 
   // Helper for rendering icons based on type
@@ -302,6 +479,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     switch (type) {
       case 'course':
         return <BookOpen className="w-4 h-4 text-blue-500" />;
+      case 'chapter':
+        return <Layers className="w-4 h-4 text-indigo-500" />;
+      case 'topic':
+        return <FileCode className="w-4 h-4 text-sky-500" />;
       case 'live':
         return <Video className="w-4 h-4 text-red-500" />;
       case 'tutorial':
@@ -326,6 +507,10 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     switch (type) {
       case 'course':
         return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'chapter':
+        return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+      case 'topic':
+        return 'bg-sky-50 text-sky-700 border-sky-200';
       case 'live':
         return 'bg-red-50 text-red-700 border-red-200';
       case 'tutorial':
@@ -368,7 +553,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search courses, live batches, study materials, tutorials, blogs..."
+            placeholder="Search courses, chapters, topics, live batches, notes..."
             className="w-full text-base sm:text-lg text-primary placeholder:text-text-muted/60 bg-transparent border-none outline-none font-medium"
             autoComplete="off"
             spellCheck="false"
@@ -394,18 +579,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         {/* Filter Categories Bar */}
         <div className="flex items-center gap-1.5 px-4 py-2.5 bg-surface/70 border-b border-border-subtle overflow-x-auto text-xs no-scrollbar">
           <span className="text-text-muted font-medium mr-1 hidden sm:inline">Filter:</span>
-          {(
-            [
-              { id: 'all', label: 'All Resources' },
-              { id: 'courses', label: 'Courses' },
-              { id: 'live', label: 'Live Schedule' },
-              { id: 'study-material', label: 'Study Material' },
-              { id: 'careers', label: 'Internships & Jobs' },
-              { id: 'blogs', label: 'Blogs' },
-            ] as const
-          ).map((cat) => (
+          {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
+              ref={(el) => {
+                filterRefs.current[cat.id] = el;
+              }}
               onClick={() => setActiveCategory(cat.id)}
               className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer ${
                 activeCategory === cat.id
@@ -512,6 +691,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         {/* Command Palette Keyboard Hints Footer */}
         <div className="px-4 py-2.5 bg-surface border-t border-border-subtle flex flex-wrap items-center justify-between text-[11px] text-text-muted">
           <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1">
+              <kbd className="px-1.5 py-0.5 bg-white border border-border-subtle rounded font-mono shadow-2xs">←</kbd>
+              <kbd className="px-1.5 py-0.5 bg-white border border-border-subtle rounded font-mono shadow-2xs">→</kbd>
+              <span>to filter</span>
+            </span>
             <span className="flex items-center gap-1">
               <kbd className="px-1.5 py-0.5 bg-white border border-border-subtle rounded font-mono shadow-2xs">↑</kbd>
               <kbd className="px-1.5 py-0.5 bg-white border border-border-subtle rounded font-mono shadow-2xs">↓</kbd>

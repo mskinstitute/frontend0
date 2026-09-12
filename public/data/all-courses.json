@@ -718,6 +718,7 @@
           {
             "id": "html5-t1.1",
             "title": "Introduction to HTML",
+            "slug": "introduction-to-html",
             "sortOrder": 1,
             "videos": [
               {
@@ -731,21 +732,25 @@
           {
             "id": "html5-t1.2",
             "title": "Basic Document Structure",
+            "slug": "basic-document-structure",
             "sortOrder": 2
           },
           {
             "id": "html5-t1.3",
             "title": "VS-Code Setup",
+            "slug": "vs-code-setup",
             "sortOrder": 3
           },
           {
             "id": "html5-t1.4",
             "title": "Elements",
+            "slug": "elements",
             "sortOrder": 4
           },
           {
             "id": "html5-t1.5",
             "title": "Attributes",
+            "slug": "attributes",
             "sortOrder": 5
           }
         ]
@@ -758,11 +763,13 @@
           {
             "id": "html5-t2.1",
             "title": "HTML Headings",
+            "slug": "html-headings",
             "sortOrder": 1
           },
           {
             "id": "html5-t2.2",
             "title": "Paragraphs & Line Breaks",
+            "slug": "paragraphs-line-breaks",
             "sortOrder": 2
           }
         ]
@@ -800,6 +807,7 @@
           {
             "id": "html5-t4.1",
             "title": "HTML Comments",
+            "slug": "html-comments",
             "sortOrder": 1
           }
         ]
@@ -10259,17 +10267,20 @@
           {
             "id": "ms-word-for-beginners-t1.1",
             "title": "MS Word Interface Overview",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "ms-word-interface-overview"
           },
           {
             "id": "ms-word-for-beginners-t1.2",
             "title": "Ribbons, Tabs & Quick Access Toolbar",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "ribbons-tabs-quick-access-toolbar"
           },
           {
             "id": "ms-word-for-beginners-t1.3",
             "title": "Creating & Saving Documents",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "creating-saving-documents"
           }
         ]
       },
@@ -10281,17 +10292,20 @@
           {
             "id": "ms-word-for-beginners-t2.1",
             "title": "Font Style, Size & Color",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "font-style-size-color"
           },
           {
             "id": "ms-word-for-beginners-t2.2",
             "title": "Bold, Italic, Underline & Effects",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "bold-italic-underline-effects"
           },
           {
             "id": "ms-word-for-beginners-t2.3",
             "title": "Clear Formatting & Styles",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "clear-formatting-styles"
           }
         ]
       },
@@ -10303,17 +10317,20 @@
           {
             "id": "ms-word-for-beginners-t3.1",
             "title": "Alignment & Indentation",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "alignment-indentation"
           },
           {
             "id": "ms-word-for-beginners-t3.2",
             "title": "Line & Paragraph Spacing",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "line-paragraph-spacing"
           },
           {
             "id": "ms-word-for-beginners-t3.3",
             "title": "Bullets & Numbering",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "bullets-numbering"
           }
         ]
       },
@@ -10325,17 +10342,20 @@
           {
             "id": "ms-word-for-beginners-t4.1",
             "title": "Creating & Formatting Tables",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "creating-formatting-tables"
           },
           {
             "id": "ms-word-for-beginners-t4.2",
             "title": "Merging & Splitting Cells",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "merging-splitting-cells"
           },
           {
             "id": "ms-word-for-beginners-t4.3",
             "title": "Table Styles & Design",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "table-styles-design"
           }
         ]
       },
@@ -10347,17 +10367,20 @@
           {
             "id": "ms-word-for-beginners-t5.1",
             "title": "Inserting & Formatting Images",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "inserting-formatting-images"
           },
           {
             "id": "ms-word-for-beginners-t5.2",
             "title": "Adding Shapes & Icons",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "adding-shapes-icons"
           },
           {
             "id": "ms-word-for-beginners-t5.3",
             "title": "SmartArt Graphics & Design",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "smartart-graphics-design"
           }
         ]
       },
@@ -10369,17 +10392,20 @@
           {
             "id": "ms-word-for-beginners-t6.1",
             "title": "Margins, Orientation & Size",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "margins-orientation-size"
           },
           {
             "id": "ms-word-for-beginners-t6.2",
             "title": "Columns & Page Breaks",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "columns-page-breaks"
           },
           {
             "id": "ms-word-for-beginners-t6.3",
             "title": "Headers, Footers & Page Numbers",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "headers-footers-page-numbers"
           }
         ]
       },
@@ -10391,17 +10417,20 @@
           {
             "id": "ms-word-for-beginners-t7.1",
             "title": "Inserting Footnotes & Endnotes",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "inserting-footnotes-endnotes"
           },
           {
             "id": "ms-word-for-beginners-t7.2",
             "title": "Adding Table of Contents",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "adding-table-of-contents"
           },
           {
             "id": "ms-word-for-beginners-t7.3",
             "title": "Track Changes & Comments",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "track-changes-comments"
           }
         ]
       },
@@ -10413,17 +10442,20 @@
           {
             "id": "ms-word-for-beginners-t8.1",
             "title": "Essential Keyboard Shortcuts",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "essential-keyboard-shortcuts"
           },
           {
             "id": "ms-word-for-beginners-t8.2",
             "title": "Quick Formatting Tricks",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "quick-formatting-tricks"
           },
           {
             "id": "ms-word-for-beginners-t8.3",
             "title": "Efficiency Tips for Documents",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "efficiency-tips-documents"
           }
         ]
       },
@@ -10435,17 +10467,20 @@
           {
             "id": "ms-word-for-beginners-t9.1",
             "title": "Creating a Resume",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "creating-a-resume"
           },
           {
             "id": "ms-word-for-beginners-t9.2",
             "title": "Designing a Report",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "designing-a-report"
           },
           {
             "id": "ms-word-for-beginners-t9.3",
             "title": "Invitation Card & Certificate",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "invitation-card-certificate"
           }
         ]
       }
@@ -10484,17 +10519,20 @@
           {
             "id": "ms-word-for-advanced-t1.1",
             "title": "Nested Tables & Formatting",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "nested-tables-formatting"
           },
           {
             "id": "ms-word-for-advanced-t1.2",
             "title": "Formulas in Tables",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "formulas-in-tables"
           },
           {
             "id": "ms-word-for-advanced-t1.3",
             "title": "Table Styles & Design",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "advanced-table-styles-design"
           }
         ]
       },
@@ -10506,17 +10544,20 @@
           {
             "id": "ms-word-for-advanced-t2.1",
             "title": "Introduction to Mail Merge",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "introduction-to-mail-merge"
           },
           {
             "id": "ms-word-for-advanced-t2.2",
             "title": "Using Data Sources",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "using-data-sources"
           },
           {
             "id": "ms-word-for-advanced-t2.3",
             "title": "Generating Letters, Labels, Envelopes",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "generating-letters-labels-envelopes"
           }
         ]
       },
@@ -10528,17 +10569,20 @@
           {
             "id": "ms-word-for-advanced-t3.1",
             "title": "Recording & Running Macros",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "recording-running-macros"
           },
           {
             "id": "ms-word-for-advanced-t3.2",
             "title": "Assigning Macros to Buttons",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "assigning-macros-buttons"
           },
           {
             "id": "ms-word-for-advanced-t3.3",
             "title": "Practical Macro Examples",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "practical-macro-examples"
           }
         ]
       },
@@ -10550,17 +10594,20 @@
           {
             "id": "ms-word-for-advanced-t4.1",
             "title": "Creating & Using Templates",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "creating-using-templates"
           },
           {
             "id": "ms-word-for-advanced-t4.2",
             "title": "Custom Styles & Themes",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "custom-styles-themes"
           },
           {
             "id": "ms-word-for-advanced-t4.3",
             "title": "Consistent Document Formatting",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "consistent-document-formatting"
           }
         ]
       },
@@ -10572,17 +10619,20 @@
           {
             "id": "ms-word-for-advanced-t5.1",
             "title": "Track Changes & Comments",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "advanced-track-changes-comments"
           },
           {
             "id": "ms-word-for-advanced-t5.2",
             "title": "Compare & Combine Documents",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "compare-combine-documents"
           },
           {
             "id": "ms-word-for-advanced-t5.3",
             "title": "Sharing & Protecting Documents",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "sharing-protecting-documents"
           }
         ]
       },
@@ -10594,17 +10644,20 @@
           {
             "id": "ms-word-for-advanced-t6.1",
             "title": "Custom Bullets & Numbering",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "custom-bullets-numbering"
           },
           {
             "id": "ms-word-for-advanced-t6.2",
             "title": "Advanced Indentation & Spacing",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "advanced-indentation-spacing"
           },
           {
             "id": "ms-word-for-advanced-t6.3",
             "title": "Drop Caps & Special Effects",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "drop-caps-special-effects"
           }
         ]
       },
@@ -10616,17 +10669,20 @@
           {
             "id": "ms-word-for-advanced-t7.1",
             "title": "Advanced SmartArt & Charts",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "advanced-smartart-charts"
           },
           {
             "id": "ms-word-for-advanced-t7.2",
             "title": "Watermarks, Backgrounds & Page Borders",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "watermarks-backgrounds-page-borders"
           },
           {
             "id": "ms-word-for-advanced-t7.3",
             "title": "Linking & Embedding Objects",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "linking-embedding-objects-ole"
           }
         ]
       },
@@ -10638,17 +10694,20 @@
           {
             "id": "ms-word-for-advanced-t8.1",
             "title": "Keyboard Shortcuts & Quick Access",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "advanced-keyboard-shortcuts-quick-access"
           },
           {
             "id": "ms-word-for-advanced-t8.2",
             "title": "Document Navigation & Search Tips",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "document-navigation-search-tips"
           },
           {
             "id": "ms-word-for-advanced-t8.3",
             "title": "Automation Techniques",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "advanced-automation-techniques"
           }
         ]
       },
@@ -10660,17 +10719,20 @@
           {
             "id": "ms-word-for-advanced-t9.1",
             "title": "Automated Invoice using Mail Merge",
-            "sortOrder": 1
+            "sortOrder": 1,
+            "slug": "automated-invoice-mail-merge"
           },
           {
             "id": "ms-word-for-advanced-t9.2",
             "title": "Professional Report Template",
-            "sortOrder": 2
+            "sortOrder": 2,
+            "slug": "professional-report-template"
           },
           {
             "id": "ms-word-for-advanced-t9.3",
             "title": "Certificate & Invitation Template",
-            "sortOrder": 3
+            "sortOrder": 3,
+            "slug": "certificate-invitation-template"
           }
         ]
       }
@@ -10931,7 +10993,7 @@
     "title": "MS PowerPoint for Beginners",
     "slug": "ms-powerpoint-for-beginners",
     "featuredImageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Learn to create professional presentations with Microsoft PowerPoint. Master slides, themes, animations, transitions, and presentation skills in 1 month.",
+    "shortDescription": "Learn to create professional presentations with Microsoft PowerPoint. Master slide layouts, custom Slide Master, themes, Morph transitions, animations, SmartArt, Presenter View, and pitch decks with screenshots and quizzes.",
     "categories": [
       "Productivity Tools",
       "MS Office"
@@ -10956,17 +11018,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t1.1",
-            "title": "Topic 1",
+            "title": "PowerPoint Interface, Ribbon, and Quick Access Toolbar",
+            "slug": "powerpoint-interface-overview",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t1.2",
-            "title": "Topic 2",
+            "title": "Creating, Opening, Saving & Backstage View",
+            "slug": "creating-managing-presentations",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t1.3",
-            "title": "Topic 3",
+            "title": "PowerPoint Views (Normal, Sorter, Reading, Notes Page) & Zoom Controls",
+            "slug": "powerpoint-views-navigation",
             "sortOrder": 3
           }
         ]
@@ -10978,17 +11043,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t2.1",
-            "title": "Topic 1",
+            "title": "Slide Layouts, Title & Content Placeholders",
+            "slug": "slide-layouts-placeholders",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t2.2",
-            "title": "Topic 2",
+            "title": "Adding, Duplicating, Deleting & Reordering Slides",
+            "slug": "adding-duplicating-reordering-slides",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t2.3",
-            "title": "Topic 3",
+            "title": "Organizing Slides with Sections & Collapsing Groups",
+            "slug": "organizing-slides-with-sections",
             "sortOrder": 3
           }
         ]
@@ -11000,17 +11068,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t3.1",
-            "title": "Topic 1",
+            "title": "Text Boxes, Typography, Fonts & Text Alignment",
+            "slug": "text-boxes-typography",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t3.2",
-            "title": "Topic 2",
+            "title": "Bulleted & Numbered Lists, Indentation, Line Spacing",
+            "slug": "bulleted-numbered-lists-slides",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t3.3",
-            "title": "Topic 3",
+            "title": "WordArt, Text Effects, Shadows & Reflection",
+            "slug": "wordart-text-effects",
             "sortOrder": 3
           }
         ]
@@ -11022,17 +11093,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t4.1",
-            "title": "Topic 1",
+            "title": "Inserting & Formatting Pictures, Crop, Artistic Effects & Background Removal",
+            "slug": "inserting-formatting-images-ppt",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t4.2",
-            "title": "Topic 2",
+            "title": "Drawing Shapes, Icons, Aligning, Grouping & SmartArt Graphics",
+            "slug": "shapes-icons-smartart-ppt",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t4.3",
-            "title": "Topic 3",
+            "title": "Inserting Audio, Video & Screen Recording in Slides",
+            "slug": "audio-video-screen-recording",
             "sortOrder": 3
           }
         ]
@@ -11044,17 +11118,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t5.1",
-            "title": "Topic 1",
+            "title": "Applying Themes, Color Variants & Font Schemes",
+            "slug": "applying-themes-color-variants",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t5.2",
-            "title": "Topic 2",
+            "title": "Slide Size (16:9 vs 4:3), Formatting Slide Backgrounds & Gradients",
+            "slug": "slide-dimensions-formatting-backgrounds",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t5.3",
-            "title": "Topic 3",
+            "title": "Slide Master Mastery: Custom Layouts, Headers, Footers & Branding",
+            "slug": "slide-master-mastery",
             "sortOrder": 3
           }
         ]
@@ -11066,17 +11143,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t6.1",
-            "title": "Topic 1",
+            "title": "Slide Transitions, Effects & Duration Timing",
+            "slug": "slide-transitions-timing",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t6.2",
-            "title": "Topic 2",
+            "title": "The Magic Morph Transition: Creating Cinematic Motion",
+            "slug": "the-magic-morph-transition",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t6.3",
-            "title": "Topic 3",
+            "title": "Object Animations: Entrance, Emphasis, Exit & Trigger Options",
+            "slug": "entrance-emphasis-exit-animations",
             "sortOrder": 3
           }
         ]
@@ -11088,17 +11168,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t7.1",
-            "title": "Topic 1",
+            "title": "The Animation Pane, Sequencing, Delays & Motion Paths",
+            "slug": "animation-pane-motion-paths",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t7.2",
-            "title": "Topic 2",
+            "title": "Hyperlinks, Action Buttons & Slide Zoom Navigation",
+            "slug": "hyperlinks-action-buttons-zoom",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t7.3",
-            "title": "Topic 3",
+            "title": "Tables, Excel Charts & Data Visualization in PowerPoint",
+            "slug": "tables-charts-in-powerpoint",
             "sortOrder": 3
           }
         ]
@@ -11110,17 +11193,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t8.1",
-            "title": "Topic 1",
+            "title": "Presenter View, Dual Monitors, Laser Pointer & Live Pen Annotations",
+            "slug": "delivering-with-presenter-view",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t8.2",
-            "title": "Topic 2",
+            "title": "Rehearse Timings, Speaker Coach & Recording Slide Shows",
+            "slug": "rehearse-timings-record-slideshow",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t8.3",
-            "title": "Topic 3",
+            "title": "Reviewing, Comments, Comparing & Inspecting/Protecting Presentations",
+            "slug": "reviewing-coauthoring-protecting-ppt",
             "sortOrder": 3
           }
         ]
@@ -11132,17 +11218,20 @@
         "topics": [
           {
             "id": "ms-powerpoint-for-beginners-t9.1",
-            "title": "Topic 1",
+            "title": "Capstone Project 1: Designing an Executive Business Pitch Deck",
+            "slug": "mini-project-corporate-pitch-deck",
             "sortOrder": 1
           },
           {
             "id": "ms-powerpoint-for-beginners-t9.2",
-            "title": "Topic 2",
+            "title": "Capstone Project 2: Building an Interactive Non-Linear Quiz Game",
+            "slug": "mini-project-interactive-quiz-presentation",
             "sortOrder": 2
           },
           {
             "id": "ms-powerpoint-for-beginners-t9.3",
-            "title": "Topic 3",
+            "title": "Exporting to PDF, MP4 Video, Word Handouts & Packaging",
+            "slug": "exporting-video-handouts-sharing",
             "sortOrder": 3
           }
         ]
@@ -11155,7 +11244,7 @@
     "title": "MS Excel for Beginners",
     "slug": "ms-excel-for-beginners",
     "featuredImageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Learn the basics of Microsoft Excel, including spreadsheets, formatting, simple formulas, and basic charts. Perfect for students and beginners.",
+    "shortDescription": "Master Excel fundamentals: interface navigation, cell formatting, basic formulas, math/text functions, worksheet management, column/pie charts, page setup, and report card projects with screenshots and quizzes.",
     "categories": [
       "Productivity Tools",
       "MS Office"
@@ -11181,16 +11270,19 @@
           {
             "id": "ms-excel-for-beginners-t1.1",
             "title": "Excel Interface Overview",
+            "slug": "excel-interface-overview",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t1.2",
             "title": "Understanding Workbooks and Worksheets",
+            "slug": "workbooks-and-worksheets",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t1.3",
             "title": "Basic Navigation in Excel",
+            "slug": "basic-navigation-in-excel",
             "sortOrder": 3
           }
         ]
@@ -11203,16 +11295,19 @@
           {
             "id": "ms-excel-for-beginners-t2.1",
             "title": "Entering Data in Cells",
+            "slug": "entering-data-in-cells",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t2.2",
             "title": "Editing and Deleting Data",
+            "slug": "editing-and-deleting-data",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t2.3",
-            "title": "Undo and Redo",
+            "title": "Undo, Redo and Clipboard Basics",
+            "slug": "undo-redo-and-clipboard",
             "sortOrder": 3
           }
         ]
@@ -11225,16 +11320,19 @@
           {
             "id": "ms-excel-for-beginners-t3.1",
             "title": "Cell Formatting (Fonts, Colors, Borders)",
+            "slug": "cell-formatting-fonts-borders",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t3.2",
-            "title": "Number Formats",
+            "title": "Number Formats (Currency, Percentage, Dates)",
+            "slug": "number-formats-currency-dates",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t3.3",
             "title": "Adjusting Rows and Columns",
+            "slug": "adjusting-rows-and-columns",
             "sortOrder": 3
           }
         ]
@@ -11247,16 +11345,19 @@
           {
             "id": "ms-excel-for-beginners-t4.1",
             "title": "Understanding Formula Bar",
+            "slug": "understanding-formula-bar",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t4.2",
             "title": "Simple Calculations (+, -, *, /)",
+            "slug": "simple-arithmetic-calculations",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t4.3",
-            "title": "AutoSum Function",
+            "title": "AutoSum and Status Bar Calculations",
+            "slug": "autosum-and-status-bar",
             "sortOrder": 3
           }
         ]
@@ -11268,17 +11369,20 @@
         "topics": [
           {
             "id": "ms-excel-for-beginners-t5.1",
-            "title": "SUM, AVERAGE, MIN, MAX",
+            "title": "SUM, AVERAGE, MIN, MAX Functions",
+            "slug": "math-functions-sum-average-min-max",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t5.2",
-            "title": "Basic Text Functions (CONCATENATE)",
+            "title": "Basic Text Functions (CONCATENATE, UPPER, LOWER)",
+            "slug": "basic-text-functions-concat",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t5.3",
-            "title": "AutoFill with Functions",
+            "title": "AutoFill and Relative Cell References",
+            "slug": "autofill-relative-cell-references",
             "sortOrder": 3
           }
         ]
@@ -11291,16 +11395,19 @@
           {
             "id": "ms-excel-for-beginners-t6.1",
             "title": "Adding and Renaming Sheets",
+            "slug": "adding-and-renaming-sheets",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t6.2",
-            "title": "Copying and Moving Sheets",
+            "title": "Copying, Moving and Grouping Sheets",
+            "slug": "copying-moving-grouping-sheets",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t6.3",
-            "title": "Deleting Sheets",
+            "title": "Hiding, Unhiding and Deleting Sheets",
+            "slug": "hiding-unhiding-deleting-sheets",
             "sortOrder": 3
           }
         ]
@@ -11312,17 +11419,20 @@
         "topics": [
           {
             "id": "ms-excel-for-beginners-t7.1",
-            "title": "Creating a Column Chart",
+            "title": "Creating Column and Bar Charts",
+            "slug": "creating-column-and-bar-charts",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t7.2",
-            "title": "Creating a Pie Chart",
+            "title": "Creating Pie and Doughnut Charts",
+            "slug": "creating-pie-and-doughnut-charts",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t7.3",
             "title": "Customizing Chart Elements",
+            "slug": "customizing-chart-elements",
             "sortOrder": 3
           }
         ]
@@ -11334,17 +11444,20 @@
         "topics": [
           {
             "id": "ms-excel-for-beginners-t8.1",
-            "title": "Setting Print Area",
+            "title": "Setting Print Area and Page Breaks",
+            "slug": "setting-print-area-page-breaks",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t8.2",
-            "title": "Page Layout and Orientation",
+            "title": "Page Layout, Orientation and Margins",
+            "slug": "page-layout-orientation-margins",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t8.3",
-            "title": "Exporting as PDF",
+            "title": "Headers, Footers and Exporting as PDF",
+            "slug": "headers-footers-exporting-pdf",
             "sortOrder": 3
           }
         ]
@@ -11356,17 +11469,20 @@
         "topics": [
           {
             "id": "ms-excel-for-beginners-t9.1",
-            "title": "Creating a Student Report Card",
+            "title": "Creating a Student Report Card Layout",
+            "slug": "project-student-report-card-setup",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-beginners-t9.2",
-            "title": "Applying Formulas and Formatting",
+            "title": "Applying Formulas and Grade Calculations",
+            "slug": "project-applying-formulas-calculations",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-beginners-t9.3",
-            "title": "Visualizing with a Chart",
+            "title": "Visualizing Performance with a Chart",
+            "slug": "project-visualizing-grades-chart",
             "sortOrder": 3
           }
         ]
@@ -11379,7 +11495,7 @@
     "title": "MS Excel for Intermediate",
     "slug": "ms-excel-for-intermediate",
     "featuredImageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Upgrade your Excel skills with intermediate-level functions, conditional formatting, tables, pivot tables, and data handling techniques.",
+    "shortDescription": "Elevate your Excel productivity: absolute references ($A$1), multi-level sorting, filtering, Excel Tables (Ctrl+T), conditional formatting rules, IF/AND/OR logic, VLOOKUP, Pivot Tables, data validation, and attendance tracker project.",
     "categories": [
       "Productivity Tools",
       "MS Office"
@@ -11404,17 +11520,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t1.1",
-            "title": "Quick Recap of Formulas",
+            "title": "Quick Recap of Formulas & Shortcuts for Speed",
+            "slug": "speed-shortcuts-navigation",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t1.2",
-            "title": "Using AutoFill Efficiently",
+            "title": "Absolute and Mixed Cell References ($A$1)",
+            "slug": "absolute-and-mixed-cell-references",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t1.3",
-            "title": "Shortcuts for Speed",
+            "title": "Using AutoFill and Flash Fill Efficiently",
+            "slug": "advanced-autofill-flash-fill",
             "sortOrder": 3
           }
         ]
@@ -11427,16 +11546,19 @@
           {
             "id": "ms-excel-for-intermediate-t2.1",
             "title": "Sorting Data (Single and Multi-Level)",
+            "slug": "sorting-single-and-multi-level",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t2.2",
-            "title": "Filtering Data",
+            "title": "Filtering Data with AutoFilter",
+            "slug": "filtering-data-autofilter",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t2.3",
-            "title": "Advanced Filter Options",
+            "title": "Advanced Filter Options & Extracting Unique Records",
+            "slug": "advanced-filter-unique-records",
             "sortOrder": 3
           }
         ]
@@ -11448,17 +11570,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t3.1",
-            "title": "Creating and Formatting Tables",
+            "title": "Creating and Formatting Excel Tables (Ctrl + T)",
+            "slug": "creating-excel-tables-ctrl-t",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t3.2",
-            "title": "Structured References",
+            "title": "Structured References in Table Formulas",
+            "slug": "structured-references-syntax",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t3.3",
-            "title": "Using Table Styles",
+            "title": "Using Table Styles and Total Row Calculations",
+            "slug": "table-styles-and-total-row",
             "sortOrder": 3
           }
         ]
@@ -11471,16 +11596,19 @@
           {
             "id": "ms-excel-for-intermediate-t4.1",
             "title": "Highlighting Cells Based on Rules",
+            "slug": "highlighting-cells-rules",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t4.2",
-            "title": "Using Formulas in Conditional Formatting",
+            "title": "Data Bars, Color Scales, and Icon Sets",
+            "slug": "data-bars-color-scales-icon-sets",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t4.3",
-            "title": "Data Bars, Color Scales, Icon Sets",
+            "title": "Using Custom Formulas in Conditional Formatting",
+            "slug": "formula-based-conditional-formatting",
             "sortOrder": 3
           }
         ]
@@ -11492,17 +11620,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t5.1",
-            "title": "Text Functions (LEFT, RIGHT, MID, TRIM)",
+            "title": "Text Functions (LEFT, RIGHT, MID, TRIM, LEN)",
+            "slug": "text-functions-left-right-mid-trim",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t5.2",
-            "title": "Date & Time Functions (TODAY, NOW, DATEDIF)",
+            "title": "Date & Time Functions (TODAY, NOW, DATEDIF, NETWORKDAYS)",
+            "slug": "date-time-functions-datedif",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t5.3",
             "title": "Logical Functions (IF, AND, OR, NOT)",
+            "slug": "logical-functions-if-and-or-not",
             "sortOrder": 3
           }
         ]
@@ -11514,17 +11645,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t6.1",
-            "title": "VLOOKUP Basics",
+            "title": "VLOOKUP Basics (Exact Match & Syntax)",
+            "slug": "vlookup-exact-match-syntax",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t6.2",
-            "title": "HLOOKUP Basics",
+            "title": "HLOOKUP Basics & Approximate Match Ranges",
+            "slug": "hlookup-and-approximate-match",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t6.3",
-            "title": "Nested Lookup Functions",
+            "title": "Nested Lookup Functions & IFERROR Handling",
+            "slug": "handling-lookup-errors-iferror",
             "sortOrder": 3
           }
         ]
@@ -11536,17 +11670,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t7.1",
-            "title": "Creating Pivot Tables",
+            "title": "Creating Your First Pivot Table",
+            "slug": "creating-first-pivot-table",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t7.2",
-            "title": "Sorting and Filtering in Pivot Tables",
+            "title": "Pivot Table Fields (Rows, Columns, Values, Filters)",
+            "slug": "pivot-table-fields-rows-cols-values",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t7.3",
-            "title": "Summarizing Data with Pivot Tables",
+            "title": "Sorting, Filtering and Summarizing Pivot Data",
+            "slug": "summarizing-and-sorting-pivot-data",
             "sortOrder": 3
           }
         ]
@@ -11559,16 +11696,19 @@
           {
             "id": "ms-excel-for-intermediate-t8.1",
             "title": "Clustered Column and Bar Charts",
+            "slug": "clustered-column-and-bar-charts-int",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t8.2",
-            "title": "Line and Area Charts",
+            "title": "Line and Area Trend Charts",
+            "slug": "line-and-area-trend-charts",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t8.3",
-            "title": "Combination Charts",
+            "title": "Combination Charts with Secondary Axis",
+            "slug": "combination-charts-secondary-axis",
             "sortOrder": 3
           }
         ]
@@ -11580,17 +11720,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t9.1",
-            "title": "Restricting Data Entry",
+            "title": "Restricting Data Entry (Numbers, Dates, Length)",
+            "slug": "restricting-data-entry-whole-dates",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t9.2",
-            "title": "Dropdown Lists",
+            "title": "Creating In-Cell Dropdown Lists",
+            "slug": "creating-dropdown-lists-validation",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t9.3",
-            "title": "Custom Validation Rules",
+            "title": "Custom Validation Rules and Error Alert Modals",
+            "slug": "custom-validation-rules-error-alerts",
             "sortOrder": 3
           }
         ]
@@ -11602,17 +11745,20 @@
         "topics": [
           {
             "id": "ms-excel-for-intermediate-t10.1",
-            "title": "Create an Employee Attendance Tracker",
+            "title": "Create an Employee Attendance Tracker Setup",
+            "slug": "project-attendance-tracker-setup",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-intermediate-t10.2",
-            "title": "Use Formulas and Conditional Formatting",
+            "title": "Use COUNTIF Formulas and Conditional Formatting",
+            "slug": "project-attendance-formulas-formatting",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-intermediate-t10.3",
-            "title": "Summarize with a Pivot Table",
+            "title": "Summarize Attendance with a Pivot Table and Visuals",
+            "slug": "project-attendance-pivot-summary",
             "sortOrder": 3
           }
         ]
@@ -11625,7 +11771,7 @@
     "title": "MS Excel for Advanced",
     "slug": "ms-excel-for-advanced",
     "featuredImageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Master advanced Excel features including advanced formulas, nested functions, macros, dashboards, and automation techniques.",
+    "shortDescription": "Achieve enterprise Excel mastery: INDEX & MATCH, XLOOKUP, Dynamic Arrays, Advanced Pivot Tables with Slicers/Timelines, What-If Analysis, Power Query ETL, Power Pivot DAX data modeling, Macros/VBA automation, and interactive dashboards.",
     "categories": [
       "Productivity Tools",
       "MS Office"
@@ -11650,22 +11796,26 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t1.1",
-            "title": "Nested IFs and Complex Conditions",
+            "title": "Nested IFs, IFS and SWITCH Functions",
+            "slug": "nested-ifs-and-ifs-function",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t1.2",
-            "title": "INDEX & MATCH for Dynamic Lookups",
+            "title": "INDEX & MATCH for Dynamic 2-Way Lookups",
+            "slug": "index-and-match-mastery",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t1.3",
-            "title": "XLOOKUP Function",
+            "title": "XLOOKUP: The Modern Flexible Lookup Function",
+            "slug": "xlookup-the-modern-lookup",
             "sortOrder": 3
           },
           {
             "id": "ms-excel-for-advanced-t1.4",
-            "title": "Array Formulas & Dynamic Arrays",
+            "title": "Array Formulas & Dynamic Arrays (FILTER, SORT, UNIQUE)",
+            "slug": "dynamic-arrays-filter-sort-unique",
             "sortOrder": 4
           }
         ]
@@ -11677,22 +11827,26 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t2.1",
-            "title": "Grouping Data in Pivot Tables",
+            "title": "Grouping Dates and Numbers in Pivot Tables",
+            "slug": "grouping-dates-numbers-pivot-tables",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t2.2",
-            "title": "Calculated Fields and Items",
+            "title": "Calculated Fields and Calculated Items",
+            "slug": "calculated-fields-and-calculated-items",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t2.3",
-            "title": "Pivot Charts Integration",
+            "title": "Pivot Charts Integration and Design",
+            "slug": "pivot-charts-integration",
             "sortOrder": 3
           },
           {
             "id": "ms-excel-for-advanced-t2.4",
-            "title": "Slicers and Timelines",
+            "title": "Using Slicers and Timelines for Dynamic Interactivity",
+            "slug": "slicers-and-timelines-interactivity",
             "sortOrder": 4
           }
         ]
@@ -11704,17 +11858,20 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t3.1",
-            "title": "Scenario Manager",
+            "title": "Goal Seek for Target Back-Calculation",
+            "slug": "goal-seek-backwards-calculation",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t3.2",
-            "title": "Goal Seek",
+            "title": "Scenario Manager for Multi-Model Budgeting",
+            "slug": "scenario-manager-budgeting",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t3.3",
-            "title": "Data Tables (One/Two Variable)",
+            "title": "Data Tables (One and Two Variable Sensitivity Analysis)",
+            "slug": "one-and-two-variable-data-tables",
             "sortOrder": 3
           }
         ]
@@ -11726,22 +11883,26 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t4.1",
-            "title": "Remove Duplicates",
+            "title": "Removing Duplicates and Cleaning Invisible Spaces",
+            "slug": "removing-duplicates-cleaning-spaces",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t4.2",
-            "title": "Flash Fill Tricks",
+            "title": "Advanced Text to Columns (Delimited and Fixed Width)",
+            "slug": "text-to-columns-delimited-fixed",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t4.3",
-            "title": "Advanced Text to Columns",
+            "title": "Data Consolidation and 3D Sheet Formulas",
+            "slug": "data-consolidation-3d-formulas",
             "sortOrder": 3
           },
           {
             "id": "ms-excel-for-advanced-t4.4",
-            "title": "Data Consolidation",
+            "title": "Formula Auditing (Trace Precedents, Dependents & Error Checking)",
+            "slug": "formula-auditing-trace-precedents",
             "sortOrder": 4
           }
         ]
@@ -11753,17 +11914,20 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t5.1",
-            "title": "Importing Data from Different Sources",
+            "title": "Power Query Overview & Importing Data from Multiple Sources",
+            "slug": "power-query-overview-get-data",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t5.2",
-            "title": "Data Cleaning with Power Query",
+            "title": "Data Transformation & Cleaning with Power Query",
+            "slug": "data-cleaning-transformations-pq",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t5.3",
-            "title": "Merging and Appending Queries",
+            "title": "Merging and Appending Queries (Joins & Unions)",
+            "slug": "merging-and-appending-queries",
             "sortOrder": 3
           }
         ]
@@ -11775,17 +11939,20 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t6.1",
-            "title": "Creating Data Models",
+            "title": "Power Pivot Architecture & Creating Data Models",
+            "slug": "power-pivot-and-data-models",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t6.2",
-            "title": "Using Relationships",
+            "title": "Using Relationships (Star Schema & Cardinality)",
+            "slug": "creating-table-relationships",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t6.3",
-            "title": "DAX Basics (SUMX, CALCULATE)",
+            "title": "DAX Basics (Calculated Columns, Measures, SUMX, CALCULATE)",
+            "slug": "dax-basics-calculated-columns-measures",
             "sortOrder": 3
           }
         ]
@@ -11797,22 +11964,26 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t7.1",
-            "title": "Recording Macros",
+            "title": "Developer Tab & Macro Security Settings",
+            "slug": "enabling-developer-tab-macro-security",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t7.2",
-            "title": "Assigning Macros to Buttons",
+            "title": "Recording and Running Macros with Shortcuts",
+            "slug": "recording-and-running-macros",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t7.3",
-            "title": "Introduction to VBA Editor",
+            "title": "Assigning Macros to Buttons and Clickable Shapes",
+            "slug": "assigning-macros-to-buttons-shapes",
             "sortOrder": 3
           },
           {
             "id": "ms-excel-for-advanced-t7.4",
-            "title": "Writing Simple VBA Codes",
+            "title": "Introduction to VBA Editor & Writing Simple Automation Codes",
+            "slug": "introduction-to-vba-editor",
             "sortOrder": 4
           }
         ]
@@ -11824,22 +11995,26 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t8.1",
-            "title": "Design Principles for Dashboards",
+            "title": "Design Principles and Layout Architecture for Dashboards",
+            "slug": "dashboard-design-principles-layout",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t8.2",
-            "title": "Combining Pivot Tables and Charts",
+            "title": "Building Dynamic KPI Summary Cards",
+            "slug": "building-kpi-summary-cards",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t8.3",
-            "title": "Using Slicers for Interactivity",
+            "title": "Combining Pivot Tables, Charts, and Universal Slicers",
+            "slug": "integrating-charts-and-slicers",
             "sortOrder": 3
           },
           {
             "id": "ms-excel-for-advanced-t8.4",
-            "title": "Building a Sales Dashboard",
+            "title": "Building a Full Interactive Sales & Revenue Dashboard",
+            "slug": "building-interactive-sales-dashboard",
             "sortOrder": 4
           }
         ]
@@ -11851,17 +12026,20 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t9.1",
-            "title": "Protecting Worksheets & Workbooks",
+            "title": "Protecting Worksheets, Specific Cell Ranges & Workbooks",
+            "slug": "protecting-cells-worksheets-workbooks",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t9.2",
-            "title": "Sharing and Tracking Changes",
+            "title": "Sharing, Threaded Comments and Tracking Changes",
+            "slug": "track-changes-and-comments",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t9.3",
-            "title": "Excel Online & Co-Authoring",
+            "title": "Excel Online, Real-Time Co-Authoring & Version History",
+            "slug": "excel-online-coauthoring-version-history",
             "sortOrder": 3
           }
         ]
@@ -11873,17 +12051,20 @@
         "topics": [
           {
             "id": "ms-excel-for-advanced-t10.1",
-            "title": "Build a Business Performance Dashboard",
+            "title": "Capstone: Building the Business Performance Data Model",
+            "slug": "capstone-business-dashboard-data-model",
             "sortOrder": 1
           },
           {
             "id": "ms-excel-for-advanced-t10.2",
-            "title": "Use Advanced Formulas and Charts",
+            "title": "Capstone: Applying Advanced Formulas, DAX, and Pivot KPIs",
+            "slug": "capstone-advanced-formulas-pivot-kpis",
             "sortOrder": 2
           },
           {
             "id": "ms-excel-for-advanced-t10.3",
-            "title": "Apply Power Query, Pivot, and Macros",
+            "title": "Capstone: Polishing the Interactive Dashboard with Macro Automation",
+            "slug": "capstone-finalizing-interactive-dashboard",
             "sortOrder": 3
           }
         ]

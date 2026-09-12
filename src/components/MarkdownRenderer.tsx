@@ -19,6 +19,8 @@ import {
   Link2,
   Eye,
   EyeOff,
+  Maximize2,
+  X,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { toast } from 'react-hot-toast';
@@ -54,8 +56,8 @@ export function renderFormattedText(text: string): React.ReactNode {
   if (!text) return null;
 
   const parts: React.ReactNode[] = [];
-  // Regex matches: `inline code`, **bold**, ~~strikethrough~~, [link](url), *italic*
-  const regex = /(`[^`\n]+`|\*\*[^*\n]+\*\*|~~[^~\n]+~~|\[[^\]\n]+\]\([^)\n]+\)|\*[^*\n]+\*)/g;
+  // Regex matches: ![image](url), `inline code`, **bold**, ~~strikethrough~~, [link](url), *italic*
+  const regex = /(!\[[^\]\n]*\]\([^)\n]+\)|`[^`\n]+`|\*\*[^*\n]+\*\*|~~[^~\n]+~~|\[[^\]\n]+\]\([^)\n]+\)|\*[^*\n]+\*)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -65,7 +67,24 @@ export function renderFormattedText(text: string): React.ReactNode {
     }
     const token = match[0];
 
-    if (token.startsWith('`') && token.endsWith('`')) {
+    if (token.startsWith('![') && token.includes('](')) {
+      const imgMatch = token.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (imgMatch) {
+        parts.push(
+          <span key={match.index} className="inline-block my-2 overflow-hidden rounded-xl border border-slate-200 bg-white p-1 shadow-2xs">
+            <img
+              src={imgMatch[2]}
+              alt={imgMatch[1] || 'Illustration'}
+              className="max-h-72 object-contain rounded-lg"
+              loading="lazy"
+            />
+            {imgMatch[1] && <span className="block text-center text-xs text-slate-500 mt-1 font-medium">{imgMatch[1]}</span>}
+          </span>
+        );
+      } else {
+        parts.push(token);
+      }
+    } else if (token.startsWith('`') && token.endsWith('`')) {
       const codeContent = token.slice(1, -1);
       parts.push(
         <code
@@ -170,10 +189,12 @@ type Block =
   | { type: 'unordered-list'; items: string[] }
   | { type: 'mcq-answer'; answer: string }
   | { type: 'mcq-explanation'; explanation: string }
+  | { type: 'image'; alt: string; src: string }
   | { type: 'paragraph'; lines: string[] };
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null);
   const [playgroundModal, setPlaygroundModal] = useState<{
     isOpen: boolean;
     language: SupportedLanguage;
@@ -449,6 +470,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           currentType = 'unordered-list';
         }
         currentBlock.push(line);
+        continue;
+      }
+
+      // Markdown Image Block (![alt](src))
+      const blockImgMatch = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (blockImgMatch) {
+        flushCurrent();
+        blocks.push({
+          type: 'image',
+          alt: blockImgMatch[1],
+          src: blockImgMatch[2],
+        });
         continue;
       }
 
@@ -1109,7 +1142,39 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           );
         }
 
-        // 10. Normal Paragraph
+        // 10. Image Block
+        if (block.type === 'image') {
+          return (
+            <figure
+              key={idx}
+              className="my-8 overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-b from-slate-50/70 to-slate-100/40 p-2 sm:p-3 shadow-xs group"
+            >
+              <div
+                className="relative overflow-hidden rounded-xl bg-white flex items-center justify-center border border-slate-200/60 cursor-zoom-in"
+                onClick={() => setZoomedImage({ src: block.src, alt: block.alt })}
+              >
+                <img
+                  src={block.src}
+                  alt={block.alt || 'Microsoft Word UI diagram'}
+                  className="w-full max-h-[520px] object-contain rounded-lg transition-transform duration-200 group-hover:scale-[1.01]"
+                  loading="lazy"
+                />
+                <span className="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-slate-900/80 text-white text-[11px] font-medium opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs flex items-center gap-1.5 shadow-sm pointer-events-none">
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  Click to Zoom
+                </span>
+              </div>
+              {block.alt && (
+                <figcaption className="mt-3 text-center text-xs sm:text-sm font-semibold text-slate-700 px-3 py-1 flex items-center justify-center gap-2">
+                  <span className="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+                  <span>{renderFormattedText(block.alt)}</span>
+                </figcaption>
+              )}
+            </figure>
+          );
+        }
+
+        // 11. Normal Paragraph
         const paraText = block.lines.join(' ').trim();
         return (
           <p key={idx} className="text-text-muted text-base sm:text-lg leading-relaxed">
@@ -1129,6 +1194,39 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           initialHtml={playgroundModal.companionHtml}
           title={playgroundModal.title}
         />
+      )}
+
+      {/* Image Zoom / Lightbox Modal */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all animate-fadeIn"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div
+            className="relative max-w-5xl w-full max-h-[90vh] bg-white rounded-2xl p-3 sm:p-4 shadow-2xl overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-100">
+              <span className="text-sm sm:text-base font-bold text-slate-800 truncate">
+                {zoomedImage.alt || 'Image Preview'}
+              </span>
+              <button
+                onClick={() => setZoomedImage(null)}
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors"
+                aria-label="Close image preview"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="overflow-auto flex items-center justify-center p-2 max-h-[calc(90vh-80px)] bg-slate-50 rounded-xl">
+              <img
+                src={zoomedImage.src}
+                alt={zoomedImage.alt}
+                className="max-h-[75vh] w-auto object-contain rounded-lg shadow-sm"
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

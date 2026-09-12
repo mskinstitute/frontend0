@@ -29,6 +29,7 @@ export interface Chapter {
 export interface ChapterTopic {
   id: string;
   title: string;
+  slug?: string;
   sortOrder: number;
   notes?: {
     title: string;
@@ -210,7 +211,7 @@ export interface BlogPost {
 
 export interface SearchResultItem {
   id: string;
-  type: 'course' | 'live' | 'tutorial' | 'cheatsheet' | 'note' | 'handbook' | 'blog' | 'career';
+  type: 'course' | 'live' | 'tutorial' | 'cheatsheet' | 'note' | 'handbook' | 'blog' | 'career' | 'chapter' | 'topic';
   title: string;
   description: string;
   category?: string;

@@ -367,5 +367,222 @@
         "sql notes"
       ]
     }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-word-beginners",
+    "slug": "ms-word-for-beginners",
+    "courseSlug": "ms-word-for-beginners",
+    "title": "MS Word for Beginners",
+    "icon": "file-text",
+    "badge": "Beginner (Level 1)",
+    "tags": [
+      "Beginner",
+      "ms-word",
+      "ms-office",
+      "word-processing",
+      "documentation"
+    ],
+    "documentationTitle": "Complete MS Word for Beginners Documentation & Tutorial",
+    "shortDescription": "Learn MS Word from scratch: interface overview, ribbons, font & paragraph formatting, tables, images, page layout, shortcuts, and hands-on resume and report projects with visual screenshots and practice quizzes.",
+    "lessonsCount": 9,
+    "totalHours": "15h",
+    "topicsCount": 27,
+    "githubRepo": "github.com/msk-institute/ms-word-for-beginners",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "MS Word for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Complete MS Word for Beginners tutorial notes with interface screenshots, step-by-step formatting guides, table design, page setup, and interactive quizzes.",
+      "keywords": [
+        "ms word tutorial",
+        "ms word for beginners",
+        "learn microsoft word",
+        "word processing notes",
+        "ms word formatting guide",
+        "ms word resume tutorial"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-word-advanced",
+    "slug": "ms-word-for-advanced",
+    "courseSlug": "ms-word-for-advanced",
+    "title": "MS Word for Advanced",
+    "icon": "award",
+    "badge": "Advanced (Level 2)",
+    "tags": [
+      "Advanced",
+      "ms-word",
+      "mail-merge",
+      "macros",
+      "vba",
+      "ms-office"
+    ],
+    "documentationTitle": "Mastering Advanced MS Word: Mail Merge, Macros & Professional Publishing",
+    "shortDescription": "Master advanced MS Word skills: Mail Merge automation, VBA Macros, advanced table calculations, master templates, document protection, collaboration tools, and professional publishing workflows.",
+    "lessonsCount": 9,
+    "totalHours": "15h",
+    "topicsCount": 27,
+    "githubRepo": "github.com/msk-institute/ms-word-for-advanced",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "MS Word for Advanced Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Master advanced Microsoft Word features: Mail Merge step-by-step, VBA Macros, table formulas, compare documents, templates, and multi-author collaboration.",
+      "keywords": [
+        "advanced ms word tutorial",
+        "mail merge word tutorial",
+        "word macros tutorial",
+        "ms word table formulas",
+        "word document protection",
+        "advanced word notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-powerpoint-beginners",
+    "slug": "ms-powerpoint-for-beginners",
+    "courseSlug": "ms-powerpoint-for-beginners",
+    "title": "MS PowerPoint for Beginners",
+    "icon": "presentation",
+    "badge": "Beginner (Level 1)",
+    "tags": [
+      "Beginner",
+      "ms-powerpoint",
+      "ms-office",
+      "presentation",
+      "slide-design",
+      "pitch-deck"
+    ],
+    "documentationTitle": "Complete MS PowerPoint for Beginners Documentation & Tutorial",
+    "shortDescription": "Master MS PowerPoint from scratch: interface navigation, slide layouts, text and typography, multimedia, themes, Slide Master, cinematic Morph transitions, advanced animations, Presenter View, and capstone pitch deck projects with visual screenshots and practice quizzes.",
+    "lessonsCount": 9,
+    "totalHours": "15h",
+    "topicsCount": 27,
+    "githubRepo": "github.com/msk-institute/ms-powerpoint-for-beginners",
+    "updatedAt": "2026-09-12",
+    "seo": {
+      "title": "MS PowerPoint for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Complete MS PowerPoint for Beginners tutorial notes with interface screenshots, slide design best practices, Slide Master, Morph transitions, animations, Presenter View, and interactive quizzes.",
+      "keywords": [
+        "ms powerpoint tutorial",
+        "ms powerpoint for beginners",
+        "learn microsoft powerpoint",
+        "powerpoint slide design",
+        "powerpoint notes",
+        "morph transition tutorial",
+        "slide master guide",
+        "pitch deck powerpoint"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-excel-beginners",
+    "slug": "ms-excel-for-beginners",
+    "courseSlug": "ms-excel-for-beginners",
+    "title": "MS Excel for Beginners",
+    "icon": "file-spreadsheet",
+    "badge": "Beginner (Level 1)",
+    "tags": [
+      "Beginner",
+      "ms-excel",
+      "ms-office",
+      "spreadsheet",
+      "data-entry",
+      "formulas"
+    ],
+    "documentationTitle": "Complete MS Excel for Beginners Documentation & Tutorial",
+    "shortDescription": "Learn Microsoft Excel from the ground up: workbook anatomy, data entry, formatting, basic formulas, essential functions (SUM, AVERAGE, MIN, MAX), sheet management, basic charts, printing, and hands-on student report card project with screenshots and quizzes.",
+    "lessonsCount": 9,
+    "totalHours": "15h",
+    "topicsCount": 27,
+    "githubRepo": "github.com/msk-institute/ms-excel-for-beginners",
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "MS Excel for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Complete MS Excel for Beginners tutorial notes with interface screenshots, formula breakdowns, basic functions, cell formatting, and interactive quizzes.",
+      "keywords": [
+        "ms excel tutorial",
+        "ms excel for beginners",
+        "learn microsoft excel",
+        "excel formulas beginner",
+        "excel notes"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-excel-intermediate",
+    "slug": "ms-excel-for-intermediate",
+    "courseSlug": "ms-excel-for-intermediate",
+    "title": "MS Excel for Intermediate",
+    "icon": "file-spreadsheet",
+    "badge": "Intermediate (Level 2)",
+    "tags": [
+      "Intermediate",
+      "ms-excel",
+      "ms-office",
+      "vlookup",
+      "pivot-tables",
+      "data-analysis"
+    ],
+    "documentationTitle": "Complete MS Excel for Intermediate Documentation & Tutorial",
+    "shortDescription": "Intermediate Excel mastery: absolute cell references, multi-level sorting, advanced filtering, official Excel Tables (Ctrl+T), conditional formatting heatmaps, logical formulas (IF, AND, OR), VLOOKUP, Pivot Tables, data validation, and attendance tracker project.",
+    "lessonsCount": 10,
+    "totalHours": "18h",
+    "topicsCount": 30,
+    "githubRepo": "github.com/msk-institute/ms-excel-for-intermediate",
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "MS Excel for Intermediate Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Intermediate Excel tutorial covering VLOOKUP, Pivot Tables, Excel Tables, conditional formatting, data validation dropdowns, and interactive quizzes.",
+      "keywords": [
+        "ms excel intermediate",
+        "vlookup tutorial",
+        "pivot table tutorial",
+        "excel conditional formatting",
+        "data validation excel"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-ms-excel-advanced",
+    "slug": "ms-excel-for-advanced",
+    "courseSlug": "ms-excel-for-advanced",
+    "title": "MS Excel for Advanced",
+    "icon": "file-spreadsheet",
+    "badge": "Advanced (Level 3)",
+    "tags": [
+      "Advanced",
+      "ms-excel",
+      "xlookup",
+      "power-query",
+      "power-pivot",
+      "dax",
+      "vba",
+      "dashboards"
+    ],
+    "documentationTitle": "Complete MS Excel for Advanced Documentation & Tutorial",
+    "shortDescription": "Enterprise-grade Excel mastery: XLOOKUP, INDEX & MATCH, Dynamic Arrays (FILTER, SORT, UNIQUE), Advanced Pivot Tables with Slicers, What-If Analysis, Power Query ETL, Power Pivot DAX data modeling, VBA Macros automation, and executive dashboards.",
+    "lessonsCount": 10,
+    "totalHours": "24h",
+    "topicsCount": 35,
+    "githubRepo": "github.com/msk-institute/ms-excel-for-advanced",
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "MS Excel for Advanced Tutorial & Notes - MSK Notes | MSK Institute",
+      "description": "Advanced Excel tutorial notes with XLOOKUP, dynamic arrays, Power Query, Power Pivot DAX, VBA macros, interactive dashboards, and practice quizzes.",
+      "keywords": [
+        "advanced excel tutorial",
+        "xlookup guide",
+        "power query tutorial",
+        "power pivot dax",
+        "excel vba macros",
+        "excel dashboard tutorial"
+      ]
+    }
   }
 ]
