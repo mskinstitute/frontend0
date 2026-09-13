@@ -83,14 +83,49 @@ export default function TutorialSidebar({
       <div className="p-4 sm:p-5 border-b border-border-subtle/80 space-y-3">
         {/* Navigation Actions Row: Back to Study Material & Tutorial Overview */}
         <div className="flex items-center justify-between gap-1">
-          <Link
-            href="/study-material"
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-secondary hover:bg-orange-50/70 border border-border-subtle/70 transition-colors group"
-            title="Browse all Study Materials, Cheatsheets & PDF Notes"
-          >
-            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-            <span>Study Materials</span>
-          </Link>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <Link
+              href="/study-material"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-secondary hover:bg-orange-50/70 border border-border-subtle/70 transition-colors group"
+              title="Browse all Study Materials, Cheatsheets & PDF Notes"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+              <span>Study Materials</span>
+            </Link>
+
+            {tutorialSlug === 'python-for-beginners' && (
+              <Link
+                href="/study-material?id=cheat-python-beginners&type=cheatsheet"
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 transition-colors"
+                title="Open Python Cheatsheet"
+              >
+                <Layers className="w-3 h-3 text-purple-600" />
+                <span>Cheatsheet</span>
+              </Link>
+            )}
+
+            {tutorialSlug === 'html5-complete-course' && (
+              <Link
+                href="/study-material?id=cheat-html5-complete&type=cheatsheet"
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 transition-colors"
+                title="Open HTML5 Cheatsheet"
+              >
+                <Layers className="w-3 h-3 text-purple-600" />
+                <span>Cheatsheet</span>
+              </Link>
+            )}
+
+            {tutorialSlug === 'markdown' && (
+              <Link
+                href="/study-material?id=cheat-markdown-syntax&type=cheatsheet"
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
+                title="Open Markdown & GFM Cheatsheet"
+              >
+                <Layers className="w-3 h-3 text-blue-600" />
+                <span>Cheatsheet</span>
+              </Link>
+            )}
+          </div>
 
           {onToggleHide && (
             <button

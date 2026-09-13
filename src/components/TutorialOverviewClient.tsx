@@ -175,14 +175,29 @@ export default function TutorialOverviewClient({
             </span>
           </div>
 
-          {/* Orange "Start Learning →" CTA Button (Image 2) */}
-          <div className="pt-4">
+          {/* Action CTAs */}
+          <div className="pt-4 flex flex-wrap items-center gap-4">
             <Link
               href={`/tutorials/${tutorial.slug}/${firstTopicSlug}`}
               className="inline-flex items-center gap-2 px-8 py-4 bg-secondary hover:bg-secondary-light text-white font-black text-base rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
             >
               Start Learning
               <ArrowRight className="w-5 h-5" />
+            </Link>
+
+            <Link
+              href={
+                tutorial.slug === 'python-for-beginners'
+                  ? '/study-material?id=cheat-python-beginners&type=cheatsheet'
+                  : tutorial.slug === 'html5-complete-course'
+                  ? '/study-material?id=cheat-html5-complete&type=cheatsheet'
+                  : '/study-material?type=cheatsheet'
+              }
+              className="inline-flex items-center gap-2 px-6 py-4 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold text-base rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+              title="Open quick syntax revision cheatsheet"
+            >
+              <Layers className="w-5 h-5 text-purple-600" />
+              Quick Cheatsheet
             </Link>
           </div>
 

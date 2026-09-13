@@ -46,6 +46,43 @@ export default function TutorialCard({ tutorial }: TutorialCardProps) {
             </svg>
           </div>
         );
+      case 'numpy':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 shadow-2xs">
+            {/* Matrix / Numerical Array Grid Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M9 3v18" />
+              <path d="M15 3v18" />
+              <path d="M3 9h18" />
+              <path d="M3 15h18" />
+            </svg>
+          </div>
+        );
+      case 'computer':
+      case 'ccc':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-2xs">
+            {/* Desktop Monitor & Computer Screen Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="14" x="2" y="3" rx="2" />
+              <line x1="8" x2="16" y1="21" y2="21" />
+              <line x1="12" x2="12" y1="17" y2="21" />
+            </svg>
+          </div>
+        );
+      case 'markdown':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 shadow-2xs">
+            {/* Official Markdown M and Arrow Down Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="14" x="2" y="5" rx="2" />
+              <path d="M6 15V9l2.5 3 2.5-3v6" />
+              <path d="M15 9v6l2-2" />
+              <path d="M15 15l-2-2" />
+            </svg>
+          </div>
+        );
       default:
         return (
           <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 shadow-2xs font-mono font-black text-sm">

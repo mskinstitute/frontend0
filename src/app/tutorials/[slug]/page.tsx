@@ -21,15 +21,15 @@ export async function generateMetadata({ params }: TutorialOverviewPageProps): P
 
   const { tutorial } = data;
   return {
-    title: tutorial.seo.title || `${tutorial.title} Tutorial & Notes | MSK Institute`,
-    description: tutorial.seo.description || tutorial.shortDescription,
-    keywords: tutorial.seo.keywords,
+    title: tutorial.seo?.title || `${tutorial.title} Tutorial & Notes | MSK Institute`,
+    description: tutorial.seo?.description || tutorial.shortDescription,
+    keywords: tutorial.seo?.keywords || [tutorial.title?.toLowerCase() || 'computer', 'ccc', 'tutorial', 'nielit'],
     alternates: {
       canonical: `https://mskinstitute.in/tutorials/${tutorial.slug}`,
     },
     openGraph: {
-      title: tutorial.seo.title,
-      description: tutorial.seo.description,
+      title: tutorial.seo?.title || tutorial.title,
+      description: tutorial.seo?.description || tutorial.shortDescription,
       url: `https://mskinstitute.in/tutorials/${tutorial.slug}`,
     },
   };

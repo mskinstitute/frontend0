@@ -123,8 +123,8 @@ export async function fetchTutorialBySlug(slug: string): Promise<{ tutorial: Tut
 
   // Match course by courseSlug or by keyword
   const course =
-    courses.find((c) => c.slug.toLowerCase() === tutorial.courseSlug.toLowerCase()) ||
-    courses.find((c) => c.title.toLowerCase().includes(tutorial.title?.toLowerCase() || '')) ||
+    courses.find((c) => tutorial.courseSlug && c.slug?.toLowerCase() === tutorial.courseSlug.toLowerCase()) ||
+    courses.find((c) => c.title?.toLowerCase().includes(tutorial.title?.toLowerCase() || '')) ||
     courses[0];
 
   return { tutorial, course };

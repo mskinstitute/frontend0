@@ -52,6 +52,17 @@ export default function StudyMaterialClient({
   const [activeHandbook, setActiveHandbook] = useState<StudyMaterial | null>(null);
   const [activeNoteToBuy, setActiveNoteToBuy] = useState<StudyMaterial | null>(null);
 
+  // Cheatsheet modal internal search & filter state
+  const [cheatsheetSearch, setCheatsheetSearch] = useState('');
+  const [activeCheatsheetCategory, setActiveCheatsheetCategory] = useState('All');
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
+
+  const openCheatsheetModal = (item: StudyMaterial) => {
+    setCheatsheetSearch('');
+    setActiveCheatsheetCategory('All');
+    setActiveCheatsheet(item);
+  };
+
   // Copy state tracker: records snippet index or command key
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -76,7 +87,7 @@ export default function StudyMaterialClient({
       );
       if (match) {
         if (match.type === 'tutorial') setActiveTutorial(match);
-        else if (match.type === 'cheatsheet') setActiveCheatsheet(match);
+        else if (match.type === 'cheatsheet') openCheatsheetModal(match);
         else if (match.type === 'handbook') setActiveHandbook(match);
         else if (match.type === 'note' && match.tier === 'paid') setActiveNoteToBuy(match);
       }
@@ -156,6 +167,64 @@ export default function StudyMaterialClient({
     setTimeout(() => {
       setCopiedKey((prev) => (prev === key ? null : prev));
     }, 2000);
+  };
+
+  // Filtered Cheatsheet Sections inside Modal
+  const filteredCheatsheetSections = useMemo(() => {
+    if (!activeCheatsheet?.cheatsheetContent?.sections) return [];
+    const query = cheatsheetSearch.trim().toLowerCase();
+
+    return activeCheatsheet.cheatsheetContent.sections
+      .filter((sec) => {
+        if (activeCheatsheetCategory !== 'All' && sec.categoryTitle !== activeCheatsheetCategory) {
+          return false;
+        }
+        return true;
+      })
+      .map((sec) => {
+        if (!query) return sec;
+        const matchingItems = sec.items.filter((item) => {
+          return (
+            item.commandOrSyntax.toLowerCase().includes(query) ||
+            item.explanation.toLowerCase().includes(query) ||
+            (item.example && item.example.toLowerCase().includes(query)) ||
+            sec.categoryTitle.toLowerCase().includes(query)
+          );
+        });
+        return {
+          ...sec,
+          items: matchingItems,
+        };
+      })
+      .filter((sec) => sec.items.length > 0);
+  }, [activeCheatsheet, cheatsheetSearch, activeCheatsheetCategory]);
+
+  const totalCheatsheetItemsCount = useMemo(() => {
+    if (!activeCheatsheet?.cheatsheetContent?.sections) return 0;
+    return activeCheatsheet.cheatsheetContent.sections.reduce(
+      (acc, s) => acc + s.items.length,
+      0
+    );
+  }, [activeCheatsheet]);
+
+  const matchingCheatsheetItemsCount = useMemo(() => {
+    return filteredCheatsheetSections.reduce((acc, s) => acc + s.items.length, 0);
+  }, [filteredCheatsheetSections]);
+
+  // Download as PDF without redirecting
+  const handleDownloadCheatsheetPdf = async () => {
+    if (!activeCheatsheet) return;
+    try {
+      setIsDownloadingPdf(true);
+      const { downloadCheatsheetPdf } = await import('@/lib/cheatsheetPdfGenerator');
+      downloadCheatsheetPdf(activeCheatsheet);
+      toast.success('PDF Cheatsheet downloaded successfully!');
+    } catch (error) {
+      console.error('Failed to download PDF cheatsheet:', error);
+      toast.error('Could not generate PDF. Please try again.');
+    } finally {
+      setIsDownloadingPdf(false);
+    }
   };
 
   // Inquiry Checkout Submission
@@ -245,7 +314,7 @@ export default function StudyMaterialClient({
             <h3
               onClick={() => {
                 if (item.type === 'tutorial') setActiveTutorial(item);
-                else if (item.type === 'cheatsheet') setActiveCheatsheet(item);
+                else if (item.type === 'cheatsheet') openCheatsheetModal(item);
                 else if (item.type === 'handbook') setActiveHandbook(item);
               }}
               className={`text-lg font-bold text-primary group-hover:text-secondary transition-colors ${
@@ -316,7 +385,7 @@ export default function StudyMaterialClient({
 
           {item.type === 'cheatsheet' && (
             <button
-              onClick={() => setActiveCheatsheet(item)}
+              onClick={() => openCheatsheetModal(item)}
               className="w-full flex items-center justify-center gap-2 py-2.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition-colors cursor-pointer"
             >
               <Layers className="w-4 h-4" />
@@ -711,104 +780,222 @@ export default function StudyMaterialClient({
           aria-modal="true"
         >
           <div
-            className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-border-subtle overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
+            className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl border border-border-subtle overflow-hidden flex flex-col max-h-[92vh] animate-in zoom-in-95 duration-150"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="p-6 border-b border-border-subtle bg-purple-50/50 flex items-start justify-between gap-4">
-              <div className="space-y-1.5">
-                <span className="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-[11px] font-bold uppercase rounded-md">
-                  Quick Cheatsheet
-                </span>
-                <h2 className="text-xl sm:text-2xl font-black text-primary">
+            <div className="p-5 sm:p-6 border-b border-border-subtle bg-gradient-to-r from-purple-50/90 via-white to-purple-50/40 flex items-start justify-between gap-4">
+              <div className="space-y-1.5 min-w-0 flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-[11px] font-bold uppercase rounded-md flex items-center gap-1">
+                    <Layers className="w-3 h-3 text-purple-600" />
+                    Quick Cheatsheet
+                  </span>
+                  <span className="px-2 py-0.5 bg-surface text-text-muted text-[11px] font-semibold rounded-md border border-border-subtle">
+                    {activeCheatsheet.category}
+                  </span>
+                  <span className="px-2 py-0.5 bg-surface text-text-muted text-[11px] font-semibold rounded-md border border-border-subtle">
+                    {activeCheatsheet.level}
+                  </span>
+                  <span className="text-xs text-text-muted hidden sm:inline">
+                    • {totalCheatsheetItemsCount} Commands across {activeCheatsheet.cheatsheetContent?.sections.length || 0} Categories
+                  </span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-primary truncate">
                   {activeCheatsheet.title}
                 </h2>
-                <p className="text-xs text-text-muted">{activeCheatsheet.description}</p>
+                <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
+                  {activeCheatsheet.description}
+                </p>
               </div>
               <button
                 onClick={() => setActiveCheatsheet(null)}
-                className="p-1.5 rounded-full text-text-muted hover:text-primary hover:bg-white transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-text-muted hover:text-primary hover:bg-slate-100 transition-colors cursor-pointer flex-shrink-0"
                 aria-label="Close modal"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-6">
-              {activeCheatsheet.cheatsheetContent?.sections.map((sec, secIdx) => (
-                <div key={secIdx} className="space-y-3">
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-purple-900 border-b border-purple-100 pb-1 flex items-center gap-2">
-                    <ChevronRight className="w-4 h-4 text-purple-600" />
-                    {sec.categoryTitle}
-                  </h3>
+            {/* Search & Category Filter Toolbar */}
+            <div className="p-3 sm:p-4 border-b border-border-subtle bg-surface/70 space-y-3">
+              {/* Search Bar with live counter and clear button */}
+              <div className="relative flex items-center">
+                <Search className="w-4 h-4 text-purple-600 absolute left-3.5 pointer-events-none" />
+                <input
+                  type="text"
+                  value={cheatsheetSearch}
+                  onChange={(e) => setCheatsheetSearch(e.target.value)}
+                  placeholder="Search syntax, commands, keywords, or examples (e.g. print, list, dict, open)..."
+                  className="w-full pl-10 pr-10 py-2 sm:py-2.5 bg-white border border-border-subtle rounded-xl text-xs sm:text-sm text-primary placeholder:text-text-muted/70 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all shadow-2xs"
+                />
+                {cheatsheetSearch && (
+                  <button
+                    onClick={() => setCheatsheetSearch('')}
+                    className="absolute right-3 p-1 text-text-muted hover:text-primary rounded-md transition-colors cursor-pointer"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
 
-                  <div className="space-y-2">
-                    {sec.items.map((item, itemIdx) => {
-                      const copyKey = `cs-${secIdx}-${itemIdx}`;
-                      return (
-                        <div
-                          key={itemIdx}
-                          className="bg-surface border border-border-subtle rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-purple-300 transition-colors"
-                        >
-                          <div className="space-y-1 min-w-0 flex-1">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <code className="text-xs font-bold font-mono bg-white px-2 py-1 rounded border border-border-subtle text-purple-700">
-                                {item.commandOrSyntax}
-                              </code>
-                            </div>
-                            <p className="text-xs text-text-muted">{item.explanation}</p>
-                            {item.example && (
-                              <p className="text-[11px] text-text-muted/80 font-mono">
-                                e.g. {item.example}
-                              </p>
-                            )}
-                          </div>
-
-                          <button
-                            onClick={() => handleCopy(copyKey, item.commandOrSyntax)}
-                            className="self-start sm:self-center flex items-center gap-1 px-2.5 py-1.5 bg-white border border-border-subtle hover:border-purple-400 text-xs text-text-muted hover:text-purple-700 rounded-lg transition-colors cursor-pointer flex-shrink-0"
-                            aria-label="Copy syntax"
-                          >
-                            {copiedKey === copyKey ? (
-                              <>
-                                <Check className="w-3.5 h-3.5 text-green-600" />
-                                <span className="text-green-600 font-semibold">Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="w-3.5 h-3.5" />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
+              {/* Category Filter Chips & Counter */}
+              <div className="flex items-center justify-between gap-3 text-xs flex-wrap">
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full no-scrollbar">
+                  <button
+                    onClick={() => setActiveCheatsheetCategory('All')}
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                      activeCheatsheetCategory === 'All'
+                        ? 'bg-purple-700 text-white shadow-xs'
+                        : 'bg-white text-text-muted hover:text-primary border border-border-subtle'
+                    }`}
+                  >
+                    All ({totalCheatsheetItemsCount})
+                  </button>
+                  {activeCheatsheet.cheatsheetContent?.sections.map((sec, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveCheatsheetCategory(sec.categoryTitle)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                        activeCheatsheetCategory === sec.categoryTitle
+                          ? 'bg-purple-700 text-white shadow-xs'
+                          : 'bg-white text-text-muted hover:text-primary border border-border-subtle'
+                      }`}
+                    >
+                      {sec.categoryTitle.replace(/^\d+\.\s*/, '')} ({sec.items.length})
+                    </button>
+                  ))}
                 </div>
-              ))}
+
+                <div className="text-[11px] font-medium text-text-muted flex-shrink-0">
+                  {cheatsheetSearch.trim() ? (
+                    <span className="text-purple-700 font-bold bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">
+                      {matchingCheatsheetItemsCount} matching {matchingCheatsheetItemsCount === 1 ? 'command' : 'commands'}
+                    </span>
+                  ) : (
+                    <span>{totalCheatsheetItemsCount} total commands</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body: Cards List */}
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1">
+              {filteredCheatsheetSections.length === 0 ? (
+                <div className="text-center py-12 space-y-3 bg-surface rounded-2xl border border-dashed border-border-subtle">
+                  <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center mx-auto text-purple-600">
+                    <Search className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-primary">No matching syntax found</p>
+                    <p className="text-xs text-text-muted">
+                      No syntax matching &ldquo;{cheatsheetSearch}&rdquo; in this cheatsheet.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setCheatsheetSearch('');
+                      setActiveCheatsheetCategory('All');
+                    }}
+                    className="px-4 py-1.5 bg-white border border-purple-200 text-purple-700 hover:bg-purple-50 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                  >
+                    Clear Filter & Search
+                  </button>
+                </div>
+              ) : (
+                filteredCheatsheetSections.map((sec, secIdx) => (
+                  <div key={secIdx} className="space-y-3">
+                    <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-purple-900 border-b border-purple-100 pb-1.5 flex items-center justify-between gap-2">
+                      <span className="flex items-center gap-2">
+                        <ChevronRight className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                        {sec.categoryTitle}
+                      </span>
+                      <span className="text-[11px] font-medium text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200">
+                        {sec.items.length} {sec.items.length === 1 ? 'item' : 'items'}
+                      </span>
+                    </h3>
+
+                    <div className="space-y-2.5">
+                      {sec.items.map((item, itemIdx) => {
+                        const copyKey = `cs-${secIdx}-${itemIdx}`;
+                        return (
+                          <div
+                            key={itemIdx}
+                            className="bg-surface hover:bg-white border border-border-subtle hover:border-purple-300 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all group shadow-2xs hover:shadow-xs"
+                          >
+                            <div className="space-y-1.5 min-w-0 flex-1">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <code className="text-xs sm:text-[13px] font-bold font-mono bg-white group-hover:bg-purple-50/50 px-2.5 py-1 rounded-lg border border-border-subtle group-hover:border-purple-200 text-purple-700 select-all transition-colors">
+                                  {item.commandOrSyntax}
+                                </code>
+                              </div>
+                              <p className="text-xs text-text-muted leading-relaxed">{item.explanation}</p>
+                              {item.example && (
+                                <p className="text-[11px] text-purple-900/80 bg-purple-50/60 px-2 py-1 rounded-md border border-purple-100/80 font-mono inline-block">
+                                  <span className="text-purple-500 font-semibold select-none">e.g. </span>
+                                  {item.example}
+                                </p>
+                              )}
+                            </div>
+
+                            <button
+                              onClick={() => handleCopy(copyKey, item.commandOrSyntax)}
+                              className="self-start sm:self-center flex items-center gap-1 px-3 py-1.5 bg-white border border-border-subtle hover:border-purple-400 text-xs text-text-muted hover:text-purple-700 rounded-lg transition-all cursor-pointer flex-shrink-0 shadow-2xs active:scale-95"
+                              aria-label="Copy syntax"
+                            >
+                              {copiedKey === copyKey ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 text-green-600" />
+                                  <span className="text-green-600 font-semibold">Copied!</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5 text-purple-600" />
+                                  <span>Copy</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 bg-surface border-t border-border-subtle flex items-center justify-between gap-3">
-              {activeCheatsheet.downloadUrl && (
-                <a
-                  href={activeCheatsheet.downloadUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold rounded-lg transition-colors"
+            <div className="p-4 bg-surface border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <button
+                  onClick={handleDownloadCheatsheetPdf}
+                  disabled={isDownloadingPdf}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-purple-700 hover:bg-purple-800 disabled:bg-purple-400 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm hover:shadow cursor-pointer active:scale-95"
+                  title="Download cheatsheet directly as PDF file"
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  Download PDF Cheatsheet
-                </a>
-              )}
-              <button
-                onClick={() => setActiveCheatsheet(null)}
-                className="px-4 py-2 bg-white border border-border-subtle text-text-muted hover:text-primary rounded-lg text-xs font-semibold cursor-pointer"
-              >
-                Close
-              </button>
+                  {isDownloadingPdf ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Generating PDF...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4" />
+                      <span>Download PDF Cheatsheet</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => setActiveCheatsheet(null)}
+                  className="w-full sm:w-auto px-4 py-2.5 bg-white border border-border-subtle text-text-muted hover:text-primary rounded-xl text-xs sm:text-sm font-semibold cursor-pointer hover:bg-surface transition-colors"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>

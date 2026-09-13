@@ -15,6 +15,9 @@ export const TUTORIAL_SLUGS = new Set([
   'ms-excel-for-beginners',
   'ms-excel-for-intermediate',
   'ms-excel-for-advanced',
+  'numpy-complete-course',
+  'ccc',
+  'markdown',
 ]);
 
 export function isTutorialCourse(courseSlug?: string): boolean {
@@ -36,7 +39,7 @@ export function resolveTopicTutorialUrl(
   }
 
   const cSlug = (courseSlug || '').toLowerCase().trim();
-  const chTitle = chapterTitle.toLowerCase();
+  const chTitle = (chapterTitle || '').toLowerCase();
 
   let tutorialSlug: string | null = null;
 
@@ -98,6 +101,14 @@ export function resolveTopicTutorialUrl(
     } else {
       tutorialSlug = 'ms-excel-for-beginners';
     }
+  } else if (cSlug === 'numpy-complete-course' || cSlug.includes('numpy')) {
+    tutorialSlug = 'numpy-complete-course';
+  } else if (cSlug.includes('data-analysis') && (chTitle.includes('numpy') || chTitle.includes('numerical'))) {
+    tutorialSlug = 'numpy-complete-course';
+  } else if (cSlug === 'ccc' || cSlug.includes('ccc')) {
+    tutorialSlug = 'ccc';
+  } else if (cSlug === 'markdown' || cSlug.includes('markdown')) {
+    tutorialSlug = 'markdown';
   } else if (cSlug.includes('full-stack') || cSlug.includes('bootcamp')) {
     if (chTitle.includes('html')) tutorialSlug = 'html5-complete-course';
     else if (chTitle.includes('css') || chTitle.includes('tailwind')) tutorialSlug = 'css-for-beginners';

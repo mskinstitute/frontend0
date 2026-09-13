@@ -20,6 +20,7 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
   GraduationCap,
+  Layers,
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { TutorialItem, Course, TutorialTopicFrontmatter } from '@/types';
@@ -435,6 +436,29 @@ export default function TutorialReader({
                   <GraduationCap className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
                   <span>Study Materials</span>
                 </Link>
+
+                {/* Direct link to Cheatsheet if viewing Python or HTML5 */}
+                {tutorial.slug === 'python-for-beginners' && (
+                  <Link
+                    href="/study-material?id=cheat-python-beginners&type=cheatsheet"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold transition-all shadow-2xs group"
+                    title="Open Python Revision Cheatsheet"
+                  >
+                    <Layers className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-purple-600" />
+                    <span>Cheatsheet</span>
+                  </Link>
+                )}
+
+                {tutorial.slug === 'html5-complete-course' && (
+                  <Link
+                    href="/study-material?id=cheat-html5-complete&type=cheatsheet"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold transition-all shadow-2xs group"
+                    title="Open HTML5 Revision Cheatsheet"
+                  >
+                    <Layers className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-purple-600" />
+                    <span>Cheatsheet</span>
+                  </Link>
+                )}
 
                 {/* Hide / Show Curriculum Sidebar Button (Desktop) */}
                 <button

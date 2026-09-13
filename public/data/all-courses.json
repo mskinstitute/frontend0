@@ -5,7 +5,7 @@
     "title": "CCC (Basic Computer Course)",
     "slug": "ccc",
     "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Become digitally literate with the complete CCC program. Learn computer fundamentals, MS Office tools, Internet, Email, Digital Payments, Cyber Security, and Future Skills.",
+    "shortDescription": "Comprehensive CCC (Course on Computer Concepts) certification training aligned with the official NIELIT syllabus. Covers basic hardware, operating systems, LibreOffice & MS Office, Internet, Cyber Security, Digital Financial Tools, and FutureSkills with 350+ exam-oriented MCQs.",
     "categories": [
       "Computer Literacy",
       "Digital Skills",
@@ -26,424 +26,1017 @@
     "chapters": [
       {
         "id": "ccc-ch1",
+        "chapterTitle": "Introduction to Computer",
         "title": "Introduction to Computer",
         "sortOrder": 1,
         "topics": [
           {
             "id": "ccc-t1.1",
             "title": "Evolution of Computers and IT Gadgets",
+            "slug": "evolution-of-computers-and-it-gadgets",
             "sortOrder": 1
           },
           {
             "id": "ccc-t1.2",
             "title": "Applications of Computers in Daily Life",
+            "slug": "applications-of-computers-in-daily-life",
             "sortOrder": 2
           },
           {
             "id": "ccc-t1.3",
             "title": "Basics of Hardware and Software",
+            "slug": "basics-of-hardware-and-software",
             "sortOrder": 3
           },
           {
             "id": "ccc-t1.4",
             "title": "CPU, Memory, Storage, Input & Output Devices",
+            "slug": "cpu-memory-storage-input-output-devices",
             "sortOrder": 4
           },
           {
             "id": "ccc-t1.5",
             "title": "Types of Software: Application, System, Utility",
+            "slug": "types-of-software-application-system-utility",
             "sortOrder": 5
           },
           {
             "id": "ccc-t1.6",
             "title": "Open Source vs Proprietary Software",
+            "slug": "open-source-vs-proprietary-software",
             "sortOrder": 6
           },
           {
             "id": "ccc-t1.7",
             "title": "Introduction to Mobile Applications",
+            "slug": "introduction-to-mobile-applications",
             "sortOrder": 7
           }
         ]
       },
       {
         "id": "ccc-ch2",
+        "chapterTitle": "Introduction to Operating System",
         "title": "Introduction to Operating System",
         "sortOrder": 2,
         "topics": [
           {
             "id": "ccc-t2.1",
             "title": "Basics and Types of Operating Systems",
+            "slug": "basics-and-types-of-operating-systems",
             "sortOrder": 1
           },
           {
             "id": "ccc-t2.2",
             "title": "Operating Systems for Desktop, Laptop, and Mobile",
+            "slug": "operating-systems-desktop-laptop-mobile",
             "sortOrder": 2
           },
           {
             "id": "ccc-t2.3",
             "title": "Desktop Interface: Taskbar, Icons, Shortcuts",
+            "slug": "desktop-interface-taskbar-icons-shortcuts",
             "sortOrder": 3
           },
           {
             "id": "ccc-t2.4",
             "title": "Running and Managing Applications",
+            "slug": "running-and-managing-applications",
             "sortOrder": 4
           },
           {
             "id": "ccc-t2.5",
             "title": "System Settings: Date, Time, Display, Mouse",
+            "slug": "system-settings-date-time-display-mouse",
             "sortOrder": 5
           },
           {
             "id": "ccc-t2.6",
             "title": "Add/Remove Programs, Printers, and Features",
+            "slug": "add-remove-programs-printers-features",
             "sortOrder": 6
           },
           {
             "id": "ccc-t2.7",
             "title": "File and Folder Management",
+            "slug": "file-and-folder-management",
             "sortOrder": 7
           },
           {
             "id": "ccc-t2.8",
             "title": "Common File Extensions",
+            "slug": "common-file-extensions",
             "sortOrder": 8
           }
         ]
       },
       {
         "id": "ccc-ch3",
+        "chapterTitle": "Word Processing (MS Word / LibreOffice Writer)",
         "title": "Word Processing (MS Word / LibreOffice Writer)",
         "sortOrder": 3,
         "topics": [
           {
             "id": "ccc-t3.1",
             "title": "Introduction and Interface Overview",
+            "slug": "word-processing-interface-overview",
             "sortOrder": 1
           },
           {
             "id": "ccc-t3.2",
             "title": "Creating, Opening, Saving, and Printing Documents",
+            "slug": "creating-opening-saving-printing-documents",
             "sortOrder": 2
           },
           {
             "id": "ccc-t3.3",
             "title": "Text Editing: Cut, Copy, Paste, Undo, Redo",
+            "slug": "text-editing-cut-copy-paste-undo-redo",
             "sortOrder": 3
           },
           {
             "id": "ccc-t3.4",
             "title": "Formatting Text: Font, Color, Size, Alignment",
+            "slug": "formatting-text-font-color-size-alignment",
             "sortOrder": 4
           },
           {
             "id": "ccc-t3.5",
             "title": "Spelling Check, Find and Replace, AutoCorrect",
+            "slug": "spelling-check-find-replace-autocorrect",
             "sortOrder": 5
           },
           {
             "id": "ccc-t3.6",
             "title": "Page Setup, Header, Footer, and Page Numbering",
+            "slug": "page-setup-header-footer-numbering",
             "sortOrder": 6
           },
           {
             "id": "ccc-t3.7",
             "title": "Table Insertion and Manipulation",
+            "slug": "table-insertion-and-manipulation",
             "sortOrder": 7
           },
           {
             "id": "ccc-t3.8",
             "title": "Mail Merge: Creating Bulk Letters and Labels",
+            "slug": "mail-merge-bulk-letters-labels",
             "sortOrder": 8
           }
         ]
       },
       {
         "id": "ccc-ch4",
+        "chapterTitle": "Spreadsheet (MS Excel / LibreOffice Calc)",
         "title": "Spreadsheet (MS Excel / LibreOffice Calc)",
         "sortOrder": 4,
         "topics": [
           {
             "id": "ccc-t4.1",
             "title": "Introduction to Spreadsheets and Interface",
+            "slug": "spreadsheet-basics-and-interface",
             "sortOrder": 1
           },
           {
             "id": "ccc-t4.2",
             "title": "Creating and Saving Worksheets",
+            "slug": "creating-and-saving-worksheets",
             "sortOrder": 2
           },
           {
             "id": "ccc-t4.3",
             "title": "Cell Addressing and Data Entry",
+            "slug": "cell-addressing-and-data-entry",
             "sortOrder": 3
           },
           {
             "id": "ccc-t4.4",
             "title": "Editing, Formatting Cells, Rows, and Columns",
+            "slug": "editing-formatting-cells-rows-columns",
             "sortOrder": 4
           },
           {
             "id": "ccc-t4.5",
             "title": "Basic Formulas and Functions (SUM, AVG, MAX, MIN)",
+            "slug": "basic-formulas-functions-sum-avg-max-min",
             "sortOrder": 5
           },
           {
             "id": "ccc-t4.6",
             "title": "Sorting, Filtering, and Freezing Panes",
+            "slug": "sorting-filtering-freezing-panes",
             "sortOrder": 6
           },
           {
             "id": "ccc-t4.7",
             "title": "Charts and Graphs (Bar, Pie, Line)",
+            "slug": "charts-and-graphs-bar-pie-line",
             "sortOrder": 7
           },
           {
             "id": "ccc-t4.8",
             "title": "Printing and Page Setup for Sheets",
+            "slug": "printing-and-page-setup-sheets",
             "sortOrder": 8
           }
         ]
       },
       {
         "id": "ccc-ch5",
+        "chapterTitle": "Presentation (MS PowerPoint / LibreOffice Impress)",
         "title": "Presentation (MS PowerPoint / LibreOffice Impress)",
         "sortOrder": 5,
         "topics": [
           {
             "id": "ccc-t5.1",
             "title": "Creating a New Presentation (Template / Blank)",
+            "slug": "creating-new-presentation-templates",
             "sortOrder": 1
           },
           {
             "id": "ccc-t5.2",
             "title": "Adding and Editing Text on Slides",
+            "slug": "adding-and-editing-text-slides",
             "sortOrder": 2
           },
           {
             "id": "ccc-t5.3",
             "title": "Inserting Tables, Images, and Media",
+            "slug": "inserting-tables-images-media-slides",
             "sortOrder": 3
           },
           {
             "id": "ccc-t5.4",
             "title": "Slide Layouts and Master Slide",
+            "slug": "slide-layouts-and-master-slide",
             "sortOrder": 4
           },
           {
             "id": "ccc-t5.5",
             "title": "Transitions, Animations, and Slide Timings",
+            "slug": "transitions-animations-slide-timings",
             "sortOrder": 5
           },
           {
             "id": "ccc-t5.6",
             "title": "Running Slide Shows and Printing Handouts",
+            "slug": "running-slide-shows-printing-handouts",
             "sortOrder": 6
           },
           {
             "id": "ccc-t5.7",
             "title": "Enhancing Presentation with Design and Color Themes",
+            "slug": "presentation-design-color-themes",
             "sortOrder": 7
           }
         ]
       },
       {
         "id": "ccc-ch6",
+        "chapterTitle": "Introduction to Internet and WWW",
         "title": "Introduction to Internet and WWW",
         "sortOrder": 6,
         "topics": [
           {
             "id": "ccc-t6.1",
             "title": "Basics of Computer Networks (LAN, WAN, Topology)",
+            "slug": "basics-computer-networks-lan-wan-topology",
             "sortOrder": 1
           },
           {
             "id": "ccc-t6.2",
             "title": "Concept of Internet, WWW, and IP Address",
+            "slug": "concept-of-internet-www-ip-address",
             "sortOrder": 2
           },
           {
             "id": "ccc-t6.3",
             "title": "Modes of Internet Connection (WiFi, Broadband, Mobile)",
+            "slug": "modes-internet-connection-wifi-broadband",
             "sortOrder": 3
           },
           {
             "id": "ccc-t6.4",
             "title": "Web Browsers: Chrome, Firefox, Edge, Opera",
+            "slug": "web-browsers-chrome-firefox-edge",
             "sortOrder": 4
           },
           {
             "id": "ccc-t6.5",
             "title": "Using Search Engines and Surfing Websites",
+            "slug": "using-search-engines-surfing-websites",
             "sortOrder": 5
           },
           {
             "id": "ccc-t6.6",
             "title": "Downloading and Printing Web Pages",
+            "slug": "downloading-and-printing-web-pages",
             "sortOrder": 6
           },
           {
             "id": "ccc-t6.7",
             "title": "Understanding URLs and Website Navigation",
+            "slug": "understanding-urls-website-navigation",
             "sortOrder": 7
           }
         ]
       },
       {
         "id": "ccc-ch7",
+        "chapterTitle": "Email, Social Networking, and e-Governance",
         "title": "Email, Social Networking, and e-Governance",
         "sortOrder": 7,
         "topics": [
           {
             "id": "ccc-t7.1",
             "title": "Creating and Managing an Email Account",
+            "slug": "creating-managing-email-account",
             "sortOrder": 1
           },
           {
             "id": "ccc-t7.2",
             "title": "Composing, Sending, and Attaching Files in Email",
+            "slug": "composing-sending-attaching-files-email",
             "sortOrder": 2
           },
           {
             "id": "ccc-t7.3",
             "title": "Social Media Basics: Facebook, Instagram, LinkedIn, X",
+            "slug": "social-media-basics-facebook-insta-linkedin-x",
             "sortOrder": 3
           },
           {
             "id": "ccc-t7.4",
             "title": "Instant Messaging: WhatsApp, Telegram, Messenger",
+            "slug": "instant-messaging-whatsapp-telegram",
             "sortOrder": 4
           },
           {
             "id": "ccc-t7.5",
             "title": "Introduction to Blogs and Netiquettes",
+            "slug": "introduction-to-blogs-netiquettes",
             "sortOrder": 5
           },
           {
             "id": "ccc-t7.6",
             "title": "e-Governance Applications: Passport, Railway, eHospital",
+            "slug": "egovernance-applications-passport-railway-ehospital",
             "sortOrder": 6
           },
           {
             "id": "ccc-t7.7",
             "title": "Using UMANG App and Digital Locker",
+            "slug": "using-umang-app-and-digilocker",
             "sortOrder": 7
           }
         ]
       },
       {
         "id": "ccc-ch8",
+        "chapterTitle": "Digital Financial Tools and Applications",
         "title": "Digital Financial Tools and Applications",
         "sortOrder": 8,
         "topics": [
           {
             "id": "ccc-t8.1",
             "title": "Introduction to OTP and QR Code",
+            "slug": "introduction-otp-qr-code",
             "sortOrder": 1
           },
           {
             "id": "ccc-t8.2",
             "title": "UPI, AEPS, and eWallet Concepts",
+            "slug": "upi-aeps-ewallet-concepts",
             "sortOrder": 2
           },
           {
             "id": "ccc-t8.3",
             "title": "Internet Banking: NEFT, RTGS, IMPS",
+            "slug": "internet-banking-neft-rtgs-imps",
             "sortOrder": 3
           },
           {
             "id": "ccc-t8.4",
             "title": "Online Bill Payment and Recharge",
+            "slug": "online-bill-payment-recharge",
             "sortOrder": 4
           },
           {
             "id": "ccc-t8.5",
             "title": "Using PoS Devices and Secure Transactions",
+            "slug": "using-pos-devices-secure-transactions",
             "sortOrder": 5
           },
           {
             "id": "ccc-t8.6",
             "title": "Government Financial Schemes and Awareness",
+            "slug": "government-financial-schemes-awareness",
             "sortOrder": 6
           }
         ]
       },
       {
         "id": "ccc-ch9",
+        "chapterTitle": "Overview of Cyber Security",
         "title": "Overview of Cyber Security",
         "sortOrder": 9,
         "topics": [
           {
             "id": "ccc-t9.1",
             "title": "Introduction to Cyber Security and its Need",
+            "slug": "introduction-cyber-security-need",
             "sortOrder": 1
           },
           {
             "id": "ccc-t9.2",
             "title": "Securing PC, Browsers, and Emails",
+            "slug": "securing-pc-browsers-emails",
             "sortOrder": 2
           },
           {
             "id": "ccc-t9.3",
             "title": "Social Media Safety and Password Protection",
+            "slug": "social-media-safety-password-protection",
             "sortOrder": 3
           },
           {
             "id": "ccc-t9.4",
             "title": "Safe Practices for Mobile Devices",
+            "slug": "safe-practices-mobile-devices",
             "sortOrder": 4
           },
           {
             "id": "ccc-t9.5",
             "title": "Recognizing Online Fraud and Phishing",
+            "slug": "recognizing-online-fraud-phishing",
             "sortOrder": 5
           }
         ]
       },
       {
         "id": "ccc-ch10",
+        "chapterTitle": "Future Skills and Artificial Intelligence",
         "title": "Future Skills and Artificial Intelligence",
         "sortOrder": 10,
         "topics": [
           {
             "id": "ccc-t10.1",
             "title": "Introduction to Future Technologies",
+            "slug": "introduction-future-technologies",
             "sortOrder": 1
           },
           {
             "id": "ccc-t10.2",
             "title": "Internet of Things (IoT) and Big Data Analytics",
+            "slug": "internet-of-things-iot-big-data",
             "sortOrder": 2
           },
           {
             "id": "ccc-t10.3",
             "title": "Cloud Computing and Virtual Reality",
+            "slug": "cloud-computing-virtual-reality",
             "sortOrder": 3
           },
           {
             "id": "ccc-t10.4",
             "title": "Artificial Intelligence: Concept, Goals, and Ethics",
+            "slug": "artificial-intelligence-concepts-goals-ethics",
             "sortOrder": 4
           },
           {
             "id": "ccc-t10.5",
             "title": "Applications of AI in Daily Life",
+            "slug": "applications-ai-daily-life",
             "sortOrder": 5
           },
           {
             "id": "ccc-t10.6",
             "title": "Robotic Process Automation and 3D Printing",
+            "slug": "robotic-process-automation-3d-printing",
             "sortOrder": 6
           },
           {
             "id": "ccc-t10.7",
             "title": "Future Trends in ICT and AI-driven Innovation",
+            "slug": "future-trends-ict-ai-innovation",
             "sortOrder": 7
           }
         ]
       }
+    ],
+    "curriculum": [
+      {
+        "id": "ccc-ch1",
+        "chapterTitle": "Introduction to Computer",
+        "title": "Introduction to Computer",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "ccc-t1.1",
+            "title": "Evolution of Computers and IT Gadgets",
+            "slug": "evolution-of-computers-and-it-gadgets",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t1.2",
+            "title": "Applications of Computers in Daily Life",
+            "slug": "applications-of-computers-in-daily-life",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t1.3",
+            "title": "Basics of Hardware and Software",
+            "slug": "basics-of-hardware-and-software",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t1.4",
+            "title": "CPU, Memory, Storage, Input & Output Devices",
+            "slug": "cpu-memory-storage-input-output-devices",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t1.5",
+            "title": "Types of Software: Application, System, Utility",
+            "slug": "types-of-software-application-system-utility",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t1.6",
+            "title": "Open Source vs Proprietary Software",
+            "slug": "open-source-vs-proprietary-software",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t1.7",
+            "title": "Introduction to Mobile Applications",
+            "slug": "introduction-to-mobile-applications",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch2",
+        "chapterTitle": "Introduction to Operating System",
+        "title": "Introduction to Operating System",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "ccc-t2.1",
+            "title": "Basics and Types of Operating Systems",
+            "slug": "basics-and-types-of-operating-systems",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t2.2",
+            "title": "Operating Systems for Desktop, Laptop, and Mobile",
+            "slug": "operating-systems-desktop-laptop-mobile",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t2.3",
+            "title": "Desktop Interface: Taskbar, Icons, Shortcuts",
+            "slug": "desktop-interface-taskbar-icons-shortcuts",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t2.4",
+            "title": "Running and Managing Applications",
+            "slug": "running-and-managing-applications",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t2.5",
+            "title": "System Settings: Date, Time, Display, Mouse",
+            "slug": "system-settings-date-time-display-mouse",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t2.6",
+            "title": "Add/Remove Programs, Printers, and Features",
+            "slug": "add-remove-programs-printers-features",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t2.7",
+            "title": "File and Folder Management",
+            "slug": "file-and-folder-management",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t2.8",
+            "title": "Common File Extensions",
+            "slug": "common-file-extensions",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch3",
+        "chapterTitle": "Word Processing (MS Word / LibreOffice Writer)",
+        "title": "Word Processing (MS Word / LibreOffice Writer)",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "ccc-t3.1",
+            "title": "Introduction and Interface Overview",
+            "slug": "word-processing-interface-overview",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t3.2",
+            "title": "Creating, Opening, Saving, and Printing Documents",
+            "slug": "creating-opening-saving-printing-documents",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t3.3",
+            "title": "Text Editing: Cut, Copy, Paste, Undo, Redo",
+            "slug": "text-editing-cut-copy-paste-undo-redo",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t3.4",
+            "title": "Formatting Text: Font, Color, Size, Alignment",
+            "slug": "formatting-text-font-color-size-alignment",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t3.5",
+            "title": "Spelling Check, Find and Replace, AutoCorrect",
+            "slug": "spelling-check-find-replace-autocorrect",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t3.6",
+            "title": "Page Setup, Header, Footer, and Page Numbering",
+            "slug": "page-setup-header-footer-numbering",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t3.7",
+            "title": "Table Insertion and Manipulation",
+            "slug": "table-insertion-and-manipulation",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t3.8",
+            "title": "Mail Merge: Creating Bulk Letters and Labels",
+            "slug": "mail-merge-bulk-letters-labels",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch4",
+        "chapterTitle": "Spreadsheet (MS Excel / LibreOffice Calc)",
+        "title": "Spreadsheet (MS Excel / LibreOffice Calc)",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "ccc-t4.1",
+            "title": "Introduction to Spreadsheets and Interface",
+            "slug": "spreadsheet-basics-and-interface",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t4.2",
+            "title": "Creating and Saving Worksheets",
+            "slug": "creating-and-saving-worksheets",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t4.3",
+            "title": "Cell Addressing and Data Entry",
+            "slug": "cell-addressing-and-data-entry",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t4.4",
+            "title": "Editing, Formatting Cells, Rows, and Columns",
+            "slug": "editing-formatting-cells-rows-columns",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t4.5",
+            "title": "Basic Formulas and Functions (SUM, AVG, MAX, MIN)",
+            "slug": "basic-formulas-functions-sum-avg-max-min",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t4.6",
+            "title": "Sorting, Filtering, and Freezing Panes",
+            "slug": "sorting-filtering-freezing-panes",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t4.7",
+            "title": "Charts and Graphs (Bar, Pie, Line)",
+            "slug": "charts-and-graphs-bar-pie-line",
+            "sortOrder": 7
+          },
+          {
+            "id": "ccc-t4.8",
+            "title": "Printing and Page Setup for Sheets",
+            "slug": "printing-and-page-setup-sheets",
+            "sortOrder": 8
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch5",
+        "chapterTitle": "Presentation (MS PowerPoint / LibreOffice Impress)",
+        "title": "Presentation (MS PowerPoint / LibreOffice Impress)",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "ccc-t5.1",
+            "title": "Creating a New Presentation (Template / Blank)",
+            "slug": "creating-new-presentation-templates",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t5.2",
+            "title": "Adding and Editing Text on Slides",
+            "slug": "adding-and-editing-text-slides",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t5.3",
+            "title": "Inserting Tables, Images, and Media",
+            "slug": "inserting-tables-images-media-slides",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t5.4",
+            "title": "Slide Layouts and Master Slide",
+            "slug": "slide-layouts-and-master-slide",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t5.5",
+            "title": "Transitions, Animations, and Slide Timings",
+            "slug": "transitions-animations-slide-timings",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t5.6",
+            "title": "Running Slide Shows and Printing Handouts",
+            "slug": "running-slide-shows-printing-handouts",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t5.7",
+            "title": "Enhancing Presentation with Design and Color Themes",
+            "slug": "presentation-design-color-themes",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch6",
+        "chapterTitle": "Introduction to Internet and WWW",
+        "title": "Introduction to Internet and WWW",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "ccc-t6.1",
+            "title": "Basics of Computer Networks (LAN, WAN, Topology)",
+            "slug": "basics-computer-networks-lan-wan-topology",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t6.2",
+            "title": "Concept of Internet, WWW, and IP Address",
+            "slug": "concept-of-internet-www-ip-address",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t6.3",
+            "title": "Modes of Internet Connection (WiFi, Broadband, Mobile)",
+            "slug": "modes-internet-connection-wifi-broadband",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t6.4",
+            "title": "Web Browsers: Chrome, Firefox, Edge, Opera",
+            "slug": "web-browsers-chrome-firefox-edge",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t6.5",
+            "title": "Using Search Engines and Surfing Websites",
+            "slug": "using-search-engines-surfing-websites",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t6.6",
+            "title": "Downloading and Printing Web Pages",
+            "slug": "downloading-and-printing-web-pages",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t6.7",
+            "title": "Understanding URLs and Website Navigation",
+            "slug": "understanding-urls-website-navigation",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch7",
+        "chapterTitle": "Email, Social Networking, and e-Governance",
+        "title": "Email, Social Networking, and e-Governance",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "ccc-t7.1",
+            "title": "Creating and Managing an Email Account",
+            "slug": "creating-managing-email-account",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t7.2",
+            "title": "Composing, Sending, and Attaching Files in Email",
+            "slug": "composing-sending-attaching-files-email",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t7.3",
+            "title": "Social Media Basics: Facebook, Instagram, LinkedIn, X",
+            "slug": "social-media-basics-facebook-insta-linkedin-x",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t7.4",
+            "title": "Instant Messaging: WhatsApp, Telegram, Messenger",
+            "slug": "instant-messaging-whatsapp-telegram",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t7.5",
+            "title": "Introduction to Blogs and Netiquettes",
+            "slug": "introduction-to-blogs-netiquettes",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t7.6",
+            "title": "e-Governance Applications: Passport, Railway, eHospital",
+            "slug": "egovernance-applications-passport-railway-ehospital",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t7.7",
+            "title": "Using UMANG App and Digital Locker",
+            "slug": "using-umang-app-and-digilocker",
+            "sortOrder": 7
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch8",
+        "chapterTitle": "Digital Financial Tools and Applications",
+        "title": "Digital Financial Tools and Applications",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "ccc-t8.1",
+            "title": "Introduction to OTP and QR Code",
+            "slug": "introduction-otp-qr-code",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t8.2",
+            "title": "UPI, AEPS, and eWallet Concepts",
+            "slug": "upi-aeps-ewallet-concepts",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t8.3",
+            "title": "Internet Banking: NEFT, RTGS, IMPS",
+            "slug": "internet-banking-neft-rtgs-imps",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t8.4",
+            "title": "Online Bill Payment and Recharge",
+            "slug": "online-bill-payment-recharge",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t8.5",
+            "title": "Using PoS Devices and Secure Transactions",
+            "slug": "using-pos-devices-secure-transactions",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t8.6",
+            "title": "Government Financial Schemes and Awareness",
+            "slug": "government-financial-schemes-awareness",
+            "sortOrder": 6
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch9",
+        "chapterTitle": "Overview of Cyber Security",
+        "title": "Overview of Cyber Security",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "ccc-t9.1",
+            "title": "Introduction to Cyber Security and its Need",
+            "slug": "introduction-cyber-security-need",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t9.2",
+            "title": "Securing PC, Browsers, and Emails",
+            "slug": "securing-pc-browsers-emails",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t9.3",
+            "title": "Social Media Safety and Password Protection",
+            "slug": "social-media-safety-password-protection",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t9.4",
+            "title": "Safe Practices for Mobile Devices",
+            "slug": "safe-practices-mobile-devices",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t9.5",
+            "title": "Recognizing Online Fraud and Phishing",
+            "slug": "recognizing-online-fraud-phishing",
+            "sortOrder": 5
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch10",
+        "chapterTitle": "Future Skills and Artificial Intelligence",
+        "title": "Future Skills and Artificial Intelligence",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "ccc-t10.1",
+            "title": "Introduction to Future Technologies",
+            "slug": "introduction-future-technologies",
+            "sortOrder": 1
+          },
+          {
+            "id": "ccc-t10.2",
+            "title": "Internet of Things (IoT) and Big Data Analytics",
+            "slug": "internet-of-things-iot-big-data",
+            "sortOrder": 2
+          },
+          {
+            "id": "ccc-t10.3",
+            "title": "Cloud Computing and Virtual Reality",
+            "slug": "cloud-computing-virtual-reality",
+            "sortOrder": 3
+          },
+          {
+            "id": "ccc-t10.4",
+            "title": "Artificial Intelligence: Concept, Goals, and Ethics",
+            "slug": "artificial-intelligence-concepts-goals-ethics",
+            "sortOrder": 4
+          },
+          {
+            "id": "ccc-t10.5",
+            "title": "Applications of AI in Daily Life",
+            "slug": "applications-ai-daily-life",
+            "sortOrder": 5
+          },
+          {
+            "id": "ccc-t10.6",
+            "title": "Robotic Process Automation and 3D Printing",
+            "slug": "robotic-process-automation-3d-printing",
+            "sortOrder": 6
+          },
+          {
+            "id": "ccc-t10.7",
+            "title": "Future Trends in ICT and AI-driven Innovation",
+            "slug": "future-trends-ict-ai-innovation",
+            "sortOrder": 7
+          }
+        ]
+      }
+    ],
+    "description": "CCC (Course on Computer Concepts) is a government-recognized computer certification by NIELIT (National Institute of Electronics & Information Technology), mandatory for various state and central government jobs including UPSSSC, VDO, Lekhpal, RO/ARO, and Police clerical posts. This course is specially tailored for UP Board and Hindi-medium students using simple Indian English with real-life Hindi analogies, practical interface walkthroughs, shortcut keys, and 350+ interactive practice questions.",
+    "isFeatured": true,
+    "tags": [
+      "CCC",
+      "NIELIT",
+      "Basic Computer",
+      "LibreOffice",
+      "MS Office",
+      "Government Job Exam",
+      "Computer Certificate"
     ]
   },
   {
@@ -5945,6 +6538,334 @@
                 "url": "/tutorials/python-for-advanced/project-3-personal-finance-tracker-with-database"
               }
             ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "course-numpy-complete-course",
+    "status": "PUBLISH",
+    "title": "NumPy Complete Course: From Basics to Advanced Scientific Computing",
+    "slug": "numpy-complete-course",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=450&auto=format&fit=crop",
+    "shortDescription": "Master NumPy (Numerical Python) from scratch to production-level scientific computing. Learn multidimensional ndarrays, vectorization, broadcasting, ufuncs, linear algebra, random sampling, and image processing with hands-on projects.",
+    "categories": [
+      "Data Science",
+      "Python",
+      "Machine Learning",
+      "NumPy"
+    ],
+    "level": "Beginner to Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "chapters": [
+      {
+        "id": "numpy-complete-course-ch1",
+        "title": "Introduction to NumPy & Numerical Computing",
+        "sortOrder": 1,
+        "topics": [
+          {
+            "id": "numpy-t1.1",
+            "title": "What is NumPy & Why It Powers Data Science",
+            "slug": "what-is-numpy-and-architecture",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t1.2",
+            "title": "Setting Up NumPy: Installation & Environment",
+            "slug": "numpy-installation-and-setup",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t1.3",
+            "title": "NumPy vs Python Lists: Memory & Speed Benchmarks",
+            "slug": "numpy-vs-python-lists-performance",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch2",
+        "title": "NumPy Ndarrays & Array Creation Routines",
+        "sortOrder": 2,
+        "topics": [
+          {
+            "id": "numpy-t2.1",
+            "title": "Creating 1D, 2D & 3D Arrays from Lists & Tuples",
+            "slug": "creating-arrays-from-python-lists",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t2.2",
+            "title": "Built-in Creation Routines (zeros, ones, full, empty)",
+            "slug": "array-creation-zeros-ones-full",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t2.3",
+            "title": "Generating Numerical Sequences (arange, linspace, logspace)",
+            "slug": "numerical-ranges-arange-linspace",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch3",
+        "title": "Data Types & Array Inspection",
+        "sortOrder": 3,
+        "topics": [
+          {
+            "id": "numpy-t3.1",
+            "title": "NumPy Data Types (dtype) & Type Casting (astype)",
+            "slug": "numpy-datatypes-and-typecasting",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t3.2",
+            "title": "Inspecting Array Attributes (shape, ndim, size, itemsize)",
+            "slug": "inspecting-array-attributes",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t3.3",
+            "title": "Identity Matrices & Diagonal Arrays (eye, identity, diag)",
+            "slug": "identity-and-diagonal-matrices",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch4",
+        "title": "Basic Indexing, Slicing & Views",
+        "sortOrder": 4,
+        "topics": [
+          {
+            "id": "numpy-t4.1",
+            "title": "1D Array Indexing, Slicing & Step Strides",
+            "slug": "one-dimensional-indexing-slicing",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t4.2",
+            "title": "Multi-Dimensional Array Slicing (Row, Column & Matrix Slices)",
+            "slug": "multidimensional-array-slicing",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t4.3",
+            "title": "Memory Views vs Deep Copies (view() vs copy())",
+            "slug": "array-views-vs-copies",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch5",
+        "title": "Advanced Indexing & Boolean Filtering",
+        "sortOrder": 5,
+        "topics": [
+          {
+            "id": "numpy-t5.1",
+            "title": "Boolean Masking & Conditional Filtering",
+            "slug": "boolean-masking-and-filtering",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t5.2",
+            "title": "Fancy Indexing with Integer Arrays",
+            "slug": "fancy-indexing-integer-arrays",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t5.3",
+            "title": "Conditional Selectors: np.where(), np.select() & np.extract()",
+            "slug": "numpy-where-and-select-conditions",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch6",
+        "title": "Array Reshaping, Flattening & Dimensions",
+        "sortOrder": 6,
+        "topics": [
+          {
+            "id": "numpy-t6.1",
+            "title": "Reshaping Arrays (reshape with -1 auto-dimension)",
+            "slug": "reshaping-arrays-reshape-dimensions",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t6.2",
+            "title": "Flattening Multi-Dimensional Arrays (flatten vs ravel)",
+            "slug": "flattening-arrays-flatten-vs-ravel",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t6.3",
+            "title": "Expanding & Squeezing Dimensions (np.newaxis, expand_dims, squeeze)",
+            "slug": "adding-removing-dimensions-newaxis",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch7",
+        "title": "Joining, Stacking & Splitting Arrays",
+        "sortOrder": 7,
+        "topics": [
+          {
+            "id": "numpy-t7.1",
+            "title": "Concatenating & Stacking Arrays (concatenate, vstack, hstack)",
+            "slug": "joining-stacking-arrays-vstack-hstack",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t7.2",
+            "title": "Depth & Column Stacking (dstack, column_stack, stack)",
+            "slug": "depth-and-column-stacking",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t7.3",
+            "title": "Splitting Arrays into Chunks (split, hsplit, vsplit)",
+            "slug": "splitting-arrays-hsplit-vsplit",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch8",
+        "title": "Vectorized Operations & Broadcasting",
+        "sortOrder": 8,
+        "topics": [
+          {
+            "id": "numpy-t8.1",
+            "title": "Vectorization: Eliminating Python Loops with SIMD",
+            "slug": "vectorization-eliminating-python-loops",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t8.2",
+            "title": "Element-Wise Arithmetic & Comparison Operations",
+            "slug": "elementwise-arithmetic-comparisons",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t8.3",
+            "title": "The Rules of NumPy Broadcasting Explained",
+            "slug": "the-rules-of-numpy-broadcasting",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch9",
+        "title": "Universal Functions (ufuncs) & Mathematical Methods",
+        "sortOrder": 9,
+        "topics": [
+          {
+            "id": "numpy-t9.1",
+            "title": "Universal Functions (ufuncs), Trigonometry & Logarithms",
+            "slug": "universal-functions-ufuncs-math",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t9.2",
+            "title": "Aggregate Statistics (sum, mean, median, std, var)",
+            "slug": "aggregate-statistics-mean-std-var",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t9.3",
+            "title": "Directional Aggregations with the axis Parameter",
+            "slug": "directional-aggregations-axis-parameter",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch10",
+        "title": "Sorting, Searching & Set Operations",
+        "sortOrder": 10,
+        "topics": [
+          {
+            "id": "numpy-t10.1",
+            "title": "Sorting Arrays & Extracting Indices (np.sort vs np.argsort)",
+            "slug": "sorting-arrays-sort-and-argsort",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t10.2",
+            "title": "Searching & Counting (argmax, argmin, nonzero, count_nonzero)",
+            "slug": "searching-argmax-argmin-nonzero",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t10.3",
+            "title": "Set Operations & Distinct Elements (np.unique, intersect1d, isin)",
+            "slug": "set-operations-unique-and-isin",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch11",
+        "title": "Linear Algebra with numpy.linalg",
+        "sortOrder": 11,
+        "topics": [
+          {
+            "id": "numpy-t11.1",
+            "title": "Dot Products & Matrix Multiplication (dot, @ operator, matmul)",
+            "slug": "matrix-multiplication-dot-matmul",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t11.2",
+            "title": "Matrix Determinant, Inversion & Solving Linear Systems",
+            "slug": "matrix-inversion-determinant-solve",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t11.3",
+            "title": "Eigenvalues, Eigenvectors & Singular Value Decomposition (SVD)",
+            "slug": "eigenvalues-eigenvectors-and-svd",
+            "sortOrder": 3
+          }
+        ]
+      },
+      {
+        "id": "numpy-complete-course-ch12",
+        "title": "Random Sampling, File I/O & Capstone Project",
+        "sortOrder": 12,
+        "topics": [
+          {
+            "id": "numpy-t12.1",
+            "title": "Random Number Generation with default_rng & Distributions",
+            "slug": "random-number-generation-distributions",
+            "sortOrder": 1
+          },
+          {
+            "id": "numpy-t12.2",
+            "title": "File I/O: Saving & Loading Native Arrays (.npy, .npz, Text)",
+            "slug": "saving-loading-arrays-npy-npz",
+            "sortOrder": 2
+          },
+          {
+            "id": "numpy-t12.3",
+            "title": "Capstone: Image Manipulation & Monte Carlo Simulation",
+            "slug": "capstone-image-processing-financial-simulation",
+            "sortOrder": 3
           }
         ]
       }
@@ -12874,18 +13795,21 @@
         "sortOrder": 2,
         "topics": [
           {
-            "id": "data-analysis--basics--pandas-t2.1",
-            "title": "Topic 1",
+            "id": "da-numpy-t1",
+            "title": "NumPy Ndarrays & Creation Routines",
+            "slug": "creating-arrays-from-python-lists",
             "sortOrder": 1
           },
           {
-            "id": "data-analysis--basics--pandas-t2.2",
-            "title": "Topic 2",
+            "id": "da-numpy-t2",
+            "title": "Vectorized Operations & Broadcasting",
+            "slug": "the-rules-of-numpy-broadcasting",
             "sortOrder": 2
           },
           {
-            "id": "data-analysis--basics--pandas-t2.3",
-            "title": "Topic 3",
+            "id": "da-numpy-t3",
+            "title": "Mathematical & Statistical Aggregations",
+            "slug": "aggregate-statistics-mean-std-var",
             "sortOrder": 3
           }
         ]
@@ -15786,6 +16710,498 @@
       "course-sql-for-beginners",
       "course-sql-for-intermediate",
       "course-sql-for-advanced"
+    ]
+  },
+  {
+    "id": "course-markdown-mastery",
+    "status": "PUBLISHED",
+    "title": "Markdown Mastery: From Zero to GitHub READMEs, Technical Documentation & MDX",
+    "slug": "markdown",
+    "featuredImageUrl": "/images/tutorials/markdown/markdown-syntax-cheatsheet-anatomy.svg",
+    "shortDescription": "Master the standard language of software documentation. Learn basic formatting, GitHub Flavored Markdown (GFM), tables, Mermaid diagrams, LaTeX math, professional READMEs, and MDX.",
+    "categories": [
+      "Programming",
+      "Web Development",
+      "Developer Tools"
+    ],
+    "level": "Beginner to Advanced",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 1,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "STANDARD",
+    "curriculum": [
+      {
+        "id": "md-ch1",
+        "chapterTitle": "Getting Started with Markdown",
+        "topics": [
+          {
+            "id": "md-t1.1",
+            "title": "Introduction to Markdown & Philosophy",
+            "slug": "introduction-to-markdown-philosophy",
+            "description": "Learn the origin, history (John Gruber & Aaron Swartz), and the core philosophy of plain-text writing with Markdown."
+          },
+          {
+            "id": "md-t1.2",
+            "title": "Markdown Flavors & Specifications (CommonMark vs GFM)",
+            "slug": "markdown-flavors-commonmark-gfm",
+            "description": "Understand the differences between Original Markdown, CommonMark, and GitHub Flavored Markdown (GFM)."
+          },
+          {
+            "id": "md-t1.3",
+            "title": "Environment & Editor Setup (VS Code, Obsidian, Typora)",
+            "slug": "environment-editor-setup-vscode",
+            "description": "Set up the ultimate Markdown workspace using VS Code extensions, Obsidian note-taking, and live previewers."
+          }
+        ]
+      },
+      {
+        "id": "md-ch2",
+        "chapterTitle": "Essential Typography & Formatting",
+        "topics": [
+          {
+            "id": "md-t2.1",
+            "title": "Headings & Document Hierarchy (ATX vs Setext)",
+            "slug": "headings-document-hierarchy-atx-setext",
+            "description": "Master H1 to H6 headings, ATX hash styles, Setext underlines, and semantic document outlines."
+          },
+          {
+            "id": "md-t2.2",
+            "title": "Paragraphs, Line Breaks & Horizontal Rules",
+            "slug": "paragraphs-line-breaks-horizontal-rules",
+            "description": "Control paragraph spacing, two-space line breaks, <br> tags, and thematic divider rules (---, ***)."
+          },
+          {
+            "id": "md-t2.3",
+            "title": "Text Emphasis: Bold, Italic, Strikethrough & Highlights",
+            "slug": "text-emphasis-bold-italic-strike",
+            "description": "Apply bold (**), italic (*), strikethrough (~~), and highlight syntax cleanly without parsing collisions."
+          },
+          {
+            "id": "md-t2.4",
+            "title": "Blockquotes, Nested Quotes & Callouts",
+            "slug": "blockquotes-nested-quotes-callouts",
+            "description": "Structure blockquotes (>), multi-paragraph quotes, nested quotations (>>), and quote attributions."
+          }
+        ]
+      },
+      {
+        "id": "md-ch3",
+        "chapterTitle": "Lists & Organization",
+        "topics": [
+          {
+            "id": "md-t3.1",
+            "title": "Unordered Lists & Bullet Customization",
+            "slug": "unordered-lists-bullets",
+            "description": "Create bulleted lists using asterisks, dashes, and plus signs, with tight vs loose spacing."
+          },
+          {
+            "id": "md-t3.2",
+            "title": "Ordered Lists & Nested Outlines",
+            "slug": "ordered-lists-nested-outlines",
+            "description": "Format numbered lists, auto-numbering behavior, offset start numbers, and multi-level nested outlines."
+          },
+          {
+            "id": "md-t3.3",
+            "title": "Task Lists & Interactive Checkboxes",
+            "slug": "task-lists-interactive-checkboxes",
+            "description": "Build GitHub Flavored Markdown task lists with [ ] and [x] checkboxes for tracking projects and PRs."
+          }
+        ]
+      },
+      {
+        "id": "md-ch4",
+        "chapterTitle": "Links, Images & Media",
+        "topics": [
+          {
+            "id": "md-t4.1",
+            "title": "Links: Inline, Reference & Automatic URLs",
+            "slug": "links-inline-reference-autolinks",
+            "description": "Construct inline links [text](url), reusable reference links, title tooltips, and bare autolinks <url>."
+          },
+          {
+            "id": "md-t4.2",
+            "title": "Images, Alt Text & Captions",
+            "slug": "images-alt-text-captions",
+            "description": "Embed images with ![alt](url), link images to URLs, and write accessible descriptive alt text."
+          },
+          {
+            "id": "md-t4.3",
+            "title": "Embedding Raw HTML & Media in Markdown",
+            "slug": "embedding-raw-html-media-markdown",
+            "description": "Enhance Markdown with raw HTML5 tags: custom image widths, videos, audio players, details/summary, and kbd tags."
+          }
+        ]
+      },
+      {
+        "id": "md-ch5",
+        "chapterTitle": "Code Blocks & Technical Writing",
+        "topics": [
+          {
+            "id": "md-t5.1",
+            "title": "Inline Code & Backtick Escaping Rules",
+            "slug": "inline-code-backtick-escaping",
+            "description": "Format variables, commands, and file paths with single `code` and escape backtick literals using double backticks."
+          },
+          {
+            "id": "md-t5.2",
+            "title": "Fenced Code Blocks & Syntax Highlighting",
+            "slug": "fenced-code-blocks-syntax-highlighting",
+            "description": "Write multi-line fenced code blocks with triple backticks and language identifiers (py, js, html, css, bash, json)."
+          },
+          {
+            "id": "md-t5.3",
+            "title": "Mathematical Notation with LaTeX / KaTeX",
+            "slug": "mathematical-notation-latex-katex",
+            "description": "Typeset elegant math formulas in Markdown using inline ($...$) and display block ($$...$$) KaTeX syntax."
+          }
+        ]
+      },
+      {
+        "id": "md-ch6",
+        "chapterTitle": "Tables, Footnotes & GFM Extensions",
+        "topics": [
+          {
+            "id": "md-t6.1",
+            "title": "Tables & Column Alignment Syntax",
+            "slug": "tables-column-alignment-syntax",
+            "description": "Construct clean GFM tables using pipes (|), hyphens (-), and alignment colons (:---, :---:, ---:)."
+          },
+          {
+            "id": "md-t6.2",
+            "title": "Footnotes & Citation References",
+            "slug": "footnotes-citation-references",
+            "description": "Reference citations and footnotes using GFM [^1] syntax with auto-linked bottom notes."
+          },
+          {
+            "id": "md-t6.3",
+            "title": "GitHub Alerts & Admonitions",
+            "slug": "github-alerts-admonitions",
+            "description": "Implement official GitHub callout alerts: > [!NOTE], > [!TIP], > [!IMPORTANT], > [!WARNING], and > [!CAUTION]."
+          },
+          {
+            "id": "md-t6.4",
+            "title": "Mermaid.js Diagrams in Markdown",
+            "slug": "mermaid-diagrams-in-markdown",
+            "description": "Render flowcharts, sequence diagrams, class models, and Gantt charts directly in Markdown using mermaid code blocks."
+          }
+        ]
+      },
+      {
+        "id": "md-ch7",
+        "chapterTitle": "Real-World Developer Workflows",
+        "topics": [
+          {
+            "id": "md-t7.1",
+            "title": "Writing Professional GitHub READMEs & Badges",
+            "slug": "writing-professional-github-readmes",
+            "description": "Design high-converting open-source README files with shields.io badges, hero banners, feature grids, and licenses."
+          },
+          {
+            "id": "md-t7.2",
+            "title": "Issue & Pull Request Templates in GitHub",
+            "slug": "issue-pull-request-templates",
+            "description": "Standardize open-source contributions using .github/ISSUE_TEMPLATE and PULL_REQUEST_TEMPLATE.md forms."
+          },
+          {
+            "id": "md-t7.3",
+            "title": "Frontmatter & Metadata for Static Sites",
+            "slug": "frontmatter-metadata-static-sites",
+            "description": "Structure YAML and JSON frontmatter blocks (---) for SEO titles, publish dates, authors, and tag taxonomies."
+          },
+          {
+            "id": "md-t7.4",
+            "title": "Markdown in Modern SSGs & MDX (Astro, Next.js)",
+            "slug": "markdown-ssgs-mdx-nextjs",
+            "description": "Supercharge technical blogs with MDX, importing interactive React/JSX components directly inside Markdown documents."
+          }
+        ]
+      },
+      {
+        "id": "md-ch8",
+        "chapterTitle": "Tooling, Linters & Document Conversion",
+        "topics": [
+          {
+            "id": "md-t8.1",
+            "title": "Linting & Formatting with markdownlint & Prettier",
+            "slug": "linting-formatting-markdownlint-prettier",
+            "description": "Enforce consistent markdown style guides, fix heading spacing, and automate linting in CI/CD pipelines."
+          },
+          {
+            "id": "md-t8.2",
+            "title": "Converting Markdown to HTML, PDF & Slides (Marp/Pandoc)",
+            "slug": "converting-markdown-html-pdf-marp",
+            "description": "Convert markdown documents into polished PDFs, ePub books, and presentation slide decks using Pandoc and Marp."
+          },
+          {
+            "id": "md-t8.3",
+            "title": "Capstone Project: Complete Project Documentation Portal",
+            "slug": "capstone-project-documentation-portal",
+            "description": "Synthesize all skills to build a production-ready open-source library documentation repository from scratch."
+          }
+        ]
+      }
+    ],
+    "chapters": [
+      {
+        "id": "md-ch1",
+        "chapterTitle": "Getting Started with Markdown",
+        "topics": [
+          {
+            "id": "md-t1.1",
+            "title": "Introduction to Markdown & Philosophy",
+            "slug": "introduction-to-markdown-philosophy",
+            "description": "Learn the origin, history (John Gruber & Aaron Swartz), and the core philosophy of plain-text writing with Markdown.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t1.2",
+            "title": "Markdown Flavors & Specifications (CommonMark vs GFM)",
+            "slug": "markdown-flavors-commonmark-gfm",
+            "description": "Understand the differences between Original Markdown, CommonMark, and GitHub Flavored Markdown (GFM).",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t1.3",
+            "title": "Environment & Editor Setup (VS Code, Obsidian, Typora)",
+            "slug": "environment-editor-setup-vscode",
+            "description": "Set up the ultimate Markdown workspace using VS Code extensions, Obsidian note-taking, and live previewers.",
+            "sortOrder": 3
+          }
+        ],
+        "title": "Getting Started with Markdown",
+        "sortOrder": 1
+      },
+      {
+        "id": "md-ch2",
+        "chapterTitle": "Essential Typography & Formatting",
+        "topics": [
+          {
+            "id": "md-t2.1",
+            "title": "Headings & Document Hierarchy (ATX vs Setext)",
+            "slug": "headings-document-hierarchy-atx-setext",
+            "description": "Master H1 to H6 headings, ATX hash styles, Setext underlines, and semantic document outlines.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t2.2",
+            "title": "Paragraphs, Line Breaks & Horizontal Rules",
+            "slug": "paragraphs-line-breaks-horizontal-rules",
+            "description": "Control paragraph spacing, two-space line breaks, <br> tags, and thematic divider rules (---, ***).",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t2.3",
+            "title": "Text Emphasis: Bold, Italic, Strikethrough & Highlights",
+            "slug": "text-emphasis-bold-italic-strike",
+            "description": "Apply bold (**), italic (*), strikethrough (~~), and highlight syntax cleanly without parsing collisions.",
+            "sortOrder": 3
+          },
+          {
+            "id": "md-t2.4",
+            "title": "Blockquotes, Nested Quotes & Callouts",
+            "slug": "blockquotes-nested-quotes-callouts",
+            "description": "Structure blockquotes (>), multi-paragraph quotes, nested quotations (>>), and quote attributions.",
+            "sortOrder": 4
+          }
+        ],
+        "title": "Essential Typography & Formatting",
+        "sortOrder": 2
+      },
+      {
+        "id": "md-ch3",
+        "chapterTitle": "Lists & Organization",
+        "topics": [
+          {
+            "id": "md-t3.1",
+            "title": "Unordered Lists & Bullet Customization",
+            "slug": "unordered-lists-bullets",
+            "description": "Create bulleted lists using asterisks, dashes, and plus signs, with tight vs loose spacing.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t3.2",
+            "title": "Ordered Lists & Nested Outlines",
+            "slug": "ordered-lists-nested-outlines",
+            "description": "Format numbered lists, auto-numbering behavior, offset start numbers, and multi-level nested outlines.",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t3.3",
+            "title": "Task Lists & Interactive Checkboxes",
+            "slug": "task-lists-interactive-checkboxes",
+            "description": "Build GitHub Flavored Markdown task lists with [ ] and [x] checkboxes for tracking projects and PRs.",
+            "sortOrder": 3
+          }
+        ],
+        "title": "Lists & Organization",
+        "sortOrder": 3
+      },
+      {
+        "id": "md-ch4",
+        "chapterTitle": "Links, Images & Media",
+        "topics": [
+          {
+            "id": "md-t4.1",
+            "title": "Links: Inline, Reference & Automatic URLs",
+            "slug": "links-inline-reference-autolinks",
+            "description": "Construct inline links [text](url), reusable reference links, title tooltips, and bare autolinks <url>.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t4.2",
+            "title": "Images, Alt Text & Captions",
+            "slug": "images-alt-text-captions",
+            "description": "Embed images with ![alt](url), link images to URLs, and write accessible descriptive alt text.",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t4.3",
+            "title": "Embedding Raw HTML & Media in Markdown",
+            "slug": "embedding-raw-html-media-markdown",
+            "description": "Enhance Markdown with raw HTML5 tags: custom image widths, videos, audio players, details/summary, and kbd tags.",
+            "sortOrder": 3
+          }
+        ],
+        "title": "Links, Images & Media",
+        "sortOrder": 4
+      },
+      {
+        "id": "md-ch5",
+        "chapterTitle": "Code Blocks & Technical Writing",
+        "topics": [
+          {
+            "id": "md-t5.1",
+            "title": "Inline Code & Backtick Escaping Rules",
+            "slug": "inline-code-backtick-escaping",
+            "description": "Format variables, commands, and file paths with single `code` and escape backtick literals using double backticks.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t5.2",
+            "title": "Fenced Code Blocks & Syntax Highlighting",
+            "slug": "fenced-code-blocks-syntax-highlighting",
+            "description": "Write multi-line fenced code blocks with triple backticks and language identifiers (py, js, html, css, bash, json).",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t5.3",
+            "title": "Mathematical Notation with LaTeX / KaTeX",
+            "slug": "mathematical-notation-latex-katex",
+            "description": "Typeset elegant math formulas in Markdown using inline ($...$) and display block ($$...$$) KaTeX syntax.",
+            "sortOrder": 3
+          }
+        ],
+        "title": "Code Blocks & Technical Writing",
+        "sortOrder": 5
+      },
+      {
+        "id": "md-ch6",
+        "chapterTitle": "Tables, Footnotes & GFM Extensions",
+        "topics": [
+          {
+            "id": "md-t6.1",
+            "title": "Tables & Column Alignment Syntax",
+            "slug": "tables-column-alignment-syntax",
+            "description": "Construct clean GFM tables using pipes (|), hyphens (-), and alignment colons (:---, :---:, ---:).",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t6.2",
+            "title": "Footnotes & Citation References",
+            "slug": "footnotes-citation-references",
+            "description": "Reference citations and footnotes using GFM [^1] syntax with auto-linked bottom notes.",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t6.3",
+            "title": "GitHub Alerts & Admonitions",
+            "slug": "github-alerts-admonitions",
+            "description": "Implement official GitHub callout alerts: > [!NOTE], > [!TIP], > [!IMPORTANT], > [!WARNING], and > [!CAUTION].",
+            "sortOrder": 3
+          },
+          {
+            "id": "md-t6.4",
+            "title": "Mermaid.js Diagrams in Markdown",
+            "slug": "mermaid-diagrams-in-markdown",
+            "description": "Render flowcharts, sequence diagrams, class models, and Gantt charts directly in Markdown using mermaid code blocks.",
+            "sortOrder": 4
+          }
+        ],
+        "title": "Tables, Footnotes & GFM Extensions",
+        "sortOrder": 6
+      },
+      {
+        "id": "md-ch7",
+        "chapterTitle": "Real-World Developer Workflows",
+        "topics": [
+          {
+            "id": "md-t7.1",
+            "title": "Writing Professional GitHub READMEs & Badges",
+            "slug": "writing-professional-github-readmes",
+            "description": "Design high-converting open-source README files with shields.io badges, hero banners, feature grids, and licenses.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t7.2",
+            "title": "Issue & Pull Request Templates in GitHub",
+            "slug": "issue-pull-request-templates",
+            "description": "Standardize open-source contributions using .github/ISSUE_TEMPLATE and PULL_REQUEST_TEMPLATE.md forms.",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t7.3",
+            "title": "Frontmatter & Metadata for Static Sites",
+            "slug": "frontmatter-metadata-static-sites",
+            "description": "Structure YAML and JSON frontmatter blocks (---) for SEO titles, publish dates, authors, and tag taxonomies.",
+            "sortOrder": 3
+          },
+          {
+            "id": "md-t7.4",
+            "title": "Markdown in Modern SSGs & MDX (Astro, Next.js)",
+            "slug": "markdown-ssgs-mdx-nextjs",
+            "description": "Supercharge technical blogs with MDX, importing interactive React/JSX components directly inside Markdown documents.",
+            "sortOrder": 4
+          }
+        ],
+        "title": "Real-World Developer Workflows",
+        "sortOrder": 7
+      },
+      {
+        "id": "md-ch8",
+        "chapterTitle": "Tooling, Linters & Document Conversion",
+        "topics": [
+          {
+            "id": "md-t8.1",
+            "title": "Linting & Formatting with markdownlint & Prettier",
+            "slug": "linting-formatting-markdownlint-prettier",
+            "description": "Enforce consistent markdown style guides, fix heading spacing, and automate linting in CI/CD pipelines.",
+            "sortOrder": 1
+          },
+          {
+            "id": "md-t8.2",
+            "title": "Converting Markdown to HTML, PDF & Slides (Marp/Pandoc)",
+            "slug": "converting-markdown-html-pdf-marp",
+            "description": "Convert markdown documents into polished PDFs, ePub books, and presentation slide decks using Pandoc and Marp.",
+            "sortOrder": 2
+          },
+          {
+            "id": "md-t8.3",
+            "title": "Capstone Project: Complete Project Documentation Portal",
+            "slug": "capstone-project-documentation-portal",
+            "description": "Synthesize all skills to build a production-ready open-source library documentation repository from scratch.",
+            "sortOrder": 3
+          }
+        ],
+        "title": "Tooling, Linters & Document Conversion",
+        "sortOrder": 8
+      }
     ]
   }
 ]

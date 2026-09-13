@@ -273,7 +273,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
                     icon: course.mode === 'ONLINE' ? Globe : Laptop,
                   },
                   { label: 'Level', value: course.level, icon: Layers },
-                  { label: 'Languages', value: course.language.join(', '), icon: MessageSquare },
+                  { label: 'Languages', value: Array.isArray(course.language) ? course.language.join(', ') : (course.language || 'English & Hindi'), icon: MessageSquare },
                   { label: 'Certificate', value: course.certificate ? 'Verifiable Certificate' : 'Certificate Unavailable', icon: Award },
                 ].map((item, idx) => {
                   const Icon = item.icon;

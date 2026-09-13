@@ -1,42 +1,813 @@
 [
   {
-    "id": "cheat-python-core",
+    "id": "cheat-html5-complete",
     "type": "cheatsheet",
-    "title": "Python 3 Core Syntax & Built-ins Cheatsheet",
-    "slug": "python-3-syntax-cheatsheet",
-    "category": "Python",
+    "title": "HTML5 Complete Course: Master Tags, Semantics & Forms Cheatsheet",
+    "slug": "html5-complete-syntax-cheatsheet",
+    "category": "Web Development",
     "level": "Beginner",
-    "description": "Essential quick-reference for Python variables, string methods, slicing, lists, dicts, set operations, and list comprehensions.",
+    "description": "The ultimate quick-reference cheatsheet for HTML5: boilerplate structure, semantic layout elements, modern form inputs & validations, tables, responsive media (audio, video, picture), interactive tags (details, dialog), and essential accessibility ARIA attributes.",
     "tier": "free",
-    "downloadUrl": "https://github.com/msk-institute/python-cheatsheet",
-    "topicsCovered": ["Data Structures", "List Comprehensions", "String Slicing", "Dictionary Methods"],
-    "readTime": "3 min lookup",
-    "pages": 2,
+    "downloadUrl": "https://github.com/msk-institute/html5-complete-course-cheatsheet",
+    "topicsCovered": [
+      "Boilerplate & Meta",
+      "Semantic Layouts",
+      "Forms & Validations",
+      "Tables & Lists",
+      "Audio, Video & Media",
+      "ARIA & Accessibility"
+    ],
+    "readTime": "5 min lookup",
+    "pages": 4,
     "featured": true,
-    "updatedAt": "2026-08-20",
+    "updatedAt": "2026-09-13",
     "cheatsheetContent": {
       "sections": [
         {
-          "categoryTitle": "Lists & Slicing",
+          "categoryTitle": "1. Boilerplate & Document Head",
           "items": [
-            { "commandOrSyntax": "lst[start:stop:step]", "explanation": "Slice a list or string with optional step", "example": "items[::-1]  # reverses list" },
-            { "commandOrSyntax": "[x**2 for x in lst if x > 0]", "explanation": "List comprehension with conditional filter", "example": "evens = [x for x in nums if x%2==0]" },
-            { "commandOrSyntax": "lst.append(item) / lst.extend(iterable)", "explanation": "Add single item vs merge another collection", "example": "arr.extend([4, 5, 6])" }
+            {
+              "commandOrSyntax": "<!DOCTYPE html>",
+              "explanation": "HTML5 standard doctype declaration informing the browser to render in standard mode",
+              "example": "<!DOCTYPE html>"
+            },
+            {
+              "commandOrSyntax": "<html lang=\"en\"> ... </html>",
+              "explanation": "Root element of the document; lang attribute declares the natural language for SEO & screen readers",
+              "example": "<html lang=\"en\" dir=\"ltr\">"
+            },
+            {
+              "commandOrSyntax": "<meta charset=\"UTF-8\">",
+              "explanation": "Specifies UTF-8 character encoding to correctly display all global characters & symbols",
+              "example": "<meta charset=\"UTF-8\">"
+            },
+            {
+              "commandOrSyntax": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+              "explanation": "Configures responsive viewport scaling for mobile and tablet screens",
+              "example": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+            },
+            {
+              "commandOrSyntax": "<title>Page Title</title>",
+              "explanation": "Specifies page title shown on browser tab and search engine results",
+              "example": "<title>MSK Institute | Computer Courses</title>"
+            },
+            {
+              "commandOrSyntax": "<link rel=\"stylesheet\" href=\"style.css\">",
+              "explanation": "Links external CSS stylesheet inside the <head> section",
+              "example": "<link rel=\"stylesheet\" href=\"/styles/main.css\">"
+            }
           ]
         },
         {
-          "categoryTitle": "Dictionaries & Sets",
+          "categoryTitle": "2. Headings, Paragraphs & Text Flow",
           "items": [
-            { "commandOrSyntax": "d.get('key', default_val)", "explanation": "Safe key lookup without raising KeyError", "example": "score = user.get('points', 0)" },
-            { "commandOrSyntax": "{k: v for k, v in d.items()}", "explanation": "Dictionary comprehension", "example": "{x: x*2 for x in range(5)}" },
-            { "commandOrSyntax": "set_a.union(set_b) | set_a.intersection(set_b)", "explanation": "Fast unique mathematical set operations", "example": "common = set(a) & set(b)" }
+            {
+              "commandOrSyntax": "<h1>Title</h1> ... <h6>Sub-heading</h6>",
+              "explanation": "Six levels of semantic section headings; h1 is highest importance (one per page recommended)",
+              "example": "<h1>HTML5 Complete Course</h1>\\n<h2>1: Introduction</h2>"
+            },
+            {
+              "commandOrSyntax": "<p>This is a paragraph of text.</p>",
+              "explanation": "Standard block-level paragraph with automatic browser top/bottom margin",
+              "example": "<p>Welcome to MSK Institute, Shikohabad.</p>"
+            },
+            {
+              "commandOrSyntax": "<br>",
+              "explanation": "Void (self-closing) element that inserts a single physical line break inside text flow",
+              "example": "First line<br>Second line"
+            },
+            {
+              "commandOrSyntax": "<hr>",
+              "explanation": "Thematic break or horizontal dividing line separating content shifts",
+              "example": "<p>Section 1</p><hr><p>Section 2</p>"
+            }
           ]
         },
         {
-          "categoryTitle": "String Manipulation",
+          "categoryTitle": "3. Text Formatting & Inline Elements",
           "items": [
-            { "commandOrSyntax": "f\"Hello, {name.strip().title()}!\"", "explanation": "Formatted f-strings with expression interpolation", "example": "f\"{val:.2f}\"" },
-            { "commandOrSyntax": "\" - \".join(list_of_strings)", "explanation": "Efficient string concatenation from list", "example": "\", \".join(['A', 'B'])" }
+            {
+              "commandOrSyntax": "<strong>Important</strong> / <em>Emphasis</em>",
+              "explanation": "Semantic importance (bold by default) and emphasized stress (italics by default)",
+              "example": "<strong>Note:</strong> Always add <em>alt</em> text to images."
+            },
+            {
+              "commandOrSyntax": "<mark>Highlighted Text</mark>",
+              "explanation": "Highlights text with default yellow background for visual reference or search matches",
+              "example": "<mark>Admission Open 2026</mark>"
+            },
+            {
+              "commandOrSyntax": "<del>Original</del> <ins>Updated</ins>",
+              "explanation": "Strikethrough deleted content paired with newly inserted text",
+              "example": "Course Fee: <del>₹1500</del> <ins>₹999</ins>"
+            },
+            {
+              "commandOrSyntax": "<sub>Subscript</sub> / <sup>Superscript</sup>",
+              "explanation": "Subscript (chemical formulas, footnotes) and superscript (exponents, math powers)",
+              "example": "Water is H<sub>2</sub>O and 10<sup>2</sup> = 100"
+            },
+            {
+              "commandOrSyntax": "<code>let x = 10;</code> / <pre>Preserved text</pre>",
+              "explanation": "Inline monospace code snippet / block preserving exact whitespace and indents",
+              "example": "<pre><code>function hello() {\\n  return true;\\n}</code></pre>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Links & Navigation Anchors",
+          "items": [
+            {
+              "commandOrSyntax": "<a href=\"https://mskinstitute.in\" target=\"_blank\" rel=\"noopener noreferrer\">Link</a>",
+              "explanation": "Opens external web page in a new secure tab preventing tab-nabbing security risks",
+              "example": "<a href=\"https://mskinstitute.in\" target=\"_blank\" rel=\"noopener noreferrer\">Visit MSK</a>"
+            },
+            {
+              "commandOrSyntax": "<a href=\"#syllabus\">Jump to Syllabus</a>",
+              "explanation": "Internal page jump linking directly to an element with id=\"syllabus\"",
+              "example": "<a href=\"#contact-section\">Jump to Contact</a>"
+            },
+            {
+              "commandOrSyntax": "<a href=\"mailto:info@mskinstitute.in\">Send Email</a>",
+              "explanation": "Launches the user's default email application pre-addressed to the recipient",
+              "example": "<a href=\"mailto:support@mskinstitute.in\">Email Support</a>"
+            },
+            {
+              "commandOrSyntax": "<a href=\"tel:+918393042166\">Call +91 8393042166</a>",
+              "explanation": "Triggers phone dialer directly on smartphones and supported desktop softphones",
+              "example": "<a href=\"tel:+918393042166\">Helpline: +91 8393042166</a>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Lists (Unordered, Ordered, Description)",
+          "items": [
+            {
+              "commandOrSyntax": "<ul> <li>Item 1</li> <li>Item 2</li> </ul>",
+              "explanation": "Unordered bulleted list container with list items (<li>)",
+              "example": "<ul>\\n  <li>Python</li>\\n  <li>HTML5</li>\\n</ul>"
+            },
+            {
+              "commandOrSyntax": "<ol type=\"1|A|a|I|i\" start=\"1\"> <li>First</li> </ol>",
+              "explanation": "Numbered ordered sequence; type controls numbering style (numbers, letters, Roman)",
+              "example": "<ol type=\"A\">\\n  <li>HTML Basics</li>\\n  <li>Forms</li>\\n</ol>"
+            },
+            {
+              "commandOrSyntax": "<dl> <dt>Term</dt> <dd>Definition</dd> </dl>",
+              "explanation": "Description list pairing defined terms (<dt>) with detailed definitions (<dd>)",
+              "example": "<dl>\\n  <dt>HTML5</dt>\\n  <dd>Modern Web Markup Standard</dd>\\n</dl>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. Images & Responsive Media",
+          "items": [
+            {
+              "commandOrSyntax": "<img src=\"logo.png\" alt=\"MSK Logo\" loading=\"lazy\" width=\"200\" height=\"80\">",
+              "explanation": "Embeds image with mandatory alt text for accessibility and native lazy loading for performance",
+              "example": "<img src=\"/brand/logo.png\" alt=\"MSK Institute Logo\" loading=\"lazy\">"
+            },
+            {
+              "commandOrSyntax": "<figure> <img src=\"lab.jpg\" alt=\"Lab\"> <figcaption>Caption</figcaption> </figure>",
+              "explanation": "Semantic figure block pairing illustrations, charts, or images with an explanatory caption",
+              "example": "<figure>\\n  <img src=\"lab.jpg\" alt=\"Computer Lab\">\\n  <figcaption>Offline Lab at Shikohabad</figcaption>\\n</figure>"
+            },
+            {
+              "commandOrSyntax": "<picture> <source media=\"(min-width: 768px)\" srcset=\"large.jpg\"> <img src=\"small.jpg\" alt=\"...\"> </picture>",
+              "explanation": "Responsive art direction serving optimized image files based on device screen widths",
+              "example": "<picture>\\n  <source media=\"(min-width: 640px)\" srcset=\"desktop.webp\">\\n  <img src=\"mobile.webp\" alt=\"Hero\">\\n</picture>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "7. Tables & Structured Tabular Data",
+          "items": [
+            {
+              "commandOrSyntax": "<table> <thead> <tbody> <tfoot>",
+              "explanation": "Semantic table structure separating header columns, data body rows, and summary footer rows",
+              "example": "<table>\\n  <thead><tr><th>Course</th><th>Fee</th></tr></thead>\\n  <tbody><tr><td>HTML5</td><td>Free</td></tr></tbody>\\n</table>"
+            },
+            {
+              "commandOrSyntax": "<tr> <th scope=\"col\">Header</th> <td>Data Cell</td> </tr>",
+              "explanation": "Table rows with header cells (<th>, bold/centered) and standard data cells (<td>)",
+              "example": "<tr><th scope=\"row\">Student</th><td>Sumit Kumar</td></tr>"
+            },
+            {
+              "commandOrSyntax": "<td colspan=\"2\">Merged across 2 columns</td>",
+              "explanation": "Expands a cell horizontally to span multiple adjacent columns",
+              "example": "<td colspan=\"2\">Total Marks: 98</td>"
+            },
+            {
+              "commandOrSyntax": "<td rowspan=\"2\">Merged across 2 rows</td>",
+              "explanation": "Expands a cell vertically to span multiple stacked table rows",
+              "example": "<td rowspan=\"2\">Full-Stack Batch</td>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "8. Block, Inline & Structural Containers",
+          "items": [
+            {
+              "commandOrSyntax": "<div class=\"card\"> ... </div>",
+              "explanation": "Generic non-semantic block-level container taking 100% width; used for CSS styling layout",
+              "example": "<div className=\"p-4 rounded-xl bg-white shadow-md\">...</div>"
+            },
+            {
+              "commandOrSyntax": "<span class=\"badge\">Text</span>",
+              "explanation": "Generic inline container taking only required content width; used to target text segments",
+              "example": "<span className=\"text-purple-600 font-bold\">Verified</span>"
+            },
+            {
+              "commandOrSyntax": "<address>Contact info</address>",
+              "explanation": "Represents contact information (physical address, phone, email) for article author or organisation",
+              "example": "<address>MSK Institute, Station Road, Shikohabad, UP</address>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "9. HTML5 Semantic Layout Elements",
+          "items": [
+            {
+              "commandOrSyntax": "<header> ... </header>",
+              "explanation": "Introductory banner containing logo, main site title, or top page navigation",
+              "example": "<header>\\n  <h1>MSK Institute</h1>\\n  <nav>...</nav>\\n</header>"
+            },
+            {
+              "commandOrSyntax": "<nav aria-label=\"Main Navigation\"> ... </nav>",
+              "explanation": "Landmark section dedicated to primary site navigation menus and link lists",
+              "example": "<nav>\\n  <a href=\"/\">Home</a>\\n  <a href=\"/courses\">Courses</a>\\n</nav>"
+            },
+            {
+              "commandOrSyntax": "<main> ... </main>",
+              "explanation": "The central unique dominant content of the page (strictly once per HTML document)",
+              "example": "<main>\\n  <article>...</article>\\n</main>"
+            },
+            {
+              "commandOrSyntax": "<article> ... </article>",
+              "explanation": "Self-contained, independently reusable unit (e.g. blog post, lesson, forum message)",
+              "example": "<article>\\n  <h2>Lesson 1: Introduction</h2>\\n  <p>Content...</p>\\n</article>"
+            },
+            {
+              "commandOrSyntax": "<section> ... </section>",
+              "explanation": "Thematic content block grouping related information, almost always preceded by a heading",
+              "example": "<section>\\n  <h2>Course Syllabus</h2>\\n  <p>Topics...</p>\\n</section>"
+            },
+            {
+              "commandOrSyntax": "<aside> ... </aside>",
+              "explanation": "Indirectly related side content (sidebar widgets, related tutorials, author bios, callouts)",
+              "example": "<aside>\\n  <h3>Download Cheatsheet</h3>\\n</aside>"
+            },
+            {
+              "commandOrSyntax": "<footer> ... </footer>",
+              "explanation": "Footer for nearest section or page containing copyright, sitemap, legal notes, contact",
+              "example": "<footer>\\n  <p>© 2026 MSK Institute. All rights reserved.</p>\\n</footer>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "10. Forms & Core Input Types",
+          "items": [
+            {
+              "commandOrSyntax": "<form action=\"/api/submit\" method=\"POST\"> ... </form>",
+              "explanation": "Form container defining HTTP endpoint URL and transmission method (GET / POST)",
+              "example": "<form action=\"/api/leads\" method=\"POST\">\\n  ...\\n</form>"
+            },
+            {
+              "commandOrSyntax": "<label for=\"email-input\">Email:</label> <input id=\"email-input\">",
+              "explanation": "Accessible label explicitly bound to input via id attribute; clicking label focuses input",
+              "example": "<label for=\"email\">Email</label>\\n<input id=\"email\" type=\"email\">"
+            },
+            {
+              "commandOrSyntax": "<input type=\"text | email | password | number | tel | url\">",
+              "explanation": "Single-line inputs optimized with contextual virtual keyboards on mobile phones",
+              "example": "<input type=\"tel\" placeholder=\"+91 8393042166\">"
+            },
+            {
+              "commandOrSyntax": "<input type=\"checkbox\" id=\"agree\"> / <input type=\"radio\" name=\"course\">",
+              "explanation": "Checkbox for multiple binary selections / Radio buttons sharing 'name' for single choice",
+              "example": "<input type=\"radio\" name=\"batch\" value=\"offline\"> Offline Lab"
+            },
+            {
+              "commandOrSyntax": "<input type=\"date | time | color | file\">",
+              "explanation": "Native browser calendar pickers, clock selectors, color pickers, and file upload dialogs",
+              "example": "<input type=\"file\" accept=\".pdf,.png\" multiple>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "11. Advanced Form Controls & Validations",
+          "items": [
+            {
+              "commandOrSyntax": "<select name=\"course\"> <option value=\"html\">HTML5</option> </select>",
+              "explanation": "Dropdown menu allowing single or multiple (with multiple attr) selections",
+              "example": "<select name=\"level\">\\n  <option value=\"beg\">Beginner</option>\\n</select>"
+            },
+            {
+              "commandOrSyntax": "<textarea rows=\"4\" cols=\"50\" placeholder=\"Enter query...\"></textarea>",
+              "explanation": "Multi-line expandable text input area for messages, addresses, and comments",
+              "example": "<textarea rows=\"4\" placeholder=\"Write your message...\"></textarea>"
+            },
+            {
+              "commandOrSyntax": "<input list=\"courses\"> <datalist id=\"courses\"> <option value=\"Python\"> ... </datalist>",
+              "explanation": "Combines free-form text input with pre-filled autocomplete dropdown suggestions",
+              "example": "<input list=\"courses\">\\n<datalist id=\"courses\"><option value=\"Python\"><option value=\"HTML5\"></datalist>"
+            },
+            {
+              "commandOrSyntax": "<fieldset> <legend>Student Details</legend> ... </fieldset>",
+              "explanation": "Visually and semantically groups related form controls with a border and legend caption",
+              "example": "<fieldset>\\n  <legend>Contact Information</legend>\\n</fieldset>"
+            },
+            {
+              "commandOrSyntax": "required, minlength=\"3\", pattern=\"[0-9]{10}\", min=\"1\" max=\"100\"",
+              "explanation": "Client-side HTML5 constraint validation executed automatically by browser before submit",
+              "example": "<input type=\"tel\" required pattern=\"[0-9]{10}\" placeholder=\"10-digit mobile\">"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "12. HTML5 Media: Audio & Video",
+          "items": [
+            {
+              "commandOrSyntax": "<video controls poster=\"thumb.jpg\" width=\"640\"> <source src=\"video.mp4\" type=\"video/mp4\"> </video>",
+              "explanation": "Native embedded video player with play/pause/volume controls and initial poster image",
+              "example": "<video controls autoplay muted loop>\\n  <source src=\"intro.mp4\" type=\"video/mp4\">\\n</video>"
+            },
+            {
+              "commandOrSyntax": "<audio controls preload=\"metadata\"> <source src=\"song.mp3\" type=\"audio/mpeg\"> </audio>",
+              "explanation": "Native embedded audio player supporting MP3, WAV, and OGG audio streams",
+              "example": "<audio controls>\\n  <source src=\"podcast.mp3\" type=\"audio/mpeg\">\\n</audio>"
+            },
+            {
+              "commandOrSyntax": "<track src=\"subtitles.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English\">",
+              "explanation": "Integrates WebVTT subtitles, closed captions, and chapter titles to media elements",
+              "example": "<track src=\"subs-hi.vtt\" kind=\"subtitles\" srclang=\"hi\" label=\"Hindi\">"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "13. Iframes & Web Embeds",
+          "items": [
+            {
+              "commandOrSyntax": "<iframe src=\"url\" title=\"Description\" width=\"100%\" height=\"400\" loading=\"lazy\"></iframe>",
+              "explanation": "Embeds external web pages, YouTube video players, or Google Maps with lazy loading",
+              "example": "<iframe src=\"https://www.youtube.com/embed/...\" title=\"Video\" allowfullscreen></iframe>"
+            },
+            {
+              "commandOrSyntax": "sandbox=\"allow-scripts allow-same-origin\"",
+              "explanation": "Applies security restrictions to embedded iframes preventing malicious scripts or redirects",
+              "example": "<iframe src=\"embed.html\" sandbox=\"allow-scripts\" title=\"Widget\"></iframe>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "14. Interactive HTML5 Elements",
+          "items": [
+            {
+              "commandOrSyntax": "<details> <summary>Click to view FAQ</summary> <p>Hidden answer...</p> </details>",
+              "explanation": "Native expandable disclosure accordion widget; expands/collapses without JavaScript",
+              "example": "<details>\\n  <summary>Who can enroll in HTML5?</summary>\\n  <p>Anyone with basic computer skills.</p>\\n</details>"
+            },
+            {
+              "commandOrSyntax": "<dialog id=\"modal\"> <p>Modal Window</p> <button>Close</button> </dialog>",
+              "explanation": "Native modal or popup dialog opened using dialog.showModal() and closed via dialog.close()",
+              "example": "<dialog id=\"infoModal\">\\n  <p>Registration successful!</p>\\n</dialog>"
+            },
+            {
+              "commandOrSyntax": "<progress value=\"75\" max=\"100\">75%</progress>",
+              "explanation": "Visual progress bar showing current completion percentage of an active task",
+              "example": "<progress value=\"80\" max=\"100\">80%</progress>"
+            },
+            {
+              "commandOrSyntax": "<meter min=\"0\" max=\"100\" low=\"30\" high=\"80\" optimum=\"90\" value=\"85\">85%</meter>",
+              "explanation": "Scalar measurement gauge within a known range (disk space, battery, test score)",
+              "example": "<meter min=\"0\" max=\"100\" value=\"90\">90%</meter>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "15. HTML5 Graphics: SVG & Canvas",
+          "items": [
+            {
+              "commandOrSyntax": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#F97316\" /> </svg>",
+              "explanation": "Scalable Vector Graphics for ultra-crisp, resolution-independent vector icons and shapes",
+              "example": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 2L2 22h20L12 2z\" fill=\"currentColor\"/></svg>"
+            },
+            {
+              "commandOrSyntax": "<canvas id=\"myCanvas\" width=\"400\" height=\"300\"></canvas>",
+              "explanation": "Bitmap drawing canvas allowing dynamic scriptable 2D/3D graphics, charts, and games via JavaScript",
+              "example": "<canvas id=\"signaturePad\" width=\"300\" height=\"150\"></canvas>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "16. Accessibility (A11y) & ARIA Essentials",
+          "items": [
+            {
+              "commandOrSyntax": "aria-label=\"Close modal dialogue\"",
+              "explanation": "Defines an explicit accessible name for screen readers when an element has no visible text",
+              "example": "<button aria-label=\"Close dialog\"><X /></button>"
+            },
+            {
+              "commandOrSyntax": "aria-hidden=\"true\"",
+              "explanation": "Hides purely decorative visual icons or graphics from assistive screen reading technologies",
+              "example": "<svg aria-hidden=\"true\">...</svg>"
+            },
+            {
+              "commandOrSyntax": "role=\"button | navigation | banner | alert\"",
+              "explanation": "Communicates semantic widget purpose to accessibility tree when generic elements are used",
+              "example": "<div role=\"alert\">Form submitted successfully!</div>"
+            },
+            {
+              "commandOrSyntax": "aria-expanded=\"true | false\"",
+              "explanation": "Informs screen readers whether an associated collapsible menu or dropdown is expanded or collapsed",
+              "example": "<button aria-expanded=\"false\" aria-controls=\"nav-menu\">Menu</button>"
+            },
+            {
+              "commandOrSyntax": "tabindex=\"0 | -1\"",
+              "explanation": "Controls keyboard navigation order (0 makes item focusable in natural tab flow; -1 programmatic focus)",
+              "example": "<div tabindex=\"0\" role=\"button\">Clickable Card</div>"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-python-beginners",
+    "type": "cheatsheet",
+    "title": "Python for Beginners: Complete Syntax & Operations Cheatsheet",
+    "slug": "python-for-beginners-syntax-cheatsheet",
+    "category": "Python",
+    "level": "Beginner",
+    "description": "Essential quick-reference revision cheatsheet covering Python 3 fundamental syntax, variables, data types, numbers, string manipulation, list/tuple/set/dictionary operations, conditional branching, loops, functions, and safe file handling.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/python-for-beginners-cheatsheet",
+    "topicsCovered": [
+      "Variables & Casting",
+      "Strings & Slicing",
+      "Lists, Tuples & Sets",
+      "Dictionaries & Keys",
+      "Loops & Logic",
+      "Functions & File I/O"
+    ],
+    "readTime": "5 min lookup",
+    "pages": 4,
+    "featured": true,
+    "updatedAt": "2026-09-13",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Python Fundamentals & I/O",
+          "items": [
+            {
+              "commandOrSyntax": "print(\"Hello, World!\", end=\"\\n\", sep=\" \")",
+              "explanation": "Outputs message to console with custom ending and separator",
+              "example": "print(\"Python\", \"is\", \"fun\", sep=\"-\")  # Python-is-fun"
+            },
+            {
+              "commandOrSyntax": "user_input = input(\"Enter your name: \")",
+              "explanation": "Takes user input from standard console (always returns string)",
+              "example": "age = int(input(\"Enter age: \"))"
+            },
+            {
+              "commandOrSyntax": "# Single line comment\\n\"\"\"Multi-line docstring\"\"\"",
+              "explanation": "Comment lines ignored by interpreter or used for documentation",
+              "example": "# TODO: calculate average score"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Variables & Multiple Assignment",
+          "items": [
+            {
+              "commandOrSyntax": "x, y, z = 10, 20, 30",
+              "explanation": "Unpack and assign multiple values in a single statement",
+              "example": "name, score = \"Rahul\", 95"
+            },
+            {
+              "commandOrSyntax": "a, b = b, a",
+              "explanation": "Swap values of two variables in-place without a temp variable",
+              "example": "x, y = 5, 10; x, y = y, x  # x=10, y=5"
+            },
+            {
+              "commandOrSyntax": "MAX_CONNECTIONS = 100",
+              "explanation": "Constant naming convention: ALL_CAPS denotes constant values",
+              "example": "PI = 3.14159; TIMEOUT = 30"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Data Types & Type Conversion",
+          "items": [
+            {
+              "commandOrSyntax": "type(variable)",
+              "explanation": "Returns the dynamic runtime class type of the variable",
+              "example": "type(3.14)  # <class 'float'>"
+            },
+            {
+              "commandOrSyntax": "isinstance(value, (int, float))",
+              "explanation": "Check if an object belongs to a class or tuple of classes",
+              "example": "isinstance(100, int)  # True"
+            },
+            {
+              "commandOrSyntax": "int(\"42\"), float(\"3.14\"), str(100), bool(1)",
+              "explanation": "Explicit type casting between numbers, strings, and booleans",
+              "example": "price = float(\"19.99\"); flag = bool(0)  # False"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Numbers & Arithmetic Operations",
+          "items": [
+            {
+              "commandOrSyntax": "+, -, *, /, //, %, **",
+              "explanation": "Basic math: addition, subtraction, multiplication, float division, floor division, modulus, power",
+              "example": "7 // 2  # 3 | 7 % 2  # 1 | 2 ** 3  # 8"
+            },
+            {
+              "commandOrSyntax": "round(number, ndigits) / abs(x)",
+              "explanation": "Round to decimal places / get absolute non-negative value",
+              "example": "round(3.14159, 2)  # 3.14 | abs(-50)  # 50"
+            },
+            {
+              "commandOrSyntax": "import math; math.sqrt(16), math.ceil(4.2)",
+              "explanation": "Math module: square root, ceiling, floor, factorial",
+              "example": "math.ceil(4.2)  # 5 | math.sqrt(25)  # 5.0"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Comparison, Logical & Identity Operators",
+          "items": [
+            {
+              "commandOrSyntax": "==, !=, >, <, >=, <=",
+              "explanation": "Comparison operators return boolean True or False",
+              "example": "5 != 3  # True | 10 >= 10  # True"
+            },
+            {
+              "commandOrSyntax": "and, or, not",
+              "explanation": "Logical operators for compound boolean expressions",
+              "example": "age >= 18 and has_id"
+            },
+            {
+              "commandOrSyntax": "item in collection / item not in collection",
+              "explanation": "Membership operator checking existence in sequence or dict keys",
+              "example": "\"admin\" in [\"guest\", \"admin\", \"staff\"]  # True"
+            },
+            {
+              "commandOrSyntax": "a is None / a is not None",
+              "explanation": "Identity comparison checking memory address (standard for None)",
+              "example": "result is None"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. Strings, Slicing & Formatting",
+          "items": [
+            {
+              "commandOrSyntax": "f\"Name: {name}, Total: {price * qty:.2f}\"",
+              "explanation": "f-Strings (formatted string literals) with inline expression evaluation",
+              "example": "f\"{student_name.title()} scored {pct:.1f}%\""
+            },
+            {
+              "commandOrSyntax": "s[start:stop:step]",
+              "explanation": "Slicing string from start index up to (excluding) stop index",
+              "example": "\"Python\"[0:4]  # \"Pyth\" | \"Hello\"[::-1]  # \"olleH\" (reversed)"
+            },
+            {
+              "commandOrSyntax": "len(text)",
+              "explanation": "Returns total count of characters in string",
+              "example": "len(\"MSK Institute\")  # 13"
+            },
+            {
+              "commandOrSyntax": "\"Line 1\\nLine 2\\tIndented \\\"Quotes\\\"\"",
+              "explanation": "Escape sequences for newline (\\n), tab (\\t), and quotes (\\\")",
+              "example": "print(\"C:\\\\Users\\\\Admin\\\\file.txt\")"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "7. String Methods",
+          "items": [
+            {
+              "commandOrSyntax": "s.strip() / s.lstrip() / s.rstrip()",
+              "explanation": "Remove leading and trailing whitespaces or specific characters",
+              "example": "\"  clean text  \".strip()  # \"clean text\""
+            },
+            {
+              "commandOrSyntax": "s.lower(), s.upper(), s.title(), s.capitalize()",
+              "explanation": "Change letter casing across the string",
+              "example": "\"python course\".title()  # \"Python Course\""
+            },
+            {
+              "commandOrSyntax": "s.replace(old, new, count)",
+              "explanation": "Replace occurrences of substring with a new substring",
+              "example": "\"I like Java\".replace(\"Java\", \"Python\")"
+            },
+            {
+              "commandOrSyntax": "s.split(delimiter) / delimiter.join(list)",
+              "explanation": "Split string into list / join list items into a single string",
+              "example": "\", \".join([\"Delhi\", \"Agra\", \"Shikohabad\"])"
+            },
+            {
+              "commandOrSyntax": "s.startswith(prefix) / s.endswith(suffix)",
+              "explanation": "Check if string starts or ends with specific substring",
+              "example": "\"photo.png\".endswith((\".png\", \".jpg\"))  # True"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "8. Lists - Creation, Mutation & Methods",
+          "items": [
+            {
+              "commandOrSyntax": "nums = [10, 20, 30, 40]; first = nums[0]; last = nums[-1]",
+              "explanation": "Ordered, mutable collection accessible by positive & negative index",
+              "example": "nums[1] = 25  # update item in-place"
+            },
+            {
+              "commandOrSyntax": "lst.append(item) / lst.insert(index, item)",
+              "explanation": "Add item to the end of list / insert at specific index",
+              "example": "courses.append(\"Python\") | courses.insert(0, \"CCC\")"
+            },
+            {
+              "commandOrSyntax": "lst.extend(iterable)",
+              "explanation": "Append all items from an iterable to the end of the list",
+              "example": "[1, 2].extend([3, 4])  # [1, 2, 3, 4]"
+            },
+            {
+              "commandOrSyntax": "lst.pop(index=-1) / lst.remove(value)",
+              "explanation": "Remove and return item at index (default last) / remove first matching value",
+              "example": "last = tasks.pop() | tasks.remove(\"completed\")"
+            },
+            {
+              "commandOrSyntax": "lst.sort(reverse=False) / sorted(iterable)",
+              "explanation": "Sort list in-place / return a new sorted copy without mutating original",
+              "example": "nums.sort(reverse=True) | top3 = sorted(scores)[-3:]"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "9. List Comprehension",
+          "items": [
+            {
+              "commandOrSyntax": "[expression for item in iterable]",
+              "explanation": "Concise syntax to generate a transformed list from an iterable",
+              "example": "squares = [x**2 for x in range(1, 6)]  # [1, 4, 9, 16, 25]"
+            },
+            {
+              "commandOrSyntax": "[item for item in iterable if condition]",
+              "explanation": "List comprehension with conditional filtering",
+              "example": "evens = [n for n in numbers if n % 2 == 0]"
+            },
+            {
+              "commandOrSyntax": "[x if condition else y for x in iterable]",
+              "explanation": "Ternary transformation inside list comprehension",
+              "example": "labels = [\"Pass\" if s >= 40 else \"Fail\" for s in marks]"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "10. Tuples & Unpacking",
+          "items": [
+            {
+              "commandOrSyntax": "coords = (10, 20); x, y = coords",
+              "explanation": "Ordered, immutable sequence; elements unpacked into variables",
+              "example": "name, roll, marks = (\"Sumit\", 101, 92)"
+            },
+            {
+              "commandOrSyntax": "single_tuple = (42,)",
+              "explanation": "Single-element tuple requires trailing comma to prevent being parsed as integer",
+              "example": "type((5))  # int vs type((5,))  # tuple"
+            },
+            {
+              "commandOrSyntax": "t.count(value) / t.index(value)",
+              "explanation": "Count occurrences of item / return index of first occurrence",
+              "example": "(1, 2, 2, 3).count(2)  # 2"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "11. Sets & Set Operations",
+          "items": [
+            {
+              "commandOrSyntax": "unique_nums = set([1, 2, 2, 3, 3, 4])",
+              "explanation": "Unordered collection of unique, hashable elements (removes duplicates)",
+              "example": "tags = {\"python\", \"coding\", \"backend\"}"
+            },
+            {
+              "commandOrSyntax": "s.add(item) / s.discard(item)",
+              "explanation": "Add item to set / remove item without throwing KeyError if not found",
+              "example": "visited.add(\"home\") | visited.discard(\"login\")"
+            },
+            {
+              "commandOrSyntax": "a | b, a & b, a - b, a ^ b",
+              "explanation": "Set operations: union (|), intersection (&), difference (-), symmetric difference (^)",
+              "example": "common = set(skills_required) & set(candidate_skills)"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "12. Dictionaries - Key-Value Store",
+          "items": [
+            {
+              "commandOrSyntax": "student = {\"name\": \"Ankit\", \"course\": \"Python\", \"fees\": 2500}",
+              "explanation": "Mapping of unique keys to values (preserves insertion order in Python 3.7+)",
+              "example": "student[\"grade\"] = \"A\"  # add or update key"
+            },
+            {
+              "commandOrSyntax": "d.get(key, default_value)",
+              "explanation": "Safe key lookup returning default value if key is not found",
+              "example": "role = user.get(\"role\", \"student\")"
+            },
+            {
+              "commandOrSyntax": "d.keys(), d.values(), d.items()",
+              "explanation": "View objects for keys, values, and (key, value) pairs",
+              "example": "for k, v in student.items(): print(f\"{k}: {v}\")"
+            },
+            {
+              "commandOrSyntax": "d.update({key: new_val}) / d.pop(key)",
+              "explanation": "Merge another dictionary / remove key and return its value",
+              "example": "student.update({\"status\": \"Enrolled\"})"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "13. Conditional Statements (if-elif-else)",
+          "items": [
+            {
+              "commandOrSyntax": "if condition1:\\n    # code\\nelif condition2:\\n    # code\\nelse:\\n    # fallback",
+              "explanation": "Branching logic with indentation-based code blocks",
+              "example": "if score >= 90: grade = 'A'\\nelif score >= 75: grade = 'B'\\nelse: grade = 'C'"
+            },
+            {
+              "commandOrSyntax": "result = value_if_true if condition else value_if_false",
+              "explanation": "Ternary operator for one-line conditional assignment",
+              "example": "status = \"Adult\" if age >= 18 else \"Minor\""
+            }
+          ]
+        },
+        {
+          "categoryTitle": "14. Loops - For & While",
+          "items": [
+            {
+              "commandOrSyntax": "for i in range(start, stop, step):",
+              "explanation": "Iterate through numeric sequence generated by range()",
+              "example": "for n in range(1, 11, 2): print(n)  # 1, 3, 5, 7, 9"
+            },
+            {
+              "commandOrSyntax": "for index, item in enumerate(iterable, start=0):",
+              "explanation": "Provides both current 0-based index and item in each iteration",
+              "example": "for idx, name in enumerate(students, 1): print(f\"{idx}. {name}\")"
+            },
+            {
+              "commandOrSyntax": "while condition:",
+              "explanation": "Repeat execution block as long as condition remains True",
+              "example": "while attempts < 3: attempts += 1"
+            },
+            {
+              "commandOrSyntax": "break, continue, pass",
+              "explanation": "Exit loop immediately (break) / skip to next iteration (continue) / null placeholder (pass)",
+              "example": "if val == target: break"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "15. Functions & Parameters",
+          "items": [
+            {
+              "commandOrSyntax": "def function_name(param1, param2=\"default\") -> return_type:\\n    \"\"\"Docstring\"\"\"\\n    return result",
+              "explanation": "Reusable code block with positional parameters and default arguments",
+              "example": "def calculate_discount(price, pct=10):\\n    return price * (1 - pct/100)"
+            },
+            {
+              "commandOrSyntax": "def func(*args, **kwargs):",
+              "explanation": "*args collects variable positional arguments as tuple; **kwargs collects keyword args as dict",
+              "example": "def sum_all(*numbers): return sum(numbers)"
+            },
+            {
+              "commandOrSyntax": "square = lambda x: x ** 2",
+              "explanation": "Anonymous inline one-expression function",
+              "example": "sorted(students, key=lambda s: s[\"score\"], reverse=True)"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "16. File Handling & Safe Context Management",
+          "items": [
+            {
+              "commandOrSyntax": "with open(\"filename.txt\", \"r\", encoding=\"utf-8\") as f:\\n    content = f.read()",
+              "explanation": "Context manager auto-closes file on exit; 'r' mode reads entire content",
+              "example": "with open(\"data.txt\", \"r\") as f: lines = f.readlines()"
+            },
+            {
+              "commandOrSyntax": "with open(\"output.txt\", \"w\", encoding=\"utf-8\") as f:\\n    f.write(\"Hello\\n\")",
+              "explanation": "'w' mode overwrites/creates file and writes text strings",
+              "example": "with open(\"report.txt\", \"w\") as f: f.write(report_data)"
+            },
+            {
+              "commandOrSyntax": "with open(\"log.txt\", \"a\", encoding=\"utf-8\") as f:\\n    f.write(\"New entry\\n\")",
+              "explanation": "'a' mode appends content to the end of file without truncating existing data",
+              "example": "with open(\"activity.log\", \"a\") as f: f.write(f\"{timestamp}: {action}\\n\")"
+            }
           ]
         }
       ]
@@ -52,7 +823,12 @@
     "description": "Visual reference for flex direction, justify-content, align-items, grid template columns, fr units, minmax, and auto-fit layouts.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/css-flex-grid-cheatsheet",
-    "topicsCovered": ["CSS Flexbox", "CSS Grid", "Responsive Layouts", "Tailwind Equivalence"],
+    "topicsCovered": [
+      "CSS Flexbox",
+      "CSS Grid",
+      "Responsive Layouts",
+      "Tailwind Equivalence"
+    ],
     "readTime": "4 min lookup",
     "pages": 3,
     "featured": true,
@@ -62,18 +838,46 @@
         {
           "categoryTitle": "Flexbox Alignment Properties",
           "items": [
-            { "commandOrSyntax": "display: flex; flex-direction: row | column;", "explanation": "Establishes main axis direction", "example": "flex flex-col (Tailwind)" },
-            { "commandOrSyntax": "justify-content: center | space-between | space-around;", "explanation": "Aligns child elements along the main axis", "example": "justify-between" },
-            { "commandOrSyntax": "align-items: center | stretch | flex-start;", "explanation": "Aligns child elements along the cross axis", "example": "items-center" },
-            { "commandOrSyntax": "gap: 1rem; flex-wrap: wrap;", "explanation": "Even gutter spacing without negative margins", "example": "gap-4 flex-wrap" }
+            {
+              "commandOrSyntax": "display: flex; flex-direction: row | column;",
+              "explanation": "Establishes main axis direction",
+              "example": "flex flex-col (Tailwind)"
+            },
+            {
+              "commandOrSyntax": "justify-content: center | space-between | space-around;",
+              "explanation": "Aligns child elements along the main axis",
+              "example": "justify-between"
+            },
+            {
+              "commandOrSyntax": "align-items: center | stretch | flex-start;",
+              "explanation": "Aligns child elements along the cross axis",
+              "example": "items-center"
+            },
+            {
+              "commandOrSyntax": "gap: 1rem; flex-wrap: wrap;",
+              "explanation": "Even gutter spacing without negative margins",
+              "example": "gap-4 flex-wrap"
+            }
           ]
         },
         {
           "categoryTitle": "CSS Grid Essentials",
           "items": [
-            { "commandOrSyntax": "grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));", "explanation": "Fully responsive card grid without media queries", "example": "grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]" },
-            { "commandOrSyntax": "grid-column: span 2 / span 2;", "explanation": "Make an item stretch across multiple grid tracks", "example": "col-span-2" },
-            { "commandOrSyntax": "place-items: center;", "explanation": "Perfect horizontal and vertical centering in 1 line", "example": "place-items-center" }
+            {
+              "commandOrSyntax": "grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));",
+              "explanation": "Fully responsive card grid without media queries",
+              "example": "grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"
+            },
+            {
+              "commandOrSyntax": "grid-column: span 2 / span 2;",
+              "explanation": "Make an item stretch across multiple grid tracks",
+              "example": "col-span-2"
+            },
+            {
+              "commandOrSyntax": "place-items: center;",
+              "explanation": "Perfect horizontal and vertical centering in 1 line",
+              "example": "place-items-center"
+            }
           ]
         }
       ]
@@ -89,7 +893,12 @@
     "description": "All essential git commands: init, branch switching, merge conflicts, stash, interactive rebase, and remote origin management.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/git-cheatsheet",
-    "topicsCovered": ["Git Branches", "Commit Standards", "Remote Repositories", "Undo & Stash"],
+    "topicsCovered": [
+      "Git Branches",
+      "Commit Standards",
+      "Remote Repositories",
+      "Undo & Stash"
+    ],
     "readTime": "3 min lookup",
     "pages": 2,
     "featured": false,
@@ -99,17 +908,41 @@
         {
           "categoryTitle": "Branching & Syncing",
           "items": [
-            { "commandOrSyntax": "git switch -c <branch-name>", "explanation": "Create and switch to a new branch modern way", "example": "git switch -c feature/login" },
-            { "commandOrSyntax": "git pull origin main --rebase", "explanation": "Pull latest updates keeping linear commit history", "example": "git pull origin main" },
-            { "commandOrSyntax": "git stash push -m \"wip\" / git stash pop", "explanation": "Temporarily save dirty workspace state", "example": "git stash && git pull" }
+            {
+              "commandOrSyntax": "git switch -c <branch-name>",
+              "explanation": "Create and switch to a new branch modern way",
+              "example": "git switch -c feature/login"
+            },
+            {
+              "commandOrSyntax": "git pull origin main --rebase",
+              "explanation": "Pull latest updates keeping linear commit history",
+              "example": "git pull origin main"
+            },
+            {
+              "commandOrSyntax": "git stash push -m \"wip\" / git stash pop",
+              "explanation": "Temporarily save dirty workspace state",
+              "example": "git stash && git pull"
+            }
           ]
         },
         {
           "categoryTitle": "Inspection & Undos",
           "items": [
-            { "commandOrSyntax": "git log --oneline --graph --decorate", "explanation": "Compact visual tree of branch commits", "example": "git log --oneline -n 10" },
-            { "commandOrSyntax": "git restore --staged <file>", "explanation": "Unstage changes without losing file edits", "example": "git restore --staged index.html" },
-            { "commandOrSyntax": "git commit --amend --no-edit", "explanation": "Add staged changes to the previous commit directly", "example": "git commit --amend" }
+            {
+              "commandOrSyntax": "git log --oneline --graph --decorate",
+              "explanation": "Compact visual tree of branch commits",
+              "example": "git log --oneline -n 10"
+            },
+            {
+              "commandOrSyntax": "git restore --staged <file>",
+              "explanation": "Unstage changes without losing file edits",
+              "example": "git restore --staged index.html"
+            },
+            {
+              "commandOrSyntax": "git commit --amend --no-edit",
+              "explanation": "Add staged changes to the previous commit directly",
+              "example": "git commit --amend"
+            }
           ]
         }
       ]
@@ -125,7 +958,12 @@
     "description": "Quick lookup for XLOOKUP, VLOOKUP, INDEX-MATCH, SUMIFS, COUNTIFS, conditional formatting, and 20+ Windows keyboard shortcuts.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/excel-shortcuts-cheatsheet",
-    "topicsCovered": ["XLOOKUP / VLOOKUP", "SUMIFS & COUNTIFS", "Pivot Shortcuts", "F4 Absolute Referencing"],
+    "topicsCovered": [
+      "XLOOKUP / VLOOKUP",
+      "SUMIFS & COUNTIFS",
+      "Pivot Shortcuts",
+      "F4 Absolute Referencing"
+    ],
     "readTime": "4 min lookup",
     "pages": 3,
     "featured": false,
@@ -135,18 +973,46 @@
         {
           "categoryTitle": "Formulas",
           "items": [
-            { "commandOrSyntax": "=XLOOKUP(lookup_val, lookup_array, return_array, \"Not Found\")", "explanation": "Modern two-way search replacing VLOOKUP & HLOOKUP", "example": "=XLOOKUP(A2, Employees!A:A, Employees!C:C)" },
-            { "commandOrSyntax": "=SUMIFS(sum_range, criteria_range1, criteria1, ...)", "explanation": "Sum numbers meeting multiple criteria", "example": "=SUMIFS(D:D, B:B, \"Shikohabad\", C:C, \">1000\")" },
-            { "commandOrSyntax": "=TEXT(date, \"DD-MMM-YYYY\")", "explanation": "Format date and numerical strings easily", "example": "=TEXT(TODAY(), \"DD-MM-YYYY\")" }
+            {
+              "commandOrSyntax": "=XLOOKUP(lookup_val, lookup_array, return_array, \"Not Found\")",
+              "explanation": "Modern two-way search replacing VLOOKUP & HLOOKUP",
+              "example": "=XLOOKUP(A2, Employees!A:A, Employees!C:C)"
+            },
+            {
+              "commandOrSyntax": "=SUMIFS(sum_range, criteria_range1, criteria1, ...)",
+              "explanation": "Sum numbers meeting multiple criteria",
+              "example": "=SUMIFS(D:D, B:B, \"Shikohabad\", C:C, \">1000\")"
+            },
+            {
+              "commandOrSyntax": "=TEXT(date, \"DD-MMM-YYYY\")",
+              "explanation": "Format date and numerical strings easily",
+              "example": "=TEXT(TODAY(), \"DD-MM-YYYY\")"
+            }
           ]
         },
         {
           "categoryTitle": "High-Speed Shortcuts",
           "items": [
-            { "commandOrSyntax": "Ctrl + Shift + L", "explanation": "Toggle AutoFilter on active table", "example": "Filters headers immediately" },
-            { "commandOrSyntax": "Alt + = (Equals)", "explanation": "AutoSum selected numbers instantly", "example": "Sum column in 1 keystroke" },
-            { "commandOrSyntax": "F4 (while typing formula)", "explanation": "Cycle absolute cell references ($A$1, A$1, $A1)", "example": "Locks row or column" },
-            { "commandOrSyntax": "Ctrl + ` (Backtick)", "explanation": "Toggle Show All Formulas mode", "example": "Inspect formula errors easily" }
+            {
+              "commandOrSyntax": "Ctrl + Shift + L",
+              "explanation": "Toggle AutoFilter on active table",
+              "example": "Filters headers immediately"
+            },
+            {
+              "commandOrSyntax": "Alt + = (Equals)",
+              "explanation": "AutoSum selected numbers instantly",
+              "example": "Sum column in 1 keystroke"
+            },
+            {
+              "commandOrSyntax": "F4 (while typing formula)",
+              "explanation": "Cycle absolute cell references ($A$1, A$1, $A1)",
+              "example": "Locks row or column"
+            },
+            {
+              "commandOrSyntax": "Ctrl + ` (Backtick)",
+              "explanation": "Toggle Show All Formulas mode",
+              "example": "Inspect formula errors easily"
+            }
           ]
         }
       ]
@@ -162,7 +1028,12 @@
     "description": "Comprehensive reference guide covering basic syntax, data structures, OOP concepts, file handling, and exception handling.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/python-notes-pdf",
-    "topicsCovered": ["Syntax & Data Types", "Control Flow", "Functions & Modules", "OOP Principles"],
+    "topicsCovered": [
+      "Syntax & Data Types",
+      "Control Flow",
+      "Functions & Modules",
+      "OOP Principles"
+    ],
     "readTime": "45 min study",
     "pages": 64,
     "featured": true,
@@ -178,7 +1049,12 @@
     "description": "Learn semantic layout design, CSS Grid, Flexbox, media queries, and utility-first styling with modern frameworks.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/html-css-notes",
-    "topicsCovered": ["Semantic Tags", "Flexbox & Grid Layouts", "Responsive Media Queries", "CSS Animations"],
+    "topicsCovered": [
+      "Semantic Tags",
+      "Flexbox & Grid Layouts",
+      "Responsive Media Queries",
+      "CSS Animations"
+    ],
     "readTime": "35 min study",
     "pages": 52,
     "featured": false,
@@ -194,7 +1070,12 @@
     "description": "Complete guide to DOM manipulation, event handling, async functions, promises, and modern ES6 array functions.",
     "tier": "paid",
     "price": "₹149",
-    "topicsCovered": ["ES6 Syntactic Sugar", "DOM Selection & Manipulation", "Event Bubbling & Capturing", "Fetch API & Promises"],
+    "topicsCovered": [
+      "ES6 Syntactic Sugar",
+      "DOM Selection & Manipulation",
+      "Event Bubbling & Capturing",
+      "Fetch API & Promises"
+    ],
     "readTime": "60 min study",
     "pages": 88,
     "featured": true,
@@ -210,7 +1091,12 @@
     "description": "Master advanced formulas, pivot tables, data tools in Excel, and professional document formatting, mail merge in Word.",
     "tier": "paid",
     "price": "₹99",
-    "topicsCovered": ["Excel Formulas & Pivot Tables", "Word Formatting & Page Layouts", "Mail Merge Integration", "Keyboard Shortcuts"],
+    "topicsCovered": [
+      "Excel Formulas & Pivot Tables",
+      "Word Formatting & Page Layouts",
+      "Mail Merge Integration",
+      "Keyboard Shortcuts"
+    ],
     "readTime": "50 min study",
     "pages": 76,
     "featured": false,
@@ -226,7 +1112,12 @@
     "description": "Essential network security protocols, port scanning basics, Kali Linux tools, OWASP Top 10 web vulnerabilities, and password auditing.",
     "tier": "paid",
     "price": "₹199",
-    "topicsCovered": ["Network Protocols & OSI", "Nmap & Wireshark Basics", "OWASP Top 10 Web Bugs", "Defensive Hardening"],
+    "topicsCovered": [
+      "Network Protocols & OSI",
+      "Nmap & Wireshark Basics",
+      "OWASP Top 10 Web Bugs",
+      "Defensive Hardening"
+    ],
     "readTime": "55 min study",
     "pages": 92,
     "featured": false,
@@ -242,18 +1133,43 @@
     "description": "The definitive blueprint to modern full-stack development. Covers Next.js App Router, Tailwind CSS, PostgreSQL, REST/GraphQL APIs, and cloud deployment.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/fullstack-developer-handbook",
-    "topicsCovered": ["Next.js & React 19", "Node.js Architecture", "PostgreSQL & Prisma", "CI/CD & Docker Basics"],
+    "topicsCovered": [
+      "Next.js & React 19",
+      "Node.js Architecture",
+      "PostgreSQL & Prisma",
+      "CI/CD & Docker Basics"
+    ],
     "readTime": "2 hours deep read",
     "pages": 140,
     "featured": true,
     "updatedAt": "2026-08-31",
     "handbookContent": {
       "chapters": [
-        { "number": 1, "title": "The Modern Web Architecture (Client, Server & Edge)", "summary": "Understanding client rendering vs server components, SSR, and Edge computing." },
-        { "number": 2, "title": "Styling & Design Systems with Tailwind CSS v4", "summary": "Configuring modern themes, variables, and rapid UI component patterns." },
-        { "number": 3, "title": "API Engineering with Node.js & Express", "summary": "Building resilient endpoints, JWT authentication, and rate limiting." },
-        { "number": 4, "title": "Relational Databases & Indexing Strategies", "summary": "Designing clean schemas in PostgreSQL and utilizing Prisma ORM." },
-        { "number": 5, "title": "Deployment, Monitoring & Production Hardening", "summary": "Deploying to Vercel/VPS, handling SSL, and configuring logging." }
+        {
+          "number": 1,
+          "title": "The Modern Web Architecture (Client, Server & Edge)",
+          "summary": "Understanding client rendering vs server components, SSR, and Edge computing."
+        },
+        {
+          "number": 2,
+          "title": "Styling & Design Systems with Tailwind CSS v4",
+          "summary": "Configuring modern themes, variables, and rapid UI component patterns."
+        },
+        {
+          "number": 3,
+          "title": "API Engineering with Node.js & Express",
+          "summary": "Building resilient endpoints, JWT authentication, and rate limiting."
+        },
+        {
+          "number": 4,
+          "title": "Relational Databases & Indexing Strategies",
+          "summary": "Designing clean schemas in PostgreSQL and utilizing Prisma ORM."
+        },
+        {
+          "number": 5,
+          "title": "Deployment, Monitoring & Production Hardening",
+          "summary": "Deploying to Vercel/VPS, handling SSL, and configuring logging."
+        }
       ],
       "highlights": [
         "End-to-end full-stack code examples with real database queries.",
@@ -272,17 +1188,38 @@
     "description": "Complete reference manual from basic syntax up to writing Pythonic scripts, generators, decorators, unit testing, and packaging.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/python-pro-handbook",
-    "topicsCovered": ["Generators & Decorators", "Context Managers", "pytest Framework", "Virtual Environments"],
+    "topicsCovered": [
+      "Generators & Decorators",
+      "Context Managers",
+      "pytest Framework",
+      "Virtual Environments"
+    ],
     "readTime": "1.5 hours deep read",
     "pages": 110,
     "featured": false,
     "updatedAt": "2026-08-25",
     "handbookContent": {
       "chapters": [
-        { "number": 1, "title": "Pythonic Coding Principles & PEP 8", "summary": "Writing clean, readable code and leveraging type hints." },
-        { "number": 2, "title": "Advanced OOP: Metaclasses & Magic Methods", "summary": "Implementing custom operators, __repr__, and property decorators." },
-        { "number": 3, "title": "Async IO & Multithreading", "summary": "Concurrent programming with asyncio and ThreadPoolExecutor." },
-        { "number": 4, "title": "Testing & Test Driven Development (TDD)", "summary": "Writing unit tests with pytest and mocking external API services." }
+        {
+          "number": 1,
+          "title": "Pythonic Coding Principles & PEP 8",
+          "summary": "Writing clean, readable code and leveraging type hints."
+        },
+        {
+          "number": 2,
+          "title": "Advanced OOP: Metaclasses & Magic Methods",
+          "summary": "Implementing custom operators, __repr__, and property decorators."
+        },
+        {
+          "number": 3,
+          "title": "Async IO & Multithreading",
+          "summary": "Concurrent programming with asyncio and ThreadPoolExecutor."
+        },
+        {
+          "number": 4,
+          "title": "Testing & Test Driven Development (TDD)",
+          "summary": "Writing unit tests with pytest and mocking external API services."
+        }
       ],
       "highlights": [
         "Detailed comparison of iterative vs functional approaches.",
@@ -300,22 +1237,256 @@
     "description": "Curriculum-aligned handbook for students preparing for the NIELIT CCC exam in Uttar Pradesh. Includes 300+ sample questions and practical exercises.",
     "tier": "free",
     "downloadUrl": "https://github.com/msk-institute/ccc-official-handbook",
-    "topicsCovered": ["Computer Hardware & OS", "LibreOffice Writer & Calc", "Digital Financial Services", "Cyber Ethics"],
+    "topicsCovered": [
+      "Computer Hardware & OS",
+      "LibreOffice Writer & Calc",
+      "Digital Financial Services",
+      "Cyber Ethics"
+    ],
     "readTime": "2.5 hours read",
     "pages": 156,
     "featured": true,
     "updatedAt": "2026-09-01",
     "handbookContent": {
       "chapters": [
-        { "number": 1, "title": "Introduction to Computers and Operating Systems", "summary": "Hardware architectures, CPU, memory, and Windows/Linux desktops." },
-        { "number": 2, "title": "Word Processing (LibreOffice Writer & MS Word)", "summary": "Document formatting, tables, shapes, and mail merge." },
-        { "number": 3, "title": "Spreadsheets (LibreOffice Calc & MS Excel)", "summary": "Formulas, cell addressing, charts, and data sorting." },
-        { "number": 4, "title": "Internet, WWW and Web Browsers", "summary": "IP addressing, DNS, email protocol, search engines, and social media." },
-        { "number": 5, "title": "Digital Financial Services & Cyber Security", "summary": "UPI, AEPS, net banking, OTP security, and phishing avoidance." }
+        {
+          "number": 1,
+          "title": "Introduction to Computers and Operating Systems",
+          "summary": "Hardware architectures, CPU, memory, and Windows/Linux desktops."
+        },
+        {
+          "number": 2,
+          "title": "Word Processing (LibreOffice Writer & MS Word)",
+          "summary": "Document formatting, tables, shapes, and mail merge."
+        },
+        {
+          "number": 3,
+          "title": "Spreadsheets (LibreOffice Calc & MS Excel)",
+          "summary": "Formulas, cell addressing, charts, and data sorting."
+        },
+        {
+          "number": 4,
+          "title": "Internet, WWW and Web Browsers",
+          "summary": "IP addressing, DNS, email protocol, search engines, and social media."
+        },
+        {
+          "number": 5,
+          "title": "Digital Financial Services & Cyber Security",
+          "summary": "UPI, AEPS, net banking, OTP security, and phishing avoidance."
+        }
       ],
       "highlights": [
         "100% mapped to the latest NIELIT 2026 syllabus.",
         "Includes 5 full-length practice mock test question sets."
+      ]
+    }
+  },
+  {
+    "id": "cheat-markdown-syntax",
+    "type": "cheatsheet",
+    "title": "Markdown & GitHub Flavored Markdown (GFM) Complete Cheatsheet",
+    "slug": "markdown-syntax-gfm-cheatsheet",
+    "category": "Web Development",
+    "level": "Beginner to Advanced",
+    "description": "Comprehensive quick-reference revision cheatsheet covering Standard Markdown, GitHub Flavored Markdown (GFM), tables, task lists, GFM alerts, math notation, Mermaid diagrams, and YAML frontmatter.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/markdown-cheatsheet",
+    "topicsCovered": [
+      "Headings & Formatting",
+      "Lists & Task Checkboxes",
+      "Links & Images",
+      "Code Blocks & Languages",
+      "GFM Tables & Alignment",
+      "GitHub Alerts & Callouts",
+      "LaTeX Math ($ & $$)",
+      "Mermaid Diagrams"
+    ],
+    "readTime": "3 min lookup",
+    "pages": 3,
+    "featured": true,
+    "updatedAt": "2026-09-13",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Headings & Document Structure",
+          "items": [
+            {
+              "commandOrSyntax": "# Heading 1\n## Heading 2\n### Heading 3",
+              "explanation": "ATX style headings from H1 (largest) down to H6",
+              "example": "# Project Title"
+            },
+            {
+              "commandOrSyntax": "Heading 1\n=========\nHeading 2\n---------",
+              "explanation": "Setext style headings using equal signs (H1) or hyphens (H2)",
+              "example": "Overview\n--------"
+            },
+            {
+              "commandOrSyntax": "---\n***\n___",
+              "explanation": "Horizontal divider / thematic break (requires 3+ symbols)",
+              "example": "---"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Text Formatting & Emphasis",
+          "items": [
+            {
+              "commandOrSyntax": "**Bold Text** or __Bold Text__",
+              "explanation": "Double asterisks or underscores for strong emphasis",
+              "example": "**Crucial Step**"
+            },
+            {
+              "commandOrSyntax": "*Italic Text* or _Italic Text_",
+              "explanation": "Single asterisk or underscore for light emphasis",
+              "example": "*Note:* Check log"
+            },
+            {
+              "commandOrSyntax": "~~Strikethrough~~",
+              "explanation": "GFM strikethrough using double tildes",
+              "example": "~~Old Price: $50~~"
+            },
+            {
+              "commandOrSyntax": "==Highlight==",
+              "explanation": "Text highlight in supported markdown extensions",
+              "example": "==Key Takeaway=="
+            },
+            {
+              "commandOrSyntax": "> Quoted text\n>> Nested quote",
+              "explanation": "Blockquotes and multi-level quotes using greater-than sign",
+              "example": "> Logic will get you from A to B."
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Lists & Task Checkboxes",
+          "items": [
+            {
+              "commandOrSyntax": "- Item A\n- Item B\n  - Sub-item B1",
+              "explanation": "Unordered bulleted list (dashes, asterisks, or plus signs)",
+              "example": "- Apple\n- Banana"
+            },
+            {
+              "commandOrSyntax": "1. First\n2. Second\n3. Third",
+              "explanation": "Ordered numbered list (numbers auto-increment on render)",
+              "example": "1. Download\n2. Install"
+            },
+            {
+              "commandOrSyntax": "- [ ] Incomplete task\n- [x] Completed task",
+              "explanation": "GFM task list with interactive clickable checkboxes in GitHub",
+              "example": "- [x] Write tests"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Links, Images & Raw HTML",
+          "items": [
+            {
+              "commandOrSyntax": "[Link Title](https://example.com)",
+              "explanation": "Standard inline clickable hyperlink",
+              "example": "[MSK Institute](https://mskinstitute.in)"
+            },
+            {
+              "commandOrSyntax": "[Reference Link][id]\n\n[id]: https://example.com",
+              "explanation": "Reference-style link for clean, uncluttered markdown",
+              "example": "[Documentation][docs]"
+            },
+            {
+              "commandOrSyntax": "![Alt text for screen readers](image.png)",
+              "explanation": "Embed image with accessible description",
+              "example": "![Architecture](/images/arch.png)"
+            },
+            {
+              "commandOrSyntax": "<img src=\"logo.png\" width=\"200\" alt=\"Logo\" />",
+              "explanation": "Raw HTML image tag for custom width/height sizing",
+              "example": "<img src=\"logo.png\" width=\"120\" />"
+            },
+            {
+              "commandOrSyntax": "<details><summary>Click to view</summary>Content</details>",
+              "explanation": "Collapsible disclosure toggle accordion",
+              "example": "<details><summary>Hint</summary>Use SUM</details>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Code Blocks & Syntax Highlighting",
+          "items": [
+            {
+              "commandOrSyntax": "`const x = 10;`",
+              "explanation": "Inline code formatting using single backticks",
+              "example": "Run `npm run build`"
+            },
+            {
+              "commandOrSyntax": "``Use `backticks` here``",
+              "explanation": "Double backticks escape a literal backtick inside inline code",
+              "example": "`` `git commit` ``"
+            },
+            {
+              "commandOrSyntax": "```javascript\nfunction hello() {\n  console.log('Hi');\n}\n```",
+              "explanation": "Fenced code block with programming language syntax highlighting",
+              "example": "```python\nprint('Hello')\n```"
+            },
+            {
+              "commandOrSyntax": "$E = mc^2$\n\n$$\\int_0^\\infty x dx$$",
+              "explanation": "KaTeX / LaTeX inline and block mathematical equations",
+              "example": "$\\sum_{i=1}^n i$"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "GFM Tables & Column Alignment",
+          "items": [
+            {
+              "commandOrSyntax": "| Header 1 | Header 2 |\n| :--- | :---: |\n| Left | Center |",
+              "explanation": "GFM table with pipe borders and alignment colons",
+              "example": "| Col A | Col B |\n| :--- | ---: |\n| 10 | 20 |"
+            },
+            {
+              "commandOrSyntax": ":--- (Left) | :---: (Center) | ---: (Right)",
+              "explanation": "Alignment colons inside header divider row",
+              "example": ":---: for centered text"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "GitHub Alerts, Footnotes & Mermaid",
+          "items": [
+            {
+              "commandOrSyntax": "> [!NOTE]\n> Highlights helpful background info.",
+              "explanation": "GitHub blue Note callout box",
+              "example": "> [!NOTE]\n> Requires Node 18+"
+            },
+            {
+              "commandOrSyntax": "> [!TIP]\n> Helpful advice or quick shortcuts.",
+              "explanation": "GitHub green Tip callout box",
+              "example": "> [!TIP]\n> Use shortcut Ctrl+P"
+            },
+            {
+              "commandOrSyntax": "> [!IMPORTANT]\n> Crucial instructions users must know.",
+              "explanation": "GitHub purple Important callout box",
+              "example": "> [!IMPORTANT]\n> Save before exit"
+            },
+            {
+              "commandOrSyntax": "> [!WARNING]\n> Potential breaking changes or issues.",
+              "explanation": "GitHub orange Warning callout box",
+              "example": "> [!WARNING]\n> Overwrites files"
+            },
+            {
+              "commandOrSyntax": "> [!CAUTION]\n> Negative consequences or data loss.",
+              "explanation": "GitHub red Caution callout box",
+              "example": "> [!CAUTION]\n> Destructive action"
+            },
+            {
+              "commandOrSyntax": "Here is a note[^1].\n\n[^1]: Reference detail.",
+              "explanation": "GFM footnotes linked to the bottom of the page",
+              "example": "[^1]: RFC 7763 standard"
+            },
+            {
+              "commandOrSyntax": "```mermaid\ngraph TD;\nA-->B;\n```",
+              "explanation": "Mermaid.js flowchart and sequence diagram renderer",
+              "example": "```mermaid\ngraph LR; Start-->Done\n```"
+            }
+          ]
+        }
       ]
     }
   }

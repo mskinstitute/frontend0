@@ -262,6 +262,262 @@
   },
   {
     "featured": true,
+    "id": "tut-numpy-complete-course",
+    "slug": "numpy-complete-course",
+    "courseSlug": "numpy-complete-course",
+    "title": "NumPy",
+    "icon": "numpy",
+    "badge": "Beginner to Advanced",
+    "tags": [
+      "Beginner to Advanced",
+      "data science",
+      "python",
+      "numpy",
+      "machine learning",
+      "linear algebra"
+    ],
+    "documentationTitle": "NumPy Complete Course",
+    "shortDescription": "Master NumPy from scratch to advanced numerical computing. Learn multidimensional ndarrays, vectorized operations, broadcasting rules, ufuncs, linear algebra, and data science simulations.",
+    "lessonsCount": 12,
+    "totalHours": "24h",
+    "topicsCount": 36,
+    "githubRepo": "github.com/msk-institute/numpy-complete-course",
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "NumPy Complete Course: From Beginner to Advanced - MSK Notes | MSK Institute",
+      "description": "Learn NumPy from scratch to pro with structured lessons, memory architecture diagrams, interactive code snippets, and quizzes based on the NumPy Complete Course at MSK Institute.",
+      "keywords": [
+        "numpy complete course",
+        "numpy tutorial",
+        "learn numpy python",
+        "numpy beginner to advanced",
+        "numpy documentation",
+        "numpy ndarrays",
+        "numpy broadcasting",
+        "msk notes"
+      ]
+    },
+    "topics": [
+      {
+        "title": "What is NumPy & Why It Powers Data Science",
+        "slug": "what-is-numpy-and-architecture",
+        "chapterTitle": "Introduction to NumPy & Numerical Computing",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Setting Up NumPy: Installation & Environment",
+        "slug": "numpy-installation-and-setup",
+        "chapterTitle": "Introduction to NumPy & Numerical Computing",
+        "readTime": "8 min"
+      },
+      {
+        "title": "NumPy vs Python Lists: Memory & Speed Benchmarks",
+        "slug": "numpy-vs-python-lists-performance",
+        "chapterTitle": "Introduction to NumPy & Numerical Computing",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Creating 1D, 2D & 3D Arrays from Lists & Tuples",
+        "slug": "creating-arrays-from-python-lists",
+        "chapterTitle": "NumPy Ndarrays & Array Creation Routines",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Built-in Creation Routines (zeros, ones, full, empty)",
+        "slug": "array-creation-zeros-ones-full",
+        "chapterTitle": "NumPy Ndarrays & Array Creation Routines",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Generating Numerical Sequences (arange, linspace, logspace)",
+        "slug": "numerical-ranges-arange-linspace",
+        "chapterTitle": "NumPy Ndarrays & Array Creation Routines",
+        "readTime": "8 min"
+      },
+      {
+        "title": "NumPy Data Types (dtype) & Type Casting (astype)",
+        "slug": "numpy-datatypes-and-typecasting",
+        "chapterTitle": "Data Types & Array Inspection",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Inspecting Array Attributes (shape, ndim, size, itemsize)",
+        "slug": "inspecting-array-attributes",
+        "chapterTitle": "Data Types & Array Inspection",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Identity Matrices & Diagonal Arrays (eye, identity, diag)",
+        "slug": "identity-and-diagonal-matrices",
+        "chapterTitle": "Data Types & Array Inspection",
+        "readTime": "8 min"
+      },
+      {
+        "title": "1D Array Indexing, Slicing & Step Strides",
+        "slug": "one-dimensional-indexing-slicing",
+        "chapterTitle": "Basic Indexing, Slicing & Views",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Multi-Dimensional Array Slicing (Row, Column & Matrix Slices)",
+        "slug": "multidimensional-array-slicing",
+        "chapterTitle": "Basic Indexing, Slicing & Views",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Memory Views vs Deep Copies (view() vs copy())",
+        "slug": "array-views-vs-copies",
+        "chapterTitle": "Basic Indexing, Slicing & Views",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Boolean Masking & Conditional Filtering",
+        "slug": "boolean-masking-and-filtering",
+        "chapterTitle": "Advanced Indexing & Boolean Filtering",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Fancy Indexing with Integer Arrays",
+        "slug": "fancy-indexing-integer-arrays",
+        "chapterTitle": "Advanced Indexing & Boolean Filtering",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Conditional Selectors: np.where(), np.select() & np.extract()",
+        "slug": "numpy-where-and-select-conditions",
+        "chapterTitle": "Advanced Indexing & Boolean Filtering",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Reshaping Arrays (reshape with -1 auto-dimension)",
+        "slug": "reshaping-arrays-reshape-dimensions",
+        "chapterTitle": "Array Reshaping, Flattening & Dimensions",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Flattening Multi-Dimensional Arrays (flatten vs ravel)",
+        "slug": "flattening-arrays-flatten-vs-ravel",
+        "chapterTitle": "Array Reshaping, Flattening & Dimensions",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Expanding & Squeezing Dimensions (np.newaxis, expand_dims, squeeze)",
+        "slug": "adding-removing-dimensions-newaxis",
+        "chapterTitle": "Array Reshaping, Flattening & Dimensions",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Concatenating & Stacking Arrays (concatenate, vstack, hstack)",
+        "slug": "joining-stacking-arrays-vstack-hstack",
+        "chapterTitle": "Joining, Stacking & Splitting Arrays",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Depth & Column Stacking (dstack, column_stack, stack)",
+        "slug": "depth-and-column-stacking",
+        "chapterTitle": "Joining, Stacking & Splitting Arrays",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Splitting Arrays into Chunks (split, hsplit, vsplit)",
+        "slug": "splitting-arrays-hsplit-vsplit",
+        "chapterTitle": "Joining, Stacking & Splitting Arrays",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Vectorization: Eliminating Python Loops with SIMD",
+        "slug": "vectorization-eliminating-python-loops",
+        "chapterTitle": "Vectorized Operations & Broadcasting",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Element-Wise Arithmetic & Comparison Operations",
+        "slug": "elementwise-arithmetic-comparisons",
+        "chapterTitle": "Vectorized Operations & Broadcasting",
+        "readTime": "8 min"
+      },
+      {
+        "title": "The Rules of NumPy Broadcasting Explained",
+        "slug": "the-rules-of-numpy-broadcasting",
+        "chapterTitle": "Vectorized Operations & Broadcasting",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Universal Functions (ufuncs), Trigonometry & Logarithms",
+        "slug": "universal-functions-ufuncs-math",
+        "chapterTitle": "Universal Functions (ufuncs) & Mathematical Methods",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Aggregate Statistics (sum, mean, median, std, var)",
+        "slug": "aggregate-statistics-mean-std-var",
+        "chapterTitle": "Universal Functions (ufuncs) & Mathematical Methods",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Directional Aggregations with the axis Parameter",
+        "slug": "directional-aggregations-axis-parameter",
+        "chapterTitle": "Universal Functions (ufuncs) & Mathematical Methods",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Sorting Arrays & Extracting Indices (np.sort vs np.argsort)",
+        "slug": "sorting-arrays-sort-and-argsort",
+        "chapterTitle": "Sorting, Searching & Set Operations",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Searching & Counting (argmax, argmin, nonzero, count_nonzero)",
+        "slug": "searching-argmax-argmin-nonzero",
+        "chapterTitle": "Sorting, Searching & Set Operations",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Set Operations & Distinct Elements (np.unique, intersect1d, isin)",
+        "slug": "set-operations-unique-and-isin",
+        "chapterTitle": "Sorting, Searching & Set Operations",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Dot Products & Matrix Multiplication (dot, @ operator, matmul)",
+        "slug": "matrix-multiplication-dot-matmul",
+        "chapterTitle": "Linear Algebra with numpy.linalg",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Matrix Determinant, Inversion & Solving Linear Systems",
+        "slug": "matrix-inversion-determinant-solve",
+        "chapterTitle": "Linear Algebra with numpy.linalg",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Eigenvalues, Eigenvectors & Singular Value Decomposition (SVD)",
+        "slug": "eigenvalues-eigenvectors-and-svd",
+        "chapterTitle": "Linear Algebra with numpy.linalg",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Random Number Generation with default_rng & Distributions",
+        "slug": "random-number-generation-distributions",
+        "chapterTitle": "Random Sampling, File I/O & Capstone Project",
+        "readTime": "8 min"
+      },
+      {
+        "title": "File I/O: Saving & Loading Native Arrays (.npy, .npz, Text)",
+        "slug": "saving-loading-arrays-npy-npz",
+        "chapterTitle": "Random Sampling, File I/O & Capstone Project",
+        "readTime": "8 min"
+      },
+      {
+        "title": "Capstone: Image Manipulation & Monte Carlo Simulation",
+        "slug": "capstone-image-processing-financial-simulation",
+        "chapterTitle": "Random Sampling, File I/O & Capstone Project",
+        "readTime": "8 min"
+      }
+    ]
+  },
+  {
+    "featured": true,
     "id": "tut-sql-beginners",
     "slug": "sql-for-beginners",
     "courseSlug": "sql-for-beginners",
@@ -582,6 +838,503 @@
         "power pivot dax",
         "excel vba macros",
         "excel dashboard tutorial"
+      ]
+    }
+  },
+  {
+    "id": "tut-ccc",
+    "title": "CCC: Course on Computer Concepts (NIELIT Exam Masterclass)",
+    "slug": "ccc",
+    "shortDescription": "Comprehensive tutorial series for NIELIT CCC examination covering Computer Fundamentals, Windows, LibreOffice (Writer, Calc, Impress), Internet, Digital Payments, Cyber Security, and AI Future Skills with 350 practice MCQs.",
+    "description": "A complete, beginner-friendly online tutorial for the NIELIT CCC (Course on Computer Concepts) exam. Covers all 10 official chapters: Computer Basics, Operating Systems (Windows & Linux), Word Processing (LibreOffice Writer & Word), Spreadsheets (LibreOffice Calc & Excel), Presentations (Impress & PowerPoint), Internet & WWW, Email & e-Governance (DigiLocker, UMANG), Digital Financial Services (UPI, AEPS, NetBanking), Cyber Security, and FutureSkills (AI, IoT, Cloud).",
+    "icon": "computer",
+    "category": "Basic Computer & Government Exams",
+    "level": "Beginner to Intermediate",
+    "duration": "80 Hours",
+    "totalTopics": 70,
+    "featuredImageUrl": "/images/tutorials/ccc/computer-hardware-components.svg",
+    "tags": [
+      "CCC",
+      "NIELIT",
+      "Basic Computer",
+      "LibreOffice",
+      "UP Government Exams",
+      "UPSSSC",
+      "Digital India"
+    ],
+    "chapters": [
+      {
+        "id": "ccc-ch1",
+        "chapterTitle": "Introduction to Computer",
+        "topics": [
+          {
+            "id": "ccc-t1.1",
+            "title": "Evolution of Computers and IT Gadgets",
+            "slug": "evolution-of-computers-and-it-gadgets"
+          },
+          {
+            "id": "ccc-t1.2",
+            "title": "Applications of Computers in Daily Life",
+            "slug": "applications-of-computers-in-daily-life"
+          },
+          {
+            "id": "ccc-t1.3",
+            "title": "Basics of Hardware and Software",
+            "slug": "basics-of-hardware-and-software"
+          },
+          {
+            "id": "ccc-t1.4",
+            "title": "CPU, Memory, Storage, Input & Output Devices",
+            "slug": "cpu-memory-storage-input-output-devices"
+          },
+          {
+            "id": "ccc-t1.5",
+            "title": "Types of Software: Application, System, Utility",
+            "slug": "types-of-software-application-system-utility"
+          },
+          {
+            "id": "ccc-t1.6",
+            "title": "Open Source vs Proprietary Software",
+            "slug": "open-source-vs-proprietary-software"
+          },
+          {
+            "id": "ccc-t1.7",
+            "title": "Introduction to Mobile Applications",
+            "slug": "introduction-to-mobile-applications"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch2",
+        "chapterTitle": "Introduction to Operating System",
+        "topics": [
+          {
+            "id": "ccc-t2.1",
+            "title": "Basics and Types of Operating Systems",
+            "slug": "basics-and-types-of-operating-systems"
+          },
+          {
+            "id": "ccc-t2.2",
+            "title": "Operating Systems for Desktop, Laptop, and Mobile",
+            "slug": "operating-systems-desktop-laptop-mobile"
+          },
+          {
+            "id": "ccc-t2.3",
+            "title": "Desktop Interface: Taskbar, Icons, Shortcuts",
+            "slug": "desktop-interface-taskbar-icons-shortcuts"
+          },
+          {
+            "id": "ccc-t2.4",
+            "title": "Running and Managing Applications",
+            "slug": "running-and-managing-applications"
+          },
+          {
+            "id": "ccc-t2.5",
+            "title": "System Settings: Date, Time, Display, Mouse",
+            "slug": "system-settings-date-time-display-mouse"
+          },
+          {
+            "id": "ccc-t2.6",
+            "title": "Add/Remove Programs, Printers, and Features",
+            "slug": "add-remove-programs-printers-features"
+          },
+          {
+            "id": "ccc-t2.7",
+            "title": "File and Folder Management",
+            "slug": "file-and-folder-management"
+          },
+          {
+            "id": "ccc-t2.8",
+            "title": "Common File Extensions",
+            "slug": "common-file-extensions"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch3",
+        "chapterTitle": "Word Processing (MS Word / LibreOffice Writer)",
+        "topics": [
+          {
+            "id": "ccc-t3.1",
+            "title": "Introduction and Interface Overview",
+            "slug": "word-processing-interface-overview"
+          },
+          {
+            "id": "ccc-t3.2",
+            "title": "Creating, Opening, Saving, and Printing Documents",
+            "slug": "creating-opening-saving-printing-documents"
+          },
+          {
+            "id": "ccc-t3.3",
+            "title": "Text Editing: Cut, Copy, Paste, Undo, Redo",
+            "slug": "text-editing-cut-copy-paste-undo-redo"
+          },
+          {
+            "id": "ccc-t3.4",
+            "title": "Formatting Text: Font, Color, Size, Alignment",
+            "slug": "formatting-text-font-color-size-alignment"
+          },
+          {
+            "id": "ccc-t3.5",
+            "title": "Spelling Check, Find and Replace, AutoCorrect",
+            "slug": "spelling-check-find-replace-autocorrect"
+          },
+          {
+            "id": "ccc-t3.6",
+            "title": "Page Setup, Header, Footer, and Page Numbering",
+            "slug": "page-setup-header-footer-numbering"
+          },
+          {
+            "id": "ccc-t3.7",
+            "title": "Table Insertion and Manipulation",
+            "slug": "table-insertion-and-manipulation"
+          },
+          {
+            "id": "ccc-t3.8",
+            "title": "Mail Merge: Creating Bulk Letters and Labels",
+            "slug": "mail-merge-bulk-letters-labels"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch4",
+        "chapterTitle": "Spreadsheet (MS Excel / LibreOffice Calc)",
+        "topics": [
+          {
+            "id": "ccc-t4.1",
+            "title": "Introduction to Spreadsheets and Interface",
+            "slug": "spreadsheet-basics-and-interface"
+          },
+          {
+            "id": "ccc-t4.2",
+            "title": "Creating and Saving Worksheets",
+            "slug": "creating-and-saving-worksheets"
+          },
+          {
+            "id": "ccc-t4.3",
+            "title": "Cell Addressing and Data Entry",
+            "slug": "cell-addressing-and-data-entry"
+          },
+          {
+            "id": "ccc-t4.4",
+            "title": "Editing, Formatting Cells, Rows, and Columns",
+            "slug": "editing-formatting-cells-rows-columns"
+          },
+          {
+            "id": "ccc-t4.5",
+            "title": "Basic Formulas and Functions (SUM, AVG, MAX, MIN)",
+            "slug": "basic-formulas-functions-sum-avg-max-min"
+          },
+          {
+            "id": "ccc-t4.6",
+            "title": "Sorting, Filtering, and Freezing Panes",
+            "slug": "sorting-filtering-freezing-panes"
+          },
+          {
+            "id": "ccc-t4.7",
+            "title": "Charts and Graphs (Bar, Pie, Line)",
+            "slug": "charts-and-graphs-bar-pie-line"
+          },
+          {
+            "id": "ccc-t4.8",
+            "title": "Printing and Page Setup for Sheets",
+            "slug": "printing-and-page-setup-sheets"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch5",
+        "chapterTitle": "Presentation (MS PowerPoint / LibreOffice Impress)",
+        "topics": [
+          {
+            "id": "ccc-t5.1",
+            "title": "Creating a New Presentation (Template / Blank)",
+            "slug": "creating-new-presentation-templates"
+          },
+          {
+            "id": "ccc-t5.2",
+            "title": "Adding and Editing Text on Slides",
+            "slug": "adding-and-editing-text-slides"
+          },
+          {
+            "id": "ccc-t5.3",
+            "title": "Inserting Tables, Images, and Media",
+            "slug": "inserting-tables-images-media-slides"
+          },
+          {
+            "id": "ccc-t5.4",
+            "title": "Slide Layouts and Master Slide",
+            "slug": "slide-layouts-and-master-slide"
+          },
+          {
+            "id": "ccc-t5.5",
+            "title": "Transitions, Animations, and Slide Timings",
+            "slug": "transitions-animations-slide-timings"
+          },
+          {
+            "id": "ccc-t5.6",
+            "title": "Running Slide Shows and Printing Handouts",
+            "slug": "running-slide-shows-printing-handouts"
+          },
+          {
+            "id": "ccc-t5.7",
+            "title": "Enhancing Presentation with Design and Color Themes",
+            "slug": "presentation-design-color-themes"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch6",
+        "chapterTitle": "Introduction to Internet and WWW",
+        "topics": [
+          {
+            "id": "ccc-t6.1",
+            "title": "Basics of Computer Networks (LAN, WAN, Topology)",
+            "slug": "basics-computer-networks-lan-wan-topology"
+          },
+          {
+            "id": "ccc-t6.2",
+            "title": "Concept of Internet, WWW, and IP Address",
+            "slug": "concept-of-internet-www-ip-address"
+          },
+          {
+            "id": "ccc-t6.3",
+            "title": "Modes of Internet Connection (WiFi, Broadband, Mobile)",
+            "slug": "modes-internet-connection-wifi-broadband"
+          },
+          {
+            "id": "ccc-t6.4",
+            "title": "Web Browsers: Chrome, Firefox, Edge, Opera",
+            "slug": "web-browsers-chrome-firefox-edge"
+          },
+          {
+            "id": "ccc-t6.5",
+            "title": "Using Search Engines and Surfing Websites",
+            "slug": "using-search-engines-surfing-websites"
+          },
+          {
+            "id": "ccc-t6.6",
+            "title": "Downloading and Printing Web Pages",
+            "slug": "downloading-and-printing-web-pages"
+          },
+          {
+            "id": "ccc-t6.7",
+            "title": "Understanding URLs and Website Navigation",
+            "slug": "understanding-urls-website-navigation"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch7",
+        "chapterTitle": "Email, Social Networking, and e-Governance",
+        "topics": [
+          {
+            "id": "ccc-t7.1",
+            "title": "Creating and Managing an Email Account",
+            "slug": "creating-managing-email-account"
+          },
+          {
+            "id": "ccc-t7.2",
+            "title": "Composing, Sending, and Attaching Files in Email",
+            "slug": "composing-sending-attaching-files-email"
+          },
+          {
+            "id": "ccc-t7.3",
+            "title": "Social Media Basics: Facebook, Instagram, LinkedIn, X",
+            "slug": "social-media-basics-facebook-insta-linkedin-x"
+          },
+          {
+            "id": "ccc-t7.4",
+            "title": "Instant Messaging: WhatsApp, Telegram, Messenger",
+            "slug": "instant-messaging-whatsapp-telegram"
+          },
+          {
+            "id": "ccc-t7.5",
+            "title": "Introduction to Blogs and Netiquettes",
+            "slug": "introduction-to-blogs-netiquettes"
+          },
+          {
+            "id": "ccc-t7.6",
+            "title": "e-Governance Applications: Passport, Railway, eHospital",
+            "slug": "egovernance-applications-passport-railway-ehospital"
+          },
+          {
+            "id": "ccc-t7.7",
+            "title": "Using UMANG App and Digital Locker",
+            "slug": "using-umang-app-and-digilocker"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch8",
+        "chapterTitle": "Digital Financial Tools and Applications",
+        "topics": [
+          {
+            "id": "ccc-t8.1",
+            "title": "Introduction to OTP and QR Code",
+            "slug": "introduction-otp-qr-code"
+          },
+          {
+            "id": "ccc-t8.2",
+            "title": "UPI, AEPS, and eWallet Concepts",
+            "slug": "upi-aeps-ewallet-concepts"
+          },
+          {
+            "id": "ccc-t8.3",
+            "title": "Internet Banking: NEFT, RTGS, IMPS",
+            "slug": "internet-banking-neft-rtgs-imps"
+          },
+          {
+            "id": "ccc-t8.4",
+            "title": "Online Bill Payment and Recharge",
+            "slug": "online-bill-payment-recharge"
+          },
+          {
+            "id": "ccc-t8.5",
+            "title": "Using PoS Devices and Secure Transactions",
+            "slug": "using-pos-devices-secure-transactions"
+          },
+          {
+            "id": "ccc-t8.6",
+            "title": "Government Financial Schemes and Awareness",
+            "slug": "government-financial-schemes-awareness"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch9",
+        "chapterTitle": "Overview of Cyber Security",
+        "topics": [
+          {
+            "id": "ccc-t9.1",
+            "title": "Introduction to Cyber Security and its Need",
+            "slug": "introduction-cyber-security-need"
+          },
+          {
+            "id": "ccc-t9.2",
+            "title": "Securing PC, Browsers, and Emails",
+            "slug": "securing-pc-browsers-emails"
+          },
+          {
+            "id": "ccc-t9.3",
+            "title": "Social Media Safety and Password Protection",
+            "slug": "social-media-safety-password-protection"
+          },
+          {
+            "id": "ccc-t9.4",
+            "title": "Safe Practices for Mobile Devices",
+            "slug": "safe-practices-mobile-devices"
+          },
+          {
+            "id": "ccc-t9.5",
+            "title": "Recognizing Online Fraud and Phishing",
+            "slug": "recognizing-online-fraud-phishing"
+          }
+        ]
+      },
+      {
+        "id": "ccc-ch10",
+        "chapterTitle": "Future Skills and Artificial Intelligence",
+        "topics": [
+          {
+            "id": "ccc-t10.1",
+            "title": "Introduction to Future Technologies",
+            "slug": "introduction-future-technologies"
+          },
+          {
+            "id": "ccc-t10.2",
+            "title": "Internet of Things (IoT) and Big Data Analytics",
+            "slug": "internet-of-things-iot-big-data"
+          },
+          {
+            "id": "ccc-t10.3",
+            "title": "Cloud Computing and Virtual Reality",
+            "slug": "cloud-computing-virtual-reality"
+          },
+          {
+            "id": "ccc-t10.4",
+            "title": "Artificial Intelligence: Concept, Goals, and Ethics",
+            "slug": "artificial-intelligence-concepts-goals-ethics"
+          },
+          {
+            "id": "ccc-t10.5",
+            "title": "Applications of AI in Daily Life",
+            "slug": "applications-ai-daily-life"
+          },
+          {
+            "id": "ccc-t10.6",
+            "title": "Robotic Process Automation and 3D Printing",
+            "slug": "robotic-process-automation-3d-printing"
+          },
+          {
+            "id": "ccc-t10.7",
+            "title": "Future Trends in ICT and AI-driven Innovation",
+            "slug": "future-trends-ict-ai-innovation"
+          }
+        ]
+      }
+    ],
+    "courseId": "course-ccc-nielit",
+    "courseSlug": "ccc",
+    "featured": true,
+    "badge": "NIELIT Certified",
+    "documentationTitle": "CCC (Course on Computer Concepts) Tutorial & Complete Notes",
+    "lessonsCount": 10,
+    "totalHours": 80,
+    "topicsCount": 70,
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "CCC Tutorial & Complete Exam Notes (NIELIT 2026) | MSK Institute",
+      "description": "Learn CCC (Course on Computer Concepts) step-by-step with simple Hindi-English explanations, LibreOffice vs MS Office comparisons, diagrams, and 350+ chapter-wise MCQs.",
+      "keywords": [
+        "ccc tutorial",
+        "ccc course",
+        "nielit ccc notes",
+        "ccc libreoffice writer calc impress",
+        "ccc computer fundamentals",
+        "ccc exam mcq questions",
+        "ccc hindi notes",
+        "msk institute ccc"
+      ]
+    }
+  },
+  {
+    "featured": true,
+    "id": "tut-markdown",
+    "slug": "markdown",
+    "courseSlug": "markdown",
+    "courseId": "course-markdown-mastery",
+    "title": "Markdown & GitHub Flavored Markdown (GFM) Mastery",
+    "icon": "markdown",
+    "badge": "Developer Essential",
+    "tags": [
+      "Markdown",
+      "GFM",
+      "GitHub",
+      "Technical Writing",
+      "Documentation",
+      "MDX",
+      "Mermaid"
+    ],
+    "documentationTitle": "Markdown & GFM Documentation & Notes",
+    "shortDescription": "Complete guide to Markdown and GitHub Flavored Markdown. Learn typography, code blocks, tables, Mermaid diagrams, LaTeX equations, professional READMEs, and MDX workflows with 135 practice MCQs.",
+    "lessonsCount": 8,
+    "totalHours": 25,
+    "topicsCount": 27,
+    "githubRepo": "https://github.com/msk-institute/markdown-mastery-notes",
+    "updatedAt": "2026-09-13",
+    "seo": {
+      "title": "Markdown Complete Course & GFM Cheatsheet | MSK Institute",
+      "description": "Learn Markdown and GitHub Flavored Markdown (GFM) with structured lessons, code examples, cheatsheet, and practice quizzes at MSK Institute.",
+      "keywords": [
+        "markdown tutorial",
+        "markdown complete course",
+        "learn markdown",
+        "github flavored markdown",
+        "gfm cheatsheet",
+        "markdown readme guide",
+        "markdown notes",
+        "msk notes"
       ]
     }
   }

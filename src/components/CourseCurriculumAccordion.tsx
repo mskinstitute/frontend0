@@ -259,7 +259,7 @@ export default function CourseCurriculumAccordion({
                                         {chapter.sortOrder}
                                       </span>
                                       <span className="text-sm font-bold text-primary">
-                                        {chapter.title}
+                                        {chapter.title || (chapter as any).chapterTitle}
                                       </span>
                                     </div>
 
@@ -299,7 +299,7 @@ export default function CourseCurriculumAccordion({
                                                 {(() => {
                                                   const tutorialUrl = resolveTopicTutorialUrl(
                                                     courseItem.slug,
-                                                    chapter.title,
+                                                    chapter.title || (chapter as any).chapterTitle,
                                                     topic.title,
                                                     topic.notes,
                                                     topic.slug
@@ -447,7 +447,7 @@ export default function CourseCurriculumAccordion({
                     >
                       {chapter.sortOrder}
                     </span>
-                    <span className="text-base font-bold text-primary">{chapter.title}</span>
+                    <span className="text-base font-bold text-primary">{chapter.title || (chapter as any).chapterTitle}</span>
                   </span>
 
                   <div className="flex items-center gap-3">
@@ -484,7 +484,7 @@ export default function CourseCurriculumAccordion({
                               {(() => {
                                 const tutorialUrl = resolveTopicTutorialUrl(
                                   courseSlug,
-                                  chapter.title,
+                                  chapter.title || (chapter as any).chapterTitle,
                                   topic.title,
                                   topic.notes,
                                   topic.slug
