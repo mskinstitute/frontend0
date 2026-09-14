@@ -83,6 +83,162 @@ export default function TutorialCard({ tutorial }: TutorialCardProps) {
             </svg>
           </div>
         );
+      case 'pandas':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 shadow-2xs">
+            {/* Pandas Tabular DataFrame Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M10 3v18" />
+              <path d="M3 9h18" />
+              <path d="M3 15h18" />
+            </svg>
+          </div>
+        );
+      case 'powerbi':
+      case 'power-bi':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shadow-2xs">
+            {/* Power BI Bar Chart Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor" opacity="0.4" />
+              <rect x="10" y="7" width="4" height="14" rx="1" fill="currentColor" opacity="0.7" />
+              <rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor" />
+            </svg>
+          </div>
+        );
+      case 'tableau':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-700 shadow-2xs">
+            {/* Tableau Visual Analytics Star Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="2" x2="12" y2="22" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <circle cx="12" cy="12" r="3" fill="currentColor" />
+              <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+              <circle cx="5" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="19" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+        );
+      case 'chart':
+      case 'visualization':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shadow-2xs">
+            {/* Trend & Chart Line Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 3v18h18" />
+              <path d="m19 9-5 5-4-4-3 3" />
+            </svg>
+          </div>
+        );
+      case 'machinelearning':
+      case 'ml':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 shadow-2xs">
+            {/* AI / Neural Network / ML Nodes Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="6" cy="6" r="3" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="18" cy="12" r="3" />
+              <line x1="8.5" y1="7.5" x2="15.5" y2="10.5" />
+              <line x1="8.5" y1="16.5" x2="15.5" y2="13.5" />
+            </svg>
+          </div>
+        );
+      case 'tailwind':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-500 shadow-2xs">
+            {/* Tailwind Waves Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+            </svg>
+          </div>
+        );
+      case 'nodejs':
+      case 'node':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shadow-2xs font-bold text-base font-mono">
+            {/* Node.js Hexagon / Node Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z" />
+              <path d="M12 12l8-4.5" />
+              <path d="M12 12v8" />
+              <path d="M12 12L4 7.5" />
+            </svg>
+          </div>
+        );
+      case 'mongodb':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-green-50 border border-green-200 flex items-center justify-center text-green-600 shadow-2xs">
+            {/* MongoDB Leaf Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2C8 6 6 11 6 15c0 4 3 7 6 7s6-3 6-7c0-4-2-9-6-13z" />
+              <path d="M12 2v20" />
+            </svg>
+          </div>
+        );
+      case 'nextjs':
+      case 'next':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-white shadow-2xs font-bold text-sm">
+            ▲
+          </div>
+        );
+      case 'dsa':
+      case 'algorithm':
+      case 'data-structures':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 shadow-2xs font-bold">
+            {/* Binary Tree / Nodes Algorithm Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="5" r="3" />
+              <circle cx="5" cy="19" r="3" />
+              <circle cx="19" cy="19" r="3" />
+              <line x1="12" y1="8" x2="5" y2="16" />
+              <line x1="12" y1="8" x2="19" y2="16" />
+            </svg>
+          </div>
+        );
+      case 'git':
+      case 'github':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-600 shadow-2xs">
+            {/* Git Branch Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="6" y1="3" x2="6" y2="15" />
+              <circle cx="18" cy="6" r="3" />
+              <circle cx="6" cy="18" r="3" />
+              <path d="M18 9a9 9 0 0 1-9 9" />
+            </svg>
+          </div>
+        );
+      case 'react':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-500 shadow-2xs">
+            {/* React Atom Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <ellipse cx="12" cy="12" rx="10" ry="4.5" />
+              <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)" />
+              <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+        );
+      case 'django':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-emerald-900 border border-emerald-800 flex items-center justify-center text-white shadow-2xs font-bold text-sm font-serif">
+            dj
+          </div>
+        );
+      case 'javascript':
+      case 'js':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shadow-2xs font-mono font-black text-sm">
+            JS
+          </div>
+        );
       default:
         return (
           <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 shadow-2xs font-mono font-black text-sm">

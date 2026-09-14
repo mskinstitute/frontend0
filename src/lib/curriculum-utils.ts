@@ -18,6 +18,27 @@ export const TUTORIAL_SLUGS = new Set([
   'numpy-complete-course',
   'ccc',
   'markdown',
+  'pandas-complete-course',
+  'data-analysis--visualization--statistics',
+  'power-bi-for-beginners',
+  'power-bi-for-intermediate',
+  'power-bi-for-advanced',
+  'tableau-for-beginners',
+  'data-analysis--advanced-pandas--ml-basics',
+  'tailwind-css-mastery',
+  'nodejs-and-express-backend',
+  'mongodb-and-mongoose-database',
+  'nextjs-complete-course',
+  'dsa-mastery-course',
+  'git--github-basics',
+  'javascript-for-beginners',
+  'javascript-for-intermediate',
+  'javascript-for-advanced',
+  'react-js-for-beginners',
+  'react-js-for-intermediate',
+  'react-js-for-advanced',
+  'django-for-backend-development',
+  'rest-api-development-with-django',
 ]);
 
 export function isTutorialCourse(courseSlug?: string): boolean {
@@ -109,11 +130,58 @@ export function resolveTopicTutorialUrl(
     tutorialSlug = 'ccc';
   } else if (cSlug === 'markdown' || cSlug.includes('markdown')) {
     tutorialSlug = 'markdown';
+  } else if (cSlug === 'data-analysis--advanced-pandas--ml-basics' || cSlug.includes('advanced-pandas')) {
+    tutorialSlug = 'data-analysis--advanced-pandas--ml-basics';
+  } else if (cSlug === 'pandas-complete-course' || (cSlug.includes('pandas') && !cSlug.includes('advanced-pandas'))) {
+    tutorialSlug = 'pandas-complete-course';
+  } else if (cSlug === 'data-analysis--visualization--statistics' || (cSlug.includes('visualization') && cSlug.includes('statistics'))) {
+    tutorialSlug = 'data-analysis--visualization--statistics';
+  } else if (cSlug === 'power-bi-for-advanced' || cSlug.includes('power-bi-for-advanced') || cSlug.includes('powerbi-advanced')) {
+    tutorialSlug = 'power-bi-for-advanced';
+  } else if (cSlug === 'power-bi-for-intermediate' || cSlug.includes('power-bi-for-intermediate') || cSlug.includes('powerbi-intermediate')) {
+    tutorialSlug = 'power-bi-for-intermediate';
+  } else if (cSlug === 'power-bi-for-beginners' || cSlug.includes('power-bi') || cSlug.includes('powerbi')) {
+    tutorialSlug = 'power-bi-for-beginners';
+  } else if (cSlug === 'tableau-for-beginners' || cSlug.includes('tableau')) {
+    tutorialSlug = 'tableau-for-beginners';
+  } else if (cSlug === 'tailwind-css-mastery' || cSlug.includes('tailwind')) {
+    tutorialSlug = 'tailwind-css-mastery';
+  } else if (cSlug === 'nodejs-and-express-backend' || cSlug.includes('nodejs') || cSlug.includes('node-js') || cSlug.includes('express')) {
+    tutorialSlug = 'nodejs-and-express-backend';
+  } else if (cSlug === 'mongodb-and-mongoose-database' || cSlug.includes('mongodb') || cSlug.includes('mongoose')) {
+    tutorialSlug = 'mongodb-and-mongoose-database';
+  } else if (cSlug === 'nextjs-complete-course' || cSlug.includes('nextjs') || cSlug.includes('next-js')) {
+    tutorialSlug = 'nextjs-complete-course';
+  } else if (cSlug === 'dsa-mastery-course' || cSlug.includes('dsa') || cSlug.includes('data-structure') || cSlug.includes('algorithm')) {
+    tutorialSlug = 'dsa-mastery-course';
+  } else if (cSlug === 'git--github-basics' || cSlug.includes('git--github') || cSlug.includes('git-github') || (cSlug.includes('git') && !cSlug.includes('digital'))) {
+    tutorialSlug = 'git--github-basics';
+  } else if (cSlug === 'javascript-for-advanced' || cSlug.includes('javascript-for-advanced') || cSlug.includes('javascript-advanced')) {
+    tutorialSlug = 'javascript-for-advanced';
+  } else if (cSlug === 'javascript-for-intermediate' || cSlug.includes('javascript-for-intermediate') || cSlug.includes('javascript-intermediate')) {
+    tutorialSlug = 'javascript-for-intermediate';
+  } else if (cSlug === 'javascript-for-beginners' || (cSlug.includes('javascript') && !cSlug.includes('intermediate') && !cSlug.includes('advanced')) || (cSlug.includes('js-for-beginners'))) {
+    tutorialSlug = 'javascript-for-beginners';
+  } else if (cSlug === 'react-js-for-advanced' || cSlug.includes('react-js-for-advanced') || cSlug.includes('react-advanced')) {
+    tutorialSlug = 'react-js-for-advanced';
+  } else if (cSlug === 'react-js-for-intermediate' || cSlug.includes('react-js-for-intermediate') || cSlug.includes('react-intermediate')) {
+    tutorialSlug = 'react-js-for-intermediate';
+  } else if (cSlug === 'react-js-for-beginners' || (cSlug.includes('react') && !cSlug.includes('intermediate') && !cSlug.includes('advanced'))) {
+    tutorialSlug = 'react-js-for-beginners';
+  } else if (cSlug === 'rest-api-development-with-django' || cSlug.includes('rest-api') || cSlug.includes('drf')) {
+    tutorialSlug = 'rest-api-development-with-django';
+  } else if (cSlug === 'django-for-backend-development' || cSlug.includes('django')) {
+    tutorialSlug = 'django-for-backend-development';
+  } else if (cSlug.includes('data-analysis') && (chTitle.includes('pandas') || chTitle.includes('wrangling') || chTitle.includes('cleaning')) && !cSlug.includes('advanced-pandas')) {
+    tutorialSlug = 'pandas-complete-course';
   } else if (cSlug.includes('full-stack') || cSlug.includes('bootcamp')) {
     if (chTitle.includes('html')) tutorialSlug = 'html5-complete-course';
     else if (chTitle.includes('css') || chTitle.includes('tailwind')) tutorialSlug = 'css-for-beginners';
     else if (chTitle.includes('python')) tutorialSlug = 'python-for-beginners';
     else if (chTitle.includes('sql') || chTitle.includes('database')) tutorialSlug = 'sql-for-beginners';
+    else if (chTitle.includes('react')) tutorialSlug = 'react-js-for-beginners';
+    else if (chTitle.includes('django') || chTitle.includes('drf')) tutorialSlug = 'django-for-backend-development';
+    else if (chTitle.includes('javascript') || chTitle.includes('js')) tutorialSlug = 'javascript-for-beginners';
   }
 
   if (!tutorialSlug) return null;

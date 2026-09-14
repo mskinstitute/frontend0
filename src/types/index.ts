@@ -17,6 +17,7 @@ export interface Course {
   courseType: 'SINGLE' | 'COMBO';
   includedCourseIds?: string[];
   chapters?: Chapter[];
+  learningOutcomes?: string[];
 }
 
 export interface Chapter {

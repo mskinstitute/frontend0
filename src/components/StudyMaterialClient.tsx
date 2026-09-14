@@ -97,13 +97,17 @@ export default function StudyMaterialClient({
   // Categories extraction
   const categories = useMemo(() => {
     const cats = new Set<string>();
-    initialMaterials.forEach((m) => cats.add(m.category));
-    tutorials.forEach((t) => {
-      if (t.tags) t.tags.forEach((tag) => cats.add(tag));
-      if (t.title) cats.add(t.title);
+    initialMaterials.forEach((m) => {
+      if (m.category) cats.add(m.category);
     });
-    return ['All', 'Python', 'Web Development', 'MS Office', 'Cyber Security'];
-  }, [initialMaterials, tutorials]);
+    const standardCats = ['All', 'Python', 'Data Analytics', 'Web Development', 'MS Office', 'Cyber Security'];
+    cats.forEach((c) => {
+      if (!standardCats.includes(c) && c !== 'All') {
+        standardCats.push(c);
+      }
+    });
+    return standardCats;
+  }, [initialMaterials]);
 
   // Counts by type
   const counts = useMemo(() => {

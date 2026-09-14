@@ -219,14 +219,53 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
                 What You Will Master in this Course
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {[
-                  'Clean, industry-standard syntax following international W3C specifications',
-                  'Live lab implementation with real-time mentor code reviews',
-                  'Deep-dive debugging with Chrome DevTools and browser inspectors',
-                  'Mobile responsiveness, accessibility (WCAG/ARIA) & SEO best practices',
-                  'Hands-on portfolio projects ready for tech resumes and freelance work',
-                  'Verifiable Certificate of Completion with instant QR code validation',
-                ].map((outcome, idx) => (
+                {(
+                  course.learningOutcomes ||
+                  (isCombo || course.categories.some((c) => c.toLowerCase().includes('data analysis') || c.toLowerCase().includes('business intelligence') || c.toLowerCase().includes('pandas'))
+                    ? [
+                        'Full-stack Data Analytics: Advanced Excel, SQL, Python, Pandas, NumPy, Power BI & Tableau',
+                        'Automated data cleaning, ETL pipelines, and Exploratory Data Analysis (EDA)',
+                        'Executive Business Intelligence dashboards with DAX, LOD expressions, and KPI metrics',
+                        'Statistical hypothesis testing, normal distribution, and A/B test formulation',
+                        'Predictive machine learning modeling: Linear/Logistic Regression, Decision Trees, and K-Means',
+                        'Resume-ready GitHub portfolio projects, verifiable certificate, and interview preparation',
+                      ]
+                    : course.categories.some((c) => c.toLowerCase().includes('python'))
+                    ? [
+                        'Core Python syntax, control flow, functions, and clean code principles',
+                        'Object-Oriented Programming (OOP), modular architecture, and file I/O operations',
+                        'Hands-on problem solving, algorithmic thinking, and VS Code debugging',
+                        'Automation scripts, data structures, and working with external APIs',
+                        'Real-world portfolio projects ready for tech resumes and freelance work',
+                        'Verifiable Certificate of Completion with instant QR code validation',
+                      ]
+                    : course.categories.some((c) => c.toLowerCase().includes('sql') || c.toLowerCase().includes('database'))
+                    ? [
+                        'Relational database architecture, schema design, and ACID transactional integrity',
+                        'Complex multi-table queries with INNER, LEFT, RIGHT, and FULL OUTER JOINs',
+                        'Advanced subqueries, Common Table Expressions (CTEs), and Window Functions',
+                        'Aggregation, grouping, filtering, indexing, and query performance optimization',
+                        'Practical database manipulation for real-world enterprise datasets',
+                        'Verifiable Certificate of Completion with instant QR code validation',
+                      ]
+                    : course.categories.some((c) => c.toLowerCase().includes('excel') || c.toLowerCase().includes('spreadsheet'))
+                    ? [
+                        'Spreadsheet modeling from fundamental arithmetic to advanced dynamic array formulas',
+                        'Lookup mastery: XLOOKUP, VLOOKUP, INDEX-MATCH, and multi-condition criteria',
+                        'Pivot Tables, calculated fields, slicers, and interactive executive dashboards',
+                        'Data cleansing, duplicate removal, validation rules, and conditional formatting',
+                        'Automated data transformation with Power Query and foundational workflow macros',
+                        'Verifiable Certificate of Completion with instant QR code validation',
+                      ]
+                    : [
+                        'Clean, industry-standard syntax following international W3C specifications',
+                        'Live lab implementation with real-time mentor code reviews',
+                        'Deep-dive debugging with developer tools and modern inspectors',
+                        'Mobile responsiveness, accessibility (WCAG/ARIA) & SEO best practices',
+                        'Hands-on portfolio projects ready for tech resumes and freelance work',
+                        'Verifiable Certificate of Completion with instant QR code validation',
+                      ])
+                ).map((outcome, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-sm text-text-main">
                     <span className="w-5 h-5 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5">
                       ✓

@@ -1489,5 +1489,1050 @@
         }
       ]
     }
+  },
+  {
+    "id": "cheat-sql-data-analytics",
+    "type": "cheatsheet",
+    "title": "SQL for Data Analytics & Business Intelligence Cheatsheet",
+    "slug": "sql-data-analytics-cheatsheet",
+    "category": "Data Analytics",
+    "level": "Beginner to Advanced",
+    "description": "Essential SQL query syntax for data analysts: SELECT, WHERE, GROUP BY, HAVING, INNER/LEFT/FULL JOINs, Window Functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD), and CTEs.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/sql-data-analytics-cheatsheet",
+    "topicsCovered": [
+      "Aggregations & Group By",
+      "Multi-Table Joins",
+      "Window Functions (OVER / PARTITION BY)",
+      "Common Table Expressions (WITH CTE)"
+    ],
+    "readTime": "5 min lookup",
+    "pages": 4,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Query Fundamentals",
+          "items": [
+            {
+              "commandOrSyntax": "SELECT DISTINCT col1, col2 FROM table_name;",
+              "explanation": "Retrieve unique deduplicated values across specified columns",
+              "example": "SELECT DISTINCT department, job_title FROM employees;"
+            },
+            {
+              "commandOrSyntax": "WHERE col IN ('val1', 'val2') AND num_col BETWEEN 10 AND 50;",
+              "explanation": "Filter rows matching multiple discrete values or continuous ranges",
+              "example": "SELECT * FROM orders WHERE status IN ('Shipped', 'Delivered') AND total_amount BETWEEN 500 AND 2000;"
+            },
+            {
+              "commandOrSyntax": "COALESCE(val1, val2, fallback_val)",
+              "explanation": "Return the first non-NULL expression from left to right",
+              "example": "SELECT customer_name, COALESCE(phone, mobile, 'No Phone') AS contact FROM customers;"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Aggregation & Grouping",
+          "items": [
+            {
+              "commandOrSyntax": "SELECT dept, COUNT(*), AVG(salary) FROM emp GROUP BY dept HAVING AVG(salary) > 50000;",
+              "explanation": "Group rows and filter aggregated metrics using HAVING (WHERE cannot filter aggregates)",
+              "example": "SELECT category, SUM(revenue) FROM sales GROUP BY category HAVING SUM(revenue) >= 100000;"
+            },
+            {
+              "commandOrSyntax": "COUNT(DISTINCT customer_id)",
+              "explanation": "Count unique occurrences rather than total records",
+              "example": "SELECT region, COUNT(DISTINCT customer_id) AS active_buyers FROM orders GROUP BY region;"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Multi-Table Joins",
+          "items": [
+            {
+              "commandOrSyntax": "FROM table_a a INNER JOIN table_b b ON a.id = b.a_id",
+              "explanation": "Returns records having matching keys in both tables",
+              "example": "SELECT o.order_id, c.customer_name FROM orders o INNER JOIN customers c ON o.customer_id = c.id;"
+            },
+            {
+              "commandOrSyntax": "FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.id IS NULL;",
+              "explanation": "Anti-join pattern: Identify customers who have never placed an order",
+              "example": "SELECT c.name FROM customers c LEFT JOIN orders o ON c.id = o.cust_id WHERE o.cust_id IS NULL;"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Window Functions & CTEs",
+          "items": [
+            {
+              "commandOrSyntax": "ROW_NUMBER() OVER(PARTITION BY category ORDER BY sales DESC)",
+              "explanation": "Assign sequential unique rank 1..N within each partitioned subset",
+              "example": "SELECT product, category, sales, ROW_NUMBER() OVER(PARTITION BY category ORDER BY sales DESC) as rank_in_cat FROM products;"
+            },
+            {
+              "commandOrSyntax": "LAG(revenue, 1) OVER(ORDER BY order_date)",
+              "explanation": "Access metric from previous row to compute period-over-period growth",
+              "example": "SELECT order_date, revenue, (revenue - LAG(revenue, 1) OVER(ORDER BY order_date)) AS daily_diff FROM daily_sales;"
+            },
+            {
+              "commandOrSyntax": "WITH TopCustomers AS (SELECT cust_id, SUM(amt) as spent FROM orders GROUP BY cust_id) SELECT * FROM TopCustomers WHERE spent > 10000;",
+              "explanation": "Common Table Expression (CTE) creates reusable modular temporary result set",
+              "example": "WITH MonthlyRevenue AS (SELECT DATE_TRUNC('month', order_date) AS m, SUM(amount) AS rev FROM sales GROUP BY 1) SELECT * FROM MonthlyRevenue;"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-pandas-data-science",
+    "type": "cheatsheet",
+    "title": "Pandas & NumPy Data Wrangling Cheatsheet for Analysts",
+    "slug": "pandas-numpy-data-wrangling-cheatsheet",
+    "category": "Data Analytics",
+    "level": "Beginner to Advanced",
+    "description": "Quick reference for Pandas DataFrame manipulations: indexing, filtering, groupby, pivoting, missing value imputation, string methods, and method chaining for production pipelines.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/pandas-data-wrangling-cheatsheet",
+    "topicsCovered": [
+      "DataFrame Indexing & Querying",
+      "Data Cleaning & Imputation",
+      "Advanced GroupBy & Aggregations",
+      "Reshaping: Pivot Tables & Melt"
+    ],
+    "readTime": "5 min lookup",
+    "pages": 4,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "Inspection & Memory Optimization",
+          "items": [
+            {
+              "commandOrSyntax": "df.info(memory_usage='deep')",
+              "explanation": "Inspect true memory consumption including Python heap string pointers",
+              "example": "print(df.info(memory_usage='deep'))"
+            },
+            {
+              "commandOrSyntax": "df[col] = pd.to_numeric(df[col], downcast='integer')",
+              "explanation": "Automatically downcast int64 to int8/int16/int32 to reduce RAM usage by up to 80%",
+              "example": "df['age'] = pd.to_numeric(df['age'], downcast='unsigned')"
+            },
+            {
+              "commandOrSyntax": "df[col] = df[col].astype('category')",
+              "explanation": "Convert low-cardinality repetitive strings to integer lookup codes",
+              "example": "df['country'] = df['country'].astype('category')"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Filtering & Querying",
+          "items": [
+            {
+              "commandOrSyntax": "df.query('revenue > 1000 and status == \"Delivered\"')",
+              "explanation": "Clean boolean string expression filtering without repeating DataFrame names",
+              "example": "high_value_df = df.query('age >= 21 and score > 85')"
+            },
+            {
+              "commandOrSyntax": "df.loc[row_indexer, ['col1', 'col2']]",
+              "explanation": "Label-based slicing for both rows and columns simultaneously",
+              "example": "df.loc[df['salary'] > 60000, ['name', 'department']]"
+            },
+            {
+              "commandOrSyntax": "df['col'].isin(['Val1', 'Val2'])",
+              "explanation": "Vectorized membership test across lists or sets",
+              "example": "active_orders = df[df['status'].isin(['Pending', 'Shipped'])]"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "GroupBy & Multi-Aggregations",
+          "items": [
+            {
+              "commandOrSyntax": "df.groupby('cat').agg(total_sales=('amt', 'sum'), avg_rating=('rating', 'mean'))",
+              "explanation": "Named aggregations yielding clean, unnested column headers",
+              "example": "summary = df.groupby('store_id').agg(revenue=('sales', 'sum'), orders=('id', 'count'))"
+            },
+            {
+              "commandOrSyntax": "df['rolling_7d'] = df['sales'].rolling(window=7, min_periods=1).mean()",
+              "explanation": "Compute rolling moving averages across temporal windows",
+              "example": "df['sales_sma_7'] = df['sales'].rolling(7).mean()"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "Reshaping & Method Chaining",
+          "items": [
+            {
+              "commandOrSyntax": "df.pivot_table(index='store', columns='year', values='revenue', aggfunc='sum', fill_value=0)",
+              "explanation": "Transform long data into cross-tabulated wide matrix format",
+              "example": "matrix = df.pivot_table(index='region', columns='quarter', values='sales', aggfunc='mean')"
+            },
+            {
+              "commandOrSyntax": "df.melt(id_vars=['id'], value_vars=['Q1', 'Q2'], var_name='quarter', value_name='sales')",
+              "explanation": "Unpivot wide tabular columns into tidy normalized long-form records",
+              "example": "tidy_df = wide_df.melt(id_vars=['product'], var_name='month', value_name='units')"
+            },
+            {
+              "commandOrSyntax": "df.assign(margin=lambda x: x['rev'] - x['cost']).pipe(clean_func)",
+              "explanation": "Functional declarative pipeline without intermediate temporary variables",
+              "example": "clean_df = (raw_df.dropna().assign(total=lambda x: x['q'] * x['p']).query('total > 100'))"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-tailwind-css-mastery",
+    "type": "cheatsheet",
+    "title": "Tailwind CSS & Modern UI Engineering Cheatsheet",
+    "slug": "tailwind-css-mastery-cheatsheet",
+    "category": "Web Development",
+    "level": "All Levels",
+    "description": "Essential quick-reference cheatsheet for Tailwind CSS: layout containers, flexbox alignments, grid template layouts, typography scales, responsive breakpoints, pseudo-class variants, dark mode, and custom theme extensions.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/tailwind-css-cheatsheet",
+    "topicsCovered": [
+      "Flexbox & Grid",
+      "Spacing & Sizing",
+      "Typography & Colors",
+      "Breakpoints (sm, md, lg, xl)",
+      "Hover, Focus & Active States",
+      "Dark Mode & Themes"
+    ],
+    "readTime": "6 min lookup",
+    "pages": 5,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Layout & Flexbox",
+          "items": [
+            {
+              "commandOrSyntax": "flex items-center justify-between",
+              "explanation": "Creates a flex container with centered vertical items and space distributed between elements",
+              "example": "<div class=\"flex items-center justify-between p-4\">...</div>"
+            },
+            {
+              "commandOrSyntax": "flex-col gap-4",
+              "explanation": "Stacks flex children vertically with 1rem (16px) gap between them",
+              "example": "<div class=\"flex flex-col gap-4\">...</div>"
+            },
+            {
+              "commandOrSyntax": "grid grid-cols-1 md:grid-cols-3 gap-6",
+              "explanation": "1-column grid on mobile, automatically expands to 3 columns on tablet/desktop (md: 768px+)",
+              "example": "<div class=\"grid grid-cols-1 md:grid-cols-3 gap-6\">...</div>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Spacing, Sizing & Box Model",
+          "items": [
+            {
+              "commandOrSyntax": "p-4 / px-6 / py-3",
+              "explanation": "Padding: p-4 = 1rem all sides; px-6 = 1.5rem horizontal; py-3 = 0.75rem vertical",
+              "example": "<div class=\"px-6 py-3\">...</div>"
+            },
+            {
+              "commandOrSyntax": "w-full max-w-4xl mx-auto",
+              "explanation": "Full width constrained to max 56rem (896px) and horizontally centered with auto margins",
+              "example": "<div class=\"w-full max-w-4xl mx-auto\">...</div>"
+            },
+            {
+              "commandOrSyntax": "rounded-xl shadow-lg border border-slate-200",
+              "explanation": "Modern card container with 0.75rem border radius, elevation shadow, and subtle boundary border",
+              "example": "<div class=\"rounded-xl shadow-lg border border-slate-200\">...</div>"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Responsive Variants & Dark Mode",
+          "items": [
+            {
+              "commandOrSyntax": "sm: / md: / lg: / xl: / 2xl:",
+              "explanation": "Mobile-first responsive prefixes: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)",
+              "example": "<h1 class=\"text-xl md:text-3xl lg:text-5xl font-bold\">...</h1>"
+            },
+            {
+              "commandOrSyntax": "dark:bg-slate-900 dark:text-white",
+              "explanation": "Applies alternate dark theme styles when HTML has class=\"dark\"",
+              "example": "<div class=\"bg-white text-slate-900 dark:bg-slate-900 dark:text-white\">...</div>"
+            },
+            {
+              "commandOrSyntax": "hover:bg-blue-700 transition-all duration-300",
+              "explanation": "Smooth interactive transition on hover state with 300ms easing",
+              "example": "<button class=\"bg-blue-600 hover:bg-blue-700 transition-all duration-300\">Click</button>"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-nodejs-express-backend",
+    "type": "cheatsheet",
+    "title": "Node.js & Express.js Backend Architecture Cheatsheet",
+    "slug": "nodejs-express-backend-cheatsheet",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "description": "Production-ready quick-reference for Node.js and Express: Event loop lifecycle, fs/promises, stream pipelines, routing verbs, middleware chaining, JWT cookie authentication, Bcrypt password hashing, and Helmet/CORS security hardening.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/nodejs-express-cheatsheet",
+    "topicsCovered": [
+      "Event Loop & Async",
+      "Express Routing & Controllers",
+      "Middleware & Next()",
+      "JWT Authentication & Cookies",
+      "Bcrypt Hashing & RBAC",
+      "Security (Helmet, CORS, RateLimit)"
+    ],
+    "readTime": "7 min lookup",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Express App Setup & Middleware",
+          "items": [
+            {
+              "commandOrSyntax": "app.use(express.json({ limit: '10kb' }))",
+              "explanation": "Parses incoming requests with JSON payloads and prevents body flood attacks",
+              "example": "app.use(express.json({ limit: '10kb' }));"
+            },
+            {
+              "commandOrSyntax": "app.use((req, res, next) => { ... next(); })",
+              "explanation": "Custom application-level middleware executing in sequence for every matching request",
+              "example": "app.use((req, res, next) => { req.requestTime = Date.now(); next(); });"
+            },
+            {
+              "commandOrSyntax": "app.use((err, req, res, next) => { ... })",
+              "explanation": "Centralized global error-handling middleware recognized by its 4-parameter arity",
+              "example": "app.use((err, req, res, next) => res.status(err.statusCode || 500).json({ error: err.message }));"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Routing & Request Extraction",
+          "items": [
+            {
+              "commandOrSyntax": "req.params / req.query / req.body",
+              "explanation": "Extracts dynamic URL path parameters (:id), search queries (?page=1), and POST bodies",
+              "example": "const { id } = req.params; const { sort } = req.query; const { name } = req.body;"
+            },
+            {
+              "commandOrSyntax": "res.status(201).json({ status: 'success', data })",
+              "explanation": "Sends a 201 Created status with serialized JSON payload and correct headers",
+              "example": "res.status(201).json({ status: 'success', data: newCourse });"
+            },
+            {
+              "commandOrSyntax": "res.status(204).send()",
+              "explanation": "Sends a 204 No Content response indicating successful deletion without response payload",
+              "example": "res.status(204).send();"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Authentication & Security Hardening",
+          "items": [
+            {
+              "commandOrSyntax": "jwt.sign(payload, secret, { expiresIn: '1d' })",
+              "explanation": "Generates a signed JSON Web Token with expiration claim",
+              "example": "const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });"
+            },
+            {
+              "commandOrSyntax": "res.cookie('token', token, { httpOnly: True, secure: true })",
+              "explanation": "Transmits JWT in an HTTP-Only cookie to prevent client-side XSS credential theft",
+              "example": "res.cookie('token', token, { httpOnly: True, secure: True, sameSite: 'strict' });"
+            },
+            {
+              "commandOrSyntax": "await bcrypt.hash(password, 12)",
+              "explanation": "Hashes plain password with cryptographic salt using 12 cost work rounds",
+              "example": "const hashedPassword = await bcrypt.hash(plainPassword, 12);"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-mongodb-mongoose-database",
+    "type": "cheatsheet",
+    "title": "MongoDB & Mongoose NoSQL Database Cheatsheet",
+    "slug": "mongodb-mongoose-database-cheatsheet",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "description": "Comprehensive reference for MongoDB and Mongoose ODM: CRUD operations, query operators ($gt, $in, $elemMatch), atomic update modifiers ($set, $inc, $push), Schema validations, Pre/Post hooks, Population, and Aggregation Pipeline stages ($match, $group, $lookup, $unwind).",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/mongodb-mongoose-cheatsheet",
+    "topicsCovered": [
+      "CRUD Operations",
+      "Comparison & Logical Operators",
+      "Field Modifiers ($set, $inc, $push)",
+      "Mongoose Schemas & Pre-hooks",
+      ".populate() vs Embedding",
+      "Aggregation Pipeline ($match, $group, $lookup)"
+    ],
+    "readTime": "8 min lookup",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Query & Comparison Operators",
+          "items": [
+            {
+              "commandOrSyntax": "{ price: { $gte: 1000, $lte: 5000 } }",
+              "explanation": "Finds documents where numeric field is between 1000 and 5000 inclusive",
+              "example": "db.courses.find({ price: { $gte: 1000, $lte: 5000 } });"
+            },
+            {
+              "commandOrSyntax": "{ category: { $in: ['Web', 'AI', 'Cloud'] } }",
+              "explanation": "Matches documents where category equals any value in the array",
+              "example": "db.courses.find({ category: { $in: ['Web', 'AI'] } });"
+            },
+            {
+              "commandOrSyntax": "{ tags: { $all: ['react', 'node'] } }",
+              "explanation": "Matches array fields that contain ALL specified items simultaneously",
+              "example": "db.courses.find({ tags: { $all: ['react', 'node'] } });"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Atomic Update Modifiers",
+          "items": [
+            {
+              "commandOrSyntax": "{ $set: { status: 'PUBLISHED' } }",
+              "explanation": "Updates or sets specific field values without overwriting the rest of the document",
+              "example": "Course.updateOne({ _id: id }, { $set: { status: 'PUBLISHED' } });"
+            },
+            {
+              "commandOrSyntax": "{ $inc: { views: 1, inventory: -1 } }",
+              "explanation": "Atomically increments or decrements numerical fields without read race conditions",
+              "example": "Product.updateOne({ sku: 'A1' }, { $inc: { stock: -1 } });"
+            },
+            {
+              "commandOrSyntax": "{ $addToSet: { tags: 'nextjs' } }",
+              "explanation": "Appends an element to an array ONLY if it does not already exist (prevents duplicates)",
+              "example": "Course.updateOne({ _id: id }, { $addToSet: { tags: 'nextjs' } });"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Aggregation Pipeline Stages",
+          "items": [
+            {
+              "commandOrSyntax": "{ $match: { isPublished: true } }",
+              "explanation": "Filters documents in the pipeline; use early to leverage database indexes",
+              "example": "{ $match: { isPublished: True, rating: { $gte: 4.5 } } }"
+            },
+            {
+              "commandOrSyntax": "{ $group: { _id: '$category', total: { $sum: 1 }, avgPrice: { $avg: '$price' } } }",
+              "explanation": "Groups documents by key and computes accumulator metrics like sum, average, min, max",
+              "example": "{ $group: { _id: '$category', avgRating: { $avg: '$rating' } } }"
+            },
+            {
+              "commandOrSyntax": "{ $lookup: { from: 'users', localField: 'author', foreignField: '_id', as: 'authorData' } }",
+              "explanation": "Performs left outer join with target collection and outputs array in 'as' field",
+              "example": "{ $lookup: { from: 'authors', localField: 'authorId', foreignField: '_id', as: 'author' } }"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-nextjs-fullstack-framework",
+    "type": "cheatsheet",
+    "title": "Next.js 15 Full-Stack React Framework Cheatsheet",
+    "slug": "nextjs-fullstack-framework-cheatsheet",
+    "category": "Web Development",
+    "level": "Advanced",
+    "description": "The definitive master cheatsheet for Next.js 15 App Router: React Server Components (RSC), 'use client' boundaries, Server Actions ('use server'), Form handling with useActionState, Cache revalidation (revalidatePath, revalidateTag), API route.ts handlers, and Middleware route protection.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/nextjs-complete-cheatsheet",
+    "topicsCovered": [
+      "App Router & File Conventions",
+      "Server Components vs Client Components",
+      "Server Actions & useActionState",
+      "Caching & revalidateTag",
+      "API Route Handlers (route.ts)",
+      "Edge Middleware (middleware.ts)"
+    ],
+    "readTime": "8 min lookup",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. App Router File Conventions",
+          "items": [
+            {
+              "commandOrSyntax": "page.tsx / layout.tsx / template.tsx",
+              "explanation": "page = unique route UI; layout = persistent shared shell preserving state; template = remounts fresh on navigation",
+              "example": "app/courses/[slug]/page.tsx"
+            },
+            {
+              "commandOrSyntax": "loading.tsx / error.tsx / not-found.tsx",
+              "explanation": "Automatic React Suspense skeleton boundary, error boundary, and 404 handler",
+              "example": "export default function Loading() { return <Skeleton />; }"
+            },
+            {
+              "commandOrSyntax": "generateStaticParams()",
+              "explanation": "Prerenders dynamic route parameter slugs statically into HTML at build time",
+              "example": "export async function generateStaticParams() { return [{ slug: 'web' }]; }"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Server Actions & Form Mutations",
+          "items": [
+            {
+              "commandOrSyntax": "'use server'",
+              "explanation": "Marks file or function as a Server Action that executes exclusively on the backend",
+              "example": "async function createPost(formData: FormData) { 'use server'; ... }"
+            },
+            {
+              "commandOrSyntax": "const [state, formAction] = useActionState(action, initialState)",
+              "explanation": "React 19 hook for managing Server Action execution, pending status, and server validation errors",
+              "example": "const [state, formAction] = useActionState(signupAction, {});"
+            },
+            {
+              "commandOrSyntax": "revalidatePath('/courses') / revalidateTag('courses')",
+              "explanation": "Purges cached server HTML and data on demand, refreshing content on next visit",
+              "example": "revalidatePath('/courses'); revalidateTag('course-catalog');"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Edge Middleware & API Handlers",
+          "items": [
+            {
+              "commandOrSyntax": "export async function GET(request: NextRequest) { ... }",
+              "explanation": "Defines an HTTP GET API endpoint in route.ts returning NextResponse.json()",
+              "example": "return NextResponse.json({ status: 'ok', data });"
+            },
+            {
+              "commandOrSyntax": "export function middleware(request: NextRequest) { ... }",
+              "explanation": "Edge middleware intercepting incoming requests for redirects, headers, and authentication guards",
+              "example": "if (!token) return NextResponse.redirect(new URL('/login', request.url));"
+            },
+            {
+              "commandOrSyntax": "export const dynamic = 'force-dynamic' / 'force-static'",
+              "explanation": "Explicitly controls whether a route segment renders dynamically on every request or statically at build time",
+              "example": "export const dynamic = 'force-dynamic';"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-dsa-mastery-handbook",
+    "type": "cheatsheet",
+    "title": "Data Structures & Algorithms (DSA) Interview Patterns Cheatsheet",
+    "slug": "dsa-interview-patterns-cheatsheet",
+    "category": "Programming",
+    "level": "All Levels",
+    "description": "The ultimate quick-reference handbook for coding interviews and competitive programming: Big-O complexity charts, Two Pointers, Sliding Window, Fast/Slow cycle detection, Monotonic Stack, Binary Search templates, Tree traversals, Graph BFS/DFS, and 1D/2D Dynamic Programming tabulation formulas.",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/dsa-mastery-cheatsheet",
+    "topicsCovered": [
+      "Big-O Cheatsheet",
+      "Two Pointers & Sliding Window",
+      "Fast & Slow Pointers (Floyd's)",
+      "Monotonic Stacks & Deques",
+      "Binary Search Boundary Templates",
+      "Tree Traversals & Heap Formulas",
+      "Graph BFS, DFS & Dijkstra",
+      "Dynamic Programming Patterns"
+    ],
+    "readTime": "10 min lookup",
+    "pages": 8,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Big-O Complexity Quick Reference",
+          "items": [
+            {
+              "commandOrSyntax": "O(1) - Constant Time",
+              "explanation": "Hash map lookup, array index access, stack push/pop, queue enqueue/dequeue",
+              "example": "hashTable.get(key) // O(1) average"
+            },
+            {
+              "commandOrSyntax": "O(log n) - Logarithmic Time",
+              "explanation": "Binary search, balanced BST search, heap insert/extract-min, divide-and-conquer exponentiation",
+              "example": "binarySearch(arr, target) // O(log n)"
+            },
+            {
+              "commandOrSyntax": "O(n) - Linear Time",
+              "explanation": "Single-pass array traversal, two-pointer scan, sliding window, tree DFS/BFS traversal",
+              "example": "for (let i = 0; i < n; i++) { ... } // O(n)"
+            },
+            {
+              "commandOrSyntax": "O(n log n) - Linearithmic Time",
+              "explanation": "Optimal comparison sorting algorithms: Merge Sort, Quick Sort (avg), Heap Sort",
+              "example": "arr.sort((a, b) => a - b) // O(n log n)"
+            },
+            {
+              "commandOrSyntax": "O(n²) - Quadratic Time",
+              "explanation": "Nested loops, bubble sort, selection sort, checking all pairs in an array",
+              "example": "for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { ... }"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Two Pointers & Sliding Window Patterns",
+          "items": [
+            {
+              "commandOrSyntax": "Opposite-Direction Two Pointers",
+              "explanation": "One pointer at 0, one at n - 1; converge inwards while left < right (Two Sum sorted, Palindromes)",
+              "example": "while (left < right) { if (nums[left] + nums[right] === target) return ...; }"
+            },
+            {
+              "commandOrSyntax": "Fast & Slow Pointers (Floyd's Cycle)",
+              "explanation": "Slow moves 1 step, fast moves 2 steps; if they meet, a cycle exists (detect loop in Linked List)",
+              "example": "while (fast && fast.next) { slow = slow.next; fast = fast.next.next; if (slow === fast) return true; }"
+            },
+            {
+              "commandOrSyntax": "Dynamic Sliding Window (At Most K)",
+              "explanation": "Expand right pointer to include elements; while window is invalid, shrink left pointer",
+              "example": "for (let r = 0; r < n; r++) { add(nums[r]); while (!valid()) remove(nums[l++]); maxLen = Math.max(maxLen, r - l + 1); }"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Binary Search & Tree / Graph Templates",
+          "items": [
+            {
+              "commandOrSyntax": "Binary Search (Preventing Overflow)",
+              "explanation": "Calculate mid as low + Math.floor((high - low) / 2) to avoid 32-bit integer overflow",
+              "example": "let mid = low + Math.floor((high - low) / 2);"
+            },
+            {
+              "commandOrSyntax": "Heap Array Indices (0-indexed)",
+              "explanation": "Left Child = 2*i + 1, Right Child = 2*i + 2, Parent = Math.floor((i - 1) / 2)",
+              "example": "const parent = (i - 1) >> 1;"
+            },
+            {
+              "commandOrSyntax": "BFS with Queue (Shortest Path)",
+              "explanation": "Queue initialized with source node; pop node, inspect neighbors, mark visited, push unvisited",
+              "example": "const queue = [start]; visited.add(start); while (queue.length) { const u = queue.shift(); ... }"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-power-bi-dax-modeling",
+    "type": "cheatsheet",
+    "title": "Power BI DAX & Star Schema Data Modeling Master Cheatsheet",
+    "description": "Comprehensive corporate quick reference for Power BI developers: Evaluation context (Row vs Filter context), CALCULATE modifier patterns, Time Intelligence functions, Iterators (SUMX), and Star Schema relationship best practices.",
+    "badge": "Power BI & DAX",
+    "category": "Data Analytics",
+    "tier": "free",
+    "downloadUrl": "https://github.com/msk-institute/power-bi-dax-cheatsheet",
+    "topicsCovered": [
+      "CALCULATE & Filter Context",
+      "Time Intelligence (YTD, Prior Year)",
+      "Iterators (SUMX, AVERAGEX, RANKX)",
+      "Star Schema & Relationships",
+      "Row-Level Security (RLS)",
+      "Conditional Logic (SWITCH TRUE)"
+    ],
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Essential Aggregations & Safe Division",
+          "items": [
+            {
+              "commandOrSyntax": "DIVIDE(Numerator, Denominator, [AlternateResult])",
+              "explanation": "Safely divides numbers handling division by zero gracefully without throwing errors (returns BLANK or alternate result)",
+              "example": "Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)"
+            },
+            {
+              "commandOrSyntax": "DISTINCTCOUNT(ColumnName)",
+              "explanation": "Counts unique non-duplicate values in a column; ignores blank cells unless specified",
+              "example": "Unique Customers = DISTINCTCOUNT(Orders[CustomerID])"
+            },
+            {
+              "commandOrSyntax": "COUNTROWS(TableName)",
+              "explanation": "Optimized DAX engine function to count total rows in a table or filtered table expression",
+              "example": "Total Orders = COUNTROWS(Orders)"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. CALCULATE & Evaluation Context Modifiers",
+          "items": [
+            {
+              "commandOrSyntax": "CALCULATE(Expression, [Filter1], [Filter2]...)",
+              "explanation": "The most powerful DAX function. Evaluates an expression inside a modified filter context; triggers context transition",
+              "example": "Tech Sales = CALCULATE([Total Sales], Products[Category] = \"Technology\")"
+            },
+            {
+              "commandOrSyntax": "ALL(TableOrColumn)",
+              "explanation": "Removes all filters from the specified table or column, returning all rows for percentage calculations",
+              "example": "Sales % of Total = DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(Products)))"
+            },
+            {
+              "commandOrSyntax": "ALLEXCEPT(Table, Column1, [Column2])",
+              "explanation": "Clears all filters from a table EXCEPT those applied to specified columns",
+              "example": "Category Total = CALCULATE([Total Sales], ALLEXCEPT(Products, Products[Category]))"
+            },
+            {
+              "commandOrSyntax": "KEEPFILTERS(FilterExpression)",
+              "explanation": "Applies new filters without overwriting or overriding existing outer report slicers/filters",
+              "example": "North Only = CALCULATE([Total Sales], KEEPFILTERS(Regions[Region] = \"North\"))"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Row Context Iterators (The 'X' Functions)",
+          "items": [
+            {
+              "commandOrSyntax": "SUMX(Table, RowExpression)",
+              "explanation": "Iterates row-by-row through a table, calculates the expression for each row, and sums the results",
+              "example": "Total Revenue = SUMX(OrderItems, OrderItems[Qty] * OrderItems[UnitPrice] * (1 - OrderItems[Discount]))"
+            },
+            {
+              "commandOrSyntax": "RANKX(Table, Expression, [Value], [Order], [Ties])",
+              "explanation": "Ranks items in a table based on a DAX expression; supports DESC/ASC and Dense/Skip tie breaking",
+              "example": "Product Rank = RANKX(ALL(Products[ProductName]), [Total Sales], , DESC, Dense)"
+            },
+            {
+              "commandOrSyntax": "AVERAGEX(Table, Expression)",
+              "explanation": "Calculates row-by-row expression and returns arithmetic mean of non-blank results",
+              "example": "Avg Order Value = AVERAGEX(VALUES(Orders[OrderID]), [Total Sales])"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Time Intelligence & Period Comparisons",
+          "items": [
+            {
+              "commandOrSyntax": "TOTALYTD(Expression, DateColumn, [Filter], [YearEndDate])",
+              "explanation": "Calculates year-to-date cumulative total from January 1st to the current date in context",
+              "example": "YTD Sales = TOTALYTD([Total Sales], DimDate[Date])"
+            },
+            {
+              "commandOrSyntax": "SAMEPERIODLASTYEAR(DateColumn)",
+              "explanation": "Shifts dates in context exactly one year backward for YoY variance and growth analysis",
+              "example": "Sales SPLY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(DimDate[Date]))"
+            },
+            {
+              "commandOrSyntax": "DATEADD(DateColumn, NumberOfIntervals, Interval)",
+              "explanation": "Shifts dates by Day, Month, Quarter, or Year for custom period comparisons",
+              "example": "Prior Month Sales = CALCULATE([Total Sales], DATEADD(DimDate[Date], -1, MONTH))"
+            },
+            {
+              "commandOrSyntax": "DATESINPERIOD(DateColumn, StartDate, NumberOfIntervals, Interval)",
+              "explanation": "Returns a sliding window date range; perfect for rolling averages (e.g., 30-day or 90-day moving sales)",
+              "example": "Rolling 90D Sales = CALCULATE([Total Sales], DATESINPERIOD(DimDate[Date], MAX(DimDate[Date]), -90, DAY))"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Logical, Conditional & Selected Values",
+          "items": [
+            {
+              "commandOrSyntax": "SWITCH(TRUE(), Condition1, Result1, Condition2, Result2, [Else])",
+              "explanation": "Clean alternative to deeply nested IF statements; evaluates conditions sequentially",
+              "example": "Sales Tier = SWITCH(TRUE(), [Total Sales] > 100000, \"Platinum\", [Total Sales] > 50000, \"Gold\", \"Silver\")"
+            },
+            {
+              "commandOrSyntax": "SELECTEDVALUE(ColumnName, [AlternateResult])",
+              "explanation": "Returns the value when only one distinct value is selected in a slicer; otherwise returns default",
+              "example": "Target Region = SELECTEDVALUE(Regions[Region], \"All Regions\")"
+            },
+            {
+              "commandOrSyntax": "USERELATIONSHIP(Column1, Column2)",
+              "explanation": "Activates an inactive relationship inside a CALCULATE statement without changing the physical model",
+              "example": "Sales by Ship Date = CALCULATE([Total Sales], USERELATIONSHIP(Orders[ShipDate], DimDate[Date]))"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. Star Schema & Data Modeling Golden Rules",
+          "items": [
+            {
+              "commandOrSyntax": "1-to-Many Single Direction",
+              "explanation": "Always model relationships from 1-side (Dimension: Customers/Products) to Many-side (Fact: Orders/Sales) with Single cross-filter direction",
+              "example": "Dim_Customers[CustomerID] (1) ---> Fact_Sales[CustomerID] (*)"
+            },
+            {
+              "commandOrSyntax": "Avoid Bi-Directional Cross-Filtering",
+              "explanation": "Bi-directional filters cause ambiguity, performance degradation, and unexpected measure propagation in large enterprise models",
+              "example": "Keep Cross-filter direction = Single; use CROSSFILTER() in DAX only when strictly required"
+            },
+            {
+              "commandOrSyntax": "Dynamic Row-Level Security (RLS)",
+              "explanation": "Restrict data access using Entra ID / Microsoft 365 login email with USERPRINCIPALNAME()",
+              "example": "[SalesManagerEmail] = USERPRINCIPALNAME()"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-react-modern-architecture",
+    "type": "cheatsheet",
+    "title": "Modern React & Component Architecture Master Cheatsheet",
+    "slug": "react-modern-architecture-cheatsheet",
+    "category": "Web Development",
+    "level": "Intermediate to Advanced",
+    "badge": "React & Architecture",
+    "description": "The definitive modern React engineering cheatsheet: component lifecycle, essential hooks (useState, useEffect), memoization (useMemo, useCallback), mutable refs, useReducer patterns, Context API, custom hooks patterns, and production performance tuning.",
+    "tier": "free",
+    "downloadUrl": "/downloads/study-material/react-modern-architecture-cheatsheet.pdf",
+    "topicsCovered": [
+      "JSX & Props",
+      "useState & State Patterns",
+      "useEffect & Lifecycle",
+      "useMemo & useCallback",
+      "useReducer & Context",
+      "Custom Hooks & Performance"
+    ],
+    "readTime": "6 min lookup",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Components, JSX & Props Patterns",
+          "items": [
+            {
+              "commandOrSyntax": "export default function Component({ propA, propB = defaultValue }: Props)",
+              "explanation": "Modern functional component with destructured typed props and default fallbacks",
+              "example": "function UserCard({ name, role = 'Member', avatar }: UserProps) { return <div className=\"card\"><img src={avatar} /><h3>{name}</h3><span>{role}</span></div>; }"
+            },
+            {
+              "commandOrSyntax": "Conditional Rendering: {condition && <Element />} | {cond ? <A /> : <B />}",
+              "explanation": "Inline logical AND guard and ternary operator for dynamic UI rendering based on truthy state",
+              "example": "{isLoading ? <Spinner /> : <ProductList items={products} />}"
+            },
+            {
+              "commandOrSyntax": "List Rendering with Stable Key: items.map((item) => <Item key={item.id} {...item} />)",
+              "explanation": "Always provide unique, stable IDs as keys—never array indices when lists can be reordered or filtered",
+              "example": "{todos.map(todo => <TodoItem key={todo.id} text={todo.title} done={todo.completed} />)}"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Core Hooks: useState & useEffect",
+          "items": [
+            {
+              "commandOrSyntax": "const [state, setState] = useState<T>(initialValueOrLazyFn)",
+              "explanation": "Declares reactive state variable. Use updater function setState(prev => prev + 1) for concurrent/atomic updates",
+              "example": "const [count, setCount] = useState<number>(0); setCount(prev => prev + 1);"
+            },
+            {
+              "commandOrSyntax": "useEffect(() => { /* subscription / fetch */ return () => /* cleanup */; }, [deps])",
+              "explanation": "Synchronizes component with external systems (APIs, DOM listeners, timers). Always clean up subscriptions in return callback",
+              "example": "useEffect(() => { const timer = setInterval(tick, 1000); return () => clearInterval(timer); }, []);"
+            },
+            {
+              "commandOrSyntax": "useRef<T>(initialValue)",
+              "explanation": "Holds a mutable value across renders without triggering a re-render. Commonly used for direct DOM access or interval IDs",
+              "example": "const inputRef = useRef<HTMLInputElement>(null); inputRef.current?.focus();"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Performance & Memoization: useMemo & useCallback",
+          "items": [
+            {
+              "commandOrSyntax": "const memoizedValue = useMemo(() => computeHeavyData(a, b), [a, b])",
+              "explanation": "Caches the result of an expensive calculation between renders unless dependencies change",
+              "example": "const filteredUsers = useMemo(() => users.filter(u => u.role === selectedRole), [users, selectedRole]);"
+            },
+            {
+              "commandOrSyntax": "const memoizedCallback = useCallback((arg) => { doSomething(arg); }, [deps])",
+              "explanation": "Preserves referential equality of a function instance to prevent unnecessary re-renders in memoized child components",
+              "example": "const handleDelete = useCallback((id: string) => { setList(prev => prev.filter(x => x.id !== id)); }, []);"
+            },
+            {
+              "commandOrSyntax": "React.memo(Component, [arePropsEqual])",
+              "explanation": "Higher-order component that skips re-rendering if props have not changed shallowly",
+              "example": "export const ProductRow = React.memo(function ProductRow({ item }: Props) { return <div>{item.title}</div>; });"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Complex State & Global State: useReducer & Context API",
+          "items": [
+            {
+              "commandOrSyntax": "const [state, dispatch] = useReducer(reducer, initialState)",
+              "explanation": "Manages complex state logic with explicit action types ({ type, payload }) following unidirectional Redux pattern",
+              "example": "function reducer(state, action) { switch(action.type) { case 'ADD': return {...state, items: [...state.items, action.payload]}; default: return state; } }"
+            },
+            {
+              "commandOrSyntax": "const ThemeContext = createContext<ThemeContextType | null>(null)",
+              "explanation": "Creates Context for prop-drilling prevention. Pair with ThemeContext.Provider and custom useContext consumer hook",
+              "example": "export function useTheme() { const ctx = useContext(ThemeContext); if(!ctx) throw new Error('Outside Provider'); return ctx; }"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Custom Hooks Architecture",
+          "items": [
+            {
+              "commandOrSyntax": "function useLocalStorage<T>(key: string, initialValue: T)",
+              "explanation": "Extracts reusable, testable stateful logic into pure JavaScript functions prefixed with 'use'",
+              "example": "function useFetch<T>(url: string) { const [data, setData] = useState<T|null>(null); useEffect(() => { fetch(url).then(r => r.json()).then(setData); }, [url]); return { data }; }"
+            },
+            {
+              "commandOrSyntax": "useWindowSize() / useDebounce(value, delay)",
+              "explanation": "Essential utility custom hooks for responsive UI listeners and search input rate limiting",
+              "example": "const debouncedQuery = useDebounce(searchQuery, 400); useEffect(() => { searchApi(debouncedQuery); }, [debouncedQuery]);"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. React 19 & Architecture Golden Rules",
+          "items": [
+            {
+              "commandOrSyntax": "Single Source of Truth & Lifting State Up",
+              "explanation": "Keep state at the lowest common ancestor that needs it. Avoid duplicating derived state that can be computed on the fly",
+              "example": "Do not store 'fullName' in state if 'firstName' and 'lastName' are already in state; compute: const fullName = `${firstName} ${lastName}`"
+            },
+            {
+              "commandOrSyntax": "Server Components vs Client Components ('use client')",
+              "explanation": "In Next.js / modern React, components are Server Components by default (zero JS bundle). Add 'use client' only for hooks/events",
+              "example": "'use client';\nimport { useState } from 'react';\nexport function InteractiveButton() { ... }"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cheat-django-drf-architecture",
+    "type": "cheatsheet",
+    "title": "Django & Django REST Framework (DRF) API Architecture Cheatsheet",
+    "slug": "django-drf-api-architecture-cheatsheet",
+    "category": "Backend Engineering",
+    "level": "Intermediate to Advanced",
+    "badge": "Django & REST APIs",
+    "description": "Production reference for Django & Django REST Framework: Models, ORM QuerySets (select_related, prefetch_related), ModelSerializers, GenericAPIViews, ModelViewSets, SimpleJWT authentication, Custom Permissions, and Filtering.",
+    "tier": "free",
+    "downloadUrl": "/downloads/study-material/django-drf-api-architecture-cheatsheet.pdf",
+    "topicsCovered": [
+      "Project & Apps Setup",
+      "ORM Models & Migrations",
+      "DRF Serializers & Validation",
+      "ViewSets & DefaultRouter",
+      "JWT Auth & Permissions",
+      "ORM Performance Tuning"
+    ],
+    "readTime": "6 min lookup",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-15",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Django CLI, Apps & Project Configuration",
+          "items": [
+            {
+              "commandOrSyntax": "django-admin startproject config . && python manage.py startapp api",
+              "explanation": "Initializes project in current directory and scaffolds modular app",
+              "example": "python manage.py makemigrations && python manage.py migrate"
+            },
+            {
+              "commandOrSyntax": "settings.py: INSTALLED_APPS = ['rest_framework', 'corsheaders', 'api.apps.ApiConfig']",
+              "explanation": "Registers Django apps and DRF packages into core runtime",
+              "example": "REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication'] }"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Models, Relationships & ORM Queries",
+          "items": [
+            {
+              "commandOrSyntax": "models.ForeignKey(ParentModel, on_delete=models.CASCADE, related_name='items')",
+              "explanation": "Establishes 1-to-Many relational link with reverse query accessor alias",
+              "example": "class Order(models.Model): customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')"
+            },
+            {
+              "commandOrSyntax": "select_related() vs prefetch_related()",
+              "explanation": "Eliminates N+1 query disasters. select_related() performs SQL JOIN for 1-to-1 / 1-to-Many; prefetch_related() performs separate batch IN query for Many-to-Many",
+              "example": "orders = Order.objects.select_related('customer').prefetch_related('items__product').all()"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. DRF Serializers & Data Validation",
+          "items": [
+            {
+              "commandOrSyntax": "class ModelSerializer(serializers.ModelSerializer): class Meta: model = M; fields = '__all__'",
+              "explanation": "Translates complex QuerySets and Model instances into native Python datatypes and JSON payloads",
+              "example": "class UserSerializer(serializers.ModelSerializer): class Meta: model = User; fields = ['id', 'username', 'email']"
+            },
+            {
+              "commandOrSyntax": "def validate_<field>(self, value): | def validate(self, data):",
+              "explanation": "Field-level and object-level validators. Raise serializers.ValidationError for bad input payloads",
+              "example": "def validate_price(self, value): if value <= 0: raise serializers.ValidationError('Price must be positive'); return value"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Class-Based Views & ModelViewSets",
+          "items": [
+            {
+              "commandOrSyntax": "class ProductViewSet(viewsets.ModelViewSet): queryset = Product.objects.all(); serializer_class = ProductSerializer",
+              "explanation": "Provides automatic CRUD (list, create, retrieve, update, destroy) handlers in a single declarative class",
+              "example": "router = DefaultRouter(); router.register(r'products', ProductViewSet); urlpatterns = router.urls"
+            },
+            {
+              "commandOrSyntax": "@action(detail=True, methods=['post']) def custom_action(self, request, pk=None):",
+              "explanation": "Adds custom sub-endpoints to a ViewSet (e.g. /api/orders/5/mark_shipped/)",
+              "example": "@action(detail=True, methods=['post']) def approve(self, request, pk=None): order = self.get_object(); order.status='APPROVED'; order.save(); return Response({'status': 'approved'})"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Authentication, JWT & Permissions",
+          "items": [
+            {
+              "commandOrSyntax": "permission_classes = [IsAuthenticated | IsAdminUser | CustomPermission]",
+              "explanation": "Guards endpoints against unauthorized HTTP operations",
+              "example": "class IsOwnerOrReadOnly(permissions.BasePermission): def has_object_permission(self, req, view, obj): return req.method in permissions.SAFE_METHODS or obj.owner == req.user"
+            },
+            {
+              "commandOrSyntax": "SimpleJWT: TokenObtainPairView & TokenRefreshView",
+              "explanation": "Stateless authentication returning short-lived Access Token and long-lived Refresh Token",
+              "example": "urlpatterns = [path('api/token/', TokenObtainPairView.as_view()), path('api/token/refresh/', TokenRefreshView.as_view())]"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. Production API Best Practices",
+          "items": [
+            {
+              "commandOrSyntax": "PageNumberPagination / LimitOffsetPagination",
+              "explanation": "Always paginate list endpoints to protect memory and network bandwidth from large datasets",
+              "example": "REST_FRAMEWORK = { 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', 'PAGE_SIZE': 20 }"
+            },
+            {
+              "commandOrSyntax": "django-filter & SearchFilter",
+              "explanation": "Declarative query filtering via URL query params (?search=laptop&category=electronics)",
+              "example": "filter_backends = [DjangoFilterBackend, filters.SearchFilter]; search_fields = ['name', 'description']"
+            }
+          ]
+        }
+      ]
+    }
   }
 ]

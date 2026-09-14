@@ -98,16 +98,25 @@ export function extractQuizQuestions(markdown: string): {
   correctAnswer: string;
   explanation?: string;
 }[] {
-  const mcqSectionMatch = markdown.match(/# (?:Multiple Choice Questions|MCQs|Practice Quiz)[\s\S]*?(?=(?:\r?\n# [A-Z])|$)/i);
+  // Support #, ##, or ### headers for quiz section
+  const mcqSectionMatch = markdown.match(/#{1,3}\s+(?:Multiple Choice Questions|MCQs|Practice Quiz|Quiz)[\s\S]*?(?=(?:\r?\n#{1,2}\s+[A-Z])|\Z)/i);
   if (!mcqSectionMatch) return [];
 
   const sectionText = mcqSectionMatch[0];
-  const questionBlocks = sectionText.split(/###\s+\d+\.\s+/).filter(Boolean);
-  const quizList: any[] = [];
+  // Split on question headers: ### Q1: or ### 1. or ### Q1. or ### Question 1:
+  const questionBlocks = sectionText.split(/###\s+(?:Q\d+[:.]?|\d+\.|Question\s+\d+[:.]?)\s*/i);
+  const quizList: {
+    question: string;
+    options: { label: string; text: string }[];
+    correctAnswer: string;
+    explanation?: string;
+  }[] = [];
 
-  questionBlocks.forEach((block) => {
+  // First block is the section preamble before the first question
+  for (let i = 1; i < questionBlocks.length; i++) {
+    const block = questionBlocks[i];
     const lines = block.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-    if (lines.length < 3) return;
+    if (lines.length < 3) continue;
 
     const questionText = lines[0].replace(/\*\*/g, '');
     const options: { label: string; text: string }[] = [];
@@ -115,9 +124,10 @@ export function extractQuizQuestions(markdown: string): {
     let explanation = '';
 
     lines.forEach((l) => {
-      const optMatch = l.match(/^([A-D])\.\s+(.*)$/);
+      // Matches '- A) ...', 'A. ...', 'A) ...', '- A. ...'
+      const optMatch = l.match(/^(?:-\s+)?([A-D])[\.\)]\s+(.*)$/i);
       if (optMatch) {
-        options.push({ label: optMatch[1], text: optMatch[2] });
+        options.push({ label: optMatch[1].toUpperCase(), text: optMatch[2] });
       }
 
       const ansMatch = l.match(/\*\*Answer:\*\*\s*([A-D])/i);
@@ -139,7 +149,7 @@ export function extractQuizQuestions(markdown: string): {
         explanation,
       });
     }
-  });
+  }
 
   return quizList;
 }
