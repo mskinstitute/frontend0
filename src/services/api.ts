@@ -9,7 +9,6 @@ import careersData from '../../public/data/careers.json';
 import certificatesData from '../../public/data/certificates.json';
 import instructorsData from '../../public/data/instructors.json';
 import liveBatchesData from '../../public/data/live-batches.json';
-import liveClassesData from '../../public/data/live-classes.json';
 import notesData from '../../public/data/notes.json';
 import studentsData from '../../public/data/students.json';
 import announcementsData from '../../public/data/announcements.json';
@@ -23,7 +22,6 @@ const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
   'certificates.json': certificatesData,
   'instructors.json': instructorsData,
   'live-batches.json': liveBatchesData,
-  'live-classes.json': liveClassesData,
   'notes.json': notesData,
   'students.json': studentsData,
   'announcements.json': announcementsData,
@@ -311,41 +309,252 @@ export function calculateDurationMinutes(startTime?: string, endTime?: string): 
   }
 }
 
-export async function fetchLiveClasses(): Promise<LiveClass[]> {
-  if (API_BASE_URL) {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/live-classes/`);
-      if (res.ok) return await res.json();
-    } catch (err) {
-      console.warn('API fetch live classes failed, falling back to local data:', err);
+export function formatGoogleSheetCsvUrl(rawUrl: string): string {
+  if (!rawUrl) return '';
+  const trimmed = rawUrl.trim();
+
+  // If already a CSV export url
+  if (trimmed.includes('output=csv') || trimmed.includes('tqx=out:csv')) {
+    return trimmed;
+  }
+
+  // If standard Google Sheet edit or share link
+  // e.g. https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=0
+  const match = trimmed.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+  if (match && match[1]) {
+    const sheetId = match[1];
+    const gidMatch = trimmed.match(/[#&?]gid=([0-9]+)/);
+    const gidParam = gidMatch && gidMatch[1] ? `&gid=${gidMatch[1]}` : '';
+    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv${gidParam}`;
+  }
+
+  // If just the ID is provided
+  if (!trimmed.includes('/') && trimmed.length > 20) {
+    return `https://docs.google.com/spreadsheets/d/${trimmed}/gviz/tq?tqx=out:csv`;
+  }
+
+  return trimmed;
+}
+
+export function parseGoogleSheetCsv(csvText: string): LiveClass[] {
+  if (!csvText || typeof csvText !== 'string') return [];
+
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentCell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        currentCell += '"';
+        i++; // skip escaped quote
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      currentRow.push(currentCell.trim());
+      currentCell = '';
+    } else if ((char === '\r' || char === '\n') && !inQuotes) {
+      if (char === '\r' && nextChar === '\n') {
+        i++; // skip \n in \r\n
+      }
+      currentRow.push(currentCell.trim());
+      if (currentRow.some((cell) => cell.length > 0)) {
+        rows.push(currentRow);
+      }
+      currentRow = [];
+      currentCell = '';
+    } else {
+      currentCell += char;
     }
   }
-  const [classesData, enrichedBatches] = await Promise.all([
-    getLocalData<LiveClass[] | { classes: LiveClass[] }>('live-classes.json'),
+
+  if (currentCell.length > 0 || currentRow.length > 0) {
+    currentRow.push(currentCell.trim());
+    if (currentRow.some((cell) => cell.length > 0)) {
+      rows.push(currentRow);
+    }
+  }
+
+  if (rows.length < 2) return [];
+
+  // Parse headers - support courseid, date, starttime, endtime, joinurl, chapter
+  const rawHeaders = rows[0].map((h) => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
+  const headerMap: Record<string, number> = {};
+
+  rawHeaders.forEach((header, idx) => {
+    if (header === 'id') {
+      headerMap['id'] = idx;
+    } else if (
+      header === 'courseid' ||
+      header === 'course' ||
+      header === 'courseslug' ||
+      header === 'livebatcheid' ||
+      header === 'livebatchid' ||
+      header === 'batchid' ||
+      header === 'batch'
+    ) {
+      headerMap['courseId'] = idx;
+    } else if (header === 'date') {
+      headerMap['date'] = idx;
+    } else if (header === 'starttime' || header === 'start') {
+      headerMap['startTime'] = idx;
+    } else if (header === 'endtime' || header === 'end') {
+      headerMap['endTime'] = idx;
+    } else if (header === 'joinurl' || header === 'url' || header === 'link') {
+      headerMap['joinUrl'] = idx;
+    } else if (header === 'chapter' || header === 'topic' || header === 'topics') {
+      headerMap['chapter'] = idx;
+    }
+  });
+
+  const parsedClasses: LiveClass[] = [];
+
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    const getVal = (key: string): string => {
+      const idx = headerMap[key];
+      if (idx !== undefined && idx < row.length) {
+        return row[idx].trim();
+      }
+      return '';
+    };
+
+    const courseId = getVal('courseId');
+    const date = getVal('date');
+    const startTime = getVal('startTime');
+    const endTime = getVal('endTime');
+    const joinUrl = getVal('joinUrl');
+    const chapter = getVal('chapter');
+    const explicitId = getVal('id');
+
+    // Skip empty rows
+    if (!courseId && !joinUrl && !chapter && !date) continue;
+
+    const cleanCourseKey = (courseId || 'class').replace(/[^a-zA-Z0-9_-]/g, '');
+    const cleanTimeKey = (startTime || '').replace(/[^a-zA-Z0-9]/g, '');
+    const generatedId = explicitId || `live-${cleanCourseKey}-${date || r}-${cleanTimeKey || r}`;
+
+    parsedClasses.push({
+      id: generatedId,
+      courseId: courseId || '',
+      liveBatcheId: courseId || '',
+      date: date || new Date().toISOString().split('T')[0],
+      startTime: startTime || '04:30 PM',
+      endTime: endTime || '06:00 PM',
+      joinUrl: joinUrl || '',
+      chapter: chapter || '',
+      topics: chapter ? [chapter] : [],
+    });
+  }
+
+  return parsedClasses;
+}
+
+export const DEFAULT_GOOGLE_SHEET_LIVE_CLASSES_URL =
+  'https://docs.google.com/spreadsheets/d/1IMLDtXqnuM1A35xpboR_IrcYh5563ZCy55dzl1vGW1A/edit?usp=sharing';
+
+export async function fetchLiveClasses(): Promise<LiveClass[]> {
+  let rawClasses: (LiveClass & { courseid?: string })[] = [];
+
+  // 1. Fetch live classes directly from Google Sheet
+  const sheetUrl =
+    process.env.GOOGLE_SHEET_LIVE_CLASSES_URL ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEET_LIVE_CLASSES_URL ||
+    DEFAULT_GOOGLE_SHEET_LIVE_CLASSES_URL;
+
+  if (sheetUrl) {
+    try {
+      const csvUrl = formatGoogleSheetCsvUrl(sheetUrl);
+      const res = await fetch(csvUrl, { next: { revalidate: 60 } });
+      if (res.ok) {
+        const csvText = await res.text();
+        const parsed = parseGoogleSheetCsv(csvText);
+        if (parsed.length > 0) {
+          rawClasses = parsed;
+        }
+      }
+    } catch (sheetErr) {
+      console.warn('API fetch live classes from Google Sheet failed:', sheetErr);
+    }
+  }
+
+  // 2. Check external API if configured and sheet didn't return classes
+  if (rawClasses.length === 0 && API_BASE_URL) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/live-classes/`);
+      if (res.ok) {
+        rawClasses = await res.json();
+      }
+    } catch (err) {
+      console.warn('API fetch live classes failed:', err);
+    }
+  }
+
+  // 3. Enrich with batch, course, instructor & calculated fields
+  const [enrichedBatches, allCourses] = await Promise.all([
     fetchLiveBatches(),
+    getLocalData<Course[]>('all-courses.json'),
   ]);
 
-  const rawClasses = Array.isArray(classesData) ? classesData : (classesData?.classes || []);
+  return rawClasses.map((c, index) => {
+    const lookupKey = (c.courseId || c.courseid || c.liveBatcheId || '').trim().toLowerCase();
 
-  return rawClasses.map((c) => {
-    const matchedBatch = enrichedBatches.find((b) => b.id === c.liveBatcheId);
+    // Match batch by batch id or batch courseSlug
+    const matchedBatch = enrichedBatches.find(
+      (b) =>
+        b.id.toLowerCase() === lookupKey ||
+        b.courseSlug.toLowerCase() === lookupKey
+    );
+
+    // Match course by course id, course slug, or matched batch's courseSlug
+    const matchedCourse = allCourses.find(
+      (crs) =>
+        crs.id.toLowerCase() === lookupKey ||
+        crs.slug.toLowerCase() === lookupKey ||
+        (matchedBatch && crs.slug.toLowerCase() === matchedBatch.courseSlug.toLowerCase())
+    );
+
+    // If batch was not matched directly, resolve batch by matched course's slug
+    const resolvedBatch =
+      matchedBatch ||
+      (matchedCourse ? enrichedBatches.find((b) => b.courseSlug.toLowerCase() === matchedCourse.slug.toLowerCase()) : undefined);
+
     const detectedPlatform = deductPlatformFromUrl(c.joinUrl);
     const duration = calculateDurationMinutes(c.startTime, c.endTime);
-    const autoTitle = c.title || (c.topics && c.topics.length > 0 ? c.topics.slice(0, 2).join(' & ') : matchedBatch?.title || 'Live Interactive Class');
+    const chapterTopics = c.chapter ? [c.chapter] : (c.topics && c.topics.length > 0 ? c.topics : []);
+    const courseTitle = matchedCourse?.title || resolvedBatch?.courseTitle || c.courseTitle || 'Live Computer Course';
+    const courseSlug = matchedCourse?.slug || resolvedBatch?.courseSlug || c.courseSlug || '';
+    const autoTitle = c.title || c.chapter || (chapterTopics.length > 0 ? chapterTopics.slice(0, 2).join(' & ') : resolvedBatch?.title || courseTitle || 'Live Interactive Class');
+    const instructor = resolvedBatch?.instructor || c.instructor || 'Er. Sumit Kumar';
+    const instructorPicture = resolvedBatch?.instructorPicture || c.instructorPicture || '';
+
+    const cleanCourseKey = (courseSlug || lookupKey || 'class').replace(/[^a-zA-Z0-9_-]/g, '');
+    const cleanTimeKey = (c.startTime || '').replace(/[^a-zA-Z0-9]/g, '');
+    const classId = c.id || `live-${cleanCourseKey}-${c.date}-${cleanTimeKey || index + 1}`;
 
     return {
       ...c,
+      id: classId,
+      courseId: c.courseId || c.courseid || lookupKey,
+      liveBatcheId: resolvedBatch?.id || c.liveBatcheId || lookupKey,
+      chapter: c.chapter || (chapterTopics.length > 0 ? chapterTopics[0] : ''),
+      topics: chapterTopics,
       platform: c.platform || detectedPlatform,
       durationMinutes: c.durationMinutes || duration,
       title: autoTitle,
-      description: c.description || matchedBatch?.description || '',
-      courseTitle: matchedBatch?.courseTitle || c.courseTitle || 'Live Computer Course',
-      courseSlug: matchedBatch?.courseSlug || '',
-      instructor: matchedBatch?.instructor || c.instructor || 'Er. Sumit Kumar',
-      instructorPicture: matchedBatch?.instructorPicture || c.instructorPicture || '',
-      instructorData: matchedBatch?.instructorData,
-      batchTitle: matchedBatch?.title || '',
-      batch: matchedBatch,
+      description: c.description || resolvedBatch?.description || matchedCourse?.shortDescription || '',
+      courseTitle,
+      courseSlug,
+      instructor,
+      instructorPicture,
+      instructorData: resolvedBatch?.instructorData,
+      batchTitle: resolvedBatch?.title || '',
+      batch: resolvedBatch,
     };
   });
 }

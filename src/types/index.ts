@@ -223,13 +223,15 @@ export interface SearchResultItem {
 
 export interface LiveClass {
   id: string;
-  liveBatcheId: string;
+  courseId?: string;
+  liveBatcheId?: string;
   date: string; // YYYY-MM-DD e.g. "2026-09-01"
   startTime: string; // e.g. "04:30 PM"
   endTime: string; // e.g. "06:00 PM"
   joinUrl: string;
+  chapter?: string;
   platform?: string; // Auto-deducted from joinUrl
-  topics: string[];
+  topics?: string[];
 
   // Auto-fetched / enriched properties from linked LiveBatch
   title?: string;

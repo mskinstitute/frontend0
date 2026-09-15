@@ -49,7 +49,8 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
 
   const getClassShareData = (c: LiveClass, isLive: boolean) => {
     const title = `🔴 Live Class: ${c.batchTitle || c.courseTitle || 'Live Computer Class'} | MSK Institute`;
-    const topicsStr = c.topics && c.topics.length > 0 ? ` Topics: ${c.topics.slice(0, 3).join(', ')}.` : '';
+    const chapterOrTopic = c.chapter || (c.topics && c.topics.length > 0 ? c.topics.slice(0, 3).join(', ') : '');
+    const topicsStr = chapterOrTopic ? ` Chapter: ${chapterOrTopic}.` : '';
     const text = isLive
       ? `🔴 LIVE NOW: ${c.batchTitle || c.courseTitle} on ${c.platform || 'Online Live'} by ${c.instructor}!${topicsStr} Join live:`
       : `📅 Live Class: ${c.batchTitle || c.courseTitle} (${c.startTime}${c.endTime ? ' - ' + c.endTime : ''}) by ${c.instructor}!${topicsStr} Set reminder & join live:`;
@@ -339,7 +340,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                 <table className="w-full text-left border-collapse">
                   <thead className="bg-surface/80 border-b border-border-subtle text-[11px] font-bold uppercase tracking-wider text-text-muted">
                     <tr>
-                      <th className="py-3.5 px-6">Topics Covered</th>
+                      <th className="py-3.5 px-6">Chapter / Topic</th>
                       <th className="py-3.5 px-6">Batch / Course</th>
                       <th className="py-3.5 px-6">Schedule & Status</th>
                       <th className="py-3.5 px-6">Mentor</th>
@@ -551,10 +552,10 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </p>
                     )}
 
-                    {/* Topics Covered */}
+                    {/* Chapter / Topic */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted block">
-                        Topics Covered:
+                        Chapter / Topic:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {c.topics && c.topics.map((t, idx) => (
@@ -698,7 +699,7 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                   <thead className="bg-surface/80 border-b border-border-subtle text-[11px] font-bold uppercase tracking-wider text-text-muted">
                     <tr>
                       <th className="py-3.5 px-6">Date & Schedule</th>
-                      <th className="py-3.5 px-6">Topics Covered</th>
+                      <th className="py-3.5 px-6">Chapter / Topic</th>
                       <th className="py-3.5 px-6">Course & Batch</th>
                       <th className="py-3.5 px-6">Mentor</th>
                       <th className="py-3.5 px-6">Platform</th>
@@ -883,10 +884,10 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
                       </p>
                     )}
 
-                    {/* Topics Covered */}
+                    {/* Chapter / Topic */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted block">
-                        Topics Covered:
+                        Chapter / Topic:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {c.topics && c.topics.map((t, idx) => (
