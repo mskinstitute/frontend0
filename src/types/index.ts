@@ -269,8 +269,10 @@ export interface Instructor {
 export interface LiveBatch {
   id: string;
   courseSlug: string;
+  courseId?: string;
   title: string;
   startDate: string; // e.g. "2026-09-15" or "15 September 2026"
+  startDateTime?: string; // e.g. "2026-09-20T17:00:00"
   schedule: string; // e.g. "Mon, Wed, Fri (04:30 PM - 06:00 PM)"
   instructorId?: string;
   instructor: string;

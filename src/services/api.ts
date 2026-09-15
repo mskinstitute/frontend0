@@ -8,7 +8,6 @@ import blogsData from '../../public/data/blogs.json';
 import careersData from '../../public/data/careers.json';
 import certificatesData from '../../public/data/certificates.json';
 import instructorsData from '../../public/data/instructors.json';
-import liveBatchesData from '../../public/data/live-batches.json';
 import notesData from '../../public/data/notes.json';
 import studentsData from '../../public/data/students.json';
 import announcementsData from '../../public/data/announcements.json';
@@ -21,7 +20,6 @@ const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
   'careers.json': careersData,
   'certificates.json': certificatesData,
   'instructors.json': instructorsData,
-  'live-batches.json': liveBatchesData,
   'notes.json': notesData,
   'students.json': studentsData,
   'announcements.json': announcementsData,
@@ -219,24 +217,98 @@ export async function fetchInstructorById(id: string): Promise<Instructor | null
   return instructors.find(i => i.id.toLowerCase() === id.toLowerCase() || i.name.toLowerCase() === id.toLowerCase()) || null;
 }
 
+export const DEFAULT_GOOGLE_SHEET_LIVE_BATCHES_URL =
+  'https://docs.google.com/spreadsheets/d/1IMLDtXqnuM1A35xpboR_IrcYh5563ZCy55dzl1vGW1A/edit#gid=1194716609';
+
 export async function fetchLiveBatches(): Promise<LiveBatch[]> {
-  if (API_BASE_URL) {
+  let rawBatches: LiveBatch[] = [];
+
+  // 1. Fetch live batches directly from Google Sheet (Batches tab)
+  const sheetUrl =
+    process.env.GOOGLE_SHEET_LIVE_BATCHES_URL ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEET_LIVE_BATCHES_URL ||
+    DEFAULT_GOOGLE_SHEET_LIVE_BATCHES_URL;
+
+  if (sheetUrl) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/live-batches/`);
-      if (res.ok) return await res.json();
-    } catch (err) {
-      console.warn('API fetch live batches failed, falling back to local data:', err);
+      const csvUrl = formatGoogleSheetCsvUrl(sheetUrl, { gid: '1194716609', sheet: 'Batches' });
+      const res = await fetch(csvUrl, { next: { revalidate: 60 } });
+      if (res.ok) {
+        const csvText = await res.text();
+        const parsed = parseGoogleSheetBatchesCsv(csvText);
+        if (parsed.length > 0) {
+          rawBatches = parsed;
+        }
+      }
+    } catch (sheetErr) {
+      console.warn('API fetch live batches from Google Sheet failed:', sheetErr);
     }
   }
-  const [batches, courses, instructors] = await Promise.all([
-    getLocalData<LiveBatch[]>('live-batches.json'),
+
+  // 2. Check external API if configured and sheet didn't return batches
+  if (rawBatches.length === 0 && API_BASE_URL) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/live-batches/`);
+      if (res.ok) {
+        rawBatches = await res.json();
+      }
+    } catch (err) {
+      console.warn('API fetch live batches failed:', err);
+    }
+  }
+
+  // 3. Fallback default batches if sheet is not yet filled
+  if (rawBatches.length === 0) {
+    rawBatches = [
+      {
+        id: 'batch-python-mastery-3-months',
+        courseSlug: 'python-mastery-beginner-to-advanced--3-months',
+        courseId: 'python-mastery-beginner-to-advanced--3-months',
+        title: 'Python Programming Mastery (Beginner to Advanced) - Live Batch',
+        startDate: '2026-09-20',
+        startDateTime: '2026-09-20T17:00:00',
+        schedule: 'Mon, Wed, Fri (05:00 PM - 06:30 PM)',
+        instructorId: 'sumit-kumar',
+        instructor: 'Er. Sumit Kumar',
+        instructorPicture: '/logo.jpg',
+        price: '₹2,999',
+        originalPrice: '₹9,999',
+        totalSeats: 20,
+        leftSeats: 20,
+      },
+      {
+        id: 'batch-data-analysis-mastery',
+        courseSlug: 'data-analysis-mastery-combo-course--12-months',
+        courseId: 'data-analysis-mastery-combo-course--12-months',
+        title: 'Data Analysis Mastery - Live Batch',
+        startDate: '2026-09-15',
+        startDateTime: '2026-09-15T16:30:00',
+        schedule: 'Mon, Tue, Wed, Thu, Fri, Sat (04:30 PM - 06:00 PM)',
+        instructorId: 'sumit-kumar',
+        instructor: 'Er. Sumit Kumar',
+        instructorPicture: '/logo.jpg',
+        price: '₹17,999',
+        originalPrice: '₹54,999',
+        totalSeats: 20,
+        leftSeats: 18,
+      },
+    ];
+  }
+
+  // 4. Enrich batches with course data and instructor data
+  const [courses, instructors] = await Promise.all([
     getLocalData<Course[]>('all-courses.json'),
     fetchInstructors().catch(() => [] as Instructor[]),
   ]);
 
-  // Enrich batches with course data and instructor data
-  return batches.map((batch) => {
-    const matchedCourse = courses.find((c) => c.slug === batch.courseSlug);
+  return rawBatches.map((batch) => {
+    const lookupKey = (batch.courseSlug || batch.courseId || batch.id).toLowerCase();
+    const matchedCourse = courses.find(
+      (c) =>
+        c.slug.toLowerCase() === lookupKey ||
+        c.id.toLowerCase() === lookupKey ||
+        c.slug.toLowerCase() === (batch.courseSlug || '').toLowerCase()
+    );
     const matchedInstructor = instructors.find(
       (inst) => inst.id === batch.instructorId || inst.name.toLowerCase() === batch.instructor?.toLowerCase()
     );
@@ -244,10 +316,11 @@ export async function fetchLiveBatches(): Promise<LiveBatch[]> {
     return {
       ...batch,
       courseTitle: matchedCourse?.title || batch.courseTitle || batch.title,
+      courseSlug: matchedCourse?.slug || batch.courseSlug || lookupKey,
       duration: matchedCourse ? `${matchedCourse.duration.value} ${matchedCourse.duration.unit}` : batch.duration || '3 Months',
       description: matchedCourse?.shortDescription || batch.description || '',
-      instructor: matchedInstructor?.name || batch.instructor,
-      instructorPicture: matchedInstructor?.picture || batch.instructorPicture,
+      instructor: matchedInstructor?.name || batch.instructor || 'Er. Sumit Kumar',
+      instructorPicture: matchedInstructor?.picture || batch.instructorPicture || '/logo.jpg',
       instructorData: matchedInstructor,
     };
   });
@@ -260,10 +333,16 @@ export async function fetchLiveBatchById(id: string): Promise<{ batch: LiveBatch
     fetchInstructors().catch(() => [] as Instructor[]),
   ]);
 
-  const batch = allBatches.find((b) => b.id.toLowerCase() === id.toLowerCase());
+  const normalized = id.toLowerCase();
+  const batch = allBatches.find(
+    (b) =>
+      b.id.toLowerCase() === normalized ||
+      b.courseSlug.toLowerCase() === normalized ||
+      b.courseId?.toLowerCase() === normalized
+  );
   if (!batch) return null;
 
-  const course = allCourses.find((c) => c.slug === batch.courseSlug) || null;
+  const course = allCourses.find((c) => c.slug.toLowerCase() === batch.courseSlug.toLowerCase() || c.id.toLowerCase() === batch.courseSlug.toLowerCase()) || null;
   const isCombo = course?.courseType === 'COMBO';
   const includedCourses: Course[] = isCombo && course?.includedCourseIds
     ? course.includedCourseIds
@@ -309,7 +388,7 @@ export function calculateDurationMinutes(startTime?: string, endTime?: string): 
   }
 }
 
-export function formatGoogleSheetCsvUrl(rawUrl: string): string {
+export function formatGoogleSheetCsvUrl(rawUrl: string, defaultOptions?: { gid?: string; sheet?: string }): string {
   if (!rawUrl) return '';
   const trimmed = rawUrl.trim();
 
@@ -324,16 +403,240 @@ export function formatGoogleSheetCsvUrl(rawUrl: string): string {
   if (match && match[1]) {
     const sheetId = match[1];
     const gidMatch = trimmed.match(/[#&?]gid=([0-9]+)/);
-    const gidParam = gidMatch && gidMatch[1] ? `&gid=${gidMatch[1]}` : '';
-    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv${gidParam}`;
+    const sheetMatch = trimmed.match(/[#&?]sheet=([^&#]+)/);
+
+    if (gidMatch && gidMatch[1]) {
+      return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=${gidMatch[1]}`;
+    }
+    if (sheetMatch && sheetMatch[1]) {
+      return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetMatch[1]}`;
+    }
+    if (defaultOptions?.gid) {
+      return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=${defaultOptions.gid}`;
+    }
+    if (defaultOptions?.sheet) {
+      return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(defaultOptions.sheet)}`;
+    }
+    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
   }
 
   // If just the ID is provided
   if (!trimmed.includes('/') && trimmed.length > 20) {
-    return `https://docs.google.com/spreadsheets/d/${trimmed}/gviz/tq?tqx=out:csv`;
+    const extra = defaultOptions?.gid ? `&gid=${defaultOptions.gid}` : defaultOptions?.sheet ? `&sheet=${encodeURIComponent(defaultOptions.sheet)}` : '';
+    return `https://docs.google.com/spreadsheets/d/${trimmed}/gviz/tq?tqx=out:csv${extra}`;
   }
 
   return trimmed;
+}
+
+export function parseStartDateTime(dateTimeStr?: string): {
+  dateStr: string;
+  isoString: string;
+  timestamp: number;
+} {
+  if (!dateTimeStr) {
+    const fallback = new Date();
+    return {
+      dateStr: fallback.toISOString().split('T')[0],
+      isoString: fallback.toISOString(),
+      timestamp: fallback.getTime(),
+    };
+  }
+
+  const trimmed = dateTimeStr.trim();
+  let parsedDate = new Date(trimmed);
+
+  // Check if format like "YYYY-MM-DD hh:mm AM/PM" or "YYYY-MM-DD HH:mm"
+  if (isNaN(parsedDate.getTime())) {
+    const match = trimmed.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?$/i);
+    if (match) {
+      const [, ymd, hStr, mStr, , ampm] = match;
+      let hours = parseInt(hStr, 10);
+      const minutes = parseInt(mStr, 10);
+      if (ampm) {
+        if (ampm.toUpperCase() === 'PM' && hours < 12) hours += 12;
+        if (ampm.toUpperCase() === 'AM' && hours === 12) hours = 0;
+      }
+      parsedDate = new Date(`${ymd}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`);
+    } else {
+      const alt = new Date(trimmed.replace(/\//g, '-'));
+      if (!isNaN(alt.getTime())) {
+        parsedDate = alt;
+      }
+    }
+  }
+
+  if (isNaN(parsedDate.getTime())) {
+    parsedDate = new Date();
+  }
+
+  const y = parsedDate.getFullYear();
+  const m = String(parsedDate.getMonth() + 1).padStart(2, '0');
+  const d = String(parsedDate.getDate()).padStart(2, '0');
+
+  return {
+    dateStr: `${y}-${m}-${d}`,
+    isoString: parsedDate.toISOString(),
+    timestamp: parsedDate.getTime(),
+  };
+}
+
+export function getBatchStartTimestamp(batch: LiveBatch): number {
+  if (batch.startDateTime) {
+    const ts = new Date(batch.startDateTime).getTime();
+    if (!isNaN(ts)) return ts;
+  }
+
+  if (batch.startDate) {
+    let timePart = '09:00 AM';
+    if (batch.schedule) {
+      const timeMatch = batch.schedule.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
+      if (timeMatch) timePart = timeMatch[1];
+    }
+    const [hVal, mVal] = timePart.split(':');
+    const [mins, ampm] = (mVal || '00 AM').trim().split(' ');
+    let hours = parseInt(hVal, 10) || 9;
+    const minutes = parseInt(mins, 10) || 0;
+    if (ampm && ampm.toUpperCase() === 'PM' && hours < 12) hours += 12;
+    if (ampm && ampm.toUpperCase() === 'AM' && hours === 12) hours = 0;
+
+    const [year, month, day] = batch.startDate.split('-').map(Number);
+    if (year && month && day) {
+      return new Date(year, month - 1, day, hours, minutes, 0).getTime();
+    }
+    const d = new Date(batch.startDate).getTime();
+    if (!isNaN(d)) return d;
+  }
+
+  return 0;
+}
+
+export function parseGoogleSheetBatchesCsv(csvText: string): LiveBatch[] {
+  if (!csvText || typeof csvText !== 'string') return [];
+
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentCell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        currentCell += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      currentRow.push(currentCell.trim());
+      currentCell = '';
+    } else if ((char === '\r' || char === '\n') && !inQuotes) {
+      if (char === '\r' && nextChar === '\n') {
+        i++;
+      }
+      currentRow.push(currentCell.trim());
+      if (currentRow.some((cell) => cell.length > 0)) {
+        rows.push(currentRow);
+      }
+      currentRow = [];
+      currentCell = '';
+    } else {
+      currentCell += char;
+    }
+  }
+
+  if (currentCell.length > 0 || currentRow.length > 0) {
+    currentRow.push(currentCell.trim());
+    if (currentRow.some((cell) => cell.length > 0)) {
+      rows.push(currentRow);
+    }
+  }
+
+  if (rows.length < 2) return [];
+
+  // Expected columns: courseid, title, startdatetime, schedule, instructorId, price, originalPrice, totalSeats, leftSeats
+  const rawHeaders = rows[0].map((h) => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
+  const headerMap: Record<string, number> = {};
+
+  rawHeaders.forEach((header, idx) => {
+    if (header === 'courseid' || header === 'courseslug' || header === 'course') {
+      headerMap['courseId'] = idx;
+    } else if (header === 'title' || header === 'batchtitle' || header === 'name') {
+      headerMap['title'] = idx;
+    } else if (
+      header === 'startdatetime' ||
+      header === 'startdate' ||
+      header === 'datetime' ||
+      header === 'date' ||
+      header === 'starts'
+    ) {
+      headerMap['startDateTime'] = idx;
+    } else if (header === 'schedule' || header === 'timing' || header === 'time' || header === 'days') {
+      headerMap['schedule'] = idx;
+    } else if (header === 'instructorid' || header === 'instructor' || header === 'mentor') {
+      headerMap['instructorId'] = idx;
+    } else if (header === 'price' || header === 'fee') {
+      headerMap['price'] = idx;
+    } else if (header === 'originalprice' || header === 'mrp' || header === 'strikeprice') {
+      headerMap['originalPrice'] = idx;
+    } else if (header === 'totalseats' || header === 'seats' || header === 'total') {
+      headerMap['totalSeats'] = idx;
+    } else if (header === 'leftseats' || header === 'remainingseats' || header === 'availableseats' || header === 'available') {
+      headerMap['leftSeats'] = idx;
+    }
+  });
+
+  const parsedBatches: LiveBatch[] = [];
+
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    const getVal = (key: string): string => {
+      const idx = headerMap[key];
+      if (idx !== undefined && idx < row.length) {
+        return row[idx].trim();
+      }
+      return '';
+    };
+
+    const courseId = getVal('courseId');
+    const title = getVal('title');
+    const startDateTimeRaw = getVal('startDateTime');
+    const schedule = getVal('schedule');
+    const instructorId = getVal('instructorId');
+    const price = getVal('price');
+    const originalPrice = getVal('originalPrice');
+    const totalSeats = getVal('totalSeats');
+    const leftSeats = getVal('leftSeats');
+
+    // Skip empty rows
+    if (!courseId && !title && !startDateTimeRaw) continue;
+
+    const parsedDT = parseStartDateTime(startDateTimeRaw);
+    const cleanKey = (courseId || title || `batch-${r}`).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const batchId = cleanKey.startsWith('batch-') ? cleanKey : `batch-${cleanKey}`;
+
+    parsedBatches.push({
+      id: batchId,
+      courseSlug: courseId || '',
+      courseId: courseId || '',
+      title: title || 'Live Interactive Batch',
+      startDate: parsedDT.dateStr,
+      startDateTime: parsedDT.isoString,
+      schedule: schedule || 'Mon, Wed, Fri (05:00 PM - 06:30 PM)',
+      instructorId: instructorId || 'sumit-kumar',
+      instructor: 'Er. Sumit Kumar',
+      instructorPicture: '/logo.jpg',
+      price: price ? (price.startsWith('₹') ? price : `₹${price}`) : '₹4,999',
+      originalPrice: originalPrice ? (originalPrice.startsWith('₹') ? originalPrice : `₹${originalPrice}`) : '₹9,999',
+      totalSeats: parseInt(totalSeats, 10) || 20,
+      leftSeats: parseInt(leftSeats, 10) || 18,
+    });
+  }
+
+  return parsedBatches;
 }
 
 export function parseGoogleSheetCsv(csvText: string): LiveClass[] {

@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-export default function CountdownTimer({ targetDate }: { targetDate: string }) {
+export default function CountdownTimer({
+  targetDate,
+  onComplete,
+}: {
+  targetDate: string;
+  onComplete?: () => void;
+}) {
   const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -10,7 +16,12 @@ export default function CountdownTimer({ targetDate }: { targetDate: string }) {
     setIsMounted(true);
     const calculateTimeLeft = () => {
       const difference = +new Date(targetDate) - +new Date();
-      if (difference <= 0) return null;
+      if (difference <= 0) {
+        if (onComplete) {
+          onComplete();
+        }
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      }
 
       return {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -27,7 +38,7 @@ export default function CountdownTimer({ targetDate }: { targetDate: string }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [targetDate, onComplete]);
 
   // Prevent server-side vs client-side mismatch by returning placeholder during SSR
   if (!isMounted || !timeLeft) {

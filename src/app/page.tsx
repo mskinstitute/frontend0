@@ -6,11 +6,12 @@ import {
   HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
+import HomeHeroBatchCard from '@/components/HomeHeroBatchCard';
 import CountdownTimer from '@/components/CountdownTimer';
 import HomeFaqAccordion from '@/components/HomeFaqAccordion';
 import { Course, LiveBatch } from '@/types';
 
-export const revalidate = 86400; // Static generation with 24 hours ISR caching
+export const revalidate = 60; // Refresh live batch schedules every 60s
 
 export const metadata: Metadata = {
   title: 'MSK Institute | Premier Computer Training & Coding Academy in Shikohabad',
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   let featuredCourses: Course[] = [];
-  let nextBatch: LiveBatch | null = null;
+  let allBatches: LiveBatch[] = [];
 
   try {
     const [courses, batches] = await Promise.all([
@@ -77,28 +78,24 @@ export default async function HomePage() {
       fetchLiveBatches(),
     ]);
     featuredCourses = courses.filter(c => c.status === 'PUBLISH').slice(0, 3);
-    
-    if (batches && batches.length > 0) {
-      // Find the next earliest upcoming live batch
-      nextBatch = [...batches].sort((a, b) => {
-        return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-      })[0];
-    }
+    allBatches = batches || [];
   } catch (error) {
     console.error('Failed to load courses or live batches for homepage', error);
   }
 
-  const batchStartDate = nextBatch?.startDate || '2026-09-15';
-  const countdownDateString = `${batchStartDate}T09:00:00`;
-  const formattedStartDate = (() => {
-    try {
-      const d = new Date(batchStartDate);
-      if (!isNaN(d.getTime())) {
-        return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-      }
-    } catch {}
-    return batchStartDate;
-  })();
+  const now = Date.now();
+  const upcomingBatch = [...allBatches]
+    .filter((b) => {
+      const ts = b.startDateTime ? new Date(b.startDateTime).getTime() : new Date(b.startDate).getTime();
+      return ts > now;
+    })
+    .sort((a, b) => {
+      const aTime = a.startDateTime ? new Date(a.startDateTime).getTime() : new Date(a.startDate).getTime();
+      const bTime = b.startDateTime ? new Date(b.startDateTime).getTime() : new Date(b.startDate).getTime();
+      return aTime - bTime;
+    })[0] || allBatches[0];
+
+  const countdownDateString = upcomingBatch?.startDateTime || `${upcomingBatch?.startDate || '2026-09-20'}T09:00:00`;
 
   const stats = [
     { id: 1, name: 'Students Trained', value: '1,200+', icon: Users },
@@ -333,98 +330,7 @@ export default async function HomePage() {
               </div>
             </header>
 
-            <div className="relative">
-              <div className="absolute -inset-4 bg-secondary/5 rounded-3xl blur-3xl -z-10" />
-              <div className="border border-border-subtle bg-white p-6 sm:p-7 rounded-3xl shadow-xl flex flex-col gap-5">
-                {/* Top Header Badge & Price */}
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#B83A00] bg-[#B83A00]/10 px-3 py-1 rounded-md">
-                    Starting {formattedStartDate}
-                  </span>
-                  <span className="text-xs sm:text-sm font-black text-secondary bg-secondary/10 px-3 py-1 rounded-lg border border-secondary/15">
-                    {nextBatch?.price || '₹4,999'}
-                  </span>
-                </div>
-
-                {/* Batch Titles */}
-                <div className="space-y-1">
-                  <h2 className="text-xl sm:text-2xl font-black text-primary tracking-tight">
-                    {nextBatch?.title || 'Python Developer Fast-Track Live Batch'}
-                  </h2>
-                  <p className="text-xs font-semibold text-text-muted">
-                    {nextBatch?.courseTitle || 'Python Programming Masterclass'}
-                  </p>
-                </div>
-
-                {/* Short Description */}
-                <p className="text-xs text-text-muted leading-relaxed line-clamp-2">
-                  {nextBatch?.description || 'Start your coding journey with our new weekday evening batch. Learn scripting, OOP, and automation under expert mentorship.'}
-                </p>
-
-                {/* Live Countdown Timer */}
-                <div className="bg-surface/80 border border-border-subtle p-3.5 rounded-2xl space-y-2">
-                  <div className="flex items-center justify-between text-xs text-text-muted px-1">
-                    <span className="font-bold text-primary flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-secondary animate-ping" />
-                      Batch Starts In:
-                    </span>
-                    <span className="text-[11px] font-semibold text-secondary">
-                      Admissions Open
-                    </span>
-                  </div>
-                  <CountdownTimer targetDate={countdownDateString} />
-                </div>
-
-                {/* Instructor & Schedule Info with Instructor Picture */}
-                <div className="flex items-center gap-3 pt-3 border-t border-border-subtle">
-                  {nextBatch?.instructorPicture ? (
-                    <div className="relative flex-shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={nextBatch.instructorPicture}
-                        alt={nextBatch.instructor}
-                        width={44}
-                        height={44}
-                        loading="lazy"
-                        className="w-11 h-11 rounded-full object-cover border-2 border-secondary shadow-xs"
-                      />
-                      <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border border-white" />
-                    </div>
-                  ) : (
-                    <div className="w-11 h-11 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-black text-sm flex-shrink-0">
-                      {nextBatch?.instructor?.[0] || 'S'}
-                    </div>
-                  )}
-                  <div className="text-xs space-y-0.5 min-w-0">
-                    <div className="font-bold text-primary flex items-center gap-1.5">
-                      <span className="truncate">{nextBatch?.instructor || 'Er. Sumit Kumar'}</span>
-                      <span className="text-[10px] font-medium text-text-muted bg-surface px-1.5 py-0.2 rounded border border-border-subtle flex-shrink-0">
-                        Lead Mentor
-                      </span>
-                    </div>
-                    <div className="text-text-muted text-[11px] truncate">
-                      <strong>Schedule:</strong> {nextBatch?.schedule || 'Mon, Wed, Fri (04:30 PM - 06:00 PM)'}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Urgency & Primary CTA Button */}
-                <div className="flex flex-col sm:flex-row items-center justify-between pt-3 border-t border-border-subtle gap-3">
-                  <span className="text-xs text-red-500 font-bold flex items-center gap-1.5 animate-pulse">
-                    <span className="w-2 h-2 rounded-full bg-red-500" />
-                    Only {nextBatch?.leftSeats || 4} of {nextBatch?.totalSeats || 20} Seats Left
-                  </span>
-
-                  <Link
-                    href={`/live-batches/${nextBatch?.id || 'batch-python-fasttrack'}`}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-md hover:shadow-lg transition-all text-center cursor-pointer flex-shrink-0"
-                  >
-                    <span>View Live Batch Details</span>
-                    <span className="text-sm">➔</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <HomeHeroBatchCard initialBatches={allBatches} />
           </div>
         </section>
 

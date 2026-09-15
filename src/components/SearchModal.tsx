@@ -69,7 +69,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       try {
         const [cRes, bRes, sRes, blRes, tRes, carRes] = await Promise.all([
           fetch('/data/all-courses.json').catch(() => null),
-          fetch('/data/live-batches.json').catch(() => null),
+          fetch('/api/live-batches').catch(() => null),
           fetch('/data/study-materials.json').catch(() => null),
           fetch('/data/blogs.json').catch(() => null),
           fetch('/data/tutorials.json').catch(() => null),
