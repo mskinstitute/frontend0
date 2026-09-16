@@ -70,7 +70,7 @@ Without HTML, you cannot put any content on a webpage!
 
 ---
 
-# Who Created HTML? (A Quick History)
+# Who Created HTML? (History)
 
 - HTML was invented in **1991** by **Sir Tim Berners-Lee** at CERN research laboratory in Switzerland.
 - He created it so scientists could easily share research documents with each other across computer networks.
@@ -92,93 +92,11 @@ Your Code (index.html)  ➡️  Web Browser (Chrome/Edge)  ➡️  Clean Webpage
 
 ---
 
-# Tags, Elements, and Attributes (Core Concepts)
-
-Many beginner students get confused between these three terms. Let us make them crystal clear:
-
-### 1. What is a Tag?
-A tag is a special keyword surrounded by angle brackets `< >`. In HTML, most things have two tags:
-- **Opening Tag (Start Tag):** For example, `<p>` (tells the browser: a paragraph starts here).
-- **Closing Tag (End Tag):** For example, `</p>` (has a forward slash `/`, tells the browser: the paragraph ends here).
-
-> 📌 **Self-Closing Tags (Void Tags):**
-> Some tags do not have closing tags because they do not wrap any text inside them. For example:
-> - `<br>`: Adds a line break (jumps to the next line).
-> - `<hr>`: Draws a horizontal line across the page.
-
----
-
-### 2. What is an Element?
-An **Element** is the complete package: **Opening Tag + Content in the middle + Closing Tag**.
-
-```text
-<p>  Welcome to MSK Institute!  </p>
-───  ─────────────────────────  ────
- │               │                │
-Start Tag     Content          End Tag
-└─────────────────────────────────────┘
-             HTML Element
-```
-
-- **Tag:** Just `<p>` or `</p>`.
-- **Element:** `<p>Welcome to MSK Institute!</p>` (The entire combination).
-
----
-
-### 3. What is an Attribute?
-An attribute gives **extra information** about a tag.
-
-- Attributes are always written inside the **Opening Tag**.
-- They follow the format: `name="value"`.
-
-**Example:**
-```html no-try no-copy  preview-enable mdn="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"
-<a href="https://google.com">Go to Google</a>
-```
-
-- Here, `<a>` is the link tag.
-- `href` is the **Attribute**, which tells the browser the exact website address to open when someone clicks on the link.
-
----
-
-# Your Very First HTML Code
-
-Look at this simple example:
-
-```html
-<h1>Hello World!</h1>
-<p>My name is Aman and I am learning HTML5 at MSK Institute.</p>
-```
-
-### What does this code do?
-- `<h1>...</h1>`: This is a **Heading 1 Element**. The browser displays this text big and bold.
-- `<p>...</p>`: This is a **Paragraph Element**. The browser displays this text as regular body text.
-
----
-
-# Common Beginner Mistakes to Avoid
-
-1. ⚠️ **Forgetting the Closing Tag:**
-   - ❌ Wrong: `<p>My name is Aman.`
-   - ✅ Correct: `<p>My name is Aman.</p>`
-
-2. ⚠️ **Spelling Mistakes in Tags:**
-   - ❌ Wrong: `<paragraf>Hello</paragraf>` or `<headding>Title</headding>`
-   - ✅ Correct: `<p>Hello</p>` and `<h1>Title</h1>`
-
-3. ⚠️ **Using Capital Letters:**
-   - HTML works even if you write `<P>` in uppercase, but modern standard coding practice requires writing all tags in **lowercase (small letters)**: `<p>`, `<h1>`.
-
----
-
 # Quick Summary
 
 - ✅ **HTML** stands for **HyperText Markup Language**.
 - ✅ HTML builds the **structure** of every webpage.
 - ✅ HTML is a **markup language**, not a programming language.
-- ✅ **Tag:** `<p>` or `</p>`.
-- ✅ **Element:** Opening Tag + Content + Closing Tag.
-- ✅ **Attribute:** Extra details written inside the opening tag (`name="value"`).
 - ✅ **HTML5** is the latest and standard version of HTML.
 
 ---
@@ -197,17 +115,7 @@ D. Home Tool Markup Language
 
 ---
 
-### 2. What do you call the combination of an opening tag, content, and a closing tag?
-A. Attribute
-B. Element
-C. Variable
-D. Function
-**Answer:** B
-**Explanation:** An HTML Element consists of the start tag, the content in between, and the end tag.
-
----
-
-### 3. Which of the following statements about HTML is true?
+### 2. Which of the following statements about HTML is true?
 A. HTML is a programming language with loops and calculations
 B. HTML requires special paid software to run
 C. HTML is a markup language that defines the structure of a webpage
@@ -217,7 +125,7 @@ D. HTML was created by Google in 2020
 
 ---
 
-### 4. Who invented HTML in the year 1991?
+### 3. Who invented HTML in the year 1991?
 A. Bill Gates
 B. Steve Jobs
 C. Sir Tim Berners-Lee
@@ -227,7 +135,7 @@ D. Mark Zuckerberg
 
 ---
 
-### 5. What file extension must be used when saving an HTML document?
+### 4. What file extension must be used when saving an HTML document?
 A. `.txt`
 B. `.docx`
 C. `.html` or `.htm`
@@ -241,10 +149,10 @@ D. `.css`
 
 1. Open **Notepad** on your computer.
 2. Type the following code:
-   ```html
-   <h1>My First Webpage</h1>
-   <p>I am a Class 10 student and I am excited to learn web development!</p>
-   ```
+```html copy
+<h1>My First Webpage</h1>
+<p>I am a Class 10 student and I am excited to learn web development!</p>
+```
 3. Click `File -> Save As` and name the file: `mypage.html` (make sure to include `.html` at the end).
 4. Go to the folder where you saved it, and double-click `mypage.html`.
 5. Your very first webpage will open right inside your web browser! 🚀

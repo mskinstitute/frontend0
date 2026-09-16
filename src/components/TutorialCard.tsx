@@ -232,6 +232,17 @@ export default function TutorialCard({ tutorial }: TutorialCardProps) {
             dj
           </div>
         );
+      case 'flask':
+        return (
+          <div className="w-11 h-11 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white shadow-2xs">
+            {/* Flask Chemistry Beaker Icon */}
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 2v4.5L5.2 16.2A3 3 0 0 0 7.8 21h8.4a3 3 0 0 0 2.6-4.8L14 6.5V2" />
+              <path d="M8.5 2h7" />
+              <path d="M7 16h10" />
+            </svg>
+          </div>
+        );
       case 'javascript':
       case 'js':
         return (

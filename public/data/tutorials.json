@@ -5588,5 +5588,203 @@
         "sortOrder": 3
       }
     ]
+  },
+  {
+    "featured": true,
+    "id": "tut-flask-complete-course",
+    "slug": "flask-complete-course",
+    "courseSlug": "flask-complete-course",
+    "title": "Flask",
+    "icon": "flask",
+    "badge": "Intermediate",
+    "tags": [
+      "Python",
+      "Flask",
+      "Backend",
+      "Web Development",
+      "REST API",
+      "SQLAlchemy"
+    ],
+    "documentationTitle": "Flask 3.x Mastery Documentation",
+    "shortDescription": "Master Python Flask from microframework basics to Jinja2, SQLAlchemy ORM, Authentication, REST APIs with JWT, Celery, and Docker deployment.",
+    "lessonsCount": 32,
+    "totalHours": "42h",
+    "topicsCount": 32,
+    "githubRepo": "https://github.com/mskinstitute/flask-mastery",
+    "updatedAt": "2026-09-16",
+    "seo": {
+      "title": "Flask Tutorial - Complete Guide to Web Apps & REST APIs | MSK Notes",
+      "description": "Free comprehensive Flask tutorial covering routing, Jinja2, Flask-WTF, SQLAlchemy ORM, Flask-Login, Blueprints, REST APIs, and production deployment.",
+      "keywords": [
+        "flask",
+        "python flask tutorial",
+        "flask rest api",
+        "flask sqlalchemy",
+        "flask login",
+        "flask blueprints"
+      ]
+    },
+    "topics": [
+      {
+        "title": "What is Flask & WSGI Architecture",
+        "slug": "what-is-flask-and-wsgi-architecture",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Virtual Environments & First Flask Application",
+        "slug": "flask-virtualenv-installation-and-first-app",
+        "duration": "20 mins"
+      },
+      {
+        "title": "Flask CLI & Environment Configuration",
+        "slug": "flask-cli-and-environment-configuration",
+        "duration": "20 mins"
+      },
+      {
+        "title": "Dynamic URLs & Type Converters",
+        "slug": "flask-routing-dynamic-urls-and-converters",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Handling HTTP Methods (GET, POST, PUT, DELETE)",
+        "slug": "http-methods-get-post-put-delete-in-flask",
+        "duration": "25 mins"
+      },
+      {
+        "title": "The Flask Request Object & Data Parsing",
+        "slug": "flask-request-object-query-params-and-headers",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Response Objects, make_response & Cookies",
+        "slug": "flask-response-object-make-response-and-cookies",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Reverse Routing with url_for, Aborts & Error Handlers",
+        "slug": "redirects-url-for-and-abort-error-handling",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Jinja2 Syntax, Variables & Custom Filters",
+        "slug": "jinja2-syntax-variables-expressions-and-filters",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Control Structures, Loops & Conditionals",
+        "slug": "jinja2-control-structures-loops-and-conditionals",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Template Inheritance & Layout Composition",
+        "slug": "template-inheritance-blocks-and-layout-composition",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Jinja2 Macros & Reusable UI Components",
+        "slug": "jinja2-macros-and-reusable-ui-components",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Flask-WTF Setup & CSRF Token Protection",
+        "slug": "flask-wtf-installation-and-csrf-protection",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Form Classes & Built-In Field Validators",
+        "slug": "building-form-classes-and-built-in-validators",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Custom Form Validators & Secure File Uploads",
+        "slug": "custom-form-validators-and-file-uploads",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Flash Messaging System & User Feedback UI",
+        "slug": "flash-messaging-and-user-feedback",
+        "duration": "20 mins"
+      },
+      {
+        "title": "Flask-SQLAlchemy Setup & Engine Configuration",
+        "slug": "flask-sqlalchemy-setup-and-engine-configuration",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Defining Models & Column Constraints",
+        "slug": "defining-models-and-data-types-in-sqlalchemy",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Database Relationships (One-to-Many & Many-to-Many)",
+        "slug": "database-relationships-one-to-many-and-many-to-many",
+        "duration": "30 mins"
+      },
+      {
+        "title": "CRUD Operations, Query Filtering & Pagination",
+        "slug": "crud-operations-and-querying-with-sqlalchemy",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Database Schema Migrations with Flask-Migrate",
+        "slug": "database-migrations-with-flask-migrate",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Password Hashing with Werkzeug Security",
+        "slug": "user-passwords-hashing-with-werkzeug",
+        "duration": "25 mins"
+      },
+      {
+        "title": "User Session Management with Flask-Login",
+        "slug": "user-sessions-and-flask-login-integration",
+        "duration": "30 mins"
+      },
+      {
+        "title": "Role-Based Access Control & Custom Decorators",
+        "slug": "role-based-authorization-and-custom-decorators",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Modular Routing with Flask Blueprints",
+        "slug": "flask-blueprints-and-modular-routing",
+        "duration": "25 mins"
+      },
+      {
+        "title": "The Application Factory Pattern (create_app)",
+        "slug": "the-application-factory-pattern",
+        "duration": "30 mins"
+      },
+      {
+        "title": "Building JSON APIs with jsonify & Status Codes",
+        "slug": "building-json-apis-with-jsonify-and-http-status-codes",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Data Serialization & Validation with Marshmallow",
+        "slug": "data-serialization-and-validation-with-marshmallow",
+        "duration": "30 mins"
+      },
+      {
+        "title": "Stateless JWT Authentication with Flask-JWT-Extended",
+        "slug": "stateless-jwt-authentication-with-flask-jwt-extended",
+        "duration": "30 mins"
+      },
+      {
+        "title": "Background Tasks with Celery and Redis",
+        "slug": "background-tasks-with-celery-and-redis",
+        "duration": "30 mins"
+      },
+      {
+        "title": "Performance Caching with Flask-Caching",
+        "slug": "performance-caching-with-flask-caching",
+        "duration": "25 mins"
+      },
+      {
+        "title": "Testing Flask with Pytest, Gunicorn & Docker Deployment",
+        "slug": "testing-flask-apps-with-pytest-and-docker-deployment",
+        "duration": "35 mins"
+      }
+    ]
   }
 ]

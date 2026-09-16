@@ -2534,5 +2534,26 @@
         }
       ]
     }
+  },
+  {
+    "id": "cheat-flask-architecture",
+    "title": "Flask Web Architecture & REST API Cheatsheet",
+    "description": "Essential quick-reference guide covering WSGI request lifecycles, routing converters, Jinja2 syntax, SQLAlchemy ORM models, Blueprints, and JWT auth.",
+    "category": "Cheatsheets",
+    "tags": [
+      "Python",
+      "Flask",
+      "Backend",
+      "REST API",
+      "SQLAlchemy"
+    ],
+    "format": "Markdown & PDF",
+    "icon": "flask",
+    "slug": "flask-complete-course",
+    "downloadUrl": "#",
+    "readOnlineUrl": "/tutorials/flask-complete-course/what-is-flask-and-wsgi-architecture",
+    "totalViews": 2480,
+    "lastUpdated": "2026-09-16",
+    "author": "MSK Faculty Team"
   }
 ]

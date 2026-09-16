@@ -19163,5 +19163,564 @@
         ]
       }
     ]
+  },
+  {
+    "id": "course-flask-complete-course",
+    "status": "PUBLISH",
+    "title": "Flask Complete Course: Web Applications & REST APIs",
+    "slug": "flask-complete-course",
+    "featuredImageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop",
+    "shortDescription": "Master Python's leading microframework. Build modular web applications with Jinja2, relational databases with SQLAlchemy, secure authentication with Flask-Login, and production REST APIs with JWT, Celery, and Docker.",
+    "categories": [
+      "Programming",
+      "Web Development",
+      "Backend Development",
+      "Python",
+      "Flask"
+    ],
+    "level": "Intermediate",
+    "language": [
+      "English",
+      "Hindi"
+    ],
+    "duration": {
+      "value": 2,
+      "unit": "MONTHS"
+    },
+    "certificate": true,
+    "mode": "BOTH",
+    "courseType": "SINGLE",
+    "featured": true,
+    "rating": 4.9,
+    "studentsCount": 1840,
+    "chapters": [
+      {
+        "id": "flask-ch-1",
+        "title": "Introduction, WSGI & Environment Setup",
+        "description": "Foundations of Flask, WSGI mechanics, virtual environments, and initial project bootstrapping.",
+        "topics": [
+          {
+            "title": "What is Flask & WSGI Architecture",
+            "slug": "what-is-flask-and-wsgi-architecture",
+            "description": "Explore Flask philosophy, WSGI specification, Werkzeug request handling, Jinja2 engine, and how Flask compares to Django and FastAPI.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Virtual Environments & First Flask Application",
+            "slug": "flask-virtualenv-installation-and-first-app",
+            "description": "Configure isolated virtual environments, install Flask 3.x, and write your first Hello World application.",
+            "duration": "20 mins"
+          },
+          {
+            "title": "Flask CLI & Environment Configuration",
+            "slug": "flask-cli-and-environment-configuration",
+            "description": "Master flask run, environment variables (FLASK_APP, FLASK_DEBUG), dotenv files, and development server mechanics.",
+            "duration": "20 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-2",
+        "title": "Routing, Request Handling & Responses",
+        "description": "URL mapping, request parsing, response dispatch, cookies, and HTTP error handling.",
+        "topics": [
+          {
+            "title": "Dynamic URLs & Type Converters",
+            "slug": "flask-routing-dynamic-urls-and-converters",
+            "description": "Construct dynamic URL parameters with int, string, float, path, and uuid converters alongside custom regex converters.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Handling HTTP Methods (GET, POST, PUT, DELETE)",
+            "slug": "http-methods-get-post-put-delete-in-flask",
+            "description": "Implement route handlers for standard HTTP verbs, inspect request.method, and structure RESTful request dispatching.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "The Flask Request Object & Data Parsing",
+            "slug": "flask-request-object-query-params-and-headers",
+            "description": "Parse query parameters with request.args, form payloads with request.form, JSON bodies with request.json, and headers.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Response Objects, make_response & Cookies",
+            "slug": "flask-response-object-make-response-and-cookies",
+            "description": "Craft custom HTTP responses, set status codes, attach custom headers, and read/write secure client cookies.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Reverse Routing with url_for, Aborts & Error Handlers",
+            "slug": "redirects-url-for-and-abort-error-handling",
+            "description": "Implement clean reverse routing with url_for(), trigger HTTP errors with abort(), and write custom @app.errorhandler handlers.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-3",
+        "title": "Jinja2 Templating Engine",
+        "description": "Dynamic HTML generation, control structures, layout inheritance, and reusable macros.",
+        "topics": [
+          {
+            "title": "Jinja2 Syntax, Variables & Custom Filters",
+            "slug": "jinja2-syntax-variables-expressions-and-filters",
+            "description": "Render dynamic context variables, escape HTML safely, use built-in filters, and register custom Python template filters.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Control Structures, Loops & Conditionals",
+            "slug": "jinja2-control-structures-loops-and-conditionals",
+            "description": "Implement {% if %}, {% for %}, loop context variables (loop.index, loop.first), and handle empty iterable states cleanly.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Template Inheritance & Layout Composition",
+            "slug": "template-inheritance-blocks-and-layout-composition",
+            "description": "Design modular layouts using base templates, {% extends %}, {% block %}, and partial includes with {% include %}.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Jinja2 Macros & Reusable UI Components",
+            "slug": "jinja2-macros-and-reusable-ui-components",
+            "description": "Author parameterized macros for form inputs, interactive pagination, navigation bars, and badge cards.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-4",
+        "title": "Forms, Validation & Flask-WTF",
+        "description": "Secure user input handling, CSRF defenses, form classes, and flash feedback.",
+        "topics": [
+          {
+            "title": "Flask-WTF Setup & CSRF Token Protection",
+            "slug": "flask-wtf-installation-and-csrf-protection",
+            "description": "Install Flask-WTF, configure secret keys, render CSRF tokens, and defend web applications against cross-site request forgery.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Form Classes & Built-In Field Validators",
+            "slug": "building-form-classes-and-built-in-validators",
+            "description": "Define declarative form classes with StringField, PasswordField, EmailField, SelectField, and DataRequired validators.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Custom Form Validators & Secure File Uploads",
+            "slug": "custom-form-validators-and-file-uploads",
+            "description": "Write custom validation methods, process multipart file uploads with FileField, and sanitize filenames with secure_filename.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Flash Messaging System & User Feedback UI",
+            "slug": "flash-messaging-and-user-feedback",
+            "description": "Deliver non-blocking notifications across redirects using flash(), categorize message types, and render toast components.",
+            "duration": "20 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-5",
+        "title": "Relational Databases with Flask-SQLAlchemy",
+        "description": "SQLAlchemy 3.x ORM, models, relational constraints, CRUD queries, and Alembic migrations.",
+        "topics": [
+          {
+            "title": "Flask-SQLAlchemy Setup & Engine Configuration",
+            "slug": "flask-sqlalchemy-setup-and-engine-configuration",
+            "description": "Configure SQLite and PostgreSQL database URIs, initialize SQLAlchemy extensions, and manage connection pools.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Defining Models & Column Constraints",
+            "slug": "defining-models-and-data-types-in-sqlalchemy",
+            "description": "Define declarative models, primary keys, string/text/integer columns, timestamps, unique constraints, and database indexes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Database Relationships (One-to-Many & Many-to-Many)",
+            "slug": "database-relationships-one-to-many-and-many-to-many",
+            "description": "Design relational models using db.ForeignKey, db.relationship, back_populates, cascades, and many-to-many association tables.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "CRUD Operations, Query Filtering & Pagination",
+            "slug": "crud-operations-and-querying-with-sqlalchemy",
+            "description": "Create, query, update, and delete records with db.session, execute advanced filters, and paginate large datasets.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Database Schema Migrations with Flask-Migrate",
+            "slug": "database-migrations-with-flask-migrate",
+            "description": "Track database schema revisions using Alembic and Flask-Migrate commands (init, migrate, upgrade, downgrade).",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-6",
+        "title": "Authentication & User Sessions",
+        "description": "Cryptographic password hashing, session cookies, Flask-Login, and role-based access control.",
+        "topics": [
+          {
+            "title": "Password Hashing with Werkzeug Security",
+            "slug": "user-passwords-hashing-with-werkzeug",
+            "description": "Implement industry-standard password hashing using PBKDF2/scrypt, generate_password_hash, and check_password_hash.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "User Session Management with Flask-Login",
+            "slug": "user-sessions-and-flask-login-integration",
+            "description": "Integrate LoginManager, implement UserMixin, manage login_user, logout_user, current_user, and enforce @login_required.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Role-Based Access Control & Custom Decorators",
+            "slug": "role-based-authorization-and-custom-decorators",
+            "description": "Build custom authorization decorators to restrict administrative endpoints based on user roles and permissions.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-7",
+        "title": "Blueprints & Application Factory Pattern",
+        "description": "Modular enterprise codebase organization, blueprint registration, and environment switching.",
+        "topics": [
+          {
+            "title": "Modular Routing with Flask Blueprints",
+            "slug": "flask-blueprints-and-modular-routing",
+            "description": "Deconstruct monolithic apps into modular domain Blueprints with isolated templates, static folders, and URL prefixes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "The Application Factory Pattern (create_app)",
+            "slug": "the-application-factory-pattern",
+            "description": "Implement create_app() to instantiate application instances dynamically, prevent circular imports, and swap environment configs.",
+            "duration": "30 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-8",
+        "title": "REST API Development with Flask",
+        "description": "Stateless JSON APIs, schema validation with Marshmallow, and JWT token authentication.",
+        "topics": [
+          {
+            "title": "Building JSON APIs with jsonify & Status Codes",
+            "slug": "building-json-apis-with-jsonify-and-http-status-codes",
+            "description": "Architect RESTful JSON endpoints, format structured error responses, and return RFC-compliant HTTP status codes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Data Serialization & Validation with Marshmallow",
+            "slug": "data-serialization-and-validation-with-marshmallow",
+            "description": "Serialize complex ORM objects and validate incoming JSON payloads using Marshmallow Schema definitions.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Stateless JWT Authentication with Flask-JWT-Extended",
+            "slug": "stateless-jwt-authentication-with-flask-jwt-extended",
+            "description": "Issue access and refresh JWT tokens, protect API endpoints with @jwt_required(), and implement token revocation blocklists.",
+            "duration": "30 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-9",
+        "title": "Advanced Features, Asynchronous Tasks & Caching",
+        "description": "Asynchronous background queues with Celery, Redis caching, and custom middleware.",
+        "topics": [
+          {
+            "title": "Background Tasks with Celery and Redis",
+            "slug": "background-tasks-with-celery-and-redis",
+            "description": "Offload long-running computations, asynchronous email dispatch, and scheduled background workers using Celery and Redis.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Performance Caching with Flask-Caching",
+            "slug": "performance-caching-with-flask-caching",
+            "description": "Accelerate response latency by caching view outputs and expensive database query results with Redis and Flask-Caching.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-10",
+        "title": "Testing, Security & Production Deployment",
+        "description": "Pytest unit tests, WSGI Gunicorn servers, Nginx reverse proxying, and Docker containerization.",
+        "topics": [
+          {
+            "title": "Testing Flask with Pytest, Gunicorn & Docker Deployment",
+            "slug": "testing-flask-apps-with-pytest-and-docker-deployment",
+            "description": "Write automated unit and API integration tests with Pytest fixtures, containerize with Docker, and deploy with Gunicorn and Nginx.",
+            "duration": "35 mins"
+          }
+        ]
+      }
+    ],
+    "curriculum": [
+      {
+        "id": "flask-ch-1",
+        "title": "Introduction, WSGI & Environment Setup",
+        "description": "Foundations of Flask, WSGI mechanics, virtual environments, and initial project bootstrapping.",
+        "topics": [
+          {
+            "title": "What is Flask & WSGI Architecture",
+            "slug": "what-is-flask-and-wsgi-architecture",
+            "description": "Explore Flask philosophy, WSGI specification, Werkzeug request handling, Jinja2 engine, and how Flask compares to Django and FastAPI.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Virtual Environments & First Flask Application",
+            "slug": "flask-virtualenv-installation-and-first-app",
+            "description": "Configure isolated virtual environments, install Flask 3.x, and write your first Hello World application.",
+            "duration": "20 mins"
+          },
+          {
+            "title": "Flask CLI & Environment Configuration",
+            "slug": "flask-cli-and-environment-configuration",
+            "description": "Master flask run, environment variables (FLASK_APP, FLASK_DEBUG), dotenv files, and development server mechanics.",
+            "duration": "20 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-2",
+        "title": "Routing, Request Handling & Responses",
+        "description": "URL mapping, request parsing, response dispatch, cookies, and HTTP error handling.",
+        "topics": [
+          {
+            "title": "Dynamic URLs & Type Converters",
+            "slug": "flask-routing-dynamic-urls-and-converters",
+            "description": "Construct dynamic URL parameters with int, string, float, path, and uuid converters alongside custom regex converters.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Handling HTTP Methods (GET, POST, PUT, DELETE)",
+            "slug": "http-methods-get-post-put-delete-in-flask",
+            "description": "Implement route handlers for standard HTTP verbs, inspect request.method, and structure RESTful request dispatching.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "The Flask Request Object & Data Parsing",
+            "slug": "flask-request-object-query-params-and-headers",
+            "description": "Parse query parameters with request.args, form payloads with request.form, JSON bodies with request.json, and headers.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Response Objects, make_response & Cookies",
+            "slug": "flask-response-object-make-response-and-cookies",
+            "description": "Craft custom HTTP responses, set status codes, attach custom headers, and read/write secure client cookies.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Reverse Routing with url_for, Aborts & Error Handlers",
+            "slug": "redirects-url-for-and-abort-error-handling",
+            "description": "Implement clean reverse routing with url_for(), trigger HTTP errors with abort(), and write custom @app.errorhandler handlers.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-3",
+        "title": "Jinja2 Templating Engine",
+        "description": "Dynamic HTML generation, control structures, layout inheritance, and reusable macros.",
+        "topics": [
+          {
+            "title": "Jinja2 Syntax, Variables & Custom Filters",
+            "slug": "jinja2-syntax-variables-expressions-and-filters",
+            "description": "Render dynamic context variables, escape HTML safely, use built-in filters, and register custom Python template filters.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Control Structures, Loops & Conditionals",
+            "slug": "jinja2-control-structures-loops-and-conditionals",
+            "description": "Implement {% if %}, {% for %}, loop context variables (loop.index, loop.first), and handle empty iterable states cleanly.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Template Inheritance & Layout Composition",
+            "slug": "template-inheritance-blocks-and-layout-composition",
+            "description": "Design modular layouts using base templates, {% extends %}, {% block %}, and partial includes with {% include %}.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Jinja2 Macros & Reusable UI Components",
+            "slug": "jinja2-macros-and-reusable-ui-components",
+            "description": "Author parameterized macros for form inputs, interactive pagination, navigation bars, and badge cards.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-4",
+        "title": "Forms, Validation & Flask-WTF",
+        "description": "Secure user input handling, CSRF defenses, form classes, and flash feedback.",
+        "topics": [
+          {
+            "title": "Flask-WTF Setup & CSRF Token Protection",
+            "slug": "flask-wtf-installation-and-csrf-protection",
+            "description": "Install Flask-WTF, configure secret keys, render CSRF tokens, and defend web applications against cross-site request forgery.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Form Classes & Built-In Field Validators",
+            "slug": "building-form-classes-and-built-in-validators",
+            "description": "Define declarative form classes with StringField, PasswordField, EmailField, SelectField, and DataRequired validators.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Custom Form Validators & Secure File Uploads",
+            "slug": "custom-form-validators-and-file-uploads",
+            "description": "Write custom validation methods, process multipart file uploads with FileField, and sanitize filenames with secure_filename.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Flash Messaging System & User Feedback UI",
+            "slug": "flash-messaging-and-user-feedback",
+            "description": "Deliver non-blocking notifications across redirects using flash(), categorize message types, and render toast components.",
+            "duration": "20 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-5",
+        "title": "Relational Databases with Flask-SQLAlchemy",
+        "description": "SQLAlchemy 3.x ORM, models, relational constraints, CRUD queries, and Alembic migrations.",
+        "topics": [
+          {
+            "title": "Flask-SQLAlchemy Setup & Engine Configuration",
+            "slug": "flask-sqlalchemy-setup-and-engine-configuration",
+            "description": "Configure SQLite and PostgreSQL database URIs, initialize SQLAlchemy extensions, and manage connection pools.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Defining Models & Column Constraints",
+            "slug": "defining-models-and-data-types-in-sqlalchemy",
+            "description": "Define declarative models, primary keys, string/text/integer columns, timestamps, unique constraints, and database indexes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Database Relationships (One-to-Many & Many-to-Many)",
+            "slug": "database-relationships-one-to-many-and-many-to-many",
+            "description": "Design relational models using db.ForeignKey, db.relationship, back_populates, cascades, and many-to-many association tables.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "CRUD Operations, Query Filtering & Pagination",
+            "slug": "crud-operations-and-querying-with-sqlalchemy",
+            "description": "Create, query, update, and delete records with db.session, execute advanced filters, and paginate large datasets.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Database Schema Migrations with Flask-Migrate",
+            "slug": "database-migrations-with-flask-migrate",
+            "description": "Track database schema revisions using Alembic and Flask-Migrate commands (init, migrate, upgrade, downgrade).",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-6",
+        "title": "Authentication & User Sessions",
+        "description": "Cryptographic password hashing, session cookies, Flask-Login, and role-based access control.",
+        "topics": [
+          {
+            "title": "Password Hashing with Werkzeug Security",
+            "slug": "user-passwords-hashing-with-werkzeug",
+            "description": "Implement industry-standard password hashing using PBKDF2/scrypt, generate_password_hash, and check_password_hash.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "User Session Management with Flask-Login",
+            "slug": "user-sessions-and-flask-login-integration",
+            "description": "Integrate LoginManager, implement UserMixin, manage login_user, logout_user, current_user, and enforce @login_required.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Role-Based Access Control & Custom Decorators",
+            "slug": "role-based-authorization-and-custom-decorators",
+            "description": "Build custom authorization decorators to restrict administrative endpoints based on user roles and permissions.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-7",
+        "title": "Blueprints & Application Factory Pattern",
+        "description": "Modular enterprise codebase organization, blueprint registration, and environment switching.",
+        "topics": [
+          {
+            "title": "Modular Routing with Flask Blueprints",
+            "slug": "flask-blueprints-and-modular-routing",
+            "description": "Deconstruct monolithic apps into modular domain Blueprints with isolated templates, static folders, and URL prefixes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "The Application Factory Pattern (create_app)",
+            "slug": "the-application-factory-pattern",
+            "description": "Implement create_app() to instantiate application instances dynamically, prevent circular imports, and swap environment configs.",
+            "duration": "30 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-8",
+        "title": "REST API Development with Flask",
+        "description": "Stateless JSON APIs, schema validation with Marshmallow, and JWT token authentication.",
+        "topics": [
+          {
+            "title": "Building JSON APIs with jsonify & Status Codes",
+            "slug": "building-json-apis-with-jsonify-and-http-status-codes",
+            "description": "Architect RESTful JSON endpoints, format structured error responses, and return RFC-compliant HTTP status codes.",
+            "duration": "25 mins"
+          },
+          {
+            "title": "Data Serialization & Validation with Marshmallow",
+            "slug": "data-serialization-and-validation-with-marshmallow",
+            "description": "Serialize complex ORM objects and validate incoming JSON payloads using Marshmallow Schema definitions.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Stateless JWT Authentication with Flask-JWT-Extended",
+            "slug": "stateless-jwt-authentication-with-flask-jwt-extended",
+            "description": "Issue access and refresh JWT tokens, protect API endpoints with @jwt_required(), and implement token revocation blocklists.",
+            "duration": "30 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-9",
+        "title": "Advanced Features, Asynchronous Tasks & Caching",
+        "description": "Asynchronous background queues with Celery, Redis caching, and custom middleware.",
+        "topics": [
+          {
+            "title": "Background Tasks with Celery and Redis",
+            "slug": "background-tasks-with-celery-and-redis",
+            "description": "Offload long-running computations, asynchronous email dispatch, and scheduled background workers using Celery and Redis.",
+            "duration": "30 mins"
+          },
+          {
+            "title": "Performance Caching with Flask-Caching",
+            "slug": "performance-caching-with-flask-caching",
+            "description": "Accelerate response latency by caching view outputs and expensive database query results with Redis and Flask-Caching.",
+            "duration": "25 mins"
+          }
+        ]
+      },
+      {
+        "id": "flask-ch-10",
+        "title": "Testing, Security & Production Deployment",
+        "description": "Pytest unit tests, WSGI Gunicorn servers, Nginx reverse proxying, and Docker containerization.",
+        "topics": [
+          {
+            "title": "Testing Flask with Pytest, Gunicorn & Docker Deployment",
+            "slug": "testing-flask-apps-with-pytest-and-docker-deployment",
+            "description": "Write automated unit and API integration tests with Pytest fixtures, containerize with Docker, and deploy with Gunicorn and Nginx.",
+            "duration": "35 mins"
+          }
+        ]
+      }
+    ],
+    "totalTopics": 32
   }
 ]

@@ -23,8 +23,6 @@ version: 2.0
 
 # Basic Document Structure (The HTML Skeleton)
 
-Welcome to Topic 1.2! 🚀
-
 Whenever you write a **Leave Application** in school, it follows a standard, fixed format:
 1. At the top: *To The Principal*
 2. Next: *Subject*
@@ -40,7 +38,7 @@ If you change the order or mix these sections, the application will not look rig
 
 Whenever you create a new HTML file, you start with this essential structure:
 
-```html
+```html no-try no-run
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,26 +104,6 @@ Inside `<head>`, we normally have three main tags:
 
 > 💡 **Golden Rule to Remember:**
 > If you want users to see it on the screen, write it inside `<body>`. If it is a setting or configuration for the browser, write it inside `<head>`.
-
----
-
-# Visual Tree: Document Structure
-
-You can imagine an HTML webpage like a tree with two main branches:
-
-```text
-📄 HTML Page (<html>)
-│
-├── 🧠 <head> (Invisible - Settings & Brain)
-│    ├── <meta charset="UTF-8"> (Language & Emoji Support)
-│    ├── <meta name="viewport"> (Mobile Screen Fit)
-│    └── <title> (Name on Browser Tab)
-│
-└── 🧍 <body> (Visible - Everything on Screen)
-     ├── <h1> (Main Big Heading)
-     ├── <p> (Paragraph Text)
-     └── <img>, <button>, etc. (Photos and Buttons)
-```
 
 ---
 

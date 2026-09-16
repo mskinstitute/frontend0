@@ -23,8 +23,6 @@ version: 2.0
 
 # VS Code Setup (The Best Tool for HTML Coding)
 
-Welcome to Topic 1.3! 💻
-
 In Topics 1.1 and 1.2, you learned what HTML is and what a standard HTML document looks like. Now comes the practical question: **Where do we write our HTML code?**
 
 You can write HTML in basic Windows **Notepad**. But in Notepad, all text looks plain black, there is no automatic error checking, and you have to manually refresh your browser every time you make a change.

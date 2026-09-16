@@ -39,6 +39,7 @@ export const TUTORIAL_SLUGS = new Set([
   'react-js-for-advanced',
   'django-for-backend-development',
   'rest-api-development-with-django',
+  'flask-complete-course',
 ]);
 
 export function isTutorialCourse(courseSlug?: string): boolean {

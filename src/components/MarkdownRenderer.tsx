@@ -21,10 +21,12 @@ import {
   EyeOff,
   Maximize2,
   X,
+  Brain,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { toast } from 'react-hot-toast';
 import { slugify } from '@/lib/markdown';
+import QuizQuestionCard, { QuizOption } from '@/components/QuizQuestionCard';
 import {
   highlightCode,
   getLanguageDisplayName,
@@ -189,6 +191,18 @@ type Block =
   | { type: 'unordered-list'; items: string[] }
   | { type: 'mcq-answer'; answer: string }
   | { type: 'mcq-explanation'; explanation: string }
+  | {
+      type: 'quiz-question';
+      questionNumber?: string | number;
+      question: string;
+      codeSnippet?: {
+        code: string;
+        lang: string;
+      };
+      options: QuizOption[];
+      correctAnswer: string;
+      explanation?: string;
+    }
   | { type: 'image'; alt: string; src: string }
   | { type: 'paragraph'; lines: string[] };
 
@@ -465,6 +479,15 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
       // Unordered List (- , * )
       if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        // If it's an MCQ option like '- A) ' or '- A. ', keep with paragraph/options block so it groups with answer
+        if (/^(?:-\s*)?\(?[A-D]\)?[\.\)]/i.test(trimmed)) {
+          if (currentType && currentType !== 'paragraph') {
+            flushCurrent();
+          }
+          currentType = 'paragraph';
+          currentBlock.push(line);
+          continue;
+        }
         if (currentType !== 'unordered-list') {
           flushCurrent();
           currentType = 'unordered-list';
@@ -495,16 +518,149 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
     flushCurrent();
 
+    // Consolidation pass for Practice Quiz Questions:
+    // Merges question headings / prompts, optional code snippets, options, answers, and explanations into unified quiz-question blocks
+    const consolidatedBlocks: Block[] = [];
+    let bIdx = 0;
+
+    const optRegex = /^(?:-\s*)?\(?([A-D])\)?[\.\)]\s+(.*)$/i;
+    const ansRegex = /^(?:\*\*)?(?:Correct\s+)?Answer:\s*(?:\*\*)?\s*(?:Option\s+)?\(?([A-D])\)?/i;
+    const expRegex = /^(?:\*\*)?Explanation:\s*(?:\*\*)?\s*(.*)$/i;
+
+    while (bIdx < blocks.length) {
+      const block = blocks[bIdx];
+
+      let options: QuizOption[] = [];
+      let answer = '';
+      let explanation = '';
+      let questionText = '';
+      let questionNum = '';
+
+      const lines: string[] =
+        block.type === 'paragraph'
+          ? block.lines
+          : block.type === 'unordered-list'
+          ? block.items
+          : [];
+
+      const foundOpts: QuizOption[] = [];
+      lines.forEach((l) => {
+        const optM = l.trim().match(optRegex);
+        if (optM) {
+          foundOpts.push({ label: optM[1].toUpperCase(), text: optM[2].trim() });
+        }
+      });
+
+      if (foundOpts.length >= 2) {
+        options = foundOpts;
+
+        lines.forEach((l) => {
+          const ansM = l.trim().match(ansRegex);
+          if (ansM) answer = ansM[1].toUpperCase();
+          const expM = l.trim().match(expRegex);
+          if (expM) explanation = expM[1].trim();
+        });
+
+        let nextIdx = bIdx + 1;
+        while (nextIdx < blocks.length && (!answer || !explanation)) {
+          const nextB = blocks[nextIdx];
+          if (nextB.type === 'paragraph') {
+            let matched = false;
+            nextB.lines.forEach((nl) => {
+              const ansM = nl.trim().match(ansRegex);
+              if (ansM) {
+                answer = ansM[1].toUpperCase();
+                matched = true;
+              }
+              const expM = nl.trim().match(expRegex);
+              if (expM) {
+                explanation = expM[1].trim();
+                matched = true;
+              }
+            });
+            if (matched) {
+              nextIdx++;
+              continue;
+            }
+          }
+          break;
+        }
+
+        if (answer) {
+          let codeSnippet: { code: string; lang: string } | undefined = undefined;
+          let prevBlock = consolidatedBlocks[consolidatedBlocks.length - 1];
+
+          if (prevBlock && prevBlock.type === 'code') {
+            codeSnippet = { code: prevBlock.code, lang: prevBlock.lang };
+            consolidatedBlocks.pop();
+            prevBlock = consolidatedBlocks[consolidatedBlocks.length - 1];
+          }
+
+          if (prevBlock && prevBlock.type === 'heading') {
+            const hText = prevBlock.text;
+            const qMatch = hText.match(
+              /^(?:Q(\d+)[:.]?|(\d+)[\.:\)]|Question\s+(\d+)[:.]?)\s*(.*)$/i
+            );
+            if (qMatch) {
+              questionNum = qMatch[1] || qMatch[2] || qMatch[3] || '';
+              questionText = qMatch[4] ? qMatch[4].trim() : '';
+              consolidatedBlocks.pop();
+            } else {
+              questionText = hText;
+              consolidatedBlocks.pop();
+            }
+          } else if (
+            prevBlock &&
+            prevBlock.type === 'paragraph' &&
+            prevBlock.lines.length === 1
+          ) {
+            questionText = prevBlock.lines[0];
+            consolidatedBlocks.pop();
+          }
+
+          if (!questionText && lines.length > 0 && !optRegex.test(lines[0].trim())) {
+            questionText = lines[0].trim();
+          }
+
+          consolidatedBlocks.push({
+            type: 'quiz-question',
+            questionNumber: questionNum,
+            question: questionText || 'Practice Question',
+            codeSnippet,
+            options,
+            correctAnswer: answer,
+            explanation,
+          });
+
+          bIdx = nextIdx;
+          // Skip redundant divider right after a quiz question
+          if (bIdx < blocks.length && blocks[bIdx].type === 'hr') {
+            const afterHr = blocks[bIdx + 1];
+            if (
+              afterHr &&
+              (afterHr.type === 'heading' || afterHr.type === 'paragraph')
+            ) {
+              bIdx++;
+            }
+          }
+          continue;
+        }
+      }
+
+      consolidatedBlocks.push(block);
+      bIdx++;
+    }
+
     // Automatic Companion Pairing for HTML & CSS:
     // If an HTML block is followed by or near a CSS block (or vice versa),
     // pair them up so running either in Playground passes both HTML and CSS!
-    for (let i = 0; i < blocks.length; i++) {
-      const cur = blocks[i];
+    for (let i = 0; i < consolidatedBlocks.length; i++) {
+      const cur = consolidatedBlocks[i];
       if (cur.type !== 'code') continue;
 
       if ((cur.lang === 'html' || cur.lang === 'htm') && !cur.meta.companionCode) {
-        for (let j = i + 1; j <= Math.min(i + 3, blocks.length - 1); j++) {
-          const target = blocks[j];
+        for (let j = i + 1; j <= Math.min(i + 3, consolidatedBlocks.length - 1); j++) {
+          const target = consolidatedBlocks[j];
           if (target.type === 'heading') break; // do not cross section boundaries
           if (target.type === 'code' && (target.lang === 'css' || target.lang === 'style')) {
             cur.meta.companionCode = target.code;
@@ -519,7 +675,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       } else if (cur.lang === 'css' && !cur.meta.companionCode) {
         // Look backwards for previous HTML
         for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
-          const target = blocks[j];
+          const target = consolidatedBlocks[j];
           if (target.type === 'heading') break;
           if (target.type === 'code' && (target.lang === 'html' || target.lang === 'htm')) {
             cur.meta.companionCode = target.code;
@@ -534,7 +690,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
     }
 
-    return blocks;
+    return consolidatedBlocks;
   }, [content]);
 
   let codeBlockCounter = 0;
@@ -549,6 +705,43 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
         // 2. Headings
         if (block.type === 'heading') {
+          const isQuizSectionHeader = /^(?:Practice\s+Quiz|Multiple\s+Choice\s+Questions|MCQs|Knowledge\s+Check|Self\s+Assessment|Review\s+Quiz)$/i.test(
+            block.text.trim().replace(/^#+\s*/, '')
+          );
+
+          if (isQuizSectionHeader) {
+            return (
+              <div
+                key={idx}
+                className="mt-12 mb-6 pt-6 border-t-2 border-dashed border-border-subtle"
+              >
+                <div className="bg-gradient-to-r from-orange-50/90 via-amber-50/70 to-surface rounded-2xl border border-orange-200/90 p-5 sm:p-6 flex items-start sm:items-center justify-between gap-4 shadow-2xs">
+                  <div className="flex items-start sm:items-center gap-3.5">
+                    <div className="w-11 h-11 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-xs shrink-0 mt-0.5 sm:mt-0">
+                      <Brain className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-orange-700 bg-orange-100/90 px-2 py-0.5 rounded-md">
+                          Interactive Quiz
+                        </span>
+                        <span className="text-xs text-text-muted hidden sm:inline">
+                          • Knowledge Check
+                        </span>
+                      </div>
+                      <h2
+                        id={block.cleanId}
+                        className="text-2xl sm:text-3xl font-black text-primary tracking-tight mt-0.5"
+                      >
+                        {renderFormattedText(block.text)}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
           switch (block.level) {
             case 1:
               return (
@@ -1139,6 +1332,22 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               <span className="font-bold text-primary mr-1">Explanation:</span>
               {renderFormattedText(block.explanation)}
             </div>
+          );
+        }
+
+        // 9.5. Practice Quiz Question Card
+        if (block.type === 'quiz-question') {
+          return (
+            <QuizQuestionCard
+              key={idx}
+              questionNumber={block.questionNumber}
+              question={block.question}
+              codeSnippet={block.codeSnippet}
+              options={block.options}
+              correctAnswer={block.correctAnswer}
+              explanation={block.explanation}
+              index={idx}
+            />
           );
         }
 
