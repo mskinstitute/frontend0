@@ -212,7 +212,7 @@ export interface BlogPost {
 
 export interface SearchResultItem {
   id: string;
-  type: 'course' | 'live' | 'tutorial' | 'cheatsheet' | 'note' | 'handbook' | 'blog' | 'career' | 'chapter' | 'topic';
+  type: 'course' | 'live' | 'tutorial' | 'cheatsheet' | 'note' | 'handbook' | 'blog' | 'career' | 'chapter' | 'topic' | 'tool';
   title: string;
   description: string;
   category?: string;

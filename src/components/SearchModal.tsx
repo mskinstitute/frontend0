@@ -17,7 +17,8 @@ import {
   Command,
   Flame,
   Calendar,
-  Briefcase
+  Briefcase,
+  Code2
 } from 'lucide-react';
 import { Course, LiveBatch, StudyMaterial, BlogPost, SearchResultItem } from '@/types';
 import { resolveTopicTutorialUrl, isTutorialCourse } from '@/lib/curriculum-utils';
@@ -123,6 +124,38 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   // Convert raw datasets into uniform SearchResultItems
   const allSearchItems = useMemo<SearchResultItem[]>(() => {
     const items: SearchResultItem[] = [];
+
+    // MSK Developer & Student Tools
+    items.push({
+      id: 'tool-typequest',
+      type: 'tool',
+      title: 'TypeQuest by MSK - Typing Master & Speed Lab',
+      description: 'Practice touch typing from beginner to expert, home row, code typing, and speed challenges.',
+      category: 'Developer Tools',
+      url: '/tools/typing',
+      badge: 'Tool',
+      actionLabel: 'Launch TypeQuest',
+    });
+    items.push({
+      id: 'tool-tools-hub',
+      type: 'tool',
+      title: 'MSK Developer & Student Tools Hub',
+      description: 'Explore in-browser coding tools, compilers, certificate verifier, and typing master.',
+      category: 'Developer Tools',
+      url: '/tools',
+      badge: 'Tool',
+      actionLabel: 'Browse Tools',
+    });
+    items.push({
+      id: 'tool-playground',
+      type: 'tool',
+      title: 'MSK Code Playground & Compiler',
+      description: 'Run Python, HTML/CSS, JavaScript, and C++ directly in Monaco Editor.',
+      category: 'Developer Tools',
+      url: '/playground',
+      badge: 'Tool',
+      actionLabel: 'Open Editor',
+    });
 
     // Courses, Chapters, and Topics
     courses.forEach((c) => {
@@ -497,6 +530,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         return <Newspaper className="w-4 h-4 text-teal-500" />;
       case 'career':
         return <Briefcase className="w-4 h-4 text-emerald-600" />;
+      case 'tool':
+        return <Code2 className="w-4 h-4 text-orange-500" />;
       default:
         return <Search className="w-4 h-4 text-gray-500" />;
     }
@@ -525,6 +560,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         return 'bg-teal-50 text-teal-700 border-teal-200';
       case 'career':
         return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'tool':
+        return 'bg-orange-50 text-orange-700 border-orange-200';
       default:
         return 'bg-gray-100 text-gray-700 border-gray-200';
     }

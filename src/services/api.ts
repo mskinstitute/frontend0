@@ -9,7 +9,6 @@ import careersData from '../../public/data/careers.json';
 import certificatesData from '../../public/data/certificates.json';
 import instructorsData from '../../public/data/instructors.json';
 import notesData from '../../public/data/notes.json';
-import studentsData from '../../public/data/students.json';
 import announcementsData from '../../public/data/announcements.json';
 
 const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
@@ -21,7 +20,6 @@ const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
   'certificates.json': certificatesData,
   'instructors.json': instructorsData,
   'notes.json': notesData,
-  'students.json': studentsData,
   'announcements.json': announcementsData,
 };
 
@@ -139,17 +137,198 @@ export async function fetchCertificateById(id: string): Promise<Certificate | nu
   return certificates.find(c => c.id.trim().toLowerCase() === id.trim().toLowerCase()) || null;
 }
 
-export async function fetchStudentById(studentId: string): Promise<Student | null> {
-  if (API_BASE_URL) {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/students/${studentId}/`);
-      if (res.ok) return await res.json();
-    } catch (err) {
-      console.warn('API fetch student failed, falling back to local data:', err);
+export const DEFAULT_GOOGLE_SHEET_STUDENTS_URL =
+  'https://docs.google.com/spreadsheets/d/1IMLDtXqnuM1A35xpboR_IrcYh5563ZCy55dzl1vGW1A/edit#gid=1837311274';
+
+export const FALLBACK_STUDENTS: Student[] = [
+  {
+    studentId: 'std-001',
+    name: 'Rahul Kumar',
+    username: 'rahulkumar',
+    email: 'rahul.kumar@email.com',
+    status: 'ACTIVE',
+    joinedAt: '2026-02-10',
+  },
+  {
+    studentId: 'std-002',
+    name: 'Priya Sharma',
+    username: 'priyasharma',
+    email: 'priya.sharma@email.com',
+    status: 'ACTIVE',
+    joinedAt: '2026-02-15',
+  },
+  {
+    studentId: 'std-003',
+    name: 'Amit Singh',
+    username: 'amitsingh',
+    email: 'amit.singh@email.com',
+    status: 'INACTIVE',
+    joinedAt: '2026-03-01',
+  },
+];
+
+export function parseGoogleSheetStudentsCsv(csvText: string): Student[] {
+  if (!csvText || typeof csvText !== 'string') return [];
+
+  const rows: string[][] = [];
+  let currentRow: string[] = [];
+  let currentCell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < csvText.length; i++) {
+    const char = csvText[i];
+    const nextChar = csvText[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        currentCell += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      currentRow.push(currentCell);
+      currentCell = '';
+    } else if ((char === '\r' || char === '\n') && !inQuotes) {
+      if (char === '\r' && nextChar === '\n') {
+        i++;
+      }
+      currentRow.push(currentCell);
+      if (currentRow.some((c) => c.trim().length > 0)) {
+        rows.push(currentRow);
+      }
+      currentRow = [];
+      currentCell = '';
+    } else {
+      currentCell += char;
     }
   }
-  const students = await getLocalData<Student[]>('students.json');
-  return students.find(s => s.studentId === studentId) || null;
+
+  if (currentCell.length > 0 || currentRow.length > 0) {
+    currentRow.push(currentCell);
+    if (currentRow.some((c) => c.trim().length > 0)) {
+      rows.push(currentRow);
+    }
+  }
+
+  if (rows.length <= 1) return [];
+
+  const headers = rows[0].map((h) => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
+  const headerMap: Record<string, number> = {};
+
+  headers.forEach((header, idx) => {
+    if (
+      header === 'studentid' ||
+      header === 'id' ||
+      header === 'rollno' ||
+      header === 'roll' ||
+      header === 'regno' ||
+      header === 'registrationno' ||
+      header === 'enrollmentno'
+    ) {
+      headerMap['studentId'] = idx;
+    } else if (
+      header === 'name' ||
+      header === 'studentname' ||
+      header === 'fullname' ||
+      header === 'candidatename'
+    ) {
+      headerMap['name'] = idx;
+    } else if (header === 'username' || header === 'user') {
+      headerMap['username'] = idx;
+    } else if (header === 'email' || header === 'emailid' || header === 'mail') {
+      headerMap['email'] = idx;
+    } else if (header === 'status') {
+      headerMap['status'] = idx;
+    } else if (
+      header === 'joinedat' ||
+      header === 'joiningdate' ||
+      header === 'admissiondate' ||
+      header === 'date'
+    ) {
+      headerMap['joinedAt'] = idx;
+    }
+  });
+
+  const parsedStudents: Student[] = [];
+
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    const getVal = (key: string): string => {
+      const idx = headerMap[key];
+      if (idx !== undefined && idx < row.length) {
+        return row[idx].trim();
+      }
+      return '';
+    };
+
+    const studentId = getVal('studentId') || (row[0] ? row[0].trim() : '');
+    const name = getVal('name') || (row[1] ? row[1].trim() : '');
+    const username = getVal('username') || (row[2] ? row[2].trim() : studentId.toLowerCase());
+    const email = getVal('email') || (row[3] ? row[3].trim() : '');
+    const statusVal = getVal('status') || (row[4] ? row[4].trim() : 'ACTIVE');
+    const joinedAt = getVal('joinedAt') || (row[5] ? row[5].trim() : new Date().toISOString().split('T')[0]);
+
+    if (!studentId && !name) continue;
+
+    parsedStudents.push({
+      studentId,
+      name,
+      username: username || studentId.toLowerCase(),
+      email,
+      status: statusVal.toUpperCase().includes('INACT') ? 'INACTIVE' : 'ACTIVE',
+      joinedAt,
+    });
+  }
+
+  return parsedStudents;
+}
+
+export async function fetchStudents(): Promise<Student[]> {
+  const sheetUrl =
+    process.env.GOOGLE_SHEET_STUDENTS_URL ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEET_STUDENTS_URL ||
+    DEFAULT_GOOGLE_SHEET_STUDENTS_URL;
+
+  try {
+    const csvUrl = formatGoogleSheetCsvUrl(sheetUrl, { gid: '1837311274', sheet: 'students' });
+    const res = await fetch(csvUrl, { next: { revalidate: 60 } });
+    if (res.ok) {
+      const csvText = await res.text();
+      const parsed = parseGoogleSheetStudentsCsv(csvText);
+      if (parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (err) {
+    console.warn('API fetch students from Google Sheet failed, falling back:', err);
+  }
+
+  return FALLBACK_STUDENTS;
+}
+
+export async function fetchStudentById(studentId: string): Promise<Student | null> {
+  if (!studentId) return null;
+  const cleanId = studentId.trim().toLowerCase();
+
+  if (API_BASE_URL) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/students/${encodeURIComponent(studentId)}/`);
+      if (res.ok) return await res.json();
+    } catch (err) {
+      console.warn('API fetch student failed:', err);
+    }
+  }
+
+  const students = await fetchStudents();
+  return (
+    students.find(
+      (s) =>
+        s.studentId.trim().toLowerCase() === cleanId ||
+        s.username.trim().toLowerCase() === cleanId ||
+        s.email.trim().toLowerCase() === cleanId
+    ) || null
+  );
 }
 
 export async function fetchNotes(): Promise<Note[]> {

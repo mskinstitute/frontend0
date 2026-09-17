@@ -75,6 +75,18 @@ export default function Footer() {
             <h3 className="text-sm font-semibold tracking-wider uppercase text-secondary">Resources</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
+                <Link href="/tools" className="hover:text-white transition-colors duration-150 flex items-center gap-1.5">
+                  All MSK Tools
+                  <span className="bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Hub</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/tools/typing" className="hover:text-white transition-colors duration-150 flex items-center gap-1.5">
+                  TypeQuest Speed Lab
+                  <span className="bg-amber-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Typing</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/playground" className="hover:text-white transition-colors duration-150 flex items-center gap-1.5">
                   MSK Code Editor
                   <span className="bg-emerald-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Playground</span>
