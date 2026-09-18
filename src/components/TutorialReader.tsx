@@ -43,6 +43,40 @@ interface TutorialReaderProps {
   nextTopic?: { title: string; slug: string } | null;
 }
 
+const TUTORIAL_CHEATSHEET_MAP: Record<string, string> = {
+  'python-for-beginners': 'cheat-python-beginners',
+  'python-for-intermediate': 'cheat-python-beginners',
+  'python-for-advanced': 'cheat-python-beginners',
+  'html5-complete-course': 'cheat-html5-complete',
+  'flask-complete-course': 'cheat-flask-architecture',
+  'django-for-backend-development': 'cheat-django-drf-architecture',
+  'rest-api-development-with-django': 'cheat-django-drf-architecture',
+  'react-js-for-beginners': 'cheat-react-modern-architecture',
+  'react-js-for-intermediate': 'cheat-react-modern-architecture',
+  'react-js-for-advanced': 'cheat-react-modern-architecture',
+  'git--github-basics': 'cheat-git-commands',
+  'tailwind-css-mastery': 'cheat-tailwind-css-mastery',
+  'nodejs-and-express-backend': 'cheat-nodejs-express-backend',
+  'mongodb-and-mongoose-database': 'cheat-mongodb-mongoose-database',
+  'nextjs-complete-course': 'cheat-nextjs-fullstack-framework',
+  'dsa-mastery-course': 'cheat-dsa-mastery-handbook',
+  'power-bi-for-beginners': 'cheat-power-bi-dax-modeling',
+  'power-bi-for-intermediate': 'cheat-power-bi-dax-modeling',
+  'power-bi-for-advanced': 'cheat-power-bi-dax-modeling',
+  'pandas-complete-course': 'cheat-pandas-data-science',
+  'numpy-complete-course': 'cheat-pandas-data-science',
+  'sql-for-beginners': 'cheat-sql-data-analytics',
+  'sql-for-intermediate': 'cheat-sql-data-analytics',
+  'sql-for-advanced': 'cheat-sql-data-analytics',
+  'css-for-beginners': 'cheat-css-flex-grid',
+  'css-for-intermediate': 'cheat-css-flex-grid',
+  'css-for-advanced': 'cheat-css-flex-grid',
+  'markdown': 'cheat-markdown-syntax',
+  'ms-excel-for-beginners': 'cheat-excel-top50',
+  'ms-excel-for-intermediate': 'cheat-excel-top50',
+  'ms-excel-for-advanced': 'cheat-excel-top50',
+};
+
 export default function TutorialReader({
   tutorial,
   course,
@@ -60,6 +94,7 @@ export default function TutorialReader({
   const [isOfflineReady, setIsOfflineReady] = useState(false);
   const [isDownloadingOffline, setIsDownloadingOffline] = useState(false);
   const [isCurriculumHidden, setIsCurriculumHidden] = useState(false);
+  const linkedCheatsheetId = TUTORIAL_CHEATSHEET_MAP[tutorial.slug];
 
   // Track scroll percentage for top progress bar
   useEffect(() => {
@@ -437,23 +472,12 @@ export default function TutorialReader({
                   <span>Study Materials</span>
                 </Link>
 
-                {/* Direct link to Cheatsheet if viewing Python or HTML5 */}
-                {tutorial.slug === 'python-for-beginners' && (
+                {/* Direct link to Cheatsheet if available */}
+                {linkedCheatsheetId && (
                   <Link
-                    href="/study-material?id=cheat-python-beginners&type=cheatsheet"
+                    href={`/study-material?id=${linkedCheatsheetId}&type=cheatsheet`}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold transition-all shadow-2xs group"
-                    title="Open Python Revision Cheatsheet"
-                  >
-                    <Layers className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-purple-600" />
-                    <span>Cheatsheet</span>
-                  </Link>
-                )}
-
-                {tutorial.slug === 'html5-complete-course' && (
-                  <Link
-                    href="/study-material?id=cheat-html5-complete&type=cheatsheet"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold transition-all shadow-2xs group"
-                    title="Open HTML5 Revision Cheatsheet"
+                    title={`Open ${tutorial.title || 'Course'} Revision Cheatsheet`}
                   >
                     <Layers className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-purple-600" />
                     <span>Cheatsheet</span>

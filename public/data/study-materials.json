@@ -2537,23 +2537,189 @@
   },
   {
     "id": "cheat-flask-architecture",
+    "type": "cheatsheet",
     "title": "Flask Web Architecture & REST API Cheatsheet",
-    "description": "Essential quick-reference guide covering WSGI request lifecycles, routing converters, Jinja2 syntax, SQLAlchemy ORM models, Blueprints, and JWT auth.",
-    "category": "Cheatsheets",
-    "tags": [
-      "Python",
-      "Flask",
-      "Backend",
-      "REST API",
-      "SQLAlchemy"
-    ],
-    "format": "Markdown & PDF",
-    "icon": "flask",
     "slug": "flask-complete-course",
+    "category": "Backend Development",
+    "level": "Intermediate",
+    "badge": "Cheat Sheet",
+    "description": "Essential quick-reference guide covering WSGI request lifecycles, routing converters, Jinja2 syntax, Flask-WTF, SQLAlchemy ORM models, Blueprints, and JWT auth.",
+    "tier": "FREE",
     "downloadUrl": "#",
-    "readOnlineUrl": "/tutorials/flask-complete-course/what-is-flask-and-wsgi-architecture",
-    "totalViews": 2480,
-    "lastUpdated": "2026-09-16",
-    "author": "MSK Faculty Team"
+    "topicsCovered": [
+      "Flask 3.x WSGI Architecture & App Factory",
+      "Routing & URL Type Converters",
+      "Request & Response Objects, Cookies",
+      "Jinja2 Syntax, Filters & Macros",
+      "Flask-WTF Forms & CSRF Defense",
+      "Flask-SQLAlchemy Models, Relations & Migrations",
+      "Flask-Login & Werkzeug Password Hashing",
+      "REST APIs with Marshmallow & Flask-JWT-Extended"
+    ],
+    "readTime": "20 min",
+    "pages": 6,
+    "featured": true,
+    "updatedAt": "2026-09-18",
+    "icon": "flask",
+    "author": "MSK Faculty Team",
+    "cheatsheetContent": {
+      "sections": [
+        {
+          "categoryTitle": "1. Flask Setup, CLI & Application Factory",
+          "items": [
+            {
+              "commandOrSyntax": "from flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello, Flask 3.x!'",
+              "explanation": "Minimal single-file Flask WSGI application instance. __name__ helps locate resources.",
+              "example": "if __name__ == '__main__': app.run(debug=True, port=5000)"
+            },
+            {
+              "commandOrSyntax": "def create_app(config_name='default'):\n    app = Flask(__name__)\n    app.config.from_object(config[config_name])\n    db.init_app(app)\n    app.register_blueprint(main_bp)\n    return app",
+              "explanation": "Application Factory Pattern. Prevents circular imports and allows isolated test environments.",
+              "example": "app = create_app('production')"
+            },
+            {
+              "commandOrSyntax": "export FLASK_APP=wsgi.py\nexport FLASK_DEBUG=1\nflask run --port=5000",
+              "explanation": "Flask CLI commands with environment variables loaded automatically via python-dotenv.",
+              "example": ".flaskenv: FLASK_APP=wsgi.py, FLASK_DEBUG=1"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "2. Routing, Dynamic Converters & HTTP Methods",
+          "items": [
+            {
+              "commandOrSyntax": "@app.route('/user/<int:user_id>/<string:slug>')\ndef user_profile(user_id, slug):\n    return f'User #{user_id}: {slug}'",
+              "explanation": "Dynamic URL routing with built-in type converters (string, int, float, path, uuid).",
+              "example": "Converters: <int:id>, <uuid:order_id>, <path:filepath>"
+            },
+            {
+              "commandOrSyntax": "@app.route('/api/items', methods=['GET', 'POST'])\ndef items():\n    if request.method == 'POST':\n        return create_item()\n    return get_items()",
+              "explanation": "Restricting endpoints to explicit HTTP verbs. Unsupported methods return HTTP 405.",
+              "example": "methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH']"
+            },
+            {
+              "commandOrSyntax": "from flask import url_for, redirect, abort\nreturn redirect(url_for('auth.login', next='/dashboard'))",
+              "explanation": "Dynamic reverse routing with url_for(). Halts execution immediately with abort(403).",
+              "example": "abort(404, description='Resource not found')"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "3. Request Data Parsing & Response Generation",
+          "items": [
+            {
+              "commandOrSyntax": "q = request.args.get('search', '', type=str)\nform_val = request.form.get('email')\njson_data = request.get_json(silent=True)\nskills = request.form.getlist('skills')",
+              "explanation": "Extracting query parameters (?q=), form submissions, JSON payloads, and multi-value checkboxes.",
+              "example": "request.headers.get('Authorization'), request.files['avatar']"
+            },
+            {
+              "commandOrSyntax": "from flask import make_response, jsonify\nres = make_response(jsonify({'status': 'ok'}), 201)\nres.headers['X-Engine'] = 'Flask'\nreturn res",
+              "explanation": "Explicit response construction with custom headers, status codes, and JSON serialization.",
+              "example": "Shortcut tuple: return {'id': 1}, 201, {'Header': 'Val'}"
+            },
+            {
+              "commandOrSyntax": "res.set_cookie('session_id', token, max_age=86400, httponly=True, secure=True, samesite='Lax')",
+              "explanation": "Setting hardened HTTP cookies with XSS and CSRF defense attributes. Delete with res.delete_cookie(key).",
+              "example": "request.cookies.get('session_id')"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "4. Jinja2 Templating, Filters & Macros",
+          "items": [
+            {
+              "commandOrSyntax": "{{ user.name|title }}\n{{ items|length }}\n{{ raw_html|safe }}\n{{ price|default(0, true) }}",
+              "explanation": "Jinja2 variable interpolation and pipe filters. Register custom filter with @app.template_filter().",
+              "example": "@app.template_filter('inr')\\ndef inr(val): return f'₹{val:,.2f}'"
+            },
+            {
+              "commandOrSyntax": "{% extends 'base.html' %}\n{% block title %}{{ super() }} | Courses{% endblock %}\n{% block content %}\n    {% for item in items %}\n        <p>{{ loop.index }}: {{ item }}</p>\n    {% else %}\n        <p>No items found.</p>\n    {% endfor %}\n{% endblock %}",
+              "explanation": "Template layout inheritance with {% extends %}, block overrides, and loops with loop.index/loop.first.",
+              "example": "Preserve parent content using {{ super() }}"
+            },
+            {
+              "commandOrSyntax": "{% macro render_field(field) %}\n    <label>{{ field.label }}</label>\n    {{ field(class='input') }}\n    {% for err in field.errors %}<p>{{ err }}</p>{% endfor %}\n{% endmacro %}",
+              "explanation": "Reusable UI macros. Import via {% from 'macros/form.html' import render_field %}.",
+              "example": "{{ render_field(form.username) }}"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "5. Flask-WTF Forms & CSRF Defense",
+          "items": [
+            {
+              "commandOrSyntax": "from flask_wtf import FlaskForm\nfrom wtforms import StringField, PasswordField, SubmitField\nfrom wtforms.validators import DataRequired, Email, Length, EqualTo\n\nclass RegisterForm(FlaskForm):\n    email = StringField('Email', validators=[DataRequired(), Email()])\n    password = PasswordField('Password', validators=[Length(min=8)])\n    submit = SubmitField('Sign Up')",
+              "explanation": "Declarative form classes with built-in validation rules and automatic type casting.",
+              "example": "Custom validator: def validate_email(self, field): ..."
+            },
+            {
+              "commandOrSyntax": "form = RegisterForm()\nif form.validate_on_submit():\n    user_email = form.email.data\n    flash('Account created!', 'success')\n    return redirect(url_for('home'))",
+              "explanation": "Form processing in route. Checks POST method, validates CSRF token, and verifies all field constraints.",
+              "example": "In template: {{ form.hidden_tag() }} to render CSRF input"
+            },
+            {
+              "commandOrSyntax": "flash('Profile updated successfully!', 'success')\n# In template:\n{% with msgs = get_flashed_messages(with_categories=true) %}\n    {% for cat, msg in msgs %}<div class='alert {{ cat }}'>{{ msg }}</div>{% endfor %}\n{% endwith %}",
+              "explanation": "Post/Redirect/Get flash messaging. Persists messages in session cookie and purges upon retrieval.",
+              "example": "get_flashed_messages(category_filter=['danger'])"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "6. Flask-SQLAlchemy Models, Relations & Migrations",
+          "items": [
+            {
+              "commandOrSyntax": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(80), unique=True, nullable=False, index=True)\n    posts = db.relationship('Post', back_populates='author', cascade='all, delete-orphan')",
+              "explanation": "SQLAlchemy 3.x declarative model definition with primary keys, indexes, and One-to-Many relationships.",
+              "example": "Foreign Key: author_id = db.Column(db.Integer, db.ForeignKey('user.id'))"
+            },
+            {
+              "commandOrSyntax": "user = User(username='sumit')\ndb.session.add(user)\ndb.session.commit() # Flush & commit to database\n\n# Queries\nactive = User.query.filter_by(is_active=True).all()\nuser = User.query.get_or_404(1)\npages = User.query.order_by(User.id.desc()).paginate(page=1, per_page=10)",
+              "explanation": "CRUD database operations via db.session and model queries with automatic 404 aborts and pagination.",
+              "example": "Rollback on error: except Exception: db.session.rollback()"
+            },
+            {
+              "commandOrSyntax": "flask db init     # Initialize migrations folder once\nflask db migrate -m 'add bio column' # Auto-detect schema changes\nflask db upgrade  # Apply migrations to database",
+              "explanation": "Alembic database migrations via Flask-Migrate. Rollback with flask db downgrade.",
+              "example": "flask db --help"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "7. Authentication (Flask-Login & Werkzeug)",
+          "items": [
+            {
+              "commandOrSyntax": "from werkzeug.security import generate_password_hash, check_password_hash\n\nhash_str = generate_password_hash('PlaintextPassword', method='pbkdf2:sha256')\nis_valid = check_password_hash(hash_str, candidate_password)",
+              "explanation": "Cryptographic salted password hashing using PBKDF2/SHA256 with constant-time verification.",
+              "example": "Store hash_str in DB (length >= 256). Never store plaintext!"
+            },
+            {
+              "commandOrSyntax": "from flask_login import UserMixin, login_user, logout_user, login_required, current_user\n\nclass User(UserMixin, db.Model): ...\n\n@login_manager.user_loader\ndef load_user(user_id):\n    return User.query.get(int(user_id))\n\n@app.route('/dashboard')\n@login_required\ndef dashboard():\n    return f'Welcome, {current_user.username}'",
+              "explanation": "User session management with Flask-Login. UserMixin provides authentication properties.",
+              "example": "login_user(user, remember=True)"
+            }
+          ]
+        },
+        {
+          "categoryTitle": "8. REST APIs, JWT & Production Deployment",
+          "items": [
+            {
+              "commandOrSyntax": "from marshmallow import Schema, fields\n\nclass UserSchema(Schema):\n    id = fields.Int(dump_only=True)\n    username = fields.Str(required=True)\n    email = fields.Email(required=True)\n\nuser_schema = UserSchema()\nusers_schema = UserSchema(many=True)",
+              "explanation": "Data serialization and input validation using Marshmallow schemas.",
+              "example": "json_dict = user_schema.dump(user); data = user_schema.load(request.json)"
+            },
+            {
+              "commandOrSyntax": "from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity\n\ntoken = create_access_token(identity=str(user.id))\n\n@app.route('/api/profile')\n@jwt_required()\ndef profile():\n    uid = get_jwt_identity()\n    return {'user_id': uid}",
+              "explanation": "Stateless JWT authentication for mobile and Single Page Apps via Authorization: Bearer <token>.",
+              "example": "Refresh token: @jwt_required(refresh=True)"
+            },
+            {
+              "commandOrSyntax": "gunicorn --workers 4 --bind 0.0.0.0:8000 'wsgi:app'\n# Formula: workers = (2 * CPU_CORES) + 1",
+              "explanation": "Production WSGI server execution. Never run app.run() in production.",
+              "example": "Docker CMD: ['gunicorn', '-w', '4', '-b', '0.0.0.0:8000', 'wsgi:app']"
+            }
+          ]
+        }
+      ]
+    }
   }
 ]
