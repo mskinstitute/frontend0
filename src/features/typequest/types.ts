@@ -101,6 +101,7 @@ export interface RaceCompetitor {
   progressPercent: number;
   isUser?: boolean;
   isAi?: boolean;
+  isReady?: boolean;
   rank?: number;
   finishRank?: number;
   finishTimeSeconds?: number;

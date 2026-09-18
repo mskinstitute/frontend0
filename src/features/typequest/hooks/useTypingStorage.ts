@@ -13,6 +13,8 @@ export interface UserPreferences {
   showHands: boolean;
   strictMode: boolean;
   blindMode: boolean;
+  wordWrap?: boolean;
+  codeWordWrap?: boolean;
 }
 
 const DEFAULT_PREFS: UserPreferences = {
@@ -22,6 +24,8 @@ const DEFAULT_PREFS: UserPreferences = {
   showHands: true,
   strictMode: false,
   blindMode: false,
+  wordWrap: true,
+  codeWordWrap: false,
 };
 
 const DEFAULT_STATS: UserTypingStats = {

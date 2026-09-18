@@ -191,12 +191,19 @@ pre[class*="language-"] {
   font-style: italic;
 }
 
-/* Cross-browser Scrollbar Suppression Utility */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Cross-browser Universal Scrollbar Suppression Utility */
+.no-scrollbar,
+.typequest-container,
+.typequest-container * {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
 }
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+
+.no-scrollbar::-webkit-scrollbar,
+.typequest-container::-webkit-scrollbar,
+.typequest-container *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 

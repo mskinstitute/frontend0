@@ -18,6 +18,20 @@ export default function AchievementsModal({
 }: AchievementsModalProps) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
+  // Escape key closes modal without exiting fullscreen
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const categories = [
@@ -128,7 +142,7 @@ export default function AchievementsModal({
         </div>
 
         {/* Category Filters */}
-        <div className="flex items-center gap-1.5 px-6 py-2.5 overflow-x-auto border-b border-slate-800/60 bg-slate-900/60 scrollbar-none">
+        <div className="flex items-center gap-1.5 px-6 py-2.5 overflow-x-auto border-b border-slate-800/60 bg-slate-900/60 no-scrollbar">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -146,7 +160,7 @@ export default function AchievementsModal({
         </div>
 
         {/* Badges Grid */}
-        <div className="flex-1 overflow-y-auto p-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 scrollbar-thin scrollbar-thumb-slate-700">
+        <div className="flex-1 overflow-y-auto p-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 no-scrollbar">
           {filteredBadges.map((badge) => {
             const isUnlocked = unlockedBadgeIds.includes(badge.id);
 

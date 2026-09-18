@@ -112,6 +112,20 @@ export default function TypingCertificateModal({
     }
   }, [isOpen, gamification.studentId, verifyStudentId]);
 
+  // Escape key closes modal without exiting fullscreen
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   // Determine certification metrics
@@ -448,7 +462,7 @@ export default function TypingCertificateModal({
         </div>
 
         {/* Certificate Visual Preview */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-950/40 flex justify-center items-center">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-950/40 flex justify-center items-center no-scrollbar">
           <div className="w-full max-w-3xl aspect-[1.414/1] bg-gradient-to-br from-amber-50/95 via-stone-50 to-orange-50/90 text-slate-900 rounded-xl p-5 sm:p-8 shadow-2xl border-4 border-amber-500/80 relative flex flex-col justify-between select-none">
             {/* Inner Border */}
             <div className="absolute inset-2 border-2 border-slate-800/80 pointer-events-none rounded-lg" />

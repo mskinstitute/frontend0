@@ -17,6 +17,20 @@ export default function CustomTextModal({
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
+  // Escape key closes modal without exiting fullscreen
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleApply = () => {

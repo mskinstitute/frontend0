@@ -169,9 +169,35 @@ export function useTypingAudio(soundType: SoundEffectType, volume: number = 0.5)
     });
   }, [soundType, volume, getAudioContext]);
 
+  const playCountdownBeep = useCallback(
+    (isFinal: boolean = false) => {
+      if (soundType === 'off' || volume <= 0) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = isFinal ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(isFinal ? 880 : 440, now);
+
+      gain.gain.setValueAtTime(volume * (isFinal ? 0.45 : 0.3), now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + (isFinal ? 0.45 : 0.2));
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + (isFinal ? 0.5 : 0.25));
+    },
+    [soundType, volume, getAudioContext]
+  );
+
   return {
     playClick,
     playError,
     playCompleteChime,
+    playCountdownBeep,
   };
 }
