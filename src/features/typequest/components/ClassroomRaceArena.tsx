@@ -37,6 +37,7 @@ import {
   Bell,
 } from 'lucide-react';
 import { RaceCompetitor } from '../types';
+import RacerVehicle from './RacerVehicle';
 
 export interface RaceCircuit {
   id: string;
@@ -652,6 +653,21 @@ export default function ClassroomRaceArena({
           if (!hasTriggeredCountdownRef.current && !isRaceStarted) {
             startFiveSecondCountdown();
           }
+        } else if (data.type === 'REMATCH') {
+          setIsReady(false);
+          setIsRaceStarted(false);
+          setCountdownSeconds(null);
+          hasTriggeredCountdownRef.current = false;
+          setRemoteMembers((prev) =>
+            prev.map((m) => ({
+              ...m,
+              progressPercent: 0,
+              speedWpm: 0,
+              isReady: false,
+              isCompleted: false,
+            }))
+          );
+          onRematch?.();
         } else if (data.type === 'PROGRESS') {
           if (data.memberId !== myMemberId) {
             setRemoteMembers((prev) =>
@@ -938,7 +954,7 @@ export default function ClassroomRaceArena({
           progressPercent: 0,
           rank: 2,
           color: '#10b981',
-          avatar: '👩‍🎓',
+          avatar: '🏎️',
         },
         {
           id: 'peer-2',
@@ -948,7 +964,7 @@ export default function ClassroomRaceArena({
           progressPercent: 0,
           rank: 3,
           color: '#06b6d4',
-          avatar: '👨‍🎓',
+          avatar: '⚡',
         },
         {
           id: 'peer-3',
@@ -958,7 +974,7 @@ export default function ClassroomRaceArena({
           progressPercent: 0,
           rank: 4,
           color: '#a855f7',
-          avatar: '👨‍🎓',
+          avatar: '🚀',
         },
       ];
     }
@@ -1743,7 +1759,7 @@ export default function ClassroomRaceArena({
           return (
             <div
               key={comp.id}
-              className={`relative h-12 rounded-lg p-1.5 flex items-center border transition-all ${
+              className={`relative h-14 sm:h-16 rounded-xl p-2 flex items-center border transition-all ${
                 isPlayer
                   ? 'bg-secondary/15 border-secondary/50 ring-1 ring-secondary/30'
                   : 'bg-slate-900/60 border-slate-800/90'
@@ -1811,43 +1827,40 @@ export default function ClassroomRaceArena({
                 {/* Lane Dashed Center Guidance Line */}
                 <div className="absolute inset-x-0 h-0.5 border-t border-dashed border-slate-800" />
 
-                {/* Animated Vehicle / Avatar Marker */}
+                {/* Animated Vehicle / Car (NO BOX! Shows ONLY the car!) */}
                 <div
-                  className="absolute transition-all duration-300 ease-out flex items-center gap-1.5 z-20"
+                  className="absolute transition-all duration-300 ease-out flex items-center z-20 pointer-events-none"
                   style={{
                     left: `${Math.min(92, Math.max(2, comp.progressPercent))}%`,
                     transform: 'translateX(-50%)',
                   }}
                 >
-                  {/* Nitro Flame or Plasma Boost Trail */}
-                  {isActive && comp.progressPercent > 2 && (
-                    <div className="flex items-center -space-x-1">
+                  {/* Nitro Flame or Plasma Boost Trail Behind Car Exhaust */}
+                  {isActive && comp.progressPercent > 1 && (
+                    <div className="absolute -left-6 top-1/2 -translate-y-1/2 flex items-center pointer-events-none z-10">
                       {isPlayer && isNitroActive ? (
-                        <div className="flex items-center gap-0.5">
-                          <Zap className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400 animate-ping" />
-                          <Flame className="w-4 h-4 text-amber-400 fill-amber-400 -rotate-90 animate-pulse" />
+                        <div className="flex items-center -space-x-1.5 animate-pulse">
+                          <Zap className="w-4 h-4 text-cyan-300 fill-cyan-300 animate-ping" />
+                          <Flame className="w-6 h-6 text-cyan-400 fill-cyan-400 -rotate-90 filter drop-shadow-[0_0_8px_#00f0ff]" />
+                          <Flame className="w-4 h-4 text-amber-300 fill-amber-300 -rotate-90" />
                         </div>
-                      ) : (
-                        <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500 -rotate-90 animate-pulse" />
-                      )}
+                      ) : (comp.speedWpm ?? 0) > 0 ? (
+                        <div className="flex items-center -space-x-1 animate-pulse">
+                          <Flame className="w-5 h-5 text-orange-500 fill-orange-500 -rotate-90" />
+                          <Flame className="w-3.5 h-3.5 text-amber-400 fill-amber-400 -rotate-90" />
+                        </div>
+                      ) : null}
                     </div>
                   )}
 
-                  {/* Vehicle Body Container */}
-                  <div
-                    className={`relative px-2 py-1 rounded-md text-xs sm:text-sm font-bold shadow-lg flex items-center gap-1 transition-transform ${
-                      isLead ? 'scale-110' : ''
-                    } ${isPlayer && isNitroActive ? 'ring-2 ring-amber-400 ring-offset-1 ring-offset-slate-950' : ''}`}
-                    style={{
-                      backgroundColor: comp.color,
-                      color: '#ffffff',
-                    }}
-                  >
-                    <span>{comp.avatar}</span>
-                    <span className="text-[9px] font-mono hidden sm:inline">
-                      {comp.speedWpm}
-                    </span>
-                  </div>
+                  {/* Sleek Racing Car Vector (Zero background box, clean aerodynamic vehicle) */}
+                  <RacerVehicle
+                    avatar={comp.avatar}
+                    color={comp.color}
+                    isNitro={isPlayer && isNitroActive}
+                    isLeader={isLead}
+                    size="md"
+                  />
                 </div>
               </div>
 
@@ -1938,6 +1951,13 @@ export default function ClassroomRaceArena({
                     setIsRaceStarted(false);
                     setCountdownSeconds(null);
                     hasTriggeredCountdownRef.current = false;
+                    if (roomCode) {
+                      try {
+                        const ch = new BroadcastChannel('msk_race_room_' + roomCode);
+                        ch.postMessage({ type: 'REMATCH' });
+                        ch.close();
+                      } catch {}
+                    }
                     onRematch();
                   }}
                   className="px-4 py-2 bg-secondary hover:bg-orange-600 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center gap-1.5 shadow-lg shadow-secondary/30 transition-transform active:scale-95 cursor-pointer"
@@ -1967,7 +1987,13 @@ export default function ClassroomRaceArena({
             {/* 2nd Place */}
             {sortedCompetitors[1] && (
               <div className="flex flex-col items-center flex-1">
-                <div className="text-sm font-bold">{sortedCompetitors[1].avatar}</div>
+                <div className="mb-2 flex items-center justify-center">
+                  <RacerVehicle
+                    avatar={sortedCompetitors[1].avatar}
+                    color={sortedCompetitors[1].color}
+                    size="sm"
+                  />
+                </div>
                 <div className="text-[11px] font-bold text-slate-300 truncate max-w-[90px]">
                   {sortedCompetitors[1].name.split(' ')[0]}
                 </div>
@@ -1983,8 +2009,14 @@ export default function ClassroomRaceArena({
             {/* 1st Place Champion */}
             {sortedCompetitors[0] && (
               <div className="flex flex-col items-center flex-1">
-                <div className="text-xl font-bold animate-bounce">
-                  👑 {sortedCompetitors[0].avatar}
+                <div className="flex flex-col items-center mb-2 animate-bounce">
+                  <span className="text-sm">👑</span>
+                  <RacerVehicle
+                    avatar={sortedCompetitors[0].avatar}
+                    color={sortedCompetitors[0].color}
+                    size="md"
+                    isLeader={true}
+                  />
                 </div>
                 <div className="text-xs font-black text-amber-300 truncate max-w-[100px]">
                   {sortedCompetitors[0].name.split(' ')[0]}
@@ -2001,7 +2033,13 @@ export default function ClassroomRaceArena({
             {/* 3rd Place */}
             {sortedCompetitors[2] && (
               <div className="flex flex-col items-center flex-1">
-                <div className="text-sm font-bold">{sortedCompetitors[2].avatar}</div>
+                <div className="mb-2 flex items-center justify-center">
+                  <RacerVehicle
+                    avatar={sortedCompetitors[2].avatar}
+                    color={sortedCompetitors[2].color}
+                    size="sm"
+                  />
+                </div>
                 <div className="text-[11px] font-bold text-slate-400 truncate max-w-[90px]">
                   {sortedCompetitors[2].name.split(' ')[0]}
                 </div>
@@ -2068,7 +2106,9 @@ export default function ClassroomRaceArena({
                         : 'bg-slate-950 border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    <span className="text-2xl">{skin.avatar}</span>
+                    <div className="h-7 flex items-center">
+                      <RacerVehicle avatar={skin.avatar} color={selectedColor} size="sm" />
+                    </div>
                     <span className="text-xs font-bold text-white">{skin.name}</span>
                     <span className="text-[10px] text-slate-400">{skin.tag}</span>
                   </button>
@@ -2099,15 +2139,19 @@ export default function ClassroomRaceArena({
               </div>
             </div>
 
-            {/* Vehicle Preview */}
-            <div className="mt-5 p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
-              <span className="text-xs text-slate-400 font-mono">Live Track Preview:</span>
-              <div
-                className="px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-2 shadow-lg"
-                style={{ backgroundColor: selectedColor, color: '#ffffff' }}
-              >
-                <span>{selectedAvatar}</span>
-                <span className="text-xs">{studentName}</span>
+            {/* Live Vehicle Track Preview */}
+            <div className="mt-5 p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex flex-col items-center justify-center gap-2">
+              <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                <span>Live Track Vehicle Preview</span>
+                <span className="text-emerald-400">• Ready</span>
+              </div>
+              <div className="py-2.5 flex items-center justify-center">
+                <RacerVehicle avatar={selectedAvatar} color={selectedColor} size="lg" isNitro={true} />
+              </div>
+              <div className="text-xs font-mono font-bold text-white flex items-center gap-2">
+                <span>{studentName}</span>
+                <span className="text-slate-500">•</span>
+                <span className="text-secondary">Custom Livery</span>
               </div>
             </div>
 
