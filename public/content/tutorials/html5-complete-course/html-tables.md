@@ -85,37 +85,37 @@ To build any basic table in HTML, you only need four core tags:
 Let's build a simple student report card table:
 
 ```html
-<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+<table border="1">
   <!-- Row 1: Column Headings -->
   <tr>
-    <th style="padding: 8px; background-color: #F1F5F9;">Subject</th>
-    <th style="padding: 8px; background-color: #F1F5F9;">Max Marks</th>
-    <th style="padding: 8px; background-color: #F1F5F9;">Marks Obtained</th>
-    <th style="padding: 8px; background-color: #F1F5F9;">Grade</th>
+    <th>Subject</th>
+    <th>Max Marks</th>
+    <th>Marks Obtained</th>
+    <th>Grade</th>
   </tr>
 
   <!-- Row 2: Mathematics -->
   <tr>
-    <td style="padding: 8px;">Mathematics</td>
-    <td style="padding: 8px;">100</td>
-    <td style="padding: 8px;">98</td>
-    <td style="padding: 8px;">A1</td>
+    <td>Mathematics</td>
+    <td>100</td>
+    <td>98</td>
+    <td>A1</td>
   </tr>
 
   <!-- Row 3: Science -->
   <tr>
-    <td style="padding: 8px;">Science</td>
-    <td style="padding: 8px;">100</td>
-    <td style="padding: 8px;">94</td>
-    <td style="padding: 8px;">A1</td>
+    <td>Science</td>
+    <td>100</td>
+    <td>94</td>
+    <td>A1</td>
   </tr>
 
   <!-- Row 4: English -->
   <tr>
-    <td style="padding: 8px;">English</td>
-    <td style="padding: 8px;">100</td>
-    <td style="padding: 8px;">89</td>
-    <td style="padding: 8px;">A2</td>
+    <td>English</td>
+    <td>100</td>
+    <td>89</td>
+    <td>A2</td>
   </tr>
 </table>
 ```
@@ -179,36 +179,10 @@ Wraps the bottom row showing totals, averages, overall percentages, or remarks.
 <head>
   <meta charset="UTF-8">
   <title>School Fee Structure</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: Arial, sans-serif;
-    }
-    caption {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #0A2540;
-    }
-    th, td {
-      border: 1px solid #CBD5E1;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #0A2540;
-      color: #FFFFFF;
-    }
-    tfoot {
-      background-color: #F8FAFC;
-      font-weight: bold;
-    }
-  </style>
 </head>
 <body>
 
-  <table>
+  <table border>
     <!-- Caption: Table Title -->
     <caption>MSK School Annual Fee Breakdown (Class 10th)</caption>
 
