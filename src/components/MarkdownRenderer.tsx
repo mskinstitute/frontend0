@@ -1408,7 +1408,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       {/* Image Zoom / Lightbox Modal */}
       {zoomedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all animate-fadeIn"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all animate-fadeIn"
           onClick={() => setZoomedImage(null)}
         >
           <div

@@ -13,116 +13,82 @@ author: Antigravity Team
 version: 1.0.0
 ---
 
-# VS Code Setup for Python: Extensions, Terminal, and Configuration
+# Setting Up Visual Studio Code (VS Code)
 
-Imagine an architect or civil engineer who has to draft building plans. They could draw sketches on a rough napkin using a leaky ballpoint pen, but professional blueprints require a dedicated drafting table with T-squares, precision compasses, calibrated rulers, and erasable pencils. 
+Welcome to the second chapter of the Python Basic Course at MSK Institute. In this chapter, we'll guide you through setting up Visual Studio Code (VS Code), a powerful and popular code editor that will make your Python programming experience more efficient and enjoyable.
 
-In software engineering, your **Integrated Development Environment (IDE)** is that precision drafting table. While Python comes with a rudimentary editor called IDLE, professional software engineers across India and global tech firms write Python inside **Visual Studio Code (VS Code)**. With syntax highlighting, real-time error squiggly lines, automatic autocomplete (IntelliSense), and an integrated terminal, VS Code supercharges your coding speed!
+## Why Use VS Code?
 
----
+VS Code is a free, open-source code editor developed by Microsoft. It offers numerous features that make coding easier, such as:
+- Syntax highlighting and code snippets
+- IntelliSense (smart code completion)
+- Integrated terminal
+- Debugging tools
+- Extensions and plugins for various languages and tools
 
-## 1. The Anatomy of a Modern Python Development Setup
+## Installing VS Code
 
-```
-+-------------------------------------------------------------------------+
-|                  VS CODE PYTHON WORKBENCH ARCHITECTURE                  |
-+-------------------------------------------------------------------------+
+### Step 1: Download VS Code
+1. Visit the [VS Code website](https://code.visualstudio.com/).
+2. Click on the download button for your operating system (Windows, macOS, or Linux).
+3. Once the download is complete, run the installer and follow the prompts to install VS Code.
 
-  +---------------------------------------------------------------------+
-  | File Explorer   | Editor Tab (main.py)                              |
-  |  - main.py      |   1  # Real-time syntax highlighting              |
-  |  - utils.py     |   2  student_name = "Priya"                       |
-  |  - .venv/       |   3  print(f"Hello, {student_name}!")             |
-  |                 |                                                   |
-  | Extensions (🧩) | IntelliSense Popup:                              |
-  |  - Python (MS)  |   [student_name: str]                             |
-  |  - Pylance      +---------------------------------------------------+
-  |                 | Integrated Terminal (Ctrl + `)                    |
-  |                 | PS C:\Users\Student> python main.py               |
-  |                 | Hello, Priya!                                     |
-  +-----------------+---------------------------------------------------+
-  | Status Bar: Python 3.12.2 64-bit ('venv': venv) | UTF-8 | Spaces: 4 |
-  +---------------------------------------------------------------------+
-```
+### Step 2: Install Python
+1. If you haven't already, download and install Python from the official website: [python.org](https://www.python.org/).
+2. Make sure to check the box that says "Add Python to PATH" during the installation process.
 
----
+## Setting Up VS Code for Python
 
-## 2. Step-by-Step Setup Guide
+### Step 3: Open VS Code
+1. Launch VS Code from your desktop or start menu.
 
-### Step 1: Install Visual Studio Code
-Download and install the official free installer from [code.visualstudio.com](https://code.visualstudio.com) for Windows, macOS, or Linux.
+### Step 4: Install Python Extension
+1. Click on the Extensions icon in the Activity Bar on the side of the window or press `Ctrl+Shift+X`.
+2. Search for "Python" and select the extension provided by Microsoft.
+3. Click the "Install" button.
 
-### Step 2: Install Essential Extensions
-Open the Extensions view (`Ctrl + Shift + X` on Windows/Linux or `Cmd + Shift + X` on macOS):
-1. **Python (by Microsoft):** The official language pack providing linting, debugging, code navigation, and formatting.
-2. **Pylance (by Microsoft):** High-performance language server delivering fast autocomplete, type inference, and parameter hints.
+### Step 5: Configure Python Interpreter
+1. Open the Command Palette by pressing `Ctrl+Shift+P`.
+2. Type `Python: Select Interpreter` and select it from the dropdown list.
+3. Choose the Python interpreter that you installed earlier (it should display the version number).
 
-### Step 3: Select Your Python Interpreter
-VS Code needs to know which installed version of Python to run:
-1. Press `Ctrl + Shift + P` (`Cmd + Shift + P`) to open the **Command Palette**.
-2. Type `Python: Select Interpreter` and press Enter.
-3. Choose the latest recommended version (e.g., `Python 3.12.x` or your project virtual environment).
+### Step 6: Create a New Python File
+1. Open a new file by selecting `File > New File` or pressing `Ctrl+N`.
+2. Save the file with a `.py` extension (e.g., `hello.py`).
 
----
+### Step 7: Write Your First Python Program
+1. In your new Python file, type the following code:
+   ```python
+   print("Hello, World!")
+   ```
+2. Save the file by selecting `File > Save` or pressing `Ctrl+S`.
 
-## 3. Running Your Code in VS Code
+### Step 8: Run Your Python Program
+1. Open the integrated terminal by selecting `View > Terminal` or pressing `Ctrl+` (backtick).
+2. In the terminal, navigate to the directory where your Python file is saved using the `cd` command.
+3. Run your program by typing:
+   ```sh
+   python hello.py
+   ```
+4. You should see `Hello, World!` printed in the terminal.
 
-There are three ways to execute a Python script in VS Code:
+## Additional VS Code Features
 
-| Execution Method | How to Trigger | When to Use |
-| :--- | :--- | :--- |
-| **1. The Play Button** | Click the triangle `▶` icon in the top-right corner | Easiest for beginners; opens terminal automatically |
-| **2. Keyboard Shortcut** | Press `Ctrl + F5` (Run Without Debugging) | Fastest way during continuous coding practice |
-| **3. Integrated Terminal** | Press `` Ctrl + ` `` to open terminal, then type `python app.py` | Professional standard; allows passing command-line flags |
+### Extensions
+VS Code supports a wide range of extensions to enhance your coding experience. Some useful extensions for Python development include:
+- **Pylint**: For code linting and quality checking.
+- **Jupyter**: For working with Jupyter notebooks.
+- **GitLens**: For powerful Git integration.
 
----
-
-## 4. Recommended `settings.json` Configuration
-
-To keep your code clean, add these settings to your user settings (`Ctrl + ,` $\to$ Open Settings JSON):
-
-```json
-{
-  "python.analysis.typeCheckingMode": "basic",
-  "editor.formatOnSave": true,
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "files.autoSave": "afterDelay",
-  "editor.rulers": [79, 88]
-}
-```
-
-- **`editor.formatOnSave: true`:** Cleans up indentation and whitespace automatically every time you press `Ctrl + S`.
-- **`editor.rulers: [79, 88]`:** Shows a subtle vertical guideline marking the PEP 8 recommended maximum line length!
+### Customization
+VS Code is highly customizable. You can change themes, customize the layout, and set up keyboard shortcuts to suit your preferences. Explore the settings by navigating to `File > Preferences > Settings`.
 
 ---
 
-## 5. Do's and Don'ts of VS Code Configuration
+Congratulations! You have successfully set up Visual Studio Code for Python development. You are now ready to start coding in Python. In the next chapter, we will dive deeper into Python's basic concepts and start writing some exciting programs.
 
-| Practice | Do | Don't |
-| :--- | :--- | :--- |
-| **Indentation** | Enforce 4 spaces per tab (`editor.insertSpaces: true`). | Mix tab characters with space bars in the same file. |
-| **Interpreter** | Verify the bottom-right status bar shows the correct Python version. | Run scripts without selecting an interpreter, causing "Python not found" warnings. |
-| **Extensions** | Install trusted extensions from verified publishers (Microsoft, Red Hat). | Install 50 random unverified plugins that slow down VS Code launch times. |
-| **File Saving** | Save your file (`Ctrl + S`) before running in terminal. | Run the terminal command on an unsaved file (indicated by a white circle on the tab). |
 
----
 
-## 6. Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  VS CODE FOR PYTHON CHEAT SHEET                         |
-+-------------------------------------------------------------------------+
-
-  - Command Palette:      Ctrl + Shift + P (Cmd + Shift + P on macOS)
-  - Toggle Terminal:      Ctrl + ` (Backtick)
-  - Run Script Shortcut:  Ctrl + F5 (Run Without Debugging)
-  - Core Extensions:      Python (Microsoft) + Pylance
-  - Status Bar Check:     Bottom-right shows active Python interpreter version
-```
-
----
 
 # Multiple Choice Questions
 

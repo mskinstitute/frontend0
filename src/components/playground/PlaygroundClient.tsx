@@ -2252,9 +2252,9 @@ _err_result = _stderr_buffer.getvalue()
       style={{ minHeight: isModal ? '550px' : '650px' }}
     >
       {/* 1. TOP VS CODE TITLE & ACTION TOOLBAR */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2 bg-[#181818] border-b border-[#2b2b2b] text-xs">
+      <div className="shrink-0 flex items-center justify-between gap-2 px-3 sm:px-4 py-2 bg-[#181818] border-b border-[#2b2b2b] text-xs z-10">
         {/* Left: Brand + Language Picker + Templates */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
           <div className="flex items-center gap-2 pr-2 border-r border-[#333]">
             <div className="w-6 h-6 rounded bg-gradient-to-tr from-secondary to-orange-400 flex items-center justify-center text-white shadow-xs">
               <Code2 className="w-3.5 h-3.5" />

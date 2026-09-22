@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import dynamic from 'next/dynamic';
 import { SupportedLanguage } from './types';
 
@@ -33,7 +34,12 @@ export default function PlaygroundModal({
   initialHtml,
   initialJs,
 }: PlaygroundModalProps) {
+  const [mounted, setMounted] = useState(false);
   const scrollPositionRef = useRef<number>(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Preserve background scroll position and lock background scroll while modal is open
   useEffect(() => {
@@ -64,11 +70,11 @@ export default function PlaygroundModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200"
       onClick={(e) => {
         // Close modal when clicking on backdrop outside the editor card
         if (e.target === e.currentTarget) {
@@ -87,6 +93,7 @@ export default function PlaygroundModal({
           onCloseModal={onClose}
         />
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
