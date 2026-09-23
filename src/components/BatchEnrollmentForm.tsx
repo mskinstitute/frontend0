@@ -8,7 +8,13 @@ import {
   ExternalLink, ArrowRight, Clock, AlertCircle 
 } from 'lucide-react';
 import { LiveBatch } from '@/types';
-import { trackBatchEnrollment } from '@/lib/tracking';
+import { 
+  trackFormStart, 
+  trackFormSubmit, 
+  trackGenerateLead, 
+  trackBatchRegister, 
+  trackWhatsAppClick 
+} from '@/lib/dataLayer';
 import { queueLeadOffline } from '@/lib/offlineSync';
 
 interface BatchEnrollmentFormProps {
@@ -49,14 +55,11 @@ export default function BatchEnrollmentForm({
 
     setIsSubmitting(true);
 
-    // Track batch enrollment event
-    trackBatchEnrollment(batch.id, batch.title, {
-      course: courseTitle || batch.courseTitle,
-      name: name.trim(),
-      phone: cleanPhone,
-      city: city.trim() || 'Shikohabad',
-      mode,
-      price: batch.price,
+    // Track form submission intent
+    trackFormSubmit('batch_enrollment', {
+      batch_id: batch.id,
+      batch_name: batch.title,
+      course_name: courseTitle || batch.courseTitle,
     });
 
     try {
@@ -84,6 +87,24 @@ export default function BatchEnrollmentForm({
       if (data.success && data.whatsappUrl) {
         setIsSuccess(true);
         setWhatsappRedirectUrl(data.whatsappUrl);
+
+        // Fire verified lead and registration events (zero PII)
+        trackGenerateLead('batch_enrollment', {
+          batch_id: batch.id,
+          batch_name: batch.title,
+          course_name: courseTitle || batch.courseTitle,
+          course_mode: mode,
+          course_price: batch.price,
+        });
+        trackBatchRegister({
+          batchId: batch.id,
+          batchName: batch.title,
+          courseName: courseTitle || batch.courseTitle,
+          batchStartDate: batch.startDate,
+          coursePrice: batch.price,
+          courseMode: mode,
+        });
+
         toast.success('Registration saved! Opening WhatsApp...');
 
         // Automatically open WhatsApp in new tab
@@ -118,6 +139,23 @@ export default function BatchEnrollmentForm({
       
       setIsSuccess(true);
       setWhatsappRedirectUrl(fallbackUrl);
+
+      // Fire verified lead and registration events for offline fallback
+      trackGenerateLead('batch_enrollment_offline', {
+        batch_id: batch.id,
+        batch_name: batch.title,
+        course_name: courseTitle || batch.courseTitle,
+        course_mode: mode,
+      });
+      trackBatchRegister({
+        batchId: batch.id,
+        batchName: batch.title,
+        courseName: courseTitle || batch.courseTitle,
+        batchStartDate: batch.startDate,
+        coursePrice: batch.price,
+        courseMode: mode,
+      });
+
       window.open(fallbackUrl, '_blank');
       toast.success('Offline enquiry saved! Also opening WhatsApp...');
     } finally {
@@ -206,6 +244,7 @@ export default function BatchEnrollmentForm({
                 required
                 placeholder="e.g. Rahul Sharma"
                 value={name}
+                onFocus={() => trackFormStart('batch_enrollment')}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-3.5 py-2.5 bg-surface border border-border-subtle rounded-xl text-sm focus:outline-none focus:border-secondary focus:bg-white transition-colors"
               />

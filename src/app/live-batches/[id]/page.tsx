@@ -10,6 +10,7 @@ import {
 import { fetchLiveBatches, fetchLiveBatchById } from '@/services/api';
 import CourseCurriculumAccordion from '@/components/CourseCurriculumAccordion';
 import BatchEnrollmentForm from '@/components/BatchEnrollmentForm';
+import BatchViewTracker from '@/components/BatchViewTracker';
 
 type Params = Promise<{ id: string }>;
 
@@ -87,31 +88,70 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
 
   const percentageLeft = Math.round((batch.leftSeats / batch.totalSeats) * 100);
 
-  // Schema LD
+  // Schema LD (CourseInstance + BreadcrumbList)
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'CourseInstance',
-    'name': batch.title,
-    'description': course?.shortDescription || batch.title,
-    'startDate': batch.startDate,
-    'courseMode': 'Online & Offline Classroom',
-    'instructor': {
-      '@type': 'Person',
-      'name': batch.instructor,
-      'image': batch.instructorPicture,
-    },
-    'offers': {
-      '@type': 'Offer',
-      'price': batch.price.replace(/[^\d]/g, ''),
-      'priceCurrency': 'INR',
-      'availability': 'https://schema.org/LimitedAvailability',
-    },
-    'provider': {
-      '@type': 'EducationalOrganization',
-      'name': 'MSK Institute',
-      'sameAs': 'https://mskinstitute.in',
-      'telephone': '+918393042166',
-    },
+    '@graph': [
+      {
+        '@type': 'CourseInstance',
+        'name': batch.title,
+        'description': course?.shortDescription || batch.title,
+        'startDate': batch.startDate,
+        'courseMode': 'Online & Offline Classroom',
+        'instructor': {
+          '@type': 'Person',
+          'name': batch.instructor,
+          'image': batch.instructorPicture,
+        },
+        'offers': {
+          '@type': 'Offer',
+          'price': batch.price.replace(/[^\d]/g, '') || '0',
+          'priceCurrency': 'INR',
+          'availability': batch.leftSeats > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+        },
+        'location': {
+          '@type': 'Place',
+          'name': 'MSK Institute Shikohabad Campus',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
+            'addressLocality': 'Shikohabad',
+            'addressRegion': 'Uttar Pradesh',
+            'postalCode': '283135',
+            'addressCountry': 'IN',
+          },
+        },
+        'organizer': {
+          '@type': 'EducationalOrganization',
+          'name': 'MSK Institute',
+          'sameAs': 'https://mskinstitute.in',
+          'telephone': '+918393042166',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': 'https://mskinstitute.in',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Live Batches',
+            'item': 'https://mskinstitute.in/live-batches',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'name': batch.title,
+            'item': `https://mskinstitute.in/live-batches/${batch.id}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -119,6 +159,11 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BatchViewTracker
+        batch={batch}
+        courseTitle={course?.title}
+        courseMode={course?.mode}
       />
 
       {/* Top Urgency Sticky Bar */}

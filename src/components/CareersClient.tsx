@@ -37,6 +37,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { CareerOpportunity, CareerType, WorkMode } from '@/types';
+import { trackFormStart, trackFormSubmit, trackGenerateLead, trackWhatsAppClick } from '@/lib/dataLayer';
 
 interface CareersClientProps {
   initialCareers: CareerOpportunity[];
@@ -354,6 +355,21 @@ ${applicantPortfolio.trim() ? `• *Portfolio / Resume Link:* ${applicantPortfol
       waMeUrl,
       jobTitle: career.title,
       msg,
+    });
+
+    // Fire form submission and lead tracking (zero PII)
+    trackFormSubmit('career_application', {
+      position: career.title,
+      work_type: career.workType || career.type,
+    });
+    trackGenerateLead('career_application', {
+      position: career.title,
+      work_type: career.workType || career.type,
+    });
+    trackWhatsAppClick({
+      buttonText: 'Submit Application via WhatsApp',
+      courseName: career.title,
+      linkUrl: whatsappApiUrl,
     });
 
     toast.success('Application recorded! Opening WhatsApp...');

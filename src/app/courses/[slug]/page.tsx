@@ -10,6 +10,7 @@ import { fetchCourses } from '@/services/api';
 import DemoBookingForm from '@/components/DemoBookingForm';
 import CourseCurriculumAccordion from '@/components/CourseCurriculumAccordion';
 import WebShareButton from '@/components/WebShareButton';
+import CourseViewTracker from '@/components/CourseViewTracker';
 import { Course } from '@/types';
 
 type Params = Promise<{ slug: string }>;
@@ -84,27 +85,55 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         .filter((c): c is Course => Boolean(c))
     : [];
 
-  // Inject Structured JSON-LD Schema Data
+  // Inject Structured JSON-LD Schema Data (Course + BreadcrumbList)
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Course',
-    'name': course.title,
-    'description': course.shortDescription,
-    'educationalLevel': course.level,
-    'about': course.categories,
-    'provider': {
-      '@type': 'EducationalOrganization',
-      'name': 'MSK Institute',
-      'sameAs': 'https://mskinstitute.in',
-      'address': {
-        '@type': 'PostalAddress',
-        'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
-        'addressLocality': 'Shikohabad',
-        'addressRegion': 'Firozabad, Uttar Pradesh',
-        'postalCode': '283135',
-        'addressCountry': 'IN',
+    '@graph': [
+      {
+        '@type': 'Course',
+        'name': course.title,
+        'description': course.shortDescription,
+        'educationalLevel': course.level,
+        'about': course.categories,
+        'inLanguage': course.language,
+        'provider': {
+          '@type': 'EducationalOrganization',
+          'name': 'MSK Institute',
+          'sameAs': 'https://mskinstitute.in',
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
+            'addressLocality': 'Shikohabad',
+            'addressRegion': 'Firozabad, Uttar Pradesh',
+            'postalCode': '283135',
+            'addressCountry': 'IN',
+          },
+        },
       },
-    },
+      {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': 'https://mskinstitute.in',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Courses',
+            'item': 'https://mskinstitute.in/courses',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'name': course.title,
+            'item': `https://mskinstitute.in/courses/${course.slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -113,6 +142,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <CourseViewTracker course={course} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Navigation Breadcrumb */}

@@ -15,4 +15,5 @@ Allow: /contact
 Disallow: /verify-certificate?id=*
 Disallow: /admin
 
+Sitemap: https://www.mskinstitute.in/sitemap.xml
 Sitemap: https://mskinstitute.in/sitemap.xml

@@ -14,6 +14,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/verify-certificate?id=*', '/admin'], // Protect private certificate details
       }
     ],
-    sitemap: 'https://mskinstitute.in/sitemap.xml',
+    sitemap: [
+      'https://www.mskinstitute.in/sitemap.xml',
+      'https://mskinstitute.in/sitemap.xml',
+    ],
   };
 }

@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { fetchCourses, fetchBlogs, fetchTutorials } from '@/services/api';
+import { fetchCourses, fetchBlogs, fetchTutorials, fetchLiveBatches } from '@/services/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://mskinstitute.in';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mskinstitute.in';
 
   // Base static routes
   const routes = [
@@ -14,34 +14,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/blogs',
     '/live',
     '/live-batches',
+    '/tools',
+    '/tools/typing',
+    '/playground',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'daily' as const,
-    priority: route === '' ? 1.0 : 0.8,
+    priority: route === '' ? 1.0 : route === '/courses' || route === '/live-batches' ? 0.9 : 0.8,
   }));
 
   try {
-    const [courses, blogs, tutorials] = await Promise.all([
+    const [courses, blogs, tutorials, batches] = await Promise.all([
       fetchCourses(),
       fetchBlogs().catch(() => []),
       fetchTutorials().catch(() => []),
+      fetchLiveBatches().catch(() => []),
     ]);
 
     const courseRoutes = courses
-      .filter(course => course.status === 'PUBLISH')
+      .filter((course) => course.status === 'PUBLISH')
       .map((course) => ({
         url: `${baseUrl}/courses/${course.slug}`,
         lastModified: new Date().toISOString().split('T')[0],
         changeFrequency: 'weekly' as const,
-        priority: 0.7,
+        priority: 0.85,
       }));
+
+    const batchRoutes = batches.map((batch) => ({
+      url: `${baseUrl}/live-batches/${batch.id}`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
 
     const blogRoutes = blogs.map((blog) => ({
       url: `${baseUrl}/blogs/${blog.slug}`,
       lastModified: new Date().toISOString().split('T')[0],
       changeFrequency: 'weekly' as const,
-      priority: 0.7,
+      priority: 0.75,
     }));
 
     const tutorialRoutes = tutorials.map((tut) => ({
@@ -51,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
-    return [...routes, ...courseRoutes, ...blogRoutes, ...tutorialRoutes];
+    return [...routes, ...courseRoutes, ...batchRoutes, ...blogRoutes, ...tutorialRoutes];
   } catch (error) {
     console.error('Error generating dynamic routes for sitemap:', error);
     return routes;

@@ -1,109 +1,144 @@
 'use client';
 
-// Google Analytics & Telemetry Tracking Helper for MSK Institute
+/**
+ * MSK Institute — Analytics & Telemetry Layer
+ *
+ * Provides backward-compatible tracking functions mapped to the
+ * centralized, privacy-safe dataLayer architecture.
+ */
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-MSKINSTITUTE';
+import {
+  pushToDataLayer,
+  trackPageView as dlTrackPageView,
+  trackCourseView as dlTrackCourseView,
+  trackCourseEnquiry as dlTrackCourseEnquiry,
+  trackCourseRegister as dlTrackCourseRegister,
+  trackBatchView as dlTrackBatchView,
+  trackBatchRegister as dlTrackBatchRegister,
+  trackWhatsAppClick as dlTrackWhatsAppClick,
+  trackPhoneClick as dlTrackPhoneClick,
+  trackEmailClick as dlTrackEmailClick,
+  trackFormStart as dlTrackFormStart,
+  trackFormSubmit as dlTrackFormSubmit,
+  trackGenerateLead as dlTrackGenerateLead,
+  trackFileDownload as dlTrackFileDownload,
+} from './dataLayer';
 
-declare global {
-  interface Window {
-    gtag?: (command: string, ...args: any[]) => void;
-    dataLayer?: any[];
-  }
-}
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-6CQ1F72VS0';
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-WTZ5VP6M';
 
-// Log event locally for offline / in-browser admin review
-function logLocalEvent(eventName: string, params?: Record<string, any>) {
-  if (typeof window === 'undefined') return;
-  try {
-    const raw = localStorage.getItem('msk_analytics_events');
-    const list = raw ? JSON.parse(raw) : [];
-    list.unshift({
-      event: eventName,
-      params: params || {},
-      timestamp: new Date().toISOString(),
-      url: window.location.pathname,
-    });
-    // Keep last 100 events
-    localStorage.setItem('msk_analytics_events', JSON.stringify(list.slice(0, 100)));
-  } catch {
-    // ignore storage errors
-  }
-}
+// Re-export core dataLayer helpers
+export {
+  pushToDataLayer,
+  dlTrackPageView as trackPageView,
+  dlTrackCourseView as trackCourseViewDetail,
+  dlTrackCourseEnquiry as trackCourseEnquiry,
+  dlTrackCourseRegister as trackCourseRegister,
+  dlTrackBatchView as trackBatchViewDetail,
+  dlTrackBatchRegister as trackBatchRegister,
+  dlTrackWhatsAppClick as trackWhatsAppClick,
+  dlTrackPhoneClick as trackPhoneClick,
+  dlTrackEmailClick as trackEmailClick,
+  dlTrackFormStart as trackFormStart,
+  dlTrackFormSubmit as trackFormSubmit,
+  dlTrackGenerateLead as trackGenerateLead,
+  dlTrackFileDownload as trackFileDownload,
+};
 
 // Track standard Pageviews
 export function pageview(url: string, title?: string) {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_TRACKING_ID, {
-      page_path: url,
-      page_title: title || document.title,
-    });
-  }
-  logLocalEvent('page_view', { path: url, title: title || (typeof document !== 'undefined' ? document.title : '') });
+  dlTrackPageView(url, title);
 }
 
-// Track generic custom events
+// Track generic custom events (sanitized through dataLayer)
 export function trackEvent(action: string, params: Record<string, any> = {}) {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', action, params);
-  }
-  logLocalEvent(action, params);
+  pushToDataLayer(action, params);
 }
 
 // Specialized Conversion & Telemetry Trackers
 export function trackLeadSubmission(formType: string, details: Record<string, any> = {}) {
-  trackEvent('lead_generation', {
-    form_name: formType,
-    ...details,
-  });
+  dlTrackGenerateLead(formType, details);
 }
 
 export function trackDemoBooking(courseTitle: string, details: Record<string, any> = {}) {
-  trackEvent('demo_booking_submitted', {
-    course: courseTitle,
-    ...details,
+  dlTrackFormSubmit('demo_booking', { course_name: courseTitle });
+  dlTrackGenerateLead('demo_booking', {
+    course_name: courseTitle,
+    preferred_date: details.preferred_date || '',
   });
 }
 
 export function trackBatchEnrollment(batchId: string, batchTitle: string, details: Record<string, any> = {}) {
-  trackEvent('batch_enrollment_submitted', {
+  dlTrackFormSubmit('batch_enrollment', {
     batch_id: batchId,
-    batch_title: batchTitle,
-    ...details,
+    batch_name: batchTitle,
+  });
+  dlTrackGenerateLead('batch_enrollment', {
+    batch_id: batchId,
+    batch_name: batchTitle,
+    course_name: details.course || batchTitle,
+    course_mode: details.mode || 'ONLINE',
+    course_price: details.price || 0,
+  });
+  dlTrackBatchRegister({
+    batchId,
+    batchName: batchTitle,
+    courseName: details.course || batchTitle,
+    courseMode: details.mode || 'ONLINE',
+    coursePrice: details.price || 0,
   });
 }
 
 export function trackCertificateVerification(certificateId: string, isValid: boolean) {
-  trackEvent('certificate_verification_search', {
-    certificate_id: certificateId,
+  pushToDataLayer('certificate_verification_search', {
     is_valid: isValid,
+    // Note: Do not send full certificate details or user names
   });
 }
 
 export function trackPwaInstall() {
-  trackEvent('pwa_app_installed', {
+  pushToDataLayer('pwa_app_installed', {
     platform: typeof window !== 'undefined' ? window.navigator.platform : 'unknown',
     installed_at: new Date().toISOString(),
   });
 }
 
 export function trackContactClick(channel: 'call' | 'whatsapp' | 'email' | 'maps', targetValue?: string) {
-  trackEvent('contact_channel_click', {
-    channel,
-    target: targetValue || '',
-  });
+  switch (channel) {
+    case 'whatsapp':
+      dlTrackWhatsAppClick({ buttonText: 'WhatsApp Contact' });
+      break;
+    case 'call':
+      dlTrackPhoneClick({ buttonText: 'Phone Contact' });
+      break;
+    case 'email':
+      dlTrackEmailClick({ buttonText: 'Email Contact' });
+      break;
+    case 'maps':
+      pushToDataLayer('outbound_click', {
+        destination: 'google_maps',
+        link_url: 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
+      });
+      break;
+  }
 }
 
 export function trackNoteDownload(noteTitle: string, isPaid: boolean) {
-  trackEvent(isPaid ? 'paid_note_inquiry' : 'free_note_download', {
-    note_title: noteTitle,
-    is_paid: isPaid,
-  });
+  if (isPaid) {
+    dlTrackFormSubmit('paid_note_inquiry', { note_title: noteTitle });
+    dlTrackGenerateLead('paid_note_inquiry', { note_title: noteTitle });
+  } else {
+    dlTrackFileDownload({
+      fileName: noteTitle,
+      downloadType: 'notes',
+    });
+  }
 }
 
 export function trackCourseView(courseId: string, courseTitle: string) {
-  trackEvent('view_course_detail', {
-    course_id: courseId,
-    course_title: courseTitle,
+  dlTrackCourseView({
+    courseId,
+    courseName: courseTitle,
   });
 }
 

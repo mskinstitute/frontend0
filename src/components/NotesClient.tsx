@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { FileText, Download, ShoppingBag, CheckCircle, X, Phone, User, Send, ArrowRight } from 'lucide-react';
 import { Note } from '@/types';
 import { trackNoteDownload } from '@/lib/tracking';
+import { trackFormStart } from '@/lib/dataLayer';
 
 export default function NotesClient({ initialNotes }: { initialNotes: Note[] }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -40,11 +41,11 @@ export default function NotesClient({ initialNotes }: { initialNotes: Note[] }) 
     }
 
     setIsSubmitting(true);
-    if (activeNoteToBuy) {
-      trackNoteDownload(activeNoteToBuy.title, true);
-    }
     setTimeout(() => {
       setIsSubmitting(false);
+      if (activeNoteToBuy) {
+        trackNoteDownload(activeNoteToBuy.title, true);
+      }
       toast.success(`Purchase request for "${activeNoteToBuy?.title}" sent! Our support team will contact you for payment link.`);
       setBuyerName('');
       setBuyerPhone('');
@@ -180,6 +181,7 @@ export default function NotesClient({ initialNotes }: { initialNotes: Note[] }) 
                     required
                     placeholder="e.g. Amit Singh"
                     value={buyerName}
+                    onFocus={() => trackFormStart('notes_purchase_inquiry')}
                     onChange={(e) => setBuyerName(e.target.value)}
                     className="w-full pl-10 pr-3 py-2.5 bg-surface border border-border-subtle rounded-lg text-sm focus:outline-none focus:border-secondary transition-colors"
                   />

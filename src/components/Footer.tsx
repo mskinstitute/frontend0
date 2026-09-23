@@ -119,7 +119,7 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
                 <a 
                   href="tel:+918393042166" 
-                  onClick={() => trackContactClick('call', '+918393042166')}
+                  onClick={() => trackContactClick('call')}
                   className="hover:text-white transition-colors"
                 >
                   +91 83930 42166
@@ -129,7 +129,7 @@ export default function Footer() {
                 <Mail className="w-4 h-4 text-secondary flex-shrink-0" />
                 <a 
                   href="mailto:mskshikohabad@gmail.com" 
-                  onClick={() => trackContactClick('email', 'mskshikohabad@gmail.com')}
+                  onClick={() => trackContactClick('email')}
                   className="hover:text-white transition-colors"
                 >
                   mskshikohabad@gmail.com
@@ -140,7 +140,7 @@ export default function Footer() {
                   href="https://maps.google.com/?q=MSK+Institute+Shikohabad"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackContactClick('maps', 'MSK Institute Shikohabad')}
+                  onClick={() => trackContactClick('maps')}
                   className="inline-flex items-center gap-1 text-xs text-secondary hover:text-secondary-light font-medium"
                 >
                   Open in Google Maps

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Send, X, Calendar, User, Phone, Book } from 'lucide-react';
-import { trackDemoBooking } from '@/lib/tracking';
+import { trackFormStart, trackFormSubmit, trackGenerateLead, trackCourseEnquiry } from '@/lib/dataLayer';
 
 interface DemoBookingFormProps {
   courseTitle: string;
@@ -35,16 +35,17 @@ export default function DemoBookingForm({ courseTitle, onClose, isEmbedded = fal
 
     setIsSubmitting(true);
 
-    // Track demo booking event
-    trackDemoBooking(courseTitle, {
-      name: name.trim(),
-      phone: phone.trim(),
-      preferred_date: date,
-    });
-
     // Simulate API request submission
     setTimeout(() => {
       setIsSubmitting(false);
+      // Fire form submission and lead generation ONLY after verified completion (zero PII)
+      trackFormSubmit('demo_booking', { course_name: courseTitle });
+      trackGenerateLead('demo_booking', {
+        course_name: courseTitle,
+        preferred_date: date,
+      });
+      trackCourseEnquiry({ courseName: courseTitle });
+
       toast.success('Demo session request sent! Our counselor will call you within 24 hours.');
       setName('');
       setPhone('');
@@ -86,6 +87,7 @@ export default function DemoBookingForm({ courseTitle, onClose, isEmbedded = fal
               required
               placeholder="e.g. Amit Kumar"
               value={name}
+              onFocus={() => trackFormStart('demo_booking')}
               onChange={(e) => setName(e.target.value)}
               className="w-full pl-10 pr-3 py-2.5 bg-surface border border-border-subtle rounded-lg text-sm focus:outline-none focus:border-secondary transition-colors"
             />

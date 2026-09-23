@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { StudyMaterial, StudyMaterialType, TutorialItem } from '@/types';
 import { trackNoteDownload } from '@/lib/tracking';
+import { trackFileDownload, trackFormStart } from '@/lib/dataLayer';
 import TutorialCard from '@/components/TutorialCard';
 
 interface StudyMaterialClientProps {
@@ -222,6 +223,10 @@ export default function StudyMaterialClient({
       setIsDownloadingPdf(true);
       const { downloadCheatsheetPdf } = await import('@/lib/cheatsheetPdfGenerator');
       downloadCheatsheetPdf(activeCheatsheet);
+      trackFileDownload({
+        fileName: `${activeCheatsheet.slug || activeCheatsheet.title || 'cheatsheet'}.pdf`,
+        downloadType: 'cheatsheet',
+      });
       toast.success('PDF Cheatsheet downloaded successfully!');
     } catch (error) {
       console.error('Failed to download PDF cheatsheet:', error);
@@ -244,11 +249,11 @@ export default function StudyMaterialClient({
     }
 
     setIsSubmitting(true);
-    if (activeNoteToBuy) {
-      trackNoteDownload(activeNoteToBuy.title, true);
-    }
     setTimeout(() => {
       setIsSubmitting(false);
+      if (activeNoteToBuy) {
+        trackNoteDownload(activeNoteToBuy.title, true);
+      }
       toast.success(
         `Purchase inquiry for "${activeNoteToBuy?.title}" submitted! Our team will contact you via WhatsApp.`
       );

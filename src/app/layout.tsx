@@ -8,6 +8,7 @@ import InstallAppModal from '@/components/InstallAppModal';
 import PwaUpdateToast from '@/components/PwaUpdateToast';
 import { PwaProvider } from '@/context/PwaContext';
 import Analytics from '@/components/Analytics';
+import { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -67,6 +68,9 @@ export const metadata: Metadata = {
     'msapplication-config': '/browserconfig.xml',
     'mobile-web-app-capable': 'yes',
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
 };
 
 export default function RootLayout({
@@ -105,6 +109,13 @@ export default function RootLayout({
                 'https://www.instagram.com/mskinstitute',
                 'https://maps.google.com/?q=MSK+Institute+Shikohabad'
               ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+918393042166',
+                contactType: 'admissions',
+                areaServed: 'IN',
+                availableLanguage: ['en', 'hi'],
+              },
             }),
           }}
         />
@@ -136,6 +147,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-text-main antialiased selection:bg-secondary selection:text-white">
+        <GoogleTagManagerNoScript />
         <PwaProvider>
           <Analytics />
           <PwaRegister />
