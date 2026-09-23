@@ -828,7 +828,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           };
 
           const enableTry = block.meta.enableTry !== false && Boolean(PLAYGROUND_SUPPORTED_LANGS[lang]);
-          const enableCopy = Boolean(block.meta.enableCopy);
+          const enableCopy = block.meta.enableCopy !== false;
           const canPreview = block.meta.enablePreview !== false && isWebPreviewSupported(lang);
           const hasCompanion = Boolean(block.meta.companionCode);
           const companionLang = block.meta.companionLang;

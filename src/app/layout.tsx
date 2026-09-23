@@ -7,10 +7,17 @@ import PwaRegister from '@/components/PwaRegister';
 import InstallAppModal from '@/components/InstallAppModal';
 import PwaUpdateToast from '@/components/PwaUpdateToast';
 import { PwaProvider } from '@/context/PwaContext';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import Analytics from '@/components/Analytics';
 import { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
 import FloatingWhatsAppCTA from '@/components/FloatingWhatsAppCTA';
 import './globals.css';
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
 
 export const viewport: Viewport = {
   themeColor: '#0A2540',
@@ -82,8 +89,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -109,8 +114,8 @@ export default function RootLayout({
               },
               geo: {
                 '@type': 'GeoCoordinates',
-                latitude: 27.1084,
-                longitude: 78.5844,
+                latitude: 27.1157743,
+                longitude: 78.5829716,
               },
               openingHoursSpecification: [
                 {
@@ -167,7 +172,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white text-text-main antialiased selection:bg-secondary selection:text-white">
+      <body className={`min-h-screen flex flex-col bg-white text-text-main antialiased selection:bg-secondary selection:text-white ${jakarta.className} ${jakarta.variable}`}>
         <GoogleTagManagerNoScript />
         <PwaProvider>
           <Analytics />
