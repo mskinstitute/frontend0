@@ -9,6 +9,7 @@ import PwaUpdateToast from '@/components/PwaUpdateToast';
 import { PwaProvider } from '@/context/PwaContext';
 import Analytics from '@/components/Analytics';
 import { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
+import FloatingWhatsAppCTA from '@/components/FloatingWhatsAppCTA';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -88,14 +89,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'EducationalOrganization',
+              '@type': ['EducationalOrganization', 'LocalBusiness'],
               name: 'MSK Institute',
               alternateName: 'MSK Computer Training & Coding Academy',
               url: 'https://mskinstitute.in',
               logo: 'https://mskinstitute.in/logo.jpg',
-              description: "Shikohabad's Leading Coding & Computer Training Academy",
+              image: 'https://mskinstitute.in/logo.jpg',
+              description: "Shikohabad's Leading Coding & Computer Training Academy with 100% practical lab training in Python, Web Development, CCC, and MS Office.",
               telephone: '+918393042166',
               email: 'mskshikohabad@gmail.com',
+              priceRange: '₹₹',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: 'Gali No. 3, Near Gyan Jyoti Public School',
@@ -104,16 +107,34 @@ export default function RootLayout({
                 postalCode: '283135',
                 addressCountry: 'IN',
               },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 27.1084,
+                longitude: 78.5844,
+              },
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  opens: '08:00',
+                  closes: '19:00',
+                },
+              ],
+              founder: {
+                '@type': 'Person',
+                name: 'Er. Sumit Kumar',
+                jobTitle: 'Founder & Lead Technical Trainer',
+              },
               sameAs: [
                 'https://www.facebook.com/mskinstitute',
                 'https://www.instagram.com/mskinstitute',
-                'https://maps.google.com/?q=MSK+Institute+Shikohabad'
+                'https://maps.google.com/?q=MSK+Institute+Shikohabad',
               ],
               contactPoint: {
                 '@type': 'ContactPoint',
                 telephone: '+918393042166',
                 contactType: 'admissions',
-                areaServed: 'IN',
+                areaServed: ['Shikohabad', 'Firozabad', 'Sirsaganj', 'Jasrana', 'Uttar Pradesh'],
                 availableLanguage: ['en', 'hi'],
               },
             }),
@@ -158,6 +179,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <FloatingWhatsAppCTA />
           <MobileBottomNav />
           <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
         </PwaProvider>

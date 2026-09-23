@@ -69,14 +69,76 @@ export default async function TutorialTopicPage({ params }: TutorialTopicPagePro
     notFound();
   }
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        headline: `${topicData.frontmatter.title} - ${topicData.tutorial.title}`,
+        description: topicData.frontmatter.description || `Learn ${topicData.frontmatter.title} with practical examples and code tutorials at MSK Institute.`,
+        inLanguage: 'en-IN',
+        mainEntityOfPage: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+        author: {
+          '@type': 'EducationalOrganization',
+          name: 'MSK Institute',
+          url: 'https://mskinstitute.in',
+        },
+        publisher: {
+          '@type': 'EducationalOrganization',
+          name: 'MSK Institute',
+          url: 'https://mskinstitute.in',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://mskinstitute.in/logo.jpg',
+          },
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://mskinstitute.in',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Tutorials',
+            item: 'https://mskinstitute.in/tutorials',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: topicData.tutorial.title,
+            item: `https://mskinstitute.in/tutorials/${slug}`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: topicData.frontmatter.title,
+            item: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
-    <TutorialReader
-      tutorial={topicData.tutorial}
-      course={topicData.course}
-      frontmatter={topicData.frontmatter}
-      markdownContent={topicData.content}
-      prevTopic={topicData.prevTopic}
-      nextTopic={topicData.nextTopic}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <TutorialReader
+        tutorial={topicData.tutorial}
+        course={topicData.course}
+        frontmatter={topicData.frontmatter}
+        markdownContent={topicData.content}
+        prevTopic={topicData.prevTopic}
+        nextTopic={topicData.nextTopic}
+      />
+    </>
   );
 }

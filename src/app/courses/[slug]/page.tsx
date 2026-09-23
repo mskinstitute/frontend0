@@ -85,7 +85,26 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         .filter((c): c is Course => Boolean(c))
     : [];
 
-  // Inject Structured JSON-LD Schema Data (Course + BreadcrumbList)
+  // Inject Structured JSON-LD Schema Data (Course + FAQPage + BreadcrumbList)
+  const courseFaqs = [
+    {
+      question: `Can I attend a free demo class for ${course.title}?`,
+      answer: `Yes, MSK Institute provides free demo classes and lab sessions at our Shikohabad campus. You can book a free demo slot online or via WhatsApp before enrolling.`,
+    },
+    {
+      question: `Do I get a verifiable certificate upon completing ${course.title}?`,
+      answer: `Yes, upon successful completion and project submission, you receive an official certificate with a unique verification code verifiable online at https://mskinstitute.in/verify-certificate.`,
+    },
+    {
+      question: `Where are the offline classes held and what are the timings?`,
+      answer: `Offline practical lab training is conducted at Gali No. 3, Near Gyan Jyoti Public School, Shikohabad, UP. Morning and evening batches are available with 1-on-1 mentor guidance.`,
+    },
+    {
+      question: `What are the prerequisites to join ${course.title}?`,
+      answer: `This course is designed for ${course.level.toLowerCase()} level learners. Basic computer operation familiarity is helpful, but no prior programming background is required.`,
+    },
+  ];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -93,22 +112,72 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         '@type': 'Course',
         'name': course.title,
         'description': course.shortDescription,
+        'courseCode': course.id,
         'educationalLevel': course.level,
         'about': course.categories,
         'inLanguage': course.language,
+        'educationalCredentialAwarded': course.certificate ? 'Verifiable Certificate of Completion' : undefined,
         'provider': {
           '@type': 'EducationalOrganization',
           'name': 'MSK Institute',
+          'url': 'https://mskinstitute.in',
           'sameAs': 'https://mskinstitute.in',
           'address': {
             '@type': 'PostalAddress',
             'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
             'addressLocality': 'Shikohabad',
-            'addressRegion': 'Firozabad, Uttar Pradesh',
+            'addressRegion': 'Uttar Pradesh',
             'postalCode': '283135',
             'addressCountry': 'IN',
           },
         },
+        'instructor': {
+          '@type': 'Person',
+          'name': 'Er. Sumit Kumar',
+          'jobTitle': 'Lead Technical Trainer & Founder',
+        },
+        'hasCourseInstance': {
+          '@type': 'CourseInstance',
+          'courseMode': course.mode === 'BOTH' ? ['online', 'onsite'] : [course.mode.toLowerCase()],
+          'courseWorkload': `${course.duration.value} ${course.duration.unit.toLowerCase()}`,
+          'location': {
+            '@type': 'Place',
+            'name': 'MSK Institute Shikohabad',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
+              'addressLocality': 'Shikohabad',
+              'addressRegion': 'Uttar Pradesh',
+              'postalCode': '283135',
+              'addressCountry': 'IN',
+            },
+          },
+        },
+        'offers': {
+          '@type': 'Offer',
+          'category': 'Free Demo Class',
+          'availability': 'https://schema.org/InStock',
+          'price': 0,
+          'priceCurrency': 'INR',
+          'url': `https://mskinstitute.in/courses/${course.slug}`,
+        },
+        'syllabusSections': (course.chapters || []).map((ch, idx) => ({
+          '@type': 'Syllabus',
+          'position': idx + 1,
+          'name': ch.title,
+          'description': `${ch.topics?.length || 0} practical topics covered in this module.`,
+        })),
+      },
+      {
+        '@type': 'FAQPage',
+        'mainEntity': courseFaqs.map((faq) => ({
+          '@type': 'Question',
+          'name': faq.question,
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': faq.answer,
+          },
+        })),
       },
       {
         '@type': 'BreadcrumbList',

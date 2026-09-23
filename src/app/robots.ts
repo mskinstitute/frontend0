@@ -9,10 +9,36 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api'],
       },
       {
-        userAgent: ['GPTBot', 'ChatGPT-User', 'ClaudeBot', 'Google-Extended', 'Anthropic-AI'],
-        allow: ['/', '/courses/', '/about', '/contact'],
-        disallow: ['/verify-certificate?id=*', '/admin'], // Protect private certificate details
-      }
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'ClaudeBot',
+          'Google-Extended',
+          'Anthropic-AI',
+          'PerplexityBot',
+          'Bytespider',
+          'Applebot-Extended',
+          'cohere-ai',
+          'Diffbot',
+          'FacebookBot',
+        ],
+        allow: [
+          '/',
+          '/courses/',
+          '/tutorials/',
+          '/study-material/',
+          '/notes/',
+          '/blogs/',
+          '/live-batches/',
+          '/playground',
+          '/tools/',
+          '/about',
+          '/contact',
+          '/llms.txt',
+          '/llms-full.txt',
+        ],
+        disallow: ['/verify-certificate?id=*', '/admin', '/api'], // Protect private certificate details and internal endpoints
+      },
     ],
     sitemap: [
       'https://www.mskinstitute.in/sitemap.xml',
