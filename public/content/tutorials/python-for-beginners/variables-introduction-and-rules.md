@@ -123,22 +123,6 @@ class StudentRecord:
 
 ---
 
-## 6. Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  VARIABLE NAMING RULES CHEAT SHEET                      |
-+-------------------------------------------------------------------------+
-
-  - Allowed:            Letters, numbers, underscores (a-z, A-Z, 0-9, _)
-  - First character:    Must be a letter or underscore (NEVER a digit!)
-  - Case Sensitivity:   age != Age != AGE
-  - Forbidden:          Spaces, hyphens (-), symbols (@, $, %, #), and 35 keywords
-  - Standard Style:     snake_case (e.g., student_roll_number)
-```
-
----
-
 # Multiple Choice Questions
 
 ### 1. Which of the following is a VALID variable name in Python?
@@ -146,8 +130,8 @@ A. `2nd_semester_marks`
 B. `total-score`
 C. `student_roll_number`
 D. `class`
-
 **Answer:** C
+
 **Explanation:** `student_roll_number` contains only letters and underscores. Option A starts with a number (illegal), Option B contains a hyphen/minus operator, and Option D is a reserved keyword.
 
 ---
@@ -157,8 +141,8 @@ A. `TypeError`
 B. `SyntaxError: invalid syntax`
 C. `ZeroDivisionError`
 D. `IndexError`
-
 **Answer:** B
+
 **Explanation:** Keywords represent the grammar of Python. Attempting to use a keyword as an identifier violates the language grammar, triggering a `SyntaxError`.
 
 ---
@@ -168,8 +152,8 @@ A. `camelCase` (e.g., `studentName`)
 B. `snake_case` (e.g., `student_name`)
 C. `kebab-case` (e.g., `student-name`)
 D. `PascalCase` (e.g., `StudentName`)
-
 **Answer:** B
+
 **Explanation:** PEP 8 dictates `snake_case` (all lowercase letters separated by underscores) for variables and function names in Python.
 
 ---
@@ -179,8 +163,8 @@ A. As three identical references to the same variable
 B. As three completely distinct, independent variables in memory due to strict case sensitivity
 C. It throws a duplicate variable warning
 D. It automatically merges their values
-
 **Answer:** B
+
 **Explanation:** Python is case-sensitive. Identifiers with different casing are stored as completely separate names in the local/global namespace.
 
 ---
@@ -190,8 +174,8 @@ A. `import keyword; keyword.iskeyword("your_word")`
 B. `check_word("your_word")`
 C. `sys.is_reserved("your_word")`
 D. `python.verify("your_word")`
-
 **Answer:** A
+
 **Explanation:** The built-in `keyword` module provides the `iskeyword()` function, which returns `True` if the provided string is a reserved Python keyword.
 
 ---
@@ -253,27 +237,4 @@ print(f"Batch Strength    : {total_students} Scholars")
 print(f"Boys Enrolled     : {boys_count}")
 print(f"Girls Enrolled    : {girls_count} ({girls_percentage:.1f}%)")
 print("==========================================================")
-```
-
-### Expected Program Output:
-```text
-=======================================================
-       PYTHON VARIABLE IDENTIFIER INSPECTOR
-=======================================================
-Identifier Name      | Is Keyword?  | Status         
--------------------------------------------------------
-student_name         | False        | ✓ VALID        
-batch_2026           | False        | ✓ VALID        
-_internal_token      | False        | ✓ VALID        
-2nd_rank             | False        | ✕ INVALID SYNTAX
-user-email           | False        | ✕ INVALID SYNTAX
-total score          | False        | ✕ INVALID SYNTAX
-class                | True         | ✕ RESERVED KEYWORD
-True                 | True         | ✕ RESERVED KEYWORD
-total_marks          | False        | ✓ VALID        
-=======================================================
-Batch Strength    : 60 Scholars
-Boys Enrolled     : 28
-Girls Enrolled    : 32 (53.3%)
-==========================================================
 ```

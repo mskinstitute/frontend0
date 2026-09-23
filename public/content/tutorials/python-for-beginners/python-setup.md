@@ -141,8 +141,8 @@ A. The computer hard drive will automatically format
 B. Typing `python` in Command Prompt will return an error stating that `'python' is not recognized as an internal or external command`
 C. Python will permanently run in demo mode
 D. The computer will refuse to connect to the internet
-
 **Answer:** B
+
 **Explanation:** The PATH environment variable tells the operating system where executable binaries live. Without Python in PATH, the terminal does not know where `python.exe` is stored when you type its name.
 
 ---
@@ -152,8 +152,8 @@ A. Real Execution Protocol Layer
 B. Read-Eval-Print Loop
 C. Run Every Program Linearly
 D. Redundant Environment Package Library
-
 **Answer:** B
+
 **Explanation:** REPL stands for Read-Eval-Print Loop. It is an interactive programming environment that reads a single command from the user, evaluates it, prints the result to screen, and loops back to await the next input.
 
 ---
@@ -163,8 +163,8 @@ A. `close()`
 B. `terminate`
 C. `exit()`
 D. `stop`
-
 **Answer:** C
+
 **Explanation:** Calling the built-in function `exit()` or `quit()` terminates the interactive Python REPL session and returns control to the operating system shell.
 
 ---
@@ -174,8 +174,8 @@ A. To make the computer run 50% faster
 B. To create an isolated sandbox for project dependencies, preventing version conflicts between different projects
 C. To encrypt the project's source code against theft
 D. To run Python without an operating system
-
 **Answer:** B
+
 **Explanation:** Virtual environments provide directory-level isolation for Python packages, ensuring that different projects can use different versions of libraries without conflicting globally.
 
 ---
@@ -185,65 +185,8 @@ A. `npm`
 B. `pip`
 C. `cargo`
 D. `gem`
-
 **Answer:** B
+
 **Explanation:** `pip` (Pip Installs Packages) is Python's standard package manager. It connects to the Python Package Index (PyPI) to download and manage third-party modules.
 
 ---
-
-# Hands-On Practice Challenge: Python Environment & Path Inspector
-
-Write and run this self-inspecting Python script that examines your system's PATH, modules, and installation directory.
-
-```python
-# ==========================================================
-# Challenge 3: Python Installation & PATH Verification
-# ==========================================================
-
-import sys
-import os
-
-print("=" * 60)
-print("       PYTHON INSTALLATION ARCHITECTURE REPORT")
-print("=" * 60)
-
-# 1. Inspect Python executable and prefix
-print(f"Python Binary Location  : {sys.executable}")
-print(f"Installation Root Prefix: {sys.prefix}")
-print(f"Byte Order (Endianness) : {sys.byteorder}")
-
-# 2. Check if running inside a virtual environment
-is_venv = sys.prefix != sys.base_prefix
-print(f"Inside Virtual Env?     : {'YES (.venv Active)' if is_venv else 'NO (Global Python)'}")
-
-# 3. Inspect Module Search Paths (sys.path)
-print("\nPython searches these directories when you 'import' modules:")
-for index, folder in enumerate(sys.path[:4], start=1):
-    print(f"  [{index}] {folder}")
-
-print("=" * 60)
-print("SUCCESS: Your Python runtime is healthy, properly configured,")
-print("and ready for syntax, variable, and data structure mastery!")
-print("=" * 60)
-```
-
-### Expected Program Output:
-```text
-============================================================
-       PYTHON INSTALLATION ARCHITECTURE REPORT
-============================================================
-Python Binary Location  : C:\Users\Student\AppData\Local\Programs\Python\Python312\python.exe
-Installation Root Prefix: C:\Users\Student\AppData\Local\Programs\Python\Python312
-Byte Order (Endianness) : little
-Inside Virtual Env?     : NO (Global Python)
-
-Python searches these directories when you 'import' modules:
-  [1] D:\Sumit\MSK-Institute-Website
-  [2] C:\Users\Student\AppData\Local\Programs\Python\Python312\python312.zip
-  [3] C:\Users\Student\AppData\Local\Programs\Python\Python312\DLLs
-  [4] C:\Users\Student\AppData\Local\Programs\Python\Python312\Lib
-============================================================
-SUCCESS: Your Python runtime is healthy, properly configured,
-and ready for syntax, variable, and data structure mastery!
-============================================================
-```

@@ -92,7 +92,7 @@ Similarly, keywords like `if`, `else`, `while`, `def`, `True`, `False`, and `Non
 In Python, an end-of-line usually marks the end of a statement. If you have an unusually long calculation, you can continue it onto the next line in two ways:
 
 ### 1. Implicit Continuation (Recommended inside Parentheses `()`)
-```python
+```python copy
 total_fee = (
     admission_fee
     + tuition_fee
@@ -102,7 +102,7 @@ total_fee = (
 ```
 
 ### 2. Explicit Continuation (Using Backslash `\`)
-```python
+```python copy
 total = 100 + 200 + 300 + \
         400 + 500
 ```
@@ -144,8 +144,8 @@ A. Semicolon `;`
 B. Colon `:`
 C. Curly brace `{`
 D. Arrow `->`
-
 **Answer:** B
+
 **Explanation:** In Python, control structures like `if`, `elif`, `else`, `for`, `while`, and `def` must end with a colon `:`, signaling the start of an indented block of code.
 
 ---
@@ -155,8 +155,8 @@ A. 1 space
 B. 2 spaces
 C. 4 spaces
 D. 8 spaces
-
 **Answer:** C
+
 **Explanation:** PEP 8 specifies exactly 4 spaces per indentation level as the universal standard for Python code.
 
 ---
@@ -166,8 +166,8 @@ A. The number 5 is printed to screen
 B. A `SyntaxError: cannot assign to True` is raised because `True` is a reserved boolean keyword
 C. Python redefines truthiness to equal 5
 D. The variable is converted to a string
-
 **Answer:** B
+
 **Explanation:** `True`, `False`, and `None` are reserved language keywords in Python. Reassigning values to them triggers an immediate `SyntaxError`.
 
 ---
@@ -177,8 +177,8 @@ A. Enclosing the expression in parentheses `( ... )`
 B. Putting three dots `...` at the end of the line
 C. Ending every line with a dollar sign `$`
 D. Writing comments on each line
-
 **Answer:** A
+
 **Explanation:** Python supports implicit line continuation inside parentheses `()`, brackets `[]`, and braces `{}`. Wrapping calculations in parentheses is cleaner and less error-prone than trailing backslashes.
 
 ---
@@ -188,8 +188,8 @@ A. The computer has run out of RAM
 B. Spaces or tabs within a code block are inconsistent or do not align with the expected block boundary
 C. The file was saved in UTF-8 format
 D. The monitor resolution is too low
-
 **Answer:** B
+
 **Explanation:** Because Python uses whitespace to define structural blocks, any inconsistency in the number of spaces or mixing tabs and spaces prevents the parser from determining block boundaries, throwing an `IndentationError`.
 
 ---
@@ -198,7 +198,7 @@ D. The monitor resolution is too low
 
 Create a Python file named `syntax_lab.py` and run this program to see how Python evaluates nested blocks, case-sensitive identifiers, and multi-line expressions.
 
-```python
+```python no-try copy
 # ==========================================================
 # Challenge 4: Python Syntax & Block Structure Lab
 # MSK Institute of Technology

@@ -135,23 +135,6 @@ print(calculate_compound_interest.__doc__)
 
 ---
 
-## 6. Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  PYTHON COMMENTS CHEAT SHEET                            |
-+-------------------------------------------------------------------------+
-
-  - Single-line:        # This is a comment
-  - Inline comment:     total = 100  # 2 spaces before hash
-  - Multi-line:         Multiple # lines or unassigned """ strings
-  - Docstring:          First statement in function/module enclosed in """
-  - Inspect Docstring:  print(function_name.__doc__) or help(function_name)
-  - Core Rule:          Explain WHY, never describe the obvious WHAT!
-```
-
----
-
 # Multiple Choice Questions
 
 ### 1. Which symbol starts a single-line comment in Python?
@@ -159,8 +142,8 @@ A. `//`
 B. `/*`
 C. `#`
 D. `--`
-
 **Answer:** C
+
 **Explanation:** The hash symbol `#` begins a comment in Python. The interpreter ignores everything following `#` on that line.
 
 ---
@@ -170,8 +153,8 @@ A. Comments can only be written in uppercase
 B. Standard comments are discarded by the compiler, while docstrings are retained in memory and accessible via the `__doc__` attribute and `help()` function
 C. Docstrings can only be read on Linux
 D. Comments slow down code execution by 50%
-
 **Answer:** B
+
 **Explanation:** Regular `#` comments are ignored during bytecode compilation and do not exist at runtime. Docstrings are preserved as metadata attributes (`__doc__`) on functions, modules, and classes.
 
 ---
@@ -181,8 +164,8 @@ A. Zero spaces
 B. At least 2 spaces
 C. Exactly 5 spaces
 D. 1 tab character
-
 **Answer:** B
+
 **Explanation:** PEP 8 dictates that inline comments should be separated from the code statement by at least two spaces, followed by the `#` symbol and a single space before the text.
 
 ---
@@ -192,8 +175,8 @@ A. `# retry handshake if banking gateway returns HTTP 504 timeout`
 B. `i = i + 1  # Increment i by 1`
 C. `# calculate GST tax based on interstate CGST/SGST rules`
 D. `# cache results for 300 seconds to prevent database load spikes`
-
 **Answer:** B
+
 **Explanation:** Stating `Increment i by 1` merely restates what the code obviously does without providing any context. Comments should explain the non-obvious *why*, not the obvious *what*.
 
 ---
@@ -203,8 +186,8 @@ A. An empty line
 B. The built-in documentation string explaining how the `len()` function calculates object length
 C. A `SyntaxError`
 D. The physical memory address of the function
-
 **Answer:** B
+
 **Explanation:** Built-in Python functions include standard docstrings. Accessing `len.__doc__` displays the built-in documentation: `Return the number of items in a container.`
 
 ---
@@ -256,25 +239,4 @@ print("=" * 55)
 print("\n[PROGRAMMATIC DOCSTRING INSPECTION VIA .__doc__]:")
 print(calculate_scholarship_stipend.__doc__.strip())
 print("=" * 55)
-```
-
-### Expected Program Output:
-```text
-=======================================================
-     SCHOLARSHIP STIPEND ALLOCATION RESULT
-=======================================================
-Student Cumulative GPA: 9.8
-Monthly Stipend Award : ₹10,000 / month
-=======================================================
-
-[PROGRAMMATIC DOCSTRING INSPECTION VIA .__doc__]:
-Calculate the monthly scholarship stipend based on academic GPA.
-
-    Parameters:
-        gpa (float): Cumulative Grade Point Average (0.0 to 10.0 scale).
-        base_stipend (int, optional): Standard foundation grant in INR. Defaults to 5000.
-
-    Returns:
-        int: Total monthly stipend award in INR.
-=======================================================
 ```
