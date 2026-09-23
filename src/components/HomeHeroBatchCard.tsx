@@ -4,40 +4,10 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { LiveBatch } from '@/types';
 import CountdownTimer from '@/components/CountdownTimer';
+import { parseBatchStartTimestamp } from '@/lib/batchUtils';
 
 interface HomeHeroBatchCardProps {
   initialBatches: LiveBatch[];
-}
-
-export function parseBatchStartTimestamp(batch: LiveBatch): number {
-  if (batch.startDateTime) {
-    const ts = new Date(batch.startDateTime).getTime();
-    if (!isNaN(ts)) return ts;
-  }
-
-  if (batch.startDate) {
-    let timePart = '09:00 AM';
-    if (batch.schedule) {
-      const match = batch.schedule.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
-      if (match) timePart = match[1];
-    }
-    const [hVal, mVal] = timePart.split(':');
-    const [mins, ampm] = (mVal || '00 AM').trim().split(' ');
-    let hours = parseInt(hVal, 10) || 9;
-    const minutes = parseInt(mins, 10) || 0;
-    if (ampm && ampm.toUpperCase() === 'PM' && hours < 12) hours += 12;
-    if (ampm && ampm.toUpperCase() === 'AM' && hours === 12) hours = 0;
-
-    const [year, month, day] = batch.startDate.split('-').map(Number);
-    if (year && month && day) {
-      const d = new Date(year, month - 1, day, hours, minutes, 0);
-      return d.getTime();
-    }
-    const d = new Date(batch.startDate).getTime();
-    if (!isNaN(d)) return d;
-  }
-
-  return 0;
 }
 
 export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardProps) {
@@ -55,8 +25,8 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
     if (upcoming.length > 0) {
       return upcoming[0];
     }
-    // If all batches have started, show the latest batch
-    return sortedBatches[sortedBatches.length - 1];
+    // If all batches have started and no upcoming batch exists, return null
+    return null;
   }, [sortedBatches]);
 
   // Initial batch for SSR
@@ -71,7 +41,7 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
     const checkActiveBatch = () => {
       const now = Date.now();
       const nextUpcoming = findNextUpcomingBatch(now);
-      if (nextUpcoming && nextUpcoming.id !== currentBatch?.id) {
+      if (nextUpcoming?.id !== currentBatch?.id) {
         setCurrentBatch(nextUpcoming);
       }
       setTick((t) => t + 1);
@@ -87,9 +57,7 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
     // Immediately look for next upcoming batch
     const now = Date.now();
     const next = findNextUpcomingBatch(now);
-    if (next) {
-      setCurrentBatch(next);
-    }
+    setCurrentBatch(next);
   }, [findNextUpcomingBatch]);
 
   if (!currentBatch) return null;

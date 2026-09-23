@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import HomeHeroBatchCard from '@/components/HomeHeroBatchCard';
+import { parseBatchStartTimestamp } from '@/lib/batchUtils';
 import CountdownTimer from '@/components/CountdownTimer';
 import HomeFaqAccordion from '@/components/HomeFaqAccordion';
 import { Course, LiveBatch } from '@/types';
@@ -85,18 +86,14 @@ export default async function HomePage() {
   }
 
   const now = Date.now();
-  const upcomingBatch = [...allBatches]
-    .filter((b) => {
-      const ts = b.startDateTime ? new Date(b.startDateTime).getTime() : new Date(b.startDate).getTime();
-      return ts > now;
-    })
-    .sort((a, b) => {
-      const aTime = a.startDateTime ? new Date(a.startDateTime).getTime() : new Date(a.startDate).getTime();
-      const bTime = b.startDateTime ? new Date(b.startDateTime).getTime() : new Date(b.startDate).getTime();
-      return aTime - bTime;
-    })[0] || allBatches[0];
+  const upcomingBatches = [...allBatches]
+    .filter((b) => parseBatchStartTimestamp(b) > now)
+    .sort((a, b) => parseBatchStartTimestamp(a) - parseBatchStartTimestamp(b));
 
-  const countdownDateString = upcomingBatch?.startDateTime || `${upcomingBatch?.startDate || '2026-09-20'}T09:00:00`;
+  const upcomingBatch = upcomingBatches[0] || null;
+  const countdownDateString = upcomingBatch
+    ? upcomingBatch.startDateTime || (parseBatchStartTimestamp(upcomingBatch) ? new Date(parseBatchStartTimestamp(upcomingBatch)).toISOString() : `${upcomingBatch.startDate}T09:00:00`)
+    : '';
 
   const stats = [
     { id: 1, name: 'Students Trained', value: '1,200+', icon: Users },
@@ -340,9 +337,9 @@ export default async function HomePage() {
       <div className="space-y-16 pb-16">
         {/* 1. Hero Section */}
         <section className="relative bg-gradient-to-br from-surface to-white border-b border-border-subtle overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <header className="space-y-6">
-              <div className="flex flex-wrap items-center gap-2">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 ${upcomingBatch ? 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center' : 'max-w-4xl mx-auto flex flex-col items-center text-center space-y-6'}`}>
+            <header className={`space-y-6 ${upcomingBatch ? '' : 'flex flex-col items-center text-center'}`}>
+              <div className={`flex flex-wrap items-center gap-2 ${upcomingBatch ? '' : 'justify-center'}`}>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold tracking-wider bg-[#B83A00]/10 text-[#B83A00]">
                   <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
                   Shikohabad's No. 1 Coding Academy
@@ -362,10 +359,10 @@ export default async function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary leading-tight">
                 Empower Your Career with <span className="text-secondary">Practical Coding</span> Skills
               </h1>
-              <p className="home-hero-desc text-base sm:text-lg text-text-muted max-w-xl leading-relaxed">
+              <p className={`home-hero-desc text-base sm:text-lg text-text-muted ${upcomingBatch ? 'max-w-xl' : 'max-w-2xl'} leading-relaxed`}>
                 Join <strong>MSK Institute</strong> in Shikohabad to learn Python, Full-Stack Web Development, and essential computer concepts with hands-on lab projects and direct mentorship by <strong>Er. Sumit Kumar</strong>.
               </p>
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className={`flex flex-wrap gap-3 pt-2 ${upcomingBatch ? '' : 'justify-center'}`}>
                 <Link
                   href="/courses"
                   className="inline-flex items-center justify-center px-6 py-3.5 bg-secondary hover:bg-secondary-light text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
@@ -389,7 +386,7 @@ export default async function HomePage() {
               </div>
             </header>
 
-            <HomeHeroBatchCard initialBatches={allBatches} />
+            {upcomingBatch && <HomeHeroBatchCard initialBatches={allBatches} />}
           </div>
         </section>
 
@@ -412,31 +409,33 @@ export default async function HomePage() {
         </section>
 
         {/* 3. Live Course Banner */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary text-white rounded-2xl overflow-hidden shadow-lg border border-primary-light flex flex-col md:flex-row items-center justify-center p-8 md:p-12 gap-8 md:gap-16 lg:gap-24 relative">
-            <div className="space-y-4 max-w-xl text-center md:text-left">
-              <span className="inline-block px-3 py-1 bg-secondary text-white text-xs font-bold uppercase rounded-full">
-                Admissions Open
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                Enroll in Upcoming Live Coding Cohorts
-              </h2>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                Registration closes soon for our premium online & offline coding batches in Shikohabad. Limited batch seats to maintain optimal student-to-instructor guidance.
-              </p>
+        {upcomingBatch && (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-primary text-white rounded-2xl overflow-hidden shadow-lg border border-primary-light flex flex-col md:flex-row items-center justify-center p-8 md:p-12 gap-8 md:gap-16 lg:gap-24 relative">
+              <div className="space-y-4 max-w-xl text-center md:text-left">
+                <span className="inline-block px-3 py-1 bg-secondary text-white text-xs font-bold uppercase rounded-full">
+                  Admissions Open
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Enroll in Upcoming Live Coding Cohorts
+                </h2>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Registration closes soon for our premium online & offline coding batches in Shikohabad. Limited batch seats to maintain optimal student-to-instructor guidance.
+                </p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl flex flex-col items-center gap-4 text-center">
+                <span className="text-xs uppercase tracking-wider font-semibold text-gray-300">Time remaining:</span>
+                <CountdownTimer targetDate={countdownDateString} />
+                <Link
+                  href="/live"
+                  className="mt-2 w-full text-center px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-sm rounded-xl transition-colors shadow"
+                >
+                  View Live Classes Schedule ➔
+                </Link>
+              </div>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl flex flex-col items-center gap-4 text-center">
-              <span className="text-xs uppercase tracking-wider font-semibold text-gray-300">Time remaining:</span>
-              <CountdownTimer targetDate={countdownDateString} />
-              <Link
-                href="/live"
-                className="mt-2 w-full text-center px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-sm rounded-xl transition-colors shadow"
-              >
-                View Live Classes Schedule ➔
-              </Link>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* 4. Course Highlights */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">

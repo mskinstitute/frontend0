@@ -98,7 +98,7 @@ export default function FloatingWhatsAppCTA() {
         <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
         
         {/* WhatsApp Icon */}
-        <MessageCircle className="w-7 h-7 fill-white text-[#25D366] relative z-10" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="Whatsapp" className="w-10 h-10 fill-white text-[#25D366] relative z-10"/> 
 
         {/* Small Online Indicator Dot */}
         <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-300 border-2 border-white rounded-full z-20" />
