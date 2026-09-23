@@ -126,8 +126,8 @@ export default async function CoursesPage() {
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 27.1084,
-          "longitude": 78.5846
+          "latitude": 27.1157743,
+          "longitude": 78.5829716
         },
         "founder": {
           "@type": "Person",

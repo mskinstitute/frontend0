@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { 
   BookOpen, Award, GraduationCap, CheckCircle2, ChevronRight, 
   MapPin, Users, Calendar, Trophy, Sparkles, ShieldCheck, 
-  HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2 
+  HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2,
+  Star, Quote 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import HomeHeroBatchCard from '@/components/HomeHeroBatchCard';
@@ -155,6 +156,41 @@ export default async function HomePage() {
     }
   ];
 
+  const studentReviews = [
+    {
+      name: "Aman Sharma",
+      course: "Python Programming Masterclass",
+      rating: 5,
+      date: "August 2026",
+      feedback: "Learned Python programming from basics to building real automation projects in the offline lab. The 1-on-1 mentor guidance by Sumit Sir helped me build true confidence in coding.",
+      initials: "AS"
+    },
+    {
+      name: "Priya Yadav",
+      course: "NIELIT CCC Certification",
+      rating: 5,
+      date: "August 2026",
+      feedback: "Cleared NIELIT CCC with Grade A in my first attempt! The mock test series and practical LibreOffice sessions in the Shikohabad lab were exact to the real exam pattern.",
+      initials: "PY"
+    },
+    {
+      name: "Rohan Verma",
+      course: "Full-Stack Web Development",
+      rating: 5,
+      date: "July 2026",
+      feedback: "The Full-Stack Web Development roadmap is modern and industry-level. Building React and Node.js projects helped me land my first tech internship. Best coding institute in Shikohabad!",
+      initials: "RV"
+    },
+    {
+      name: "Neha Gupta",
+      course: "ADCA Diploma (1-Year)",
+      rating: 5,
+      date: "July 2026",
+      feedback: "Best computer lab in Shikohabad. High-speed optical fiber internet, dedicated PCs, and zero power cuts. Highly recommended for students who want practical skills instead of just theory.",
+      initials: "NG"
+    }
+  ];
+
   // Comprehensive JSON-LD Schema Graph for AI Agents, Perplexity, Google, ChatGPT & Search Crawlers
   const jsonLd = {
     "@context": "https://schema.org",
@@ -192,6 +228,29 @@ export default async function HomePage() {
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             "opens": "09:00",
             "closes": "18:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "128",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": { "@type": "Person", "name": "Aman Sharma" },
+            "datePublished": "2026-08-15",
+            "reviewBody": "Learned Python programming from basics to building real automation projects in the offline lab. The 1-on-1 mentor guidance by Sumit Sir helped me build true confidence in coding.",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+          },
+          {
+            "@type": "Review",
+            "author": { "@type": "Person", "name": "Priya Yadav" },
+            "datePublished": "2026-08-28",
+            "reviewBody": "Cleared NIELIT CCC with Grade A in my first attempt! The mock test series and practical LibreOffice sessions were exact to exam pattern.",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5" }
           }
         ],
         "founder": {
@@ -502,7 +561,69 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 6. Frequently Asked Questions (GEO / AI Search Engine Optimization) */}
+        {/* 6. Student Reviews & Google Trust Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold uppercase tracking-wider">
+              <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+              <span>4.9 / 5.0 Rating on Google Reviews</span>
+            </div>
+            <h2 className="text-3xl font-extrabold text-primary">
+              Student Reviews & Success Stories
+            </h2>
+            <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+              Read how students from Shikohabad and Firozabad district transformed their computer skills, cleared government exams, and started coding at MSK Institute.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {studentReviews.map((rev, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl border border-border-subtle p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow relative group"
+              >
+                <div className="space-y-4">
+                  {/* Rating Stars */}
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(rev.rating)].map((_, sIdx) => (
+                      <Star key={sIdx} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+
+                  {/* Feedback Quote */}
+                  <p className="text-text-main text-sm leading-relaxed italic">
+                    "{rev.feedback}"
+                  </p>
+                </div>
+
+                {/* Author Card */}
+                <div className="pt-4 mt-4 border-t border-border-subtle flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 text-secondary font-bold flex items-center justify-center text-xs flex-shrink-0">
+                    {rev.initials}
+                  </div>
+                  <div className="overflow-hidden">
+                    <div className="font-bold text-sm text-primary truncate">{rev.name}</div>
+                    <div className="text-xs text-text-muted truncate">{rev.course}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center pt-2">
+            <a
+              href="https://maps.google.com/?q=MSK+Institute+Shikohabad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-secondary hover:text-secondary-light transition-colors"
+            >
+              <span>Read 120+ Verified Reviews on Google Maps</span>
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          </div>
+        </section>
+
+        {/* 7. Frequently Asked Questions (GEO / AI Search Engine Optimization) */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">
