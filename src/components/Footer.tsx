@@ -65,6 +65,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/contact" className="hover:text-white transition-colors duration-150">Contact & Admissions</Link>
+              </li>
+              <li>
                 <Link href="/verify-certificate" className="hover:text-white transition-colors duration-150">Verify Certificates</Link>
               </li>
             </ul>

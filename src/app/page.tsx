@@ -90,7 +90,8 @@ export default async function HomePage() {
     .filter((b) => parseBatchStartTimestamp(b) > now)
     .sort((a, b) => parseBatchStartTimestamp(a) - parseBatchStartTimestamp(b));
 
-  const upcomingBatch = upcomingBatches[0] || null;
+  const hasLiveBatches = allBatches.length > 0;
+  const upcomingBatch = upcomingBatches[0] || (hasLiveBatches ? allBatches[0] : null);
   const countdownDateString = upcomingBatch
     ? upcomingBatch.startDateTime || (parseBatchStartTimestamp(upcomingBatch) ? new Date(parseBatchStartTimestamp(upcomingBatch)).toISOString() : `${upcomingBatch.startDate}T09:00:00`)
     : '';
@@ -337,9 +338,9 @@ export default async function HomePage() {
       <div className="space-y-16 pb-16">
         {/* 1. Hero Section */}
         <section className="relative bg-gradient-to-br from-surface to-white border-b border-border-subtle overflow-hidden">
-          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 ${upcomingBatch ? 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center' : 'max-w-4xl mx-auto flex flex-col items-center text-center space-y-6'}`}>
-            <header className={`space-y-6 ${upcomingBatch ? '' : 'flex flex-col items-center text-center'}`}>
-              <div className={`flex flex-wrap items-center gap-2 ${upcomingBatch ? '' : 'justify-center'}`}>
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-14 lg:pt-8 lg:pb-16 ${hasLiveBatches ? 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center' : 'max-w-4xl mx-auto flex flex-col items-center text-center space-y-6'}`}>
+            <header className={`space-y-6 ${hasLiveBatches ? '' : 'flex flex-col items-center text-center'}`}>
+              <div className={`flex flex-wrap items-center gap-2 ${hasLiveBatches ? '' : 'justify-center'}`}>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold tracking-wider bg-[#B83A00]/10 text-[#B83A00]">
                   <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
                   Shikohabad's No. 1 Coding Academy
@@ -359,10 +360,10 @@ export default async function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary leading-tight">
                 Empower Your Career with <span className="text-secondary">Practical Coding</span> Skills
               </h1>
-              <p className={`home-hero-desc text-base sm:text-lg text-text-muted ${upcomingBatch ? 'max-w-xl' : 'max-w-2xl'} leading-relaxed`}>
+              <p className={`home-hero-desc text-base sm:text-lg text-text-muted ${hasLiveBatches ? 'max-w-xl' : 'max-w-2xl'} leading-relaxed`}>
                 Join <strong>MSK Institute</strong> in Shikohabad to learn Python, Full-Stack Web Development, and essential computer concepts with hands-on lab projects and direct mentorship by <strong>Er. Sumit Kumar</strong>.
               </p>
-              <div className={`flex flex-wrap gap-3 pt-2 ${upcomingBatch ? '' : 'justify-center'}`}>
+              <div className={`flex flex-wrap gap-3 pt-2 ${hasLiveBatches ? '' : 'justify-center'}`}>
                 <Link
                   href="/courses"
                   className="inline-flex items-center justify-center px-6 py-3.5 bg-secondary hover:bg-secondary-light text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
@@ -386,7 +387,7 @@ export default async function HomePage() {
               </div>
             </header>
 
-            {upcomingBatch && <HomeHeroBatchCard initialBatches={allBatches} />}
+            {hasLiveBatches && <HomeHeroBatchCard initialBatches={allBatches} />}
           </div>
         </section>
 
