@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Database,
   Table2,
@@ -16,6 +16,9 @@ import {
   Layers,
   Code2,
   FileCode,
+  Upload,
+  Download,
+  FileDown,
 } from 'lucide-react';
 import { mysqlEngine, SqlDatabaseInfo, SqlTableInfo, SqlColumnInfo } from './mysqlEngine';
 import ActionTooltip from './ActionTooltip';
@@ -41,6 +44,66 @@ export default function DatabaseSchemasSection({
   const [isCreatingDb, setIsCreatingDb] = useState<boolean>(false);
   const [newDbName, setNewDbName] = useState<string>('');
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const uploadInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImportDbFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      try {
+        const buffer = ev.target?.result as ArrayBuffer;
+        if (!buffer) throw new Error('Could not read binary file data');
+        const uint8 = new Uint8Array(buffer);
+        const res = mysqlEngine.importDatabaseFile(file.name, uint8);
+        onSwitchDatabase?.(res.name);
+        refreshSchemas();
+        setExpandedDbs((prev) => new Set([...prev, res.name]));
+        toast.success(res.message, { icon: '🗄️', duration: 3500 });
+      } catch (err: any) {
+        toast.error(`Database import failed: ${err.message || String(err)}`);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+    e.target.value = '';
+  };
+
+  const handleDownloadDbBinary = (dbName: string) => {
+    try {
+      const { name, data } = mysqlEngine.exportDatabaseBinary(dbName);
+      const blob = new Blob([data as any], { type: 'application/x-sqlite3' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success(`Downloaded SQLite database '${name}'`, { icon: '💾' });
+    } catch (err: any) {
+      toast.error(`Export failed: ${err.message || String(err)}`);
+    }
+  };
+
+  const handleExportSqlDump = (dbName: string) => {
+    try {
+      const { name, sql } = mysqlEngine.exportDatabaseSqlDump(dbName);
+      const blob = new Blob([sql], { type: 'text/sql' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success(`Exported SQL dump '${name}'`, { icon: '📜' });
+    } catch (err: any) {
+      toast.error(`SQL dump export failed: ${err.message || String(err)}`);
+    }
+  };
 
   // Load latest schema from mysqlEngine
   const refreshSchemas = useCallback(() => {
@@ -186,6 +249,26 @@ export default function DatabaseSchemasSection({
           onClick={(e) => e.stopPropagation()}
           className="flex items-center gap-1 opacity-80 group-hover:opacity-100"
         >
+          {/* Hidden file input for uploading .db / .sqlite */}
+          <input
+            ref={uploadInputRef}
+            type="file"
+            accept=".db,.sqlite,.sqlite3"
+            className="hidden"
+            onChange={handleImportDbFile}
+          />
+
+          <ActionTooltip label="Import .db / .sqlite File" placement="top">
+            <button
+              type="button"
+              onClick={() => uploadInputRef.current?.click()}
+              aria-label="Import SQLite Database"
+              className="p-1 text-slate-400 hover:text-emerald-300 hover:bg-[#2d2d2d] rounded transition-colors cursor-pointer"
+            >
+              <Upload className="w-3 h-3" />
+            </button>
+          </ActionTooltip>
+
           <ActionTooltip label="Refresh Schemas" placement="top">
             <button
               type="button"
@@ -303,6 +386,28 @@ export default function DatabaseSchemasSection({
                         className="p-0.5 hover:text-sky-400 hover:bg-[#333] rounded cursor-pointer"
                       >
                         <Plus className="w-3 h-3" />
+                      </button>
+                    </ActionTooltip>
+
+                    <ActionTooltip label={`Download '${db.name}' as .db (SQLite Binary)`} placement="right">
+                      <button
+                        type="button"
+                        onClick={() => handleDownloadDbBinary(db.name)}
+                        aria-label="Download SQLite database"
+                        className="p-0.5 hover:text-emerald-400 hover:bg-[#333] rounded cursor-pointer"
+                      >
+                        <Download className="w-3 h-3" />
+                      </button>
+                    </ActionTooltip>
+
+                    <ActionTooltip label={`Export '${db.name}' as .sql Dump`} placement="right">
+                      <button
+                        type="button"
+                        onClick={() => handleExportSqlDump(db.name)}
+                        aria-label="Export SQL dump"
+                        className="p-0.5 hover:text-amber-400 hover:bg-[#333] rounded cursor-pointer"
+                      >
+                        <FileDown className="w-3 h-3" />
                       </button>
                     </ActionTooltip>
 

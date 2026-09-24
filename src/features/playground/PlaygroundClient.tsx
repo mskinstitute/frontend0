@@ -23,6 +23,9 @@ import MarkdownPreview from './MarkdownPreview';
 import MarkdownToolbar from './MarkdownToolbar';
 import ConsoleOutput from './ConsoleOutput';
 import SqlTableOutput from './SqlTableOutput';
+import MultiTestcaseRunner from './MultiTestcaseRunner';
+import DataStructureVisualizer from './DataStructureVisualizer';
+import { formatCode } from './codeFormatter';
 import PlaygroundSettingsModal from './PlaygroundSettingsModal';
 import KeyboardShortcutsModal from './KeyboardShortcutsModal';
 import CodeScreenshotModal from './CodeScreenshotModal';
@@ -41,7 +44,7 @@ import {
   GitBranch, GripVertical, GripHorizontal, EyeOff, Layout,
   X, CheckCircle2, ChevronRight, FilePlus, Share2, Archive, ChevronDown, Save, Camera,
   XCircle, FolderPlus, ChevronsDownUp, FileUp, FolderUp, FolderInput, Upload, BookOpen,
-  Printer, ExternalLink
+  Printer, ExternalLink, Layers
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { editor } from 'monaco-editor';
@@ -395,8 +398,8 @@ export default function PlaygroundClient({
     }
   }, [isModal]);
 
-  // Active terminal / preview tab
-  const [activeTab, setActiveTab] = useState<'preview' | 'terminal'>(
+  // Active terminal / preview / testcases / visualizer tab
+  const [activeTab, setActiveTab] = useState<'preview' | 'terminal' | 'testcases' | 'visualizer'>(
     resolvedInitialLang === 'html' || resolvedInitialLang === 'css' || resolvedInitialLang === 'markdown' ? 'preview' : 'terminal'
   );
   const [logs, setLogs] = useState<ConsoleMessage[]>([]);
@@ -659,6 +662,27 @@ export default function PlaygroundClient({
       return next;
     });
   };
+
+  // 1-Click Code Formatter / Beautifier (Shift + Alt + F)
+  const handleFormatCode = useCallback(() => {
+    if (!editorInstanceRef.current) return;
+    const ed = editorInstanceRef.current;
+    const currentCode = ed.getValue();
+    if (!currentCode.trim()) return;
+
+    try {
+      const formatted = formatCode(currentCode, language, settings.tabSize);
+      if (formatted !== currentCode) {
+        ed.setValue(formatted);
+        handleCodeChange(formatted);
+        toast.success('Code formatted ✨', { icon: '✨', duration: 1500 });
+      } else {
+        toast('Code is already clean & formatted', { icon: '👌', duration: 1200 });
+      }
+    } catch (err: any) {
+      toast.error('Could not format code: ' + (err?.message || 'Error'));
+    }
+  }, [language, settings.tabSize]);
 
   // Insert symbol or text at current cursor (for mobile toolbar)
   const insertTextAtCursor = useCallback((text: string) => {
@@ -1090,11 +1114,7 @@ export default function PlaygroundClient({
     }
   };
 
-  const handleZipInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawFiles = e.target.files;
-    if (!rawFiles || rawFiles.length === 0) return;
-
-    const zipFile = rawFiles[0];
+  const handleExtractAndOpenZipFile = async (zipFile: File) => {
     toast.loading(`Extracting ${zipFile.name}...`, { id: 'zip-import-toast' });
 
     try {
@@ -1145,6 +1165,12 @@ export default function PlaygroundClient({
     }
   };
 
+  const handleZipInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawFiles = e.target.files;
+    if (!rawFiles || rawFiles.length === 0) return;
+    await handleExtractAndOpenZipFile(rawFiles[0]);
+  };
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     if (!isDraggingOver) setIsDraggingOver(true);
@@ -1159,6 +1185,38 @@ export default function PlaygroundClient({
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDraggingOver(false);
+
+    // 1. Intercept dropped SQLite binary database files (.db, .sqlite, .sqlite3)
+    const droppedFilesList = Array.from(e.dataTransfer.files || []);
+    const dbFile = droppedFilesList.find((f) => /\.(db|sqlite|sqlite3)$/i.test(f.name));
+
+    if (dbFile) {
+      toast.loading(`Importing SQLite database "${dbFile.name}"...`, { id: 'db-drop-toast' });
+      try {
+        const arrayBuffer = await dbFile.arrayBuffer();
+        const uint8 = new Uint8Array(arrayBuffer);
+        const res = mysqlEngine.importDatabaseFile(dbFile.name, uint8);
+        setLanguage('sql');
+        setActiveSqlDbName(res.name);
+        setSchemaVersion((v) => v + 1);
+        toast.success(`Imported "${dbFile.name}" (${res.tableCount} table${res.tableCount === 1 ? '' : 's'})`, {
+          id: 'db-drop-toast',
+          icon: '🗄️',
+          duration: 4000,
+        });
+        return;
+      } catch (err: any) {
+        toast.error('Database import error: ' + (err?.message || 'Invalid SQLite file'), { id: 'db-drop-toast' });
+        return;
+      }
+    }
+
+    // 2. Intercept dropped ZIP project archive
+    const zipFile = droppedFilesList.find((f) => f.name.toLowerCase().endsWith('.zip'));
+    if (zipFile) {
+      await handleExtractAndOpenZipFile(zipFile);
+      return;
+    }
 
     toast.loading('Processing dropped items...', { id: 'drop-toast' });
     try {
@@ -1211,7 +1269,7 @@ export default function PlaygroundClient({
     }
   };
 
-  // Global keyboard shortcuts (Ctrl+B, Ctrl+`, Ctrl+Shift+E, Ctrl+Shift+F, Ctrl+O, Alt+O)
+  // Global keyboard shortcuts (Ctrl+B, Ctrl+`, Ctrl+Shift+E, Ctrl+Shift+F, Ctrl+O, Alt+O, Shift+Alt+F)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // 1. Ctrl + B / Cmd + B -> toggle primary side bar (Explorer, Search, Challenges, Examples) just like VS Code
@@ -1240,14 +1298,19 @@ export default function PlaygroundClient({
         triggerOpenFilePicker();
       }
       // 6. Alt + O -> Open local folder from device
-      if (e.altKey && e.key.toLowerCase() === 'o') {
+      if (e.altKey && !e.shiftKey && e.key.toLowerCase() === 'o') {
         e.preventDefault();
         triggerOpenFolderPicker();
+      }
+      // 7. Shift + Alt + F -> Format document / beautify code
+      if (e.shiftKey && e.altKey && (e.key.toLowerCase() === 'f' || e.code === 'KeyF')) {
+        e.preventDefault();
+        handleFormatCode();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [triggerOpenFilePicker, triggerOpenFolderPicker, toggleSidebar]);
+  }, [triggerOpenFilePicker, triggerOpenFolderPicker, toggleSidebar, handleFormatCode]);
 
   // Jump to line from Search result
   const handleSelectSearchResult = (fileId: string, lineNumber: number, column: number) => {
@@ -1554,6 +1617,74 @@ finally:
       f.id === currentActiveId ? { ...f, content: currentCode } : f
     );
   }, [files, activeFileId]);
+
+  // Run active code with custom stdin input (for MultiTestcaseRunner)
+  const handleRunSingleCustomInput = useCallback(
+    async (customInput: string): Promise<string> => {
+      const currentFiles = getLatestFiles();
+      const currentActive = currentFiles.find((f) => f.id === activeFileId) || currentFiles[0];
+      const activeCode = currentActive ? currentActive.content : '';
+
+      if (language === 'python') {
+        const pyodide = await initPyodide();
+        if (!pyodide) throw new Error('Pyodide runtime could not be loaded');
+        const testHarness = `
+import sys
+from io import StringIO
+
+_stdin_buffer = StringIO("""${customInput.replace(/\\/g, '\\\\').replace(/"""/g, '\\"\\"\\"')}""")
+_stdout_buffer = StringIO()
+_stderr_buffer = StringIO()
+_original_stdin = sys.stdin
+_original_stdout = sys.stdout
+_original_stderr = sys.stderr
+
+sys.stdin = _stdin_buffer
+sys.stdout = _stdout_buffer
+sys.stderr = _stderr_buffer
+
+try:
+${activeCode.split('\n').map((line) => '    ' + line).join('\n')}
+except Exception as e:
+    import traceback
+    sys.stderr.write(traceback.format_exc())
+finally:
+    sys.stdin = _original_stdin
+    sys.stdout = _original_stdout
+    sys.stderr = _original_stderr
+
+(_stdout_buffer.getvalue(), _stderr_buffer.getvalue())
+`;
+        const runRes: any = await pyodide.runPythonAsync(testHarness);
+        const [outStr, errStr] = runRes?.toJs ? runRes.toJs() : ['', ''];
+        return (outStr || errStr || '').trim();
+      }
+
+      if (language === 'cpp' || language === 'c' || language === 'java') {
+        const remoteRes = await runRemoteCode(language, activeCode, customInput);
+        if (remoteRes.compilerError) {
+          throw new Error(remoteRes.compilerError);
+        }
+        return (remoteRes.stdout || remoteRes.stderr || '').trim();
+      }
+
+      if (language === 'javascript') {
+        const capturedLogs: string[] = [];
+        const originalLog = console.log;
+        console.log = (...args: unknown[]) => capturedLogs.push(args.join(' '));
+        try {
+          const fn = new Function(activeCode);
+          fn();
+        } finally {
+          console.log = originalLog;
+        }
+        return capturedLogs.join('\n').trim();
+      }
+
+      return 'Test execution not available for this language.';
+    },
+    [activeFileId, getLatestFiles, initPyodide, language]
+  );
 
   // Quick Save & Auto-Save Workspace
   const handleSaveDocument = useCallback(
@@ -2380,6 +2511,21 @@ _err_result = _stderr_buffer.getvalue()
             </button>
           </ActionTooltip>
 
+          {/* 1-Click Code Formatter / Beautifier */}
+          <ActionTooltip
+            label="Format Code / Beautify Document"
+            shortcut="Shift + Alt + F"
+            placement="bottom"
+          >
+            <button
+              onClick={handleFormatCode}
+              aria-label="Format Code"
+              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2a2d2e] rounded-lg transition-colors cursor-pointer"
+            >
+              <Code2 className="w-4 h-4 text-emerald-400" />
+            </button>
+          </ActionTooltip>
+
           {/* Export Beautiful Code Screenshot (Carbon/Ray.so) */}
           <ActionTooltip
             label="Export Code Screenshot (Carbon / Ray.so)"
@@ -2812,6 +2958,7 @@ _err_result = _stderr_buffer.getvalue()
                       settings={settings}
                       onRun={handleRunCode}
                       onSave={handleSaveDocument}
+                      onFormat={handleFormatCode}
                       onOpenFile={() => triggerOpenFilePicker()}
                       onTogglePanel={() => setIsPanelOpen((prev) => !prev)}
                       onToggleSidebar={toggleSidebar}
@@ -2917,6 +3064,34 @@ _err_result = _stderr_buffer.getvalue()
                       </span>
                     )}
                   </button>
+
+                  {language !== 'html' && language !== 'css' && language !== 'markdown' && language !== 'sql' && (
+                    <button
+                      onClick={() => setActiveTab('testcases')}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 font-medium transition-colors cursor-pointer text-xs ${
+                        activeTab === 'testcases'
+                          ? 'text-white border-b-2 border-secondary font-bold'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>⚡ Test Cases</span>
+                    </button>
+                  )}
+
+                  {(language === 'c' || language === 'cpp' || language === 'python' || language === 'java') && (
+                    <button
+                      onClick={() => setActiveTab('visualizer')}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 font-medium transition-colors cursor-pointer text-xs ${
+                        activeTab === 'visualizer'
+                          ? 'text-white border-b-2 border-secondary font-bold'
+                          : 'text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>🔬 DS & Pointers</span>
+                    </button>
+                  )}
                 </div>
 
                 {/* Panel Actions: Move Right/Bottom + Close */}
@@ -3014,6 +3189,21 @@ _err_result = _stderr_buffer.getvalue()
                         />
                       )}
                     </div>
+                  </div>
+                ) : activeTab === 'testcases' ? (
+                  <div className="w-full h-full overflow-hidden bg-[#1e1e1e]">
+                    <MultiTestcaseRunner
+                      language={language}
+                      code={activeFile?.content || activeCode || ''}
+                      onRunSingleCustomInput={handleRunSingleCustomInput}
+                    />
+                  </div>
+                ) : activeTab === 'visualizer' ? (
+                  <div className="w-full h-full overflow-hidden bg-[#1e1e1e]">
+                    <DataStructureVisualizer
+                      currentCode={activeFile?.content || activeCode || ''}
+                      language={language}
+                    />
                   </div>
                 ) : activeTab === 'preview' && language === 'markdown' ? (
                   <MarkdownPreview

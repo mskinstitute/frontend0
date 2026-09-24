@@ -491,6 +491,7 @@ interface CodeEditorProps {
   onToggleSearch?: () => void;
   onOpenFile?: () => void;
   onCursorChange?: (pos: CursorPosition) => void;
+  onFormat?: () => void;
   readOnly?: boolean;
   onMountEditor?: (editor: editor.IStandaloneCodeEditor) => void;
 }
@@ -509,6 +510,7 @@ export default function CodeEditor({
   onToggleSearch,
   onOpenFile,
   onCursorChange,
+  onFormat,
   readOnly = false,
   onMountEditor,
 }: CodeEditorProps) {
@@ -524,6 +526,7 @@ export default function CodeEditor({
   const onToggleSidebarRef = useRef(onToggleSidebar);
   const onToggleSearchRef = useRef(onToggleSearch);
   const onOpenFileRef = useRef(onOpenFile);
+  const onFormatRef = useRef(onFormat);
 
   React.useEffect(() => {
     onRunRef.current = onRun;
@@ -534,6 +537,7 @@ export default function CodeEditor({
     onToggleSidebarRef.current = onToggleSidebar;
     onToggleSearchRef.current = onToggleSearch;
     onOpenFileRef.current = onOpenFile;
+    onFormatRef.current = onFormat;
   });
 
   // Dynamically apply settings whenever changed in settings modal
@@ -726,6 +730,20 @@ export default function CodeEditor({
     editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyO, () => {
       onOpenFileRef.current?.();
     });
+
+    // 8. Shift + Alt + F: Format Document / Beautify Code
+    editorInstance.addCommand(
+      monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF,
+      () => {
+        if (onFormatRef.current) {
+          onFormatRef.current();
+        } else {
+          try {
+            editorInstance.getAction('editor.action.formatDocument')?.run();
+          } catch {}
+        }
+      }
+    );
   };
 
   return (

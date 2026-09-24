@@ -321,6 +321,131 @@ export class MysqlEngine {
   }
 
   /**
+   * Import a real SQLite binary (.db, .sqlite) file into the engine
+   */
+  public importDatabaseFile(
+    rawName: string,
+    binaryData: Uint8Array
+  ): { name: string; affectedRows: number; message: string; tableCount: number } {
+    if (!this.SQL) throw new Error('SQL engine not loaded yet');
+
+    // Clean name: e.g. "school_db.sqlite" -> "school_db"
+    let name = rawName.replace(/[`'"]/g, '').trim().toLowerCase();
+    name = name.replace(/\.(db|sqlite|sqlite3)$/i, '');
+    if (!name) name = 'imported_db';
+
+    // If database already exists, close it and replace
+    if (this.databases.has(name)) {
+      try {
+        this.databases.get(name)?.close();
+      } catch {}
+    }
+
+    const newDb = new this.SQL.Database(binaryData);
+    registerHelperFunctions(newDb, () => this.activeDatabaseName);
+    this.databases.set(name, newDb);
+    this.activeDatabaseName = name;
+
+    // Count tables in the imported database
+    let tableCount = 0;
+    try {
+      const res = newDb.exec("SELECT count(*) as cnt FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
+      if (res && res[0] && res[0].values && res[0].values[0]) {
+        tableCount = Number(res[0].values[0][0]) || 0;
+      }
+    } catch {}
+
+    return {
+      name,
+      affectedRows: tableCount,
+      message: `Database '${name}' imported successfully (${tableCount} table${tableCount === 1 ? '' : 's'})`,
+      tableCount,
+    };
+  }
+
+  /**
+   * Export active or specified database as a binary SQLite Uint8Array (.db)
+   */
+  public exportDatabaseBinary(rawName?: string): { name: string; data: Uint8Array } {
+    const targetDbName = rawName ? rawName.trim().toLowerCase() : this.activeDatabaseName;
+    const db = this.databases.get(targetDbName);
+    if (!db) {
+      throw new Error(`Database '${targetDbName}' not found`);
+    }
+
+    const data: Uint8Array = db.export();
+    return {
+      name: `${targetDbName}.db`,
+      data,
+    };
+  }
+
+  /**
+   * Export active or specified database as a clean SQL script dump (.sql)
+   */
+  public exportDatabaseSqlDump(rawName?: string): { name: string; sql: string } {
+    const targetDbName = rawName ? rawName.trim().toLowerCase() : this.activeDatabaseName;
+    const db = this.databases.get(targetDbName);
+    if (!db) {
+      throw new Error(`Database '${targetDbName}' not found`);
+    }
+
+    let dump = `-- ============================================================\n`;
+    dump += `-- MSK Code Playground SQL Dump\n`;
+    dump += `-- Database: ${targetDbName}\n`;
+    dump += `-- Exported at: ${new Date().toISOString()}\n`;
+    dump += `-- ============================================================\n\n`;
+
+    dump += `CREATE DATABASE IF NOT EXISTS \`${targetDbName}\`;\n`;
+    dump += `USE \`${targetDbName}\`;\n\n`;
+
+    try {
+      // 1. Get all table schemas
+      const tablesRes = db.exec(
+        "SELECT name, sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+      );
+
+      if (tablesRes && tablesRes[0] && tablesRes[0].values) {
+        for (const row of tablesRes[0].values) {
+          const tableName = String(row[0]);
+          const createSql = String(row[1] || '');
+
+          dump += `-- ------------------------------------------------------------\n`;
+          dump += `-- Table structure for table \`${tableName}\`\n`;
+          dump += `-- ------------------------------------------------------------\n`;
+          dump += `DROP TABLE IF EXISTS \`${tableName}\`;\n`;
+          dump += `${createSql};\n\n`;
+
+          // 2. Get rows for data dump
+          const dataRes = db.exec(`SELECT * FROM "${tableName}"`);
+          if (dataRes && dataRes[0] && dataRes[0].values && dataRes[0].values.length > 0) {
+            const columns = dataRes[0].columns.map((c: string) => `\`${c}\``).join(', ');
+            dump += `-- Dumping data for table \`${tableName}\`\n`;
+            for (const valRow of dataRes[0].values) {
+              const formattedVals = valRow
+                .map((v: any) => {
+                  if (v === null || v === undefined) return 'NULL';
+                  if (typeof v === 'number') return v;
+                  return `'${String(v).replace(/'/g, "''")}'`;
+                })
+                .join(', ');
+              dump += `INSERT INTO \`${tableName}\` (${columns}) VALUES (${formattedVals});\n`;
+            }
+            dump += `\n`;
+          }
+        }
+      }
+    } catch (err: any) {
+      dump += `-- Note: Partial dump due to error: ${err?.message || String(err)}\n`;
+    }
+
+    return {
+      name: `${targetDbName}_dump.sql`,
+      sql: dump,
+    };
+  }
+
+  /**
    * DROP DATABASE / SCHEMA [IF EXISTS] db_name
    */
   public dropDatabase(rawName: string, ifExists: boolean): { affectedRows: number; message: string } {

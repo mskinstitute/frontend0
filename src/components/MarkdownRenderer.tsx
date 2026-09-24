@@ -33,12 +33,12 @@ import {
   tokenizeCodeToLines,
   getVSCodeTokenColor,
 } from '@/lib/prism-highlighter';
-import { SupportedLanguage } from '@/components/playground/types';
+import { SupportedLanguage } from '@/features/playground';
 import { detectAndRenderVisualDiagram } from '@/components/MarkdownDiagrams';
 import InlineCodePreview from '@/components/InlineCodePreview';
 import { isWebPreviewSupported } from '@/lib/webPreviewUtils';
 
-const PlaygroundModal = dynamic(() => import('@/components/playground/PlaygroundModal'), {
+const PlaygroundModal = dynamic(() => import('@/features/playground/PlaygroundModal'), {
   ssr: false,
 });
 
