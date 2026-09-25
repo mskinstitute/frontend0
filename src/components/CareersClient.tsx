@@ -145,7 +145,7 @@ export default function CareersClient({ initialCareers }: CareersClientProps) {
 
   // Generate structured job share text with full details and direct URL
   const generateJobShareText = (career: CareerOpportunity) => {
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.mskinstitute.in';
     const jobUrl = `${origin}/careers#${career.id}`;
     const workTypeStr = career.workType || (career.type === 'internship' ? 'Internship' : 'Full-time Job');
     const skillsList = career.skills && career.skills.length > 0 ? career.skills.join(', ') : null;
@@ -199,7 +199,7 @@ ${jobUrl}
 
   const handleCopyLinkOnly = async () => {
     if (!selectedCareerForShare) return;
-    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in';
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://www.mskinstitute.in';
     const jobUrl = `${origin}/careers#${selectedCareerForShare.id}`;
     try {
       await navigator.clipboard.writeText(jobUrl);
@@ -1563,7 +1563,7 @@ We are looking to hire skilled students and graduates from MSK Institute. Please
                 <input
                   type="text"
                   readOnly
-                  value={`${typeof window !== 'undefined' ? window.location.origin : 'https://mskinstitute.in'}/careers#${selectedCareerForShare.id}`}
+                  value={`${typeof window !== 'undefined' ? window.location.origin : 'https://www.mskinstitute.in'}/careers#${selectedCareerForShare.id}`}
                   className="w-full bg-transparent text-xs text-slate-700 font-mono select-all focus:outline-none truncate"
                   onClick={(e) => (e.target as HTMLInputElement).select()}
                 />

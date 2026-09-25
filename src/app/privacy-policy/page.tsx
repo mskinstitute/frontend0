@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     'Student Data Security MSK'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/privacy-policy',
+    canonical: 'https://www.mskinstitute.in/privacy-policy',
   },
   openGraph: {
     title: 'Privacy Policy | MSK Institute of Technology & Coding',
     description: 'Learn how MSK Institute protects user privacy, student records, and complies with international data privacy standards and Google AdSense guidelines.',
-    url: 'https://mskinstitute.in/privacy-policy',
+    url: 'https://www.mskinstitute.in/privacy-policy',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
@@ -32,13 +32,13 @@ export default function PrivacyPolicyPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Privacy Policy - MSK Institute',
-    url: 'https://mskinstitute.in/privacy-policy',
+    url: 'https://www.mskinstitute.in/privacy-policy',
     description: 'Official Privacy Policy and data protection terms for MSK Institute.',
     publisher: {
       '@type': 'EducationalOrganization',
       name: 'MSK Institute',
-      url: 'https://mskinstitute.in',
-      logo: 'https://mskinstitute.in/logo.jpg',
+      url: 'https://www.mskinstitute.in',
+      logo: 'https://www.mskinstitute.in/logo.jpg',
     },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -47,13 +47,13 @@ export default function PrivacyPolicyPage() {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://mskinstitute.in',
+          item: 'https://www.mskinstitute.in',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Privacy Policy',
-          item: 'https://mskinstitute.in/privacy-policy',
+          item: 'https://www.mskinstitute.in/privacy-policy',
         },
       ],
     },
@@ -76,7 +76,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="mt-3 text-sm sm:text-base text-text-muted leading-relaxed">
-            Effective Date: <strong>{lastUpdated}</strong> • Applies to <strong>MSK Institute</strong> (https://mskinstitute.in) & Offline Campus.
+            Effective Date: <strong>{lastUpdated}</strong> • Applies to <strong>MSK Institute</strong> (https://www.mskinstitute.in) & Offline Campus.
           </p>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
             1. Introduction & Scope
           </h2>
           <p className="text-sm text-text-muted leading-relaxed">
-            At <strong>MSK Institute</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), led by <strong>Er. Sumit Kumar</strong>, respecting your privacy and protecting your personal information is paramount. This Privacy Policy details the types of information we collect when you visit our website (<strong>https://mskinstitute.in</strong>), attend our online live batches, access free coding tutorials, practice in our code playground, or visit our physical campus in Shikohabad, Uttar Pradesh.
+            At <strong>MSK Institute</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), led by <strong>Er. Sumit Kumar</strong>, respecting your privacy and protecting your personal information is paramount. This Privacy Policy details the types of information we collect when you visit our website (<strong>https://www.mskinstitute.in</strong>), attend our online live batches, access free coding tutorials, practice in our code playground, or visit our physical campus in Shikohabad, Uttar Pradesh.
           </p>
           <p className="text-sm text-text-muted leading-relaxed">
             By accessing or using our services, you acknowledge that you have read, understood, and agreed to the collection and use of information in accordance with this policy.
@@ -160,7 +160,7 @@ export default function PrivacyPolicyPage() {
                 Google DoubleClick DART Cookie Disclosure:
               </p>
               <p className="text-xs text-text-muted leading-relaxed">
-                Google, as a third-party vendor, uses cookies to serve advertisements on <strong>https://mskinstitute.in</strong>. Google&apos;s use of the <strong>DART cookie</strong> enables it to serve ads to our users based on their visits to our website and other websites across the Internet.
+                Google, as a third-party vendor, uses cookies to serve advertisements on <strong>https://www.mskinstitute.in</strong>. Google&apos;s use of the <strong>DART cookie</strong> enables it to serve ads to our users based on their visits to our website and other websites across the Internet.
               </p>
               <p className="text-xs text-text-muted leading-relaxed">
                 Users may opt out of the use of the DART cookie and personalized advertising by visiting the official Google Ad and Content Network Privacy Policy at:

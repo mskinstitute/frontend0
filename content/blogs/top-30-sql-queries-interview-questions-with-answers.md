@@ -8,7 +8,7 @@ category: "Database & SQL"
 featured: true
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-09-25"
 readTime: "9 min read"
 tags:

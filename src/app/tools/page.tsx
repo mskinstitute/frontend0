@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'Student Tools MSK Institute',
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/tools',
+    canonical: 'https://www.mskinstitute.in/tools',
   },
 };
 

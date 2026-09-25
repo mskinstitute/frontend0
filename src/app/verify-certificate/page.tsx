@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Student Certificate Verification Registry | MSK Institute',
   description: 'Instantly verify graduation certificates, grades, and course completions issued by MSK Institute, Shikohabad. Ensure authentic qualifications for employers.',
   alternates: {
-    canonical: 'https://mskinstitute.in/verify-certificate',
+    canonical: 'https://www.mskinstitute.in/verify-certificate',
   },
 };
 
@@ -14,8 +14,8 @@ export default function VerifyCertificatePage() {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
     'name': 'MSK Institute',
-    'url': 'https://mskinstitute.in',
-    'logo': 'https://mskinstitute.in/logo.png',
+    'url': 'https://www.mskinstitute.in',
+    'logo': 'https://www.mskinstitute.in/logo.png',
     'address': {
       '@type': 'PostalAddress',
       'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',

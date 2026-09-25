@@ -182,6 +182,8 @@ export default function BlogsClient({ initialBlogs }: BlogsClientProps) {
                   <img
                     src={blog.coverImage}
                     alt={blog.title}
+                    width={600}
+                    height={338}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -232,6 +234,9 @@ export default function BlogsClient({ initialBlogs }: BlogsClientProps) {
                   <img
                     src={blog.author.avatar}
                     alt={blog.author.name}
+                    width={24}
+                    height={24}
+                    loading="lazy"
                     className="w-6 h-6 rounded-full object-cover"
                   />
                   <span className="truncate max-w-[120px]">{blog.author.name}</span>

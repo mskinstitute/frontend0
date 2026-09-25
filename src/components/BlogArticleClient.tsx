@@ -102,6 +102,9 @@ export default function BlogArticleClient({ blog, relatedCourses }: BlogArticleC
           <img
             src={blog.author.avatar}
             alt={blog.author.name}
+            width={44}
+            height={44}
+            loading="eager"
             className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-2xs"
           />
           <div>
@@ -117,6 +120,9 @@ export default function BlogArticleClient({ blog, relatedCourses }: BlogArticleC
         <img
           src={blog.coverImage}
           alt={blog.title}
+          width={1200}
+          height={675}
+          fetchPriority="high"
           className="w-full h-full object-cover"
         />
       </div>

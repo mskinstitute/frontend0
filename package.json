@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "validate:courses": "node scripts/validate-courses.js",
+    "validate:batches": "node scripts/validate-batches.js",
+    "validate:seo": "node scripts/validate-seo.js",
+    "audit:urls": "node scripts/audit-urls.js",
+    "validate:analytics": "node scripts/validate-analytics.js",
+    "validate:local": "node scripts/validate-local.js",
+    "validate:seo-growth": "node scripts/validate-seo-growth.js",
+    "audit:performance": "node scripts/audit-performance.js"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

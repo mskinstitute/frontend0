@@ -27,7 +27,6 @@ export default function robots(): MetadataRoute.Robots {
           '/courses/',
           '/tutorials/',
           '/study-material/',
-          '/notes/',
           '/blogs/',
           '/live-batches/',
           '/playground',
@@ -40,9 +39,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/verify-certificate?id=*', '/admin', '/api'], // Protect private certificate details and internal endpoints
       },
     ],
-    sitemap: [
-      'https://www.mskinstitute.in/sitemap.xml',
-      'https://mskinstitute.in/sitemap.xml',
-    ],
+    sitemap: 'https://www.mskinstitute.in/sitemap.xml',
   };
 }

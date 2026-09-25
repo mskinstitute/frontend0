@@ -13,7 +13,9 @@ import {
   trackFormSubmit, 
   trackGenerateLead, 
   trackBatchRegister, 
-  trackWhatsAppClick 
+  trackWhatsAppClick,
+  trackEnrollmentStart,
+  trackEnrollmentSubmit,
 } from '@/lib/dataLayer';
 import { queueLeadOffline } from '@/lib/offlineSync';
 
@@ -95,6 +97,13 @@ export default function BatchEnrollmentForm({
           course_name: courseTitle || batch.courseTitle,
           course_mode: mode,
           course_price: batch.price,
+        });
+        trackEnrollmentSubmit({
+          batchId: batch.id,
+          batchName: batch.title,
+          courseName: courseTitle || batch.courseTitle,
+          coursePrice: batch.price,
+          courseMode: mode,
         });
         trackBatchRegister({
           batchId: batch.id,
@@ -244,7 +253,14 @@ export default function BatchEnrollmentForm({
                 required
                 placeholder="e.g. Rahul Sharma"
                 value={name}
-                onFocus={() => trackFormStart('batch_enrollment')}
+                onFocus={() => {
+                  trackFormStart('batch_enrollment');
+                  trackEnrollmentStart({
+                    batchId: batch.id,
+                    batchName: batch.title,
+                    courseName: courseTitle || batch.courseTitle,
+                  });
+                }}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-3.5 py-2.5 bg-surface border border-border-subtle rounded-xl text-sm focus:outline-none focus:border-secondary focus:bg-white transition-colors"
               />

@@ -1196,7 +1196,7 @@ export default function ClassroomRaceArena({
       const base = window.location.origin + window.location.pathname;
       return `${base}?mode=race&room=${roomCode}`;
     }
-    return `https://mskinstitute.in/tools/typing?mode=race&room=${roomCode}`;
+    return `https://www.mskinstitute.in/tools/typing?mode=race&room=${roomCode}`;
   }, [roomCode]);
 
   const handleCreateRoom = (e?: React.FormEvent) => {

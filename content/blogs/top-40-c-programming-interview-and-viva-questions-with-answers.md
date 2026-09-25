@@ -8,7 +8,7 @@ category: "Programming & Viva"
 featured: true
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-09-25"
 readTime: "9 min read"
 tags:
@@ -20,7 +20,7 @@ tags:
   - "Memory Allocation"
 relatedCourses:
   - "dsa-mastery-course"
-  - "master-computer-coding-diploma"
+  - "full-stack-development"
 ---
 
 Whether you are preparing for your 1st/2nd semester BCA, B.Sc Computer Science, or B.Tech practical lab viva, C programming is the most foundational subject examiners test. External examiners evaluate whether you truly grasp **memory addresses, pointers, and compilation cycles** or simply memorized syntax.

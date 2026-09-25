@@ -264,7 +264,7 @@ export function HtmlLinkAnatomyDiagram() {
         <div className="flex items-center gap-2">
           <span className="font-bold text-primary">Live Rendered Link Preview:</span>
           <a
-            href="https://mskinstitute.in"
+            href="https://www.mskinstitute.in"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-secondary font-bold underline hover:text-secondary-light transition-colors"

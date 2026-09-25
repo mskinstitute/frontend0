@@ -12,12 +12,12 @@ export const metadata: Metadata = {
     'Computer Training Disclaimer'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/disclaimer',
+    canonical: 'https://www.mskinstitute.in/disclaimer',
   },
   openGraph: {
     title: 'Disclaimer | MSK Institute',
     description: 'Educational, technical, and certification disclaimer for MSK Institute website, courses, and resources.',
-    url: 'https://mskinstitute.in/disclaimer',
+    url: 'https://www.mskinstitute.in/disclaimer',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
@@ -31,13 +31,13 @@ export default function DisclaimerPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Disclaimer - MSK Institute',
-    url: 'https://mskinstitute.in/disclaimer',
+    url: 'https://www.mskinstitute.in/disclaimer',
     description: 'Official legal and educational disclaimer for MSK Institute.',
     publisher: {
       '@type': 'EducationalOrganization',
       name: 'MSK Institute',
-      url: 'https://mskinstitute.in',
-      logo: 'https://mskinstitute.in/logo.jpg',
+      url: 'https://www.mskinstitute.in',
+      logo: 'https://www.mskinstitute.in/logo.jpg',
     },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -46,13 +46,13 @@ export default function DisclaimerPage() {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://mskinstitute.in',
+          item: 'https://www.mskinstitute.in',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Disclaimer',
-          item: 'https://mskinstitute.in/disclaimer',
+          item: 'https://www.mskinstitute.in/disclaimer',
         },
       ],
     },
@@ -88,7 +88,7 @@ export default function DisclaimerPage() {
             1. Educational & Informational Purpose
           </h2>
           <p className="text-sm text-text-muted leading-relaxed">
-            The content, tutorials, coding snippets, video modules, and documentation published on <strong>https://mskinstitute.in</strong> are compiled and presented exclusively for educational, technical training, and skill development purposes. While our mentor <strong>Er. Sumit Kumar</strong> and teaching staff take every reasonable measure to ensure that explanations, syntax, and coding standards are accurate and aligned with modern industry benchmarks (such as Python 3.12+, React 19, and modern web APIs), the information is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind.
+            The content, tutorials, coding snippets, video modules, and documentation published on <strong>https://www.mskinstitute.in</strong> are compiled and presented exclusively for educational, technical training, and skill development purposes. While our mentor <strong>Er. Sumit Kumar</strong> and teaching staff take every reasonable measure to ensure that explanations, syntax, and coding standards are accurate and aligned with modern industry benchmarks (such as Python 3.12+, React 19, and modern web APIs), the information is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind.
           </p>
         </section>
 

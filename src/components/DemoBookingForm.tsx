@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Send, X, Calendar, User, Phone, Book } from 'lucide-react';
-import { trackFormStart, trackFormSubmit, trackGenerateLead, trackCourseEnquiry } from '@/lib/dataLayer';
+import { trackFormStart, trackFormSubmit, trackGenerateLead, trackCourseEnquiry, trackDemoRequest } from '@/lib/dataLayer';
 
 interface DemoBookingFormProps {
   courseTitle: string;
@@ -43,6 +43,10 @@ export default function DemoBookingForm({ courseTitle, onClose, isEmbedded = fal
       trackGenerateLead('demo_booking', {
         course_name: courseTitle,
         preferred_date: date,
+      });
+      trackDemoRequest({
+        courseName: courseTitle,
+        preferredDate: date,
       });
       trackCourseEnquiry({ courseName: courseTitle });
 

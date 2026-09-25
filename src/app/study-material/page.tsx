@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: 'Study Material Hub: Tutorials, Cheatsheets & PDF Guides | MSK Institute',
   description: 'Access interactive coding tutorials, quick cheatsheets, downloadable PDF revision guides, and developer handbooks for Python, Web Development, CCC, and MS Office.',
   alternates: {
-    canonical: 'https://mskinstitute.in/study-material',
+    canonical: 'https://www.mskinstitute.in/study-material',
   },
   openGraph: {
     title: 'Study Material Hub | MSK Institute',
     description: 'Explore free & premium tutorials, cheatsheets, PDF notes, and developer handbooks at MSK Institute, Shikohabad.',
-    url: 'https://mskinstitute.in/study-material',
+    url: 'https://www.mskinstitute.in/study-material',
   },
 };
 
@@ -56,16 +56,7 @@ export default async function StudyMaterialPage() {
           <p className="font-semibold">{errorMsg}</p>
         </div>
       ) : (
-        <Suspense
-          fallback={
-            <div className="py-20 text-center space-y-3">
-              <div className="w-8 h-8 border-3 border-secondary border-t-transparent rounded-full animate-spin mx-auto" />
-              <p className="text-sm font-semibold text-text-muted">Loading study material catalog...</p>
-            </div>
-          }
-        >
-          <StudyMaterialClient initialMaterials={materials} tutorials={tutorials} />
-        </Suspense>
+        <StudyMaterialClient initialMaterials={materials} tutorials={tutorials} />
       )}
     </div>
   );

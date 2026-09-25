@@ -19,18 +19,18 @@ export const metadata: Metadata = {
     "Computer Institute Near Station Road Shikohabad"
   ],
   alternates: {
-    canonical: "https://mskinstitute.in/live",
+    canonical: "https://www.mskinstitute.in/live",
   },
   openGraph: {
     title: "Live Computer Classes & Programming Schedule | MSK Institute Shikohabad",
     description: "Daily interactive live computer training, real-time timetable, topics covered, and enrollment for upcoming coding cohorts in Shikohabad.",
-    url: "https://mskinstitute.in/live",
+    url: "https://www.mskinstitute.in/live",
     siteName: "MSK Institute",
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: "https://mskinstitute.in/logo.jpg",
+        url: "https://www.mskinstitute.in/logo.jpg",
         width: 1200,
         height: 630,
         alt: "MSK Institute Live Classes Schedule Shikohabad",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Live Computer Classes & Coding Schedule | MSK Institute",
     description: "Join real-time interactive lectures, check daily class topics, and enroll in new live batches in Shikohabad.",
-    images: ["https://mskinstitute.in/logo.jpg"],
+    images: ["https://www.mskinstitute.in/logo.jpg"],
   },
   robots: {
     index: true,
@@ -83,7 +83,7 @@ export default async function LivePage() {
     },
     {
       q: "How can students join a live online class?",
-      a: "Students can join active sessions directly through the Live Schedule page (https://mskinstitute.in/live). Sessions marked 'LIVE NOW' feature a direct 'Join Now' button linking to Google Meet, YouTube Live, or Zoom. Upcoming sessions show exact start times, topics covered, and countdown clocks."
+      a: "Students can join active sessions directly through the Live Schedule page (https://www.mskinstitute.in/live). Sessions marked 'LIVE NOW' feature a direct 'Join Now' button linking to Google Meet, YouTube Live, or Zoom. Upcoming sessions show exact start times, topics covered, and countdown clocks."
     },
     {
       q: "Who conducts the live programming sessions at MSK Institute?",
@@ -110,12 +110,12 @@ export default async function LivePage() {
       // 1. Organization Details
       {
         "@type": ["EducationalOrganization", "LocalBusiness"],
-        "@id": "https://mskinstitute.in/#organization",
+        "@id": "https://www.mskinstitute.in/#organization",
         "name": "MSK Institute",
         "alternateName": ["MSK Computer Institute", "MSK Institute Shikohabad", "MSK Live Classroom"],
-        "url": "https://mskinstitute.in",
-        "logo": "https://mskinstitute.in/logo.jpg",
-        "image": "https://mskinstitute.in/logo.jpg",
+        "url": "https://www.mskinstitute.in",
+        "logo": "https://www.mskinstitute.in/logo.jpg",
+        "image": "https://www.mskinstitute.in/logo.jpg",
         "description": "Premier Computer Institute in Shikohabad offering live interactive coding classes, full-stack software development cohorts, and certified computer courses.",
         "telephone": "+91-8393042166",
         "email": "mskshikohabad@gmail.com",
@@ -141,14 +141,14 @@ export default async function LivePage() {
       // 2. WebPage Entity
       {
         "@type": "WebPage",
-        "@id": "https://mskinstitute.in/live#webpage",
-        "url": "https://mskinstitute.in/live",
+        "@id": "https://www.mskinstitute.in/live#webpage",
+        "url": "https://www.mskinstitute.in/live",
         "name": "Live Computer Classes & Programming Schedule | MSK Institute",
         "description": "Attend live coding lectures, check 7-day upcoming class agendas, and register for new batches in Shikohabad.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://mskinstitute.in/#website",
-          "url": "https://mskinstitute.in",
+          "@id": "https://www.mskinstitute.in/#website",
+          "url": "https://www.mskinstitute.in",
           "name": "MSK Institute"
         },
         "about": [
@@ -159,19 +159,19 @@ export default async function LivePage() {
         ],
         "breadcrumb": {
           "@type": "BreadcrumbList",
-          "@id": "https://mskinstitute.in/live#breadcrumb",
+          "@id": "https://www.mskinstitute.in/live#breadcrumb",
           "itemListElement": [
             {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://mskinstitute.in"
+              "item": "https://www.mskinstitute.in"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Live Classroom Schedule",
-              "item": "https://mskinstitute.in/live"
+              "item": "https://www.mskinstitute.in/live"
             }
           ]
         },
@@ -203,17 +203,17 @@ export default async function LivePage() {
         "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
         "location": {
           "@type": "VirtualLocation",
-          "url": c.joinUrl || "https://mskinstitute.in/live",
+          "url": c.joinUrl || "https://www.mskinstitute.in/live",
           "name": c.platform || "Online Live Classroom"
         },
         "organizer": {
-          "@id": "https://mskinstitute.in/#organization"
+          "@id": "https://www.mskinstitute.in/#organization"
         },
         "performer": {
           "@type": "Person",
           "name": c.instructor || 'Er. Sumit Kumar',
           "jobTitle": "Lead Mentor",
-          "image": c.instructorPicture || "https://mskinstitute.in/logo.jpg"
+          "image": c.instructorPicture || "https://www.mskinstitute.in/logo.jpg"
         },
         "isAccessibleForFree": true,
         "offers": {
@@ -221,7 +221,7 @@ export default async function LivePage() {
           "price": "0",
           "priceCurrency": "INR",
           "availability": "https://schema.org/InStock",
-          "url": "https://mskinstitute.in/live"
+          "url": "https://www.mskinstitute.in/live"
         }
       })),
       // 5. CourseInstances for each batch
@@ -237,20 +237,20 @@ export default async function LivePage() {
           "image": b.instructorPicture
         },
         "provider": {
-          "@id": "https://mskinstitute.in/#organization"
+          "@id": "https://www.mskinstitute.in/#organization"
         },
         "offers": {
           "@type": "Offer",
           "price": b.price.replace(/[^\d]/g, ''),
           "priceCurrency": "INR",
           "availability": "https://schema.org/LimitedAvailability",
-          "url": `https://mskinstitute.in/live-batches/${b.id}`
+          "url": `https://www.mskinstitute.in/live-batches/${b.id}`
         }
       })),
       // 6. FAQPage Schema for AI Search Engines & Google Rich Results
       {
         "@type": "FAQPage",
-        "@id": "https://mskinstitute.in/live#faq",
+        "@id": "https://www.mskinstitute.in/live#faq",
         "mainEntity": faqItems.map(item => ({
           "@type": "Question",
           "name": item.q,

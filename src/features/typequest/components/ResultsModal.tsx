@@ -53,7 +53,7 @@ Practice touch typing & coding speed at: https://mskinstitute.in/tools/typing`;
   };
 
   const handleWhatsAppShare = () => {
-    const text = `🏆 I scored ${result.wpm} WPM with ${result.accuracy}% accuracy on MSK Institute TypeQuest! 🚀\n\nTest your typing speed & get your free certificate here:\nhttps://mskinstitute.in/tools/typing`;
+    const text = `🏆 I scored ${result.wpm} WPM with ${result.accuracy}% accuracy on MSK Institute TypeQuest! 🚀\n\nTest your typing speed & get your free certificate here:\nhttps://www.mskinstitute.in/tools/typing`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 

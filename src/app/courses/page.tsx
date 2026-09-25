@@ -24,18 +24,18 @@ export const metadata: Metadata = {
     'React JS Training Shikohabad'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/courses',
+    canonical: 'https://www.mskinstitute.in/courses',
   },
   openGraph: {
     title: 'Computer & Coding Courses in Shikohabad | MSK Institute',
     description: 'Practical computer syllabi covering Python, Full-Stack Web Development, Frontend Engineering, NIELIT CCC, and ADCA with 100% hands-on lab training in Shikohabad.',
-    url: 'https://mskinstitute.in/courses',
+    url: 'https://www.mskinstitute.in/courses',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://mskinstitute.in/logo.jpg',
+        url: 'https://www.mskinstitute.in/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'MSK Institute Course Catalog Shikohabad',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Computer & Coding Courses in Shikohabad | MSK Institute',
     description: 'Learn Python, MERN Stack, HTML5/CSS3, NIELIT CCC & ADCA with practical lab assignments and certified mentorship in Shikohabad.',
-    images: ['https://mskinstitute.in/logo.jpg'],
+    images: ['https://www.mskinstitute.in/logo.jpg'],
   },
   robots: {
     index: true,
@@ -73,6 +73,24 @@ export default async function CoursesPage() {
     errorMsg = 'Unable to load the course catalog. Please try again later.';
   }
 
+  // Project lean catalog items to strip massive chapters/topics arrays from HTML hydration payload
+  const catalogCourses: Course[] = courses.map((c) => ({
+    id: c.id,
+    status: c.status,
+    title: c.title,
+    slug: c.slug,
+    featuredImageUrl: c.featuredImageUrl,
+    shortDescription: c.shortDescription,
+    categories: c.categories,
+    level: c.level,
+    language: c.language,
+    duration: c.duration,
+    certificate: c.certificate,
+    mode: c.mode,
+    courseType: c.courseType,
+    includedCourseIds: c.includedCourseIds,
+  }));
+
   const courseFaqs = [
     {
       q: "What computer and programming courses are available at MSK Institute Shikohabad?",
@@ -84,7 +102,7 @@ export default async function CoursesPage() {
     },
     {
       q: "Are certificates from MSK Institute verifiable online?",
-      a: "Yes! Every student who successfully completes their course and project practicals receives a certificate with a unique Verification ID that can be authenticated 24/7 on our online Certificate Verification Portal (https://mskinstitute.in/verify-certificate)."
+      a: "Yes! Every student who successfully completes their course and project practicals receives a certificate with a unique Verification ID that can be authenticated 24/7 on our online Certificate Verification Portal (https://www.mskinstitute.in/verify-certificate)."
     },
     {
       q: "What is the learning mode (online vs. offline) for courses?",
@@ -107,12 +125,12 @@ export default async function CoursesPage() {
       // 1. Organization Details
       {
         "@type": ["EducationalOrganization", "LocalBusiness"],
-        "@id": "https://mskinstitute.in/#organization",
+        "@id": "https://www.mskinstitute.in/#organization",
         "name": "MSK Institute",
         "alternateName": ["MSK Computer Institute", "MSK Institute Shikohabad"],
-        "url": "https://mskinstitute.in",
-        "logo": "https://mskinstitute.in/logo.jpg",
-        "image": "https://mskinstitute.in/logo.jpg",
+        "url": "https://www.mskinstitute.in",
+        "logo": "https://www.mskinstitute.in/logo.jpg",
+        "image": "https://www.mskinstitute.in/logo.jpg",
         "description": "Premier Computer Institute in Shikohabad offering career-oriented programming bootcamps, web development tracks, and government certified computer courses.",
         "telephone": "+91-8393042166",
         "email": "mskshikohabad@gmail.com",
@@ -138,14 +156,14 @@ export default async function CoursesPage() {
       // 2. CollectionPage Entity
       {
         "@type": ["CollectionPage", "WebPage"],
-        "@id": "https://mskinstitute.in/courses#webpage",
-        "url": "https://mskinstitute.in/courses",
+        "@id": "https://www.mskinstitute.in/courses#webpage",
+        "url": "https://www.mskinstitute.in/courses",
         "name": "Computer & Coding Courses Catalog | MSK Institute Shikohabad",
         "description": "Explore beginner and advanced computer science programs in Shikohabad tailored to industry standards, complete with certificate validation.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://mskinstitute.in/#website",
-          "url": "https://mskinstitute.in",
+          "@id": "https://www.mskinstitute.in/#website",
+          "url": "https://www.mskinstitute.in",
           "name": "MSK Institute"
         },
         "about": [
@@ -159,19 +177,19 @@ export default async function CoursesPage() {
         ],
         "breadcrumb": {
           "@type": "BreadcrumbList",
-          "@id": "https://mskinstitute.in/courses#breadcrumb",
+          "@id": "https://www.mskinstitute.in/courses#breadcrumb",
           "itemListElement": [
             {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://mskinstitute.in"
+              "item": "https://www.mskinstitute.in"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Courses",
-              "item": "https://mskinstitute.in/courses"
+              "item": "https://www.mskinstitute.in/courses"
             }
           ]
         },
@@ -190,12 +208,12 @@ export default async function CoursesPage() {
           "position": index + 1,
           "item": {
             "@type": "Course",
-            "@id": `https://mskinstitute.in/courses/${c.slug}`,
-            "url": `https://mskinstitute.in/courses/${c.slug}`,
+            "@id": `https://www.mskinstitute.in/courses/${c.slug}`,
+            "url": `https://www.mskinstitute.in/courses/${c.slug}`,
             "name": c.title,
             "description": c.shortDescription,
             "provider": {
-              "@id": "https://mskinstitute.in/#organization"
+              "@id": "https://www.mskinstitute.in/#organization"
             },
             "educationalLevel": c.level,
             "about": c.categories,
@@ -216,7 +234,7 @@ export default async function CoursesPage() {
       // 4. FAQPage Schema for AI Search Engines & Google Rich Results
       {
         "@type": "FAQPage",
-        "@id": "https://mskinstitute.in/courses#faq",
+        "@id": "https://www.mskinstitute.in/courses#faq",
         "mainEntity": courseFaqs.map((faq) => ({
           "@type": "Question",
           "name": faq.q,
@@ -264,7 +282,7 @@ export default async function CoursesPage() {
             <p className="font-semibold">{errorMsg}</p>
           </div>
         ) : (
-          <CourseCatalogClient initialCourses={courses} />
+          <CourseCatalogClient initialCourses={catalogCourses} />
         )}
       </div>
     </>

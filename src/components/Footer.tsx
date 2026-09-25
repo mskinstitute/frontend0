@@ -1,9 +1,6 @@
-'use client';
-
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ExternalLink, ShieldAlert } from 'lucide-react';
 import InstallAppButton from '@/components/InstallAppButton';
-import { trackContactClick } from '@/lib/tracking';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -125,7 +122,6 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
                 <a 
                   href="tel:+918393042166" 
-                  onClick={() => trackContactClick('call')}
                   className="hover:text-white transition-colors"
                 >
                   +91 83930 42166
@@ -135,7 +131,6 @@ export default function Footer() {
                 <Mail className="w-4 h-4 text-secondary flex-shrink-0" />
                 <a 
                   href="mailto:mskshikohabad@gmail.com" 
-                  onClick={() => trackContactClick('email')}
                   className="hover:text-white transition-colors"
                 >
                   mskshikohabad@gmail.com
@@ -146,7 +141,6 @@ export default function Footer() {
                   href="https://maps.google.com/?q=MSK+Institute+Shikohabad"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackContactClick('maps')}
                   className="inline-flex items-center gap-1 text-xs text-secondary hover:text-secondary-light font-medium"
                 >
                   Open in Google Maps

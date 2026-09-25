@@ -8,7 +8,7 @@ category: "Certification & Govt Jobs"
 featured: false
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-09-25"
 readTime: "7 min read"
 tags:
@@ -20,7 +20,7 @@ tags:
   - "Computer Certification"
 relatedCourses:
   - "ccc"
-  - "master-computer-coding-diploma"
+  - "o-level"
 ---
 
 When students in Uttar Pradesh and across Northern India prepare for state government job examinations (such as UPSSSC, UP Police Computer Operator, UPPSC RO/ARO, and High Court Clerk recruitments), they invariably face one burning question: **Should I enroll in NIELIT CCC or NIELIT O Level?**

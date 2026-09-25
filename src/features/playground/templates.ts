@@ -984,7 +984,7 @@ A handy guide for writing clean documentation, blogs, and project guides in the 
 | *Italic* | \`*italic text*\` | *italic text* |
 | ~~Strikethrough~~ | \`~~deleted text~~\` | ~~deleted text~~ |
 | \`Inline Code\` | \` \\\`code\\\` \` | \`print("hello")\` |
-| [Hyperlink](https://mskinstitute.in) | \`[MSK](https://mskinstitute.in)\` | [MSK Institute](https://mskinstitute.in) |
+| [Hyperlink](https://www.mskinstitute.in) | \`[MSK](https://www.mskinstitute.in)\` | [MSK Institute](https://www.mskinstitute.in) |
 
 ---
 

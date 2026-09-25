@@ -8,7 +8,7 @@ category: "Programming"
 featured: false
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-08-15"
 readTime: "5 min read"
 tags:
@@ -17,7 +17,7 @@ tags:
   - "Beginner Guide"
   - "Career Advice"
 relatedCourses:
-  - "python-programming-masterclass"
+  - "python-mastery-beginner-to-advanced--3-months"
   - "full-stack-web-dev-bootcamp"
 ---
 

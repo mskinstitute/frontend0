@@ -17,14 +17,14 @@ export default async function LiveBatchesPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://mskinstitute.in/live-batches",
-        "url": "https://mskinstitute.in/live-batches",
+        "@id": "https://www.mskinstitute.in/live-batches",
+        "url": "https://www.mskinstitute.in/live-batches",
         "name": "Upcoming Live Batches Admissions | MSK Institute",
         "description": "Enrollment query and details for upcoming web development and python programming live batches.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://mskinstitute.in/#website",
-          "url": "https://mskinstitute.in",
+          "@id": "https://www.mskinstitute.in/#website",
+          "url": "https://www.mskinstitute.in",
           "name": "MSK Institute"
         }
       },

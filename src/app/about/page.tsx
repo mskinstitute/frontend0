@@ -19,18 +19,18 @@ export const metadata: Metadata = {
     'Coding Academy Firozabad'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/about',
+    canonical: 'https://www.mskinstitute.in/about',
   },
   openGraph: {
     title: 'About MSK Institute | Premier Coding & Computer Academy in Shikohabad',
     description: 'Empowering students across Shikohabad and online with practical coding skills in Python, Full-Stack Web Development, and NIELIT computer courses under Er. Sumit Kumar.',
-    url: 'https://mskinstitute.in/about',
+    url: 'https://www.mskinstitute.in/about',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://mskinstitute.in/logo.jpg',
+        url: 'https://www.mskinstitute.in/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'MSK Institute Shikohabad About Us',
@@ -44,14 +44,14 @@ export default function AboutPage() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About MSK Institute',
-    url: 'https://mskinstitute.in/about',
+    url: 'https://www.mskinstitute.in/about',
     description: 'Overview of MSK Institute, founding story, mission, and lead mentor Er. Sumit Kumar.',
     mainEntity: {
       '@type': 'EducationalOrganization',
       name: 'MSK Institute of Technology & Coding',
       alternateName: 'MSK Institute',
-      url: 'https://mskinstitute.in',
-      logo: 'https://mskinstitute.in/logo.jpg',
+      url: 'https://www.mskinstitute.in',
+      logo: 'https://www.mskinstitute.in/logo.jpg',
       founder: {
         '@type': 'Person',
         name: 'Er. Sumit Kumar',
@@ -76,13 +76,13 @@ export default function AboutPage() {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://mskinstitute.in',
+          item: 'https://www.mskinstitute.in',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'About Us',
-          item: 'https://mskinstitute.in/about',
+          item: 'https://www.mskinstitute.in/about',
         },
       ],
     },

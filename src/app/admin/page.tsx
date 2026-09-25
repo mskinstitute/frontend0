@@ -35,7 +35,7 @@ export default function AdminPanel() {
   const [showCertModal, setShowCertModal] = useState(false);
   const [certId, setCertId] = useState('');
   const [certStudentId, setCertStudentId] = useState('std-001');
-  const [certCourseSlug, setCertCourseSlug] = useState('python-programming-masterclass');
+  const [certCourseSlug, setCertCourseSlug] = useState('python-mastery-beginner-to-advanced--3-months');
   const [certGrade, setCertGrade] = useState('A+');
   const [certGradeLabel, setCertGradeLabel] = useState('Outstanding');
 

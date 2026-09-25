@@ -8,7 +8,7 @@ category: "Computer Diploma"
 featured: false
 author: "Manish Sharma"
 authorRole: "Senior Computer Applications Instructor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-09-25"
 readTime: "7 min read"
 tags:

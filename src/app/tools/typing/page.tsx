@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Sparkles, Keyboard, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import TypeQuestApp from '@/features/typequest';
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'Keyboard Speed Test',
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/tools/typing',
+    canonical: 'https://www.mskinstitute.in/tools/typing',
   },
 };
 

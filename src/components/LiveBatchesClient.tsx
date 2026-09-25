@@ -15,23 +15,29 @@ interface LiveBatchesClientProps {
   batches: LiveBatch[];
 }
 
-function LiveBatchesContent({ batches }: LiveBatchesClientProps) {
+function BatchQuerySync({
+  batches,
+  onSelectBatch,
+}: {
+  batches: LiveBatch[];
+  onSelectBatch: (id: string) => void;
+}) {
   const searchParams = useSearchParams();
-  const initialBatchId = searchParams.get('batch') || '';
-
-  // Form states
-  const [selectedBatchId, setSelectedBatchId] = useState(initialBatchId);
-
-  // Auto-select batch from query parameter
   useEffect(() => {
-    if (initialBatchId && batches.some(b => b.id === initialBatchId)) {
-      setSelectedBatchId(initialBatchId);
-    } else if (batches.length > 0 && !selectedBatchId) {
-      setSelectedBatchId(batches[0].id);
+    const batchParam = searchParams.get('batch');
+    if (batchParam && batches.some((b) => b.id === batchParam)) {
+      onSelectBatch(batchParam);
     }
-  }, [initialBatchId, batches]);
+  }, [searchParams, batches, onSelectBatch]);
 
-  const selectedBatch = batches.find(b => b.id === selectedBatchId) || batches[0];
+  return null;
+}
+
+export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
+  // Default directly to first batch so server rendering produces full stable content with zero shift
+  const [selectedBatchId, setSelectedBatchId] = useState(batches[0]?.id || '');
+
+  const selectedBatch = batches.find((b) => b.id === selectedBatchId) || batches[0];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
@@ -59,6 +65,7 @@ function LiveBatchesContent({ batches }: LiveBatchesClientProps) {
             })() : 'Upcoming Batch';
 
             const isActiveSelection = b.id === selectedBatchId;
+            const isCompleted = b.status === 'COMPLETED' || b.status === 'ARCHIVED';
             const remainingSeats = b.leftSeats ?? 5;
             const total = b.totalSeats || 20;
 
@@ -75,9 +82,15 @@ function LiveBatchesContent({ batches }: LiveBatchesClientProps) {
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                   <div className="space-y-3">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2.5 py-1 rounded uppercase tracking-wider">
-                        Starting {startDateStr}
-                      </span>
+                      {isCompleted ? (
+                        <span className="text-[10px] font-bold text-gray-700 bg-gray-100 px-2.5 py-1 rounded uppercase tracking-wider">
+                          Batch Concluded
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2.5 py-1 rounded uppercase tracking-wider">
+                          Starting {startDateStr}
+                        </span>
+                      )}
                       <span className="text-[10px] font-bold text-text-muted bg-gray-100 px-2.5 py-1 rounded uppercase tracking-wider">
                         {b.duration || 'Live Training'}
                       </span>
@@ -91,9 +104,15 @@ function LiveBatchesContent({ batches }: LiveBatchesClientProps) {
 
                   <div className="text-right sm:text-right flex-shrink-0">
                     <span className="text-lg font-black text-secondary">{b.price}</span>
-                    <p className="text-[11px] text-red-500 font-bold mt-1 animate-pulse">
-                      Only {remainingSeats} of {total} seats left!
-                    </p>
+                    {isCompleted ? (
+                      <p className="text-[11px] text-gray-500 font-semibold mt-1">
+                        Admissions Closed
+                      </p>
+                    ) : (
+                      <p className="text-[11px] text-red-500 font-bold mt-1 animate-pulse">
+                        Only {remainingSeats} of {total} seats left!
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -173,14 +192,10 @@ function LiveBatchesContent({ batches }: LiveBatchesClientProps) {
           />
         )}
       </div>
-    </div>
-  );
-}
 
-export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
-  return (
-    <Suspense fallback={<div className="p-12 text-center text-text-muted">Loading live batch details...</div>}>
-      <LiveBatchesContent batches={batches} />
-    </Suspense>
+      <Suspense fallback={null}>
+        <BatchQuerySync batches={batches} onSelectBatch={setSelectedBatchId} />
+      </Suspense>
+    </div>
   );
 }

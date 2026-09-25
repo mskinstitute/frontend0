@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: 'Tech Blogs, Career Roadmaps & Student Guides | MSK Institute',
   description: 'Read the latest technical articles, full-stack developer roadmaps, Excel productivity hacks, CCC exam preparation guides, and cyber security tips from MSK Institute mentors.',
   alternates: {
-    canonical: 'https://mskinstitute.in/blogs',
+    canonical: 'https://www.mskinstitute.in/blogs',
   },
   openGraph: {
     title: 'MSK Institute Blog | Tech Guides & Roadmaps',
     description: 'Learn modern software development, computer fundamentals, and industry tips from leading mentors in Shikohabad.',
-    url: 'https://mskinstitute.in/blogs',
+    url: 'https://www.mskinstitute.in/blogs',
   },
 };
 

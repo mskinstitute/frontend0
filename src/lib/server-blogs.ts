@@ -43,7 +43,7 @@ export function parseBlogMarkdown(rawContent: string, fallbackSlug: string): Blo
   const authorAvatar =
     frontmatter.authorAvatar ||
     (typeof frontmatter.author === 'object' ? frontmatter.author?.avatar : null) ||
-    '/assets/img/instructors/sumit-kumar.png';
+    '/assets/img/instructors/sumit-kumar.webp';
 
   const publishedAt = frontmatter.publishedAt || '2026-08-01';
 

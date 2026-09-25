@@ -2,7 +2,7 @@
   {
     "id": "MSK-2026-0001",
     "studentId": "std-001",
-    "courseSlug": "python-programming-masterclass",
+    "courseSlug": "python-mastery-beginner-to-advanced--3-months",
     "issueDate": "2026-05-15",
     "completionDate": "2026-05-10",
     "grade": "A+",
@@ -26,7 +26,7 @@
   {
     "id": "MSK-2026-0003",
     "studentId": "std-003",
-    "courseSlug": "python-programming-masterclass",
+    "courseSlug": "python-mastery-beginner-to-advanced--3-months",
     "issueDate": "2026-06-01",
     "completionDate": "2026-05-28",
     "grade": "B",

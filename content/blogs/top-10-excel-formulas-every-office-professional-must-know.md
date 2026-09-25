@@ -8,7 +8,7 @@ category: "MS Office"
 featured: false
 author: "Manish Sharma"
 authorRole: "Senior Computer Applications Instructor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-08-20"
 readTime: "5 min read"
 tags:
@@ -17,8 +17,8 @@ tags:
   - "Data Analysis"
   - "Productivity"
 relatedCourses:
-  - "ccc-computer-concepts"
-  - "master-computer-coding-diploma"
+  - "ccc"
+  - "ms-excel-beginners-to-advanced--6-months"
 ---
 
 Microsoft Excel is the backbone of business analytics, accounting, and daily office operations worldwide. Whether you manage student fees, retail stock, or salary calculations, mastering these modern Excel functions will save you hundreds of hours.

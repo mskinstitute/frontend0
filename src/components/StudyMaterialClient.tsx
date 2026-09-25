@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import {
@@ -36,12 +36,59 @@ interface StudyMaterialClientProps {
   tutorials?: TutorialItem[];
 }
 
+function StudyMaterialQuerySync({
+  initialMaterials,
+  onSetSelectedType,
+  onOpenTutorial,
+  onOpenCheatsheet,
+  onOpenHandbook,
+  onOpenNoteToBuy,
+}: {
+  initialMaterials: StudyMaterial[];
+  onSetSelectedType: (type: string) => void;
+  onOpenTutorial: (m: StudyMaterial) => void;
+  onOpenCheatsheet: (m: StudyMaterial) => void;
+  onOpenHandbook: (m: StudyMaterial) => void;
+  onOpenNoteToBuy: (m: StudyMaterial) => void;
+}) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const idParam = searchParams.get('id');
+    const typeParam = searchParams.get('type');
+
+    if (typeParam && ['tutorial', 'cheatsheet', 'note', 'handbook'].includes(typeParam)) {
+      onSetSelectedType(typeParam);
+    }
+
+    if (idParam) {
+      const match = initialMaterials.find(
+        (m) => m.id.toLowerCase() === idParam.toLowerCase() || m.slug === idParam
+      );
+      if (match) {
+        if (match.type === 'tutorial') onOpenTutorial(match);
+        else if (match.type === 'cheatsheet') onOpenCheatsheet(match);
+        else if (match.type === 'handbook') onOpenHandbook(match);
+        else if (match.type === 'note' && match.tier === 'paid') onOpenNoteToBuy(match);
+      }
+    }
+  }, [
+    searchParams,
+    initialMaterials,
+    onSetSelectedType,
+    onOpenTutorial,
+    onOpenCheatsheet,
+    onOpenHandbook,
+    onOpenNoteToBuy,
+  ]);
+
+  return null;
+}
+
 export default function StudyMaterialClient({
   initialMaterials,
   tutorials = [],
 }: StudyMaterialClientProps) {
-  const searchParams = useSearchParams();
-
   // Active Type Tab: 'all' | 'tutorial' | 'cheatsheet' | 'note' | 'handbook'
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -71,29 +118,6 @@ export default function StudyMaterialClient({
   const [buyerName, setBuyerName] = useState('');
   const [buyerPhone, setBuyerPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Sync with searchParams on load (e.g. ?id=... or ?type=...)
-  useEffect(() => {
-    const idParam = searchParams.get('id');
-    const typeParam = searchParams.get('type');
-    const tierParam = searchParams.get('tier');
-
-    if (typeParam && ['tutorial', 'cheatsheet', 'note', 'handbook'].includes(typeParam)) {
-      setSelectedType(typeParam);
-    }
-
-    if (idParam) {
-      const match = initialMaterials.find(
-        (m) => m.id.toLowerCase() === idParam.toLowerCase() || m.slug === idParam
-      );
-      if (match) {
-        if (match.type === 'tutorial') setActiveTutorial(match);
-        else if (match.type === 'cheatsheet') openCheatsheetModal(match);
-        else if (match.type === 'handbook') setActiveHandbook(match);
-        else if (match.type === 'note' && match.tier === 'paid') setActiveNoteToBuy(match);
-      }
-    }
-  }, [searchParams, initialMaterials]);
 
   // Categories extraction
   const categories = useMemo(() => {
@@ -442,6 +466,17 @@ export default function StudyMaterialClient({
 
   return (
     <div className="space-y-8">
+      <Suspense fallback={null}>
+        <StudyMaterialQuerySync
+          initialMaterials={initialMaterials}
+          onSetSelectedType={setSelectedType}
+          onOpenTutorial={setActiveTutorial}
+          onOpenCheatsheet={openCheatsheetModal}
+          onOpenHandbook={setActiveHandbook}
+          onOpenNoteToBuy={setActiveNoteToBuy}
+        />
+      </Suspense>
+
       {/* Material Type Navigation Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-surface border border-border-subtle rounded-2xl max-w-4xl mx-auto shadow-2xs">
         {[

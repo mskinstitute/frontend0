@@ -38,16 +38,21 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     }
 
     const { batch, course } = data;
+    const isCompleted = batch.status === 'COMPLETED' || batch.status === 'ARCHIVED';
     return {
-      title: `${batch.title} (${batch.price}) | MSK Institute Live Admissions`,
-      description: `Enroll in ${batch.title}. Starting ${batch.startDate} with ${batch.instructor}. 100% practical lab training in Shikohabad and online. Only ${batch.leftSeats} seats left!`,
+      title: isCompleted
+        ? `${batch.title} (Concluded) | MSK Institute Live Training`
+        : `${batch.title} (${batch.price}) | MSK Institute Live Admissions`,
+      description: isCompleted
+        ? `Completed live training cohort: ${batch.title}. Review curriculum and reserve seats in upcoming batches with ${batch.instructor} in Shikohabad.`
+        : `Enroll in ${batch.title}. Starting ${batch.startDate} with ${batch.instructor}. 100% practical lab training in Shikohabad and online. Only ${batch.leftSeats} seats left!`,
       alternates: {
-        canonical: `https://mskinstitute.in/live-batches/${batch.id}`,
+        canonical: `https://www.mskinstitute.in/live-batches/${batch.id}`,
       },
       openGraph: {
-        title: `${batch.title} - Admissions Open | MSK Institute`,
-        description: `Join ${batch.instructor} for hands-on coding training. Reserve your demo seat today.`,
-        url: `https://mskinstitute.in/live-batches/${batch.id}`,
+        title: `${batch.title} | MSK Institute`,
+        description: `Join ${batch.instructor} for hands-on coding training in Shikohabad and online.`,
+        url: `https://www.mskinstitute.in/live-batches/${batch.id}`,
         images: [{ url: course?.featuredImageUrl || batch.instructorPicture }],
       },
     };
@@ -88,6 +93,9 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
 
   const percentageLeft = Math.round((batch.leftSeats / batch.totalSeats) * 100);
 
+  const isCompleted = batch.status === 'COMPLETED' || batch.status === 'ARCHIVED';
+  const isFull = batch.status === 'FULL' || (!isCompleted && batch.leftSeats <= 0);
+
   // Schema LD (CourseInstance + BreadcrumbList)
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -97,6 +105,7 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
         'name': batch.title,
         'description': course?.shortDescription || batch.title,
         'startDate': batch.startDate,
+        ...(batch.endDate ? { 'endDate': batch.endDate } : {}),
         'courseMode': 'Online & Offline Classroom',
         'instructor': {
           '@type': 'Person',
@@ -107,7 +116,11 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
           '@type': 'Offer',
           'price': batch.price.replace(/[^\d]/g, '') || '0',
           'priceCurrency': 'INR',
-          'availability': batch.leftSeats > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+          'availability': isCompleted
+            ? 'https://schema.org/Discontinued'
+            : isFull
+            ? 'https://schema.org/SoldOut'
+            : 'https://schema.org/InStock',
         },
         'location': {
           '@type': 'Place',
@@ -124,7 +137,7 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
         'organizer': {
           '@type': 'EducationalOrganization',
           'name': 'MSK Institute',
-          'sameAs': 'https://mskinstitute.in',
+          'sameAs': 'https://www.mskinstitute.in',
           'telephone': '+918393042166',
         },
       },
@@ -135,19 +148,19 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
             '@type': 'ListItem',
             'position': 1,
             'name': 'Home',
-            'item': 'https://mskinstitute.in',
+            'item': 'https://www.mskinstitute.in',
           },
           {
             '@type': 'ListItem',
             'position': 2,
             'name': 'Live Batches',
-            'item': 'https://mskinstitute.in/live-batches',
+            'item': 'https://www.mskinstitute.in/live-batches',
           },
           {
             '@type': 'ListItem',
             'position': 3,
             'name': batch.title,
-            'item': `https://mskinstitute.in/live-batches/${batch.id}`,
+            'item': `https://www.mskinstitute.in/live-batches/${batch.id}`,
           },
         ],
       },
@@ -166,17 +179,27 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
         courseMode={course?.mode}
       />
 
-      {/* Top Urgency Sticky Bar */}
-      <div className="bg-gradient-to-r from-[#B83A00] to-secondary text-white py-2.5 px-4 text-center text-xs font-bold shadow-sm flex items-center justify-center gap-2 flex-wrap">
-        <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-        </span>
-        <span>Admissions Closing Soon: Only <strong>{batch.leftSeats} of {batch.totalSeats} seats</strong> left for the <strong>{formattedStartDate}</strong> batch!</span>
-        <a href="#enroll-form" className="underline font-black hover:text-amber-200 ml-1">
-          Lock Discounted Seat & Free Demo ➔
-        </a>
-      </div>
+      {/* Top Banner Bar */}
+      {isCompleted ? (
+        <div className="bg-slate-800 text-slate-200 py-2.5 px-4 text-center text-xs font-semibold shadow-sm flex items-center justify-center gap-2 flex-wrap">
+          <span className="px-2 py-0.5 bg-slate-700 text-slate-300 text-[10px] font-bold rounded uppercase">Batch Concluded</span>
+          <span>This cohort has completed. Admissions are now open for upcoming cohorts!</span>
+          <Link href="/live-batches" className="underline font-bold text-amber-300 hover:text-white ml-1">
+            View Upcoming Batches ➔
+          </Link>
+        </div>
+      ) : (
+        <div className="bg-gradient-to-r from-[#B83A00] to-secondary text-white py-2.5 px-4 text-center text-xs font-bold shadow-sm flex items-center justify-center gap-2 flex-wrap">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          <span>Admissions Closing Soon: Only <strong>{batch.leftSeats} of {batch.totalSeats} seats</strong> left for the <strong>{formattedStartDate}</strong> batch!</span>
+          <a href="#enroll-form" className="underline font-black hover:text-amber-200 ml-1">
+            Lock Discounted Seat & Free Demo ➔
+          </a>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
         {/* Navigation Breadcrumb */}
@@ -197,14 +220,24 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
             <div className="lg:col-span-2 space-y-5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary/10 text-secondary text-xs font-black rounded-full uppercase tracking-wider">
-                  <Flame className="w-3.5 h-3.5 fill-secondary" />
-                  Fast Filling Batch
-                </span>
+                {isCompleted ? (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-200 text-gray-800 text-xs font-black rounded-full uppercase tracking-wider">
+                    Batch Completed
+                  </span>
+                ) : isFull ? (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 text-red-800 text-xs font-black rounded-full uppercase tracking-wider">
+                    Batch Full
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary/10 text-secondary text-xs font-black rounded-full uppercase tracking-wider">
+                    <Flame className="w-3.5 h-3.5 fill-secondary" />
+                    Fast Filling Batch
+                  </span>
+                )}
                 <span className="px-2.5 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-md">
-                  Starts {formattedStartDate}
+                  {isCompleted ? `Concluded on ${batch.endDate || formattedStartDate}` : `Starts ${formattedStartDate}`}
                 </span>
-                {batch.originalPrice && (
+                {!isCompleted && batch.originalPrice && (
                   <span className="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-md animate-pulse">
                     Save 40% Today
                   </span>
@@ -256,7 +289,7 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
                     <span className="px-1.5 py-0.2 bg-secondary/10 text-secondary text-[10px] font-bold rounded">Verified Lead</span>
                   </div>
                   <div className="text-[11px] text-text-muted">
-                    MSK Institute • 8+ Years Practical Experience
+                    MSK Institute • Practical Lab Mentor
                   </div>
                 </div>
               </div>
@@ -264,45 +297,77 @@ export default async function LiveBatchDetailPage({ params }: { params: Params }
 
             {/* Hero Right: Scarcity & CTA Box */}
             <div className="lg:col-span-1 bg-white p-6 rounded-2xl border-2 border-secondary/40 shadow-lg space-y-4 text-center">
-              <div className="space-y-1">
-                <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">Seats Filling Rapidly</span>
-                <div className="flex items-center justify-between text-xs font-extrabold text-primary pt-1">
-                  <span className="text-red-600">Only {batch.leftSeats} Seats Left</span>
-                  <span className="text-text-muted">{batch.totalSeats} Total Seats</span>
-                </div>
-                {/* Progress bar */}
-                <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-secondary to-red-500 rounded-full transition-all duration-500" 
-                    style={{ width: `${100 - percentageLeft}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className="p-3 bg-surface rounded-xl border border-border-subtle space-y-1 text-left">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-text-muted">Special Offer Fee:</span>
-                  <span className="text-xl font-black text-secondary">{batch.price}</span>
-                </div>
-                {batch.originalPrice && (
-                  <div className="flex items-center justify-between text-xs text-text-muted">
-                    <span>Regular Fee:</span>
-                    <span className="line-through text-gray-400">{batch.originalPrice}</span>
+              {isCompleted ? (
+                <div className="space-y-4 text-center py-2">
+                  <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6 text-slate-600" />
                   </div>
-                )}
-              </div>
+                  <div>
+                    <h3 className="text-base font-bold text-primary">Cohort Completed</h3>
+                    <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                      All classes for this batch have concluded. Check out our active and upcoming batches.
+                    </p>
+                  </div>
+                  <Link
+                    href="/live-batches"
+                    className="w-full py-3 px-4 bg-secondary hover:bg-secondary-light text-white font-extrabold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 block"
+                  >
+                    <span>Browse Next Live Batches</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  {course && (
+                    <Link
+                      href={`/courses/${course.slug}`}
+                      className="w-full py-2.5 px-4 bg-surface hover:bg-gray-100 text-primary font-bold text-xs rounded-xl border border-border-subtle transition-all flex items-center justify-center gap-1.5 block"
+                    >
+                      <span>View Full Course Syllabus</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </Link>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">Seats Filling Rapidly</span>
+                    <div className="flex items-center justify-between text-xs font-extrabold text-primary pt-1">
+                      <span className="text-red-600">Only {batch.leftSeats} Seats Left</span>
+                      <span className="text-text-muted">{batch.totalSeats} Total Seats</span>
+                    </div>
+                    {/* Progress bar */}
+                    <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-secondary to-red-500 rounded-full transition-all duration-500" 
+                        style={{ width: `${100 - percentageLeft}%` }}
+                      />
+                    </div>
+                  </div>
 
-              <a
-                href="#enroll-form"
-                className="w-full py-3.5 px-4 bg-secondary hover:bg-secondary-light text-white font-extrabold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 block"
-              >
-                <span>Reserve Seat & Free Demo Class</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                  <div className="p-3 bg-surface rounded-xl border border-border-subtle space-y-1 text-left">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-text-muted">Special Offer Fee:</span>
+                      <span className="text-xl font-black text-secondary">{batch.price}</span>
+                    </div>
+                    {batch.originalPrice && (
+                      <div className="flex items-center justify-between text-xs text-text-muted">
+                        <span>Regular Fee:</span>
+                        <span className="line-through text-gray-400">{batch.originalPrice}</span>
+                      </div>
+                    )}
+                  </div>
 
-              <p className="text-[10px] text-text-muted">
-                ✓ Free Demo Session • ✓ 100% Practical Labs • ✓ Money-back Guarantee
-              </p>
+                  <a
+                    href="#enroll-form"
+                    className="w-full py-3.5 px-4 bg-secondary hover:bg-secondary-light text-white font-extrabold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 block"
+                  >
+                    <span>Reserve Seat & Free Demo Class</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+
+                  <p className="text-[10px] text-text-muted">
+                    ✓ Free Demo Session • ✓ 100% Practical Labs • ✓ Money-back Guarantee
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,0 +1,244 @@
+[
+  {
+    "route": "/",
+    "name": "Homepage",
+    "desktop": {
+      "ttfbMs": 144.4,
+      "totalMs": 185.3,
+      "htmlKb": "32.1",
+      "htmlUncompressedKb": "203.1",
+      "jsCount": 12,
+      "jsGzipKb": "186.2",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 8,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 17.9,
+      "totalMs": 19.4,
+      "htmlKb": "32.1"
+    }
+  },
+  {
+    "route": "/courses",
+    "name": "Courses Listing",
+    "desktop": {
+      "ttfbMs": 23.5,
+      "totalMs": 27.4,
+      "htmlKb": "59.8",
+      "htmlUncompressedKb": "573.9",
+      "jsCount": 13,
+      "jsGzipKb": "196.2",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 68,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 15.5,
+      "totalMs": 21.3,
+      "htmlKb": "59.8"
+    }
+  },
+  {
+    "route": "/courses/python-mastery-beginner-to-advanced--3-months",
+    "name": "Python Course",
+    "desktop": {
+      "ttfbMs": 68.6,
+      "totalMs": 71,
+      "htmlKb": "36.1",
+      "htmlUncompressedKb": "235.8",
+      "jsCount": 13,
+      "jsGzipKb": "186.2",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 3,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 14.6,
+      "totalMs": 17.2,
+      "htmlKb": "36.1"
+    }
+  },
+  {
+    "route": "/courses/data-analysis-mastery-combo-course--12-months",
+    "name": "Data Analytics Course",
+    "desktop": {
+      "ttfbMs": 18.9,
+      "totalMs": 22.9,
+      "htmlKb": "54.3",
+      "htmlUncompressedKb": "321.0",
+      "jsCount": 13,
+      "jsGzipKb": "186.2",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 3,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 7.9,
+      "totalMs": 11.1,
+      "htmlKb": "54.3"
+    }
+  },
+  {
+    "route": "/courses/full-stack-web-dev-bootcamp",
+    "name": "Full Stack Course",
+    "desktop": {
+      "ttfbMs": 15.6,
+      "totalMs": 17,
+      "htmlKb": "32.3",
+      "htmlUncompressedKb": "195.1",
+      "jsCount": 13,
+      "jsGzipKb": "186.2",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 3,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 7.6,
+      "totalMs": 8.9,
+      "htmlKb": "32.3"
+    }
+  },
+  {
+    "route": "/live-batches",
+    "name": "Live Batches",
+    "desktop": {
+      "ttfbMs": 579.8,
+      "totalMs": 589.8,
+      "htmlKb": "18.1",
+      "htmlUncompressedKb": "99.3",
+      "jsCount": 14,
+      "jsGzipKb": "193.8",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 6,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 5.8,
+      "totalMs": 6.3,
+      "htmlKb": "18.1"
+    }
+  },
+  {
+    "route": "/study-material",
+    "name": "Study Material",
+    "desktop": {
+      "ttfbMs": 24.8,
+      "totalMs": 32.1,
+      "htmlKb": "99.4",
+      "htmlUncompressedKb": "550.9",
+      "jsCount": 13,
+      "jsGzipKb": "198.4",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 2,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 10,
+      "totalMs": 18.5,
+      "htmlKb": "99.4"
+    }
+  },
+  {
+    "route": "/blogs",
+    "name": "Blog Listing",
+    "desktop": {
+      "ttfbMs": 87,
+      "totalMs": 91.9,
+      "htmlKb": "44.2",
+      "htmlUncompressedKb": "189.7",
+      "jsCount": 13,
+      "jsGzipKb": "189.4",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 30,
+      "missingDimsCount": 2,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 15.9,
+      "totalMs": 19.4,
+      "htmlKb": "44.2"
+    }
+  },
+  {
+    "route": "/blogs/how-to-prepare-for-nielit-ccc-exam-first-attempt",
+    "name": "Representative Blog Article",
+    "desktop": {
+      "ttfbMs": 17.4,
+      "totalMs": 17.8,
+      "htmlKb": "20.8",
+      "htmlUncompressedKb": "105.6",
+      "jsCount": 16,
+      "jsGzipKb": "227.5",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 4,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 7,
+      "totalMs": 7.6,
+      "htmlKb": "20.8"
+    }
+  },
+  {
+    "route": "/tutorials/html5-complete-course",
+    "name": "Tutorial Page",
+    "desktop": {
+      "ttfbMs": 17.5,
+      "totalMs": 17.8,
+      "htmlKb": "16.3",
+      "htmlUncompressedKb": "89.4",
+      "jsCount": 14,
+      "jsGzipKb": "188.9",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 2,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 7.8,
+      "totalMs": 8.5,
+      "htmlKb": "16.3"
+    }
+  },
+  {
+    "route": "/contact",
+    "name": "Contact",
+    "desktop": {
+      "ttfbMs": 19.6,
+      "totalMs": 20.3,
+      "htmlKb": "17.4",
+      "htmlUncompressedKb": "94.7",
+      "jsCount": 13,
+      "jsGzipKb": "194.9",
+      "cssCount": 2,
+      "cssGzipKb": "29.2",
+      "imgCount": 2,
+      "missingDimsCount": 0,
+      "lcpCandidate": "img: /logo.jpg"
+    },
+    "mobile": {
+      "ttfbMs": 5.1,
+      "totalMs": 5.4,
+      "htmlKb": "17.4"
+    }
+  }
+]

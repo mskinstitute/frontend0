@@ -33,6 +33,7 @@ import {
   saveTutorialOffline,
   removeTutorialOffline,
 } from '@/lib/offlineTutorials';
+import { trackTutorialView } from '@/lib/dataLayer';
 
 interface TutorialReaderProps {
   tutorial: TutorialItem;
@@ -129,7 +130,14 @@ export default function TutorialReader({
     isTutorialSavedOffline(tutorial.slug, frontmatter.slug)
       .then(setIsOfflineReady)
       .catch(() => null);
-  }, [tutorial.slug, frontmatter.slug]);
+
+    trackTutorialView({
+      tutorialSlug: tutorial.slug,
+      topicSlug: frontmatter.slug,
+      title: frontmatter.title,
+      courseName: course.title,
+    });
+  }, [tutorial.slug, frontmatter.slug, course.title]);
 
   // Toggle curriculum sidebar visibility
   const toggleCurriculum = () => {

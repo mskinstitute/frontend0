@@ -1,57 +1,48 @@
 import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, StudyMaterial, BlogPost, TutorialItem, TutorialTopicFrontmatter, CareerOpportunity } from '@/types';
 
-// Statically bundled JSON fallbacks for zero-IO, failure-proof loading across Serverless, ISR & SSR
-import allCoursesData from '../../public/data/all-courses.json';
-import studyMaterialsData from '../../public/data/study-materials.json';
-import tutorialsData from '../../public/data/tutorials.json';
-import careersData from '../../public/data/careers.json';
-import certificatesData from '../../public/data/certificates.json';
-import instructorsData from '../../public/data/instructors.json';
-import notesData from '../../public/data/notes.json';
-import announcementsData from '../../public/data/announcements.json';
-
-const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
-  'all-courses.json': allCoursesData,
-  'study-materials.json': studyMaterialsData,
-  'tutorials.json': tutorialsData,
-  'careers.json': careersData,
-  'certificates.json': certificatesData,
-  'instructors.json': instructorsData,
-  'notes.json': notesData,
-  'announcements.json': announcementsData,
-};
-
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+
+// Server-side lazy bundled JSON loader: zero-IO on Node/Serverless while keeping client bundles clean
+async function loadServerData<T>(fileName: string): Promise<T> {
+  switch (fileName) {
+    case 'all-courses.json':
+      return (await import('../../public/data/all-courses.json')).default as unknown as T;
+    case 'study-materials.json':
+      return (await import('../../public/data/study-materials.json')).default as unknown as T;
+    case 'tutorials.json':
+      return (await import('../../public/data/tutorials.json')).default as unknown as T;
+    case 'careers.json':
+      return (await import('../../public/data/careers.json')).default as unknown as T;
+    case 'certificates.json':
+      return (await import('../../public/data/certificates.json')).default as unknown as T;
+    case 'instructors.json':
+      return (await import('../../public/data/instructors.json')).default as unknown as T;
+    case 'notes.json':
+      return (await import('../../public/data/notes.json')).default as unknown as T;
+    case 'announcements.json':
+      return (await import('../../public/data/announcements.json')).default as unknown as T;
+    case 'live-batches.json':
+      return (await import('../../public/data/live-batches.json')).default as unknown as T;
+    default:
+      throw new Error(`Unsupported data file: ${fileName}`);
+  }
+}
 
 // Helper to safely load local data in any environment (Serverless lambda, Node SSR, build-time SSG, or browser client)
 async function getLocalData<T>(fileName: string): Promise<T> {
-  // 1. Running on server: prefer static in-memory bundled registry (zero-IO, impossible to fail with ENOENT)
+  // 1. Running on server: use zero-IO static bundled loader
   if (typeof window === 'undefined') {
-    if (LOCAL_DATA_REGISTRY[fileName] !== undefined) {
-      return LOCAL_DATA_REGISTRY[fileName] as T;
-    }
-    try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const filePath = path.join(process.cwd(), 'public', 'data', fileName);
-      const fileContent = await fs.readFile(filePath, 'utf8');
-      return JSON.parse(fileContent) as T;
-    } catch (fsErr) {
-      console.warn(`Could not read /public/data/${fileName} from filesystem:`, fsErr);
-      throw new Error(`Failed to load ${fileName}`);
-    }
+    return loadServerData<T>(fileName);
   }
 
-  // 2. Running on client: fetch relative path, with fallback to in-memory registry
+  // 2. Running on client: fetch relative path without bundling 1.2MB JSON into client bundle
   try {
     const url = `/data/${fileName}`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Failed to load ${fileName}`);
     return (await res.json()) as T;
   } catch (clientErr) {
-    if (LOCAL_DATA_REGISTRY[fileName] !== undefined) {
-      return LOCAL_DATA_REGISTRY[fileName] as T;
-    }
+    console.warn(`Could not fetch /data/${fileName} from client:`, clientErr);
     throw clientErr;
   }
 }
@@ -433,9 +424,11 @@ export const DEFAULT_GOOGLE_SHEET_LIVE_BATCHES_URL =
   'https://docs.google.com/spreadsheets/d/1IMLDtXqnuM1A35xpboR_IrcYh5563ZCy55dzl1vGW1A/edit#gid=1194716609';
 
 export async function fetchLiveBatches(): Promise<LiveBatch[]> {
-  let rawBatches: LiveBatch[] = [];
+  // 1. Load canonical baseline batches from live-batches.json
+  const baselineBatches = await getLocalData<LiveBatch[]>('live-batches.json').catch(() => [] as LiveBatch[]);
+  let rawBatches: LiveBatch[] = [...baselineBatches];
 
-  // 1. Fetch live batches directly from Google Sheet (Batches tab)
+  // 2. Fetch live updates from Google Sheet (Batches tab) if configured
   const sheetUrl =
     process.env.GOOGLE_SHEET_LIVE_BATCHES_URL ||
     process.env.NEXT_PUBLIC_GOOGLE_SHEET_LIVE_BATCHES_URL ||
@@ -449,15 +442,29 @@ export async function fetchLiveBatches(): Promise<LiveBatch[]> {
         const csvText = await res.text();
         const parsed = parseGoogleSheetBatchesCsv(csvText);
         if (parsed.length > 0) {
-          rawBatches = parsed;
+          // Merge parsed sheet batches into baseline, preserving custom fields
+          parsed.forEach((sheetBatch) => {
+            const existingIdx = rawBatches.findIndex(
+              (b) =>
+                b.id === sheetBatch.id ||
+                b.courseSlug === sheetBatch.courseSlug ||
+                (b.id.includes('python-mastery') && sheetBatch.id.includes('python-mastery')) ||
+                (b.id.includes('data-analysis') && sheetBatch.id.includes('data-analysis'))
+            );
+            if (existingIdx >= 0) {
+              rawBatches[existingIdx] = { ...rawBatches[existingIdx], ...sheetBatch };
+            } else {
+              rawBatches.push(sheetBatch);
+            }
+          });
         }
       }
     } catch (sheetErr) {
-      console.warn('API fetch live batches from Google Sheet failed:', sheetErr);
+      console.warn('API fetch live batches from Google Sheet failed, using canonical local data:', sheetErr);
     }
   }
 
-  // 2. Check external API if configured and sheet didn't return batches
+  // 3. Fallback to API if empty
   if (rawBatches.length === 0 && API_BASE_URL) {
     try {
       const res = await fetch(`${API_BASE_URL}/api/live-batches/`);
@@ -469,65 +476,13 @@ export async function fetchLiveBatches(): Promise<LiveBatch[]> {
     }
   }
 
-  // 3. Fallback default batches if sheet is not yet filled
-  if (rawBatches.length === 0) {
-    rawBatches = [
-      {
-        id: 'batch-python-mastery-3-months',
-        courseSlug: 'python-mastery-beginner-to-advanced--3-months',
-        courseId: 'python-mastery-beginner-to-advanced--3-months',
-        title: 'Python Programming Mastery – Live Batch',
-        startDate: '2026-10-01',
-        startDateTime: '2026-10-01T17:00:00',
-        schedule: 'Mon - Sat (05:00 PM - 06:30 PM)',
-        instructorId: 'sumit-kumar',
-        instructor: 'Er. Sumit Kumar',
-        instructorPicture: '/logo.jpg',
-        price: '₹2,999',
-        originalPrice: '₹9,999',
-        totalSeats: 20,
-        leftSeats: 12,
-      },
-      {
-        id: 'batch-mern-full-stack',
-        courseSlug: 'full-stack-web-development',
-        courseId: 'full-stack-web-development',
-        title: 'Full-Stack MERN Web Development – Live Cohort',
-        startDate: '2026-10-15',
-        startDateTime: '2026-10-15T18:30:00',
-        schedule: 'Mon - Sat (06:30 PM - 08:00 PM)',
-        instructorId: 'sumit-kumar',
-        instructor: 'Er. Sumit Kumar',
-        instructorPicture: '/logo.jpg',
-        price: '₹4,999',
-        originalPrice: '₹14,999',
-        totalSeats: 25,
-        leftSeats: 8,
-      },
-      {
-        id: 'batch-data-analysis-mastery',
-        courseSlug: 'data-analysis-mastery-combo-course--12-months',
-        courseId: 'data-analysis-mastery-combo-course--12-months',
-        title: 'Data Analysis Mastery – Live Batch',
-        startDate: '2026-10-25',
-        startDateTime: '2026-10-25T16:30:00',
-        schedule: 'Mon - Sat (04:30 PM - 06:00 PM)',
-        instructorId: 'sumit-kumar',
-        instructor: 'Er. Sumit Kumar',
-        instructorPicture: '/logo.jpg',
-        price: '₹17,999',
-        originalPrice: '₹54,999',
-        totalSeats: 20,
-        leftSeats: 15,
-      },
-    ];
-  }
-
-  // 4. Enrich batches with course data and instructor data
+  // 4. Enrich batches with course data, instructor data, and calculated lifecycle status
   const [courses, instructors] = await Promise.all([
     getLocalData<Course[]>('all-courses.json'),
     fetchInstructors().catch(() => [] as Instructor[]),
   ]);
+
+  const now = Date.now();
 
   return rawBatches.map((batch) => {
     const lookupKey = (batch.courseSlug || batch.courseId || batch.id).toLowerCase();
@@ -541,8 +496,24 @@ export async function fetchLiveBatches(): Promise<LiveBatch[]> {
       (inst) => inst.id === batch.instructorId || inst.name.toLowerCase() === batch.instructor?.toLowerCase()
     );
 
+    // Compute lifecycle status
+    const startTs = getBatchStartTimestamp(batch);
+    let status = batch.status || 'OPEN';
+    if (batch.status === 'COMPLETED' || batch.status === 'ARCHIVED') {
+      status = batch.status;
+    } else if (batch.leftSeats <= 0) {
+      status = 'FULL';
+    } else if (batch.endDate && new Date(batch.endDate).getTime() < now) {
+      status = 'COMPLETED';
+    } else if (startTs > 0 && startTs < now - (75 * 24 * 60 * 60 * 1000)) {
+      status = 'COMPLETED';
+    } else if (startTs > now) {
+      status = 'OPEN';
+    }
+
     return {
       ...batch,
+      status,
       courseTitle: matchedCourse?.title || batch.courseTitle || batch.title,
       courseSlug: matchedCourse?.slug || batch.courseSlug || lookupKey,
       duration: matchedCourse ? `${matchedCourse.duration.value} ${matchedCourse.duration.unit}` : batch.duration || '3 Months',
@@ -561,13 +532,26 @@ export async function fetchLiveBatchById(id: string): Promise<{ batch: LiveBatch
     fetchInstructors().catch(() => [] as Instructor[]),
   ]);
 
-  const normalized = id.toLowerCase();
-  const batch = allBatches.find(
-    (b) =>
-      b.id.toLowerCase() === normalized ||
-      b.courseSlug.toLowerCase() === normalized ||
-      b.courseId?.toLowerCase() === normalized
-  );
+  const normalized = id.toLowerCase().trim();
+  const cleanId = normalized.replace(/[^a-z0-9]+/g, '-');
+
+  const batch = allBatches.find((b) => {
+    const bId = b.id.toLowerCase();
+    const bClean = bId.replace(/[^a-z0-9]+/g, '-');
+    const bSlug = (b.courseSlug || '').toLowerCase();
+    const bCourseId = (b.courseId || '').toLowerCase();
+
+    return (
+      bId === normalized ||
+      bClean === cleanId ||
+      bSlug === normalized ||
+      bCourseId === normalized ||
+      (cleanId.includes('python-mastery') && bClean.includes('python-mastery')) ||
+      (cleanId.includes('data-analysis') && bClean.includes('data-analysis')) ||
+      (cleanId.includes('mern') && bClean.includes('mern'))
+    );
+  });
+
   if (!batch) return null;
 
   const course = allCourses.find((c) => c.slug.toLowerCase() === batch.courseSlug.toLowerCase() || c.id.toLowerCase() === batch.courseSlug.toLowerCase()) || null;

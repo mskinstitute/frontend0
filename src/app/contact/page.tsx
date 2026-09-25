@@ -15,18 +15,18 @@ export const metadata: Metadata = {
     'Computer Center Shikohabad Admissions',
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/contact',
+    canonical: 'https://www.mskinstitute.in/contact',
   },
   openGraph: {
     title: 'Contact Us | MSK Institute of Technology Shikohabad',
     description: 'Get in touch with MSK Institute Shikohabad. Connect via WhatsApp, phone, email, or visit our physical campus in Shikohabad.',
-    url: 'https://mskinstitute.in/contact',
+    url: 'https://www.mskinstitute.in/contact',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://mskinstitute.in/logo.jpg',
+        url: 'https://www.mskinstitute.in/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'MSK Institute Contact Us & Admissions',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Contact Us | MSK Institute Shikohabad',
     description: 'Connect with MSK Institute for coding courses, offline lab sessions, and computer certifications.',
-    images: ['https://mskinstitute.in/logo.jpg'],
+    images: ['https://www.mskinstitute.in/logo.jpg'],
   },
 };
 
@@ -47,9 +47,9 @@ export default function ContactPage() {
     '@type': 'EducationalOrganization',
     name: 'MSK Institute of Technology & Coding',
     alternateName: 'MSK Institute Shikohabad',
-    url: 'https://mskinstitute.in',
-    logo: 'https://mskinstitute.in/logo.jpg',
-    image: 'https://mskinstitute.in/logo.jpg',
+    url: 'https://www.mskinstitute.in',
+    logo: 'https://www.mskinstitute.in/logo.jpg',
+    image: 'https://www.mskinstitute.in/logo.jpg',
     description: 'Leading computer training academy in Shikohabad offering Python, Full Stack Web Development, CCC, and Data Analytics courses.',
     telephone: '+91-8393042166',
     email: 'mskshikohabad@gmail.com',
@@ -63,8 +63,8 @@ export default function ContactPage() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '27.1084',
-      longitude: '78.5844',
+      latitude: 27.1157743,
+      longitude: 78.5829716,
     },
     openingHoursSpecification: [
       {

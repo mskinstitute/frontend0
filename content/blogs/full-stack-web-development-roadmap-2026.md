@@ -8,7 +8,7 @@ category: "Web Development"
 featured: true
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-08-25"
 readTime: "6 min read"
 tags:
@@ -19,7 +19,7 @@ tags:
   - "Web Dev"
 relatedCourses:
   - "full-stack-web-dev-bootcamp"
-  - "javascript-react-frontend-engineering"
+  - "frontend-development--8-months"
 ---
 
 The landscape of software development is evolving rapidly with AI tools and server-driven web architectures. However, core engineering principles remain unchanged. If you are starting your coding journey in 2026 from Shikohabad or anywhere in India, here is the proven, step-by-step path to master full-stack development.

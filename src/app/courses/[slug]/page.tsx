@@ -6,12 +6,14 @@ import {
   Globe, Laptop, HelpCircle, ChevronDown, Check, Download, 
   Play, PackageCheck, ArrowRight, Sparkles, CheckCircle2 
 } from 'lucide-react';
-import { fetchCourses } from '@/services/api';
+import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import DemoBookingForm from '@/components/DemoBookingForm';
 import CourseCurriculumAccordion from '@/components/CourseCurriculumAccordion';
+import CourseRelatedContent from '@/components/CourseRelatedContent';
 import WebShareButton from '@/components/WebShareButton';
 import CourseViewTracker from '@/components/CourseViewTracker';
-import { Course } from '@/types';
+import { Course, LiveBatch } from '@/types';
+import { constructMetadata } from '@/lib/seo';
 
 type Params = Promise<{ slug: string }>;
 
@@ -34,29 +36,29 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     const course = courses.find((c) => c.slug === slug);
 
     if (!course) {
-      return {
-        title: 'Course Not Found | MSK Institute',
+      return constructMetadata({
+        title: 'Course Not Found',
         description: 'The requested course could not be found.',
-      };
+      });
     }
 
-    return {
-      title: `${course.title} in Shikohabad | MSK Institute`,
+    return constructMetadata({
+      title: `${course.title} in Shikohabad`,
       description: course.shortDescription,
-      alternates: {
-        canonical: `https://mskinstitute.in/courses/${course.slug}`,
-      },
-      openGraph: {
-        title: `${course.title} - Learn Practical Coding | MSK Institute`,
-        description: course.shortDescription,
-        url: `https://mskinstitute.in/courses/${course.slug}`,
-        images: [{ url: course.featuredImageUrl }],
-      },
-    };
+      canonical: `/courses/${course.slug}`,
+      image: course.featuredImageUrl,
+      keywords: [
+        course.title,
+        ...(course.categories || []),
+        `${course.title} in Shikohabad`,
+        'MSK Institute',
+        'Computer Classes Shikohabad',
+      ],
+    });
   } catch (error) {
-    return {
-      title: 'Course Details | MSK Institute',
-    };
+    return constructMetadata({
+      title: 'Course Details',
+    });
   }
 }
 
@@ -64,9 +66,15 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
   const { slug } = await params;
   let course: Course | undefined;
   let allCourses: Course[] = [];
+  let liveBatches: LiveBatch[] = [];
 
   try {
-    allCourses = await fetchCourses();
+    const [coursesRes, batchesRes] = await Promise.all([
+      fetchCourses(),
+      fetchLiveBatches().catch(() => [] as LiveBatch[]),
+    ]);
+    allCourses = coursesRes;
+    liveBatches = batchesRes;
     course = allCourses.find((c) => c.slug === slug);
   } catch (error) {
     console.error('Error fetching course:', error);
@@ -93,7 +101,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
     },
     {
       question: `Do I get a verifiable certificate upon completing ${course.title}?`,
-      answer: `Yes, upon successful completion and project submission, you receive an official certificate with a unique verification code verifiable online at https://mskinstitute.in/verify-certificate.`,
+      answer: `Yes, upon successful completion and project submission, you receive an official certificate with a unique verification code verifiable online at https://www.mskinstitute.in/verify-certificate.`,
     },
     {
       question: `Where are the offline classes held and what are the timings?`,
@@ -120,8 +128,8 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         'provider': {
           '@type': 'EducationalOrganization',
           'name': 'MSK Institute',
-          'url': 'https://mskinstitute.in',
-          'sameAs': 'https://mskinstitute.in',
+          'url': 'https://www.mskinstitute.in',
+          'sameAs': 'https://www.mskinstitute.in',
           'address': {
             '@type': 'PostalAddress',
             'streetAddress': 'Gali No. 3, Near Gyan Jyoti Public School',
@@ -159,7 +167,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
           'availability': 'https://schema.org/InStock',
           'price': 0,
           'priceCurrency': 'INR',
-          'url': `https://mskinstitute.in/courses/${course.slug}`,
+          'url': `https://www.mskinstitute.in/courses/${course.slug}`,
         },
         'syllabusSections': (course.chapters || []).map((ch, idx) => ({
           '@type': 'Syllabus',
@@ -186,19 +194,19 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
             '@type': 'ListItem',
             'position': 1,
             'name': 'Home',
-            'item': 'https://mskinstitute.in',
+            'item': 'https://www.mskinstitute.in',
           },
           {
             '@type': 'ListItem',
             'position': 2,
             'name': 'Courses',
-            'item': 'https://mskinstitute.in/courses',
+            'item': 'https://www.mskinstitute.in/courses',
           },
           {
             '@type': 'ListItem',
             'position': 3,
             'name': course.title,
-            'item': `https://mskinstitute.in/courses/${course.slug}`,
+            'item': `https://www.mskinstitute.in/courses/${course.slug}`,
           },
         ],
       },
@@ -439,6 +447,9 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
             </div>
           </div>
         </div>
+
+        {/* Dynamic Related Content Engine: Tutorials, Blogs & Live Batches */}
+        <CourseRelatedContent course={course} batches={liveBatches} />
       </div>
     </>
   );

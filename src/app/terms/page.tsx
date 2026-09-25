@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     'Coding Bootcamp Terms UP'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/terms',
+    canonical: 'https://www.mskinstitute.in/terms',
   },
   openGraph: {
     title: 'Terms of Service | MSK Institute',
     description: 'Official Terms of Service and student guidelines for MSK Institute physical labs and online learning portal.',
-    url: 'https://mskinstitute.in/terms',
+    url: 'https://www.mskinstitute.in/terms',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
@@ -32,13 +32,13 @@ export default function TermsPage() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Terms of Service - MSK Institute',
-    url: 'https://mskinstitute.in/terms',
+    url: 'https://www.mskinstitute.in/terms',
     description: 'Official Terms of Service and student agreement for MSK Institute.',
     publisher: {
       '@type': 'EducationalOrganization',
       name: 'MSK Institute',
-      url: 'https://mskinstitute.in',
-      logo: 'https://mskinstitute.in/logo.jpg',
+      url: 'https://www.mskinstitute.in',
+      logo: 'https://www.mskinstitute.in/logo.jpg',
     },
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -47,13 +47,13 @@ export default function TermsPage() {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://mskinstitute.in',
+          item: 'https://www.mskinstitute.in',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Terms of Service',
-          item: 'https://mskinstitute.in/terms',
+          item: 'https://www.mskinstitute.in/terms',
         },
       ],
     },
@@ -89,7 +89,7 @@ export default function TermsPage() {
             1. Acceptance of Terms
           </h2>
           <p className="text-sm text-text-muted leading-relaxed">
-            Welcome to <strong>MSK Institute of Technology & Coding</strong> (&quot;MSK Institute,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), founded and mentored by <strong>Er. Sumit Kumar</strong> in Shikohabad, Uttar Pradesh. By accessing our website (<strong>https://mskinstitute.in</strong>), participating in our live online batches, enrolling in physical offline lab courses, or utilizing our interactive developer tools, you agree to comply with and be bound by these Terms of Service.
+            Welcome to <strong>MSK Institute of Technology & Coding</strong> (&quot;MSK Institute,&quot; &quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), founded and mentored by <strong>Er. Sumit Kumar</strong> in Shikohabad, Uttar Pradesh. By accessing our website (<strong>https://www.mskinstitute.in</strong>), participating in our live online batches, enrolling in physical offline lab courses, or utilizing our interactive developer tools, you agree to comply with and be bound by these Terms of Service.
           </p>
           <p className="text-sm text-text-muted leading-relaxed">
             If you do not agree with any part of these terms, please discontinue the use of our website and educational services immediately.
@@ -180,7 +180,7 @@ export default function TermsPage() {
               MSK Institute awards digital and physical Completion Diplomas & Certificates exclusively to candidates who successfully complete the required lecture hours, lab practicals, and capstone project evaluations.
             </p>
             <p>
-              All authentic credentials can be validated publicly by employers, colleges, and verification agencies via our official portal at: <Link href="/verify-certificate" className="text-secondary font-bold hover:underline">https://mskinstitute.in/verify-certificate</Link>.
+              All authentic credentials can be validated publicly by employers, colleges, and verification agencies via our official portal at: <Link href="/verify-certificate" className="text-secondary font-bold hover:underline">https://www.mskinstitute.in/verify-certificate</Link>.
             </p>
             <p className="text-xs bg-amber-50 text-amber-900 border border-amber-200 p-3 rounded-xl">
               <strong>Strict Warning:</strong> Any attempt to tamper with, forge, or duplicate an MSK Institute certificate or roll number will result in immediate cancellation of credentials and possible reporting under applicable IT laws.

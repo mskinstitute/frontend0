@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { jsPDF } from 'jspdf';
 import { QRCodeCanvas } from 'qrcode.react';
 import {
   Award,
@@ -166,7 +165,7 @@ export default function TypingCertificateModal({
   };
 
   const proficiency = getProficiencyTier(certWpm);
-  const verifyUrl = `https://mskinstitute.in/verify-cert?id=${certId}&studentId=${encodeURIComponent(
+  const verifyUrl = `https://www.mskinstitute.in/verify-cert?id=${certId}&studentId=${encodeURIComponent(
     verifiedStudent?.studentId || ''
   )}&wpm=${certWpm}&acc=${certAccuracy}`;
 
@@ -175,13 +174,13 @@ export default function TypingCertificateModal({
   const canDownload = isEnrolledMode ? !!verifiedStudent : recipientName.length >= 2;
 
   const handleWhatsAppShare = () => {
-    const text = `🏆 I achieved ${certWpm} WPM typing speed with ${certAccuracy}% accuracy on MSK Institute TypeQuest! 🚀\n\nTest your typing speed & get your free certificate here:\nhttps://mskinstitute.in/tools/typing`;
+    const text = `🏆 I achieved ${certWpm} WPM typing speed with ${certAccuracy}% accuracy on MSK Institute TypeQuest! 🚀\n\nTest your typing speed & get your free certificate here:\nhttps://www.mskinstitute.in/tools/typing`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   const handleCopyShareLink = () => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText('https://mskinstitute.in/tools/typing');
+      navigator.clipboard.writeText('https://www.mskinstitute.in/tools/typing');
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2000);
     }
@@ -202,6 +201,7 @@ export default function TypingCertificateModal({
     setVerifyError(null);
 
     try {
+      const { jsPDF } = await import('jspdf');
       const doc = new jsPDF({
         orientation: 'landscape',
         unit: 'mm',

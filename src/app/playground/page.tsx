@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'Shikohabad Coding Academy',
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/playground',
+    canonical: 'https://www.mskinstitute.in/playground',
   },
 };
 

@@ -85,7 +85,7 @@ function CertificateVerifierContent() {
   // Compile dynamic verification URL for the QR code
   const verificationUrl = typeof window !== 'undefined' 
     ? `${window.location.origin}/verify-certificate?id=${encodeURIComponent(certificate?.id || '')}` 
-    : `https://mskinstitute.in/verify-certificate?id=${encodeURIComponent(certificate?.id || '')}`;
+    : `https://www.mskinstitute.in/verify-certificate?id=${encodeURIComponent(certificate?.id || '')}`;
 
   return (
     <div className="space-y-12">

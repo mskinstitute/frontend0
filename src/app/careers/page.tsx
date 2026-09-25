@@ -20,18 +20,18 @@ export const metadata: Metadata = {
     'Jobs in Shikohabad'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in/careers',
+    canonical: 'https://www.mskinstitute.in/careers',
   },
   openGraph: {
     title: 'Careers, Internships & Jobs | MSK Institute Shikohabad',
     description: 'Explore verified on-site jobs, faculty trainer roles, and live internships at MSK Institute Shikohabad Campus. All genders welcome.',
-    url: 'https://mskinstitute.in/careers',
+    url: 'https://www.mskinstitute.in/careers',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://mskinstitute.in/logo.jpg',
+        url: 'https://www.mskinstitute.in/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'MSK Institute Careers and Internships',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Careers, Internships & Jobs | MSK Institute',
     description: 'Explore verified on-site jobs, trainer positions, and paid internships at MSK Institute Shikohabad.',
-    images: ['https://mskinstitute.in/logo.jpg'],
+    images: ['https://www.mskinstitute.in/logo.jpg'],
   },
 };
 
@@ -69,8 +69,8 @@ export default async function CareersPage() {
         hiringOrganization: {
           '@type': 'Organization',
           name: c.company || 'MSK Institute of Technology',
-          sameAs: 'https://mskinstitute.in',
-          logo: 'https://mskinstitute.in/logo.jpg',
+          sameAs: 'https://www.mskinstitute.in',
+          logo: 'https://www.mskinstitute.in/logo.jpg',
         },
         jobLocation: {
           '@type': 'Place',

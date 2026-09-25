@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   Search, SlidersHorizontal, BookOpen, Clock, Globe, Laptop, 
@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Course } from '@/types';
 import WebShareButton from '@/components/WebShareButton';
+import { trackCourseListImpression, trackCourseSelection, trackSearch } from '@/lib/analytics';
 
 export default function CourseCatalogClient({ initialCourses }: { initialCourses: Course[] }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -95,6 +96,36 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     setSortBy('featured');
   };
 
+  // Track course list impression on mount
+  const initialTracked = useRef(false);
+  useEffect(() => {
+    if (!initialTracked.current && initialCourses.length > 0) {
+      initialTracked.current = true;
+      trackCourseListImpression(
+        initialCourses.slice(0, 30).map((c, idx) => ({
+          item_id: c.id || c.slug,
+          item_name: c.title,
+          item_category: c.categories?.[0] || 'Computer Course',
+          index: idx + 1,
+        })),
+        'Course Catalog'
+      );
+    }
+  }, [initialCourses]);
+
+  // Track search queries with 600ms debounce
+  useEffect(() => {
+    if (!searchQuery || searchQuery.trim().length < 2) return;
+    const timer = setTimeout(() => {
+      trackSearch(
+        searchQuery.trim(),
+        filteredCourses.length,
+        selectedLevel !== 'All' ? selectedLevel : 'all'
+      );
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [searchQuery, filteredCourses.length, selectedLevel]);
+
   const courseFaqs = [
     {
       q: "What computer and programming courses are available at MSK Institute Shikohabad?",
@@ -106,7 +137,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     },
     {
       q: "Are certificates from MSK Institute verifiable online?",
-      a: "Yes! Every student who successfully completes their course and project practicals receives a certificate with a unique Verification ID that can be authenticated 24/7 on our online Certificate Verification Portal (https://mskinstitute.in/verify-certificate)."
+      a: "Yes! Every student who successfully completes their course and project practicals receives a certificate with a unique Verification ID that can be authenticated 24/7 on our online Certificate Verification Portal (https://www.mskinstitute.in/verify-certificate)."
     },
     {
       q: "What is the learning mode (online vs. offline) for courses?",
@@ -125,7 +156,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
   const comparisonData = [
     {
       title: "Python Masterclass",
-      slug: "python-programming-masterclass",
+      slug: "python-mastery-beginner-to-advanced--3-months",
       duration: "3 Months",
       mode: "Online & Offline",
       level: "Beginner",
@@ -134,7 +165,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     },
     {
       title: "Full-Stack Web Dev (MERN)",
-      slug: "full-stack-web-development-bootcamp",
+      slug: "full-stack-web-dev-bootcamp",
       duration: "6 Months",
       mode: "Online & Offline",
       level: "Comprehensive",
@@ -142,18 +173,18 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
       bestFor: "React Frontend, Node.js APIs, MongoDB, Real-World Web Apps"
     },
     {
-      title: "HTML5 & Modern UI Design",
-      slug: "html5-css3-modern-ui-design",
-      duration: "2 Months",
+      title: "Web Designing Pathway",
+      slug: "web-designing-complete-pathway--4-months",
+      duration: "4 Months",
       mode: "Online & Offline",
       level: "Beginner",
       certificate: "UI Developer Certificate",
       bestFor: "Responsive Layouts, Tailwind CSS, Flexbox/Grid, Web Design"
     },
     {
-      title: "JS & React Engineering",
-      slug: "javascript-react-frontend-engineering",
-      duration: "3 Months",
+      title: "Frontend Engineering",
+      slug: "frontend-development--8-months",
+      duration: "8 Months",
       mode: "Online & Offline",
       level: "Intermediate",
       certificate: "Frontend React Certificate",
@@ -161,7 +192,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     },
     {
       title: "NIELIT CCC Certification",
-      slug: "ccc-course-on-computer-concepts",
+      slug: "ccc",
       duration: "3 Months",
       mode: "Online & Offline",
       level: "Beginner",
@@ -170,7 +201,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     },
     {
       title: "ADCA (1-Yr Diploma)",
-      slug: "adca-advanced-diploma-computer-applications",
+      slug: "adca",
       duration: "12 Months",
       mode: "Offline & Online",
       level: "Complete Diploma",
@@ -486,100 +517,116 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
             {/* Course Grid Results */}
             {filteredCourses.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-5 sm:gap-6">
-                {filteredCourses.map((course) => (
-                  <div
-                    key={course.id}
-                    className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
-                  >
-                    <Link
-                      href={`/courses/${course.slug}`}
-                      className="relative h-44 sm:h-48 w-full bg-gray-100 overflow-hidden block"
-                      aria-label={course.title}
+                {filteredCourses.map((course, idx) => {
+                  const handleCourseSelect = () => {
+                    trackCourseSelection(
+                      {
+                        item_id: course.id || course.slug,
+                        item_name: course.title,
+                        item_category: course.categories?.[0] || 'Computer Course',
+                        index: idx + 1,
+                      },
+                      'Course Catalog'
+                    );
+                  };
+
+                  return (
+                    <div
+                      key={course.id}
+                      className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={course.featuredImageUrl}
-                        alt={`${course.title} at MSK Institute Shikohabad`}
-                        width={600}
-                        height={340}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <span className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary/95 text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs">
-                        {course.level}
-                      </span>
-                    </Link>
+                      <Link
+                        href={`/courses/${course.slug}`}
+                        onClick={handleCourseSelect}
+                        className="relative h-44 sm:h-48 w-full bg-gray-100 overflow-hidden block"
+                        aria-label={course.title}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={course.featuredImageUrl}
+                          alt={`${course.title} at MSK Institute Shikohabad`}
+                          width={600}
+                          height={340}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <span className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary/95 text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs">
+                          {course.level}
+                        </span>
+                      </Link>
 
-                    <div className="p-4 sm:p-5 flex-grow flex flex-col gap-3.5 sm:gap-4">
-                      <div className="space-y-2">
-                        <div className="flex flex-wrap gap-1.5">
-                          {course.categories.slice(0, 2).map((cat, i) => (
-                            <span
-                              key={i}
-                              className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded"
-                            >
-                              {cat}
+                      <div className="p-4 sm:p-5 flex-grow flex flex-col gap-3.5 sm:gap-4">
+                        <div className="space-y-2">
+                          <div className="flex flex-wrap gap-1.5">
+                            {course.categories.slice(0, 2).map((cat, i) => (
+                              <span
+                                key={i}
+                                className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded"
+                              >
+                                {cat}
+                              </span>
+                            ))}
+                          </div>
+                          <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
+                            <Link href={`/courses/${course.slug}`} onClick={handleCourseSelect} className="hover:underline">
+                              {course.title}
+                            </Link>
+                          </h2>
+                          <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
+                            {course.shortDescription}
+                          </p>
+                        </div>
+
+                        <div className="space-y-3 mt-auto pt-3 sm:pt-4 border-t border-border-subtle">
+                          <div className="flex items-center justify-between text-xs text-text-muted">
+                            <span className="flex items-center gap-1.5 font-medium">
+                              <Clock className="w-4 h-4 text-secondary shrink-0" />
+                              <span>{course.duration.value} {course.duration.unit}</span>
                             </span>
-                          ))}
-                        </div>
-                        <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
-                          <Link href={`/courses/${course.slug}`} className="hover:underline">
-                            {course.title}
-                          </Link>
-                        </h2>
-                        <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
-                          {course.shortDescription}
-                        </p>
-                      </div>
+                            <span className="flex items-center gap-1 font-semibold">
+                              {course.mode === 'BOTH' ? (
+                                <>
+                                  <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                  <span>Online & Offline</span>
+                                </>
+                              ) : course.mode === 'OFFLINE' ? (
+                                <>
+                                  <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                  <span>Offline Lab</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Globe className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                  <span>Online Only</span>
+                                </>
+                              )}
+                            </span>
+                          </div>
 
-                      <div className="space-y-3 mt-auto pt-3 sm:pt-4 border-t border-border-subtle">
-                        <div className="flex items-center justify-between text-xs text-text-muted">
-                          <span className="flex items-center gap-1.5 font-medium">
-                            <Clock className="w-4 h-4 text-secondary shrink-0" />
-                            <span>{course.duration.value} {course.duration.unit}</span>
-                          </span>
-                          <span className="flex items-center gap-1 font-semibold">
-                            {course.mode === 'BOTH' ? (
-                              <>
-                                <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                <span>Online & Offline</span>
-                              </>
-                            ) : course.mode === 'OFFLINE' ? (
-                              <>
-                                <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                <span>Offline Lab</span>
-                              </>
-                            ) : (
-                              <>
-                                <Globe className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                <span>Online Only</span>
-                              </>
-                            )}
-                          </span>
-                        </div>
-
-                        {/* Card Action Row: Enroll CTA + Share Button */}
-                        <div className="flex items-center gap-2">
-                          <Link
-                            href={`/courses/${course.slug}`}
-                            className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer text-center"
-                          >
-                            <span className="truncate">View Syllabus & Enroll</span>
-                            <ArrowRight className="w-3.5 h-3.5 shrink-0" />
-                          </Link>
-                          <WebShareButton
-                            variant="icon"
-                            title={`${course.title} | MSK Institute Shikohabad`}
-                            text={`Explore ${course.title} course at MSK Institute Shikohabad: ${course.shortDescription}`}
-                            url={`/courses/${course.slug}`}
-                            label={`Share ${course.title}`}
-                            className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-border-subtle bg-surface hover:bg-white text-text-muted hover:text-secondary shadow-2xs hover:border-secondary/40 transition-all shrink-0 cursor-pointer"
-                          />
+                          {/* Card Action Row: Enroll CTA + Share Button */}
+                          <div className="flex items-center gap-2">
+                            <Link
+                              href={`/courses/${course.slug}`}
+                              onClick={handleCourseSelect}
+                              className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer text-center"
+                            >
+                              <span className="truncate">View Syllabus & Enroll</span>
+                              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+                            </Link>
+                            <WebShareButton
+                              variant="icon"
+                              title={`${course.title} | MSK Institute Shikohabad`}
+                              text={`Explore ${course.title} course at MSK Institute Shikohabad: ${course.shortDescription}`}
+                              url={`/courses/${course.slug}`}
+                              label={`Share ${course.title}`}
+                              className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-border-subtle bg-surface hover:bg-white text-text-muted hover:text-secondary shadow-2xs hover:border-secondary/40 transition-all shrink-0 cursor-pointer"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-16 bg-white border border-border-subtle rounded-2xl shadow-sm space-y-4">
@@ -812,38 +859,53 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                 </tr>
               </thead>
               <tbody className="divide-y divide-border-subtle">
-                {comparisonData.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-surface/50 transition-colors">
-                    <td className="py-4 px-6 font-bold text-primary">
-                      <Link href={`/courses/${item.slug}`} className="hover:text-secondary transition-colors">
-                        {item.title}
-                      </Link>
-                    </td>
-                    <td className="py-4 px-6 text-xs text-text-muted font-semibold">
-                      {item.duration}
-                    </td>
-                    <td className="py-4 px-6 text-xs">
-                      <span className="px-2 py-0.5 bg-gray-100 rounded text-text-muted font-medium">
-                        {item.mode}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-xs font-bold text-primary">
-                      {item.level}
-                    </td>
-                    <td className="py-4 px-6 text-xs text-text-muted max-w-xs">
-                      {item.bestFor}
-                    </td>
-                    <td className="py-4 px-6 text-right">
-                      <Link
-                        href={`/courses/${item.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-secondary hover:text-secondary-light transition-colors"
-                      >
-                        <span>Syllabus</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+                {comparisonData.map((item, idx) => {
+                  const handleSelect = () => {
+                    trackCourseSelection(
+                      {
+                        item_id: item.slug,
+                        item_name: item.title,
+                        item_category: 'Comparison Matrix',
+                        index: idx + 1,
+                      },
+                      'Course Comparison Matrix'
+                    );
+                  };
+
+                  return (
+                    <tr key={idx} className="hover:bg-surface/50 transition-colors">
+                      <td className="py-4 px-6 font-bold text-primary">
+                        <Link href={`/courses/${item.slug}`} onClick={handleSelect} className="hover:text-secondary transition-colors">
+                          {item.title}
+                        </Link>
+                      </td>
+                      <td className="py-4 px-6 text-xs text-text-muted font-semibold">
+                        {item.duration}
+                      </td>
+                      <td className="py-4 px-6 text-xs">
+                        <span className="px-2 py-0.5 bg-gray-100 rounded text-text-muted font-medium">
+                          {item.mode}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6 text-xs font-bold text-primary">
+                        {item.level}
+                      </td>
+                      <td className="py-4 px-6 text-xs text-text-muted max-w-xs">
+                        {item.bestFor}
+                      </td>
+                      <td className="py-4 px-6 text-right">
+                        <Link
+                          href={`/courses/${item.slug}`}
+                          onClick={handleSelect}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-secondary hover:text-secondary-light transition-colors"
+                        >
+                          <span>Syllabus</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -851,28 +913,42 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
 
         {/* Mobile Cards */}
         <div className="block md:hidden space-y-3">
-          {comparisonData.map((item, idx) => (
-            <div key={idx} className="bg-white p-5 rounded-2xl border border-border-subtle shadow-xs space-y-2.5">
-              <div className="flex justify-between items-start gap-2">
-                <Link href={`/courses/${item.slug}`} className="font-bold text-primary text-sm hover:text-secondary">
-                  {item.title}
-                </Link>
-                <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2 py-0.5 rounded uppercase">
-                  {item.duration}
-                </span>
+          {comparisonData.map((item, idx) => {
+            const handleSelect = () => {
+              trackCourseSelection(
+                {
+                  item_id: item.slug,
+                  item_name: item.title,
+                  item_category: 'Comparison Matrix',
+                  index: idx + 1,
+                },
+                'Course Comparison Matrix'
+              );
+            };
+
+            return (
+              <div key={idx} className="bg-white p-5 rounded-2xl border border-border-subtle shadow-xs space-y-2.5">
+                <div className="flex justify-between items-start gap-2">
+                  <Link href={`/courses/${item.slug}`} onClick={handleSelect} className="font-bold text-primary text-sm hover:text-secondary">
+                    {item.title}
+                  </Link>
+                  <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2 py-0.5 rounded uppercase">
+                    {item.duration}
+                  </span>
+                </div>
+                <p className="text-xs text-text-muted leading-relaxed">
+                  {item.bestFor}
+                </p>
+                <div className="flex items-center justify-between pt-2 border-t border-border-subtle text-xs">
+                  <span className="text-text-muted">{item.mode}</span>
+                  <Link href={`/courses/${item.slug}`} onClick={handleSelect} className="font-bold text-secondary flex items-center gap-1">
+                    <span>View Details</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
-              <p className="text-xs text-text-muted leading-relaxed">
-                {item.bestFor}
-              </p>
-              <div className="flex items-center justify-between pt-2 border-t border-border-subtle text-xs">
-                <span className="text-text-muted">{item.mode}</span>
-                <Link href={`/courses/${item.slug}`} className="font-bold text-secondary flex items-center gap-1">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: TutorialOverviewPageProps): P
     description: tutorial.seo?.description || tutorial.shortDescription,
     keywords: tutorial.seo?.keywords || [tutorial.title?.toLowerCase() || 'computer', 'ccc', 'tutorial', 'nielit'],
     alternates: {
-      canonical: `https://mskinstitute.in/tutorials/${tutorial.slug}`,
+      canonical: `https://www.mskinstitute.in/tutorials/${tutorial.slug}`,
     },
     openGraph: {
       title: tutorial.seo?.title || tutorial.title,
       description: tutorial.seo?.description || tutorial.shortDescription,
-      url: `https://mskinstitute.in/tutorials/${tutorial.slug}`,
+      url: `https://www.mskinstitute.in/tutorials/${tutorial.slug}`,
     },
   };
 }

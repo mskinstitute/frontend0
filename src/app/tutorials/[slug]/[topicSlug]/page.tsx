@@ -51,12 +51,12 @@ export async function generateMetadata({ params }: TutorialTopicPageProps): Prom
     description: frontmatter.description || `Read ${frontmatter.title} lesson with code examples, explanations, and practice quiz at MSK Institute.`,
     keywords: frontmatter.keywords || [tutorial.title?.toLowerCase() || 'code', 'tutorial', frontmatter.slug],
     alternates: {
-      canonical: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+      canonical: `https://www.mskinstitute.in/tutorials/${slug}/${topicSlug}`,
     },
     openGraph: {
       title: `${frontmatter.title} | ${tutorial.title} Tutorial`,
       description: frontmatter.description,
-      url: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+      url: `https://www.mskinstitute.in/tutorials/${slug}/${topicSlug}`,
     },
   };
 }
@@ -77,19 +77,19 @@ export default async function TutorialTopicPage({ params }: TutorialTopicPagePro
         headline: `${topicData.frontmatter.title} - ${topicData.tutorial.title}`,
         description: topicData.frontmatter.description || `Learn ${topicData.frontmatter.title} with practical examples and code tutorials at MSK Institute.`,
         inLanguage: 'en-IN',
-        mainEntityOfPage: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+        mainEntityOfPage: `https://www.mskinstitute.in/tutorials/${slug}/${topicSlug}`,
         author: {
           '@type': 'EducationalOrganization',
           name: 'MSK Institute',
-          url: 'https://mskinstitute.in',
+          url: 'https://www.mskinstitute.in',
         },
         publisher: {
           '@type': 'EducationalOrganization',
           name: 'MSK Institute',
-          url: 'https://mskinstitute.in',
+          url: 'https://www.mskinstitute.in',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://mskinstitute.in/logo.jpg',
+            url: 'https://www.mskinstitute.in/logo.jpg',
           },
         },
       },
@@ -100,25 +100,25 @@ export default async function TutorialTopicPage({ params }: TutorialTopicPagePro
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://mskinstitute.in',
+            item: 'https://www.mskinstitute.in',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Tutorials',
-            item: 'https://mskinstitute.in/tutorials',
+            item: 'https://www.mskinstitute.in/tutorials',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: topicData.tutorial.title,
-            item: `https://mskinstitute.in/tutorials/${slug}`,
+            item: `https://www.mskinstitute.in/tutorials/${slug}`,
           },
           {
             '@type': 'ListItem',
             position: 4,
             name: topicData.frontmatter.title,
-            item: `https://mskinstitute.in/tutorials/${slug}/${topicSlug}`,
+            item: `https://www.mskinstitute.in/tutorials/${slug}/${topicSlug}`,
           },
         ],
       },

@@ -35,12 +35,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${blog.title} | MSK Institute Publications`,
     description: blog.excerpt,
     alternates: {
-      canonical: `https://mskinstitute.in/blogs/${blog.slug}`,
+      canonical: `https://www.mskinstitute.in/blogs/${blog.slug}`,
     },
     openGraph: {
       title: blog.title,
       description: blog.excerpt,
-      url: `https://mskinstitute.in/blogs/${blog.slug}`,
+      url: `https://www.mskinstitute.in/blogs/${blog.slug}`,
       type: 'article',
       images: [
         {

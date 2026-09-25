@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   applicationName: 'MSK Institute',
   description: 'Learn Python programming, Full-Stack Web Development, CCC, and MS Office with practical, offline lab training at MSK Institute in Shikohabad. Verified graduation certificates.',
   keywords: ['MSK Institute', 'Computer Center Shikohabad', 'Coding Classes Shikohabad', 'Python Training', 'Web Development Shikohabad', 'NIELIT CCC Course'],
-  metadataBase: new URL('https://mskinstitute.in'),
+  metadataBase: new URL('https://www.mskinstitute.in'),
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'MSK Institute | Computer Training & Coding Academy',
     description: 'Learn Python, Web Development, CCC, and MS Office with practical labs at MSK Institute, Shikohabad.',
-    url: 'https://mskinstitute.in',
+    url: 'https://www.mskinstitute.in',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
@@ -97,9 +97,9 @@ export default function RootLayout({
               '@type': ['EducationalOrganization', 'LocalBusiness'],
               name: 'MSK Institute',
               alternateName: 'MSK Computer Training & Coding Academy',
-              url: 'https://mskinstitute.in',
-              logo: 'https://mskinstitute.in/logo.jpg',
-              image: 'https://mskinstitute.in/logo.jpg',
+              url: 'https://www.mskinstitute.in',
+              logo: 'https://www.mskinstitute.in/logo.jpg',
+              image: 'https://www.mskinstitute.in/logo.jpg',
               description: "Shikohabad's Leading Coding & Computer Training Academy with 100% practical lab training in Python, Web Development, CCC, and MS Office.",
               telephone: '+918393042166',
               email: 'mskshikohabad@gmail.com',
@@ -123,6 +123,12 @@ export default function RootLayout({
                   dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                   opens: '08:00',
                   closes: '19:00',
+                },
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: 'Sunday',
+                  opens: '10:00',
+                  closes: '14:00',
                 },
               ],
               founder: {

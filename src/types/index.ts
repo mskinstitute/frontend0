@@ -266,14 +266,19 @@ export interface Instructor {
   studentsCount?: number;
 }
 
+export type BatchStatus = 'DRAFT' | 'UPCOMING' | 'OPEN' | 'FULL' | 'RUNNING' | 'COMPLETED' | 'CLOSED' | 'ARCHIVED';
+
 export interface LiveBatch {
   id: string;
   courseSlug: string;
   courseId?: string;
   title: string;
+  status?: BatchStatus;
   startDate: string; // e.g. "2026-09-15" or "15 September 2026"
+  endDate?: string;
   startDateTime?: string; // e.g. "2026-09-20T17:00:00"
   schedule: string; // e.g. "Mon, Wed, Fri (04:30 PM - 06:00 PM)"
+  mode?: 'ONLINE' | 'OFFLINE' | 'BOTH';
   instructorId?: string;
   instructor: string;
   instructorPicture: string;

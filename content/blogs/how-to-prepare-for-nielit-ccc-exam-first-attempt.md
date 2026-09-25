@@ -8,7 +8,7 @@ category: "Certification"
 featured: false
 author: "Er. Sumit Kumar"
 authorRole: "Founder & Lead Technical Mentor"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-08-10"
 readTime: "4 min read"
 tags:
@@ -17,7 +17,7 @@ tags:
   - "Government Jobs"
   - "Computer Certificate"
 relatedCourses:
-  - "ccc-computer-concepts"
+  - "ccc"
 ---
 
 NIELIT CCC (Course on Computer Concepts) is a mandatory eligibility certificate for several state government job recruitments in Uttar Pradesh, including RO/ARO, UPSSSC VDO, Lekhpal, and Police Computer Operator vacancies. Scoring well requires understanding the objective exam pattern and practicing real computer fundamentals.

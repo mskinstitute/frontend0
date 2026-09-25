@@ -8,7 +8,7 @@ category: "Cyber Security"
 featured: false
 author: "Manish Sharma"
 authorRole: "Cyber Security & Networks Faculty"
-authorAvatar: "/assets/img/instructors/sumit-kumar.png"
+authorAvatar: "/assets/img/instructors/sumit-kumar.webp"
 publishedAt: "2026-08-05"
 readTime: "5 min read"
 tags:

@@ -33,18 +33,18 @@ export const metadata: Metadata = {
     'Online Computer Classes UP'
   ],
   alternates: {
-    canonical: 'https://mskinstitute.in',
+    canonical: 'https://www.mskinstitute.in',
   },
   openGraph: {
     title: 'MSK Institute | Computer Training & Coding Academy in Shikohabad',
     description: 'Learn Python, Full-Stack Web Development, CCC, and MS Office with practical labs and mentorship at MSK Institute Shikohabad.',
-    url: 'https://mskinstitute.in',
+    url: 'https://www.mskinstitute.in',
     siteName: 'MSK Institute',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://mskinstitute.in/logo.jpg',
+        url: 'https://www.mskinstitute.in/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'MSK Institute Shikohabad Computer & Coding Academy',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MSK Institute | Computer Training & Coding Academy',
     description: 'Learn Python, Web Development, CCC, and ADCA with practical offline lab sessions at MSK Institute, Shikohabad.',
-    images: ['https://mskinstitute.in/logo.jpg'],
+    images: ['https://www.mskinstitute.in/logo.jpg'],
   },
   robots: {
     index: true,
@@ -74,12 +74,16 @@ export default async function HomePage() {
   let featuredCourses: Course[] = [];
   let allBatches: LiveBatch[] = [];
 
+  let publishedCoursesCount = 66;
+
   try {
     const [courses, batches] = await Promise.all([
       fetchCourses(),
       fetchLiveBatches(),
     ]);
-    featuredCourses = courses.filter(c => c.status === 'PUBLISH').slice(0, 3);
+    const publishedCourses = courses.filter(c => c.status === 'PUBLISH');
+    publishedCoursesCount = publishedCourses.length;
+    featuredCourses = publishedCourses.slice(0, 3);
     allBatches = batches || [];
   } catch (error) {
     console.error('Failed to load courses or live batches for homepage', error);
@@ -98,8 +102,8 @@ export default async function HomePage() {
 
   const stats = [
     { id: 1, name: 'Students Trained', value: '1,200+', icon: Users },
-    { id: 2, name: 'Success Rate', value: '98%', icon: Trophy },
-    { id: 3, name: 'Active Courses', value: '12+', icon: BookOpen },
+    { id: 2, name: 'Practical Lab Focus', value: '100%', icon: Laptop },
+    { id: 3, name: 'Active Courses', value: `${publishedCoursesCount || 66}+`, icon: BookOpen },
     { id: 4, name: 'Verified Graduates', value: '500+', icon: Award },
   ];
 
@@ -142,7 +146,7 @@ export default async function HomePage() {
     },
     {
       q: "How does online certificate verification work for MSK graduates?",
-      a: "Every graduate receives a unique Certificate Verification ID printed on their official award. Anyone (employers, universities, students) can authenticate the certificate 24/7 on our online portal at https://mskinstitute.in/verify-certificate."
+      a: "Every graduate receives a unique Certificate Verification ID printed on their official award. Anyone (employers, universities, students) can authenticate the certificate 24/7 on our online portal at https://www.mskinstitute.in/verify-certificate."
     },
     {
       q: "Can prospective students attend a free demo class before enrollment?",
@@ -150,7 +154,7 @@ export default async function HomePage() {
     },
     {
       q: "Are live online classes available for remote students?",
-      a: "Yes! Remote students can join real-time interactive lectures via Google Meet, YouTube Live, and Zoom with screen sharing, live audio doubt clearance, and countdown schedules on our Live portal (https://mskinstitute.in/live)."
+      a: "Yes! Remote students can join real-time interactive lectures via Google Meet, YouTube Live, and Zoom with screen sharing, live audio doubt clearance, and countdown schedules on our Live portal (https://www.mskinstitute.in/live)."
     }
   ];
 
@@ -196,19 +200,19 @@ export default async function HomePage() {
       // 1. Root Organization Entity
       {
         "@type": ["EducationalOrganization", "LocalBusiness"],
-        "@id": "https://mskinstitute.in/#organization",
+        "@id": "https://www.mskinstitute.in/#organization",
         "name": "MSK Institute",
         "alternateName": ["MSK Computer Institute", "MSK Institute Shikohabad", "MSK Coding Academy"],
-        "url": "https://mskinstitute.in",
-        "logo": "https://mskinstitute.in/logo.jpg",
-        "image": "https://mskinstitute.in/logo.jpg",
+        "url": "https://www.mskinstitute.in",
+        "logo": "https://www.mskinstitute.in/logo.jpg",
+        "image": "https://www.mskinstitute.in/logo.jpg",
         "description": "Premier Computer & Coding Training Institute in Shikohabad providing practical software engineering bootcamps, Python programming, MERN full-stack development, and government certified computer courses.",
         "telephone": "+91-8393042166",
         "email": "mskshikohabad@gmail.com",
         "priceRange": "₹₹",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Gali No. 3, Near Gyan Jyoti Public School, Station Road",
+          "streetAddress": "Gali No. 3, Near Gyan Jyoti Public School",
           "addressLocality": "Shikohabad",
           "addressRegion": "Uttar Pradesh",
           "postalCode": "283135",
@@ -224,8 +228,14 @@ export default async function HomePage() {
           {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "09:00",
-            "closes": "18:00"
+            "opens": "08:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "10:00",
+            "closes": "14:00"
           }
         ],
         "aggregateRating": {
@@ -260,27 +270,27 @@ export default async function HomePage() {
       // 2. WebSite Entity with SearchAction
       {
         "@type": "WebSite",
-        "@id": "https://mskinstitute.in/#website",
-        "url": "https://mskinstitute.in",
+        "@id": "https://www.mskinstitute.in/#website",
+        "url": "https://www.mskinstitute.in",
         "name": "MSK Institute",
         "publisher": {
-          "@id": "https://mskinstitute.in/#organization"
+          "@id": "https://www.mskinstitute.in/#organization"
         },
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://mskinstitute.in/courses?q={search_term_string}",
+          "target": "https://www.mskinstitute.in/courses?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       },
       // 3. WebPage Entity
       {
         "@type": "WebPage",
-        "@id": "https://mskinstitute.in/#webpage",
-        "url": "https://mskinstitute.in",
+        "@id": "https://www.mskinstitute.in/#webpage",
+        "url": "https://www.mskinstitute.in",
         "name": "MSK Institute | Premier Computer Training & Coding Academy in Shikohabad",
         "description": "Learn Python programming, Full-Stack MERN Web Development, NIELIT CCC, and ADCA with hands-on lab training at MSK Institute Shikohabad.",
         "isPartOf": {
-          "@id": "https://mskinstitute.in/#website"
+          "@id": "https://www.mskinstitute.in/#website"
         },
         "about": [
           { "@type": "Thing", "name": "Computer Programming" },
@@ -303,11 +313,11 @@ export default async function HomePage() {
           "position": index + 1,
           "item": {
             "@type": "Course",
-            "@id": `https://mskinstitute.in/courses/${c.slug}`,
+            "@id": `https://www.mskinstitute.in/courses/${c.slug}`,
             "name": c.title,
             "description": c.shortDescription,
             "provider": {
-              "@id": "https://mskinstitute.in/#organization"
+              "@id": "https://www.mskinstitute.in/#organization"
             }
           }
         }))
@@ -315,7 +325,7 @@ export default async function HomePage() {
       // 5. FAQPage Schema for AI Engines
       {
         "@type": "FAQPage",
-        "@id": "https://mskinstitute.in/#faq",
+        "@id": "https://www.mskinstitute.in/#faq",
         "mainEntity": homeFaqs.map((faq) => ({
           "@type": "Question",
           "name": faq.q,

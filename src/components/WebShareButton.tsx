@@ -32,9 +32,9 @@ export default function WebShareButton({
       if (url.startsWith('#')) return `${window.location.origin}${window.location.pathname}${url}`;
       return `${window.location.origin}/${url}`;
     }
-    if (!url) return 'https://mskinstitute.in';
+    if (!url) return 'https://www.mskinstitute.in';
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
-    return `https://mskinstitute.in${url.startsWith('/') ? '' : '/'}${url}`;
+    return `https://www.mskinstitute.in${url.startsWith('/') ? '' : '/'}${url}`;
   };
 
   const copyToClipboard = async (textToCopy: string): Promise<boolean> => {
