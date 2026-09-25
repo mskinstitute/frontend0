@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { fetchCourses, fetchBlogs, fetchTutorials, fetchLiveBatches } from '@/services/api';
+import { getPublishedBranches } from '@/lib/branches';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mskinstitute.in';
@@ -10,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [
     '',
     '/courses',
+    '/locations',
     '/verify-certificate',
     '/study-material',
     '/careers',
@@ -28,15 +30,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'daily' as const,
-    priority: route === '' ? 1.0 : route === '/courses' || route === '/live-batches' ? 0.9 : 0.8,
+    priority: route === '' ? 1.0 : route === '/courses' || route === '/live-batches' || route === '/locations' ? 0.9 : 0.8,
   }));
 
   try {
-    const [courses, blogs, tutorials, batches] = await Promise.all([
+    const [courses, blogs, tutorials, batches, branches] = await Promise.all([
       fetchCourses(),
       fetchBlogs().catch(() => []),
       fetchTutorials().catch(() => []),
       fetchLiveBatches().catch(() => []),
+      getPublishedBranches().catch(() => []),
     ]);
 
     const courseRoutes = courses
@@ -91,8 +94,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
+    const branchRoutes = branches.map((branch) => ({
+      url: `${baseUrl}/locations/${branch.slug}`,
+      lastModified: branch.updatedAt || new Date().toISOString().split('T')[0],
+      changeFrequency: 'weekly' as const,
+      priority: branch.isHeadquarters ? 0.9 : 0.8,
+    }));
+
     return [
       ...routes,
+      ...branchRoutes,
       ...courseRoutes,
       ...batchRoutes,
       ...blogRoutes,

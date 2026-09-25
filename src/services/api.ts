@@ -1,4 +1,4 @@
-import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, StudyMaterial, BlogPost, TutorialItem, TutorialTopicFrontmatter, CareerOpportunity } from '@/types';
+import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, StudyMaterial, BlogPost, TutorialItem, TutorialTopicFrontmatter, CareerOpportunity, Branch } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -23,6 +23,8 @@ async function loadServerData<T>(fileName: string): Promise<T> {
       return (await import('../../public/data/announcements.json')).default as unknown as T;
     case 'live-batches.json':
       return (await import('../../public/data/live-batches.json')).default as unknown as T;
+    case 'branches.json':
+      return (await import('../../public/data/branches.json')).default as unknown as T;
     default:
       throw new Error(`Unsupported data file: ${fileName}`);
   }
@@ -1086,4 +1088,11 @@ export async function fetchLiveSchedule(): Promise<{ classes: LiveClass[]; batch
   };
 }
 
-
+export async function fetchBranches(): Promise<Branch[]> {
+  try {
+    return await getLocalData<Branch[]>('branches.json');
+  } catch (err) {
+    console.warn('Could not load branches.json:', err);
+    return [];
+  }
+}

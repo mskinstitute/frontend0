@@ -34,7 +34,15 @@ const validRoutes = new Set([
   '/terms',
   '/disclaimer',
   '/admin',
+  '/locations',
 ]);
+
+// Add branch routes
+const branchesPath = path.join(process.cwd(), 'public', 'data', 'branches.json');
+if (fs.existsSync(branchesPath)) {
+  const branches = JSON.parse(fs.readFileSync(branchesPath, 'utf8'));
+  branches.forEach(b => validRoutes.add(`/locations/${b.slug}`));
+}
 
 // Add course routes
 courses.forEach(c => validRoutes.add(`/courses/${c.slug}`));

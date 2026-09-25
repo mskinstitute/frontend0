@@ -20,6 +20,26 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/campuses',
+        destination: '/locations',
+        permanent: true,
+      },
+      {
+        source: '/branches',
+        destination: '/locations',
+        permanent: true,
+      },
+      {
+        source: '/shikohabad',
+        destination: '/locations/shikohabad',
+        permanent: true,
+      },
+      {
+        source: '/agra',
+        destination: '/locations/agra',
+        permanent: true,
+      },
+      {
         source: '/notes',
         destination: '/study-material',
         permanent: true,

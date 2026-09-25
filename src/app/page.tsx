@@ -4,9 +4,10 @@ import {
   BookOpen, Award, GraduationCap, CheckCircle2, ChevronRight, 
   MapPin, Users, Calendar, Trophy, Sparkles, ShieldCheck, 
   HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2,
-  Star, Quote 
+  Star, Quote, Building2 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
+import { getBranchSummaries } from '@/lib/branches';
 import HomeHeroBatchCard from '@/components/HomeHeroBatchCard';
 import { parseBatchStartTimestamp } from '@/lib/batchUtils';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -73,18 +74,21 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   let featuredCourses: Course[] = [];
   let allBatches: LiveBatch[] = [];
+  let branchCount = 2;
 
   let publishedCoursesCount = 66;
 
   try {
-    const [courses, batches] = await Promise.all([
+    const [courses, batches, branches] = await Promise.all([
       fetchCourses(),
       fetchLiveBatches(),
+      getBranchSummaries(),
     ]);
     const publishedCourses = courses.filter(c => c.status === 'PUBLISH');
     publishedCoursesCount = publishedCourses.length;
     featuredCourses = publishedCourses.slice(0, 3);
     allBatches = batches || [];
+    branchCount = branches.length;
   } catch (error) {
     console.error('Failed to load courses or live batches for homepage', error);
   }
@@ -677,7 +681,7 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap gap-3 pt-2">
                 <a
                   href="tel:+918393042166"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow transition-colors"
@@ -694,6 +698,13 @@ export default async function HomePage() {
                   <MapPin className="w-4 h-4 text-secondary" />
                   <span>Open in Google Maps</span>
                 </a>
+                <Link
+                  href="/locations"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-surface hover:bg-border-subtle text-primary font-bold text-xs rounded-xl border border-border-subtle transition-colors"
+                >
+                  <Building2 className="w-4 h-4 text-secondary" />
+                  <span>View All Campuses ({branchCount})</span>
+                </Link>
               </div>
             </div>
 

@@ -44,6 +44,12 @@ export default function Footer() {
                 <Link href="/about" className="hover:text-white transition-colors duration-150">About Institute</Link>
               </li>
               <li>
+                <Link href="/locations" className="hover:text-white transition-colors duration-150 flex items-center gap-1.5">
+                  Locations & Campuses
+                  <span className="bg-secondary text-primary text-[10px] font-black px-1.5 py-0.5 rounded leading-none">Hub</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/courses" className="hover:text-white transition-colors duration-150">All Courses</Link>
               </li>
               <li>

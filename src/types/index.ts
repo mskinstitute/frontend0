@@ -286,6 +286,10 @@ export interface LiveBatch {
   originalPrice?: string;
   totalSeats: number;
   leftSeats: number;
+  // Branch & Multi-Location Relationship
+  branchId?: string | null;
+  branchSlug?: string;
+  branchName?: string;
   // Optional enriched properties from Course, Instructor or legacy
   startDateOffsetDays?: number;
   courseTitle?: string;
@@ -305,6 +309,9 @@ export interface LeadSubmission {
   batchTitle: string;
   courseTitle: string;
   price: string;
+  branchId?: string;
+  branchSlug?: string;
+  branchName?: string;
   query?: string;
   submittedAt: string;
   utm_source?: string;
@@ -359,3 +366,111 @@ export interface CareerApplication {
   coverNote?: string;
   submittedAt: string;
 }
+
+// ============================================================================
+// Multi-Branch & Franchise Architecture (Phase 5)
+// ============================================================================
+
+export type BranchStatus =
+  | 'PLANNED'
+  | 'COMING_SOON'
+  | 'OPEN'
+  | 'TEMPORARILY_CLOSED'
+  | 'CLOSED'
+  | 'ARCHIVED';
+
+export type BranchType = 'CORPORATE' | 'FRANCHISE' | 'PARTNER';
+
+export interface BranchOpeningHours {
+  dayOfWeek: string[];
+  opens: string;
+  closes: string;
+}
+
+export interface BranchGalleryItem {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface BranchFaq {
+  question: string;
+  answer: string;
+}
+
+export interface Branch {
+  id: string; // e.g. "branch-shikohabad-001"
+  code?: string; // e.g. "SKB-01"
+  name: string; // e.g. "MSK Institute Shikohabad"
+  displayName: string; // e.g. "Shikohabad Campus"
+  slug: string; // e.g. "shikohabad"
+  organizationId: string; // "msk-institute"
+  city: string; // e.g. "Shikohabad"
+  normalizedCity: string; // e.g. "shikohabad"
+  state: string; // e.g. "Uttar Pradesh"
+  country: string; // e.g. "India"
+  countryCode: string; // "IN"
+  postalCode: string; // "283135"
+  address: string; // "Gali No. 3, Near Gyan Jyoti Public School"
+  landmark?: string;
+  latitude: number;
+  longitude: number;
+  phone: string; // "+918393042166"
+  formattedPhone: string; // "+91 83930 42166"
+  whatsapp: string; // "+918393042166"
+  email: string; // "mskshikohabad@gmail.com"
+  website: string; // "https://www.mskinstitute.in/locations/shikohabad"
+  openingHours: BranchOpeningHours[];
+  status: BranchStatus;
+  branchType: BranchType;
+  openingDate?: string;
+  isHeadquarters?: boolean;
+  franchise?: {
+    enabled: boolean;
+    partnerId?: string;
+    partnerName?: string;
+  };
+  googleBusiness?: {
+    profileUrl?: string;
+    placeId?: string;
+  };
+  availableCourseIds: string[]; // List of Course.id or Course.slug values
+  activeBatchIds: string[]; // List of LiveBatch.id values
+  facultyIds?: string[];
+  facilities?: string[];
+  gallery?: BranchGalleryItem[];
+  localDescription: string;
+  localSeo?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+    ogImage?: string;
+    canonical?: string;
+    indexable?: boolean;
+  };
+  faqs?: BranchFaq[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * Lightweight branch summary for fast listings, city dropdowns, and cards
+ */
+export interface BranchSummary {
+  id: string;
+  name: string;
+  displayName: string;
+  slug: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  status: BranchStatus;
+  branchType: BranchType;
+  phone: string;
+  formattedPhone: string;
+  address: string;
+  coursesCount: number;
+  batchesCount: number;
+  isHeadquarters?: boolean;
+}
+

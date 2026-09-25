@@ -36,6 +36,8 @@ export function derivePageType(pathname: string): PageType {
   if (pathname === '/privacy-policy') return 'privacy_policy';
   if (pathname === '/terms') return 'terms';
   if (pathname === '/disclaimer') return 'disclaimer';
+  if (pathname === '/locations') return 'locations_directory';
+  if (pathname.startsWith('/locations/')) return 'location';
   if (pathname === '/admin') return 'admin';
   return 'other';
 }

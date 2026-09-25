@@ -25,6 +25,8 @@ export type PageType =
   | 'terms'
   | 'disclaimer'
   | 'admin'
+  | 'location'
+  | 'locations_directory'
   | 'other';
 
 export type CtaLocation =
@@ -63,6 +65,8 @@ export type StandardAnalyticsEvent =
   | 'resource_download'
   | 'file_download'
   | 'certificate_verify'
+  | 'branch_view'
+  | 'branch_cta_click'
   | 'share';
 
 export interface PageContext {
@@ -74,6 +78,9 @@ export interface PageContext {
   course_name?: string;
   batch_id?: string;
   batch_name?: string;
+  branch_id?: string;
+  branch_slug?: string;
+  branch_name?: string;
   article_id?: string;
   article_slug?: string;
   article_category?: string;
@@ -137,6 +144,9 @@ export interface BatchViewPayload {
   mode?: string;
   price?: number | string;
   page_type?: PageType;
+  branch_id?: string;
+  branch_slug?: string;
+  branch_name?: string;
 }
 
 export interface BatchCtaClickPayload {
@@ -145,6 +155,8 @@ export interface BatchCtaClickPayload {
   course_name?: string;
   cta_location: CtaLocation;
   cta_text?: string;
+  branch_id?: string;
+  branch_slug?: string;
 }
 
 export interface WhatsAppClickPayload {
@@ -156,6 +168,8 @@ export interface WhatsAppClickPayload {
   page_type?: PageType;
   cta_location: CtaLocation;
   link_url?: string;
+  branch_id?: string;
+  branch_slug?: string;
 }
 
 export interface PhoneClickPayload {
@@ -165,6 +179,8 @@ export interface PhoneClickPayload {
   batch_id?: string;
   page_type?: PageType;
   cta_location: CtaLocation;
+  branch_id?: string;
+  branch_slug?: string;
 }
 
 export interface EmailClickPayload {
@@ -173,6 +189,8 @@ export interface EmailClickPayload {
   course_slug?: string;
   page_type?: PageType;
   cta_location: CtaLocation;
+  branch_id?: string;
+  branch_slug?: string;
 }
 
 export interface FormEventPayload {
@@ -182,6 +200,8 @@ export interface FormEventPayload {
   course_slug?: string;
   batch_id?: string;
   page_type?: PageType;
+  branch_id?: string;
+  branch_slug?: string;
   [key: string]: any;
 }
 
@@ -192,6 +212,8 @@ export interface GenerateLeadPayload {
   course_id?: string;
   batch_id?: string;
   batch_name?: string;
+  branch_id?: string;
+  branch_slug?: string;
   preferred_date?: string;
   lead_source?: string;
   lead_medium?: string;
@@ -218,3 +240,20 @@ export interface CertificateVerifyPayload {
   is_valid: boolean;
   page_type?: PageType;
 }
+
+export interface BranchViewPayload {
+  branch_id: string;
+  branch_slug: string;
+  branch_name: string;
+  city: string;
+  state?: string;
+  status: string;
+}
+
+export interface BranchCtaClickPayload {
+  branch_id: string;
+  branch_slug: string;
+  cta_type: 'direction' | 'whatsapp' | 'phone' | 'email' | 'course_click' | 'batch_click';
+  button_text: string;
+}
+

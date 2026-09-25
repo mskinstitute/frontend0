@@ -241,6 +241,8 @@ export function trackWhatsAppClick(params: {
     course_slug: params.courseSlug || pageContext.course_slug || '',
     course_name: params.courseName || pageContext.course_name || '',
     batch_id: params.batchId || pageContext.batch_id || '',
+    branch_id: pageContext.branch_id || '',
+    branch_slug: pageContext.branch_slug || '',
     page_type: pageContext.page_type,
     cta_location: location,
     link_url: params.linkUrl || '',
@@ -268,6 +270,8 @@ export function trackPhoneClick(params: {
     course_id: params.courseId || pageContext.course_id || '',
     course_slug: params.courseSlug || pageContext.course_slug || '',
     batch_id: params.batchId || pageContext.batch_id || '',
+    branch_id: pageContext.branch_id || '',
+    branch_slug: pageContext.branch_slug || '',
     page_type: pageContext.page_type,
     cta_location: location,
     ...attribution,
@@ -291,6 +295,8 @@ export function trackEmailClick(params: {
     button_text: params.buttonText || 'Email Us',
     course_id: params.courseId || pageContext.course_id || '',
     course_slug: params.courseSlug || pageContext.course_slug || '',
+    branch_id: pageContext.branch_id || '',
+    branch_slug: pageContext.branch_slug || '',
     page_type: pageContext.page_type,
     cta_location: location,
   };
@@ -359,6 +365,8 @@ export function trackGenerateLead(formName: string, details: Record<string, any>
     course_name: pageContext.course_name || details.course_name || '',
     batch_id: pageContext.batch_id || details.batch_id || '',
     batch_name: pageContext.batch_name || details.batch_name || '',
+    branch_id: pageContext.branch_id || details.branch_id || '',
+    branch_slug: pageContext.branch_slug || details.branch_slug || '',
     ...attribution,
     ...details,
   };
@@ -499,3 +507,45 @@ export function trackCertificateVerify(isValid: boolean, certId?: string): void 
 
   pushToDataLayer('certificate_verify', payload);
 }
+
+// ============================================================================
+// 8. Multi-Branch & Location Engagement (Phase 5)
+// ============================================================================
+
+export function trackBranchView(params: {
+  branchId: string;
+  branchSlug: string;
+  branchName: string;
+  city: string;
+  state?: string;
+  status: string;
+}): void {
+  const dedupeKey = `branch_view:${params.branchSlug}`;
+  if (shouldDedupe(dedupeKey)) return;
+
+  pushToDataLayer('branch_view', {
+    branch_id: params.branchId,
+    branch_slug: params.branchSlug,
+    branch_name: params.branchName,
+    city: params.city,
+    state: params.state || 'Uttar Pradesh',
+    branch_status: params.status,
+    page_type: 'location',
+  });
+}
+
+export function trackBranchCtaClick(params: {
+  branchSlug: string;
+  branchId?: string;
+  ctaType: 'direction' | 'whatsapp' | 'phone' | 'email' | 'course_click' | 'batch_click';
+  buttonText: string;
+}): void {
+  pushToDataLayer('branch_cta_click', {
+    branch_slug: params.branchSlug,
+    branch_id: params.branchId || '',
+    cta_type: params.ctaType,
+    button_text: params.buttonText,
+    page_type: 'location',
+  });
+}
+

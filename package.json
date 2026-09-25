@@ -15,7 +15,11 @@
     "validate:analytics": "node scripts/validate-analytics.js",
     "validate:local": "node scripts/validate-local.js",
     "validate:seo-growth": "node scripts/validate-seo-growth.js",
-    "audit:performance": "node scripts/audit-performance.js"
+    "audit:performance": "node scripts/audit-performance.js",
+    "validate:branches": "node scripts/validate-branches.js",
+    "validate:locations": "node scripts/validate-locations.js",
+    "validate:branch-schema": "node scripts/validate-branch-schema.js",
+    "validate:branch-content": "node scripts/validate-branch-content.js"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

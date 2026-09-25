@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, BookOpen, FileText, Home, Video, Search, Briefcase, Code2, PhoneCall } from 'lucide-react';
+import { Menu, X, BookOpen, FileText, Home, Video, Search, Briefcase, Code2, PhoneCall, MapPin } from 'lucide-react';
 
 import InstallAppButton from '@/components/InstallAppButton';
 import SearchModal from '@/components/SearchModal';
@@ -64,10 +64,11 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
+    { name: 'Locations', href: '/locations', icon: MapPin },
     { name: 'Tools', href: '/tools', icon: Code2 },
     { name: 'Live', href: '/live', icon: Video },
     { name: 'Careers', href: '/careers', icon: Briefcase },
-    { name: 'Contact Us', href: '/contact', icon: PhoneCall },
+    { name: 'Contact', href: '/contact', icon: PhoneCall },
   ];
 
   const isActive = (path: string) => {
