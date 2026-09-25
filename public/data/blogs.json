@@ -195,5 +195,57 @@
       "conclusion": "By maintaining vigilant digital habits and learning foundational security in our Cyber Security training program, you can safeguard yourself and your family against online threats."
     },
     "relatedCourseSlugs": ["cyber-security-ethical-hacking-professional-program"]
+  },
+  {
+    "id": "blog-python-interview-questions-2026",
+    "slug": "top-50-python-interview-and-viva-questions-with-answers",
+    "title": "Top 50 Python Interview & College Viva Questions with Answers (2026 Edition)",
+    "excerpt": "Ace your BCA, B.Tech semester exams and fresher IT job interviews with the top 50 Python questions, syntax explanations, and practical code snippets authored by Er. Sumit Kumar.",
+    "coverImage": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop",
+    "category": "Python Programming",
+    "featured": true,
+    "author": {
+      "name": "Er. Sumit Kumar",
+      "role": "Founder & Lead Technical Mentor",
+      "avatar": "/assets/img/instructors/sumit-kumar.png"
+    },
+    "publishedAt": "2026-09-25",
+    "readTime": "8 min read",
+    "tags": ["Python", "Interview Questions", "BCA Viva", "Coding Freshers", "MSK Tutorials"],
+    "content": {
+      "introduction": "Whether you are appearing for your BCA/B.Tech practical viva exam or preparing for your first software developer technical interview, Python is one of the most frequently tested languages. Here is a curated collection of the most critical conceptual and coding questions, compiled by Er. Sumit Kumar at MSK Institute.",
+      "sections": [
+        {
+          "heading": "1. What is Python and what makes it dynamically typed?",
+          "body": "Python is a high-level, interpreted, general-purpose programming language. Unlike statically typed languages like C++ or Java where variable types must be declared explicitly, Python dynamically determines the variable type at runtime based on the assigned value.",
+          "codeSnippet": "# Dynamically typed example\nx = 10        # x is an integer\nx = \"Hello\"   # x is now a string (no compile error!)",
+          "codeLanguage": "python"
+        },
+        {
+          "heading": "2. What is the fundamental difference between a List and a Tuple?",
+          "body": "The single most common viva question! Lists are mutable (meaning items can be modified, appended, or removed after creation) and defined using square brackets []. Tuples are immutable (read-only after creation) and defined using parentheses (). Because tuples are immutable, they are faster and memory-efficient.",
+          "codeSnippet": "# List vs Tuple\nmy_list = [1, 2, 3]\nmy_list[0] = 99  # Valid! Lists are mutable.\n\nmy_tuple = (1, 2, 3)\n# my_tuple[0] = 99  # TypeError: 'tuple' object does not support item assignment",
+          "codeLanguage": "python",
+          "callout": "Pro Tip: If you need to store constant records like GPS coordinates or institute roll numbers that shouldn't change, always use a Tuple."
+        },
+        {
+          "heading": "3. What is a List Comprehension and why is it preferred?",
+          "body": "List comprehension provides an elegant, concise syntax to create new lists from existing iterables. It replaces verbose 4-line for-loops with a single readable line.",
+          "codeSnippet": "# Traditional Loop\nsquares = []\nfor i in range(1, 6):\n    squares.append(i ** 2)\n\n# Pythonic List Comprehension\nsquares = [i ** 2 for i in range(1, 6)]  # [1, 4, 9, 16, 25]",
+          "codeLanguage": "python"
+        },
+        {
+          "heading": "4. How does Python handle memory management?",
+          "body": "Python uses a private heap space managed by the Python Memory Manager. It features automated Garbage Collection (GC) based on reference counting and cyclical garbage collection. When an object's reference count drops to zero, Python automatically deallocates its memory.",
+          "callout": "Try running and editing Python code in our free browser compiler at MSK Code Playground: mskinstitute.in/playground"
+        },
+        {
+          "heading": "5. What is the difference between shallow copy and deep copy?",
+          "body": "A shallow copy creates a new object, but inserts references into it to the objects found in the original. A deep copy (via the copy.deepcopy() module) recursively copies all nested objects, ensuring that modifications to the copy never affect the original data."
+        }
+      ],
+      "conclusion": "Mastering these core principles will give you a massive confidence boost in both campus viva exams and corporate interviews. Join our live hands-on Python classes at MSK Institute in Shikohabad or online to build 5 real-world portfolio projects under direct mentor guidance."
+    },
+    "relatedCourseSlugs": ["python-for-beginners", "python-mastery-beginner-to-advanced--3-months"]
   }
 ]

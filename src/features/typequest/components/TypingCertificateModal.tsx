@@ -13,6 +13,9 @@ import {
   ShieldCheck,
   User,
   Lock,
+  Share2,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { TestResult, UserGamification } from '../types';
 import { Student } from '@/types';
@@ -38,6 +41,9 @@ export default function TypingCertificateModal({
   onUpdateStudentProfile,
   onUpdateStudentName,
 }: TypingCertificateModalProps) {
+  const [certMode, setCertMode] = useState<'PUBLIC' | 'ENROLLED'>('PUBLIC');
+  const [publicNameInput, setPublicNameInput] = useState(gamification.studentName || '');
+  const [copiedLink, setCopiedLink] = useState(false);
   const [studentIdInput, setStudentIdInput] = useState(gamification.studentId || '');
   const [verifiedStudent, setVerifiedStudent] = useState<Student | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -45,16 +51,21 @@ export default function TypingCertificateModal({
   const [isGenerating, setIsGenerating] = useState(false);
   const qrCanvasRef = useRef<HTMLDivElement>(null);
   const studentInputRef = useRef<HTMLInputElement>(null);
+  const publicNameInputRef = useRef<HTMLInputElement>(null);
 
   // Focus input automatically when modal opens
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
-        studentInputRef.current?.focus();
+        if (certMode === 'PUBLIC') {
+          publicNameInputRef.current?.focus();
+        } else {
+          studentInputRef.current?.focus();
+        }
       }, 60);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, certMode]);
 
   // Verification helper
   const verifyStudentId = useCallback(
@@ -159,14 +170,37 @@ export default function TypingCertificateModal({
     verifiedStudent?.studentId || ''
   )}&wpm=${certWpm}&acc=${certAccuracy}`;
 
+  const isEnrolledMode = certMode === 'ENROLLED';
+  const recipientName = (isEnrolledMode ? (verifiedStudent?.name || '') : publicNameInput).trim();
+  const canDownload = isEnrolledMode ? !!verifiedStudent : recipientName.length >= 2;
+
+  const handleWhatsAppShare = () => {
+    const text = `🏆 I achieved ${certWpm} WPM typing speed with ${certAccuracy}% accuracy on MSK Institute TypeQuest! 🚀\n\nTest your typing speed & get your free certificate here:\nhttps://mskinstitute.in/tools/typing`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopyShareLink = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('https://mskinstitute.in/tools/typing');
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2000);
+    }
+  };
+
   // Generate Official PDF with jsPDF
   const handleDownloadPdf = async () => {
-    if (!verifiedStudent) {
+    if (isEnrolledMode && !verifiedStudent) {
       setVerifyError('Student ID is required and must match MSK Institute records before downloading.');
+      return;
+    }
+    if (!isEnrolledMode && recipientName.length < 2) {
+      setVerifyError('Please enter your full name (at least 2 letters) to generate and download the certificate.');
       return;
     }
 
     setIsGenerating(true);
+    setVerifyError(null);
+
     try {
       const doc = new jsPDF({
         orientation: 'landscape',
@@ -219,7 +253,7 @@ export default function TypingCertificateModal({
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(30);
       doc.setTextColor(234, 88, 12); // Primary Brand
-      const formattedName = verifiedStudent.name.toUpperCase();
+      const formattedName = (recipientName || 'CERTIFIED TYPIST').toUpperCase();
       doc.text(formattedName, 148.5, 76, { align: 'center' });
 
       // Underline
@@ -231,7 +265,10 @@ export default function TypingCertificateModal({
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(71, 85, 105);
-      doc.text(`STUDENT ID / ROLL NO: ${verifiedStudent.studentId.toUpperCase()}`, 148.5, 86, { align: 'center' });
+      const subtitleText = isEnrolledMode && verifiedStudent
+        ? `STUDENT ID / ROLL NO: ${verifiedStudent.studentId.toUpperCase()}`
+        : `PUBLIC TOUCH TYPING CREDENTIAL ID: ${certId}`;
+      doc.text(subtitleText, 148.5, 86, { align: 'center' });
 
       // Award description
       doc.setFont('helvetica', 'normal');
@@ -295,9 +332,15 @@ export default function TypingCertificateModal({
       doc.setFontSize(9);
       doc.setTextColor(71, 85, 105);
       doc.text(`Certificate No: ${certId}`, 75, 153);
-      doc.text(`Student ID: ${verifiedStudent.studentId.toUpperCase()}`, 75, 159);
+      doc.text(
+        isEnrolledMode && verifiedStudent
+          ? `Student ID: ${verifiedStudent.studentId.toUpperCase()}`
+          : `Track: Open Learner Touch Typing`,
+        75,
+        159
+      );
       doc.text(`Date of Issue: ${certDate}`, 75, 165);
-      doc.text('Verification: Scan QR code or visit mskinstitute.in/verify-certificate', 75, 171);
+      doc.text('Verification: Scan QR code or visit mskinstitute.in/tools/typing', 75, 171);
 
       // Signature Area (Right Side)
       doc.setDrawColor(148, 163, 184);
@@ -314,7 +357,8 @@ export default function TypingCertificateModal({
       doc.text('MSK Institute Certified Board', 222.5, 177, { align: 'center' });
 
       // Save PDF
-      const safeFileName = `MSK_Certificate_${verifiedStudent.studentId.toUpperCase()}_${verifiedStudent.name.replace(/\s+/g, '_')}.pdf`;
+      const safeName = (recipientName || 'Learner').replace(/\s+/g, '_');
+      const safeFileName = `MSK_TypeQuest_Certificate_${safeName}_${certWpm}WPM.pdf`;
       doc.save(safeFileName);
     } catch (err) {
       console.error('Failed to generate certificate:', err);
@@ -365,65 +409,38 @@ export default function TypingCertificateModal({
           </button>
         </div>
 
-        {/* Student ID & Verification Strip */}
-        <div className="px-6 py-3 bg-slate-950/80 border-b border-slate-800 flex flex-col gap-2.5">
+        {/* Dual-Mode Selector & Verification Strip */}
+        <div className="px-6 py-3.5 bg-slate-950/90 border-b border-slate-800 flex flex-col gap-3">
+          {/* Mode Pill Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            {/* Student ID Input & Verify Button */}
-            <div className="flex items-center gap-2 flex-1 min-w-[280px]">
-              <span className="text-xs font-semibold text-slate-300 whitespace-nowrap flex items-center gap-1.5">
-                <User className="w-4 h-4 text-secondary" />
-                Student ID: <span className="text-rose-400 font-bold">*</span>
-              </span>
-              <div className="relative flex-1 max-w-xs">
-                <input
-                  ref={studentInputRef}
-                  type="text"
-                  autoFocus
-                  value={studentIdInput}
-                  onClick={(e) => e.stopPropagation()}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onChange={(e) => {
-                    setStudentIdInput(e.target.value);
-                    if (verifiedStudent) {
-                      setVerifiedStudent(null);
-                    }
-                  }}
-                  onKeyDown={(e) => {
-                    e.stopPropagation();
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      verifyStudentId(studentIdInput);
-                    }
-                  }}
-                  placeholder="e.g. std-001 or MSK-2026-001"
-                  maxLength={30}
-                  className={`w-full px-3 py-1.5 bg-slate-900 border rounded-lg text-sm text-white font-mono uppercase tracking-wide focus:outline-none transition-colors ${
-                    verifiedStudent
-                      ? 'border-emerald-500 ring-1 ring-emerald-500/50'
-                      : verifyError
-                      ? 'border-rose-500 ring-1 ring-rose-500/50'
-                      : 'border-slate-700 focus:border-secondary focus:ring-1 focus:ring-secondary'
-                  }`}
-                />
-              </div>
-
+            <div className="inline-flex p-1 bg-slate-900 border border-slate-800 rounded-xl">
               <button
                 type="button"
-                disabled={isVerifying || !studentIdInput.trim()}
-                onClick={() => verifyStudentId(studentIdInput)}
-                className="px-3.5 py-1.5 bg-secondary hover:bg-secondary/90 disabled:opacity-50 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed shadow-sm"
+                onClick={() => {
+                  setCertMode('PUBLIC');
+                  setVerifyError(null);
+                }}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  certMode === 'PUBLIC'
+                    ? 'bg-secondary text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
               >
-                {isVerifying ? (
-                  <>
-                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Verifying...</span>
-                  </>
-                ) : (
-                  <>
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Verify ID</span>
-                  </>
-                )}
+                Public Learner (Instant)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setCertMode('ENROLLED');
+                  setVerifyError(null);
+                }}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  certMode === 'ENROLLED'
+                    ? 'bg-secondary text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                MSK Enrolled Student
               </button>
             </div>
 
@@ -433,8 +450,99 @@ export default function TypingCertificateModal({
             </div>
           </div>
 
-          {/* Verification Status Feedback */}
-          {verifiedStudent ? (
+          {/* Input Controls */}
+          {certMode === 'PUBLIC' ? (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 flex-1 min-w-[280px]">
+                <span className="text-xs font-semibold text-slate-300 whitespace-nowrap flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-secondary" />
+                  Your Full Name: <span className="text-rose-400 font-bold">*</span>
+                </span>
+                <div className="relative flex-1 max-w-sm">
+                  <input
+                    ref={publicNameInputRef}
+                    type="text"
+                    autoFocus
+                    value={publicNameInput}
+                    onClick={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onChange={(e) => {
+                      setPublicNameInput(e.target.value);
+                      if (onUpdateStudentName) onUpdateStudentName(e.target.value);
+                    }}
+                    placeholder="Enter your full name for certificate"
+                    maxLength={40}
+                    className="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 focus:border-secondary focus:ring-1 focus:ring-secondary rounded-lg text-sm text-white font-medium focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+              <span className="text-[11px] text-emerald-400 flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Instant certificate for all learners</span>
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 flex-1 min-w-[280px]">
+                <span className="text-xs font-semibold text-slate-300 whitespace-nowrap flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-secondary" />
+                  Student ID: <span className="text-rose-400 font-bold">*</span>
+                </span>
+                <div className="relative flex-1 max-w-xs">
+                  <input
+                    ref={studentInputRef}
+                    type="text"
+                    autoFocus
+                    value={studentIdInput}
+                    onClick={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onChange={(e) => {
+                      setStudentIdInput(e.target.value);
+                      if (verifiedStudent) setVerifiedStudent(null);
+                    }}
+                    onKeyDown={(e) => {
+                      e.stopPropagation();
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        verifyStudentId(studentIdInput);
+                      }
+                    }}
+                    placeholder="e.g. std-001 or MSK-2026-001"
+                    maxLength={30}
+                    className={`w-full px-3 py-1.5 bg-slate-900 border rounded-lg text-sm text-white font-mono uppercase tracking-wide focus:outline-none transition-colors ${
+                      verifiedStudent
+                        ? 'border-emerald-500 ring-1 ring-emerald-500/50'
+                        : verifyError
+                        ? 'border-rose-500 ring-1 ring-rose-500/50'
+                        : 'border-slate-700 focus:border-secondary focus:ring-1 focus:ring-secondary'
+                    }`}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  disabled={isVerifying || !studentIdInput.trim()}
+                  onClick={() => verifyStudentId(studentIdInput)}
+                  className="px-3.5 py-1.5 bg-secondary hover:bg-secondary/90 disabled:opacity-50 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed shadow-sm"
+                >
+                  {isVerifying ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Verifying...</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Verify ID</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Feedback Messages */}
+          {certMode === 'ENROLLED' && verifiedStudent && (
             <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs animate-in fade-in duration-200">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -446,17 +554,12 @@ export default function TypingCertificateModal({
                 Verified via MSK Sheet
               </span>
             </div>
-          ) : verifyError ? (
+          )}
+
+          {verifyError && (
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs animate-in fade-in duration-200">
               <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
               <span>{verifyError}</span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300/90 text-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>
-                Please enter your registered Student ID (e.g. <code>std-001</code>) to authenticate and enable certificate download.
-              </span>
             </div>
           )}
         </div>
@@ -490,24 +593,19 @@ export default function TypingCertificateModal({
             <div className="text-center my-1 sm:my-2">
               <div
                 className={`text-xl sm:text-3xl md:text-4xl font-extrabold font-serif tracking-wide border-b-2 inline-block px-4 pb-1 ${
-                  verifiedStudent
+                  canDownload
                     ? 'text-orange-600 border-amber-500/70'
                     : 'text-slate-400 border-slate-300 italic'
                 }`}
               >
-                {verifiedStudent ? verifiedStudent.name : 'STUDENT ID REQUIRED'}
+                {canDownload ? recipientName.toUpperCase() : 'YOUR NAME HERE'}
               </div>
 
-              {verifiedStudent ? (
-                <div className="text-[11px] sm:text-xs text-slate-700 mt-1 font-mono font-bold">
-                  Roll No / Student ID: {verifiedStudent.studentId.toUpperCase()}
-                </div>
-              ) : (
-                <div className="text-[10px] sm:text-xs text-rose-700 mt-1 font-medium flex items-center justify-center gap-1">
-                  <Lock className="w-3 h-3 text-rose-600" />
-                  <span>Enter Student ID in top bar to authenticate recipient name</span>
-                </div>
-              )}
+              <div className="text-[10px] sm:text-xs font-mono font-semibold text-slate-600 mt-1 uppercase tracking-wider">
+                {isEnrolledMode && verifiedStudent
+                  ? `Verified MSK Student ID: ${verifiedStudent.studentId.toUpperCase()}`
+                  : `Open Learner Credential ID: ${certId}`}
+              </div>
 
               <p className="text-[10px] sm:text-xs text-slate-700 mt-1.5 max-w-lg mx-auto">
                 for demonstrating verified touch typing mastery and excellence on MSK TypeQuest.
@@ -586,53 +684,72 @@ export default function TypingCertificateModal({
         {/* Modal Actions Footer */}
         <div className="px-6 py-4 bg-slate-900 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs text-slate-400 flex items-center gap-2">
-            {verifiedStudent ? (
+            {canDownload ? (
               <>
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span className="text-emerald-300">
-                  Student ID verified ({verifiedStudent.studentId.toUpperCase()}). Ready for high-resolution PDF generation.
+                  Certificate ready for <strong>{recipientName}</strong> ({certWpm} WPM, {certAccuracy}% Acc).
                 </span>
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4 text-amber-400" />
                 <span className="text-amber-300">
-                  Student ID required before certificate can be downloaded.
+                  {isEnrolledMode ? 'Valid Student ID required' : 'Enter your name to unlock certificate'}
                 </span>
               </>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {/* WhatsApp Share Button */}
+            <button
+              type="button"
+              onClick={handleWhatsAppShare}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Share typing certificate on WhatsApp status"
+            >
+              <span>Share on WhatsApp</span>
+            </button>
+
+            {/* Copy Share Link */}
+            <button
+              type="button"
+              onClick={handleCopyShareLink}
+              className="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-medium transition-colors cursor-pointer"
+            >
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedLink ? 'Link Copied!' : 'Copy Link'}</span>
+            </button>
+
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-sm font-medium transition-colors cursor-pointer"
+              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-medium transition-colors cursor-pointer"
             >
               Close
             </button>
+
+            {/* Download PDF Button */}
             <button
               type="button"
-              disabled={!verifiedStudent || isGenerating}
+              disabled={!canDownload || isGenerating}
               onClick={handleDownloadPdf}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all ${
-                verifiedStudent && !isGenerating
+              className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold shadow-lg transition-all ${
+                canDownload && !isGenerating
                   ? 'bg-gradient-to-r from-secondary to-orange-500 hover:from-secondary/90 hover:to-orange-600 text-white shadow-secondary/25 active:scale-95 cursor-pointer'
                   : 'bg-slate-800 text-slate-500 border border-slate-700/60 cursor-not-allowed opacity-60'
               }`}
-              title={
-                !verifiedStudent
-                  ? 'Please enter and verify a valid Student ID first'
-                  : 'Download Official PDF Certificate'
-              }
             >
               <Download className="w-4 h-4" />
               <span>
                 {isGenerating
                   ? 'Generating PDF...'
-                  : verifiedStudent
-                  ? 'Download PDF Certificate'
-                  : 'Student ID Required to Download'}
+                  : canDownload
+                  ? 'Download Certificate PDF'
+                  : isEnrolledMode
+                  ? 'Student ID Required'
+                  : 'Enter Name to Download'}
               </span>
             </button>
           </div>
