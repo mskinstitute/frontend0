@@ -18,6 +18,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/typing',
     '/playground',
     '/contact',
+    '/about',
+    '/privacy-policy',
+    '/terms',
+    '/disclaimer',
+    '/notes',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],

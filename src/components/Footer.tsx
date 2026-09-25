@@ -44,6 +44,9 @@ export default function Footer() {
                 <Link href="/" className="hover:text-white transition-colors duration-150">Home</Link>
               </li>
               <li>
+                <Link href="/about" className="hover:text-white transition-colors duration-150">About Institute</Link>
+              </li>
+              <li>
                 <Link href="/courses" className="hover:text-white transition-colors duration-150">All Courses</Link>
               </li>
               <li>
@@ -154,10 +157,28 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-primary-light flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
-          <p>&copy; {currentYear} MSK Institute. All rights reserved.</p>
-          <p className="mt-2 md:mt-0 flex items-center gap-1">
-            Built with Next.js & Tailwind CSS v4. Approved for AI indexing.
+        <div className="mt-12 pt-8 border-t border-primary-light flex flex-col lg:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2">
+            <span>&copy; {currentYear} MSK Institute. All rights reserved.</span>
+            <span className="hidden sm:inline text-gray-600">•</span>
+            <Link href="/privacy-policy" className="hover:text-secondary transition-colors underline-offset-4 hover:underline">
+              Privacy Policy
+            </Link>
+            <span className="text-gray-600">•</span>
+            <Link href="/terms" className="hover:text-secondary transition-colors underline-offset-4 hover:underline">
+              Terms of Service
+            </Link>
+            <span className="text-gray-600">•</span>
+            <Link href="/disclaimer" className="hover:text-secondary transition-colors underline-offset-4 hover:underline">
+              Disclaimer
+            </Link>
+            <span className="text-gray-600">•</span>
+            <Link href="/about" className="hover:text-secondary transition-colors underline-offset-4 hover:underline">
+              About Us
+            </Link>
+          </div>
+          <p className="flex items-center gap-1.5 text-gray-400 text-center lg:text-right">
+            <span>Shikohabad&apos;s Leading Computer & Coding Academy</span>
           </p>
         </div>
       </div>
