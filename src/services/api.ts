@@ -4,7 +4,6 @@ import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, S
 import allCoursesData from '../../public/data/all-courses.json';
 import studyMaterialsData from '../../public/data/study-materials.json';
 import tutorialsData from '../../public/data/tutorials.json';
-import blogsData from '../../public/data/blogs.json';
 import careersData from '../../public/data/careers.json';
 import certificatesData from '../../public/data/certificates.json';
 import instructorsData from '../../public/data/instructors.json';
@@ -15,7 +14,6 @@ const LOCAL_DATA_REGISTRY: Record<string, unknown> = {
   'all-courses.json': allCoursesData,
   'study-materials.json': studyMaterialsData,
   'tutorials.json': tutorialsData,
-  'blogs.json': blogsData,
   'careers.json': careersData,
   'certificates.json': certificatesData,
   'instructors.json': instructorsData,
@@ -362,20 +360,55 @@ export async function fetchStudyMaterialById(idOrSlug: string): Promise<StudyMat
 }
 
 export async function fetchBlogs(): Promise<BlogPost[]> {
+  // If running on server (SSR/SSG/ISR), read directly from content/blogs/*.md
+  if (typeof window === 'undefined') {
+    try {
+      const { getAllBlogPosts } = await import('@/lib/server-blogs');
+      const posts = await getAllBlogPosts();
+      if (posts && posts.length > 0) return posts;
+    } catch (serverErr) {
+      console.warn('Server fetch blogs from content/blogs failed:', serverErr);
+    }
+  }
+
+  // If external API URL is configured
   if (API_BASE_URL) {
     try {
       const res = await fetch(`${API_BASE_URL}/api/blogs/`);
       if (res.ok) return await res.json();
     } catch (err) {
-      console.warn('API fetch blogs failed, falling back to local data:', err);
+      console.warn('API fetch blogs failed:', err);
     }
   }
-  return getLocalData<BlogPost[]>('blogs.json');
+
+  // Client-side fetch to local /api/blogs endpoint
+  if (typeof window !== 'undefined') {
+    try {
+      const res = await fetch('/api/blogs');
+      if (res.ok) return await res.json();
+    } catch (err) {
+      console.warn('Client fetch /api/blogs failed:', err);
+    }
+  }
+
+  return [];
 }
 
 export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
-  const blogs = await fetchBlogs();
   const normalized = slug.trim().toLowerCase();
+
+  // If running on server, lookup directly from content/blogs markdown files
+  if (typeof window === 'undefined') {
+    try {
+      const { getBlogPostBySlug } = await import('@/lib/server-blogs');
+      const post = await getBlogPostBySlug(normalized);
+      if (post) return post;
+    } catch (serverErr) {
+      console.warn('Server fetch blog by slug failed:', serverErr);
+    }
+  }
+
+  const blogs = await fetchBlogs();
   return blogs.find(b => b.slug.toLowerCase() === normalized || b.id.toLowerCase() === normalized) || null;
 }
 

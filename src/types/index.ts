@@ -196,16 +196,16 @@ export interface BlogPost {
   publishedAt: string;
   readTime: string;
   tags: string[];
-  content: {
-    introduction: string;
-    sections: {
+  content: string | {
+    introduction?: string;
+    sections?: {
       heading: string;
       body: string;
       codeSnippet?: string;
       codeLanguage?: string;
       callout?: string;
     }[];
-    conclusion: string;
+    conclusion?: string;
   };
   relatedCourseSlugs?: string[];
 }

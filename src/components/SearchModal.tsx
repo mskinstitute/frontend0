@@ -72,7 +72,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           fetch('/data/all-courses.json').catch(() => null),
           fetch('/api/live-batches').catch(() => null),
           fetch('/data/study-materials.json').catch(() => null),
-          fetch('/data/blogs.json').catch(() => null),
+          fetch('/api/blogs').catch(() => null),
           fetch('/data/tutorials.json').catch(() => null),
           fetch('/data/careers.json').catch(() => null),
         ]);

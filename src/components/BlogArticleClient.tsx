@@ -17,6 +17,7 @@ import {
 import { toast } from 'react-hot-toast';
 import { BlogPost, Course } from '@/types';
 import WebShareButton from '@/components/WebShareButton';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 interface BlogArticleClientProps {
   blog: BlogPost;
@@ -122,67 +123,74 @@ export default function BlogArticleClient({ blog, relatedCourses }: BlogArticleC
 
       {/* Article Content */}
       <div className="space-y-8 text-primary leading-relaxed text-base sm:text-lg">
-        {/* Introduction */}
-        <div className="bg-surface p-6 rounded-2xl border border-border-subtle text-text-muted text-base leading-relaxed italic">
-          {blog.content.introduction}
-        </div>
-
-        {/* Main Sections */}
-        {blog.content.sections.map((section, idx) => (
-          <section key={idx} className="space-y-4 pt-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight">
-              {section.heading}
-            </h2>
-
-            <p className="text-text-muted leading-relaxed text-base sm:text-lg">
-              {section.body}
-            </p>
-
-            {/* Optional Callout */}
-            {section.callout && (
-              <div className="bg-secondary/10 border-l-4 border-l-secondary p-4 rounded-r-xl text-sm font-medium text-primary">
-                {section.callout}
+        {typeof blog.content === 'string' ? (
+          <div className="prose-container">
+            <MarkdownRenderer content={blog.content} />
+          </div>
+        ) : (
+          <>
+            {blog.content.introduction && (
+              <div className="bg-surface p-6 rounded-2xl border border-border-subtle text-text-muted text-base leading-relaxed italic">
+                {blog.content.introduction}
               </div>
             )}
 
-            {/* Optional Code Snippet */}
-            {section.codeSnippet && (
-              <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-[#0d1117] my-4">
-                <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-800 text-xs text-slate-400">
-                  <span>{section.codeLanguage || 'code'}</span>
-                  <button
-                    onClick={() => handleCopyCode(idx, section.codeSnippet || '')}
-                    className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer"
-                    aria-label="Copy code snippet"
-                  >
-                    {copiedSnippetIndex === idx ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400 font-semibold">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Copy Code</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-                <pre className="p-4 sm:p-5 text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto leading-relaxed">
-                  <code>{section.codeSnippet}</code>
-                </pre>
+            {blog.content.sections?.map((section, idx) => (
+              <section key={idx} className="space-y-4 pt-4">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight">
+                  {section.heading}
+                </h2>
+
+                <p className="text-text-muted leading-relaxed text-base sm:text-lg">
+                  {section.body}
+                </p>
+
+                {section.callout && (
+                  <div className="bg-secondary/10 border-l-4 border-l-secondary p-4 rounded-r-xl text-sm font-medium text-primary">
+                    {section.callout}
+                  </div>
+                )}
+
+                {section.codeSnippet && (
+                  <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-[#0d1117] my-4">
+                    <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-800 text-xs text-slate-400">
+                      <span>{section.codeLanguage || 'code'}</span>
+                      <button
+                        onClick={() => handleCopyCode(idx, section.codeSnippet || '')}
+                        className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                        aria-label="Copy code snippet"
+                      >
+                        {copiedSnippetIndex === idx ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-emerald-400 font-semibold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" />
+                            <span>Copy Code</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <pre className="p-4 sm:p-5 text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto leading-relaxed">
+                      <code>{section.codeSnippet}</code>
+                    </pre>
+                  </div>
+                )}
+              </section>
+            ))}
+
+            {blog.content.conclusion && (
+              <div className="p-6 bg-primary text-white rounded-2xl space-y-2 mt-8">
+                <h3 className="text-xl font-bold text-white">Summary & Next Steps</h3>
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+                  {blog.content.conclusion}
+                </p>
               </div>
             )}
-          </section>
-        ))}
-
-        {/* Conclusion */}
-        <div className="p-6 bg-primary text-white rounded-2xl space-y-2 mt-8">
-          <h3 className="text-xl font-bold text-white">Summary & Next Steps</h3>
-          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
-            {blog.content.conclusion}
-          </p>
-        </div>
+          </>
+        )}
 
         {/* Tags */}
         <div className="pt-4 border-t border-border-subtle flex items-center gap-2 flex-wrap">
