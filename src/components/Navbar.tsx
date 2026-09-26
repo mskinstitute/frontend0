@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, BookOpen, Home, Video, Search, Briefcase, Code2, PhoneCall, MapPin } from 'lucide-react';
+import { Menu, X, BookOpen, Home, Video, Search, Code2, PhoneCall, MapPin } from 'lucide-react';
 
 import InstallAppButton from '@/components/InstallAppButton';
 import SearchModal from '@/components/SearchModal';
@@ -67,15 +67,13 @@ export default function Navbar() {
   // 3. Live (high-intent live interactive batches & admissions)
   // 4. Locations (physical Shikohabad & regional centers)
   // 5. Tools (developer tools & speed lab)
-  // 6. Careers (hiring & internships)
-  // 7. Contact (admissions helpline & demo booking)
+  // 6. Contact (admissions helpline & demo booking)
   const navLinks = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
     { name: 'Live', href: '/live', icon: Video, badge: 'LIVE' },
     { name: 'Locations', href: '/locations', icon: MapPin },
     { name: 'Tools', href: '/tools', icon: Code2 },
-    { name: 'Careers', href: '/careers', icon: Briefcase, badge: 'Hiring' },
     { name: 'Contact', href: '/contact', icon: PhoneCall },
   ];
 
@@ -183,18 +181,18 @@ export default function Navbar() {
               );
             })}
 
-            {/* Quick Demo CTA Button - Desktop */}
+            {/* Quick Demo CTA Button - Desktop & Tablet */}
             <Link
               href="/#book-demo"
-              className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-xs transition-colors whitespace-nowrap ml-1"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-xs transition-colors whitespace-nowrap ml-1"
             >
               <span>Book Demo</span>
               <span className="text-[11px]">➔</span>
             </Link>
           </div>
 
-          {/* Mobile top actions: Search icon, Install App button & Hamburger */}
-          <div className="md:hidden flex items-center gap-1">
+          {/* Mobile top actions: Search icon, Book Demo button & Hamburger */}
+          <div className="md:hidden flex items-center gap-1.5">
             <button
               onClick={() => setIsSearchOpen(true)}
               className="p-2 rounded-md text-text-muted hover:text-primary hover:bg-surface focus:outline-none cursor-pointer"
@@ -202,7 +200,14 @@ export default function Navbar() {
             >
               <Search className="w-5 h-5" />
             </button>
-            <InstallAppButton variant="mobile-header" />
+            <Link
+              href="/#book-demo"
+              className="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary text-white rounded-full text-xs font-bold shadow-sm hover:bg-secondary-light active:scale-95 transition-all whitespace-nowrap"
+              aria-label="Book Demo"
+            >
+              <span>Book Demo</span>
+              <span className="text-[10px]">➔</span>
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-text-muted hover:text-primary hover:bg-surface focus:outline-none cursor-pointer"

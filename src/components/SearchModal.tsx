@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Course, LiveBatch, StudyMaterial, BlogPost, SearchResultItem } from '@/types';
 import { resolveTopicTutorialUrl, isTutorialCourse } from '@/lib/curriculum-utils';
+import { trackSearch } from '@/lib/analytics';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -431,6 +432,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   useEffect(() => {
     setSelectedIndex(0);
   }, [query, activeCategory]);
+
+  // Debounced search telemetry tracking for GTM / GA4
+  useEffect(() => {
+    const trimmed = query.trim();
+    if (!trimmed || trimmed.length < 2) return;
+    const timer = setTimeout(() => {
+      trackSearch(trimmed, filteredResults.length, activeCategory);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [query, filteredResults.length, activeCategory]);
 
   // Auto-scroll active filter pill into view
   useEffect(() => {

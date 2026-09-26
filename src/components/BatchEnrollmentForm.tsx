@@ -13,6 +13,7 @@ import {
   trackFormSubmit, 
   trackGenerateLead, 
   trackBatchRegister, 
+  trackCourseRegister,
   trackWhatsAppClick,
   trackEnrollmentStart,
   trackEnrollmentSubmit,
@@ -110,6 +111,12 @@ export default function BatchEnrollmentForm({
           batchName: batch.title,
           courseName: courseTitle || batch.courseTitle,
           batchStartDate: batch.startDate,
+          coursePrice: batch.price,
+          courseMode: mode,
+        });
+        trackCourseRegister({
+          courseId: batch.courseId || batch.id,
+          courseName: courseTitle || batch.courseTitle,
           coursePrice: batch.price,
           courseMode: mode,
         });

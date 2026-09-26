@@ -1,9 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, MessageSquare, Navigation, Sparkles, Building2, CheckCircle2 } from 'lucide-react';
 import { Branch } from '@/types';
-import { trackWhatsAppClick, trackPhoneClick, trackBranchCtaClick } from '@/lib/analytics';
+import { trackWhatsAppClick, trackPhoneClick, trackBranchCtaClick, trackBranchView } from '@/lib/analytics';
 
 interface BranchHeroProps {
   branch: Branch;
@@ -11,6 +12,17 @@ interface BranchHeroProps {
 
 export default function BranchHero({ branch }: BranchHeroProps) {
   const isOpen = branch.status === 'OPEN';
+
+  useEffect(() => {
+    trackBranchView({
+      branchId: branch.id,
+      branchSlug: branch.slug,
+      branchName: branch.name,
+      city: branch.city,
+      state: branch.state,
+      status: branch.status,
+    });
+  }, [branch]);
 
   const handleDirectionsClick = () => {
     trackBranchCtaClick({
