@@ -275,6 +275,48 @@ export default async function CoursesPage() {
           <p className="courses-hero-desc text-text-muted text-sm sm:text-lg leading-relaxed">
             Select from beginner and advanced programs tailored to industry standards, complete with live mentorship by <strong>Er. Sumit Kumar</strong>, practical project building, and online certificate verification.
           </p>
+
+          {/* Quick Helper Actions & Decision Shortcuts */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+            <a
+              href="#career-matrix"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-surface text-primary border border-border-subtle rounded-xl text-xs font-bold shadow-2xs hover:border-secondary transition-all"
+            >
+              <span className="text-secondary font-black">📊</span>
+              <span>Compare All Syllabi</span>
+            </a>
+            <a
+              href="tel:+918393042166"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-secondary/10 hover:bg-secondary hover:text-white text-secondary rounded-xl text-xs font-bold transition-all"
+            >
+              <span>📞</span>
+              <span>Free Counseling: +91 83930 42166</span>
+            </a>
+            <a
+              href="https://wa.me/918393042166?text=Hi%20MSK%20Institute%2C%20I%20want%20to%20know%20about%20upcoming%20computer%20batches%20and%20book%20a%20free%20demo%20class."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition-all"
+            >
+              <span>💬</span>
+              <span>WhatsApp Admission Desk</span>
+            </a>
+          </div>
+
+          {/* Local Shikohabad Proof & Trust Highlights */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-text-muted pt-2 px-3 py-2 bg-surface/70 rounded-xl border border-border-subtle/70">
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="text-secondary font-bold">🎓</span> 1,200+ Students Trained
+            </span>
+            <span className="hidden sm:inline text-border-subtle">•</span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="text-secondary font-bold">💻</span> Smart Lab at Station Road
+            </span>
+            <span className="hidden sm:inline text-border-subtle">•</span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="text-emerald-600 font-bold">✅</span> ISO &amp; Govt Verifiable Certificates
+            </span>
+          </div>
         </header>
 
         {errorMsg && courses.length === 0 ? (

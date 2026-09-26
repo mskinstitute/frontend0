@@ -12,13 +12,87 @@ import { Course } from '@/types';
 import WebShareButton from '@/components/WebShareButton';
 import { trackCourseListImpression, trackCourseSelection, trackSearch } from '@/lib/analytics';
 
+// High-Level Career Pathways for effortless 1-tap exploration
+const CAREER_TRACKS = [
+  {
+    id: 'all',
+    label: 'All Programs',
+    icon: '✨',
+    match: () => true,
+  },
+  {
+    id: 'web-fullstack',
+    label: 'Web & Full Stack',
+    icon: '💻',
+    match: (c: Course) =>
+      c.categories.some((cat) => /Web|Frontend|Backend|React|Node|MERN|HTML|CSS|Next|JavaScript|UI/i.test(cat)) ||
+      /web|full stack|mern|react|node|javascript|frontend|html|css|tailwind/i.test(c.title),
+  },
+  {
+    id: 'python-coding',
+    label: 'Python & Programming',
+    icon: '🐍',
+    match: (c: Course) =>
+      c.categories.some((cat) => /Python|Programming|Django|Software|Flask/i.test(cat)) ||
+      /python|django|programming|software|flask/i.test(c.title),
+  },
+  {
+    id: 'diplomas-govt',
+    label: 'Govt Diplomas & CCC',
+    icon: '📜',
+    match: (c: Course) =>
+      c.categories.some((cat) => /ADCA|CCC|O Level|Combo|Literacy|Digital Skills/i.test(cat)) ||
+      /adca|ccc|diploma|o level/i.test(c.title),
+  },
+  {
+    id: 'data-databases',
+    label: 'Data & Databases',
+    icon: '📊',
+    match: (c: Course) =>
+      c.categories.some((cat) => /Data|Database|SQL|MySQL|BI|Analytics|Power BI|Pandas/i.test(cat)) ||
+      /data|sql|database|analytics|mysql|power bi/i.test(c.title),
+  },
+  {
+    id: 'office-basics',
+    label: 'Office & Computer Basics',
+    icon: '🏢',
+    match: (c: Course) =>
+      c.categories.some((cat) => /Office|Basics|Productivity|Word|Excel|Tally/i.test(cat)) ||
+      /office|basic|excel|word|tally|typing/i.test(c.title),
+  },
+];
+
+const FLAGSHIP_SLUGS = new Set([
+  'ccc',
+  'adca',
+  'adca-advanced-diploma-computer-applications',
+  'python-programming-masterclass',
+  'full-stack-web-development-bootcamp',
+  'frontend-web-development-engineering',
+  'javascript-react-frontend-engineering',
+  'backend-engineering-nodejs-databases',
+]);
+
+const PAGE_SIZE = 12;
+
 export default function CourseCatalogClient({ initialCourses }: { initialCourses: Course[] }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTrack, setSelectedTrack] = useState<string>('all');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedMode, setSelectedMode] = useState('All');
   const [sortBy, setSortBy] = useState<'featured' | 'duration-asc' | 'duration-desc' | 'alphabetical'>('featured');
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_SIZE);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  // Compute track counts dynamically
+  const trackCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    CAREER_TRACKS.forEach((track) => {
+      counts[track.id] = initialCourses.filter(track.match).length;
+    });
+    return counts;
+  }, [initialCourses]);
 
   // Extract all levels dynamically
   const levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
@@ -42,11 +116,15 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
 
   // Filter and sort courses based on selections
   const filteredCourses = useMemo(() => {
+    const activeTrack = CAREER_TRACKS.find((t) => t.id === selectedTrack);
+
     const result = initialCourses.filter((course) => {
       const matchesSearch =
         course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
         course.categories.some((c) => c.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      const matchesTrack = selectedTrack === 'all' || (activeTrack ? activeTrack.match(course) : true);
 
       const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
 
@@ -56,7 +134,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
         (selectedMode === 'ONLINE' && course.mode === 'BOTH') ||
         (selectedMode === 'OFFLINE' && course.mode === 'BOTH');
 
-      return matchesSearch && matchesLevel && matchesMode;
+      return matchesSearch && matchesTrack && matchesLevel && matchesMode;
     });
 
     const toDays = (d: { value: number; unit: 'HOURS' | 'DAYS' | 'MONTHS' }) => {
@@ -75,25 +153,39 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     }
 
     return result;
-  }, [initialCourses, searchQuery, selectedLevel, selectedMode, sortBy]);
+  }, [initialCourses, searchQuery, selectedTrack, selectedLevel, selectedMode, sortBy]);
+
+  // Reset pagination when any filter or sort option changes
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [searchQuery, selectedTrack, selectedLevel, selectedMode, sortBy]);
+
+  // Sliced courses for progressive display (eliminates 30-viewport endless scroll)
+  const visibleCourses = useMemo(() => {
+    return filteredCourses.slice(0, visibleCount);
+  }, [filteredCourses, visibleCount]);
 
   const hasActiveFilters = Boolean(
     searchQuery ||
+    selectedTrack !== 'all' ||
     selectedLevel !== 'All' ||
     selectedMode !== 'All'
   );
 
   const activeFilterCount = [
     Boolean(searchQuery),
+    selectedTrack !== 'all',
     selectedLevel !== 'All',
     selectedMode !== 'All',
   ].filter(Boolean).length;
 
   const resetFilters = () => {
     setSearchQuery('');
+    setSelectedTrack('all');
     setSelectedLevel('All');
     setSelectedMode('All');
     setSortBy('featured');
+    setVisibleCount(PAGE_SIZE);
   };
 
   // Track course list impression on mount
@@ -214,6 +306,51 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
     <div className="space-y-16">
       {/* 1. Main Course Catalog Section (Left Sidebar on Desktop, Responsive Drawer on Mobile) */}
       <section className="space-y-6">
+        {/* Career Track Fast-Tabs (Clean horizontal 1-tap navigation without sidebar clutter) */}
+        <div className="space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-secondary" />
+              <span>Explore by Career Pathway</span>
+            </span>
+            {selectedTrack !== 'all' && (
+              <button
+                onClick={() => setSelectedTrack('all')}
+                className="text-xs font-bold text-secondary hover:underline cursor-pointer"
+              >
+                Reset to All ({initialCourses.length})
+              </button>
+            )}
+          </div>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+            {CAREER_TRACKS.map((track) => {
+              const isSel = selectedTrack === track.id;
+              const count = trackCounts[track.id] || 0;
+              return (
+                <button
+                  key={track.id}
+                  onClick={() => setSelectedTrack(track.id)}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer shadow-2xs ${
+                    isSel
+                      ? 'bg-secondary text-white shadow-xs scale-[1.02]'
+                      : 'bg-white border border-border-subtle text-text-main hover:text-primary hover:bg-surface'
+                  }`}
+                >
+                  <span className="text-sm">{track.icon}</span>
+                  <span>{track.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                      isSel ? 'bg-white/25 text-white' : 'bg-surface text-text-muted'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Mobile-Only Top Search & Filter Bar (< lg) */}
         <div className="lg:hidden space-y-3">
           <div className="flex items-center gap-2">
@@ -478,6 +615,18 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                   </span>
                 )}
 
+                {selectedTrack !== 'all' && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-surface border border-border-subtle rounded-lg text-xs text-primary font-medium">
+                    <span>Track: {CAREER_TRACKS.find((t) => t.id === selectedTrack)?.label}</span>
+                    <button
+                      onClick={() => setSelectedTrack('all')}
+                      className="hover:text-secondary cursor-pointer"
+                      aria-label="Remove track filter"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
 
                 {selectedLevel !== 'All' && (
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-surface border border-border-subtle rounded-lg text-xs text-primary font-medium">
@@ -514,119 +663,201 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
               </div>
             )}
 
-            {/* Course Grid Results */}
+            {/* Course Grid Results (Progressive 12-Card Display) */}
             {filteredCourses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-5 sm:gap-6">
-                {filteredCourses.map((course, idx) => {
-                  const handleCourseSelect = () => {
-                    trackCourseSelection(
-                      {
-                        item_id: course.id || course.slug,
-                        item_name: course.title,
-                        item_category: course.categories?.[0] || 'Computer Course',
-                        index: idx + 1,
-                      },
-                      'Course Catalog'
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-5 sm:gap-6">
+                  {visibleCourses.map((course, idx) => {
+                    const isFlagship = FLAGSHIP_SLUGS.has(course.slug);
+                    const whatsappMsg = encodeURIComponent(
+                      `Hi MSK Institute, I am interested in the "${course.title}" course. Please share demo timings, fee structure, and syllabus details.`
                     );
-                  };
+                    const whatsappUrl = `https://wa.me/918393042166?text=${whatsappMsg}`;
 
-                  return (
-                    <div
-                      key={course.id}
-                      className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
-                    >
-                      <Link
-                        href={`/courses/${course.slug}`}
-                        onClick={handleCourseSelect}
-                        className="relative h-44 sm:h-48 w-full bg-gray-100 overflow-hidden block"
-                        aria-label={course.title}
+                    const handleCourseSelect = () => {
+                      trackCourseSelection(
+                        {
+                          item_id: course.id || course.slug,
+                          item_name: course.title,
+                          item_category: course.categories?.[0] || 'Computer Course',
+                          index: idx + 1,
+                        },
+                        'Course Catalog'
+                      );
+                    };
+
+                    return (
+                      <div
+                        key={course.id}
+                        className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 flex flex-col"
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={course.featuredImageUrl}
-                          alt={`${course.title} at MSK Institute Shikohabad`}
-                          width={600}
-                          height={340}
-                          loading="lazy"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <span className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary/95 text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs">
-                          {course.level}
-                        </span>
-                      </Link>
-
-                      <div className="p-4 sm:p-5 flex-grow flex flex-col gap-3.5 sm:gap-4">
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap gap-1.5">
-                            {course.categories.slice(0, 2).map((cat, i) => (
-                              <span
-                                key={i}
-                                className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded"
-                              >
-                                {cat}
-                              </span>
-                            ))}
-                          </div>
-                          <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
-                            <Link href={`/courses/${course.slug}`} onClick={handleCourseSelect} className="hover:underline">
-                              {course.title}
-                            </Link>
-                          </h2>
-                          <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
-                            {course.shortDescription}
-                          </p>
-                        </div>
-
-                        <div className="space-y-3 mt-auto pt-3 sm:pt-4 border-t border-border-subtle">
-                          <div className="flex items-center justify-between text-xs text-text-muted">
-                            <span className="flex items-center gap-1.5 font-medium">
-                              <Clock className="w-4 h-4 text-secondary shrink-0" />
-                              <span>{course.duration.value} {course.duration.unit}</span>
-                            </span>
-                            <span className="flex items-center gap-1 font-semibold">
-                              {course.mode === 'BOTH' ? (
-                                <>
-                                  <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                  <span>Online & Offline</span>
-                                </>
-                              ) : course.mode === 'OFFLINE' ? (
-                                <>
-                                  <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                  <span>Offline Lab</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Globe className="w-3.5 h-3.5 text-secondary shrink-0" />
-                                  <span>Online Only</span>
-                                </>
-                              )}
-                            </span>
-                          </div>
-
-                          {/* Card Action Row: Enroll CTA + Share Button */}
-                          <div className="flex items-center gap-2">
-                            <Link
-                              href={`/courses/${course.slug}`}
-                              onClick={handleCourseSelect}
-                              className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer text-center"
-                            >
-                              <span className="truncate">View Syllabus & Enroll</span>
-                              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
-                            </Link>
-                            <WebShareButton
-                              variant="icon"
-                              title={`${course.title} | MSK Institute Shikohabad`}
-                              text={`Explore ${course.title} course at MSK Institute Shikohabad: ${course.shortDescription}`}
-                              url={`/courses/${course.slug}`}
-                              label={`Share ${course.title}`}
-                              className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-border-subtle bg-surface hover:bg-white text-text-muted hover:text-secondary shadow-2xs hover:border-secondary/40 transition-all shrink-0 cursor-pointer"
+                        <Link
+                          href={`/courses/${course.slug}`}
+                          onClick={handleCourseSelect}
+                          className="relative h-44 sm:h-48 w-full bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden block"
+                          aria-label={course.title}
+                        >
+                          {course.featuredImageUrl ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={course.featuredImageUrl}
+                              alt={`${course.title} at MSK Institute Shikohabad`}
+                              width={600}
+                              height={340}
+                              loading="lazy"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-primary/5 to-secondary/10 text-primary">
+                              <BookOpen className="w-10 h-10 text-secondary mb-1 opacity-70" />
+                              <span className="text-xs font-black uppercase tracking-wider text-center">{course.title}</span>
+                            </div>
+                          )}
+
+                          {/* Popular / Flagship Ribbon */}
+                          {isFlagship && (
+                            <span className="absolute top-3 left-3 bg-secondary text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-sm backdrop-blur-xs flex items-center gap-1 z-10">
+                              <Sparkles className="w-3 h-3" />
+                              Popular
+                            </span>
+                          )}
+
+                          <span className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-primary/95 text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-xs z-10">
+                            {course.level}
+                          </span>
+                        </Link>
+
+                        <div className="p-4 sm:p-5 flex-grow flex flex-col gap-3.5 sm:gap-4">
+                          <div className="space-y-2">
+                            <div className="flex flex-wrap gap-1.5">
+                              {course.categories.slice(0, 2).map((cat, i) => (
+                                <span
+                                  key={i}
+                                  className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded"
+                                >
+                                  {cat}
+                                </span>
+                              ))}
+                            </div>
+                            <h2 className="text-base sm:text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
+                              <Link href={`/courses/${course.slug}`} onClick={handleCourseSelect} className="hover:underline">
+                                {course.title}
+                              </Link>
+                            </h2>
+                            <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
+                              {course.shortDescription}
+                            </p>
+                          </div>
+
+                          <div className="space-y-3 mt-auto pt-3 sm:pt-4 border-t border-border-subtle">
+                            <div className="flex items-center justify-between text-xs text-text-muted">
+                              <span className="flex items-center gap-1.5 font-medium">
+                                <Clock className="w-4 h-4 text-secondary shrink-0" />
+                                <span>{course.duration.value} {course.duration.unit}</span>
+                              </span>
+                              <span className="flex items-center gap-1 font-semibold">
+                                {course.mode === 'BOTH' ? (
+                                  <>
+                                    <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                    <span>Online &amp; Offline</span>
+                                  </>
+                                ) : course.mode === 'OFFLINE' ? (
+                                  <>
+                                    <Laptop className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                    <span>Offline Lab</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Globe className="w-3.5 h-3.5 text-secondary shrink-0" />
+                                    <span>Online Only</span>
+                                  </>
+                                )}
+                              </span>
+                            </div>
+
+                            {/* Micro Trust Row: Verifiable Certificate & Free Demo */}
+                            <div className="flex items-center justify-between text-[11px] px-2.5 py-1 bg-surface rounded-lg border border-border-subtle/80 text-text-muted">
+                              <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                <span>Verified Certificate</span>
+                              </span>
+                              <span className="font-bold text-secondary text-[10px] uppercase tracking-wider">Free Demo</span>
+                            </div>
+
+                            {/* Card Action Row: Enroll CTA + WhatsApp Quick Enquiry + Share */}
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                              <Link
+                                href={`/courses/${course.slug}`}
+                                onClick={handleCourseSelect}
+                                className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors cursor-pointer text-center"
+                              >
+                                <span className="truncate">View Syllabus &amp; Enroll</span>
+                                <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+                              </Link>
+
+                              {/* 1-Tap Direct WhatsApp Admission Enquiry */}
+                              <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 transition-all shrink-0 cursor-pointer shadow-2xs hover:border-emerald-300 active:scale-95"
+                                aria-label={`Enquire about ${course.title} on WhatsApp`}
+                                title="Enquire on WhatsApp"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                </svg>
+                              </a>
+
+                              {/* Share Button */}
+                              <WebShareButton
+                                variant="icon"
+                                title={`${course.title} | MSK Institute Shikohabad`}
+                                text={`Explore ${course.title} course at MSK Institute Shikohabad: ${course.shortDescription}`}
+                                url={`/courses/${course.slug}`}
+                                label={`Share ${course.title}`}
+                                className="h-[38px] w-[38px] p-0 flex items-center justify-center rounded-xl border border-border-subtle bg-surface hover:bg-white text-text-muted hover:text-secondary shadow-2xs hover:border-secondary/40 transition-all shrink-0 cursor-pointer"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
+                    );
+                  })}
+                </div>
+
+                {/* Progressive "Load More" Engine (Eliminates 30-viewport scroll fatigue) */}
+                {filteredCourses.length > visibleCount && (
+                  <div className="pt-6 pb-2 text-center space-y-3 bg-white rounded-2xl border border-border-subtle p-6 shadow-2xs">
+                    <div className="text-xs text-text-muted font-medium">
+                      Showing <span className="font-bold text-primary">{visibleCourses.length}</span> of{' '}
+                      <span className="font-bold text-primary">{filteredCourses.length}</span> courses
                     </div>
-                  );
-                })}
+                    {/* Animated percentage progress bar */}
+                    <div className="w-56 h-1.5 bg-slate-100 rounded-full mx-auto overflow-hidden">
+                      <div
+                        className="h-full bg-secondary rounded-full transition-all duration-300"
+                        style={{ width: `${Math.round((visibleCourses.length / filteredCourses.length) * 100)}%` }}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                      <button
+                        onClick={() => setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filteredCourses.length))}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/95 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+                      >
+                        <span>Load More Courses (+{Math.min(PAGE_SIZE, filteredCourses.length - visibleCount)})</span>
+                        <ChevronDown className="w-4 h-4 text-secondary" />
+                      </button>
+                      <button
+                        onClick={() => setVisibleCount(filteredCourses.length)}
+                        className="px-4 py-3 bg-surface hover:bg-slate-100 border border-border-subtle text-text-muted hover:text-primary font-bold text-xs rounded-xl transition-all cursor-pointer"
+                      >
+                        Show All ({filteredCourses.length})
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="text-center py-16 bg-white border border-border-subtle rounded-2xl shadow-sm space-y-4">
@@ -694,6 +925,47 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
                 </select>
               </div>
 
+              {/* Career Pathway Track */}
+              <div className="space-y-2 pt-2 border-t border-border-subtle">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-text-muted uppercase tracking-wider">
+                    Career Pathway
+                  </span>
+                  {selectedTrack !== 'all' && (
+                    <button
+                      onClick={() => setSelectedTrack('all')}
+                      className="text-[10px] font-bold text-secondary hover:underline cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {CAREER_TRACKS.map((track) => {
+                    const isSel = selectedTrack === track.id;
+                    const count = trackCounts[track.id] || 0;
+                    return (
+                      <button
+                        key={track.id}
+                        onClick={() => setSelectedTrack(track.id)}
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
+                          isSel
+                            ? 'bg-secondary/10 text-secondary font-bold border-l-4 border-l-secondary pl-2'
+                            : 'text-text-muted hover:text-primary hover:bg-surface font-medium'
+                        }`}
+                      >
+                        <span className="flex items-center gap-2 truncate">
+                          <span>{track.icon}</span>
+                          <span>{track.label}</span>
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-surface text-text-muted">
+                          {count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
               {/* Difficulty Level */}
               <div className="space-y-2 pt-2 border-t border-border-subtle">
@@ -833,7 +1105,7 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
       </section>
 
       {/* 3. Course Comparison Matrix (GEO / AI Comparison Data & Decision Table) */}
-      <section className="space-y-6">
+      <section id="career-matrix" className="space-y-6 scroll-mt-24">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-secondary/10 text-secondary">
             <Sparkles className="w-5 h-5" />

@@ -4,11 +4,13 @@ import {
   BookOpen, Award, GraduationCap, CheckCircle2, ChevronRight, 
   MapPin, Users, Calendar, Trophy, Sparkles, ShieldCheck, 
   HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2,
-  Star, Quote, Building2 
+  Star, Quote, Building2, XCircle, MessageSquare, Flame 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import { getBranchSummaries } from '@/lib/branches';
 import HomeHeroBatchCard from '@/components/HomeHeroBatchCard';
+import HomeDemoBookingSection from '@/components/HomeDemoBookingSection';
+import HomeFeaturedCourses from '@/components/HomeFeaturedCourses';
 import { parseBatchStartTimestamp } from '@/lib/batchUtils';
 import CountdownTimer from '@/components/CountdownTimer';
 import HomeFaqAccordion from '@/components/HomeFaqAccordion';
@@ -72,6 +74,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  let allPublishedCourses: Course[] = [];
   let featuredCourses: Course[] = [];
   let allBatches: LiveBatch[] = [];
   let branchCount = 2;
@@ -85,6 +88,7 @@ export default async function HomePage() {
       getBranchSummaries(),
     ]);
     const publishedCourses = courses.filter(c => c.status === 'PUBLISH');
+    allPublishedCourses = publishedCourses;
     publishedCoursesCount = publishedCourses.length;
     featuredCourses = publishedCourses.slice(0, 3);
     allBatches = batches || [];
@@ -166,6 +170,7 @@ export default async function HomePage() {
     {
       name: "Aman Sharma",
       course: "Python Programming Masterclass",
+      badge: "Project Developer",
       rating: 5,
       date: "August 2026",
       feedback: "Learned Python programming from basics to building real automation projects in the offline lab. The 1-on-1 mentor guidance by Sumit Sir helped me build true confidence in coding.",
@@ -174,6 +179,7 @@ export default async function HomePage() {
     {
       name: "Priya Yadav",
       course: "NIELIT CCC Certification",
+      badge: "Grade A Certified",
       rating: 5,
       date: "August 2026",
       feedback: "Cleared NIELIT CCC with Grade A in my first attempt! The mock test series and practical LibreOffice sessions in the Shikohabad lab were exact to the real exam pattern.",
@@ -182,6 +188,7 @@ export default async function HomePage() {
     {
       name: "Rohan Verma",
       course: "Full-Stack Web Development",
+      badge: "Web Dev Intern",
       rating: 5,
       date: "July 2026",
       feedback: "The Full-Stack Web Development roadmap is modern and industry-level. Building React and Node.js projects helped me land my first tech internship. Best coding institute in Shikohabad!",
@@ -190,6 +197,7 @@ export default async function HomePage() {
     {
       name: "Neha Gupta",
       course: "ADCA Diploma (1-Year)",
+      badge: "1st Rank Diploma",
       rating: 5,
       date: "July 2026",
       feedback: "Best computer lab in Shikohabad. High-speed optical fiber internet, dedicated PCs, and zero power cuts. Highly recommended for students who want practical skills instead of just theory.",
@@ -366,9 +374,6 @@ export default async function HomePage() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                   Now Hiring: Internships & Jobs
                 </Link>
-                <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 bg-surface border border-border-subtle text-text-muted rounded-full">
-                  100% Practical Labs
-                </span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary leading-tight">
@@ -378,26 +383,51 @@ export default async function HomePage() {
                 Join <strong>MSK Institute</strong> in Shikohabad to learn Python, Full-Stack Web Development, and essential computer concepts with hands-on lab projects and direct mentorship by <strong>Er. Sumit Kumar</strong>.
               </p>
               <div className={`flex flex-wrap gap-3 pt-2 ${hasLiveBatches ? '' : 'justify-center'}`}>
+                <a
+                  href="#book-demo"
+                  className="inline-flex items-center justify-center px-6 py-3.5 bg-secondary hover:bg-secondary-light text-white font-black text-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Book Free Demo Class</span>
+                  <span className="text-xs">➔</span>
+                </a>
                 <Link
                   href="/courses"
-                  className="inline-flex items-center justify-center px-6 py-3.5 bg-secondary hover:bg-secondary-light text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center px-5 py-3.5 bg-white border border-border-subtle hover:bg-surface text-primary font-bold text-sm rounded-xl shadow-2xs transition-all duration-200"
                 >
                   Explore Courses
-                  <ChevronRight className="w-5 h-5 ml-1" />
+                  <ChevronRight className="w-4 h-4 ml-1 text-text-muted" />
                 </Link>
                 <Link
                   href="/playground"
-                  className="inline-flex items-center justify-center px-5 py-3.5 border border-secondary/40 bg-secondary/10 hover:bg-secondary text-secondary hover:text-white font-bold rounded-xl transition-all duration-200 gap-2 shadow-sm"
+                  className="inline-flex items-center justify-center px-4 py-3.5 border border-secondary/30 bg-secondary/5 hover:bg-secondary/10 text-secondary font-bold rounded-xl transition-all duration-200 gap-1.5 text-sm"
                 >
                   <Code2 className="w-4 h-4" />
-                  Try Code Playground
+                  <span>Try Playground</span>
                 </Link>
-                <Link
-                  href="/verify-certificate"
-                  className="inline-flex items-center justify-center px-5 py-3.5 border border-border-subtle text-text-muted hover:text-primary hover:bg-surface font-semibold rounded-xl transition-colors duration-200 text-sm"
-                >
-                  Verify Certificate
-                </Link>
+              </div>
+
+              {/* High-Trust Social Proof Strip */}
+              <div className={`pt-2 flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-semibold text-text-muted ${hasLiveBatches ? '' : 'justify-center'}`}>
+                <div className="flex items-center gap-1">
+                  <div className="flex items-center text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="font-bold text-primary ml-1">4.9/5</span>
+                  <span className="text-text-muted font-normal">(128+ Reviews)</span>
+                </div>
+                <span className="hidden sm:inline text-gray-300">•</span>
+                <div className="flex items-center gap-1.5 text-text-muted">
+                  <Users className="w-3.5 h-3.5 text-secondary" />
+                  <span>1,200+ Students Mentored</span>
+                </div>
+                <span className="hidden sm:inline text-gray-300">•</span>
+                <div className="flex items-center gap-1.5 text-emerald-600 font-bold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>100% Practical Labs</span>
+                </div>
               </div>
             </header>
 
@@ -423,36 +453,10 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 3. Live Course Banner */}
-        {upcomingBatch && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-primary text-white rounded-2xl overflow-hidden shadow-lg border border-primary-light flex flex-col md:flex-row items-center justify-center p-8 md:p-12 gap-8 md:gap-16 lg:gap-24 relative">
-              <div className="space-y-4 max-w-xl text-center md:text-left">
-                <span className="inline-block px-3 py-1 bg-secondary text-white text-xs font-bold uppercase rounded-full">
-                  Admissions Open
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                  Enroll in Upcoming Live Coding Cohorts
-                </h2>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Registration closes soon for our premium online & offline coding batches in Shikohabad. Limited batch seats to maintain optimal student-to-instructor guidance.
-                </p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl flex flex-col items-center gap-4 text-center">
-                <span className="text-xs uppercase tracking-wider font-semibold text-gray-300">Time remaining:</span>
-                <CountdownTimer targetDate={countdownDateString} />
-                <Link
-                  href="/live"
-                  className="mt-2 w-full text-center px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-sm rounded-xl transition-colors shadow"
-                >
-                  View Live Classes Schedule ➔
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
+        {/* 3. Interactive Free Demo Booking Section */}
+        <HomeDemoBookingSection />
 
-        {/* 4. Course Highlights */}
+        {/* 4. Course Highlights & Interactive Category Tabs */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">
@@ -464,74 +468,7 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredCourses.map((course) => (
-              <div
-                key={course.id}
-                className="group bg-white rounded-2xl border border-border-subtle overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
-              >
-                <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={course.featuredImageUrl}
-                    alt={`${course.title} at MSK Institute`}
-                    width={600}
-                    height={340}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <span className="absolute top-4 right-4 bg-primary/95 text-white text-xs font-bold px-2.5 py-1 rounded-md">
-                    {course.level}
-                  </span>
-                </div>
-                <div className="p-6 flex-grow flex flex-col gap-4">
-                  <div className="space-y-2">
-                    <div className="flex gap-2">
-                      {course.categories.slice(0, 2).map((cat, i) => (
-                        <span key={i} className="text-[10px] uppercase font-black text-[#B83A00] tracking-wider px-2 py-0.5 bg-[#B83A00]/10 rounded">
-                          {cat}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">
-                      {course.title}
-                    </h3>
-                    <p className="text-sm text-text-muted line-clamp-3 leading-relaxed">
-                      {course.shortDescription}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3 mt-auto pt-4 border-t border-border-subtle">
-                    <div className="flex items-center justify-between text-xs text-text-muted">
-                      <span className="flex items-center gap-1 font-medium">
-                        <Clock className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
-                        {course.duration.value} {course.duration.unit}
-                      </span>
-                      <span className="text-[10px] font-bold text-text-muted uppercase px-2 py-0.5 bg-gray-100 rounded">
-                        {course.mode === 'BOTH' ? 'Online & Offline' : course.mode}
-                      </span>
-                    </div>
-                    <Link
-                      href={`/courses/${course.slug}`}
-                      className="w-full text-center py-2.5 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-sm transition-colors block"
-                    >
-                      Syllabus Details ➔
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center pt-4">
-            <Link
-              href="/courses"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border-subtle hover:bg-surface text-primary font-bold text-sm rounded-xl transition-colors"
-            >
-              <span>Explore All Computer & Coding Courses</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          <HomeFeaturedCourses courses={allPublishedCourses} />
         </section>
 
         {/* 5. Features Grid */}
@@ -572,6 +509,72 @@ export default async function HomePage() {
                 );
               })}
             </div>
+
+            {/* Comparison Distinction Card */}
+            <div className="bg-white rounded-3xl border border-border-subtle p-6 sm:p-8 shadow-xs">
+              <div className="text-center max-w-xl mx-auto space-y-2 mb-6">
+                <span className="text-xs font-bold uppercase tracking-wider text-secondary">
+                  The MSK Standard
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-primary">
+                  How We Compare with Traditional Centers
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Traditional Centers */}
+                <div className="p-5 rounded-2xl bg-red-50/50 border border-red-100 space-y-3">
+                  <div className="flex items-center gap-2 text-red-600 font-extrabold text-sm">
+                    <XCircle className="w-5 h-5 flex-shrink-0" />
+                    <span>Typical Local Computer Centers</span>
+                  </div>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-text-muted">
+                    <li className="flex items-start gap-2">
+                      <span className="text-red-500 font-bold">✕</span>
+                      <span>Shared PCs (2 to 3 students forced to share one screen).</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-red-500 font-bold">✕</span>
+                      <span>Outdated theory books & notes with minimal project work.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-red-500 font-bold">✕</span>
+                      <span>Frequent power cuts disrupting daily lab sessions.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-red-500 font-bold">✕</span>
+                      <span>Paper certificates that cannot be verified online.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* MSK Institute */}
+                <div className="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200 space-y-3 shadow-2xs">
+                  <div className="flex items-center gap-2 text-emerald-700 font-extrabold text-sm">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-600" />
+                    <span>MSK Institute Advantage</span>
+                  </div>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-text-main font-medium">
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-600 font-bold">✓</span>
+                      <span><strong>1 Student : 1 PC Policy:</strong> Dedicated computer workstation for every single learner.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-600 font-bold">✓</span>
+                      <span><strong>Industry-Grade Practical Labs:</strong> Build real-world portfolio code & GitHub repositories.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-600 font-bold">✓</span>
+                      <span><strong>Zero Power Cut Disruption:</strong> Heavy-duty generator & inverter power backup.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-600 font-bold">✓</span>
+                      <span><strong>Instant QR Verification:</strong> 24/7 digital certificate validation portal.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -610,15 +613,22 @@ export default async function HomePage() {
                   </p>
                 </div>
 
-                {/* Author Card */}
-                <div className="pt-4 mt-4 border-t border-border-subtle flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 text-secondary font-bold flex items-center justify-center text-xs flex-shrink-0">
-                    {rev.initials}
+                {/* Author Card with Achievement Badge */}
+                <div className="pt-4 mt-4 border-t border-border-subtle space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-secondary/10 text-secondary font-bold flex items-center justify-center text-xs flex-shrink-0">
+                      {rev.initials}
+                    </div>
+                    <div className="overflow-hidden">
+                      <div className="font-bold text-sm text-primary truncate">{rev.name}</div>
+                      <div className="text-xs text-text-muted truncate">{rev.course}</div>
+                    </div>
                   </div>
-                  <div className="overflow-hidden">
-                    <div className="font-bold text-sm text-primary truncate">{rev.name}</div>
-                    <div className="text-xs text-text-muted truncate">{rev.course}</div>
-                  </div>
+                  {rev.badge && (
+                    <span className="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                      ✓ {rev.badge}
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
@@ -637,7 +647,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 7. Frequently Asked Questions (GEO / AI Search Engine Optimization) */}
+        {/* 7. Frequently Asked Questions & Academic Counseling */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">
@@ -650,9 +660,43 @@ export default async function HomePage() {
           </div>
 
           <HomeFaqAccordion faqs={homeFaqs} />
+
+          {/* Academic Counseling Banner */}
+          <div className="bg-surface rounded-2xl border border-border-subtle p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left mt-8">
+            <div className="space-y-1.5 max-w-lg">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-secondary uppercase tracking-wider">
+                <HelpCircle className="w-4 h-4" />
+                <span>Still Have Questions?</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-primary">
+                Not sure which course or roadmap is right for you?
+              </h3>
+              <p className="text-xs sm:text-sm text-text-muted">
+                Talk directly to Er. Sumit Kumar or our academic counseling team for free 1-on-1 guidance.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-3 flex-shrink-0">
+              <a
+                href="https://wa.me/918393042166?text=Hello%20MSK%20Institute%2C%20I%20need%20academic%20counseling%20regarding%20courses."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
+              </a>
+              <a
+                href="tel:+918393042166"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary-light text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+              >
+                <PhoneCall className="w-4 h-4" />
+                <span>Call Counselor</span>
+              </a>
+            </div>
+          </div>
         </section>
 
-        {/* 7. Local Trust, Campus & Google Maps Section */}
+        {/* 8. Local Trust, Campus & Google Maps Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -666,7 +710,28 @@ export default async function HomePage() {
               <p className="home-about-summary text-text-muted leading-relaxed">
                 We are located in Shikohabad at <strong>Gali No. 3, Near Gyan Jyoti Public School / Arya Samaj Mandir, Station Road</strong>. Our campus is open Monday through Saturday from 9:00 AM to 6:00 PM for demo sessions, practical lab practice, and new admissions.
               </p>
-              <div className="space-y-3">
+              
+              {/* Campus Infrastructure Highlights */}
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
+                <div className="p-2.5 rounded-xl bg-surface border border-border-subtle text-xs font-bold text-primary flex items-center gap-2">
+                  <Laptop className="w-4 h-4 text-secondary flex-shrink-0" />
+                  <span>1 Student : 1 PC Policy</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-surface border border-border-subtle text-xs font-bold text-primary flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>Generator Backup</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-surface border border-border-subtle text-xs font-bold text-primary flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-secondary flex-shrink-0" />
+                  <span>AC Classrooms</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-surface border border-border-subtle text-xs font-bold text-primary flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                  <span>Optical Fiber Wi-Fi</span>
+                </div>
+              </div>
+
+              <div className="space-y-2.5 pt-1">
                 <div className="flex items-center gap-2.5 text-sm">
                   <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0" />
                   <span className="font-medium">Air-conditioned modern classrooms & smart lab setups</span>
