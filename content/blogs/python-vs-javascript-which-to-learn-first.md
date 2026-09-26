@@ -25,7 +25,7 @@ This is the single most common question students ask when they enter MSK Institu
 
 ## Python: The King of Readability, AI & Automation
 
-Python uses clean indentation instead of curly braces, making it look almost like plain English. It is the undisputed gold standard for Artificial Intelligence, Machine Learning, Data Science, and script automation.
+Python uses clean indentation instead of curly braces, making it look almost like plain English. It is the undisputed gold standard for Artificial Intelligence, Machine Learning, Data Science, and script automation. Learn how Python enforces clean layout in our [Python Style Guide (PEP 8) Guide](/blogs/python-style-guide-pep-8-complete-beginner-guide).
 
 ```python
 # Python: Printing even numbers

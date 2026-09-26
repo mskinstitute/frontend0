@@ -117,4 +117,4 @@ The GIL is a mutex (mutual exclusion lock) used by CPython to ensure that only o
 
 ## Summary & Next Steps
 
-Mastering these core principles will give you a massive confidence boost in both campus viva exams and corporate interviews. Join our live hands-on Python classes at MSK Institute in Shikohabad or online to build real-world portfolio projects under direct mentor guidance.
+Mastering these core principles will give you a massive confidence boost in both campus viva exams and corporate interviews. Writing clean, industry-standard code is just as vital as problem solving—be sure to read our comprehensive [Python Style Guide (PEP 8) Complete Beginner Guide](/blogs/python-style-guide-pep-8-complete-beginner-guide) to master professional formatting, naming conventions, and automated tooling. Join our live hands-on Python classes at MSK Institute in Shikohabad or online to build real-world portfolio projects under direct mentor guidance.
