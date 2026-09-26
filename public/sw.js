@@ -1,5 +1,5 @@
 // public/sw.js - MSK Institute Progressive Web App Service Worker
-const CACHE_VERSION = 'v-2.1.4';
+const CACHE_VERSION = 'v-2.1.5';
 const STATIC_CACHE = `msk-static-${CACHE_VERSION}`;
 const CONTENT_CACHE = `msk-content-${CACHE_VERSION}`;
 const OFFLINE_LESSONS_CACHE = 'msk-offline-lessons';
@@ -65,9 +65,9 @@ self.addEventListener('activate', (event) => {
 });
 
 // Multi-Tier Fetch Strategy:
-// 1. Static assets (_next/static, images, fonts): Cache-First
-// 2. Tutorials & study material: Stale-While-Revalidate
-// 3. HTML Navigations: Network-First with offline.html fallback
+// 1. HTML Navigations: Network-First with cache & offline fallback (prevents React hydration mismatches)
+// 2. Static assets (_next/static, images, fonts): Cache-First
+// 3. Raw Content assets (/content/, markdown files): Stale-While-Revalidate
 // 4. APIs: Network-Only
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
@@ -81,37 +81,41 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Tutorials, Blogs & Study Material: Stale-While-Revalidate
-  // Serves instant cached version to student while fetching updates in background
-  const isContentRoute =
-    url.pathname.startsWith('/tutorials/') ||
-    url.pathname.startsWith('/blogs/') ||
-    url.pathname.startsWith('/study-material') ||
-    url.pathname.startsWith('/content/');
-
-  if (isContentRoute) {
+  // 2. HTML Page Navigations: Network-First with cache & offline fallback
+  // CRITICAL: Must be Network-First so client always receives the fresh SSR HTML
+  // matching current client JS bundles, completely preventing hydration mismatches.
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
     event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        // Also check if saved in explicit offline lessons cache
-        const fetchPromise = fetch(event.request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              const clone = networkResponse.clone();
-              caches.open(CONTENT_CACHE).then((cache) => cache.put(event.request, clone));
-            }
-            return networkResponse;
-          })
-          .catch(async () => {
-            // Check offline lessons cache if network fails
-            const offlineLessonCache = await caches.open(OFFLINE_LESSONS_CACHE);
-            const savedLesson = await offlineLessonCache.match(event.request);
-            if (savedLesson) return savedLesson;
-            if (cachedResponse) return cachedResponse;
-            return caches.match('/offline.html');
-          });
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            const isContentRoute =
+              url.pathname.startsWith('/tutorials/') ||
+              url.pathname.startsWith('/blogs/') ||
+              url.pathname.startsWith('/study-material');
+            const targetCache = isContentRoute ? CONTENT_CACHE : STATIC_CACHE;
+            caches.open(targetCache).then((cache) => cache.put(event.request, clone));
+          }
+          return networkResponse;
+        })
+        .catch(async () => {
+          // Check explicit offline lessons cache first
+          const offlineLessonCache = await caches.open(OFFLINE_LESSONS_CACHE);
+          const savedLesson = await offlineLessonCache.match(event.request);
+          if (savedLesson) return savedLesson;
 
-        return cachedResponse || fetchPromise;
-      })
+          const contentCache = await caches.open(CONTENT_CACHE);
+          const cachedContent = await contentCache.match(event.request);
+          if (cachedContent) return cachedContent;
+
+          const staticCache = await caches.open(STATIC_CACHE);
+          const cachedStatic = await staticCache.match(event.request);
+          if (cachedStatic) return cachedStatic;
+
+          const fallback = await caches.match('/offline.html');
+          return fallback || new Response('Offline - MSK Institute', { headers: { 'Content-Type': 'text/plain' } });
+        })
     );
     return;
   }
@@ -142,23 +146,30 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 4. HTML Page Navigations: Network-First with cache & offline fallback
-  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+  // 4. Raw Content & Markdown Files (non-navigation): Stale-While-Revalidate
+  const isContentAsset =
+    url.pathname.startsWith('/content/') ||
+    url.pathname.endsWith('.md') ||
+    url.pathname.startsWith('/data/');
+
+  if (isContentAsset) {
     event.respondWith(
-      fetch(event.request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const clone = networkResponse.clone();
-            caches.open(STATIC_CACHE).then((cache) => cache.put(event.request, clone));
-          }
-          return networkResponse;
-        })
-        .catch(async () => {
-          const cached = await caches.match(event.request);
-          if (cached) return cached;
-          const fallback = await caches.match('/offline.html');
-          return fallback || new Response('Offline - MSK Institute', { headers: { 'Content-Type': 'text/plain' } });
-        })
+      caches.match(event.request).then((cachedResponse) => {
+        const fetchPromise = fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const clone = networkResponse.clone();
+              caches.open(CONTENT_CACHE).then((cache) => cache.put(event.request, clone));
+            }
+            return networkResponse;
+          })
+          .catch(async () => {
+            if (cachedResponse) return cachedResponse;
+            return caches.match('/offline.html');
+          });
+
+        return cachedResponse || fetchPromise;
+      })
     );
     return;
   }
