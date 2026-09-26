@@ -123,7 +123,7 @@ export default async function HomePage() {
     },
     {
       title: 'Industry-Standard Certification',
-      description: 'Acquire official MSK Institute & NIELIT recognized certificates, verifiable anywhere online in one click.',
+      description: 'Official MSK Institute Verifiable Certificates with 24/7 digital QR verification and NIELIT CCC/O-Level exam preparation.',
       icon: Award,
     },
     {
@@ -142,7 +142,7 @@ export default async function HomePage() {
   const homeFaqs = [
     {
       q: "What is MSK Institute and where is it located in Shikohabad?",
-      a: "MSK Institute is Shikohabad's premier computer training and software coding academy. It is located at Gali No. 3, Near Gyan Jyoti Public School / Arya Samaj Mandir, Station Road, Shikohabad (Firozabad District, Uttar Pradesh). We offer modern air-conditioned computer labs with high-speed internet and power backup."
+      a: "MSK Institute is Shikohabad's premier computer training and software coding academy. It is located at Gali No. 3, Near Gyan Jyoti Public School, Station Road Area, Shikohabad (Firozabad District, Uttar Pradesh 283135). We offer modern air-conditioned computer labs with high-speed internet and power backup."
     },
     {
       q: "What computer and coding courses are offered at MSK Institute?",
@@ -365,7 +365,7 @@ export default async function HomePage() {
               <div className={`flex flex-wrap items-center gap-2 ${hasLiveBatches ? '' : 'justify-center'}`}>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold tracking-wider bg-[#B83A00]/10 text-[#B83A00]">
                   <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                  Shikohabad's No. 1 Coding Academy
+                  Shikohabad&apos;s Premier Coding Academy • Rated 4.9/5
                 </span>
                 <Link
                   href="/careers"
@@ -708,7 +708,7 @@ export default async function HomePage() {
                 Visit our Offline Training Lab
               </h2>
               <p className="home-about-summary text-text-muted leading-relaxed">
-                We are located in Shikohabad at <strong>Gali No. 3, Near Gyan Jyoti Public School / Arya Samaj Mandir, Station Road</strong>. Our campus is open Monday through Saturday from 9:00 AM to 6:00 PM for demo sessions, practical lab practice, and new admissions.
+                We are located in Shikohabad at <strong>Gali No. 3, Near Gyan Jyoti Public School, Station Road Area</strong>. Our campus is open Monday through Saturday from 8:00 AM to 7:00 PM (Sunday 10:00 AM to 2:00 PM for counseling & demos) for practical lab training, mentorship, and admissions.
               </p>
               
               {/* Campus Infrastructure Highlights */}

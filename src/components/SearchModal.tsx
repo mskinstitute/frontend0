@@ -23,6 +23,8 @@ import {
 import { Course, LiveBatch, StudyMaterial, BlogPost, SearchResultItem } from '@/types';
 import { resolveTopicTutorialUrl, isTutorialCourse } from '@/lib/curriculum-utils';
 import { trackSearch } from '@/lib/analytics';
+import { LEARNING_PATHS } from '@/data/learningPaths';
+import { STUDENT_PROJECTS } from '@/data/studentProjects';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -343,6 +345,34 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         url: `/careers`,
         badge: c.type === 'internship' ? 'Internship' : 'Job Opening',
         actionLabel: 'View & Apply',
+      });
+    });
+
+    // Learning Paths & Career Roadmaps
+    LEARNING_PATHS.forEach((lp) => {
+      items.push({
+        id: `lp-${lp.id}`,
+        type: 'course',
+        title: lp.title,
+        description: `${lp.subtitle} (${lp.duration})`,
+        category: `Career Roadmap • ${lp.level}`,
+        url: `/learning-paths#${lp.slug}`,
+        badge: 'Roadmap',
+        actionLabel: 'View Pathway',
+      });
+    });
+
+    // Student Projects
+    STUDENT_PROJECTS.forEach((sp) => {
+      items.push({
+        id: `sp-${sp.id}`,
+        type: 'course',
+        title: sp.title,
+        description: `${sp.description} By ${sp.studentName}`,
+        category: `Student Project • ${sp.category}`,
+        url: `/projects`,
+        badge: 'Project',
+        actionLabel: 'View Project',
       });
     });
 

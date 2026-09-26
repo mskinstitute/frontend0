@@ -186,7 +186,7 @@ export default function RootLayout({
           <InstallAppModal />
           <PwaUpdateToast />
           <Navbar />
-          <main className="flex-grow pb-16 md:pb-0 relative">
+          <main className="flex-grow pb-20 md:pb-0 relative">
             {children}
           </main>
           <Footer />

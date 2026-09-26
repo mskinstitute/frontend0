@@ -43,7 +43,9 @@ export default async function LiveBatchesPage() {
           "@type": "Offer",
           "price": b.price.replace(/[^\d]/g, ''),
           "priceCurrency": "INR",
-          "availability": "https://schema.org/LimitedAvailability"
+          "availability": b.status === 'COMPLETED' || b.status === 'ARCHIVED'
+            ? "https://schema.org/Discontinued"
+            : "https://schema.org/LimitedAvailability"
         }
       }))
     ]

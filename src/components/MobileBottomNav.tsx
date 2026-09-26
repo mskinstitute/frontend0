@@ -14,6 +14,16 @@ export default function MobileBottomNav() {
     if (path === '/') {
       return pathname === '/';
     }
+    if (path === '/study-material') {
+      return (
+        pathname.startsWith('/study-material') ||
+        pathname.startsWith('/tutorials') ||
+        pathname.startsWith('/notes')
+      );
+    }
+    if (path === '/live') {
+      return pathname.startsWith('/live') || pathname.startsWith('/live-batches');
+    }
     return pathname.startsWith(path);
   };
 
@@ -42,10 +52,13 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-border-subtle shadow-[0_-4px_16px_rgba(0,0,0,0.06)] no-print">
-      <nav 
-        className="max-w-md mx-auto px-2 flex items-center justify-around"
-        style={{ paddingBottom: 'max(0.4rem, env(safe-area-inset-bottom))', paddingTop: '0.4rem' }}
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] no-print">
+      <nav
+        className="max-w-md mx-auto px-3 flex items-center justify-around"
+        style={{
+          paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))',
+          paddingTop: '0.45rem',
+        }}
         aria-label="Mobile Bottom Navigation"
       >
         {navItems.map((item) => {
@@ -56,47 +69,64 @@ export default function MobileBottomNav() {
             <Link
               key={item.name}
               href={item.href}
-              className={`relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl transition-all duration-200 select-none ${
-                active
-                  ? 'text-secondary font-bold'
-                  : 'text-text-muted hover:text-primary hover:bg-surface/60'
+              className={`relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-2xl transition-all duration-200 select-none group active:scale-95 ${
+                active ? 'text-secondary' : 'text-slate-500 hover:text-primary active:bg-slate-50'
               }`}
             >
-              {/* Active Indicator Top Pill */}
+              {/* Active Indicator Top Pill with smooth transition */}
               {active && (
-                <span className="absolute -top-1 w-6 h-0.5 bg-secondary rounded-full" />
+                <span className="absolute -top-1.5 w-7 h-1 bg-secondary rounded-full shadow-[0_1px_4px_rgba(255,107,0,0.4)] animate-in fade-in zoom-in-75 duration-200" />
               )}
 
-              <div className="relative">
-                <Icon className={`w-5 h-5 transition-transform ${active ? 'scale-110' : ''}`} />
-                {item.badge && (
-                  <span className="absolute -top-1 -right-2 flex h-2 w-2">
+              {/* Icon Container with subtle active pill background */}
+              <div
+                className={`relative flex items-center justify-center w-10 h-7 rounded-full transition-all duration-200 ${
+                  active ? 'bg-orange-50 text-secondary' : 'group-hover:text-primary'
+                }`}
+              >
+                <Icon
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    active ? 'scale-110 stroke-[2.4]' : 'stroke-[1.8]'
+                  }`}
+                />
+
+                {/* Pulsing Live Beacon Indicator */}
+                {item.badge === 'LIVE' && (
+                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500 ring-2 ring-white" />
                   </span>
                 )}
               </div>
 
-              <span className={`text-[11px] leading-tight mt-1 tracking-tight ${active ? 'font-bold text-secondary' : 'font-medium'}`}>
+              {/* Label */}
+              <span
+                className={`text-[10.5px] leading-tight mt-0.5 tracking-tight transition-all duration-200 ${
+                  active ? 'font-bold text-secondary scale-[1.02]' : 'font-medium text-slate-500'
+                }`}
+              >
                 {item.name}
               </span>
             </Link>
           );
         })}
 
-        {/* 5th Tab: If NOT running inside standalone app show Install App button; if in standalone app show Verify Certificate tab */}
+        {/* 5th Action Tab */}
         {!isRunningStandalone ? (
           <button
             onClick={() => installApp()}
-            aria-label="Install App"
-            className="relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl text-secondary select-none hover:bg-secondary/5 transition-all group"
+            type="button"
+            aria-label="Install MSK Institute App"
+            className="relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-2xl text-secondary select-none group active:scale-95 transition-all cursor-pointer"
           >
-            <div className="relative">
-              <div className="w-6 h-6 rounded-full bg-secondary/15 flex items-center justify-center">
-                <Download className="w-3.5 h-3.5 text-secondary animate-bounce" />
-              </div>
+            <div className="relative flex items-center justify-center w-10 h-7 rounded-full bg-gradient-to-tr from-secondary/15 to-orange-100 group-hover:from-secondary/25 group-hover:to-orange-200 transition-colors">
+              <Download className="w-4 h-4 text-secondary stroke-[2.2] group-hover:translate-y-0.5 transition-transform duration-200" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary" />
+              </span>
             </div>
-            <span className="text-[11px] font-bold text-secondary leading-tight mt-1">
+            <span className="text-[10.5px] font-bold text-secondary leading-tight mt-0.5 tracking-tight">
               Install
             </span>
           </button>
@@ -104,17 +134,31 @@ export default function MobileBottomNav() {
           <Link
             href="/verify-certificate"
             aria-label="Verify Certificate"
-            className={`relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl select-none transition-all ${
-              isActive('/verify-certificate') ? 'text-secondary font-bold' : 'text-text-muted hover:text-primary'
+            className={`relative flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-2xl select-none group active:scale-95 transition-all ${
+              isActive('/verify-certificate')
+                ? 'text-secondary'
+                : 'text-slate-500 hover:text-primary active:bg-slate-50'
             }`}
           >
             {isActive('/verify-certificate') && (
-              <span className="absolute -top-1 w-6 h-0.5 bg-secondary rounded-full" />
+              <span className="absolute -top-1.5 w-7 h-1 bg-secondary rounded-full shadow-[0_1px_4px_rgba(255,107,0,0.4)] animate-in fade-in zoom-in-75 duration-200" />
             )}
-            <div className="relative">
-              <ShieldCheck className="w-5 h-5" />
+            <div
+              className={`relative flex items-center justify-center w-10 h-7 rounded-full transition-all duration-200 ${
+                isActive('/verify-certificate') ? 'bg-orange-50 text-secondary' : 'group-hover:text-primary'
+              }`}
+            >
+              <ShieldCheck
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  isActive('/verify-certificate') ? 'scale-110 stroke-[2.4]' : 'stroke-[1.8]'
+                }`}
+              />
             </div>
-            <span className={`text-[11px] leading-tight mt-1 tracking-tight ${isActive('/verify-certificate') ? 'font-bold text-secondary' : 'font-medium'}`}>
+            <span
+              className={`text-[10.5px] leading-tight mt-0.5 tracking-tight transition-all duration-200 ${
+                isActive('/verify-certificate') ? 'font-bold text-secondary' : 'font-medium text-slate-500'
+              }`}
+            >
               Verify
             </span>
           </Link>

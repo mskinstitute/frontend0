@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { fetchLiveSchedule } from '@/services/api';
 import LiveScheduleClient from '@/components/LiveScheduleClient';
+import { BUSINESS_INFO } from '@/config/business';
 
 export const metadata: Metadata = {
   title: "Live Computer Classes, Coding Sessions & Batches in Shikohabad | MSK Institute",
@@ -58,6 +59,9 @@ export const metadata: Metadata = {
 
 export default async function LivePage() {
   const { classes, batches } = await fetchLiveSchedule();
+  const upcomingBatches = batches.filter(
+    (b) => b.status === 'OPEN' || b.status === 'UPCOMING'
+  );
 
   // Helper to calculate exact date strings for JSON-LD from date and startTime/endTime
   const getClassISO = (dateStr?: string, timeStr?: string) => {
@@ -99,7 +103,7 @@ export default async function LivePage() {
     },
     {
       q: "How do I enroll in new upcoming live batches?",
-      a: "Review the 'Upcoming Live Batches' section on the Live page, select your desired batch, and click 'View Details' to submit your registration. You can also visit our Shikohabad centre near Station Road or call our coordinator at +91 83930 42166."
+      a: "Review the 'Upcoming Live Batches' section on the Live page, select your desired batch, and click 'View Details' to submit your registration. You can also visit our Shikohabad centre at Gali No. 3, Near Gyan Jyoti Public School, Station Road Area, or call our coordinator at +91 83930 42166."
     }
   ];
 
@@ -111,27 +115,41 @@ export default async function LivePage() {
       {
         "@type": ["EducationalOrganization", "LocalBusiness"],
         "@id": "https://www.mskinstitute.in/#organization",
-        "name": "MSK Institute",
+        "name": BUSINESS_INFO.name,
         "alternateName": ["MSK Computer Institute", "MSK Institute Shikohabad", "MSK Live Classroom"],
-        "url": "https://www.mskinstitute.in",
-        "logo": "https://www.mskinstitute.in/logo.jpg",
-        "image": "https://www.mskinstitute.in/logo.jpg",
+        "url": BUSINESS_INFO.canonicalUrl,
+        "logo": `${BUSINESS_INFO.canonicalUrl}/logo.jpg`,
+        "image": `${BUSINESS_INFO.canonicalUrl}/logo.jpg`,
         "description": "Premier Computer Institute in Shikohabad offering live interactive coding classes, full-stack software development cohorts, and certified computer courses.",
-        "telephone": "+91-8393042166",
-        "email": "mskshikohabad@gmail.com",
+        "telephone": BUSINESS_INFO.telephone,
+        "email": BUSINESS_INFO.email,
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Near Arya Samaj Mandir, Station Road",
-          "addressLocality": "Shikohabad",
-          "addressRegion": "Uttar Pradesh",
-          "postalCode": "283135",
-          "addressCountry": "IN"
+          "streetAddress": BUSINESS_INFO.address.streetAddress,
+          "addressLocality": BUSINESS_INFO.address.addressLocality,
+          "addressRegion": BUSINESS_INFO.address.addressRegion,
+          "postalCode": BUSINESS_INFO.address.postalCode,
+          "addressCountry": BUSINESS_INFO.address.addressCountry
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 27.1084,
-          "longitude": 78.5846
+          "latitude": BUSINESS_INFO.geo.latitude,
+          "longitude": BUSINESS_INFO.geo.longitude
         },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "08:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday"],
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
         "founder": {
           "@type": "Person",
           "name": "Er. Sumit Kumar",
@@ -224,8 +242,8 @@ export default async function LivePage() {
           "url": "https://www.mskinstitute.in/live"
         }
       })),
-      // 5. CourseInstances for each batch
-      ...batches.map(b => ({
+      // 5. CourseInstances for each upcoming batch
+      ...upcomingBatches.map(b => ({
         "@type": "CourseInstance",
         "name": b.title,
         "description": b.description || b.title,
@@ -285,7 +303,7 @@ export default async function LivePage() {
           </p>
         </header>
 
-        <LiveScheduleClient initialClasses={classes} initialBatches={batches} />
+        <LiveScheduleClient initialClasses={classes} initialBatches={upcomingBatches} />
       </div>
     </>
   );

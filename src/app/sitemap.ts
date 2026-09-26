@@ -11,6 +11,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [
     '',
     '/courses',
+    '/learning-paths',
+    '/projects',
     '/locations',
     '/verify-certificate',
     '/study-material',
@@ -30,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'daily' as const,
-    priority: route === '' ? 1.0 : route === '/courses' || route === '/live-batches' || route === '/locations' ? 0.9 : 0.8,
+    priority: route === '' ? 1.0 : route === '/courses' || route === '/learning-paths' || route === '/live-batches' || route === '/locations' ? 0.9 : 0.8,
   }));
 
   try {

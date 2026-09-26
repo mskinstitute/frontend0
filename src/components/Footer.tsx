@@ -52,6 +52,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/learning-paths" className="hover:text-white transition-colors duration-150 flex items-center justify-between group">
+                  <span>Learning Paths</span>
+                  <span className="text-[10px] text-gray-400 group-hover:text-secondary transition-colors">Roadmaps</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className="hover:text-white transition-colors duration-150 flex items-center justify-between group">
+                  <span>Student Projects</span>
+                  <span className="text-[10px] text-gray-400 group-hover:text-secondary transition-colors">Showcase</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/live" className="hover:text-white transition-colors duration-150 flex items-center gap-2">
                   <span>Live Classes & Schedule</span>
                   <span className="bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded leading-none uppercase">Live</span>

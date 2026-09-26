@@ -10,45 +10,92 @@ interface HomeHeroBatchCardProps {
   initialBatches: LiveBatch[];
 }
 
-export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardProps) {
-  const [nowTs, setNowTs] = useState(() => Date.now());
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
 
-  // Periodically update current timestamp to evaluate batch statuses
+/**
+ * Deterministic date formatter to guarantee 100% SSR-Client HTML parity
+ * (prevents React Hydration Error #418 caused by locale differences)
+ */
+function formatBatchStartDate(dateStr: string | undefined, startTs: number): string {
+  if (!dateStr && !startTs) return 'Upcoming Cohort';
+  try {
+    if (dateStr && dateStr.includes('-')) {
+      const parts = dateStr.split('-');
+      if (parts.length >= 3) {
+        const year = parseInt(parts[0], 10);
+        const monthIndex = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2].slice(0, 2), 10);
+        if (!isNaN(year) && !isNaN(monthIndex) && !isNaN(day) && monthIndex >= 0 && monthIndex < 12) {
+          return `${day} ${MONTH_NAMES[monthIndex]} ${year}`;
+        }
+      }
+    }
+    if (startTs > 0) {
+      const d = new Date(startTs);
+      return `${d.getUTCDate()} ${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    }
+  } catch {}
+  return dateStr || 'Upcoming Cohort';
+}
+
+export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardProps) {
+  const [mounted, setMounted] = useState(false);
+  const [nowTs, setNowTs] = useState<number>(0);
+
+  // Mount synchronization ensures initial client render exactly matches SSR
   useEffect(() => {
+    setMounted(true);
+    setNowTs(Date.now());
     const timer = setInterval(() => {
       setNowTs(Date.now());
     }, 10000);
     return () => clearInterval(timer);
   }, []);
 
-  // Sort all batches chronologically by starting timestamp
-  const sortedBatches = useMemo(() => {
-    return [...initialBatches].sort((a, b) => {
-      return parseBatchStartTimestamp(a) - parseBatchStartTimestamp(b);
-    });
+  // Filter out completed, closed, or zero-seat batches to enforce strict lifecycle hygiene
+  const activeBatches = useMemo(() => {
+    return initialBatches.filter(
+      (b) =>
+        b.status !== 'COMPLETED' &&
+        b.status !== 'ARCHIVED' &&
+        b.status !== 'CLOSED' &&
+        (b.leftSeats === undefined || b.leftSeats > 0)
+    );
   }, [initialBatches]);
 
-  // Determine active scheduled batches (future upcoming cohorts prioritized, fallback to all batches)
+  // Sort batches chronologically by starting timestamp
+  const sortedBatches = useMemo(() => {
+    const list = activeBatches.length > 0 ? activeBatches : initialBatches;
+    return [...list].sort((a, b) => {
+      return parseBatchStartTimestamp(a) - parseBatchStartTimestamp(b);
+    });
+  }, [activeBatches, initialBatches]);
+
+  // Prioritize upcoming batches; fall back cleanly to sorted list
   const scheduledBatches = useMemo(() => {
     if (sortedBatches.length === 0) return [];
+    if (!mounted || nowTs === 0) return sortedBatches;
     const upcoming = sortedBatches.filter((b) => parseBatchStartTimestamp(b) > nowTs);
     if (upcoming.length > 0) return upcoming;
     return sortedBatches;
-  }, [sortedBatches, nowTs]);
+  }, [sortedBatches, mounted, nowTs]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [isPaused, setIsPaused] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  // Keep index within bounds if scheduled batches change
+  // Keep index within bounds
   useEffect(() => {
     if (currentIndex >= scheduledBatches.length && scheduledBatches.length > 0) {
       setCurrentIndex(0);
     }
   }, [scheduledBatches.length, currentIndex]);
 
-  // Auto-scroll left / right horizontally when multiple batches are scheduled (Controls are hidden)
+  // Auto-slide carousel
   useEffect(() => {
     if (scheduledBatches.length <= 1 || isPaused) return;
 
@@ -73,7 +120,6 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
     return () => clearInterval(timer);
   }, [scheduledBatches.length, isPaused, direction]);
 
-  // Mobile touch swipe handling for smooth left/right manual sliding
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsPaused(true);
     setTouchStart(e.touches[0].clientX);
@@ -86,10 +132,8 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
     const diff = touchStart - touchEnd;
     if (Math.abs(diff) > 40) {
       if (diff > 0) {
-        // Swiped left -> advance forward
         setCurrentIndex((prev) => (prev < scheduledBatches.length - 1 ? prev + 1 : 0));
       } else {
-        // Swiped right -> move backward
         setCurrentIndex((prev) => (prev > 0 ? prev - 1 : scheduledBatches.length - 1));
       }
     }
@@ -115,39 +159,19 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Horizontal Carousel Track - Smooth Left/Right Slide */}
+        {/* Horizontal Carousel Track */}
         <div
           className="flex flex-row transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {scheduledBatches.map((batch) => {
             const startTs = parseBatchStartTimestamp(batch);
-            const isStarted = startTs > 0 && startTs <= nowTs;
+            const isStarted = mounted && nowTs > 0 ? startTs > 0 && startTs <= nowTs : batch.status === 'RUNNING';
             const countdownDateString =
               batch.startDateTime ||
               (startTs ? new Date(startTs).toISOString() : `${batch.startDate}T09:00:00`);
 
-            const formattedStartDate = (() => {
-              try {
-                if (startTs) {
-                  const d = new Date(startTs);
-                  return d.toLocaleDateString('en-IN', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  });
-                }
-                const d = new Date(batch.startDate);
-                if (!isNaN(d.getTime())) {
-                  return d.toLocaleDateString('en-IN', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  });
-                }
-              } catch {}
-              return batch.startDate;
-            })();
+            const formattedStartDate = formatBatchStartDate(batch.startDate, startTs);
 
             return (
               <div
@@ -156,21 +180,16 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
               >
                 {/* Top Header: Highlighted Starting Date & Price */}
                 <div className="flex items-center justify-between gap-3">
-                  {/* Highlighted Starting Date Badge for strong student attention grab */}
-                  <div className="relative inline-flex items-center">
-                    {/* Ambient animated radiant glow */}
+                  <div className="relative inline-flex items-center" suppressHydrationWarning>
                     <span className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 opacity-70 blur-xs animate-pulse" />
 
-                    {/* High-visibility pill */}
                     <div className="relative inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#FF5722] via-[#FF7A00] to-[#E64A19] text-white shadow-md shadow-orange-500/25 border border-white/30 select-none">
-                      {/* Pulsing attention radar beacon */}
                       <span className="relative flex h-2 w-2 flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
                       </span>
 
-                      {/* High-impact Starting Date Text */}
-                      <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-white drop-shadow-xs">
+                      <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-white drop-shadow-xs" suppressHydrationWarning>
                         {isStarted ? 'In Session' : `Starting ${formattedStartDate}`}
                       </span>
                     </div>
@@ -207,7 +226,7 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
 
                 {/* Live Countdown Timer */}
                 <div className="bg-surface/80 border border-border-subtle p-3.5 rounded-2xl space-y-2">
-                  <div className="flex items-center justify-between text-xs text-text-muted px-1">
+                  <div className="flex items-center justify-between text-xs text-text-muted px-1" suppressHydrationWarning>
                     <span className="font-bold text-primary flex items-center gap-1.5">
                       <span
                         className={`w-2 h-2 rounded-full ${
@@ -279,7 +298,7 @@ export default function HomeHeroBatchCard({ initialBatches }: HomeHeroBatchCardP
           })}
         </div>
 
-        {/* Passive subtle slide indicators when multiple batches exist (Controls are completely hidden) */}
+        {/* Passive subtle slide indicators */}
         {scheduledBatches.length > 1 && (
           <div
             className="flex justify-center items-center gap-1.5 pb-4 -mt-2 select-none"

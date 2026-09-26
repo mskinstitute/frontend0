@@ -299,6 +299,24 @@ export default function CourseCatalogClient({ initialCourses }: { initialCourses
       level: "Complete Diploma",
       certificate: "1-Year Diploma Certificate",
       bestFor: "Advanced Office Suite, Accounting Tally Prime, DTP Photoshop & Web"
+    },
+    {
+      title: "Data Analysis Mastery",
+      slug: "data-analysis-mastery-combo-course--12-months",
+      duration: "12 Months",
+      mode: "Online & Offline",
+      level: "Comprehensive",
+      certificate: "Data Analyst Specialization Certificate",
+      bestFor: "Advanced Excel, SQL, Python, Pandas, Power BI & Business Intelligence Dashboards"
+    },
+    {
+      title: "Power BI Mastery",
+      slug: "power-bi-mastery-beginner-to-advanced--3-months",
+      duration: "3 Months",
+      mode: "Online & Offline",
+      level: "Comprehensive",
+      certificate: "Power BI BI Specialist Certificate",
+      bestFor: "Power Query ETL, DAX Modeling, Interactive KPI Dashboards & Executive Reports"
     }
   ];
 

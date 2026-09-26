@@ -98,6 +98,21 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         .filter((c): c is Course => Boolean(c))
     : [];
 
+  // Authentic course-specific learning outcomes (strictly no generic cross-course fallbacks)
+  const resolvedOutcomes: string[] =
+    course.learningOutcomes && course.learningOutcomes.length > 0
+      ? course.learningOutcomes
+      : course.chapters && course.chapters.length > 0
+      ? course.chapters.slice(0, 6).map((c) => `Mastery of ${c.title}`)
+      : [
+          `Hands-on practical development covering ${course.title}`,
+          'Live laboratory coding assignments with 1-on-1 mentor guidance',
+          'Real-world portfolio projects and modern development workflows',
+          'Applied problem solving, debugging, and industry tool mastery',
+          'Interview preparation, viva guide questions, and technical confidence',
+          'Official MSK Institute Verifiable Certificate of Completion',
+        ];
+
   // Inject Structured JSON-LD Schema Data (Course + FAQPage + BreadcrumbList)
   const courseFaqs = [
     {
@@ -126,6 +141,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
         'name': course.title,
         'description': course.shortDescription,
         'courseCode': course.id,
+        'timeRequired': course.duration.unit === 'MONTHS' ? `P${course.duration.value}M` : `P${course.duration.value}D`,
         'educationalLevel': course.level,
         'about': course.categories,
         'inLanguage': course.language,
@@ -331,53 +347,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
                 What You Will Master in this Course
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {(
-                  course.learningOutcomes ||
-                  (isCombo || course.categories.some((c) => c.toLowerCase().includes('data analysis') || c.toLowerCase().includes('business intelligence') || c.toLowerCase().includes('pandas'))
-                    ? [
-                        'Full-stack Data Analytics: Advanced Excel, SQL, Python, Pandas, NumPy, Power BI & Tableau',
-                        'Automated data cleaning, ETL pipelines, and Exploratory Data Analysis (EDA)',
-                        'Executive Business Intelligence dashboards with DAX, LOD expressions, and KPI metrics',
-                        'Statistical hypothesis testing, normal distribution, and A/B test formulation',
-                        'Predictive machine learning modeling: Linear/Logistic Regression, Decision Trees, and K-Means',
-                        'Resume-ready GitHub portfolio projects, verifiable certificate, and interview preparation',
-                      ]
-                    : course.categories.some((c) => c.toLowerCase().includes('python'))
-                    ? [
-                        'Core Python syntax, control flow, functions, and clean code principles',
-                        'Object-Oriented Programming (OOP), modular architecture, and file I/O operations',
-                        'Hands-on problem solving, algorithmic thinking, and VS Code debugging',
-                        'Automation scripts, data structures, and working with external APIs',
-                        'Real-world portfolio projects ready for tech resumes and freelance work',
-                        'Verifiable Certificate of Completion with instant QR code validation',
-                      ]
-                    : course.categories.some((c) => c.toLowerCase().includes('sql') || c.toLowerCase().includes('database'))
-                    ? [
-                        'Relational database architecture, schema design, and ACID transactional integrity',
-                        'Complex multi-table queries with INNER, LEFT, RIGHT, and FULL OUTER JOINs',
-                        'Advanced subqueries, Common Table Expressions (CTEs), and Window Functions',
-                        'Aggregation, grouping, filtering, indexing, and query performance optimization',
-                        'Practical database manipulation for real-world enterprise datasets',
-                        'Verifiable Certificate of Completion with instant QR code validation',
-                      ]
-                    : course.categories.some((c) => c.toLowerCase().includes('excel') || c.toLowerCase().includes('spreadsheet'))
-                    ? [
-                        'Spreadsheet modeling from fundamental arithmetic to advanced dynamic array formulas',
-                        'Lookup mastery: XLOOKUP, VLOOKUP, INDEX-MATCH, and multi-condition criteria',
-                        'Pivot Tables, calculated fields, slicers, and interactive executive dashboards',
-                        'Data cleansing, duplicate removal, validation rules, and conditional formatting',
-                        'Automated data transformation with Power Query and foundational workflow macros',
-                        'Verifiable Certificate of Completion with instant QR code validation',
-                      ]
-                    : [
-                        'Clean, industry-standard syntax following international W3C specifications',
-                        'Live lab implementation with real-time mentor code reviews',
-                        'Deep-dive debugging with developer tools and modern inspectors',
-                        'Mobile responsiveness, accessibility (WCAG/ARIA) & SEO best practices',
-                        'Hands-on portfolio projects ready for tech resumes and freelance work',
-                        'Verifiable Certificate of Completion with instant QR code validation',
-                      ])
-                ).map((outcome, idx) => (
+                {resolvedOutcomes.map((outcome, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-sm text-text-main">
                     <span className="w-5 h-5 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5">
                       ✓

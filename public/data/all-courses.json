@@ -1050,10 +1050,10 @@
   {
     "id": "course-adca",
     "status": "PUBLISH",
-    "title": "ADCA - Advance Diploma in Computer Applications",
+    "title": "ADCA - Advance Diploma in Computer Applications (1-Year Diploma)",
     "slug": "adca",
     "featuredImageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-    "shortDescription": "Master Advanced Diploma in Computer Applications (ADCA). Learn MS Office, Internet, Email, Cyber Security, Digital Payments, and modern computer applications with hands-on projects.",
+    "shortDescription": "Comprehensive 1-Year (12 Months, 2 Semesters) Advance Diploma in Computer Applications covering advanced office productivity, financial accounting in Tally Prime, graphic design, web basics, and digital literacy with practical lab sessions.",
     "categories": [
       "Computer Literacy",
       "Digital Skills",
@@ -1066,7 +1066,7 @@
       "Hindi"
     ],
     "duration": {
-      "value": 6,
+      "value": 12,
       "unit": "MONTHS"
     },
     "certificate": true,
@@ -17367,7 +17367,7 @@
       "Hindi"
     ],
     "duration": {
-      "value": 1,
+      "value": 3,
       "unit": "MONTHS"
     },
     "certificate": true,

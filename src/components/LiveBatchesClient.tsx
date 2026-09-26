@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { 
   Sparkles, Calendar, Clock, User, Award, 
   BookOpen, CheckCircle, Mail, Phone, MessageSquare, 
-  ArrowRight, Check, Flame 
+  ArrowRight, Check, Flame, History 
 } from 'lucide-react';
 import { LiveBatch } from '@/types';
 import BatchEnrollmentForm from './BatchEnrollmentForm';
@@ -34,28 +34,32 @@ function BatchQuerySync({
 }
 
 export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
-  // Default directly to first batch so server rendering produces full stable content with zero shift
-  const [selectedBatchId, setSelectedBatchId] = useState(batches[0]?.id || '');
+  const activeBatches = batches.filter((b) => b.status !== 'COMPLETED' && b.status !== 'ARCHIVED');
+  const concludedBatches = batches.filter((b) => b.status === 'COMPLETED' || b.status === 'ARCHIVED');
 
-  const selectedBatch = batches.find((b) => b.id === selectedBatchId) || batches[0];
+  // Default directly to first active batch so server rendering produces full stable content with zero shift
+  const defaultBatchId = activeBatches[0]?.id || batches[0]?.id || '';
+  const [selectedBatchId, setSelectedBatchId] = useState(defaultBatchId);
+
+  const selectedBatch = batches.find((b) => b.id === selectedBatchId) || activeBatches[0] || batches[0];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
       {/* Left Columns - Batch details */}
-      <div className="lg:col-span-2 space-y-8">
+      <div className="lg:col-span-2 space-y-10">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-primary flex items-center gap-2">
             <Sparkles className="w-6 h-6 text-secondary" />
-            Choose Your Live Training Track
+            Upcoming Live Cohorts & Batches
           </h2>
           <p className="text-sm text-text-muted leading-relaxed">
             Our live batches combine structured lectures with real-time lab exercises. Under the direct mentorship of Er. Sumit Kumar, you will build live projects, complete programming challenges, and prepare for global certifications.
           </p>
         </div>
 
-        {/* Dynamic batch cards list */}
+        {/* Dynamic active batch cards list */}
         <div className="space-y-6">
-          {batches.map((b) => {
+          {activeBatches.map((b) => {
             const startDateStr = b.startDate ? (() => {
               try {
                 const d = new Date(b.startDate);
@@ -65,7 +69,6 @@ export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
             })() : 'Upcoming Batch';
 
             const isActiveSelection = b.id === selectedBatchId;
-            const isCompleted = b.status === 'COMPLETED' || b.status === 'ARCHIVED';
             const remainingSeats = b.leftSeats ?? 5;
             const total = b.totalSeats || 20;
 
@@ -82,15 +85,9 @@ export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                   <div className="space-y-3">
                     <div className="flex flex-wrap items-center gap-2">
-                      {isCompleted ? (
-                        <span className="text-[10px] font-bold text-gray-700 bg-gray-100 px-2.5 py-1 rounded uppercase tracking-wider">
-                          Batch Concluded
-                        </span>
-                      ) : (
-                        <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2.5 py-1 rounded uppercase tracking-wider">
-                          Starting {startDateStr}
-                        </span>
-                      )}
+                      <span className="text-[10px] font-bold text-[#B83A00] bg-[#B83A00]/10 px-2.5 py-1 rounded uppercase tracking-wider">
+                        Starting {startDateStr}
+                      </span>
                       <span className="text-[10px] font-bold text-text-muted bg-gray-100 px-2.5 py-1 rounded uppercase tracking-wider">
                         {b.duration || 'Live Training'}
                       </span>
@@ -104,15 +101,9 @@ export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
 
                   <div className="text-right sm:text-right flex-shrink-0">
                     <span className="text-lg font-black text-secondary">{b.price}</span>
-                    {isCompleted ? (
-                      <p className="text-[11px] text-gray-500 font-semibold mt-1">
-                        Admissions Closed
-                      </p>
-                    ) : (
-                      <p className="text-[11px] text-red-500 font-bold mt-1 animate-pulse">
-                        Only {remainingSeats} of {total} seats left!
-                      </p>
-                    )}
+                    <p className="text-[11px] text-red-500 font-bold mt-1 animate-pulse">
+                      Only {remainingSeats} of {total} seats left!
+                    </p>
                   </div>
                 </div>
 
@@ -180,6 +171,56 @@ export default function LiveBatchesClient({ batches }: LiveBatchesClientProps) {
             );
           })}
         </div>
+
+        {/* Concluded Batches Archive Section */}
+        {concludedBatches.length > 0 && (
+          <div className="space-y-6 pt-8 border-t border-border-subtle">
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold text-primary flex items-center gap-2">
+                <History className="w-5 h-5 text-text-muted" />
+                Concluded Batches Archive
+              </h3>
+              <p className="text-xs text-text-muted leading-relaxed">
+                The cohorts below have completed their training curriculum. Interested in joining the next cohort? Submit an enquiry or browse upcoming batches above.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {concludedBatches.map((b) => (
+                <div
+                  key={b.id}
+                  className="bg-surface/60 rounded-2xl border border-border-subtle p-5 space-y-4 opacity-90 hover:opacity-100 transition-opacity"
+                >
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold text-gray-700 bg-gray-200 px-2 py-0.5 rounded uppercase tracking-wider">
+                          Cohort Concluded
+                        </span>
+                        <span className="text-[10px] font-medium text-text-muted">
+                          {b.schedule}
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-primary">{b.title}</h4>
+                      <p className="text-xs text-text-muted">{b.courseTitle}</p>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-semibold text-text-muted">Admissions Closed</span>
+                      <Link
+                        href={`/courses/${b.courseSlug}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-surface border border-border-subtle hover:border-secondary text-primary hover:text-secondary text-xs font-medium rounded-lg transition-colors"
+                      >
+                        <span>View Curriculum</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Right Column - High Converting Lead Generation Form */}
