@@ -13,11 +13,13 @@ author: Antigravity Team
 version: 1.0.0
 ---
 
-# Comments and Best Practices: Single-line, Multi-line, Docstrings, and PEP 8
-
-Imagine borrowing a detailed science laboratory notebook from a senior student. If the notebook only contains raw mathematical calculations like `42 * 9.8 / 3.1415 = 131.02` with no labels or explanations, you will have no idea whether that formula calculates the speed of a falling cricket ball, the pressure of a steam cylinder, or the flow of water through a pipe. But if the senior wrote sticky notes explaining: *"Calculating water pressure before opening valve #2 to avoid pipe leakage,"* you instantly understand the purpose of the work!
+# Single-line, Multi-line, Docstrings, and [PEP 8](https://www.mskinstitute.in/blogs/python-style-guide-pep-8-complete-beginner-guide)
 
 In programming, **Comments** are those essential sticky notes. Code tells the computer **HOW** to do something; comments explain to human engineers **WHY** it was done that way. In this lesson, you will master single-line comments, multi-line explanations, official Python **Docstrings**, and the industry-standard **PEP 8 commenting conventions**.
+
+- Comments can be used to explain Python code.
+- Comments can be used to make the code more readable.
+- Comments can be used to prevent execution when testing code.
 
 ---
 
@@ -26,33 +28,34 @@ In programming, **Comments** are those essential sticky notes. Code tells the co
 In Python, the hash symbol (`#`) starts a comment. The Python interpreter ignores everything from the `#` to the end of that line:
 
 ```python
-# Calculate simple interest for an education loan (Standalone Comment)
-principal = 50000       # Principal amount in INR (Inline Comment)
-annual_rate = 7.5       # Annual interest rate percentage
-duration_years = 3      # Repayment tenure in years
-
-# Standard simple interest formula: (P * R * T) / 100
-interest = (principal * annual_rate * duration_years) / 100
+# this is a single-line comment (Standalone Comment)
+student_name = "sumit"  # this is (Inline Comment)
+print(student_name)
 ```
 
-> [!NOTE]
+>[!NOTE] 
 > **PEP 8 Rule for Inline Comments:**
 > Separate inline comments from the code statement with **at least 2 spaces**, followed by `#` and **1 space** before the text:
-> `x = 5  # At least 2 spaces before hash!`
-
----
+ 
+```py no-try
+x = 5  # At least 2 spaces before hash!
+```
 
 ## 2. Multi-Line Comments vs. Multi-Line Strings
 
 Python does not have a dedicated syntax like C's `/* ... */`. Instead, developers write multi-line comments in two ways:
 
-### Approach A: Consecutive Single-Line Hashes (Recommended by PEP 8)
-```python
+### Approach A: Using # Hashes
+
+To add a multiline comment you could insert a `#` for each line.  
+
+```python no-try
 # =========================================================
 # Function: calculate_grade
 # Purpose : Evaluates term marks and assigns CBSE letter grade.
 # Returns : Character grade string (A1, A2, B1, etc.)
 # =========================================================
+print("Hello, World!")
 ```
 
 ### Approach B: Triple-Quoted Strings (`"""..."""`)
@@ -64,6 +67,8 @@ Since it is not assigned to a variable,
 Python's runtime compiler safely ignores it.
 """
 ```
+
+Since Python will ignore string literals that are not assigned to a variable, you can add a multiline string (triple quotes) in your code, and place your comment inside it:
 
 ---
 
@@ -94,37 +99,8 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year=1):
 print(calculate_compound_interest.__doc__)
 ```
 
-```
-+-------------------------------------------------------------------------+
-|                  COMMENTS VS DOCSTRINGS IN MEMORY                       |
-+-------------------------------------------------------------------------+
 
-  1. Normal Comment (# calculate total)
-     -> Stripped during parsing. NEVER exists in memory or compiled .pyc!
-
-  2. Docstring ("""Calculates total balance.""")
-     -> Stored in the function's runtime object: func.__doc__
-     -> Displayed when someone calls help(func) or hovers in VS Code!
-```
-
----
-
-## 4. The 3 Golden Rules of PEP 8 Commenting
-
-1. **Explain the *Why*, not the *What*:**
-   ```python
-   # BAD: Obvious and wasteful comment
-   x = x + 1  # add 1 to x
-
-   # GOOD: Explains non-obvious business logic
-   timeout_seconds += 60  # Extend timeout due to high railway server latency during Tatkal hours
-   ```
-2. **Keep Comments Synchronized with Code:** An outdated or incorrect comment that contradicts the code is far worse than no comment at all.
-3. **Write in Clear, Professional English:** Use complete sentences with proper capitalization and periods.
-
----
-
-## 5. Do's and Don'ts of Commenting
+## 4. Do's and Don'ts of Commenting
 
 | Practice | Do | Don't |
 | :--- | :--- | :--- |
@@ -132,8 +108,6 @@ print(calculate_compound_interest.__doc__)
 | **Spacing** | Leave 2 spaces before an inline comment: `count = 10  # Counter`. | Jam comments right against code: `count = 10#Counter`. |
 | **Maintenance** | Update comments immediately whenever you modify the underlying logic. | Modify code while leaving misleading, outdated comments in place. |
 | **Clarity** | Write self-documenting code with clear variable names. | Write unreadable spaghetti code and try to fix it with 20 lines of comments. |
-
----
 
 # Multiple Choice Questions
 
@@ -143,7 +117,6 @@ B. `/*`
 C. `#`
 D. `--`
 **Answer:** C
-
 **Explanation:** The hash symbol `#` begins a comment in Python. The interpreter ignores everything following `#` on that line.
 
 ---
@@ -154,7 +127,6 @@ B. Standard comments are discarded by the compiler, while docstrings are retaine
 C. Docstrings can only be read on Linux
 D. Comments slow down code execution by 50%
 **Answer:** B
-
 **Explanation:** Regular `#` comments are ignored during bytecode compilation and do not exist at runtime. Docstrings are preserved as metadata attributes (`__doc__`) on functions, modules, and classes.
 
 ---
@@ -165,7 +137,6 @@ B. At least 2 spaces
 C. Exactly 5 spaces
 D. 1 tab character
 **Answer:** B
-
 **Explanation:** PEP 8 dictates that inline comments should be separated from the code statement by at least two spaces, followed by the `#` symbol and a single space before the text.
 
 ---
@@ -176,7 +147,6 @@ B. `i = i + 1  # Increment i by 1`
 C. `# calculate GST tax based on interstate CGST/SGST rules`
 D. `# cache results for 300 seconds to prevent database load spikes`
 **Answer:** B
-
 **Explanation:** Stating `Increment i by 1` merely restates what the code obviously does without providing any context. Comments should explain the non-obvious *why*, not the obvious *what*.
 
 ---
@@ -187,12 +157,11 @@ B. The built-in documentation string explaining how the `len()` function calcula
 C. A `SyntaxError`
 D. The physical memory address of the function
 **Answer:** B
-
 **Explanation:** Built-in Python functions include standard docstrings. Accessing `len.__doc__` displays the built-in documentation: `Return the number of items in a container.`
 
 ---
 
-# Hands-On Practice Challenge: Docstring & Help System Explorer
+# Hands-On Practice Challenge:
 
 Run this program in VS Code or terminal to create a documented utility function and inspect its metadata using Python's interactive documentation engine.
 
@@ -222,21 +191,4 @@ def calculate_scholarship_stipend(gpa, base_stipend=5000):
         return base_stipend  # Standard base grant
     else:
         return 0  # Below minimum scholarship threshold
-
-
-# 1. Execute function
-scholar_gpa = 9.8
-stipend_amount = calculate_scholarship_stipend(scholar_gpa)
-
-print("=" * 55)
-print("     SCHOLARSHIP STIPEND ALLOCATION RESULT")
-print("=" * 55)
-print(f"Student Cumulative GPA: {scholar_gpa}")
-print(f"Monthly Stipend Award : ₹{stipend_amount:,} / month")
-print("=" * 55)
-
-# 2. Programmatically inspect the function's internal Docstring
-print("\n[PROGRAMMATIC DOCSTRING INSPECTION VIA .__doc__]:")
-print(calculate_scholarship_stipend.__doc__.strip())
-print("=" * 55)
 ```

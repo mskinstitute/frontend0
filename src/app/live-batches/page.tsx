@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   keywords: ["Computer Course Admissions", "Coding Batches Shikohabad", "Enroll in Python Course", "Web Dev Bootcamp Registration"],
 };
 
+export const revalidate = 60;
+
 export default async function LiveBatchesPage() {
   const batches = await fetchLiveBatches();
 

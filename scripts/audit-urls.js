@@ -12,7 +12,8 @@ const path = require('path');
 console.log('--- MSK INSTITUTE INTERNAL URL AUDIT ---');
 
 const courses = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'all-courses.json'), 'utf8'));
-const liveBatches = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'live-batches.json'), 'utf8'));
+const batchesPath = path.join(process.cwd(), 'public', 'data', 'live-batches.json');
+const liveBatches = fs.existsSync(batchesPath) ? JSON.parse(fs.readFileSync(batchesPath, 'utf8')) : [];
 const tutorials = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'tutorials.json'), 'utf8'));
 
 // Build valid routes set

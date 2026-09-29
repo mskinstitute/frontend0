@@ -13,7 +13,7 @@ author: Antigravity Team
 version: 1.0.0
 ---
 
-# Python Syntax and Code Structure: Indentation, Statements, and Blocks
+# Indentation, Statements, and Blocks
 
 Imagine writing an essay or a leave application for your school principal. You do not dump 500 words together into one giant, breathless blob of text without margins or paragraphs. You use clear indented paragraphs, headings, and punctuation so the reader's eye immediately understands which sentences belong together.
 
@@ -23,21 +23,23 @@ In most programming languages like C, C++, and Java, the computer relies on curl
 
 ## 1. Indentation vs. Curly Braces
 
+```java no-try
+// Java, C, C++ (Braces & Semicolons):
+if (marks >= 40) {
+printf("Pass");
+printf("Congratulations");
+}
+
+if (marks >= 40) { printf("Pass"); printf("Congratulations"); }
 ```
-+-------------------------------------------------------------------------+
-|                  C++ / JAVA / JAVASCRIPT VS PYTHON                      |
-+-------------------------------------------------------------------------+
 
-  C++ / Java (Relies on Braces & Semicolons):
-  if (marks >= 40) {
-  printf("Pass");
-  printf("Congratulations");
-  }
 
-  Python (Relies on Meaningful Indentation & Colons):
-  if marks >= 40:
-      print("Pass")
-      print("Congratulations")
+
+```py
+# Python (Relies on Meaningful Indentation & Colons):
+if marks >= 40:
+    print("Pass")
+    print("Congratulations")
 ```
 
 In Python:
@@ -47,24 +49,27 @@ In Python:
 
 ---
 
-## 2. The Golden Rule of 4 Spaces (PEP 8)
+## 2. The Golden Rule of 4 Spaces ([PEP 8](https://www.mskinstitute.in/blogs/python-style-guide-pep-8-complete-beginner-guide))
 
 According to **PEP 8** (Python's official style guide):
 - Always use **4 spaces per indentation level**.
 - **NEVER mix tabs and spaces.** Mixing physical tab characters with spaces causes the dreaded `IndentationError: unindent does not match any outer indentation level`.
 
+### CORRECT: Consistent 4-space indentation
 ```python
-# CORRECT: Consistent 4-space indentation
 score = 85
 if score >= 80:
     print("Grade: A")
     print("Eligible for National Merit Scholarship")
+```
 
-# ERROR: Inconsistent indentation!
+### ERROR: Inconsistent indentation!
+```python
 if score >= 80:
     print("Grade: A")
      print("This line will cause an IndentationError!") # 5 spaces instead of 4!
 ```
+
 
 ---
 
@@ -78,9 +83,9 @@ Student = "Aarav"
 STUDENT = "Kavita"
 
 # These are THREE completely distinct variables in memory!
-print(student)  # Output: Rohan
-print(Student)  # Output: Aarav
-print(STUDENT)  # Output: Kavita
+print(student)
+print(Student)
+print(STUDENT)
 ```
 
 Similarly, keywords like `if`, `else`, `while`, `def`, `True`, `False`, and `None` must be typed in their exact casing. Typing `If` or `true` will cause a `SyntaxError` or `NameError`!
@@ -92,22 +97,28 @@ Similarly, keywords like `if`, `else`, `while`, `def`, `True`, `False`, and `Non
 In Python, an end-of-line usually marks the end of a statement. If you have an unusually long calculation, you can continue it onto the next line in two ways:
 
 ### 1. Implicit Continuation (Recommended inside Parentheses `()`)
-```python copy
+
+```python
+admission_fee = 100
+tuition_fee = 200
+examination_fee = 300
+library_caution_deposit = 400
+
 total_fee = (
     admission_fee
     + tuition_fee
     + examination_fee
     + library_caution_deposit
 )
+print(total_fee)
 ```
 
 ### 2. Explicit Continuation (Using Backslash `\`)
-```python copy
+```python
 total = 100 + 200 + 300 + \
         400 + 500
 ```
 
----
 
 ## 5. Do's and Don'ts of Python Syntax
 
@@ -118,25 +129,6 @@ total = 100 + 200 + 300 + \
 | **Block Openers** | Always end `if`, `for`, `while`, `def`, and `class` lines with a colon (`:`). | Forget the trailing colon `:` before starting an indented block. |
 | **Parentheses** | Use parentheses `( ... )` to wrap long multi-line arithmetic expressions. | Use messy backslashes `\` everywhere for line continuation. |
 
----
-
-## 6. Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  PYTHON SYNTAX RULES CHEAT SHEET                        |
-+-------------------------------------------------------------------------+
-
-  - Block Opener:       Ends with colon (:) -> if x > 10:
-  - Block Body:         Indented by 4 spaces
-  - Case Sensitive:     'marks' != 'Marks' != 'MARKS'
-  - Statement Ending:   Natural newline (semicolons are redundant)
-  - Multi-line wrap:    Enclose in parentheses: total = (a + b + c)
-  - Error to Watch:     IndentationError: unexpected indent
-```
-
----
-
 # Multiple Choice Questions
 
 ### 1. What syntax character introduces a new indented block of code in Python (such as in an `if` statement or function)?
@@ -145,7 +137,6 @@ B. Colon `:`
 C. Curly brace `{`
 D. Arrow `->`
 **Answer:** B
-
 **Explanation:** In Python, control structures like `if`, `elif`, `else`, `for`, `while`, and `def` must end with a colon `:`, signaling the start of an indented block of code.
 
 ---
@@ -156,7 +147,6 @@ B. 2 spaces
 C. 4 spaces
 D. 8 spaces
 **Answer:** C
-
 **Explanation:** PEP 8 specifies exactly 4 spaces per indentation level as the universal standard for Python code.
 
 ---
@@ -167,7 +157,6 @@ B. A `SyntaxError: cannot assign to True` is raised because `True` is a reserved
 C. Python redefines truthiness to equal 5
 D. The variable is converted to a string
 **Answer:** B
-
 **Explanation:** `True`, `False`, and `None` are reserved language keywords in Python. Reassigning values to them triggers an immediate `SyntaxError`.
 
 ---
@@ -178,7 +167,6 @@ B. Putting three dots `...` at the end of the line
 C. Ending every line with a dollar sign `$`
 D. Writing comments on each line
 **Answer:** A
-
 **Explanation:** Python supports implicit line continuation inside parentheses `()`, brackets `[]`, and braces `{}`. Wrapping calculations in parentheses is cleaner and less error-prone than trailing backslashes.
 
 ---
@@ -189,12 +177,11 @@ B. Spaces or tabs within a code block are inconsistent or do not align with the 
 C. The file was saved in UTF-8 format
 D. The monitor resolution is too low
 **Answer:** B
-
 **Explanation:** Because Python uses whitespace to define structural blocks, any inconsistency in the number of spaces or mixing tabs and spaces prevents the parser from determining block boundaries, throwing an `IndentationError`.
 
 ---
 
-# Hands-On Practice Challenge: Syntax & Indentation Mastery
+# Hands-On Practice Challenge:
 
 Create a Python file named `syntax_lab.py` and run this program to see how Python evaluates nested blocks, case-sensitive identifiers, and multi-line expressions.
 
@@ -247,23 +234,4 @@ print(f"Total Combined Marks : {annual_marks} / 500")
 print(f"Aggregate Percentage : {average_score:.1f}%")
 print("==========================================================")
 print("Code structure cleanly parsed without a single curly brace!")
-```
-
-### Expected Program Output:
-```text
---- 1. Case Sensitivity Check ---
-Lowercase variable : Kavita
-Capitalized variable: Rohan
-Uppercase variable  : Vikram
-
---- 2. Indentation & Block Hierarchy ---
-✓ Academic Status: Passed
-✓ Attendance Status: Eligible for Final Honors Examination
-✓ Certificate of Distinction: Approved
-
---- 3. Clean Multi-line Continuation ---
-Total Combined Marks : 450 / 500
-Aggregate Percentage : 90.0%
-==========================================================
-Code structure cleanly parsed without a single curly brace!
 ```

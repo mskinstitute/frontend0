@@ -13,13 +13,70 @@ author: Antigravity Team
 version: 1.0.0
 ---
 
-# Output Variables and Printing Techniques: print(), sep, end, and Formatting
+# print(), sep, end, and Formatting
 
 Imagine standing on a railway station platform listening to the public announcement speaker. If the announcer says: *"Train... Number... One... Two... Zero... Five... Seven"*, the gaps between words and the tone at the end of each sentence determine how clearly passengers understand the message. If words are jammed together with zero spacing, or if sentences never pause, nobody can comprehend the announcement.
 
 In Python, the built-in **`print()`** function is your program's public address loudspeaker. While most beginners only know how to print simple words, `print()` contains powerful built-in parameters—**`sep`**, **`end`**, and **modern f-string formatting**—that let you produce beautiful, professional reports and tables!
 
 ---
+
+The Python `print()` function is often used to `output` variables.
+
+```py
+x = "Python is awesome"
+print(x)
+```
+
+In the `print()` function, you output multiple variables, separated by a `comma (,)`:
+
+```py
+x = "Python"
+y = 12
+z = "awesome"
+
+print(x , y , z)
+```
+
+You can also use the `(+)` operator to output multiple variables:
+
+```py
+x = "Python"
+y = "is"
+z = "awesome"
+print(x + y + z)
+```
+
+Notice the space character after "Python " and "is ", without them the result would be "Pythonisawesome".
+
+For numbers, the `(+)` character works as a `mathematical operator`:
+
+```py
+x = 5
+y = 10
+
+print(x + y)
+print(x , y)
+```
+
+
+In the `print()` function, when you try to `combine` a `string` and a `number` with the `(+)` operator, Python will give you an `error`:
+
+```py
+x = 5
+y = "Sumit"
+
+print(x + y) # TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+
+**Note:** The `best way` to output multiple variables in the `print()` function is to separate them with commas `(,)`, which even support `different data` types:
+
+```py
+x = 5
+y = "Computer"
+print(x , y)
+```
+
 
 ## 1. The Complete Anatomy of the `print()` Function
 
@@ -74,23 +131,28 @@ print("Python", "HTML5", "CSS3", sep=" • ")
 
 By default, every `print()` call appends an invisible newline character (`\n`), moving the cursor to the next line. You can change this behavior using `end`:
 
-```python
-# Default: Each call prints on a new line
+
+**Default**: Each call prints on a new line (`\n`)
+
+```py
 print("Loading")
 print("Complete")
-# Output:
-# Loading
-# Complete
+```
 
-# Custom end: Keeps the cursor on the same line!
+**Custom end**: Keeps the cursor on the same line!
+
+```py
 print("Connecting to database", end="... ")
-print("Success!")
+print("Success!") 
 # Output: Connecting to database... Success!
+```
 
-# Printing a countdown loop on one single row:
+Printing a countdown loop on one single row:
+
+```py
 for count in range(3, 0, -1):
     print(count, end=" -> ")
-print("BLAST OFF! 🚀")
+print("BLAST OFF! 🚀") 
 # Output: 3 -> 2 -> 1 -> BLAST OFF! 🚀
 ```
 
@@ -100,14 +162,18 @@ print("BLAST OFF! 🚀")
 
 A common trap for beginners is using the plus operator (`+`) to join variables:
 
-```python
+```python copy
 name = "Rohan"
 score = 95
+```
 
-# DANGER: TypeError! Python cannot concatenate strings and integers!
-# print("Student: " + name + " scored: " + score)  # CRASH!
+**DANGER:** TypeError! Python cannot concatenate strings and integers!
+```py
+print("Student: " + name + " scored: " + score)  # CRASH!
+```
 
-# THE PYTHONIC SOLUTION: Formatted String Literals (f-strings, Python 3.6+)
+**SOLUTION:** Formatted String Literals (f-strings, Python 3.6+)
+```py
 print(f"Student: {name} scored: {score}")  # Perfect!
 ```
 
@@ -139,24 +205,6 @@ print(f"Candidate ID: {roll_no:04d}")      # Output: Candidate ID: 0007
 
 ---
 
-## 6. Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  PRINTING & FORMATTING CHEAT SHEET                      |
-+-------------------------------------------------------------------------+
-
-  - Default behavior:   print("A", "B") -> A B\n
-  - Custom separator:   print("A", "B", sep=":") -> A:B
-  - Keep on same line:  print("Hello", end=" ")
-  - f-string syntax:    f"Name: {name}, Marks: {score}"
-  - Currency commas:    f"₹{amount:,}" -> ₹1,000,000
-  - Decimal precision:  f"{percentage:.2f}%" -> 94.25%
-  - Pad zeros:          f"{id:05d}" -> 00042
-```
-
----
-
 # Multiple Choice Questions
 
 ### 1. What are the default values of the `sep` and `end` parameters in Python's `print()` function?
@@ -164,7 +212,6 @@ A. `sep=","` and `end=" "`
 B. `sep=" "` (a single space) and `end="\n"` (a newline character)
 C. `sep=""` (empty string) and `end=""`
 D. `sep="\t"` (tab) and `end="\r"`
-
 **Answer:** B
 **Explanation:** By default, `print()` separates multiple items with a single space (`sep=' '`) and appends a newline character at the end (`end='\n'`).
 
@@ -175,7 +222,6 @@ A. `Delhi Mumbai Kolkata`
 B. `Delhi -> Mumbai -> Kolkata`
 C. `Delhi -> Mumbai -> Kolkata ->`
 D. `SyntaxError`
-
 **Answer:** B
 **Explanation:** The `sep` parameter specifies the string placed between objects. The separator is only placed *between* items, not at the end.
 
@@ -186,7 +232,6 @@ A. It prints `Marks: 95`
 B. It raises a `TypeError: can only concatenate str (not "int") to str`
 C. It prints `Marks: 95.0`
 D. It converts the string to an integer
-
 **Answer:** B
 **Explanation:** Python does not perform implicit string coercion with the `+` operator. Attempting to concatenate a string and an integer raises a `TypeError`. Use f-strings instead (`f"Marks: {95}"`).
 
@@ -197,7 +242,6 @@ A. `{price:2d}`
 B. `{price:.2f}`
 C. `{price:%2}`
 D. `{price:round}`
-
 **Answer:** B
 **Explanation:** The format specification `:.2f` rounds a floating-point number to 2 decimal places (e.g. `f"{3.14159:.2f}"` produces `'3.14'`).
 
@@ -208,7 +252,6 @@ A. `print(item, end=" ")`
 B. `print(item, line=False)`
 C. `print(item, newline=0)`
 D. `print(item, stay=True)`
-
 **Answer:** A
 **Explanation:** Setting `end=" "` replaces the default newline character (`\n`) with a single space, allowing subsequent print calls to continue on the same terminal line.
 

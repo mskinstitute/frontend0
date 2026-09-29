@@ -13,7 +13,8 @@ author: Antigravity Team
 version: 1.0.0
 ---
 
-# Variables Introduction and Naming Rules: Identifiers and Reserved Keywords
+# What is Variable?
+Variables are containers for `store data` values.
 
 Imagine walking into your home kitchen and opening a spice rack. Your mother has arranged dozens of identical stainless steel containers (*dabbas*). One contains turmeric (*haldi*), another contains mustard seeds (*rai*), another contains cumin (*jeera*), and another contains salt (*namak*). If none of the containers had labels, cooking a simple meal would be a chaotic disaster—you might accidentally pour salt into a pot of sweet tea! But because every container has a clear label on its lid, anyone in the family can reach into the cabinet and grab exactly what they need.
 
@@ -21,47 +22,91 @@ In computer programming, **Variables** are those labeled containers. A variable 
 
 ---
 
-## 1. The 5 Cardinal Rules of Python Variable Names
+# Create Variable
+
+Python has no command for declaring a variable.
+A variable can have a short name (like x and y) or a more descriptive name (age, carname, student_name). 
+
+## 1.  **Rules of Python Variable Names:**
 
 Every variable name in Python must obey these five non-negotiable rules:
 
+- A variable name must `start` with a `Letters (A-Z, a-z)` or `Underscores (_)` character
+- A variable name `cannot` start with a `Digits (0-9)`
+- A variable name `cannot` be any of the Python `keywords`.
+- A variable name can only contain `alpha-numeric` characters and underscores `(A-z, 0-9, and _ )`
+- No Spaces or Hyphens Allowed:     ✓ `total_score`     ✕ `total score`       ✕ `total-score` (Minus operator!)
+- No Special Punctuation Symbols:   ✕ `user@email`      ✕ `price$`            ✕ `discount%` (SyntaxError!)
+- Strictly `Case-Sensitive`: `student_name`, `Student_Name`, `STUDENT_NAME` (3 different variables!)
+
+
+
+For example, to create a variable name **student** to hold **Student's Name** and variable **age** to hold **Student's Age**
+
+```py
+student = 'Amit'
+age = 18
 ```
-+-------------------------------------------------------------------------+
-|                  PYTHON IDENTIFIER NAMING RULES                         |
-+-------------------------------------------------------------------------+
 
-  1. Allowed Characters:
-     Letters (A-Z, a-z), Digits (0-9), and Underscores (_) ONLY!
-     ✓ student_age     ✓ roll_number_2     ✓ _private_id
+| variable  |  Value |
+| --------  |  ----- |
+| student   | 'Amit' |
+| age       |  18    |
 
-  2. Must Start with a Letter or Underscore:
-     ✓ marks           ✓ _temp             ✕ 1st_rank (ILLEGAL!)
+Variables do not need to be declared with any particular type, and can even change type after they have been set.
 
-  3. No Spaces or Hyphens Allowed:
-     ✓ total_score     ✕ total score       ✕ total-score (Minus operator!)
 
-  4. No Special Punctuation Symbols:
-     ✕ user@email      ✕ price$            ✕ discount% (SyntaxError!)
+### Legal variable names ✅
+```py
+myname = "Sumit"
+my_name = "Sumit"
+_my_name = "Sumit"
+myName = "Sumit"
+MYNAME = "Sumit"
+myname2 = "Sumit"
+```
 
-  5. Strictly Case-Sensitive:
-     student_name != Student_Name != STUDENT_NAME (3 different variables!)
+### Illegal variable names ❎:
+```py
+2myname = "Sumit"
+my-name = "Sumit"
+my name = "Sumit"
+@my_name = "Sumit"
+&my_name = "Sumit"
 ```
 
 ---
 
 ## 2. Python Reserved Keywords (The 35 Forbidden Names)
 
-Python reserves approximately 35 special words that form the grammatical skeleton of the language. You **CANNOT** use any of these words as variable names, function names, or identifiers:
+Python reserves approximately 35 special words that form the grammatical skeleton of the language. You **CANNOT** use any of these words as **variable** names, **function** names, or **identifiers**:
 
-```python
-import keyword
+```cmd
+PowerShell 7.6.6
+PS C:\Users\MSK-Institute> py
+Python 3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> help("keywords")
 
-# Print all 35 reserved Python keywords
-print("Total Keywords in Python:", len(keyword.kwlist))
-print(keyword.kwlist)
+Here is a list of the Python keywords.  Enter any keyword to get more help.
+```
+
+```py no-try
+False               class               from                or
+None                continue            global              pass
+True                def                 if                  raise
+and                 del                 import              return
+as                  elif                in                  try
+assert              else                is                  while
+async               except              lambda              with
+await               finally             nonlocal            yield
+break               for                 not
 ```
 
 ### The Full Keyword Roster:
+
+Complete list of python reserved keywords is given below.
+
 | Categories | Reserved Keywords |
 | :--- | :--- |
 | **Booleans & Values** | `True`, `False`, `None` |
@@ -74,23 +119,42 @@ print(keyword.kwlist)
 
 If you try to name a variable `def = 100` or `for = "student"`, Python stops immediately with a `SyntaxError: invalid syntax`!
 
+
+```python
+import keyword
+
+all_keywords = keyword.kwlist
+
+print("Total Keywords in Python:", len(all_keywords))
+print(all_keywords)
+```
+
+
+
 ---
 
 ## 3. PEP 8 Naming Conventions
 
 Beyond the hard syntax rules, Python has universal community style conventions outlined in **PEP 8**:
 
+### 1. Variables & Functions: 
+Use **snake_case** Each word is separated by an all **lowercase** with **underscores** character.
 ```python
-# 1. Variables & Functions: Use snake_case (all lowercase with underscores)
 student_count = 50
 calculate_total_marks = 450
+```
 
-# 2. Constants: Use UPPER_CASE with underscores
+### 2. Constants:
+Use **UPPER_CASE** with underscores
+```py
 MAX_ATTEMPTS = 3
 PI = 3.14159
 DATABASE_PORT = 5432
+```
 
-# 3. Classes: Use PascalCase (Capitalize each word, zero underscores)
+### 3. Classes:
+Use **PascalCase** Each word starts with a Capitalize each word, zero underscores. 
+```py
 class StudentRecord:
     pass
 ```
@@ -131,7 +195,6 @@ B. `total-score`
 C. `student_roll_number`
 D. `class`
 **Answer:** C
-
 **Explanation:** `student_roll_number` contains only letters and underscores. Option A starts with a number (illegal), Option B contains a hyphen/minus operator, and Option D is a reserved keyword.
 
 ---
@@ -142,7 +205,6 @@ B. `SyntaxError: invalid syntax`
 C. `ZeroDivisionError`
 D. `IndexError`
 **Answer:** B
-
 **Explanation:** Keywords represent the grammar of Python. Attempting to use a keyword as an identifier violates the language grammar, triggering a `SyntaxError`.
 
 ---
@@ -153,7 +215,6 @@ B. `snake_case` (e.g., `student_name`)
 C. `kebab-case` (e.g., `student-name`)
 D. `PascalCase` (e.g., `StudentName`)
 **Answer:** B
-
 **Explanation:** PEP 8 dictates `snake_case` (all lowercase letters separated by underscores) for variables and function names in Python.
 
 ---
@@ -164,7 +225,6 @@ B. As three completely distinct, independent variables in memory due to strict c
 C. It throws a duplicate variable warning
 D. It automatically merges their values
 **Answer:** B
-
 **Explanation:** Python is case-sensitive. Identifiers with different casing are stored as completely separate names in the local/global namespace.
 
 ---
@@ -175,12 +235,11 @@ B. `check_word("your_word")`
 C. `sys.is_reserved("your_word")`
 D. `python.verify("your_word")`
 **Answer:** A
-
 **Explanation:** The built-in `keyword` module provides the `iskeyword()` function, which returns `True` if the provided string is a reserved Python keyword.
 
 ---
 
-# Hands-On Practice Challenge: Variable Validator & Keyword Inspector
+# Hands-On Practice Challenge:
 
 Run this interactive Python script to inspect valid naming rules and test candidate identifier names programmatically.
 

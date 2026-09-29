@@ -14,6 +14,8 @@ import BatchViewTracker from '@/components/BatchViewTracker';
 
 type Params = Promise<{ id: string }>;
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   try {
     const batches = await fetchLiveBatches();
