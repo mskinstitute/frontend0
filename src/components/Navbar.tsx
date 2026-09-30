@@ -94,9 +94,17 @@ export default function Navbar() {
     items: DropdownItem[];
   }
 
-  const directLinks = [
+  interface DirectLink {
+    name: string;
+    href: string;
+    icon: typeof Home;
+    badge?: string;
+  }
+
+  const directLinks: DirectLink[] = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
+    { name: 'Live', href: '/live', icon: Video, badge: 'LIVE' },
   ];
 
   const dropdownGroups: NavDropdown[] = [
@@ -349,10 +357,11 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <div ref={navRef} className="hidden md:flex items-center gap-0.5 lg:gap-1 xl:gap-2">
-            {/* Direct Links (Home & Courses) */}
+            {/* Direct Links (Home, Courses & Live) */}
             {directLinks.map((link) => {
               const Icon = link.icon;
               const active = isActive(link.href);
+              const isLive = link.badge === 'LIVE';
               return (
                 <Link
                   key={link.href}
@@ -360,11 +369,19 @@ export default function Navbar() {
                   className={`relative flex items-center gap-1.5 px-2 py-1.5 lg:px-2.5 lg:py-2 xl:px-3 text-xs lg:text-sm font-medium rounded-md whitespace-nowrap transition-colors duration-150 ${
                     active
                       ? 'text-secondary font-bold border-b-2 border-secondary rounded-none pb-1'
+                      : isLive
+                      ? 'text-slate-800 hover:text-red-600 hover:bg-red-50/60 font-semibold'
                       : 'text-text-muted hover:text-primary hover:bg-surface'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0" />
+                  <Icon className={`w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0 ${isLive && !active ? 'text-red-500' : ''}`} />
                   <span>{link.name}</span>
+                  {link.badge && (
+                    <span className="relative flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-extrabold rounded-full uppercase tracking-wider bg-red-100 text-red-600 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping inline-block" />
+                      <span>{link.badge}</span>
+                    </span>
+                  )}
                 </Link>
               );
             })}
@@ -548,19 +565,30 @@ export default function Navbar() {
               {directLinks.map((link) => {
                 const Icon = link.icon;
                 const active = isActive(link.href);
+                const isLive = link.badge === 'LIVE';
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                       active
                         ? 'bg-secondary/10 text-secondary'
+                        : isLive
+                        ? 'text-slate-900 hover:bg-red-50/50'
                         : 'text-text-main hover:bg-surface'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
-                    <span>{link.name}</span>
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-4 h-4 ${isLive && !active ? 'text-red-500' : ''}`} />
+                      <span>{link.name}</span>
+                    </div>
+                    {link.badge && (
+                      <span className="relative flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-extrabold rounded-full uppercase tracking-wider bg-red-100 text-red-600">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping inline-block" />
+                        <span>{link.badge}</span>
+                      </span>
+                    )}
                   </Link>
                 );
               })}

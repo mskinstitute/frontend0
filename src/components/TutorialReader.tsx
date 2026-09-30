@@ -14,11 +14,9 @@ import {
   Brain,
   CheckCircle2,
   Circle,
-  Menu,
   X,
   DownloadCloud,
   PanelLeftOpen,
-  PanelLeftClose,
   GraduationCap,
   Layers,
 } from 'lucide-react';
@@ -261,13 +259,14 @@ export default function TutorialReader({
       </div>
 
       {/* Mobile Sidebar Toggle Header */}
-      <div className="lg:hidden p-3 border-b border-border-subtle bg-surface flex items-center justify-between no-print sticky top-0 z-40">
+      <div className="lg:hidden p-3 border-b border-border-subtle bg-surface flex items-center justify-between no-print sticky top-16 z-30">
         <button
           onClick={() => setIsMobileSidebarOpen(true)}
-          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-border-subtle rounded-xl text-xs font-bold text-primary shadow-2xs cursor-pointer"
+          className="p-2 bg-white border border-border-subtle hover:border-secondary/40 rounded-xl text-secondary shadow-2xs hover:bg-orange-50 cursor-pointer flex items-center justify-center transition-colors"
+          title="Open Curriculum"
+          aria-label="Open Curriculum"
         >
-          <Menu className="w-4 h-4 text-secondary" />
-          Course Curriculum
+          <PanelLeftOpen className="w-4 h-4 text-secondary" />
         </button>
 
         <div className="flex items-center gap-2">
@@ -281,8 +280,20 @@ export default function TutorialReader({
       </div>
 
       {/* Main Container Layout */}
-      <div className="flex-1 flex max-w-[1700px] w-full mx-auto">
-        {/* Left Sidebar (Desktop: Sticky, Mobile: Modal Overlay) */}
+      <div className="flex-1 flex max-w-[1700px] w-full mx-auto relative">
+        {/* Sticky Top-Left Open Curriculum Icon Button (Desktop) */}
+        {isCurriculumHidden && (
+          <button
+            onClick={toggleCurriculum}
+            className="hidden lg:flex fixed top-20 left-4 lg:left-6 z-40 p-2.5 bg-white hover:bg-orange-50 text-secondary border border-secondary/30 hover:border-secondary/60 rounded-xl shadow-xs hover:shadow-md transition-all duration-150 cursor-pointer group no-print items-center justify-center animate-in fade-in"
+            title="Open Curriculum"
+            aria-label="Open Curriculum"
+          >
+            <PanelLeftOpen className="w-5 h-5 text-secondary group-hover:scale-110 transition-transform" />
+          </button>
+        )}
+
+        {/* Left Sidebar (Desktop: Sticky) */}
         {!isCurriculumHidden && (
           <div className="hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-hidden no-print">
             <TutorialSidebar
@@ -324,22 +335,10 @@ export default function TutorialReader({
         )}
 
         {/* Center Main Reading Content */}
-        <main className="flex-1 min-w-0 p-4 sm:p-8 lg:p-12 space-y-8">
+        <main className={`flex-1 min-w-0 p-4 sm:p-8 lg:p-12 pb-28 md:pb-20 space-y-8 ${isCurriculumHidden ? 'lg:pl-20' : ''}`}>
           {/* Breadcrumb & Quick Next Navigation */}
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted no-print">
-            <div className="flex items-center gap-2.5 flex-wrap">
-              {isCurriculumHidden && (
-                <button
-                  onClick={toggleCurriculum}
-                  className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-secondary border border-secondary/30 rounded-xl text-xs font-bold shadow-2xs transition-all cursor-pointer group"
-                  title="Open curriculum sidebar"
-                >
-                  <PanelLeftOpen className="w-3.5 h-3.5 text-secondary group-hover:scale-110 transition-transform" />
-                  <span>Show Curriculum</span>
-                </button>
-              )}
-
-              <nav className="flex items-center gap-1.5 font-medium flex-wrap">
+            <nav className="flex items-center gap-1.5 font-medium flex-wrap">
                 <Link href="/" className="hover:text-primary">Home</Link>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 <Link href="/study-material" className="hover:text-secondary font-semibold text-secondary">
@@ -352,7 +351,6 @@ export default function TutorialReader({
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 <span className="text-text-muted">{frontmatter.title}</span>
               </nav>
-            </div>
 
             {nextTopic && (
               <Link
@@ -491,26 +489,6 @@ export default function TutorialReader({
                     <span>Cheatsheet</span>
                   </Link>
                 )}
-
-                {/* Hide / Show Curriculum Sidebar Button (Desktop) */}
-                <button
-                  onClick={toggleCurriculum}
-                  className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-surface border border-border-subtle text-text-muted hover:text-primary rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-2xs"
-                  title={isCurriculumHidden ? 'Show curriculum sidebar' : 'Hide curriculum sidebar (distraction-free reading)'}
-                  aria-label={isCurriculumHidden ? 'Show curriculum sidebar' : 'Hide curriculum sidebar'}
-                >
-                  {isCurriculumHidden ? (
-                    <>
-                      <PanelLeftOpen className="w-3.5 h-3.5 text-secondary" />
-                      <span>Show Curriculum</span>
-                    </>
-                  ) : (
-                    <>
-                      <PanelLeftClose className="w-3.5 h-3.5" />
-                      <span>Hide Curriculum</span>
-                    </>
-                  )}
-                </button>
               </div>
             </div>
           </header>
@@ -647,44 +625,76 @@ export default function TutorialReader({
         </main>
       </div>
 
-      {/* Mobile Sticky Bottom Floating Quick-Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-border-subtle shadow-xl z-40 flex items-center justify-between gap-2 no-print">
-        {prevTopic ? (
-          <Link
-            href={`/tutorials/${tutorial.slug}/${prevTopic.slug}`}
-            className="flex-1 text-center py-2 px-3 bg-surface hover:bg-slate-100 text-primary font-bold text-xs rounded-xl border border-border-subtle truncate flex items-center justify-center gap-1"
-          >
-            <ArrowLeft className="w-3 h-3" />
-            <span className="truncate">Prev</span>
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
+      {/* Sticky Bottom Next & Previous Navigation Bar (Both Devices) */}
+      {(prevTopic || nextTopic) && (
+        <div className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-40 no-print flex items-center justify-center max-w-[95vw] pointer-events-none">
+          <div className="flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 bg-white/95 backdrop-blur-xl border border-border-subtle rounded-2xl shadow-xl hover:shadow-2xl transition-all pointer-events-auto">
+            {prevTopic ? (
+              <Link
+                href={`/tutorials/${tutorial.slug}/${prevTopic.slug}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-surface hover:bg-slate-100 text-primary font-bold text-xs sm:text-sm rounded-xl border border-border-subtle transition-all group"
+                title={`Previous: ${prevTopic.title}`}
+              >
+                <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-text-muted group-hover:text-secondary group-hover:-translate-x-0.5 transition-all" />
+                <span className="hidden sm:inline">Previous</span>
+                <span className="sm:hidden">Prev</span>
+              </Link>
+            ) : (
+              <span
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 text-slate-300 font-bold text-xs sm:text-sm rounded-xl cursor-not-allowed select-none"
+                title="First lesson"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">Previous</span>
+                <span className="sm:hidden">Prev</span>
+              </span>
+            )}
 
-        <button
-          onClick={toggleComplete}
-          className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
-            isCurrentCompleted
-              ? 'bg-emerald-600 text-white shadow-xs'
-              : 'bg-primary text-white'
-          }`}
-        >
-          {isCurrentCompleted ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Circle className="w-3.5 h-3.5" />}
-          <span>{isCurrentCompleted ? 'Completed' : 'Mark Done'}</span>
-        </button>
+            <button
+              onClick={toggleComplete}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                isCurrentCompleted
+                  ? 'bg-emerald-600 text-white shadow-xs hover:bg-emerald-700'
+                  : 'bg-primary text-white hover:bg-primary-light'
+              }`}
+              title={isCurrentCompleted ? 'Lesson marked as completed' : 'Mark lesson as complete'}
+            >
+              {isCurrentCompleted ? (
+                <>
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+                  <span className="hidden sm:inline">Completed</span>
+                  <span className="sm:hidden">Done</span>
+                </>
+              ) : (
+                <>
+                  <Circle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">Mark Complete</span>
+                  <span className="sm:hidden">Done</span>
+                </>
+              )}
+            </button>
 
-        {nextTopic ? (
-          <Link
-            href={`/tutorials/${tutorial.slug}/${nextTopic.slug}`}
-            className="flex-1 text-center py-2 px-3 bg-secondary hover:bg-secondary-light text-white font-bold text-xs rounded-xl shadow-xs truncate flex items-center justify-center gap-1"
-          >
-            <span className="truncate">Next</span>
-            <ArrowRight className="w-3 h-3" />
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
-      </div>
+            {nextTopic ? (
+              <Link
+                href={`/tutorials/${tutorial.slug}/${nextTopic.slug}`}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4.5 sm:py-2 bg-secondary hover:bg-secondary-light text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all group"
+                title={`Next: ${nextTopic.title}`}
+              >
+                <span>Next</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white group-hover:translate-x-0.5 transition-all" />
+              </Link>
+            ) : (
+              <span
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4.5 sm:py-2 text-slate-300 font-bold text-xs sm:text-sm rounded-xl cursor-not-allowed select-none"
+                title="All lessons completed"
+              >
+                <span>Next</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Practice Quiz Modal */}
       <PracticeQuizModal

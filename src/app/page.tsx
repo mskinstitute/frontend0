@@ -4,7 +4,7 @@ import {
   BookOpen, Award, GraduationCap, CheckCircle2, ChevronRight, 
   MapPin, Users, Calendar, Trophy, Sparkles, ShieldCheck, 
   HelpCircle, PhoneCall, Laptop, Clock, ArrowRight, Video, Code2,
-  Star, Quote, Building2, XCircle, MessageSquare, Flame 
+  Star, Quote, Building2, XCircle, MessageSquare, Flame, Compass, Languages 
 } from 'lucide-react';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import { getBranchSummaries } from '@/lib/branches';
@@ -450,6 +450,94 @@ export default async function HomePage() {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* 2.5 Viral Interactive Tools: CCC Mock Test & Career Finder */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card 1: CCC Online Mock Test */}
+            <div className="relative bg-gradient-to-br from-white via-surface/40 to-white p-6 sm:p-8 rounded-3xl border-2 border-secondary/20 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-[#B83A00]/10 text-[#B83A00] flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    Free Practice Simulator
+                  </span>
+                  <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
+                    <Languages className="w-3.5 h-3.5" />
+                    हिंदी & English
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors">
+                    NIELIT CCC Online Mock Test 2026
+                  </h3>
+                  <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+                    Practice authentic exam pattern questions for UP Police, Lekhpal, and Govt recruitments. Real timer, instant digital scorecard, and 1-click WhatsApp status sharing.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-text-muted">
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">⏱️ 25 Mins Timer</span>
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">📊 Instant Grade S/A</span>
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">📲 WhatsApp Scorecard</span>
+                </div>
+              </div>
+
+              <div className="pt-6 mt-4 border-t border-border-subtle flex items-center justify-between">
+                <span className="text-xs font-bold text-text-muted">Zero Registration Required</span>
+                <Link
+                  href="/mock-test/ccc"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary hover:bg-secondary-light text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
+                >
+                  <span>Start Free Test</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 2: AI Career & Course Finder */}
+            <div className="relative bg-gradient-to-br from-white via-surface/40 to-white p-6 sm:p-8 rounded-3xl border-2 border-secondary/20 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-secondary/10 text-secondary flex items-center gap-1.5">
+                    <Compass className="w-3.5 h-3.5" />
+                    60-Second Quiz
+                  </span>
+                  <span className="text-xs font-bold text-emerald-700">
+                    100% Free Guidance
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors">
+                    Find Your Ideal Course in 60s
+                  </h3>
+                  <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+                    Confused between CCC, ADCA, Python, or Full-Stack? Answer 4 quick questions about your education and goals to unlock your tailored roadmap and expected starting salary.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-text-muted">
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">🎯 Tailored Track</span>
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">💼 Salary Outlook</span>
+                  <span className="bg-surface px-2.5 py-1 rounded-lg border border-border-subtle">📚 Custom Syllabus</span>
+                </div>
+              </div>
+
+              <div className="pt-6 mt-4 border-t border-border-subtle flex items-center justify-between">
+                <span className="text-xs font-bold text-text-muted">Personalized Recommendation</span>
+                <Link
+                  href="/career-finder"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
+                >
+                  <span>Take Career Quiz</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 

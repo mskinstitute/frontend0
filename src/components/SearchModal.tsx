@@ -376,6 +376,29 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       });
     });
 
+    // Viral Interactive Tools
+    items.push({
+      id: 'tool-ccc-mock-test',
+      type: 'course',
+      title: 'Free NIELIT CCC Online Mock Test 2026',
+      description: 'Attempt official-pattern bilingual CCC practice questions with timer, score calculation, and WhatsApp certificate sharing.',
+      category: 'Mock Test Simulator • Bilingual',
+      url: '/mock-test/ccc',
+      badge: 'Free Test',
+      actionLabel: 'Start Mock Test',
+    });
+
+    items.push({
+      id: 'tool-career-finder',
+      type: 'course',
+      title: 'Course & Career Finder Quiz (60 Seconds)',
+      description: 'Discover the ideal computer or coding course matching your education, ambition, and schedule.',
+      category: 'Interactive Advisor • AI Quiz',
+      url: '/career-finder',
+      badge: 'Career Quiz',
+      actionLabel: 'Take Quiz',
+    });
+
     return items;
   }, [courses, liveBatches, studyMaterials, blogs, tutorials, careers]);
 
