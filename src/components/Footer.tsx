@@ -101,6 +101,12 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm text-gray-300">
               <li>
+                <Link href="/mock-test" className="hover:text-white transition-colors duration-150 flex items-center gap-2">
+                  <span>Free Online Mock Tests</span>
+                  <span className="bg-secondary text-primary text-[9px] font-black px-1.5 py-0.5 rounded leading-none uppercase">All Tests</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/mock-test/ccc" className="hover:text-white transition-colors duration-150 flex items-center gap-2">
                   <span>NIELIT CCC Mock Test</span>
                   <span className="bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded leading-none uppercase">Free</span>

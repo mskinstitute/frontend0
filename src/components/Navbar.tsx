@@ -145,6 +145,13 @@ export default function Navbar() {
           icon: FileText,
           description: 'Free cheatsheets, handbooks & PDF guides',
         },
+        {
+          name: 'Free Mock Tests',
+          href: '/mock-test',
+          icon: Award,
+          badge: 'NEW',
+          description: 'Timed skill tests with scorecard & WhatsApp share',
+        },
       ],
     },
     {

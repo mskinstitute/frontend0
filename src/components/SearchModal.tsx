@@ -378,6 +378,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     // Viral Interactive Tools
     items.push({
+      id: 'tool-mock-test-hub',
+      type: 'course',
+      title: 'Free Online Mock Tests & Skill Assessments Hub',
+      description: 'Practice timed mock exams with instant scorecard, grades S/A/B/C/D, and WhatsApp sharing across all 66+ courses.',
+      category: 'Exam Simulator • All Courses',
+      url: '/mock-test',
+      badge: 'Mock Tests',
+      actionLabel: 'Explore Tests',
+    });
+
+    items.push({
       id: 'tool-ccc-mock-test',
       type: 'course',
       title: 'Free NIELIT CCC Online Mock Test 2026',
@@ -386,6 +397,39 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       url: '/mock-test/ccc',
       badge: 'Free Test',
       actionLabel: 'Start Mock Test',
+    });
+
+    items.push({
+      id: 'tool-python-mock-test',
+      type: 'course',
+      title: 'Python Programming Online Mock Test',
+      description: 'Timed assessment covering Python syntax, data types, functions, OOP, and code output debugging.',
+      category: 'Mock Test Simulator • Python',
+      url: '/mock-test/python-mastery-beginner-to-advanced--3-months',
+      badge: 'Mock Test',
+      actionLabel: 'Take Python Test',
+    });
+
+    items.push({
+      id: 'tool-adca-mock-test',
+      type: 'course',
+      title: 'ADCA Diploma Online Mock Test',
+      description: 'Comprehensive test on MS Office, Advanced Excel, Tally Prime accounting, and computer hardware.',
+      category: 'Mock Test Simulator • Diploma',
+      url: '/mock-test/adca',
+      badge: 'Mock Test',
+      actionLabel: 'Take ADCA Test',
+    });
+
+    items.push({
+      id: 'tool-fullstack-mock-test',
+      type: 'course',
+      title: 'Full-Stack Web Development Mock Test (MERN)',
+      description: 'Assess React, Node.js, Express, MongoDB, REST APIs, and modern JavaScript engineering.',
+      category: 'Mock Test Simulator • Web Dev',
+      url: '/mock-test/full-stack-web-dev-bootcamp',
+      badge: 'Mock Test',
+      actionLabel: 'Take Full-Stack Test',
     });
 
     items.push({

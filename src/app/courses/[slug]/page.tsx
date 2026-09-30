@@ -358,6 +358,29 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
               </div>
             </section>
 
+            {/* Free Practice Mock Test CTA Card */}
+            <section className="bg-linear-to-r from-secondary/10 via-amber-500/5 to-secondary/5 rounded-2xl p-6 border border-secondary/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="space-y-1.5 text-center sm:text-left">
+                <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-secondary uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Interactive Skill Assessment
+                </div>
+                <h3 className="text-lg sm:text-xl font-extrabold text-primary">
+                  Test Your {course.title} Skills with Free Mock Test
+                </h3>
+                <p className="text-xs text-text-muted leading-relaxed max-w-xl">
+                  Attempt timed multiple-choice questions, verify code outputs, and receive an instant digital scorecard with Grade S/A/B/C/D before starting classes.
+                </p>
+              </div>
+              <Link
+                href={course.slug === 'ccc' ? '/mock-test/ccc' : `/mock-test/${course.slug}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary hover:bg-secondary-light text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-xs transition-all whitespace-nowrap"
+              >
+                <span>Take Free Mock Test</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </section>
+
             {/* Course Curriculum (Interactive Accordion for Combo Included Courses & Single Syllabus) */}
             <div id="curriculum-section" className="scroll-mt-24">
               <CourseCurriculumAccordion
@@ -410,6 +433,23 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Practice Mock Test mini card */}
+              <div className="p-3.5 rounded-xl bg-surface border border-secondary/20 flex items-center justify-between gap-3">
+                <div className="space-y-0.5">
+                  <div className="text-xs font-extrabold text-primary flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-secondary" />
+                    Free Mock Test Available
+                  </div>
+                  <div className="text-[11px] text-text-muted">Timed test • Instant digital grade</div>
+                </div>
+                <Link
+                  href={course.slug === 'ccc' ? '/mock-test/ccc' : `/mock-test/${course.slug}`}
+                  className="px-3 py-1.5 bg-secondary text-white font-bold text-xs rounded-lg hover:bg-secondary-light transition-colors whitespace-nowrap shadow-2xs"
+                >
+                  Start Test
+                </Link>
               </div>
 
               {/* Available Branch Locations (Phase 5) */}
