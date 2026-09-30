@@ -16,9 +16,9 @@ keywords:
   - map and filter python lambda
   - python inline functions
   - pep 8 lambda guidelines
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Lambda Functions in Python: Anonymous Inline Functions & Higher-Order Tools
@@ -233,7 +233,37 @@ Age 15: Minor
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the correct syntax to create a lambda function that multiplies two numbers `x` and `y`?
 A. `def lambda(x, y): return x * y`
@@ -242,7 +272,6 @@ C. `lambda x, y: x * y`
 D. `(x, y) => x * y`
 
 **Answer:** C
-**Explanation:** Python lambda syntax uses the keyword `lambda`, followed by comma-separated parameter names, a colon `:`, and the single return expression: `lambda x, y: x * y`.
 
 ---
 
@@ -253,7 +282,6 @@ C. It returns `None`
 D. It prints the result to the console
 
 **Answer:** B
-**Explanation:** The `return` keyword is not permitted inside lambda expressions. Python handles returns implicitly; including `return` raises an immediate `SyntaxError`.
 
 ---
 
@@ -264,7 +292,6 @@ C. `sorted(students, by="marks")`
 D. `students.sort(key=s[1])`
 
 **Answer:** A
-**Explanation:** `lambda s: s[1]` extracts the second element (marks) as the sorting key, and `reverse=True` sorts from highest to lowest.
 
 ---
 
@@ -275,7 +302,6 @@ C. It is required for high performance in Python 3.12
 D. It emits a deprecation warning
 
 **Answer:** B
-**Explanation:** PEP 8 explicitly recommends against naming lambdas via assignment. Using `def` provides clearer stack traces and aids docstrings and code introspection.
 
 ---
 
@@ -286,7 +312,6 @@ C. Any number of expressions inside curly braces
 D. As many lines as indented properly
 
 **Answer:** A
-**Explanation:** Python's grammar strictly limits lambda functions to a single expression. If you require multiple statements, loops, or complex branching, you must define a standard function using `def`.
 
 ---
 
@@ -386,3 +411,10 @@ Total Portfolio Net Worth: Rs 519,300.00
   RELIANCE  : P/E 28.4
   TCS       : P/E 31.2
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Recursion** (14: Functions).
+
+👉 **[Continue to Next Lesson: Recursion →](/tutorials/python-for-beginners/recursion)**

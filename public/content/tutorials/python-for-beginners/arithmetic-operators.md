@@ -16,9 +16,9 @@ keywords:
   - string repetition
   - list concatenation
   - float modulo
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Arithmetic Operators in Python: Polymorphic Overloading & Precision
@@ -236,7 +236,39 @@ Remaining after INR 50 notes: INR 37.75
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the output of evaluating `"Bharat" * 3` in Python?
 A. `TypeError`
@@ -245,7 +277,6 @@ C. `"Bharat 3"`
 D. `["Bharat", "Bharat", "Bharat"]`
 
 **Answer:** B
-**Explanation:** The multiplication operator `*` when applied between a string and an integer performs sequence repetition, duplicating the text $N$ times to produce `"BharatBharatBharat"`.
 
 ---
 
@@ -256,7 +287,6 @@ C. It outputs `"Chapter "`
 D. It converts `"Chapter "` to an integer
 
 **Answer:** B
-**Explanation:** Python is strongly typed and will not implicitly coerce an integer to a string during addition. To concatenate them, you must explicitly cast using `str(1)` or use an f-string: `f"Chapter {1}"`.
 
 ---
 
@@ -267,7 +297,6 @@ C. `3.5`
 D. `2`
 
 **Answer:** B
-**Explanation:** Unlike C and Java where `%` is restricted to integers, Python supports floating-point modulo. $11.5 = (3 \times 3) + 2.5$, so the remainder is `2.5`.
 
 ---
 
@@ -278,7 +307,6 @@ C. `[[1, 2], [3, 4]]`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** The addition operator `+` on lists concatenates the two sequences, producing a single merged list `[1, 2, 3, 4]`.
 
 ---
 
@@ -289,7 +317,6 @@ C. Unary operators can only be used on strings
 D. `x++` is valid syntax in Python
 
 **Answer:** B
-**Explanation:** The unary minus operator `-` negates the numeric operand (e.g., `-(-10)` is `10`). Python does **not** have the `++` or `--` increment/decrement operators found in C-family languages.
 
 ---
 
@@ -401,3 +428,10 @@ Requested Withdrawal Amount: INR 1,235
 ERROR: Amount must be a multiple of INR 50 (ATM cannot dispense coins).
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Assignment Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Assignment Operators →](/tutorials/python-for-beginners/assignment-operators)**

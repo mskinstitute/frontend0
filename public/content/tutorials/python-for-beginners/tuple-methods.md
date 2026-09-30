@@ -16,9 +16,9 @@ keywords:
   - tuple vs list methods
   - immutable sequence methods
   - sorted tuple
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Tuple Methods: The Minimalist Pair (`count` & `index`)
@@ -210,7 +210,23 @@ Sorted Tuple: (76, 82, 88, 94, 99)
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the Trailing Comma on Single-Element Tuples
+Without a trailing comma, parentheses are treated as grouping symbols, not a tuple:
+```python
+not_a_tuple = ("admin")  # Type is str!
+is_a_tuple = ("admin",)  # Type is tuple!
+
+print(type(not_a_tuple))  # <class 'str'>
+print(type(is_a_tuple))   # <class 'tuple'>
+```
+
+---
+
+## Practice Quiz
 
 ### 1. How many built-in methods does a Python tuple have?
 A. 11
@@ -219,7 +235,6 @@ C. 2
 D. 0
 
 **Answer:** C
-**Explanation:** Tuples have exactly two built-in methods: `count()` and `index()`. All other collection methods (such as `append`, `sort`, `remove`) mutate data and are not supported on immutable tuples.
 
 ---
 
@@ -230,7 +245,6 @@ C. `ValueError`
 D. `0`
 
 **Answer:** D
-**Explanation:** `tuple.count(x)` safely returns `0` when the element is not found in the tuple.
 
 ---
 
@@ -241,7 +255,6 @@ C. `set`
 D. `generator`
 
 **Answer:** B
-**Explanation:** Python's built-in `sorted()` function always returns a new Python `list`, regardless of the input iterable's type. To obtain a sorted tuple, you must explicitly wrap it: `tuple(sorted(t))`.
 
 ---
 
@@ -252,7 +265,6 @@ C. Python raises an `AttributeError: 'tuple' object has no attribute 'sort'`
 D. Python raises a `TypeError`
 
 **Answer:** C
-**Explanation:** Tuples do not possess a `.sort()` method because sorting requires in-place mutation, which violates tuple immutability. An `AttributeError` is raised.
 
 ---
 
@@ -267,7 +279,6 @@ C. `[1, 3]`
 D. `ValueError`
 
 **Answer:** B
-**Explanation:** The optional second argument `2` specifies the search starting index. Python skips index 0 and 1, finding the second `"B"` at index 3.
 
 ---
 
@@ -333,3 +344,10 @@ Second Hearing Slot: Session #7 (Index 6)
 Alphabetically Grouped Docket:
   ('Court-1', 'Court-1', 'Court-1', 'Court-2', 'Court-2', 'Court-3', 'Court-3', 'Court-3', 'Court-3', 'Court-4')
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Nested Tuples** (9: Tuples).
+
+👉 **[Continue to Next Lesson: Nested Tuples →](/tutorials/python-for-beginners/nested-tuples)**

@@ -16,9 +16,9 @@ keywords:
   - set copy method
   - set relational operators
   - intersection_update
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Set Methods: Relational Comparisons, Subsets, Supersets & Disjoint Tests
@@ -249,7 +249,35 @@ After sym_diff_update:     {8080, 8443}
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating an Empty Set with `{}`
+Curly braces `{}` create an empty dictionary, not an empty set!
+```python
+empty_dict = {}       # <class 'dict'>
+empty_set = set()     # <class 'set'>
+
+print(type(empty_dict))  # <class 'dict'>
+print(type(empty_set))   # <class 'set'>
+```
+
+### 2. Attempting to Index or Slice a Set
+Sets are unordered collections with no fixed position. They cannot be indexed:
+```python
+s = {10, 20, 30}
+# ❌ TypeError: 'set' object is not subscriptable
+# print(s[0])
+
+# ✅ CORRECT (Iterate through or convert to list)
+for item in s:
+    print(item)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will `{1, 2}.issubset({1, 2, 3})` return?
 A. `False`
@@ -258,7 +286,6 @@ C. `None`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** Every element in `{1, 2}` is also present in `{1, 2, 3}`. Therefore, `{1, 2}` is a valid subset of `{1, 2, 3}`, returning `True`.
 
 ---
 
@@ -269,7 +296,6 @@ C. `[x for x in a if x in b] == []`
 D. `a - b == a`
 
 **Answer:** B
-**Explanation:** `a.isdisjoint(b)` short-circuits and terminates the instant it discovers the very first common element without constructing an intermediate intersection set in memory, making it the most memory and CPU-efficient method.
 
 ---
 
@@ -280,7 +306,6 @@ C. `A <= B` is deprecated
 D. There is no difference
 
 **Answer:** A
-**Explanation:** `<=` tests standard subset inclusion where the sets may be identical. `<` tests strict proper subset inclusion, requiring that $A \subseteq B$ and $A \neq B$.
 
 ---
 
@@ -291,7 +316,6 @@ C. `set()`
 D. `KeyError`
 
 **Answer:** A
-**Explanation:** The two sets share no overlapping elements ($A \cap B = \emptyset$), so they are disjoint, returning `True`.
 
 ---
 
@@ -302,7 +326,6 @@ C. `False`
 D. `None`
 
 **Answer:** B
-**Explanation:** Unlike the `>=` operator which requires both operands to be sets, the `.issuperset()` method accepts any iterable (such as a list) and checks if the set contains all elements from that iterable.
 
 ---
 
@@ -359,3 +382,10 @@ Super Admin possesses all financial controls? True
 Is Guest Contractor isolated from Financial Data? True
 [SECURITY VERIFIED] Zero privilege overlap for external contractors.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Nested Sets** (10: Sets).
+
+👉 **[Continue to Next Lesson: Nested Sets →](/tutorials/python-for-beginners/nested-sets)**

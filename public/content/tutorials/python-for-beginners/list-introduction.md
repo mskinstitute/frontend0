@@ -16,9 +16,9 @@ keywords:
   - ordered sequence
   - heterogeneous data
   - python list memory layout
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Lists: The Cornerstone Ordered and Mutable Data Structure
@@ -242,7 +242,38 @@ Proceeding to checkout with 3 items.
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which statement accurately describes a Python list?
 A. An unordered collection of unique elements
@@ -251,7 +282,6 @@ C. An ordered, mutable, and heterogeneous collection of objects
 D. A fixed-size contiguous memory block of identical data types
 
 **Answer:** C
-**Explanation:** Python lists are ordered (preserving sequence), mutable (can be changed in-place without altering object id), and heterogeneous (elements can have diverse types).
 
 ---
 
@@ -262,7 +292,6 @@ C. A hash table mapping string keys to memory offsets
 D. A binary search tree of integers
 
 **Answer:** B
-**Explanation:** CPython implements lists as dynamic arrays of object pointers (`PyObject**`). The list itself stores 64-bit memory addresses that reference Python objects located on the heap.
 
 ---
 
@@ -273,7 +302,6 @@ C. `('R', 'A', 'M')`
 D. `TypeError: string cannot be converted to list`
 
 **Answer:** B
-**Explanation:** Passing a string to the `list()` constructor iterates across each character of the string, producing a list containing individual single-character strings `['R', 'A', 'M']`.
 
 ---
 
@@ -284,7 +312,6 @@ C. `False` and `True`
 D. `True` and `False`
 
 **Answer:** C
-**Explanation:** An empty list `[]` has a length of 0, making it falsy (`False`). A list containing `[0]` has a length of 1; even though its content is `0`, the list itself is non-empty, making it truthy (`True`).
 
 ---
 
@@ -295,7 +322,6 @@ C. `TypeError: cannot multiply list by int`
 D. `["#4"]`
 
 **Answer:** B
-**Explanation:** The multiplication operator `*` applied to a list replicates its elements by the specified factor, resulting in four individual elements `["#", "#", "#", "#"]`.
 
 ---
 
@@ -356,3 +382,10 @@ Manifest List ID: 2410892019456 (Remains identical!)
 Updated Speed:    140.0 km/h
 On-Time Status:   False
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Create & Access Lists** (8: Lists).
+
+👉 **[Continue to Next Lesson: Create & Access Lists →](/tutorials/python-for-beginners/create-access-lists)**

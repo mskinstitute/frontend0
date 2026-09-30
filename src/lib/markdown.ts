@@ -98,13 +98,13 @@ export function extractQuizQuestions(markdown: string): {
   correctAnswer: string;
   explanation?: string;
 }[] {
-  // Support #, ##, or ### headers for quiz section
-  const mcqSectionMatch = markdown.match(/#{1,3}\s+(?:Multiple Choice Questions|MCQs|Practice Quiz|Quiz)[\s\S]*?(?=(?:\r?\n#{1,2}\s+[A-Z])|\Z)/i);
+  // Support #, ##, or ### headers for quiz section (with optional emojis or prefixes like Knowledge Check)
+  const mcqSectionMatch = markdown.match(/#{1,3}\s+(?:[^\w\r\n]*)(?:Multiple Choice Questions|MCQs|Practice Quiz|Quiz|Knowledge Check)[\s\S]*?(?=(?:\r?\n#{1,2}\s+[A-Za-z])|$)/i);
   if (!mcqSectionMatch) return [];
 
   const sectionText = mcqSectionMatch[0];
-  // Split on question headers: ### Q1: or ### 1. or ### Q1. or ### Question 1:
-  const questionBlocks = sectionText.split(/###\s+(?:Q\d+[:.]?|\d+\.|Question\s+\d+[:.]?)\s*/i);
+  // Split on question headers: ### Q1: or ### 1. or ### Q1. or ### Question 1: (also supporting ##)
+  const questionBlocks = sectionText.split(/#{2,3}\s+(?:Q\d+[:.]?|\d+\.|Question\s+\d+[:.]?)\s*/i);
   const quizList: {
     question: string;
     options: { label: string; text: string }[];

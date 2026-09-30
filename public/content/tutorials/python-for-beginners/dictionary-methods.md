@@ -16,9 +16,9 @@ keywords:
   - dictionary unpacking kwargs
   - dict keys values items
   - python 3.9 dictionary union
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Dictionary Methods: Complete Method Suite, `fromkeys()`, and Python 3.9+ Merge Operators
@@ -239,7 +239,35 @@ Remaining:  {'B': 200, 'C': 300}
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the result of executing `dict.fromkeys(["A", "B"], 0)`?
 A. `{"A": 0, "B": 0}`
@@ -248,7 +276,6 @@ C. `[("A", 0), ("B", 0)]`
 D. `TypeError`
 
 **Answer:** A
-**Explanation:** `dict.fromkeys(iterable, default_value)` creates a new dictionary with the items of the iterable as keys, setting each value to `0`: `{"A": 0, "B": 0}`.
 
 ---
 
@@ -259,7 +286,6 @@ C. Lists cannot be dictionary values
 D. The lists are automatically frozen
 
 **Answer:** B
-**Explanation:** `dict.fromkeys()` assigns the identical object reference passed as the second argument to every key. If that object is a mutable list, all keys share that single list instance.
 
 ---
 
@@ -270,7 +296,6 @@ C. `|`
 D. `^`
 
 **Answer:** C
-**Explanation:** Python 3.9 introduced the union operator `|` (PEP 584) for dictionaries: `d3 = d1 | d2` merges two dictionaries, with values from `d2` taking precedence in collisions.
 
 ---
 
@@ -281,7 +306,6 @@ C. `[2, 99]`
 D. `KeyError`
 
 **Answer:** B
-**Explanation:** In dictionary union operations, when key collisions occur, the right-hand operand (`d2`) takes precedence over the left-hand operand (`d1`). Therefore, `"b"` takes the value `99`.
 
 ---
 
@@ -292,7 +316,6 @@ C. Raises a `SyntaxError`
 D. Deletes common keys
 
 **Answer:** B
-**Explanation:** `|=` is the in-place dictionary update operator in Python 3.9+, equivalent to calling `d1.update(d2)`.
 
 ---
 
@@ -368,3 +391,10 @@ Log Level (Overridden by Prod):   WARNING (Expected: WARNING)
 Timeout (Overridden by Region):   2500 ms (Expected: 2500)
 Currency (Preserved from Global): INR (Expected: INR)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Nested Dictionaries** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Nested Dictionaries →](/tutorials/python-for-beginners/nested-dictionaries)**

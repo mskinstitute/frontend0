@@ -16,9 +16,9 @@ keywords:
   - pep 308 python
   - python ternary syntax
   - short-circuit conditional expression
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Ternary Operators in Python: Conditional Expressions & Inline Decisions
@@ -258,7 +258,7 @@ Safe division result: 0
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What is the correct syntax for a ternary conditional expression in Python?
 A. `condition ? value_if_true : value_if_false`
@@ -267,7 +267,6 @@ C. `if condition then value_if_true else value_if_false`
 D. `value_if_true unless condition else value_if_false`
 
 **Answer:** B
-**Explanation:** Unlike C/Java/JavaScript which use the `? :` operator, Python uses the readable English keywords: `value_if_true if condition else value_if_false`.
 
 ---
 
@@ -278,7 +277,6 @@ C. Python ignores the statement if `active` is False
 D. Python automatically copies the previous value of `x`
 
 **Answer:** B
-**Explanation:** Python grammar strictly requires the `else` branch in a conditional expression. Writing `x = 10 if active` without an `else` clause results in an immediate `SyntaxError: expected 'else' after 'if' expression`.
 
 ---
 
@@ -294,7 +292,6 @@ C. 100
 D. None
 
 **Answer:** A
-**Explanation:** Because `x == 0` evaluates to `True`, Python evaluates only `"Safe"`. Due to short-circuit evaluation, the `else` branch (`100 / x`) is never executed, completely preventing a `ZeroDivisionError`.
 
 ---
 
@@ -310,7 +307,6 @@ C. C
 D. B if score >= 70 else C
 
 **Answer:** B
-**Explanation:** The first condition `score >= 90` is `False`, so Python evaluates the outer `else` branch: `"B" if score >= 70 else "C"`. Since `75 >= 70` is `True`, it produces `"B"`.
 
 ---
 
@@ -321,7 +317,6 @@ C. Ternary expressions short-circuit, whereas tuple indexing evaluates both item
 D. Tuple indexing requires allocating a dictionary on heap memory
 
 **Answer:** C
-**Explanation:** The tuple hack `("NO", "YES")[flag]` builds a tuple containing both values first. If either side contains a function call or division that might fail or cause side-effects, both will execute regardless of `flag`. The ternary operator only evaluates the required branch.
 
 ---
 
@@ -439,3 +434,10 @@ Order #ODR-904 | Customer: Divya Sharma
   TOTAL PAYABLE:  Rs 1299.00
   Transit Time:   1 Business Day (Next-Day Delivery)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Project: Grading System** (12: Conditional Statements).
+
+👉 **[Continue to Next Lesson: Project: Grading System →](/tutorials/python-for-beginners/project-grading-system)**

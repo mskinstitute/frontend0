@@ -16,9 +16,9 @@ keywords:
   - loop control python
   - early loop termination
   - python placeholder pass
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Loop Control Statements in Python: `break`, `continue`, and `pass`
@@ -265,7 +265,43 @@ Odd Number: 5
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be printed by the following code?
 ```python
@@ -280,7 +316,6 @@ C. 1 2 4 5
 D. 3 4 5
 
 **Answer:** B
-**Explanation:** When `num` reaches 3, the `if num == 3:` condition evaluates to `True`, triggering `break`. The loop terminates immediately before executing `print(num)`. Only `1 2 ` are printed.
 
 ---
 
@@ -297,7 +332,6 @@ C. 1 2 3 4 5
 D. 3
 
 **Answer:** B
-**Explanation:** When `num` is 3, `continue` executes, skipping the `print` statement for that specific iteration and immediately advancing to `num = 4`. Thus, 3 is omitted, printing `1 2 4 5 `.
 
 ---
 
@@ -308,7 +342,6 @@ C. It acts as a null operation (no-op), serving as a syntactic placeholder witho
 D. It passes variables from child to parent scope
 
 **Answer:** C
-**Explanation:** `pass` does absolutely nothing. It is used exclusively to satisfy Python's syntactic requirement that an indented block must contain at least one statement.
 
 ---
 
@@ -319,7 +352,6 @@ C. The statement following `pass` on the next line executes normally
 D. An `IndentationWarning` is emitted
 
 **Answer:** C
-**Explanation:** Unlike `break` (which exits) or `continue` (which jumps to next iteration), `pass` does not divert control flow. The interpreter simply continues executing the very next statement inside the block.
 
 ---
 
@@ -330,7 +362,6 @@ C. The outer loop resets to its initial value
 D. Python raises a `LoopInterrupt` exception
 
 **Answer:** B
-**Explanation:** `break` only terminates the innermost loop that directly encloses it. The outer loop remains in execution and proceeds with its next iteration.
 
 ---
 
@@ -432,3 +463,10 @@ Invoices Discarded:   2
 Total Value Cleared:  Rs 234,000.00
 Audit Status:         FROZEN FOR ENFORCEMENT
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Loops with Else** (13: Loops).
+
+👉 **[Continue to Next Lesson: Loops with Else →](/tutorials/python-for-beginners/loops-with-else)**

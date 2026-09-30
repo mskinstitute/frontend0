@@ -16,9 +16,9 @@ keywords:
   - call stack winding unwinding
   - recursionerror maximum recursion depth
   - factorial recursion python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Recursion in Python: Base Cases, Recursive Steps, & Call Stack Unwinding
@@ -245,7 +245,37 @@ Reversed 'PYTHON':  NOHTYP
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What are the two mandatory components of every well-formed recursive function?
 A. A while loop and a for loop
@@ -254,7 +284,6 @@ C. A lambda expression and a docstring
 D. Positional arguments and keyword arguments
 
 **Answer:** B
-**Explanation:** Every recursive function must have a base case (halting condition that stops recursion) and a recursive step (which reduces the problem and calls the function with smaller inputs).
 
 ---
 
@@ -265,7 +294,6 @@ C. `SystemStackFault`
 D. `ZeroDivisionError`
 
 **Answer:** B
-**Explanation:** Python monitors stack depth and raises a `RecursionError` once the stack depth surpasses `sys.getrecursionlimit()` (default 1,000 frames) to protect against memory corruption.
 
 ---
 
@@ -282,7 +310,6 @@ C. 5
 D. 1
 
 **Answer:** A
-**Explanation:** Trace execution: `mystery(3) = 3 + mystery(2)`. `mystery(2) = 2 + mystery(1)`. `mystery(1)` hits the base case and returns 1. Unwinding: `2 + 1 = 3`, then `3 + 3 = 6`.
 
 ---
 
@@ -293,7 +320,6 @@ C. Python resets all local variables to zero
 D. The compiler optimizes bytecode into C machine code
 
 **Answer:** B
-**Explanation:** In the unwinding phase, having reached the base case, each suspended stack frame completes its calculation with the child's return value, pops off the stack, and hands its result up to its caller.
 
 ---
 
@@ -304,7 +330,6 @@ C. Recursion is prohibited by PEP 8
 D. Python limits functions to 5 total invocations
 
 **Answer:** B
-**Explanation:** Python does not optimize tail-recursive calls into loops. Every recursive call consumes stack frame memory ($O(N)$), whereas a loop runs in $O(1)$ constant auxiliary memory.
 
 ---
 
@@ -423,3 +448,10 @@ Output:
 Total Cumulative Workspace Size: 7,199.00 KB (7.03 MB)
 ======================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Scope of Variables in Functions** (14: Functions).
+
+👉 **[Continue to Next Lesson: Scope of Variables in Functions →](/tutorials/python-for-beginners/scope-of-variables-in-functions)**

@@ -16,9 +16,9 @@ keywords:
   - outer loop inner loop
   - time complexity nested loops
   - grid coordinates python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Loops in Python: Multi-Dimensional Iteration & Coordinate Systems
@@ -266,7 +266,43 @@ Every level of nesting multiplies the time complexity of your program:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. How many total times will the `print("Tick")` statement execute in the following code?
 ```python
@@ -280,7 +316,6 @@ C. 4 times
 D. 3 times
 
 **Answer:** B
-**Explanation:** The outer loop executes 3 times (`range(3)`: 0, 1, 2). For each of those 3 iterations, the inner loop executes 4 times (`range(4)`: 0, 1, 2, 3). The total execution count is $3 \times 4 = 12$.
 
 ---
 
@@ -296,7 +331,6 @@ C. 12 12
 D. 1 2 1 2
 
 **Answer:** A
-**Explanation:** For `i = 1`, `j` takes values 1 and 2, producing `11` and `12`. For `i = 2`, `j` takes values 1 and 2, producing `21` and `22`. The full output is `11 12 21 22 `.
 
 ---
 
@@ -307,7 +341,6 @@ C. Python restarts the outer loop from index 0
 D. A `RuntimeError` is raised
 
 **Answer:** B
-**Explanation:** In Python, a `break` statement terminates only the innermost enclosing loop. The surrounding outer loop continues its remaining iterations unaffected.
 
 ---
 
@@ -318,7 +351,6 @@ C. Python automatically renames the inner variable to `i_inner`
 D. The inner loop is automatically skipped
 
 **Answer:** B
-**Explanation:** Python does not prohibit shadowing loop variables. The inner loop reassigns `i` during its iterations, overwriting the outer loop's tracking of `i` and creating severe logical bugs.
 
 ---
 
@@ -329,7 +361,6 @@ C. $O(M \times N)$
 D. $O(M^N)$
 
 **Answer:** C
-**Explanation:** Visiting each of the $M$ rows and inspecting each of the $N$ columns within each row requires $M \times N$ operations, yielding a time complexity of $O(M \times N)$.
 
 ---
 
@@ -443,3 +474,10 @@ Booked Seats:   8 [X]
 Available Open: 16 [O]
 Occupancy Rate: 33.3%
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Break, Continue, Pass** (13: Loops).
+
+👉 **[Continue to Next Lesson: Break, Continue, Pass →](/tutorials/python-for-beginners/break-continue-pass)**

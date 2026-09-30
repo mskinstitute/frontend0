@@ -16,9 +16,9 @@ keywords:
   - nonlocal keyword python
   - variable shadowing python
   - unboundlocalerror python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Variable Scope in Python: The LEGB Rule, `global`, and `nonlocal` Architecture
@@ -282,7 +282,37 @@ def increment():
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In what exact order does Python search for a variable name when evaluating an expression?
 A. Global, Local, Enclosing, Built-in
@@ -291,7 +321,6 @@ C. Built-in, Global, Enclosing, Local
 D. Local, Global, Enclosing, Built-in
 
 **Answer:** B
-**Explanation:** Python strictly adheres to the LEGB order: Local first, then Enclosing (outer functions), then Global (module level), and finally Built-in.
 
 ---
 
@@ -311,7 +340,6 @@ C. None
 D. UnboundLocalError
 
 **Answer:** B
-**Explanation:** Inside `change_val()`, assigning `x = 100` creates a local variable named `x`. The global `x` outside the function remains completely unaffected and prints `50`.
 
 ---
 
@@ -322,7 +350,6 @@ C. `nonlocal`
 D. `parent`
 
 **Answer:** C
-**Explanation:** The `nonlocal` keyword explicitly binds a variable inside an inner nested function to the variable in the nearest enclosing non-global scope.
 
 ---
 
@@ -333,7 +360,6 @@ C. Variable `x` exceeds system memory
 D. The variable is imported from an external C library
 
 **Answer:** B
-**Explanation:** Because Python parses functions before execution, any variable that is assigned anywhere in the function body is marked as local. Referencing it before that assignment executes causes an `UnboundLocalError`.
 
 ---
 
@@ -344,7 +370,6 @@ C. It permanently deletes the `list` class from Python's standard library on dis
 D. It consumes double memory
 
 **Answer:** B
-**Explanation:** Defining a variable named `list` shadows the built-in constructor in the LEGB lookup. Any subsequent attempt to call `list(...)` will attempt to call your newly defined object, failing with `TypeError: 'list' object is not callable`.
 
 ---
 
@@ -460,3 +485,10 @@ Initial Central RBI Reserve: Rs 50,000,000.00
 
 Final Central RBI Reserve: Rs 49,600,000.00
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Project: Calculator** (14: Functions).
+
+👉 **[Continue to Next Lesson: Project: Calculator →](/tutorials/python-for-beginners/project-calculator)**

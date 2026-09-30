@@ -16,9 +16,9 @@ keywords:
   - mutable default argument python
   - variable length arguments
   - python parameter unpacking
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Default Arguments, `*args`, and `**kwargs` in Python: Dynamic Parameter Architecture
@@ -302,7 +302,7 @@ config = {"host": "localhost", "port": 5432, "timeout": 30}
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What data structure does Python use to pack arguments collected by `*args`?
 A. List
@@ -311,7 +311,6 @@ C. Dictionary
 D. Set
 
 **Answer:** B
-**Explanation:** When arguments are packed using `*args`, Python stores them as an immutable `tuple`.
 
 ---
 
@@ -322,7 +321,6 @@ C. Dictionary
 D. Ordered Set
 
 **Answer:** C
-**Explanation:** Surplus keyword arguments passed to a function with `**kwargs` are packed into a standard Python `dict`.
 
 ---
 
@@ -342,7 +340,6 @@ C. `[2, 3]`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** Because `num_list=[]` is a mutable default argument, it is evaluated once at function definition time and shared across all subsequent calls. Each call appends to the same list in memory, producing `[1, 2, 3]`.
 
 ---
 
@@ -353,7 +350,6 @@ C. `**kwargs, *args, defaults, positional`
 D. `defaults, positional, *args, **kwargs`
 
 **Answer:** B
-**Explanation:** Python requires standard positional parameters first, followed by default parameters, followed by `*args`, and finally `**kwargs`.
 
 ---
 
@@ -364,7 +360,6 @@ C. `setup_account(&payload)`
 D. `setup_account(payload...)`
 
 **Answer:** B
-**Explanation:** The double asterisk `**` operator unrolls a dictionary into named keyword arguments at the call site: `setup_account(**payload)` is equivalent to `setup_account(user="Kavita", role="Admin")`.
 
 ---
 
@@ -499,3 +494,10 @@ Output:
     * Delivery Pincode  : 560001
 +============================================================+
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Return Values** (14: Functions).
+
+👉 **[Continue to Next Lesson: Return Values →](/tutorials/python-for-beginners/return-values)**

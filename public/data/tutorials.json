@@ -162,23 +162,31 @@
       "backend",
       "scripting"
     ],
-    "documentationTitle": "Complete Python for Beginners Documentation",
-    "shortDescription": "Master Python programming from the ground up in 1 month. Comprehensive guide covering syntax, variables, data structures, control flow, functions, file handling, and 4 practical projects.",
+    "documentationTitle": "Complete Python for Beginners Tutorial & Interactive Documentation",
+    "shortDescription": "Master Python programming from the ground up in 1 month. Comprehensive beginner tutorial covering syntax, variables, data structures (lists, tuples, sets, dicts), control flow, loops, functions, file handling, and 4 practical capstone projects.",
     "lessonsCount": 16,
     "totalHours": "30h",
     "topicsCount": 85,
     "githubRepo": "github.com/msk-institute/python-for-beginners",
-    "updatedAt": "2026-09-03",
+    "updatedAt": "2026-09-30",
     "seo": {
-      "title": "Python for Beginners Tutorial & Notes - MSK Notes | MSK Institute",
-      "description": "Exhaustive Python for Beginners tutorial notes. Step-by-step curriculum covering syntax, variables, lists, dictionaries, loops, functions, file handling, and real projects.",
+      "title": "Python for Beginners Tutorial: Complete Step-by-Step Programming Guide | MSK Institute",
+      "description": "Master Python programming from scratch with our beginner-friendly tutorial. Learn variables, data structures, loops, functions, file handling, interactive quizzes, and 4 real-world projects.",
       "keywords": [
-        "python tutorial",
         "python for beginners",
-        "learn python",
-        "python documentation",
+        "python tutorial for beginners",
+        "learn python step by step",
+        "python programming tutorial",
+        "python course shikohabad",
         "python notes",
-        "python full course"
+        "python full course",
+        "python basics with examples",
+        "python practice exercises",
+        "python projects for beginners",
+        "python data types",
+        "python lists and dictionaries",
+        "python functions tutorial",
+        "python file handling"
       ]
     }
   },

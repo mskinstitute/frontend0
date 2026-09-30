@@ -16,9 +16,9 @@ keywords:
   - attendance condonation logic
   - python conditionals project
   - student evaluation engine
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Automated Academic Merit & Grading Engine
@@ -392,7 +392,33 @@ for s in student_roster:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Inconsistent Indentation
+Python requires consistent indentation (recommended: 4 spaces). Mixing tabs and spaces raises an `IndentationError`:
+```python
+# ❌ Inconsistent indentation
+if True:
+    print("Line 1 with spaces")
+	print("Line 2 with tab")  # IndentationError!
+```
+
+### 2. Forgetting the Trailing Colon (`:`)
+Every `if`, `elif`, and `else` statement must end with a colon:
+```python
+# ❌ SyntaxError: expected ':'
+# if age >= 18
+
+# ✅ CORRECT
+if age >= 18:
+    print("Eligible to vote")
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In an `if-elif-else` ladder checking numerical grades, why should percentage thresholds be checked in descending order (e.g. >=90, then >=80, then >=70)?
 A. Because Python sorts `elif` statements automatically at runtime
@@ -401,7 +427,6 @@ C. Because Python raises an `IndentationError` if numerical comparisons are not 
 D. Descending order is required by the PEP 8 linter
 
 **Answer:** B
-**Explanation:** In Python, an `if-elif` chain executes sequentially and halts at the very first branch that evaluates to `True`. If you checked `if marks >= 40:` first, a score of 95 would match that condition and receive a passing 'D' grade instead of reaching the 'A' grade branch.
 
 ---
 
@@ -412,7 +437,6 @@ C. Factory Method
 D. Arrow Anti-Pattern
 
 **Answer:** B
-**Explanation:** Guard clauses validate prerequisite criteria at the entrance of a function and return or raise an error immediately if preconditions fail, keeping the subsequent "happy path" clean and unindented.
 
 ---
 
@@ -423,7 +447,6 @@ C. COMPARTMENT
 D. ESSENTIAL REPEAT
 
 **Answer:** C
-**Explanation:** The student scored 30 in the fourth subject, which is below the 35 cutoff. Because exactly 1 subject was failed, the engine assigns the status `"COMPARTMENT"` for supplementary examination.
 
 ---
 
@@ -437,7 +460,6 @@ C. Bronze
 D. Gold and Silver
 
 **Answer:** A
-**Explanation:** Since `pct >= 95.0` (96.0 >= 95.0) is `True`, the expression immediately resolves to `"Gold"` and skips the rest of the ternary chain.
 
 ---
 
@@ -448,7 +470,6 @@ C. Boolean flags cannot be used in for-loops
 D. Lists run on multi-threaded CPU cores in Python
 
 **Answer:** B
-**Explanation:** Collecting failed subjects in a list provides rich diagnostic data: `len(failed_subjects)` gives the backlog count needed for policy decisions, and the list elements provide the exact names of the subjects that need re-examination.
 
 ---
 
@@ -579,3 +600,10 @@ Total Quality Points:     147
 Semester SGPA:            9.19 / 10.00
 Academic Standing:        FIRST CLASS WITH DISTINCTION
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **While Loop** (13: Loops).
+
+👉 **[Continue to Next Lesson: While Loop →](/tutorials/python-for-beginners/while-loop)**

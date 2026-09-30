@@ -16,9 +16,9 @@ keywords:
   - chained get method
   - nested dictionary iteration
   - flatten nested dictionary
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Dictionaries in Python: Multi-Tier Trees, Deep Lookups & JSON Modeling
@@ -297,7 +297,35 @@ Flattened Dictionary:
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will `data["user"]["address"]["city"]` raise if the `"address"` key is missing?
 A. `AttributeError`
@@ -306,7 +334,6 @@ C. `IndexError`
 D. Returns `None`
 
 **Answer:** B
-**Explanation:** Direct bracket chaining evaluates left-to-right. `data["user"]` succeeds, but attempting `["address"]` on a dictionary missing that key immediately raises `KeyError: 'address'`.
 
 ---
 
@@ -317,7 +344,6 @@ C. `user["address"]?.["city"]`
 D. `user.search("city")`
 
 **Answer:** B
-**Explanation:** Chaining `.get("address", {})` guarantees that if `"address"` is missing, an empty dictionary `{}` is passed to the subsequent `.get("city", "Default City")` call, preventing any crash.
 
 ---
 
@@ -328,7 +354,6 @@ C. It deletes the `"config"` key
 D. It resets all values in `d` to 30
 
 **Answer:** B
-**Explanation:** `d.setdefault("config", {})` returns the existing nested dictionary if present or initializes an empty dictionary if missing, allowing direct chained key assignment on the inner container.
 
 ---
 
@@ -344,7 +369,6 @@ C. 3
 D. `KeyError`
 
 **Answer:** B
-**Explanation:** `tree["a"]` is an inner dictionary. Adding `"c": 20` to it results in `{"b": 10, "c": 20}`, which has a length of 2.
 
 ---
 
@@ -355,7 +379,6 @@ C. Nested dictionaries cannot be printed without deepcopy
 D. Deepcopy converts dictionaries into tuples
 
 **Answer:** A
-**Explanation:** A shallow copy only creates a new container for the outer dictionary. References to inner sub-dictionaries are copied as memory pointers, meaning modifying an inner dictionary in the copy mutates the original.
 
 ---
 
@@ -442,3 +465,10 @@ ID: PT-8002 | Name: Pooja Hegde (Age: 34)
   Vitals:      BP 120/80, SpO2 99%, HR 72 bpm
   Medications: None
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Project: Student Records** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Project: Student Records →](/tutorials/python-for-beginners/project-student-records)**

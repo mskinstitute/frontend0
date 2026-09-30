@@ -16,9 +16,9 @@ keywords:
   - list count
   - list index
   - timsort key lambda
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python List Methods: In-Place Manipulation, Searching & Timsort Mastery
@@ -266,7 +266,38 @@ Class Average: 87.80
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens if a developer writes `scores = scores.sort()` in their code?
 A. `scores` becomes sorted in ascending order
@@ -275,7 +306,6 @@ C. `scores` becomes `None`, destroying the original data
 D. Python raises a `TypeError`
 
 **Answer:** C
-**Explanation:** `list.sort()` sorts the list in-place and returns `None`. Assigning `scores = scores.sort()` rebinds the variable `scores` to `None`, causing data loss. To create a new sorted list, use `scores = sorted(scores)`.
 
 ---
 
@@ -286,7 +316,6 @@ C. `ValueError`
 D. `0`
 
 **Answer:** D
-**Explanation:** Unlike `list.index(x)` which raises `ValueError` when an element is absent, `list.count(x)` safely returns `0` when the element does not exist.
 
 ---
 
@@ -297,7 +326,6 @@ C. By ASCII sum of all characters
 D. Randomly
 
 **Answer:** B
-**Explanation:** The `key` parameter accepts a callable that transforms each element into a comparison proxy. When `key=len` is passed, items are ordered based on the numeric value returned by `len(item)`.
 
 ---
 
@@ -312,7 +340,6 @@ C. `[1, 3]`
 D. 2
 
 **Answer:** A
-**Explanation:** `list.index(x)` returns the zero-based index of the *first* occurrence of `x`. The first `20` is at index 1.
 
 ---
 
@@ -323,7 +350,6 @@ C. `list.reverse()`
 D. `list.order()`
 
 **Answer:** B
-**Explanation:** `sorted()` is a Python built-in function that takes any iterable and returns a brand-new sorted list while leaving the original input sequence completely unmodified.
 
 ---
 
@@ -400,3 +426,10 @@ Cheapest Item:   Rs 449.00
 Most Expensive:  Rs 24500.00
 Average Price:   Rs 6819.40
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Nested Lists** (8: Lists).
+
+👉 **[Continue to Next Lesson: Nested Lists →](/tutorials/python-for-beginners/nested-lists)**

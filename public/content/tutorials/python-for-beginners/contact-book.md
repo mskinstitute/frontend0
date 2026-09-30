@@ -17,9 +17,9 @@ keywords:
   - cli application
   - input validation
   - data structures
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: CLI Contact Book with File Persistence
@@ -337,7 +337,17 @@ Suresh Kumar         | 9988776655   | suresh.k@example.com      | Family
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Production Development Best Practices & Common Traps
+
+1. **Always Validate User Input:** Never trust raw user inputs. Wrap numeric casts with `try...except ValueError` to prevent sudden crashes.
+2. **Defensive File Loading:** Always check whether a storage file exists or catch `FileNotFoundError` when initializing terminal databases.
+3. **Modular Function Design:** Keep functions focused on a single responsibility (e.g. `load_data()`, `save_data()`, `display_menu()`, `add_record()`).
+
+---
+
+## Practice Quiz
 
 ### 1. Why is it best practice to normalize contact names with .strip().lower() when storing them as dictionary keys?
 A. Because Python dictionaries only permit lowercase letters as keys
@@ -345,7 +355,6 @@ B. To allow case-insensitive and whitespace-resilient lookups regardless of how 
 C. To compress the memory size of strings by 50 percent
 D. To encrypt the contact details for cybersecurity
 **Answer:** B
-**Explanation:** Normalizing keys with `.strip().lower()` ensures that queries such as `"Rahul"`, `"rahul"`, and `" Rahul "` map to the exact same dictionary entry, preventing duplicate or unreachable records.
 
 ---
 
@@ -355,7 +364,6 @@ B. `contacts.pop(key, None)`
 C. `contacts.delete(key)`
 D. `del contacts[key]` without checking
 **Answer:** B
-**Explanation:** `contacts.pop(key, None)` removes the key if it exists, but returns `None` instead of raising a `KeyError` if the key is absent.
 
 ---
 
@@ -365,7 +373,6 @@ B. Checking `os.path.exists()` allows returning an empty dictionary gracefully w
 C. Python prompts the user to download an external database
 D. Python freezes indefinitely
 **Answer:** B
-**Explanation:** Using `if not os.path.exists(STORAGE_FILE): return contacts` guards against `FileNotFoundError` on fresh installs, allowing the application to initialize an empty database.
 
 ---
 
@@ -375,7 +382,6 @@ B. $O(n)$
 C. $O(1)$ average time complexity
 D. $O(\log n)$
 **Answer:** C
-**Explanation:** Dictionaries in Python are implemented as hash tables. Looking up an item by its exact hash key runs in $O(1)$ constant average time.
 
 ---
 
@@ -385,7 +391,6 @@ B. To ensure data persistence on disk so changes are not lost if the program ter
 C. Because Python limits in-memory dictionaries to 3 items
 D. To empty the RAM of the operating system
 **Answer:** B
-**Explanation:** In-memory variables vanish when the Python process halts. Immediately persisting mutations to disk guarantees data durability and integrity across restarts.
 
 ---
 
@@ -490,3 +495,10 @@ Name,Phone,Email,Category,Favorite
 Arun Sharma,9876543210,arun@example.com,Work,True
 Kavita Rani,9811223344,kavita@example.com,Family,True
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Quiz Application** (16: Projects).
+
+👉 **[Continue to Next Lesson: Quiz Application →](/tutorials/python-for-beginners/quiz-application)**

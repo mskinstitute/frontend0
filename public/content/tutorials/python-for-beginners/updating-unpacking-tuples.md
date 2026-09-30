@@ -16,9 +16,9 @@ keywords:
   - mutable objects in tuple
   - convert tuple to list
   - python variable swapping
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Updating & Unpacking Tuples: The Workaround Pattern, Extended Unpacking & Variable Swapping
@@ -257,7 +257,23 @@ Final Exam: 14
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the Trailing Comma on Single-Element Tuples
+Without a trailing comma, parentheses are treated as grouping symbols, not a tuple:
+```python
+not_a_tuple = ("admin")  # Type is str!
+is_a_tuple = ("admin",)  # Type is tuple!
+
+print(type(not_a_tuple))  # <class 'str'>
+print(type(is_a_tuple))   # <class 'tuple'>
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens if you try to unpack a 3-element tuple into 2 variables: `a, b = (1, 2, 3)`?
 A. `a` gets 1, `b` gets 2, and 3 is discarded
@@ -266,7 +282,6 @@ C. `TypeError: tuple unpacking failed`
 D. `b` becomes a list `[2, 3]`
 
 **Answer:** B
-**Explanation:** Standard unpacking requires an exact 1-to-1 match between the number of variables and the number of elements in the tuple. A mismatch raises `ValueError: too many values to unpack`.
 
 ---
 
@@ -280,7 +295,6 @@ C. `30` as an integer
 D. `SyntaxError`
 
 **Answer:** B
-**Explanation:** Python's extended unpacking operator `*` always gathers the unmatched elements into a standard Python `list`. Therefore, `middle` is `[20, 30, 40]`.
 
 ---
 
@@ -291,7 +305,6 @@ C. A new tuple is created at a new memory address
 D. The list is converted to an immutable tuple
 
 **Answer:** B
-**Explanation:** The tuple's internal reference to the list object at index 1 never changes. Because the object itself is a mutable list, calling `.append()` on it mutates the list in-place successfully.
 
 ---
 
@@ -302,7 +315,6 @@ C. `p, q = q, p`
 D. `swap(p, q)`
 
 **Answer:** C
-**Explanation:** `p, q = q, p` evaluates the right-hand side expressions into an anonymous 2-tuple `(q, p)`, then unpacks them into `p` and `q`, swapping both variables atomically.
 
 ---
 
@@ -313,7 +325,6 @@ C. Variables must be uppercase
 D. Asterisks are reserved only for function arguments
 
 **Answer:** B
-**Explanation:** Python's unpacking syntax allows at most one `*` starred expression per assignment target; having multiple starred targets creates ambiguity regarding how elements should be partitioned.
 
 ---
 
@@ -386,3 +397,10 @@ Routing Details: ['HDFC-Acc-0012', 'ICICI-Acc-8841', 45000.0] (Sender, Receiver,
 Final Status:    SETTLED_SUCCESS
 UTR Reference:   UTR-77182901
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Join Tuples** (9: Tuples).
+
+👉 **[Continue to Next Lesson: Join Tuples →](/tutorials/python-for-beginners/join-tuples)**

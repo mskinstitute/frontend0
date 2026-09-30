@@ -17,9 +17,9 @@ keywords:
   - format specifiers
   - string concatenation
   - debug f-strings
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python String Concatenation & Modern Formatting: f-strings, format(), & %
@@ -290,7 +290,33 @@ DEBUG: server_port=8080, active_threads=16, cpu_load_pct=42.8%
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Attempting to Mutate a String in Place
+Python strings are immutable. You cannot assign directly to a character index:
+```python
+text = "Python"
+# ❌ INCORRECT (TypeError: 'str' object does not support item assignment)
+text[0] = "J"
+
+# ✅ CORRECT (Create a new string using slicing or concatenation)
+text = "J" + text[1:]
+print(text)  # "Jython"
+```
+
+### 2. Off-By-One Errors in Slicing
+In Python slicing `text[start:stop]`, the `stop` index is **exclusive** (not included in the slice):
+```python
+word = "Coding"
+# Slicing word[0:3] gives indices 0, 1, 2 ('Cod'), NOT index 3!
+print(word[0:3])  # 'Cod'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which Python version officially introduced Formatted String Literals (f-strings)?
 A. Python 2.7
@@ -299,7 +325,6 @@ C. Python 3.6
 D. Python 3.12
 
 **Answer:** C
-**Explanation:** Formatted string literals (f-strings) were introduced in Python 3.6 via PEP 498. They evaluate expressions at runtime and compile directly to efficient `BUILD_STRING` bytecode.
 
 ---
 
@@ -310,7 +335,6 @@ C. `{price:2.comma}`
 D. `{price:.2d}`
 
 **Answer:** B
-**Explanation:** In Python format specifiers, `,` adds comma separators for thousands, and `.2f` specifies a fixed-point floating number with 2 decimal digits. E.g., `f"{1250000.5:,.2f}"` yields `"1,250,000.50"`.
 
 ---
 
@@ -321,7 +345,6 @@ C. `"x"`
 D. `SyntaxError`
 
 **Answer:** B
-**Explanation:** Python 3.8 introduced the `=` specifier in f-strings for self-documenting debugging expressions. `f"{x=}"` prints the text of the variable or expression followed by an equals sign and its value: `"x=25"`.
 
 ---
 
@@ -332,7 +355,6 @@ C. `"85%"`
 D. `"0.1%"`
 
 **Answer:** B
-**Explanation:** The `%` format specifier multiplies the number by 100, formats it as a float, and appends a percent sign. With `.1%`, `0.085 * 100 = 8.5%`.
 
 ---
 
@@ -343,7 +365,6 @@ C. `str.join()` is only compatible with numbers
 D. `+=` deletes the first character of the string
 
 **Answer:** B
-**Explanation:** Because strings are immutable, each `+=` operation requires reallocating memory and copying all existing characters into a newly created string. For $N$ items, this causes quadratic $O(N^2)$ time complexity. `str.join()` pre-calculates total length and copies everything in a single linear $O(N)$ pass.
 
 ---
 
@@ -434,3 +455,10 @@ NET TAKE-HOME PAY                   : INR     182,000.00
 ==============================================================
 TELEMETRY: net_take_home=182000.00, total_deductions=18000.00
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Escape Characters** (5: Strings).
+
+👉 **[Continue to Next Lesson: Escape Characters →](/tutorials/python-for-beginners/escape-characters)**

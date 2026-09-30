@@ -17,9 +17,9 @@ keywords:
   - len function
   - unicode strings
   - membership in
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Strings: Literals, Unicode, Immutability, & Length
@@ -264,7 +264,33 @@ Is 'C#' absent from syllabus?   : True
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Attempting to Mutate a String in Place
+Python strings are immutable. You cannot assign directly to a character index:
+```python
+text = "Python"
+# ❌ INCORRECT (TypeError: 'str' object does not support item assignment)
+text[0] = "J"
+
+# ✅ CORRECT (Create a new string using slicing or concatenation)
+text = "J" + text[1:]
+print(text)  # "Jython"
+```
+
+### 2. Off-By-One Errors in Slicing
+In Python slicing `text[start:stop]`, the `stop` index is **exclusive** (not included in the slice):
+```python
+word = "Coding"
+# Slicing word[0:3] gives indices 0, 1, 2 ('Cod'), NOT index 3!
+print(word[0:3])  # 'Cod'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens if you attempt to execute `msg = "Hello"; msg[0] = "Y"` in Python?
 A. `msg` successfully updates to `"Yello"`
@@ -273,7 +299,6 @@ C. A new variable `Y` is created
 D. The first letter is deleted
 
 **Answer:** B
-**Explanation:** Strings in Python are immutable objects. Once created in memory, individual characters cannot be modified in-place. Attempting index assignment raises a `TypeError`.
 
 ---
 
@@ -284,7 +309,6 @@ C. Triple quotes `"""..."""` or `'''...'''`
 D. Backticks `` `...` ``
 
 **Answer:** C
-**Explanation:** Triple quotes (either three single quotes or three double quotes) allow strings to span multiple physical lines while preserving raw line breaks, indentation, and whitespace.
 
 ---
 
@@ -295,7 +319,6 @@ C. `6`
 D. `9`
 
 **Answer:** B
-**Explanation:** The `len()` function counts every individual character in the string, including spaces and digits: `'C'`, `'o'`, `'d'`, `'e'`, `' '` (space), `'1'`, `'0'`, `'1'` = 8 characters.
 
 ---
 
@@ -306,7 +329,6 @@ C. `TypeError`
 D. `None`
 
 **Answer:** B
-**Explanation:** String membership testing using the `in` operator is strictly **case-sensitive**. The substring `"data"` (lowercase 'd') does not exist in `"Database Management"` (uppercase 'D').
 
 ---
 
@@ -317,7 +339,6 @@ C. Unicode (UTF-8 / compact representation)
 D. EBCDIC
 
 **Answer:** C
-**Explanation:** Python 3 natively represents all strings as Unicode objects, supporting virtually all world languages, technical scripts, and emojis without needing third-party libraries.
 
 ---
 
@@ -407,3 +428,10 @@ VERIFICATION    : DIGITALLY VERIFIED ACADEMIC CREDENTIAL
 ERROR: Invalid Aadhaar number '12345'. Must be 12 digits.
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Slicing & Indexing** (5: Strings).
+
+👉 **[Continue to Next Lesson: Slicing & Indexing →](/tutorials/python-for-beginners/slicing-indexing)**

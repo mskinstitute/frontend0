@@ -16,9 +16,9 @@ keywords:
   - chained comparisons
   - lexicographical order
   - short circuit evaluation
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Comparison Operators: Relational Checks & Elegant Chained Comparisons
@@ -251,7 +251,39 @@ Case-insensitive comparison   : False
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does the expression `10 <= 25 <= 50` evaluate to in Python?
 A. `False`
@@ -260,7 +292,6 @@ C. `TypeError`
 D. `SyntaxError`
 
 **Answer:** B
-**Explanation:** Python natively supports chained comparisons. `10 <= 25 <= 50` evaluates as `(10 <= 25) and (25 <= 50)`. Since both conditions are true, the expression evaluates to `True`.
 
 ---
 
@@ -271,7 +302,6 @@ C. `!==`
 D. `not ==`
 
 **Answer:** B
-**Explanation:** `!=` is the standard not-equal-to comparison operator in Python. The `<>` operator was deprecated and removed in Python 3, and `!==` belongs to JavaScript.
 
 ---
 
@@ -282,7 +312,6 @@ C. It is a bug in the interpreter
 D. "Zebra" is alphabetically before "apple" in Dutch
 
 **Answer:** B
-**Explanation:** Python performs lexicographical string comparisons based on Unicode code points. In ASCII/Unicode, all uppercase letters (A-Z: 65-90) precede lowercase letters (a-z: 97-122). Therefore, `'Z'` (90) is less than `'a'` (97).
 
 ---
 
@@ -293,7 +322,6 @@ C. Python ignores the statement
 D. Python crashes with a memory leak
 
 **Answer:** B
-**Explanation:** In Python, standard assignment (`=`) is a statement, not an expression. Writing `=` inside an `if` condition triggers a compile-time `SyntaxError`. For comparison, use `==`; for assignment expression, use the walrus operator `:=`.
 
 ---
 
@@ -304,7 +332,6 @@ C. `TypeError`
 D. `None`
 
 **Answer:** B
-**Explanation:** The `==` operator compares numeric value, not identity or type. Python implicitly promotes the integer `5` to the float `5.0` and verifies that their numerical magnitudes are equal, returning `True`.
 
 ---
 
@@ -412,3 +439,10 @@ Marginal Tax Rate   : 30.0%
 Sec 87A Full Rebate : NOT ELIGIBLE
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Logical Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Logical Operators →](/tutorials/python-for-beginners/logical-operators)**

@@ -8,292 +8,1160 @@ difficulty: Beginner
 readingTime: 12
 order: 6
 keywords: ["python variables", "variable naming rules", "python keywords", "identifiers in python", "snake_case python", "keyword.kwlist"]
-lastUpdated: 2026-09-12
-author: Antigravity Team
-version: 1.0.0
+lastUpdated: 2026-09-30
+author: MSK Team
+version: 1.1.0
 ---
 
-# What is Variable?
-Variables are containers for `store data` values.
 
-Imagine walking into your home kitchen and opening a spice rack. Your mother has arranged dozens of identical stainless steel containers (*dabbas*). One contains turmeric (*haldi*), another contains mustard seeds (*rai*), another contains cumin (*jeera*), and another contains salt (*namak*). If none of the containers had labels, cooking a simple meal would be a chaotic disaster—you might accidentally pour salt into a pot of sweet tea! But because every container has a clear label on its lid, anyone in the family can reach into the cabinet and grab exactly what they need.
 
-In computer programming, **Variables** are those labeled containers. A variable is simply a named memory tag that points to data stored in your computer's RAM. To ensure the computer never gets confused, Python enforces strict rules on what you can name your variables (**Identifiers**).
+# 🐍 Python Variables: Introduction and Naming Rules
+
+In the previous lessons, we learned how to write Python code and follow Python's syntax rules.
+
+Now we are ready to learn one of the most important concepts in programming:
+
+> **Variables**
+
+Variables allow us to **store information and use it later in our program**.
+
+By the end of this lesson, you will understand:
+
+* What a variable is
+* How to create a variable
+* What an identifier is
+* Rules for naming variables
+* Python's reserved keywords
+* `snake_case` naming
+* Constants and class naming conventions
+* How to check whether a name is valid
+* How to check Python keywords using the `keyword` module
 
 ---
 
-# Create Variable
+# 1. What is a Variable?
 
-Python has no command for declaring a variable.
-A variable can have a short name (like x and y) or a more descriptive name (age, carname, student_name). 
+A **variable** is a name that refers to a value in a Python program.
 
-## 1.  **Rules of Python Variable Names:**
+Think about your kitchen.
 
-Every variable name in Python must obey these five non-negotiable rules:
+You may have containers with labels such as:
 
-- A variable name must `start` with a `Letters (A-Z, a-z)` or `Underscores (_)` character
-- A variable name `cannot` start with a `Digits (0-9)`
-- A variable name `cannot` be any of the Python `keywords`.
-- A variable name can only contain `alpha-numeric` characters and underscores `(A-z, 0-9, and _ )`
-- No Spaces or Hyphens Allowed:     ✓ `total_score`     ✕ `total score`       ✕ `total-score` (Minus operator!)
-- No Special Punctuation Symbols:   ✕ `user@email`      ✕ `price$`            ✕ `discount%` (SyntaxError!)
-- Strictly `Case-Sensitive`: `student_name`, `Student_Name`, `STUDENT_NAME` (3 different variables!)
+* 🧂 Salt
+* 🌿 Cumin
+* 🌶️ Chili
+* 🟡 Turmeric
 
+The label helps you identify what is inside each container.
 
+Variables work in a similar way.
 
-For example, to create a variable name **student** to hold **Student's Name** and variable **age** to hold **Student's Age**
+For example:
 
-```py
-student = 'Amit'
+```python
+student_name = "Amit"
 age = 18
 ```
 
-| variable  |  Value |
-| --------  |  ----- |
-| student   | 'Amit' |
-| age       |  18    |
+Here:
 
-Variables do not need to be declared with any particular type, and can even change type after they have been set.
+* `student_name` is the variable name.
+* `"Amit"` is the value.
+* `age` is another variable name.
+* `18` is its value.
 
+You can think of it like this:
 
-### Legal variable names ✅
-```py
-myname = "Sumit"
-my_name = "Sumit"
-_my_name = "Sumit"
-myName = "Sumit"
-MYNAME = "Sumit"
-myname2 = "Sumit"
+```text
+student_name  →  "Amit"
+age           →  18
 ```
 
-### Illegal variable names ❎:
-```py
-2myname = "Sumit"
-my-name = "Sumit"
-my name = "Sumit"
-@my_name = "Sumit"
-&my_name = "Sumit"
+### 💡 Beginner Tip
+
+Don't worry about the complicated details of computer memory yet.
+
+For now, remember:
+
+> **A variable gives a meaningful name to a value so that we can use that value later.**
+
+---
+
+# 2. Creating a Variable
+
+Python does **not** require a separate variable declaration.
+
+You can create a variable simply by assigning a value to a name.
+
+```python
+student = "Amit"
+age = 18
+```
+
+Python understands that:
+
+```text
+student → "Amit"
+age     → 18
+```
+
+You can then use the variables:
+
+```python
+print(student)
+print(age)
+```
+
+Output:
+
+```text
+Amit
+18
 ```
 
 ---
 
-## 2. Python Reserved Keywords (The 35 Forbidden Names)
+## Variables Can Store Different Types of Data
 
-Python reserves approximately 35 special words that form the grammatical skeleton of the language. You **CANNOT** use any of these words as **variable** names, **function** names, or **identifiers**:
+A variable can refer to different kinds of values.
 
-```cmd
-PowerShell 7.6.6
-PS C:\Users\MSK-Institute> py
-Python 3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
->>> help("keywords")
-
-Here is a list of the Python keywords.  Enter any keyword to get more help.
+```python
+name = "Sumit"
+age = 25
+height = 5.8
+is_student = True
 ```
 
-```py no-try
-False               class               from                or
-None                continue            global              pass
-True                def                 if                  raise
-and                 del                 import              return
-as                  elif                in                  try
-assert              else                is                  while
-async               except              lambda              with
-await               finally             nonlocal            yield
-break               for                 not
+These values represent different data types:
+
+| Variable     | Value     | Type    |
+| ------------ | --------- | ------- |
+| `name`       | `"Sumit"` | String  |
+| `age`        | `25`      | Integer |
+| `height`     | `5.8`     | Float   |
+| `is_student` | `True`    | Boolean |
+
+Python determines the type from the value.
+
+You don't have to write the type when creating the variable.
+
+---
+
+# 3. Variables Can Change Their Values
+
+A variable can be assigned a new value.
+
+```python
+age = 18
+
+print(age)
+
+age = 19
+
+print(age)
 ```
 
-### The Full Keyword Roster:
+Output:
 
-Complete list of python reserved keywords is given below.
+```text
+18
+19
+```
 
-| Categories | Reserved Keywords |
-| :--- | :--- |
-| **Booleans & Values** | `True`, `False`, `None` |
-| **Control Flow & Logic** | `if`, `elif`, `else`, `while`, `for`, `break`, `continue`, `pass` |
-| **Logical Operators** | `and`, `or`, `not`, `is`, `in` |
-| **Functions & Classes** | `def`, `return`, `lambda`, `class`, `yield` |
-| **Exceptions & Errors** | `try`, `except`, `finally`, `raise`, `assert` |
-| **Scope & Imports** | `global`, `nonlocal`, `import`, `from`, `as`, `with`, `del` |
-| **Async Operations** | `async`, `await` |
+The variable `age` now refers to the new value `19`.
 
-If you try to name a variable `def = 100` or `for = "student"`, Python stops immediately with a `SyntaxError: invalid syntax`!
+A variable can also refer to a value of a different type:
 
+```python
+data = 100
+
+data = "Hello"
+```
+
+This is possible in Python because Python is **dynamically typed**.
+
+### 🎯 Remember
+
+You don't need to declare:
+
+```python
+int age
+```
+
+Instead, simply write:
+
+```python
+age = 18
+```
+
+---
+
+# 4. What is an Identifier?
+
+An **identifier** is a name used to identify something in Python code.
+
+For example:
+
+```python
+student_name = "Amit"
+```
+
+`student_name` is an identifier.
+
+Identifiers can be used for things such as:
+
+* Variables
+* Functions
+* Classes
+* Other named objects in Python
+
+So:
+
+> **Variable = a name referring to a value**
+> **Identifier = a valid name used in Python code**
+
+For beginners, you can think of a variable name as one common type of identifier.
+
+---
+
+# 5. Rules for Python Variable Names
+
+Python has specific rules for naming variables.
+
+Let's learn them one by one.
+
+---
+
+## Rule 1: Start with a Letter or Underscore
+
+A variable name can start with:
+
+* A letter: `A-Z` or `a-z`
+* An underscore: `_`
+
+Examples:
+
+```python
+name = "Amit"
+student_name = "Amit"
+_name = "Amit"
+```
+
+All three are valid.
+
+---
+
+## Rule 2: A Variable Cannot Start with a Number
+
+This is invalid:
+
+```python
+2name = "Amit"
+```
+
+Python does not allow a variable name to begin with a digit.
+
+But numbers can appear **after the first character**:
+
+```python
+name2 = "Amit"
+student2026 = "Amit"
+batch_2026 = "Python"
+```
+
+These are valid.
+
+### 💡 Easy Rule
+
+```text
+❌ 2student
+✅ student2
+```
+
+---
+
+## Rule 3: Only Letters, Numbers, and Underscores
+
+Python variable names can contain:
+
+* Letters
+* Numbers
+* Underscores
+
+Examples:
+
+```python
+student_name = "Amit"
+student2026 = "Amit"
+batch_2026 = "Python"
+```
+
+Special characters are not allowed.
+
+For example:
+
+```python
+user@email = "test"
+price$ = 500
+discount% = 10
+```
+
+These are invalid variable names.
+
+---
+
+## Rule 4: Spaces Are Not Allowed
+
+This is invalid:
+
+```python
+student name = "Amit"
+```
+
+Python interprets the space as separating different parts of the statement.
+
+Use an underscore instead:
+
+```python
+student_name = "Amit"
+```
+
+### ❌ Wrong
+
+```text
+student name
+```
+
+### ✅ Correct
+
+```text
+student_name
+```
+
+---
+
+## Rule 5: Hyphens Are Not Allowed
+
+This is invalid:
+
+```python
+student-name = "Amit"
+```
+
+Why?
+
+Because Python uses `-` as the subtraction operator.
+
+For example:
+
+```python
+10 - 5
+```
+
+So Python does not treat `student-name` as one variable name.
+
+Use an underscore:
+
+```python
+student_name = "Amit"
+```
+
+---
+
+# 6. Python is Case-Sensitive
+
+Python treats uppercase and lowercase letters as different.
+
+For example:
+
+```python
+student = "Amit"
+Student = "Rahul"
+STUDENT = "Sumit"
+```
+
+These are three different names.
+
+```text
+student
+Student
+STUDENT
+```
+
+are not the same identifier.
+
+### ⚠️ Important
+
+For beginners, it is better to avoid creating multiple variables that differ only by capitalization.
+
+Instead of:
+
+```python
+name = "Amit"
+Name = "Rahul"
+NAME = "Sumit"
+```
+
+prefer clear and different names.
+
+---
+
+# 7. Valid and Invalid Variable Names
+
+Let's look at some examples.
+
+### ✅ Valid Names
+
+```python
+myname = "Sumit"
+
+my_name = "Sumit"
+
+_my_name = "Sumit"
+
+myName = "Sumit"
+
+MYNAME = "Sumit"
+
+myname2 = "Sumit"
+```
+
+All of these follow Python's basic naming rules.
+
+However, **valid does not always mean recommended**.
+
+For regular variables, Python programmers usually prefer `snake_case`.
+
+For example:
+
+```python
+my_name = "Sumit"
+```
+
+is generally clearer than:
+
+```python
+myName = "Sumit"
+```
+
+---
+
+### ❌ Invalid Names
+
+```python
+2myname = "Sumit"
+
+my-name = "Sumit"
+
+my name = "Sumit"
+
+@my_name = "Sumit"
+
+&my_name = "Sumit"
+```
+
+Why are they invalid?
+
+| Name       | Problem              |
+| ---------- | -------------------- |
+| `2myname`  | Starts with a number |
+| `my-name`  | Contains `-`         |
+| `my name`  | Contains a space     |
+| `@my_name` | Contains `@`         |
+| `&my_name` | Contains `&`         |
+
+---
+
+# 8. Python Reserved Keywords
+
+Python has some special words that already have a meaning in the language.
+
+These words are called **keywords**.
+
+For example:
+
+```python
+if
+else
+for
+while
+class
+def
+return
+import
+```
+
+These words are part of Python's syntax.
+
+Therefore, you cannot use them as normal variable names.
+
+For example:
+
+```python
+class = "Python"
+```
+
+This is invalid.
+
+Similarly:
+
+```python
+for = 10
+```
+
+is invalid.
+
+Python will report a syntax error.
+
+---
+
+# 9. Python Keywords
+
+Python's keyword list can be checked directly from Python.
+
+Run:
 
 ```python
 import keyword
 
-all_keywords = keyword.kwlist
-
-print("Total Keywords in Python:", len(all_keywords))
-print(all_keywords)
+print(keyword.kwlist)
 ```
 
+This displays the keywords supported by your installed Python version.
 
+You can also count them:
+
+```python
+import keyword
+
+print("Total keywords:", len(keyword.kwlist))
+```
+
+### 💡 Important
+
+Don't memorize every keyword immediately.
+
+As you learn Python, you will naturally become familiar with the most commonly used ones.
+
+Some important keywords include:
+
+```text
+True
+False
+None
+
+if
+elif
+else
+
+for
+while
+break
+continue
+
+def
+return
+class
+
+try
+except
+finally
+
+import
+from
+as
+
+and
+or
+not
+in
+is
+```
+
+The exact keyword list can vary between Python versions, so checking `keyword.kwlist` is more reliable than memorizing a fixed number.
 
 ---
 
-## 3. PEP 8 Naming Conventions
+# 10. Checking Whether a Name is a Keyword
 
-Beyond the hard syntax rules, Python has universal community style conventions outlined in **PEP 8**:
+Python provides the `keyword` module for this purpose.
 
-### 1. Variables & Functions: 
-Use **snake_case** Each word is separated by an all **lowercase** with **underscores** character.
 ```python
-student_count = 50
-calculate_total_marks = 450
+import keyword
+
+print(keyword.iskeyword("class"))
 ```
 
-### 2. Constants:
-Use **UPPER_CASE** with underscores
-```py
+Output:
+
+```text
+True
+```
+
+Because `class` is a Python keyword.
+
+Now try:
+
+```python
+print(keyword.iskeyword("student"))
+```
+
+Output:
+
+```text
+False
+```
+
+Because `student` is not a Python keyword.
+
+### 🎯 Remember
+
+```python
+keyword.iskeyword("word")
+```
+
+returns:
+
+* `True` → the word is a keyword
+* `False` → the word is not a keyword
+
+---
+
+# 11. PEP 8 Naming Conventions
+
+Python has official style recommendations called **PEP 8**.
+
+PEP 8 helps developers write code that is easier to read and maintain.
+
+Naming conventions are different from syntax rules.
+
+For example:
+
+```python
+studentName = "Amit"
+```
+
+is a valid Python identifier.
+
+But for a normal variable, PEP 8 recommends:
+
+```python
+student_name = "Amit"
+```
+
+This style is called **snake_case**.
+
+---
+
+## 11.1 Variables and Functions → snake_case
+
+Use lowercase letters with underscores between words.
+
+```python
+student_name = "Amit"
+
+student_count = 50
+
+total_marks = 450
+
+calculate_average = 85
+```
+
+### ❌ Less preferred
+
+```python
+studentName = "Amit"
+```
+
+### ✅ Recommended
+
+```python
+student_name = "Amit"
+```
+
+---
+
+# 12. Constants → UPPER_CASE
+
+Constants are values that are intended to remain unchanged.
+
+Python commonly uses uppercase names with underscores for constants.
+
+```python
 MAX_ATTEMPTS = 3
+
 PI = 3.14159
+
 DATABASE_PORT = 5432
 ```
 
-### 3. Classes:
-Use **PascalCase** Each word starts with a Capitalize each word, zero underscores. 
-```py
+This is a **naming convention**, not a rule that prevents the value from changing.
+
+For example:
+
+```python
+MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = 5
+```
+
+Python does not automatically stop you.
+
+The uppercase name simply communicates:
+
+> "This value is intended to be treated as a constant."
+
+---
+
+# 13. Classes → PascalCase
+
+Class names commonly use **PascalCase**.
+
+Each word starts with a capital letter.
+
+Example:
+
+```python
 class StudentRecord:
     pass
 ```
 
----
+Another example:
 
-## 4. Valid vs. Invalid Variable Names
+```python
+class BankAccount:
+    pass
+```
 
-| Identifier | Valid? | Reason / Explanation |
-| :--- | :--- | :--- |
-| `student_marks` | **YES** | Follows clean PEP 8 `snake_case`. |
-| `_internal_id` | **YES** | Starts with valid underscore. |
-| `batch2026` | **YES** | Letters followed by digits. |
-| `2026batch` | **NO** | **SyntaxError:** Cannot begin with a number! |
-| `user-name` | **NO** | **SyntaxError:** Hyphen `-` is interpreted as a subtraction operator! |
-| `total marks` | **NO** | **SyntaxError:** Spaces are forbidden inside variable names. |
-| `class` | **NO** | **SyntaxError:** `class` is a reserved Python keyword. |
-| `scholar#id` | **NO** | **SyntaxError:** Special character `#` is a comment operator. |
+Notice:
 
----
-
-## 5. Do's and Don'ts of Naming Variables
-
-| Practice | Do | Don't |
-| :--- | :--- | :--- |
-| **Clarity** | Use descriptive, self-explanatory names (`daily_temperature = 32`). | Use single-letter or cryptic names (`t = 32`, `d1 = 12`). |
-| **Style** | Use `snake_case` for all regular variables and functions. | Use camelCase (`studentCount`) out of habit from Java or JavaScript. |
-| **Keywords** | Verify variable names with `keyword.iskeyword(name)`. | Name variables similar to built-ins like `print`, `str`, `list`, or `sum`. |
-| **Readability** | Choose pronounceable names that other teammates can read aloud. | Create absurdly long names like `the_total_score_of_all_students_in_delhi_batch`. |
+```text
+student_name   → snake_case
+MAX_ATTEMPTS   → UPPER_CASE
+StudentRecord  → PascalCase
+```
 
 ---
 
-# Multiple Choice Questions
+# 14. Valid vs Invalid Names
 
-### 1. Which of the following is a VALID variable name in Python?
+| Identifier      | Valid? | Explanation                                 |
+| --------------- | ------ | ------------------------------------------- |
+| `student_marks` | ✅ Yes  | Valid and follows `snake_case`              |
+| `_internal_id`  | ✅ Yes  | Can start with `_`                          |
+| `batch2026`     | ✅ Yes  | Digits can appear after the first character |
+| `2026batch`     | ❌ No   | Cannot start with a number                  |
+| `user-name`     | ❌ No   | `-` is not allowed in identifiers           |
+| `total marks`   | ❌ No   | Spaces are not allowed                      |
+| `class`         | ❌ No   | `class` is a keyword                        |
+| `scholar#id`    | ❌ No   | `#` starts a comment                        |
+
+---
+
+# 15. A Useful Python Check: `isidentifier()`
+
+Python strings have a useful method called:
+
+```python
+.isidentifier()
+```
+
+It checks whether a string follows Python's identifier naming rules.
+
+Example:
+
+```python
+name = "student_name"
+
+print(name.isidentifier())
+```
+
+Output:
+
+```text
+True
+```
+
+Now:
+
+```python
+name = "2student"
+
+print(name.isidentifier())
+```
+
+Output:
+
+```text
+False
+```
+
+### ⚠️ Important
+
+`isidentifier()` checks whether the name has valid identifier syntax.
+
+It does **not** tell you whether the name is a Python keyword.
+
+For example:
+
+```python
+print("class".isidentifier())
+```
+
+Output:
+
+```text
+True
+```
+
+But:
+
+```python
+class
+```
+
+is still not allowed as a variable name because it is a keyword.
+
+So for a complete check, you can use both:
+
+```python
+import keyword
+
+name = "student_name"
+
+valid = name.isidentifier() and not keyword.iskeyword(name)
+
+print(valid)
+```
+
+Output:
+
+```text
+True
+```
+
+---
+
+# 16. Good Variable Naming Practices
+
+A technically valid name is not always a good name.
+
+Compare:
+
+```python
+x = 450
+```
+
+with:
+
+```python
+total_marks = 450
+```
+
+The second one immediately tells us what `450` represents.
+
+## Prefer descriptive names
+
+### ❌ Not very clear
+
+```python
+x = 32
+y = 450
+z = 85
+```
+
+### ✅ Clearer
+
+```python
+student_count = 32
+total_marks = 450
+average_marks = 85
+```
+
+### 🎯 Remember
+
+A good variable name should help another person understand your code without needing to guess.
+
+---
+
+# 17. Do's and Don'ts
+
+| Practice         | ✅ Do                     | ❌ Don't              |
+| ---------------- | ------------------------ | -------------------- |
+| Clarity          | `daily_temperature = 32` | `t = 32`             |
+| Style            | `student_count`          | `studentCount`       |
+| Spaces           | `total_marks`            | `total marks`        |
+| Hyphens          | `user_name`              | `user-name`          |
+| Keywords         | `class_name`             | `class`              |
+| Meaningful names | `total_price`            | `x123`               |
+| Length           | `student_count`          | Extremely long names |
+
+### 💡 Beginner Tip
+
+Don't make every variable name extremely short.
+
+But also don't create unnecessarily long names.
+
+Good:
+
+```python
+total_price
+student_count
+average_marks
+```
+
+Usually not helpful:
+
+```python
+the_total_price_of_all_the_products_in_the_shopping_cart
+```
+
+---
+
+# 18. Complete Example
+
+Let's put the concepts together.
+
+```python
+student_name = "Amit"
+student_age = 18
+total_marks = 450
+
+print("Student Name:", student_name)
+print("Age:", student_age)
+print("Total Marks:", total_marks)
+```
+
+Output:
+
+```text
+Student Name: Amit
+Age: 18
+Total Marks: 450
+```
+
+This example uses:
+
+* Descriptive variable names
+* `snake_case`
+* Strings
+* Integers
+* `print()`
+
+---
+
+# 🧠 Quick Summary
+
+Let's review everything we learned.
+
+### Variables
+
+A variable is a name that refers to a value.
+
+```python
+age = 18
+```
+
+### Identifier
+
+An identifier is a valid name used in Python code.
+
+### Variable Naming Rules
+
+A variable name:
+
+* Can start with a letter or `_`
+* Cannot start with a number
+* Can contain letters, numbers, and `_`
+* Cannot contain spaces
+* Cannot contain characters such as `@`, `$`, `%`, `#`
+* Cannot be a Python keyword
+* Is case-sensitive
+
+### Naming Conventions
+
+| Purpose   | Recommended Style | Example             |
+| --------- | ----------------- | ------------------- |
+| Variables | `snake_case`      | `student_name`      |
+| Functions | `snake_case`      | `calculate_total()` |
+| Constants | `UPPER_CASE`      | `MAX_ATTEMPTS`      |
+| Classes   | `PascalCase`      | `StudentRecord`     |
+
+### Keyword Check
+
+```python
+import keyword
+
+keyword.iskeyword("class")
+```
+
+### Identifier Check
+
+```python
+"student_name".isidentifier()
+```
+
+---
+
+## Practice Quiz
+
+### 1. Which is a valid Python variable name?
 A. `2nd_semester_marks`
 B. `total-score`
 C. `student_roll_number`
 D. `class`
 **Answer:** C
-**Explanation:** `student_roll_number` contains only letters and underscores. Option A starts with a number (illegal), Option B contains a hyphen/minus operator, and Option D is a reserved keyword.
 
 ---
 
-### 2. What error does Python raise if you attempt to assign a value to a reserved keyword (e.g. `for = 10`)?
+### 2. What happens when you write this?
+```python
+for = 10
+```
 A. `TypeError`
-B. `SyntaxError: invalid syntax`
-C. `ZeroDivisionError`
-D. `IndexError`
+B. `SyntaxError`
+C. `IndexError`
+D. No error
 **Answer:** B
-**Explanation:** Keywords represent the grammar of Python. Attempting to use a keyword as an identifier violates the language grammar, triggering a `SyntaxError`.
 
 ---
 
-### 3. According to PEP 8, which naming convention should be used for standard Python variables?
-A. `camelCase` (e.g., `studentName`)
-B. `snake_case` (e.g., `student_name`)
-C. `kebab-case` (e.g., `student-name`)
-D. `PascalCase` (e.g., `StudentName`)
+### 3. Which naming style is recommended for normal Python variables?
+A. `camelCase`
+B. `snake_case`
+C. `kebab-case`
+D. `PascalCase`
 **Answer:** B
-**Explanation:** PEP 8 dictates `snake_case` (all lowercase letters separated by underscores) for variables and function names in Python.
 
 ---
 
-### 4. How does Python treat the three identifiers `school`, `School`, and `SCHOOL`?
-A. As three identical references to the same variable
-B. As three completely distinct, independent variables in memory due to strict case sensitivity
-C. It throws a duplicate variable warning
-D. It automatically merges their values
+### 4. What does Python do with these names?
+```python
+school
+School
+SCHOOL
+```
+A. Treats them as the same name
+B. Treats them as different names
+C. Produces a warning
+D. Automatically combines them
 **Answer:** B
-**Explanation:** Python is case-sensitive. Identifiers with different casing are stored as completely separate names in the local/global namespace.
 
 ---
 
-### 5. How can you programmatically check if a specific word is a reserved Python keyword in your code?
-A. `import keyword; keyword.iskeyword("your_word")`
-B. `check_word("your_word")`
-C. `sys.is_reserved("your_word")`
-D. `python.verify("your_word")`
+### 5. How can you check whether a word is a Python keyword?
+A.
+```python
+keyword.iskeyword("word")
+```
+B.
+```python
+sys.is_reserved("word")
+```
+C.
+```python
+python.check("word")
+```
+D.
+```python
+check_keyword("word")
+```
 **Answer:** A
-**Explanation:** The built-in `keyword` module provides the `iskeyword()` function, which returns `True` if the provided string is a reserved Python keyword.
 
 ---
 
-# Hands-On Practice Challenge:
+# 💻 Hands-On Practice Challenge
 
-Run this interactive Python script to inspect valid naming rules and test candidate identifier names programmatically.
+## Challenge 6: Variable Name Inspector
+
+Create a file named:
+
+```text
+variable_naming_lab.py
+```
+
+Then write:
 
 ```python
-# ==========================================================
-# Challenge 6: Variable Naming & Keyword Inspector
-# MSK Institute of Technology
-# ==========================================================
-
 import keyword
 
 print("=" * 55)
-print("       PYTHON VARIABLE IDENTIFIER INSPECTOR")
+print("PYTHON VARIABLE NAME INSPECTOR")
 print("=" * 55)
 
-# 1. Candidate variable names to evaluate
 candidate_names = [
     "student_name",
     "batch_2026",
     "_internal_token",
-    "2nd_rank",      # Invalid: Starts with a digit
-    "user-email",    # Invalid: Contains hyphen
-    "total score",   # Invalid: Contains space
-    "class",         # Invalid: Reserved keyword
-    "True",          # Invalid: Reserved keyword
-    "total_marks",
+    "2nd_rank",
+    "user-email",
+    "total score",
+    "class",
+    "True",
+    "total_marks"
 ]
 
-print(f"{'Identifier Name':<20} | {'Is Keyword?':<12} | {'Status':<15}")
+print(f"{'Name':<20} | {'Keyword':<10} | {'Status'}")
 print("-" * 55)
 
 for name in candidate_names:
-    is_kw = keyword.iskeyword(name)
-    is_valid_identifier = name.isidentifier() and not is_kw
-    
-    if is_valid_identifier:
-        status = "✓ VALID"
-    elif is_kw:
-        status = "✕ RESERVED KEYWORD"
+
+    is_keyword = keyword.iskeyword(name)
+    is_valid = name.isidentifier() and not is_keyword
+
+    if is_valid:
+        status = "VALID"
+    elif is_keyword:
+        status = "KEYWORD"
     else:
-        status = "✕ INVALID SYNTAX"
-        
-    print(f"{name:<20} | {str(is_kw):<12} | {status:<15}")
+        status = "INVALID"
+
+    print(f"{name:<20} | {str(is_keyword):<10} | {status}")
 
 print("=" * 55)
-
-# 2. Demonstration of clean snake_case variables in action
-total_students = 60
-girls_count = 32
-boys_count = total_students - girls_count
-girls_percentage = (girls_count / total_students) * 100
-
-print(f"Batch Strength    : {total_students} Scholars")
-print(f"Boys Enrolled     : {boys_count}")
-print(f"Girls Enrolled    : {girls_count} ({girls_percentage:.1f}%)")
-print("==========================================================")
 ```
+
+### What does this program teach?
+
+This small program checks three things:
+
+1. Is the name a valid identifier?
+2. Is the name a Python keyword?
+3. What is the final status of the name?
+
+For example:
+
+```text
+student_name       → VALID
+batch_2026         → VALID
+2nd_rank           → INVALID
+user-email         → INVALID
+class              → KEYWORD
+```
+
+---
+
+# 🎯 Your Practice Task
+
+Modify the program and add these names:
+
+```text
+student_age
+student-age
+student age
+2026_batch
+_batch
+total_marks
+return
+myName
+```
+
+Before running the program, **predict which names will be valid**.
+
+Then run the program and compare your answers.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Creating a Variable** (2: Variables).
+
+👉 **[Continue to Next Lesson: Creating a Variable →](/tutorials/python-for-beginners/creating-a-variable)**

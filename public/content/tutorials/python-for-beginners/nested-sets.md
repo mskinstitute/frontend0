@@ -16,9 +16,9 @@ keywords:
   - immutable set
   - mathematical powerset
   - frozenset dictionary key
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Sets in Python: The `frozenset` Immutable Solution & Powerset Theory
@@ -264,7 +264,35 @@ Powerset size (2^3 = 8): 8
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating an Empty Set with `{}`
+Curly braces `{}` create an empty dictionary, not an empty set!
+```python
+empty_dict = {}       # <class 'dict'>
+empty_set = set()     # <class 'set'>
+
+print(type(empty_dict))  # <class 'dict'>
+print(type(empty_set))   # <class 'set'>
+```
+
+### 2. Attempting to Index or Slice a Set
+Sets are unordered collections with no fixed position. They cannot be indexed:
+```python
+s = {10, 20, 30}
+# ❌ TypeError: 'set' object is not subscriptable
+# print(s[0])
+
+# ✅ CORRECT (Iterate through or convert to list)
+for item in s:
+    print(item)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Why does Python raise `TypeError: unhashable type: 'set'` when executing `{{1, 2}, {3, 4}}`?
 A. Sets cannot contain integers
@@ -273,7 +301,6 @@ C. Python only allows a maximum of 5 sets per file
 D. Double curly braces are reserved only for string templates
 
 **Answer:** B
-**Explanation:** A set's elements must be hashable so their hash values can index into hash table buckets. Because standard sets are mutable, their contents can change, making them unhashable.
 
 ---
 
@@ -284,7 +311,6 @@ C. `staticset`
 D. `tuple_set`
 
 **Answer:** B
-**Explanation:** Python provides `frozenset`, which is an immutable, hashable version of a set. Once created, its elements cannot be modified.
 
 ---
 
@@ -295,7 +321,6 @@ C. A `frozenset` is ordered and can be indexed with `fs[0]`
 D. A `frozenset` cannot perform union operations
 
 **Answer:** A
-**Explanation:** Because `frozenset` is immutable and hashable, it is fully eligible to serve as a key in Python dictionaries or as an element inside other sets.
 
 ---
 
@@ -306,7 +331,6 @@ C. `TypeError`
 D. `[1, 2, 3]`
 
 **Answer:** A
-**Explanation:** The union operator `|` on two frozensets returns a brand-new `frozenset` containing the merged elements: `frozenset({1, 2, 3})`.
 
 ---
 
@@ -317,7 +341,6 @@ C. 16
 D. 4
 
 **Answer:** C
-**Explanation:** The cardinality of the powerset of any set with $n$ elements is $2^n$. For $n = 4$, $2^4 = 16$ distinct subsets exist.
 
 ---
 
@@ -390,3 +413,10 @@ Shared Partner Routes Count: 2
   * Code-Share Sector: DEL - BOM
   * Code-Share Sector: BOM - BLR
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Dictionaries Introduction** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Dictionaries Introduction →](/tutorials/python-for-beginners/dictionaries-introduction)**

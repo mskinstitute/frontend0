@@ -16,9 +16,9 @@ keywords:
   - immutable database rows
   - collections namedtuple
   - flatten nested tuple
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Tuples in Python: Multi-Dimensional Hierarchies & Immutable Records
@@ -256,7 +256,23 @@ Flattened 1D Tuple: (1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the Trailing Comma on Single-Element Tuples
+Without a trailing comma, parentheses are treated as grouping symbols, not a tuple:
+```python
+not_a_tuple = ("admin")  # Type is str!
+is_a_tuple = ("admin",)  # Type is tuple!
+
+print(type(not_a_tuple))  # <class 'str'>
+print(type(is_a_tuple))   # <class 'tuple'>
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Given `grid = (("A", "B"), ("C", "D"), ("E", "F"))`, what is `grid[2][0]`?
 A. `"C"`
@@ -265,7 +281,6 @@ C. `"E"`
 D. `"F"`
 
 **Answer:** C
-**Explanation:** `grid[2]` accesses the third inner tuple `("E", "F")`. `[0]` extracts the first item from that inner tuple, which is `"E"`.
 
 ---
 
@@ -276,7 +291,6 @@ C. `[(10, 20)]`
 D. `tuple((10, 20))`
 
 **Answer:** B
-**Explanation:** `((10, 20))` is simply `(10, 20)` wrapped in redundant arithmetic parentheses. To create an outer tuple containing one inner tuple, a trailing comma is mandatory: `((10, 20),)`.
 
 ---
 
@@ -287,7 +301,6 @@ C. `TypeError: 'tuple' object does not support item assignment`
 D. `AttributeError`
 
 **Answer:** C
-**Explanation:** Because both the outer container and inner containers are immutable tuples, attempting to reassign any element raises `TypeError`.
 
 ---
 
@@ -303,7 +316,6 @@ C. `[1, 2, 3, 4]`
 D. `(1, 3, 2, 4)`
 
 **Answer:** B
-**Explanation:** The comprehension iterates through each sub-tuple and extracts each number, which `tuple()` packs into a single flat tuple `(1, 2, 3, 4)`.
 
 ---
 
@@ -314,7 +326,6 @@ C. Tuples support automatic encryption
 D. Lists cannot be nested
 
 **Answer:** A
-**Explanation:** Tuples are immutable and memory-compact. Using nested tuples protects reference data from accidental mutation bugs and provides thread-safety across concurrent routines.
 
 ---
 
@@ -378,3 +389,10 @@ Orbital Coordinates:     Apogee 529 km, Perigee 529 km, Inc 97.5 deg
   * RISAT-1A Radar (Inclination: 97.5°, Altitude: 529 km)
   * Oceansat-3 (Inclination: 98.3°, Altitude: 738 km)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Sets Introduction** (10: Sets).
+
+👉 **[Continue to Next Lesson: Sets Introduction →](/tutorials/python-for-beginners/sets-introduction)**

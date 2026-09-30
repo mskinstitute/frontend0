@@ -16,9 +16,9 @@ keywords:
   - keyerror in set remove
   - set pop arbitrary
   - set clear and del
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Adding and Removing Set Items: In-Place Mutation, Bulk Updates & `remove` vs `discard`
@@ -232,7 +232,35 @@ Pool ID preserved:        2410892484064
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating an Empty Set with `{}`
+Curly braces `{}` create an empty dictionary, not an empty set!
+```python
+empty_dict = {}       # <class 'dict'>
+empty_set = set()     # <class 'set'>
+
+print(type(empty_dict))  # <class 'dict'>
+print(type(empty_set))   # <class 'set'>
+```
+
+### 2. Attempting to Index or Slice a Set
+Sets are unordered collections with no fixed position. They cannot be indexed:
+```python
+s = {10, 20, 30}
+# ❌ TypeError: 'set' object is not subscriptable
+# print(s[0])
+
+# ✅ CORRECT (Iterate through or convert to list)
+for item in s:
+    print(item)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the fundamental difference between `set.remove(x)` and `set.discard(x)`?
 A. `remove()` takes only strings, while `discard()` takes numbers
@@ -241,7 +269,6 @@ C. `remove()` deletes all occurrences, while `discard()` deletes only one
 D. `discard()` returns a boolean, while `remove()` returns the item
 
 **Answer:** B
-**Explanation:** `set.remove(x)` enforces that `x` must be present, raising `KeyError` if it is missing. In contrast, `set.discard(x)` is fault-tolerant and performs a silent no-op if `x` does not exist.
 
 ---
 
@@ -252,7 +279,6 @@ C. Raises a `TypeError`
 D. Creates a nested set inside `s`
 
 **Answer:** B
-**Explanation:** `update()` iterates across its argument. Because a string is an iterable of individual characters, `s.update("CD")` unpacks it into `'C'` and `'D'`, resulting in `{'A', 'B', 'C', 'D'}`. To add `"CD"` as a single word, use `s.add("CD")`.
 
 ---
 
@@ -263,7 +289,6 @@ C. Removes and returns an arbitrary element because sets are unordered
 D. Clears the entire set
 
 **Answer:** C
-**Explanation:** Because sets are unordered collections with no concept of first or last index, `pop()` removes and returns an arbitrary element based on current internal hash table bucket positioning.
 
 ---
 
@@ -279,7 +304,6 @@ C. 2
 D. 1
 
 **Answer:** B
-**Explanation:** Sets only contain unique elements. Adding `"Apple"` a second time is a no-op. Adding `"Cherry"` increases the count to 3 (`{"Apple", "Banana", "Cherry"}`).
 
 ---
 
@@ -290,7 +314,6 @@ C. `KeyError: 'pop from an empty set'`
 D. `None` is returned
 
 **Answer:** C
-**Explanation:** Calling `.pop()` on an empty set raises a `KeyError: 'pop from an empty set'`.
 
 ---
 
@@ -361,3 +384,10 @@ Output:
 
 Active ER Patients at Shift End: {'PT-105', 'PT-101', 'PT-106', 'PT-103'}
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Set Operations** (10: Sets).
+
+👉 **[Continue to Next Lesson: Set Operations →](/tutorials/python-for-beginners/set-operations)**

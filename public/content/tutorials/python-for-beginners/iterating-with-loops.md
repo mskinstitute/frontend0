@@ -16,9 +16,9 @@ keywords:
   - sorted iteration python
   - pythonic iteration techniques
   - dictionary items loop
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Modern Looping Techniques in Python: `enumerate()`, `zip()`, `reversed()`, & `sorted()`
@@ -282,7 +282,43 @@ Store Price Manifest:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does `enumerate(fruits, start=1)` yield on its first iteration if `fruits = ["Mango", "Apple"]`?
 A. `(0, "Mango")`
@@ -291,7 +327,6 @@ C. `"Mango"`
 D. `[1, "Mango"]`
 
 **Answer:** B
-**Explanation:** `enumerate()` yields a tuple of `(index, item)`. Because `start=1` was explicitly specified, the starting index is 1, yielding `(1, "Mango")`.
 
 ---
 
@@ -302,7 +337,6 @@ C. 3 times
 D. Python raises a `ValueError` for mismatched lengths
 
 **Answer:** C
-**Explanation:** By default, `zip()` terminates as soon as the shortest iterable is exhausted. Since list A contains 3 items, the loop executes exactly 3 times, discarding the remaining 2 items in list B.
 
 ---
 
@@ -313,7 +347,6 @@ C. `reversed()` only works on strings, while `.reverse()` works on lists
 D. There is no difference; they are exact aliases
 
 **Answer:** B
-**Explanation:** `reversed()` is a built-in function that yields elements in reverse order non-destructively. In contrast, `list.reverse()` modifies the original list in place and returns `None`.
 
 ---
 
@@ -324,7 +357,6 @@ C. `for k, v in d.items():`
 D. `for v in d.values(): k = d.get_key(v)`
 
 **Answer:** C
-**Explanation:** `for k, v in d.items():` directly unpacks each key-value pair into separate variables in a single, idiomatic statement.
 
 ---
 
@@ -340,7 +372,6 @@ C. Anu 0 Bob 1
 D. (0, Anu) (1, Bob)
 
 **Answer:** B
-**Explanation:** `enumerate()` defaults to starting index 0. The first iteration produces `0 Anu ` and the second produces `1 Bob `.
 
 ---
 
@@ -427,3 +458,10 @@ Pos   Batsman              Runs   Balls   Strike Rate    Performance
 Total Team Score: 251 Runs in 22.1 Overs (Run Rate: 11.32 RPO)
 +==========================================================================+
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **List Comprehension** (13: Loops).
+
+👉 **[Continue to Next Lesson: List Comprehension →](/tutorials/python-for-beginners/list-comprehension)**

@@ -16,9 +16,9 @@ keywords:
   - grade calculation python
   - student database dictionary
   - python capstone project
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Comprehensive Student Academic Record Management System
@@ -283,7 +283,35 @@ DPS-104    | Divya Nair         |   68.5% |  64.33% | C (Pass)
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Why is a Student Roll Number better suited as a dictionary key than a student's full name?
 A. Roll numbers are shorter to type
@@ -292,7 +320,6 @@ C. Strings cannot be dictionary keys
 D. Python only allows numbers as keys
 
 **Answer:** B
-**Explanation:** Dictionary keys must be strictly unique. Names can easily have duplicate collisions (e.g. two students named "Aarav Sharma"), which would overwrite records. A unique student registration ID eliminates collision hazards.
 
 ---
 
@@ -303,7 +330,6 @@ C. The student's name
 D. The total sum of marks
 
 **Answer:** B
-**Explanation:** `.values()` returns a dynamic view containing the values mapped in the dictionary, which in this schema are the numeric test scores for the student.
 
 ---
 
@@ -314,7 +340,6 @@ C. `pop()` is only used for integers
 D. `del` is deprecated in Python 3
 
 **Answer:** A
-**Explanation:** If `roll_no` is absent, `del student_db[roll_no]` crashes with a `KeyError`. Providing a second fallback default argument to `pop(roll_no, None)` safely returns `None` without raising an error.
 
 ---
 
@@ -325,7 +350,6 @@ C. `records.highest()`
 D. `records[0]`
 
 **Answer:** B
-**Explanation:** `max()` with a key function `key=lambda x: x[2]` instructs Python to evaluate each tuple by its third element (the percentage), returning the tuple with the highest percentage.
 
 ---
 
@@ -336,7 +360,6 @@ C. `.copy()` encrypts the marks
 D. Dictionaries cannot be stored directly
 
 **Answer:** B
-**Explanation:** In Python, passing an existing mutable dictionary stores its reference pointer. Cloning it with `.copy()` isolates the database record from accidental external modifications.
 
 ---
 
@@ -411,3 +434,10 @@ Roll: DPS-103  | Chirag Singhal   | Pct: 96.0%  | Grant: Rs 25,000.00
 -----------------------------------------------------------------
 Total Institutional Scholarship Budget Disbursed: Rs 50,000.00
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **If, Elif, Else** (12: Conditional Statements).
+
+👉 **[Continue to Next Lesson: If, Elif, Else →](/tutorials/python-for-beginners/if-elif-else)**

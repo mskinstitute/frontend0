@@ -16,9 +16,9 @@ keywords:
   - hash table buckets
   - unhashable type list
   - empty set syntax
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Sets: The Unordered Collection of Unique Elements & Hash-Table Mechanics
@@ -254,7 +254,7 @@ Iterating through set elements:
 
 ---
 
-## Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What will be the value and type of `collection = {}` in Python?
 A. An empty set of type `set`
@@ -263,7 +263,6 @@ C. A syntax error
 D. An empty tuple
 
 **Answer:** B
-**Explanation:** In Python, `{}` is reserved for initializing an empty dictionary. To create an empty set, you must call the constructor `set()`.
 
 ---
 
@@ -274,7 +273,6 @@ C. 2
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** Sets enforce strict uniqueness. All duplicate values (`"A"` and `"B"`) are collapsed, leaving only 3 unique elements `{'A', 'B', 'C'}`.
 
 ---
 
@@ -285,7 +283,6 @@ C. Sets only accept numbers
 D. Lists cannot be printed inside curly braces
 
 **Answer:** B
-**Explanation:** Elements in a set must be hashable so Python can assign them to fixed hash table buckets. Because lists are mutable, their contents can change, making them unhashable.
 
 ---
 
@@ -296,7 +293,6 @@ C. Raises `TypeError: 'set' object is not subscriptable`
 D. Prints None
 
 **Answer:** C
-**Explanation:** Sets are unordered and unindexed. They do not support sequence subscripting or slicing; attempting `s[0]` raises a `TypeError`.
 
 ---
 
@@ -307,7 +303,6 @@ C. $O(1)$ average constant time
 D. $O(n^2)$ quadratic time
 
 **Answer:** C
-**Explanation:** Sets use hash tables with direct memory bucket lookups. Checking if an element exists in a set runs in $O(1)$ average constant time, unlike lists which take $O(n)$ linear time.
 
 ---
 
@@ -373,3 +368,10 @@ Unique Customers Identified: 5
 
 Traffic Efficiency: 55.6% unique human visitors.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Adding & Removing Items** (10: Sets).
+
+👉 **[Continue to Next Lesson: Adding & Removing Items →](/tutorials/python-for-beginners/adding-removing-set-items)**

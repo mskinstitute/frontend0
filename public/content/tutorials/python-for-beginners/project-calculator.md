@@ -16,9 +16,9 @@ keywords:
   - gst calculator python
   - functions capstone project
   - zero division handling
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Modular Scientific & Commercial Financial Calculator
@@ -309,7 +309,37 @@ for idx, entry in enumerate(calculation_history, start=1):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In the function dispatch table `OPERATIONS = {"+": add}`, why is `add` written without parentheses?
 A. Because parentheses are optional in Python dictionary literals
@@ -318,7 +348,6 @@ C. Because `add` is a reserved string literal
 D. To prevent syntax errors with math symbols
 
 **Answer:** B
-**Explanation:** Writing `add()` calls the function immediately and stores its return value. Writing `add` stores a reference to the function object itself, allowing the dispatch engine to invoke it on demand later.
 
 ---
 
@@ -329,7 +358,6 @@ C. `IndexError`
 D. `IndentationError`
 
 **Answer:** B
-**Explanation:** In mathematics and computing, dividing any number by zero is undefined and triggers a `ZeroDivisionError` in Python.
 
 ---
 
@@ -340,7 +368,6 @@ C. `if-elif-else` cannot compare strings
 D. Dictionaries run on GPU hardware
 
 **Answer:** B
-**Explanation:** A dictionary dispatch table allows adding new operations dynamically (e.g. `OPERATIONS["log"] = math.log`) without altering existing branching code, providing $O(1)$ lookup time and adhering to the Open/Closed Principle.
 
 ---
 
@@ -351,7 +378,6 @@ C. Python evaluates the bitwise XOR of 2 and 3
 D. Nothing happens
 
 **Answer:** A
-**Explanation:** `OPERATIONS_DISPATCH["^"]` maps to the `power` function. Executing `func(2, 3)` invokes `power(2, 3)`, which returns $2^3 = 8$.
 
 ---
 
@@ -362,7 +388,6 @@ C. `print()` slows down the Python garbage collector
 D. It avoids variable shadowing
 
 **Answer:** B
-**Explanation:** Separation of concerns is a foundational software engineering principle. Keeping math calculations independent of console I/O enables the same functions to power GUI applications, REST APIs, or unit tests seamlessly.
 
 ---
 
@@ -449,3 +474,10 @@ Current Value in Memory: 600.0
 [MC] Memory Cleared to 0.0
 [MR] Memory Recalled: 0.0
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Opening & Closing Files** (15: File Handling).
+
+👉 **[Continue to Next Lesson: Opening & Closing Files →](/tutorials/python-for-beginners/opening-closing-files)**

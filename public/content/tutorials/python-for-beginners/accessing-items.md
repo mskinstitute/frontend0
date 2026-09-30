@@ -16,9 +16,9 @@ keywords:
   - tuple slicing
   - tuple in operator
   - immutable sequence access
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Accessing Tuple Items: Indexing, Negative Indices & Slicing Immutable Sequences
@@ -237,7 +237,23 @@ Active Whitelist Permissions:
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the Trailing Comma on Single-Element Tuples
+Without a trailing comma, parentheses are treated as grouping symbols, not a tuple:
+```python
+not_a_tuple = ("admin")  # Type is str!
+is_a_tuple = ("admin",)  # Type is tuple!
+
+print(type(not_a_tuple))  # <class 'str'>
+print(type(is_a_tuple))   # <class 'tuple'>
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Given `colors = ("red", "green", "blue", "yellow")`, what does `colors[-2]` return?
 A. `"green"`
@@ -246,7 +262,6 @@ C. `"yellow"`
 D. `IndexError`
 
 **Answer:** B
-**Explanation:** Negative indices count backwards from the tail. `colors[-1]` is `"yellow"` and `colors[-2]` is `"blue"`.
 
 ---
 
@@ -257,7 +272,6 @@ C. `generator`
 D. `set`
 
 **Answer:** B
-**Explanation:** Slicing a sequence preserves the container type. Slicing a list produces a list; slicing a string produces a string; and slicing a tuple produces a brand-new immutable tuple.
 
 ---
 
@@ -268,7 +282,6 @@ C. `(20, 40)`
 D. `(10, 50)`
 
 **Answer:** B
-**Explanation:** The stride `2` selects elements at indices 0, 2, and 4, producing `(10, 30, 50)`.
 
 ---
 
@@ -279,7 +292,6 @@ C. Python silently ignores the assignment
 D. A new tuple is created at a new memory location
 
 **Answer:** B
-**Explanation:** Tuples are strictly immutable. Attempting to modify any item via indexed assignment raises a `TypeError`.
 
 ---
 
@@ -290,7 +302,6 @@ C. `"admin" in roles`
 D. `roles.exists("admin")`
 
 **Answer:** C
-**Explanation:** Python uses the `in` membership operator to test if an element is present in any sequence or collection.
 
 ---
 
@@ -364,3 +375,10 @@ Return Journey Sequence:
 
 [CONFIRMED] 'Mathura Exit Landmark' is Waypoint #3 on this route.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Updating & Unpacking Tuples** (9: Tuples).
+
+👉 **[Continue to Next Lesson: Updating & Unpacking Tuples →](/tutorials/python-for-beginners/updating-unpacking-tuples)**

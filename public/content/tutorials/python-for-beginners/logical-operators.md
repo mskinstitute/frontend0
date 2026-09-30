@@ -17,9 +17,9 @@ keywords:
   - boolean logic
   - default fallback pattern
   - de morgans laws
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Logical Operators: Boolean Logic, Short-Circuiting, & Value Returns
@@ -273,7 +273,39 @@ De Morgan's equivalence confirmed: True
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What are the official keywords for logical conjunction, disjunction, and negation in Python?
 A. `&&`, `||`, `!`
@@ -282,7 +314,6 @@ C. `and`, `or`, `not`
 D. `&`, `|`, `~`
 
 **Answer:** C
-**Explanation:** Python uses lowercase, plain-English keywords `and`, `or`, and `not` for boolean logical operations. The symbols `&`, `|`, and `~` are bitwise operators, while `&&` and `||` are invalid syntax in Python.
 
 ---
 
@@ -293,7 +324,6 @@ C. `[]`
 D. `"Default"`
 
 **Answer:** D
-**Explanation:** In Python, the `or` operator returns the first truthy value. Because an empty list `[]` is falsy, Python continues evaluating and returns the second operand `"Default"`.
 
 ---
 
@@ -304,7 +334,6 @@ C. It prints `None`
 D. It raises a `TypeError`
 
 **Answer:** B
-**Explanation:** Python utilizes short-circuit evaluation. In an `and` operation, if the left-hand operand is `False`, the overall expression can never be true. Therefore, Python stops immediately and returns `False` without evaluating `10 / 0`.
 
 ---
 
@@ -315,7 +344,6 @@ C. `not`
 D. All three have equal precedence
 
 **Answer:** C
-**Explanation:** In Python's operator precedence hierarchy, `not` has higher priority than `and`, and `and` has higher priority than `or`. Therefore, `not A and B` is evaluated as `(not A) and B`.
 
 ---
 
@@ -326,7 +354,6 @@ C. `False`
 D. `None`
 
 **Answer:** B
-**Explanation:** An empty string `""` is considered falsy in Python (`bool("")` is `False`). Applying the `not` operator inverts `False` to `True`.
 
 ---
 
@@ -453,3 +480,10 @@ Baggage Approved  : True (15.0 kg)
 GATE STATUS       : [ACCESS DENIED] Please proceed to customer desk.
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Identity & Membership Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Identity & Membership Operators →](/tutorials/python-for-beginners/identity-membership-operators)**

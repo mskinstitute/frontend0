@@ -17,9 +17,9 @@ keywords:
   - casefold unicode
   - string method chaining
   - data sanitization
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Modifying Strings in Python: Transformation Methods & Clean Data Pipelines
@@ -303,7 +303,33 @@ Correct Result : VIKRAM
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Attempting to Mutate a String in Place
+Python strings are immutable. You cannot assign directly to a character index:
+```python
+text = "Python"
+# ❌ INCORRECT (TypeError: 'str' object does not support item assignment)
+text[0] = "J"
+
+# ✅ CORRECT (Create a new string using slicing or concatenation)
+text = "J" + text[1:]
+print(text)  # "Jython"
+```
+
+### 2. Off-By-One Errors in Slicing
+In Python slicing `text[start:stop]`, the `stop` index is **exclusive** (not included in the slice):
+```python
+word = "Coding"
+# Slicing word[0:3] gives indices 0, 1, 2 ('Cod'), NOT index 3!
+print(word[0:3])  # 'Cod'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be printed after executing the following Python code snippet?
 ```python
@@ -317,7 +343,6 @@ C. `None`
 D. `AttributeError`
 
 **Answer:** B
-**Explanation:** Strings in Python are strictly immutable. Calling `greeting.upper()` returns a new string containing `"NAMASTE"`, but because the return value was not reassigned to `greeting`, the original variable remains `"namaste"`.
 
 ---
 
@@ -328,7 +353,6 @@ C. `.clean()`
 D. `.prune()`
 
 **Answer:** B
-**Explanation:** In Python, `.strip()` is the built-in method used to remove leading and trailing whitespace (including spaces, tabs, and newlines). The `.trim()` method belongs to JavaScript, not Python.
 
 ---
 
@@ -339,7 +363,6 @@ C. `"PYTHON DATA SCIENCE"`
 D. `"python Data Science"`
 
 **Answer:** A
-**Explanation:** The `.title()` method converts the first character of each word to uppercase and all remaining characters to lowercase, yielding `"Python Data Science"`.
 
 ---
 
@@ -350,7 +373,6 @@ C. `"apple, banana, mango, orange"`
 D. `ValueError`
 
 **Answer:** B
-**Explanation:** The optional third parameter in `.replace(old, new, count)` specifies the maximum number of replacements to perform. Passing `1` replaces only the first occurrence of `"apple"`.
 
 ---
 
@@ -361,7 +383,6 @@ C. It strips whitespace while converting
 D. It modifies the string in-place
 
 **Answer:** B
-**Explanation:** While `.lower()` performs standard ASCII casing, `.casefold()` implements aggressive Unicode caseless matching standards, converting international ligatures and characters (like German 'ß' to 'ss') for truly accurate comparisons.
 
 ---
 
@@ -463,3 +484,10 @@ SANITIZED MASTER RECORD:
   Clean Address  : Flat 402, Park Street, Kolkata - 700016
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Concatenation & Formatting (f-string, format, %)** (5: Strings).
+
+👉 **[Continue to Next Lesson: Concatenation & Formatting (f-string, format, %) →](/tutorials/python-for-beginners/concatenation-formatting)**

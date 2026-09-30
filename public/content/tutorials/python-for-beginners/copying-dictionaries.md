@@ -16,9 +16,9 @@ keywords:
   - copy deepcopy python
   - nested dictionary cloning
   - dict copy method
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Copying Dictionaries in Python: The Aliasing Bug, Shallow Copies & Deep Duplication
@@ -236,7 +236,35 @@ Skills: ['Python', 'Docker', 'Kubernetes']
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens when you execute `dict2 = dict1` in Python?
 A. A brand-new dictionary with the same keys and values is created
@@ -245,7 +273,6 @@ C. `dict1` is converted into an immutable tuple
 D. A shallow copy is automatically performed
 
 **Answer:** B
-**Explanation:** Assignment creates reference aliasing. Both `dict1` and `dict2` point to the exact same object in memory (`dict1 is dict2` is `True`).
 
 ---
 
@@ -256,7 +283,6 @@ C. `d.duplicate()`
 D. `d.shallow()`
 
 **Answer:** B
-**Explanation:** Python dictionaries provide the built-in `.copy()` method to generate a shallow copy of the dictionary.
 
 ---
 
@@ -267,7 +293,6 @@ C. `30` is appended to both `d1["b"]` and `d2["b"]` because the inner list refer
 D. `d1["b"]` is cleared
 
 **Answer:** C
-**Explanation:** `.copy()` performs a shallow copy. The outer dictionary is duplicated, but the nested list `[10, 20]` is copied by reference. Mutating the list through either dictionary reflects in both.
 
 ---
 
@@ -278,7 +303,6 @@ C. `copy`
 D. `itertools`
 
 **Answer:** C
-**Explanation:** The `copy` module in Python provides both `copy.copy()` (shallow copy) and `copy.deepcopy()` (recursive deep copy).
 
 ---
 
@@ -289,7 +313,6 @@ C. Whenever you want the code to run faster
 D. Never; deepcopy is deprecated
 
 **Answer:** B
-**Explanation:** Deep copy recursively traverses and duplicates all nested mutable objects, ensuring that modifications to inner structures in the clone never corrupt the original master dictionary.
 
 ---
 
@@ -363,3 +386,10 @@ Restored Version: v1.4.0
 Safe Clean IPs:   ['10.0.1.5', '10.0.1.6', '172.16.0.1']
 Is hazardous IP purged? True
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Dictionary Methods** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Dictionary Methods →](/tutorials/python-for-beginners/dictionary-methods)**

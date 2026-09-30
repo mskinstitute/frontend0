@@ -16,9 +16,9 @@ keywords:
   - filtering list comprehension
   - nested list comprehension
   - list append vs comprehension performance
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # List Comprehension in Python: Declarative List Construction & Filtering
@@ -248,7 +248,43 @@ Flattened 1D List:   [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be the output of `[x * 2 for x in range(4)]`?
 A. `[2, 4, 6, 8]`
@@ -257,7 +293,6 @@ C. `[0, 2, 4, 6, 8]`
 D. `[1, 2, 3, 4]`
 
 **Answer:** B
-**Explanation:** `range(4)` generates `0, 1, 2, 3`. Multiplying each by 2 yields `[0, 2, 4, 6]`.
 
 ---
 
@@ -268,7 +303,6 @@ C. At the end of the comprehension: `[expression for item in iterable if conditi
 D. After the word `in`
 
 **Answer:** C
-**Explanation:** When filtering elements, the `if condition` resides at the very end of the list comprehension without an `else` clause.
 
 ---
 
@@ -282,7 +316,6 @@ C. `['Odd', 1, 'Odd']`
 D. SyntaxError: invalid syntax
 
 **Answer:** A
-**Explanation:** Here, `x if x % 2 == 0 else "Odd"` is a ternary expression placed before `for`. For `x = 0`: 0 (even). For `x = 1`: "Odd". For `x = 2`: 2 (even). Result is `[0, "Odd", 2]`.
 
 ---
 
@@ -293,7 +326,6 @@ C. They pre-allocate memory in GPU RAM
 D. They execute in Cython
 
 **Answer:** B
-**Explanation:** In standard loops, `list.append(x)` requires looking up the attribute `append` on the list object on every cycle. List comprehensions compile directly into the optimized C-level `LIST_APPEND` bytecode instruction.
 
 ---
 
@@ -309,7 +341,6 @@ C. `[1, 3, 2, 4]`
 D. `[[1, 3], [2, 4]]`
 
 **Answer:** B
-**Explanation:** The comprehension flattens row by row: for `row = [1, 2]`, it extracts 1 and 2; for `row = [3, 4]`, it extracts 3 and 4. The resulting 1D list is `[1, 2, 3, 4]`.
 
 ---
 
@@ -386,3 +417,10 @@ Puma Running Shoes       Fashion       Rs 3499.00  Rs 2624.25  Rs  3096.61
 ========================================================================
 Total In-Stock Items Processed: 4 of 6
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Set Comprehension** (13: Loops).
+
+👉 **[Continue to Next Lesson: Set Comprehension →](/tutorials/python-for-beginners/set-comprehension)**

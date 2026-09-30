@@ -16,9 +16,9 @@ keywords:
   - curly brace comprehension
   - set vs dict comprehension
   - hash table set python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Set Comprehensions in Python: Deduplicated Sets & Mathematical Filtering
@@ -235,7 +235,43 @@ Total Unique Cities:       4
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which delimiter is used to define a set comprehension in Python?
 A. Square brackets `[` and `]`
@@ -244,7 +280,6 @@ C. Curly braces `{` and `}` without key-value colons
 D. Angle brackets `<` and `>`
 
 **Answer:** C
-**Explanation:** Set comprehensions use curly braces `{}` surrounding an expression without a colon: `{x for x in iterable}`.
 
 ---
 
@@ -255,7 +290,6 @@ C. 1
 D. 0
 
 **Answer:** B
-**Explanation:** For any integer `x`, `x % 3` produces remainder `0`, `1`, or `2`. Because sets automatically eliminate duplicate values, the resulting set is strictly `{0, 1, 2}`, which has a length of 3.
 
 ---
 
@@ -269,7 +303,6 @@ C. ValueError: mutable object
 D. IndexError: list index out of range
 
 **Answer:** B
-**Explanation:** Set elements must be hashable. Lists are mutable and cannot be hashed, resulting in `TypeError: unhashable type: 'list'`. To fix this, store tuples instead: `{(x,) for x in range(3)}`.
 
 ---
 
@@ -280,7 +313,6 @@ C. Set comprehensions must use parentheses inside the curly braces
 D. Dictionary comprehensions can only run on numbers
 
 **Answer:** B
-**Explanation:** Both constructs use curly braces `{}`. If the evaluated element has a colon (`key: value`), Python builds a dictionary; if it has a single expression (`value`), Python builds a set.
 
 ---
 
@@ -291,7 +323,6 @@ C. The set comprehension runs in parallel across all CPU cores
 D. `set()` cannot accept lowercase words
 
 **Answer:** A
-**Explanation:** The set comprehension streams elements directly into the newly allocated set hash table in C, bypassing the CPU and memory overhead of creating an intermediate list object.
 
 ---
 
@@ -355,3 +386,10 @@ Total Blacklisted Entities:  2
 
 CRITICAL: Incoming packet from 203.0.113.45 DROPPED immediately by firewall!
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Project: Multiplication Table Generator** (13: Loops).
+
+👉 **[Continue to Next Lesson: Project: Multiplication Table Generator →](/tutorials/python-for-beginners/project-multiplication-table-generator)**

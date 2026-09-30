@@ -16,9 +16,9 @@ keywords:
   - guard clauses python
   - decision trees python
   - control flow indentation
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Conditions in Python: Hierarchical Logic & Guard Clause Architecture
@@ -277,7 +277,33 @@ Beginner developers often wonder: *Should I use `and` or nested `if`?*
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Inconsistent Indentation
+Python requires consistent indentation (recommended: 4 spaces). Mixing tabs and spaces raises an `IndentationError`:
+```python
+# ❌ Inconsistent indentation
+if True:
+    print("Line 1 with spaces")
+	print("Line 2 with tab")  # IndentationError!
+```
+
+### 2. Forgetting the Trailing Colon (`:`)
+Every `if`, `elif`, and `else` statement must end with a colon:
+```python
+# ❌ SyntaxError: expected ':'
+# if age >= 18
+
+# ✅ CORRECT
+if age >= 18:
+    print("Eligible to vote")
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What determines which `if` statement an `else` block belongs to in Python?
 A. The physical line distance between them
@@ -286,7 +312,6 @@ C. Explicit semicolon separators
 D. Opening and closing curly braces
 
 **Answer:** B
-**Explanation:** In Python, code blocks and conditional hierarchy are governed strictly by indentation. An `else` statement always attaches to the nearest preceding `if` or `elif` that shares its exact indentation column.
 
 ---
 
@@ -309,7 +334,6 @@ C. Gamma
 D. Beta and Gamma
 
 **Answer:** B
-**Explanation:** `x > 5` (10 > 5) evaluates to `True`, so Python enters the outer block. Inside, `y > 10` (5 > 10) evaluates to `False`, triggering the inner `else` block which prints `"Beta"`.
 
 ---
 
@@ -320,7 +344,6 @@ C. Excessive levels of nested conditionals pushing code far to the right in a tr
 D. A syntax error caused by improper use of the lambda arrow operator
 
 **Answer:** C
-**Explanation:** The Arrow Anti-Pattern refers to heavily nested conditional logic where each subsequent `if` block indents deeper to the right, forming an arrow or pyramid shape that degrades readability and maintainability.
 
 ---
 
@@ -331,7 +354,6 @@ C. Bitwise masking
 D. Infinite while loops
 
 **Answer:** B
-**Explanation:** Guard clauses invert conditions to check for error states first and exit or return early, flattening deeply indented nested structures into clean sequential checks.
 
 ---
 
@@ -355,7 +377,6 @@ C. No Discount
 D. Nothing is printed
 
 **Answer:** B
-**Explanation:** Because `is_member` is `False`, Python routes immediately to the outer `else` block. Inside that outer `else`, the condition `coupon_code == "SAVE50"` evaluates to `True`, outputting `"Guest Discount Applied"`.
 
 ---
 
@@ -448,3 +469,10 @@ Passenger: Amit Patel -> Status: KYC_REJECTED | Tatkal booking requires mandator
 Passenger: Sunita Verma -> Status: PAYMENT_FAILED | Insufficient wallet balance. Shortfall: Rs 1650.00
 Passenger: Priya Sharma (09:00 AM) -> Status: WINDOW_CLOSED | Tatkal AC booking portal opens strictly between 10:00 AM and 11:00 AM.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Short-hand If Statements** (12: Conditional Statements).
+
+👉 **[Continue to Next Lesson: Short-hand If Statements →](/tutorials/python-for-beginners/short-hand-if-statements)**

@@ -16,480 +16,1408 @@ keywords:
   - random randint choice shuffle
   - random seed
   - secrets module otp
-lastUpdated: 2026-09-12
-author: Antigravity Team
-version: 1.0.0
+  lastUpdated: 2026-09-30
+  author: MSk Team
+  version: 1.1.0
 ---
 
-# Python Math & Random Modules: Scientific Computing & Stochastic Generation
+# 🧮 Python `math` and `random` Modules
 
-While Python's built-in operators provide fundamental arithmetic (`+`, `-`, `*`, `/`, `**`), advanced applications require specialized mathematical machinery—such as square roots, trigonometric ratios, logarithmic scales, and randomized simulations.
-
-Python includes two battle-tested, high-performance C-optimized standard library modules:
-1. **`math`:** Provides access to the mathematical functions defined by the C standard (trigonometry, hyperbolic functions, logarithms, ceiling, and floor).
-2. **`random`:** Implements pseudo-random number generators based on the **Mersenne Twister (MT19937)** algorithm for statistical simulations, games, and data sampling.
-
----
-
-## Real-World Analogy: ISRO Satellite Trajectory vs Diwali Tambola Draw
-
-```
-+-------------------------------------------------------------------------+
-|                    math vs random REAL-WORLD ANALOGY                    |
-+-------------------------------------------------------------------------+
-
-  1. THE math MODULE -> ISRO Rocket Trajectory Telemetry:
-     - Calculating the escape velocity and orbital insertion angle of
-       Chandrayaan requires exact, 100% deterministic mathematical laws.
-     - math.sqrt(64) is ALWAYS 8.0 yesterday, today, and 100 years from now.
-     - Never varies; strictly follows universal physical formulas.
-
-  2. THE random MODULE -> Diwali Tambola / Cricket Toss:
-     - Tossing a coin before an India vs Australia cricket match (50% Heads).
-     - Drawing lucky numbered tokens out of a cloth bag in a Tambola game.
-     - Shuffling a deck of 52 cards before dealing Teen Patti.
-     - Simulates uncertainty and chance.
-
-  3. THE CRITICAL SECURITY WARNING:
-     - Just as you wouldn't use a cardboard padlock on a bank locker,
-       NEVER use the 'random' module to generate bank OTPs or passwords!
-     - 'random' is predictable if the seed is discovered.
-     - Use Python's built-in 'secrets' module for banking and security!
-+-------------------------------------------------------------------------+
-```
-
----
-
-## Visual Architecture: Rounding Behavior & PRNG Engine
-
-```
-===========================================================================
-             CEIL vs FLOOR vs TRUNC (POSITIVE & NEGATIVE)
-===========================================================================
-
-  Value        math.floor(x)      math.ceil(x)       math.trunc(x)
-  -----------------------------------------------------------------
-  +3.7         3                  4                  3
-  +3.2         3                  4                  3
-  -3.2         -4                 -3                 -3
-  -3.7         -4                 -3                 -3
-
-  Rule:
-  - floor: Rounds DOWN towards -Infinity
-  - ceil : Rounds UP towards +Infinity
-  - trunc: Chops off decimal; rounds towards Zero
-
-===========================================================================
-                 THE MERSENNE TWISTER PRNG PIPELINE
-===========================================================================
-  [Seed Value] ---> [Internal 624-State Vector] ---> [Next Pseudo-Random Number]
-  (System Clock)       (Mutates with each call)         (0.0 <= N < 1.0)
-```
-
----
-
-## 1. Scientific Computing with the `math` Module
-
-The `math` module is part of the standard library—no `pip install` required! Simply write `import math`.
+Python already provides basic arithmetic operators:
 
 ```python
-# ==========================================================
-# Example 1: Core Mathematical Functions and Constants
-# ==========================================================
-import math
-
-# 1. Fundamental Constants
-print("Value of Pi (pi)    :", math.pi)
-print("Euler's Number (e)  :", math.e)
-print("Tau (2*pi)          :", math.tau)
-
-# 2. Powers and Roots
-print("\nSquare root of 144  :", math.sqrt(144))
-print("Hypotenuse (3, 4)   :", math.hypot(3, 4))  # sqrt(3^2 + 4^2) = 5.0
-
-# 3. Rounding Machinery
-val = 4.25
-print(f"\nOriginal Value      : {val}")
-print("math.ceil (up)      :", math.ceil(val))    # 5
-print("math.floor (down)   :", math.floor(val))   # 4
-print("math.trunc (cut)    :", math.trunc(val))   # 4
-
-# 4. Number Theory & Combinatorics
-print("\nFactorial of 6 (6!) :", math.factorial(6))       # 720
-print("GCD of 48 and 18    :", math.gcd(48, 18))         # 6
-print("LCM of 12 and 15    :", math.lcm(12, 15))         # 60
++   -   *   /   //   %   **
 ```
 
-### Output:
+But sometimes we need more advanced operations such as:
+
+* Square roots
+* Trigonometry
+* Rounding
+* Factorials
+* GCD and LCM
+* Random numbers
+* Random selections
+* Shuffling
+* Simulations
+
+Python provides useful **standard library modules** for these tasks.
+
+The two important modules in this lesson are:
+
+```python
+math
+random
+```
+
+And for security-sensitive random values, we will also learn:
+
+```python
+secrets
+```
+
+---
+
+# 🧠 What Is a Module?
+
+A **module** is a Python file that contains useful code such as functions, classes, and constants that we can use in our program.
+
+For example:
+
+```python
+import math
+```
+
+After importing it, we can use:
+
+```python
+math.sqrt(25)
+```
+
+You don't need to install `math` using `pip`.
+
+It is included with Python.
+
+---
+
+# 🔬 `math` vs `random`
+
+| Module    | Main Purpose                     | Example                     |
+| --------- | -------------------------------- | --------------------------- |
+| `math`    | Mathematical calculations        | `math.sqrt(25)`             |
+| `random`  | Pseudo-random values             | `random.randint(1, 10)`     |
+| `secrets` | Security-sensitive random values | Secure OTP/token generation |
+
+### Simple way to remember
+
 ```text
-Value of Pi (pi)    : 3.141592653589793
-Euler's Number (e)  : 2.718281828459045
-Tau (2*pi)          : 6.283185307179586
+math
+ ↓
+Calculate
 
-Square root of 144  : 12.0
-Hypotenuse (3, 4)   : 5.0
+random
+ ↓
+Simulate chance
 
-Original Value      : 4.25
-math.ceil (up)      : 5
-math.floor (down)   : 4
-math.trunc (cut)    : 4
-
-Factorial of 6 (6!) : 720
-GCD of 48 and 18    : 6
-LCM of 12 and 15    : 60
+secrets
+ ↓
+Generate security-sensitive random values
 ```
 
 ---
 
-## 2. Trigonometry and Angle Conversions
+# 1. The `math` Module
 
-Python's trigonometric functions (`sin`, `cos`, `tan`) expect angles in **radians**, not degrees! Use `math.radians()` and `math.degrees()` to convert seamlessly:
+Let's start by importing it:
 
 ```python
-# ==========================================================
-# Example 2: Trigonometry and Angular Calculations
-# ==========================================================
+import math
+```
+
+Now we can access many mathematical functions.
+
+---
+
+# π, e, and τ
+
+The `math` module provides some important mathematical constants.
+
+```python
 import math
 
-angle_degrees = 45.0
+print(math.pi)
+print(math.e)
+print(math.tau)
+```
+
+Output:
+
+```text
+3.141592653589793
+2.718281828459045
+6.283185307179586
+```
+
+### What are they?
+
+```text
+math.pi
+→ π
+→ approximately 3.14159
+
+math.e
+→ Euler's number
+→ approximately 2.71828
+
+math.tau
+→ 2π
+→ approximately 6.28318
+```
+
+For example:
+
+```python
+radius = 5
+
+area = math.pi * radius ** 2
+
+print(area)
+```
+
+Output:
+
+```text
+78.53981633974483
+```
+
+---
+
+# 2. Square Root with `math.sqrt()`
+
+The `sqrt()` function calculates the square root.
+
+```python
+import math
+
+result = math.sqrt(144)
+
+print(result)
+```
+
+Output:
+
+```text
+12.0
+```
+
+Because:
+
+```text
+12 × 12 = 144
+```
+
+Another example:
+
+```python
+print(math.sqrt(25))
+print(math.sqrt(81))
+```
+
+Output:
+
+```text
+5.0
+9.0
+```
+
+---
+
+# 📐 `math.hypot()`
+
+`math.hypot()` can calculate the length of the hypotenuse of a right triangle.
+
+For example:
+
+```python
+import math
+
+distance = math.hypot(3, 4)
+
+print(distance)
+```
+
+Output:
+
+```text
+5.0
+```
+
+This is based on:
+
+```text
+√(3² + 4²)
+= √25
+= 5
+```
+
+This function is useful for distance calculations.
+
+---
+
+# 3. Rounding with `ceil()`, `floor()`, and `trunc()`
+
+Python provides several ways to handle decimal values.
+
+### `math.ceil()`
+
+`ceil()` rounds **up** toward positive infinity.
+
+```python
+import math
+
+print(math.ceil(4.2))
+print(math.ceil(4.9))
+```
+
+Output:
+
+```text
+5
+5
+```
+
+---
+
+### `math.floor()`
+
+`floor()` rounds **down** toward negative infinity.
+
+```python
+print(math.floor(4.2))
+print(math.floor(4.9))
+```
+
+Output:
+
+```text
+4
+4
+```
+
+Negative numbers are important:
+
+```python
+print(math.floor(-4.2))
+```
+
+Output:
+
+```text
+-5
+```
+
+---
+
+### `math.trunc()`
+
+`trunc()` removes the decimal part by moving toward zero.
+
+```python
+print(math.trunc(4.9))
+print(math.trunc(-4.9))
+```
+
+Output:
+
+```text
+4
+-4
+```
+
+---
+
+# 📊 `ceil()` vs `floor()` vs `trunc()`
+
+|  Value | `ceil()` | `floor()` | `trunc()` |
+| -----: | -------: | --------: | --------: |
+|  `4.2` |      `5` |       `4` |       `4` |
+|  `4.9` |      `5` |       `4` |       `4` |
+| `-4.2` |     `-4` |      `-5` |      `-4` |
+| `-4.9` |     `-4` |      `-5` |      `-4` |
+
+### Easy memory trick
+
+```text
+ceil
+↑
+go up
+
+floor
+↓
+go down
+
+trunc
+✂
+remove decimal part toward zero
+```
+
+---
+
+# 4. Factorial with `math.factorial()`
+
+A factorial multiplies a positive integer by all positive integers below it.
+
+For example:
+
+```text
+5! = 5 × 4 × 3 × 2 × 1
+   = 120
+```
+
+Python:
+
+```python
+import math
+
+print(math.factorial(5))
+```
+
+Output:
+
+```text
+120
+```
+
+Another example:
+
+```python
+print(math.factorial(6))
+```
+
+Output:
+
+```text
+720
+```
+
+---
+
+# 5. GCD and LCM
+
+## GCD
+
+GCD means **Greatest Common Divisor**.
+
+For example:
+
+```python
+import math
+
+print(math.gcd(48, 18))
+```
+
+Output:
+
+```text
+6
+```
+
+The largest number that divides both 48 and 18 is 6.
+
+---
+
+## LCM
+
+LCM means **Least Common Multiple**.
+
+```python
+print(math.lcm(12, 15))
+```
+
+Output:
+
+```text
+60
+```
+
+So:
+
+```text
+GCD → Greatest Common Divisor
+LCM → Least Common Multiple
+```
+
+These functions are useful in mathematical and scheduling problems.
+
+---
+
+# 📐 6. Trigonometry
+
+The `math` module provides:
+
+```python
+math.sin()
+math.cos()
+math.tan()
+```
+
+These functions expect the angle in **radians**, not degrees.
+
+This is important.
+
+---
+
+# Degrees vs Radians
+
+Humans commonly use degrees:
+
+```text
+45°
+90°
+180°
+```
+
+Python's trigonometric functions use radians.
+
+For example:
+
+```python
+import math
+
+angle_degrees = 45
+
 angle_radians = math.radians(angle_degrees)
 
-print(f"Angle in Degrees: {angle_degrees}°")
-print(f"Angle in Radians: {angle_radians:.4f} rad")
-
-# sin(45 degrees) = 1 / sqrt(2) approx 0.7071
-sine_val = math.sin(angle_radians)
-cosine_val = math.cos(angle_radians)
-print(f"sin(45°) = {sine_val:.4f}")
-print(f"cos(45°) = {cosine_val:.4f}")
-
-# Convert back to degrees
-recovered_deg = math.degrees(angle_radians)
-print(f"Recovered angle : {recovered_deg:.1f}°")
+print(angle_radians)
 ```
 
-### Output:
+Output:
+
 ```text
-Angle in Degrees: 45.0°
-Angle in Radians: 0.7854 rad
+0.7853981633974483
+```
+
+---
+
+# Calculating Sine and Cosine
+
+```python
+import math
+
+angle = math.radians(45)
+
+sine = math.sin(angle)
+cosine = math.cos(angle)
+
+print(sine)
+print(cosine)
+```
+
+Output:
+
+```text
+0.7071067811865475
+0.7071067811865476
+```
+
+For easier reading:
+
+```python
+print(f"sin(45°) = {sine:.4f}")
+print(f"cos(45°) = {cosine:.4f}")
+```
+
+Output:
+
+```text
 sin(45°) = 0.7071
 cos(45°) = 0.7071
-Recovered angle : 45.0°
 ```
 
 ---
 
-## 3. Stochastic Operations with the `random` Module
+# 🔄 Convert Radians Back to Degrees
 
-The `random` module provides functions to generate pseudo-random numbers, sample items, and shuffle collections:
+Use:
 
 ```python
-# ==========================================================
-# Example 3: Random Numbers, Choices, and Shuffling
-# ==========================================================
+math.degrees()
+```
+
+Example:
+
+```python
+import math
+
+radians = math.pi
+
+degrees = math.degrees(radians)
+
+print(degrees)
+```
+
+Output:
+
+```text
+180.0
+```
+
+### Remember
+
+```text
+Degrees → Radians
+math.radians()
+
+Radians → Degrees
+math.degrees()
+```
+
+---
+
+# 🎲 7. The `random` Module
+
+Now let's learn about randomness.
+
+Import the module:
+
+```python
+import random
+```
+
+The `random` module can be used for:
+
+* Games
+* Simulations
+* Random selections
+* Testing
+* Sampling
+* Shuffling
+
+For example:
+
+```python
 import random
 
-# 1. Random Float in interval [0.0, 1.0)
-print("Uniform float [0.0, 1.0):", random.random())
+number = random.random()
 
-# 2. Random Integer between a and b INCLUSIVE!
-# Perfect for rolling a 6-sided die
-dice_roll = random.randint(1, 6)
-print("Dice Roll (1 to 6)      :", dice_roll)
-
-# 3. Random Range with Step (e.g. random even number between 10 and 30)
-even_pick = random.randrange(10, 30, 2)
-print("Random Even Number      :", even_pick)
-
-# 4. Choosing from a sequence
-fruits = ["Mango", "Apple", "Banana", "Guava", "Papaya"]
-lucky_fruit = random.choice(fruits)
-print("Randomly Picked Fruit   :", lucky_fruit)
-
-# 5. Sampling WITHOUT replacement (Lottery / Raffle)
-winners = random.sample(fruits, k=2)
-print("2 Unique Prize Winners  :", winners)
-
-# 6. In-place Shuffling (Mutates original list!)
-deck = ["Card A", "Card B", "Card C", "Card D"]
-random.shuffle(deck)
-print("Shuffled Deck           :", deck)
+print(number)
 ```
 
-### Output:
+You will get a different value such as:
+
 ```text
-Uniform float [0.0, 1.0): 0.6394267984578837
-Dice Roll (1 to 6)      : 4
-Random Even Number      : 18
-Randomly Picked Fruit   : Mango
-2 Unique Prize Winners  : ['Guava', 'Banana']
-Shuffled Deck           : ['Card C', 'Card A', 'Card D', 'Card B']
+0.6394267984578837
+```
+
+The value is:
+
+```text
+0.0 <= number < 1.0
 ```
 
 ---
 
-## 4. Reproducibility with `random.seed()`
+# 🎯 `random.randint()`
 
-Because Python's `random` module is **pseudo-random**, providing a fixed starting `seed` ensures that the exact sequence of numbers repeats identically every run. This is crucial for scientific experiments and unit tests:
+`randint(a, b)` generates a random integer between `a` and `b`.
+
+**Both endpoints are included.**
 
 ```python
-# ==========================================================
-# Example 4: Deterministic Randomness with seed()
-# ==========================================================
+import random
+
+dice = random.randint(1, 6)
+
+print(dice)
+```
+
+Possible results:
+
+```text
+1
+2
+3
+4
+5
+6
+```
+
+This is useful for simulating a dice roll.
+
+---
+
+# 🔢 `random.randrange()`
+
+`randrange()` works similarly to Python's `range()`.
+
+For example:
+
+```python
+import random
+
+number = random.randrange(10, 30, 2)
+
+print(number)
+```
+
+Possible values include:
+
+```text
+10
+12
+14
+16
+...
+28
+```
+
+Notice that `30` is not included.
+
+---
+
+# 🍎 `random.choice()`
+
+`choice()` randomly selects one item from a sequence.
+
+```python
+import random
+
+fruits = [
+    "Mango",
+    "Apple",
+    "Banana",
+    "Guava"
+]
+
+fruit = random.choice(fruits)
+
+print(fruit)
+```
+
+Possible output:
+
+```text
+Mango
+```
+
+or:
+
+```text
+Apple
+```
+
+or another fruit from the list.
+
+---
+
+# 🎟️ `random.sample()`
+
+`sample()` selects multiple **unique items** without replacement.
+
+```python
+import random
+
+students = [
+    "Aman",
+    "Riya",
+    "Rahul",
+    "Neha",
+    "Priya"
+]
+
+winners = random.sample(students, k=2)
+
+print(winners)
+```
+
+Possible output:
+
+```text
+['Rahul', 'Priya']
+```
+
+The same student will not appear twice in that sample.
+
+This can be useful for:
+
+* Raffles
+* Random teams
+* Prize selection
+* Data sampling
+
+---
+
+# 🔀 `random.shuffle()`
+
+`shuffle()` randomly rearranges the items in a list.
+
+```python
+import random
+
+cards = [
+    "Card A",
+    "Card B",
+    "Card C",
+    "Card D"
+]
+
+random.shuffle(cards)
+
+print(cards)
+```
+
+Possible output:
+
+```text
+['Card C', 'Card A', 'Card D', 'Card B']
+```
+
+The original list is changed.
+
+### Important
+
+`random.shuffle()` returns `None`.
+
+So don't write:
+
+```python
+cards = random.shuffle(cards)
+```
+
+Instead:
+
+```python
+random.shuffle(cards)
+```
+
+Then use:
+
+```python
+print(cards)
+```
+
+---
+
+# 🔁 8. `random.seed()`
+
+The numbers generated by `random` are **pseudo-random**.
+
+That means they look random, but the sequence is generated by an algorithm.
+
+Sometimes we want the same sequence again.
+
+This is useful for:
+
+* Testing
+* Debugging
+* Classroom demonstrations
+* Reproducible experiments
+
+We can use `random.seed()`.
+
+```python
 import random
 
 random.seed(42)
-seq_1 = [random.randint(1, 100) for _ in range(4)]
 
-random.seed(42)  # Resetting to identical seed
-seq_2 = [random.randint(1, 100) for _ in range(4)]
-
-print("Run 1 Sequence:", seq_1)
-print("Run 2 Sequence:", seq_2)
-print("Are both runs 100% identical?", seq_1 == seq_2)
+print(random.randint(1, 100))
+print(random.randint(1, 100))
+print(random.randint(1, 100))
 ```
 
-### Output:
+If you run the same program again with the same seed, the sequence will repeat.
+
+---
+
+# 🧪 Example: Reproducible Random Numbers
+
+```python
+import random
+
+random.seed(42)
+
+first_run = [
+    random.randint(1, 100)
+    for _ in range(4)
+]
+
+random.seed(42)
+
+second_run = [
+    random.randint(1, 100)
+    for _ in range(4)
+]
+
+print("First Run :", first_run)
+print("Second Run:", second_run)
+
+print("Same sequence:", first_run == second_run)
+```
+
+Output:
+
 ```text
-Run 1 Sequence: [82, 15, 4, 95]
-Run 2 Sequence: [82, 15, 4, 95]
-Are both runs 100% identical? True
+First Run : [82, 15, 4, 95]
+Second Run: [82, 15, 4, 95]
+Same sequence: True
+```
+
+### Remember
+
+> `seed()` is useful when you want repeatable random results.
+
+---
+
+# 🔐 9. `random` vs `secrets`
+
+This is a very important concept.
+
+The `random` module is useful for:
+
+* Games
+* Simulations
+* Testing
+* Random selections
+
+But it should **not** be used for security-sensitive values such as:
+
+* Password reset tokens
+* Authentication tokens
+* Security codes
+* Session tokens
+* Sensitive OTP generation
+
+For these tasks, Python provides:
+
+```python
+secrets
+```
+
+The `secrets` module is designed for generating random values for security-sensitive applications.
+
+---
+
+# 🔑 Secure Random Values with `secrets`
+
+Example:
+
+```python
+import secrets
+
+number = secrets.randbelow(10)
+
+print(number)
+```
+
+This generates a secure random number from:
+
+```text
+0 to 9
 ```
 
 ---
 
-## 5. Security Alert: The `secrets` Module for Passwords and OTPs
+# 📱 Secure 6-Digit Code
 
-The `random` module uses the Mersenne Twister, which is **not cryptographically secure**. An attacker observing 624 consecutive outputs can predict all future numbers. For security-sensitive applications (passwords, tokens, OTPs), use the standard library **`secrets`** module:
+For demonstration purposes, you can generate a secure six-digit code like this:
 
 ```python
-# ==========================================================
-# Example 5: Cryptographically Secure OTP Generation
-# ==========================================================
+import secrets
+
+otp = "".join(
+    str(secrets.randbelow(10))
+    for _ in range(6)
+)
+
+print(otp)
+```
+
+Possible output:
+
+```text
+849201
+```
+
+The result will normally be different each time.
+
+### Important
+
+In a real banking or authentication system, OTP delivery, expiration, rate limiting, verification, and storage must also be handled securely. Generating the number is only one part of a secure OTP system.
+
+---
+
+# 🔐 Secure Password Example
+
+The `secrets` module can also choose characters securely.
+
+```python
 import secrets
 import string
 
-# Generate a secure 6-digit Banking OTP
-# secrets.randbelow(n) returns a cryptographically secure integer in [0, n)
-banking_otp = "".join(str(secrets.randbelow(10)) for _ in range(6))
-print("Cryptographically Secure 6-Digit OTP:", banking_otp)
+characters = string.ascii_letters + string.digits + "!@#$%^&*"
 
-# Generate a high-entropy password
-alphabet = string.ascii_letters + string.digits + "!@#$%^&*"
-secure_password = "".join(secrets.choice(alphabet) for _ in range(12))
-print("Secure Password Generated           :", secure_password)
+password = "".join(
+    secrets.choice(characters)
+    for _ in range(12)
+)
+
+print(password)
 ```
 
-### Output:
+Possible output:
+
 ```text
-Cryptographically Secure 6-Digit OTP: 849201
-Secure Password Generated           : 9k#V7$qX@2mP
+9k#V7$qX@2mP
 ```
 
 ---
 
-## Do's and Don'ts: Mathematical & Random Functions
+# 📊 `random` vs `secrets`
 
-| Scenario | Anti-Pattern (Don't) | Best Practice (Do) | Why |
-| :--- | :--- | :--- | :--- |
-| **Banking OTPs** | `random.randint(100000, 999999)` | `secrets.randbelow()` | `random` is predictable; `secrets` accesses OS-level cryptographic entropy. |
-| **Trig Angles** | `math.sin(90)` expecting `1.0` | `math.sin(math.radians(90))` | `math.sin()` strictly takes radians; $\sin(90\text{ rad}) \approx 0.8939$. |
-| **Unique Sampling** | Calling `random.choice()` in a loop | `random.sample(seq, k=n)` | `sample()` guarantees distinct elements without duplicates. |
-| **List Shuffling** | `shuffled = random.shuffle(my_list)` | `random.shuffle(my_list)` (returns `None`) | `shuffle()` works in-place; assigning its output results in `None`. |
+| Requirement                     | Use       |
+| ------------------------------- | --------- |
+| Dice game                       | `random`  |
+| Game simulation                 | `random`  |
+| Random test data                | `random`  |
+| Shuffle cards                   | `random`  |
+| Scientific simulation           | `random`  |
+| Security token                  | `secrets` |
+| Password reset token            | `secrets` |
+| Authentication token            | `secrets` |
+| Security-sensitive random value | `secrets` |
 
----
+### Easy Rule
 
-## Quick Revision Summary
+```text
+Need normal randomness?
+        ↓
+     random
 
-```
-+-------------------------------------------------------------------------+
-|                    math & random CHEAT SHEET                            |
-+-------------------------------------------------------------------------+
-  - math.sqrt(x):       Square root (e.g., math.sqrt(81) -> 9.0)
-  - math.ceil / floor:  Rounding up / down towards infinities
-  - math.gcd / lcm:     Greatest common divisor & least common multiple
-  - math.radians(deg):  Convert degrees to radians for sin/cos/tan
-  - random.randint(a,b):Random integer; INCLUDES both a and b!
-  - random.choice(seq): Pick one random element from list/tuple
-  - random.sample(s,k): Pick k unique items without replacement
-  - random.shuffle(lst):In-place list mutation
-  - secrets.choice():   Cryptographically secure for passwords/OTPs
-+-------------------------------------------------------------------------+
+Need security randomness?
+        ↓
+     secrets
 ```
 
 ---
 
-# Multiple Choice Questions
+# ⚠️ Common Beginner Mistakes
 
-### 1. Does the function `random.randint(1, 10)` include both endpoints 1 and 10 in its possible outcomes?
-A. No, it includes 1 but excludes 10 (up to 9 only)
-B. Yes, both 1 and 10 are fully inclusive
-C. No, it excludes both 1 and 10 (2 to 9 only)
-D. It depends on the operating system
+## Mistake 1: Using degrees directly with `sin()`
 
+Don't:
+
+```python
+math.sin(90)
+```
+
+if you mean 90 degrees.
+
+Use:
+
+```python
+math.sin(math.radians(90))
+```
+
+---
+
+## Mistake 2: Expecting `shuffle()` to return a list
+
+Don't:
+
+```python
+shuffled = random.shuffle(my_list)
+```
+
+Use:
+
+```python
+random.shuffle(my_list)
+```
+
+`shuffle()` changes the list directly and returns `None`.
+
+---
+
+## Mistake 3: Using `random` for security
+
+Don't use:
+
+```python
+random.randint(100000, 999999)
+```
+
+for security-sensitive authentication codes.
+
+Use a security-focused approach such as:
+
+```python
+secrets.randbelow()
+```
+
+---
+
+# ✅ Do's and Don'ts
+
+| Situation          | Don't                                          | Do                            |
+| ------------------ | ---------------------------------------------- | ----------------------------- |
+| Square root        | Write your own unnecessarily                   | `math.sqrt()`                 |
+| Trigonometry       | Pass degrees directly                          | Convert with `math.radians()` |
+| Random game number | `secrets` unnecessarily                        | `random.randint()`            |
+| Security token     | `random`                                       | `secrets`                     |
+| Shuffle list       | `result = random.shuffle(list)`                | `random.shuffle(list)`        |
+| Repeatable testing | Expect random sequence to repeat automatically | Use `random.seed()`           |
+
+---
+
+# 📌 Quick Revision Cheat Sheet
+
+```text
+PYTHON MATH MODULE
+────────────────────────────────
+
+import math
+
+math.pi
+→ π
+
+math.sqrt(x)
+→ Square root
+
+math.hypot(x, y)
+→ Hypotenuse / distance
+
+math.ceil(x)
+→ Round up
+
+math.floor(x)
+→ Round down
+
+math.trunc(x)
+→ Remove decimal toward zero
+
+math.factorial(x)
+→ Factorial
+
+math.gcd(a, b)
+→ Greatest Common Divisor
+
+math.lcm(a, b)
+→ Least Common Multiple
+
+math.radians(x)
+→ Degrees → Radians
+
+math.degrees(x)
+→ Radians → Degrees
+
+math.sin()
+math.cos()
+math.tan()
+→ Trigonometry
+```
+
+```text
+PYTHON RANDOM MODULE
+────────────────────────────────
+
+import random
+
+random.random()
+→ Random float from 0.0 up to 1.0
+
+random.randint(a, b)
+→ Random integer including a and b
+
+random.randrange(start, stop, step)
+→ Random value from a range
+
+random.choice(sequence)
+→ Pick one item
+
+random.sample(sequence, k)
+→ Pick unique items
+
+random.shuffle(list)
+→ Shuffle list in-place
+
+random.seed(value)
+→ Repeatable random sequence
+```
+
+```text
+SECURITY
+────────────────────────────────
+
+import secrets
+
+secrets.randbelow()
+secrets.choice()
+
+→ Use for security-sensitive random values
+```
+
+---
+
+## Practice Quiz
+
+### 1. Which module provides `sqrt()`?
+A. `random`
+B. `math`
+C. `number`
+D. `calc`
 **Answer:** B
-**Explanation:** Unlike `range(a, b)` or `random.randrange(a, b)` which exclude the stop value, `random.randint(a, b)` is explicitly designed to include both $a$ and $b$ ($a \le N \le b$).
 
 ---
 
-### 2. What is the output of evaluating `math.floor(-4.2)` in Python?
+### 2. What is the result of `math.floor(-4.2)`?
 A. `-4`
 B. `-5`
-C. `-4.0`
+C. `4`
 D. `-4.2`
-
 **Answer:** B
-**Explanation:** `math.floor(x)` returns the largest integer less than or equal to $x$ (rounding down towards negative infinity). On the number line, the integer immediately below $-4.2$ is $-5$.
 
 ---
 
-### 3. Which standard library module should you use to generate one-time passwords (OTPs) and password reset tokens in a banking system?
+### 3. What does `random.randint(1, 10)` generate?
+A. Only values from 1 to 9
+B. Values from 1 to 10, including both endpoints
+C. Only values from 2 to 9
+D. Decimal values from 1.0 to 10.0
+**Answer:** B
+
+---
+
+### 4. Which module should be used for security-sensitive random tokens?
 A. `random`
 B. `math`
 C. `secrets`
-D. `crypto_random`
-
+D. `token`
 **Answer:** C
-**Explanation:** The `random` module is designed for statistical simulations and is not cryptographically secure. The standard library `secrets` module provides access to the operating system's cryptographic random number generator, making it safe for security tokens and OTPs.
 
 ---
 
-### 4. What will be the value of `shuffled_list` after running `shuffled_list = random.shuffle([1, 2, 3, 4])`?
-A. A new randomized list
-B. `None`
-C. A tuple of randomized numbers
-D. `TypeError`
+### 5. What does `random.shuffle()` do?
+A. Creates a new shuffled list
+B. Sorts the list
+C. Randomly rearranges the list in-place
+D. Converts the list into a tuple
+**Answer:** C
 
+---
+
+### 6. Why do we use `math.radians()` before `math.sin()` when working with degrees?
+A. `sin()` only accepts strings
+B. `sin()` expects radians
+C. `radians()` makes the number random
+D. `sin()` only works with integers
 **Answer:** B
-**Explanation:** `random.shuffle()` operates strictly **in-place** on mutable sequences and returns `None`. Storing its return value in a variable assigns `None` to that variable.
 
 ---
 
-### 5. Why does evaluating `math.sin(90)` NOT return `1.0` in Python?
-A. The `math.sin()` function is inaccurate
-B. The `math.sin()` function expects the input angle in radians, not degrees
-C. Python only supports cosine calculations
-D. Floating-point precision error
+# 💻 Hands-On Practice Challenge
 
-**Answer:** B
-**Explanation:** All trigonometric functions in Python's `math` module take angles measured in radians. To compute the sine of 90 degrees, you must first convert the degrees to radians: `math.sin(math.radians(90))` which yields `1.0`.
+## Challenge 16: Cricket Super Over Simulator
 
----
+Now let's combine `math` and `random` in a fun simulation.
 
-# Hands-On Practice Challenge: Cricket Super Over Simulation Engine
+We will create a simple **6-ball cricket simulation**.
 
-Write a complete, runnable Python script that simulates a dramatic 6-ball Cricket Super Over between two teams. Use `random.choice()` with weighted probabilities for cricket outcomes (0, 1, 2, 4, 6 runs, or Out), track run rates, and calculate the hypotenuse field distances using `math.hypot()`.
+The program will:
+
+* Generate random ball outcomes
+* Track runs
+* Track wickets
+* Use `random.choices()`
+* Use `math.hypot()` for a simple distance calculation
+
+### Starter Code
 
 ```python
-# ==========================================================
-# Challenge 16: Cricket Super Over Simulator
-# MSK Institute of Technology
-# ==========================================================
 import random
 import math
 
-print("=" * 60)
-print("        MSK PREMIER LEAGUE: SUPER OVER SHOWDOWN")
-print("=" * 60)
+print("=" * 55)
+print("       CRICKET SUPER OVER SIMULATOR")
+print("=" * 55)
 
-# Possible ball outcomes with realistic cricket weights
-BALL_OUTCOMES = [0, 1, 2, 3, 4, 6, "WICKET"]
-OUTCOME_WEIGHTS = [0.20, 0.30, 0.15, 0.05, 0.15, 0.10, 0.05]
+BALL_OUTCOMES = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    "WICKET"
+]
 
-def play_super_over(team_name: str, target_to_beat: int | None = None) -> int:
-    print(f"\n>>> INNINGS: {team_name.upper()} BATSMEN WALKING IN")
-    print("-" * 60)
-    
-    runs_scored = 0
-    wickets_lost = 0
-    MAX_WICKETS = 2
-    TOTAL_BALLS = 6
+OUTCOME_WEIGHTS = [
+    0.20,
+    0.30,
+    0.15,
+    0.05,
+    0.15,
+    0.10,
+    0.05
+]
 
-    for ball in range(1, TOTAL_BALLS + 1):
-        if wickets_lost >= MAX_WICKETS:
-            print(f"Ball {ball}: ALL OUT! (Max 2 wickets down in Super Over)")
-            break
 
-        # Generate stochastic outcome based on realistic weights
-        outcome = random.choices(BALL_OUTCOMES, weights=OUTCOME_WEIGHTS, k=1)[0]
+def play_super_over(team_name):
+
+    runs = 0
+    wickets = 0
+
+    print(f"\n{team_name} Batting")
+    print("-" * 55)
+
+    for ball in range(1, 7):
+
+        outcome = random.choices(
+            BALL_OUTCOMES,
+            weights=OUTCOME_WEIGHTS,
+            k=1
+        )[0]
 
         if outcome == "WICKET":
-            wickets_lost += 1
-            print(f"Ball {ball}: WICKET!! Batsman clean bowled! ({runs_scored}/{wickets_lost})")
+            wickets += 1
+            print(
+                f"Ball {ball}: WICKET | "
+                f"Score: {runs}/{wickets}"
+            )
         else:
-            runs_scored += outcome
-            comment = "SIX!" if outcome == 6 else ("FOUR!" if outcome == 4 else f"{outcome} run(s)")
-            print(f"Ball {ball}: {comment:<7} | Score: {runs_scored}/{wickets_lost}")
+            runs += outcome
 
-        # Check if target is chased down early
-        if target_to_beat is not None and runs_scored > target_to_beat:
-            print(f">>> TARGET SURPASSED! {team_name} wins the match!")
-            break
+            print(
+                f"Ball {ball}: "
+                f"{outcome} run(s) | "
+                f"Score: {runs}/{wickets}"
+            )
 
-    print(f"Summary: {team_name} scored {runs_scored} runs for {wickets_lost} wickets.")
-    return runs_scored
+    print(
+        f"Final Score: "
+        f"{runs}/{wickets}"
+    )
 
-# ----------------------------------------------------------
-# Execute Match: India vs Australia
-# ----------------------------------------------------------
-# Fix seed optionally for reproducibility, or leave dynamic:
-# random.seed(101)
+    return runs
 
-# Team 1 Innings
-india_score = play_super_over("Team India")
 
-# Team 2 Innings (chasing target)
-australia_score = play_super_over("Team Australia", target_to_beat=india_score)
+# Simulate two teams
 
-print("\n" + "=" * 60)
-print("                  MATCH FINAL RESULT")
-print("=" * 60)
-if india_score > australia_score:
-    print(f"CHAMPIONS: Team India won by {india_score - australia_score} runs!")
-elif australia_score > india_score:
-    print(f"CHAMPIONS: Team Australia chased down the target successfully!")
+team_a_score = play_super_over("Team A")
+
+team_b_score = play_super_over("Team B")
+
+
+# Display result
+
+print("\n" + "=" * 55)
+print("             MATCH RESULT")
+print("=" * 55)
+
+if team_a_score > team_b_score:
+    print("Team A scored more runs.")
+
+elif team_b_score > team_a_score:
+    print("Team B scored more runs.")
+
 else:
-    print("MATCH TIED! Another Super Over required!")
+    print("Match tied!")
 
-# Boundary Distance Calculation using math.hypot
-boundary_x = 55.0  # meters from pitch center along X axis
-boundary_y = 48.0  # meters from pitch center along Y axis
-direct_distance = math.hypot(boundary_x, boundary_y)
-print(f"\nLongest Six Trajectory Measured: {direct_distance:.2f} meters (via math.hypot)")
-print("=" * 60)
+
+# Simple distance calculation
+
+x = 55
+y = 48
+
+distance = math.hypot(x, y)
+
+print(
+    f"\nCalculated distance: "
+    f"{distance:.2f} meters"
+)
+
+print("=" * 55)
 ```
 
-### Expected Program Output:
-```text
-============================================================
-        MSK PREMIER LEAGUE: SUPER OVER SHOWDOWN
-============================================================
+---
 
->>> INNINGS: TEAM INDIA BATSMEN WALKING IN
-------------------------------------------------------------
-Ball 1: 1 run(s) | Score: 1/0
-Ball 2: FOUR!   | Score: 5/0
-Ball 3: SIX!    | Score: 11/0
-Ball 4: 2 run(s) | Score: 13/0
-Ball 5: WICKET!! Batsman clean bowled! (13/1)
-Ball 6: FOUR!   | Score: 17/1
-Summary: Team India scored 17 runs for 1 wickets.
+# 🧪 Challenge Tasks
 
->>> INNINGS: TEAM AUSTRALIA BATSMEN WALKING IN
-------------------------------------------------------------
-Ball 1: 2 run(s) | Score: 2/0
-Ball 2: 1 run(s) | Score: 3/0
-Ball 3: 0 run(s) | Score: 3/0
-Ball 4: SIX!    | Score: 9/0
-Ball 5: 1 run(s) | Score: 10/0
-Ball 6: FOUR!   | Score: 14/0
-Summary: Team Australia scored 14 runs for 0 wickets.
+After running the program, try these changes.
 
-============================================================
-                  MATCH FINAL RESULT
-============================================================
-CHAMPIONS: Team India won by 3 runs!
+### Task 1 — Change the number of balls
 
-Longest Six Trajectory Measured: 72.99 meters (via math.hypot)
-============================================================
+Currently:
+
+```python
+for ball in range(1, 7):
 ```
+
+Try:
+
+```python
+for ball in range(1, 13):
+```
+
+Observe what happens.
+
+---
+
+### Task 2 — Add a new outcome
+
+Add another possible outcome:
+
+```python
+5
+```
+
+Then update the weights.
+
+---
+
+### Task 3 — Make the simulation repeatable
+
+Add:
+
+```python
+random.seed(42)
+```
+
+near the beginning of the program.
+
+Run the program multiple times.
+
+Observe whether the same sequence is produced.
+
+---
+
+### Task 4 — Change the distance
+
+Try:
+
+```python
+x = 60
+y = 40
+```
+
+Then observe the new result from:
+
+```python
+math.hypot(x, y)
+```
+
+---
+
+# 🎯 Lesson Summary
+
+In this lesson, you learned:
+
+* What Python modules are
+* How to import a module
+* How to use the `math` module
+* `math.pi`, `math.e`, and `math.tau`
+* `math.sqrt()`
+* `math.hypot()`
+* `math.ceil()`
+* `math.floor()`
+* `math.trunc()`
+* `math.factorial()`
+* `math.gcd()`
+* `math.lcm()`
+* Trigonometric functions
+* Degrees and radians
+* `random.random()`
+* `random.randint()`
+* `random.randrange()`
+* `random.choice()`
+* `random.sample()`
+* `random.shuffle()`
+* `random.seed()`
+* Why `random` should not be used for security-sensitive randomness
+* How `secrets` is used for security-sensitive random values
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **String Introduction** (5: Strings).
+
+👉 **[Continue to Next Lesson: String Introduction →](/tutorials/python-for-beginners/string-introduction)**

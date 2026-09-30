@@ -16,9 +16,9 @@ keywords:
   - python no break pattern
   - search algorithm python
   - boolean flag refactoring
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Loops with Else in Python: The `for-else` & `while-else` Architecture
@@ -256,7 +256,43 @@ Because the loop never encountered a `break` statement (the loop body was never 
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. When does the `else` block of a Python `for` or `while` loop execute?
 A. Whenever an exception occurs inside the loop
@@ -265,7 +301,6 @@ C. Only when the loop finishes all iterations naturally without hitting a `break
 D. Only when the loop condition is initially `False`
 
 **Answer:** C
-**Explanation:** The `else` clause of a loop executes if and only if the loop terminates normally without being aborted by an explicit `break` statement.
 
 ---
 
@@ -283,7 +318,6 @@ C. 2
 D. Nothing is printed
 
 **Answer:** D
-**Explanation:** In the second iteration, `x == 2` evaluates to `True`, triggering the `break` statement. When `break` executes, the loop terminates immediately and the `else` block is completely skipped. Thus, nothing is printed.
 
 ---
 
@@ -301,7 +335,6 @@ C. SyntaxError
 D. Nothing is printed
 
 **Answer:** A
-**Explanation:** The value 99 is not present in the list, so `x == 99` is never `True`, and `break` is never encountered. The loop completes all iterations, triggering the `else` block which prints `"Target Missing"`.
 
 ---
 
@@ -312,7 +345,6 @@ C. The loop body executes once with `None`
 D. Neither the loop body nor the `else` block executes
 
 **Answer:** B
-**Explanation:** When iterating over an empty list, the loop terminates immediately without ever hitting a `break`. Because no `break` occurred, the `else` block executes.
 
 ---
 
@@ -323,7 +355,6 @@ C. It allows loops to run asynchronously on multiple CPU threads
 D. Boolean flags are deprecated in Python 3.12
 
 **Answer:** B
-**Explanation:** Python's `for-else` structure directly expresses the search pattern: attempt to find an item and break; if exhausted without breaking, take fallback action. It removes redundant variable tracking and reduces bug surface area.
 
 ---
 
@@ -413,3 +444,10 @@ Output:
 === AIR INDIA GATE CLEARANCE: PASSPORT M0000000 ===
 --> [ABSENT] ALERT: Passenger with Passport M0000000 NOT CHECKED IN. Report to Security Desk.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Iterating with Loops** (13: Loops).
+
+👉 **[Continue to Next Lesson: Iterating with Loops →](/tutorials/python-for-beginners/iterating-with-loops)**

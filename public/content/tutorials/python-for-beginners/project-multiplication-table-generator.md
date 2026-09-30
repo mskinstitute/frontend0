@@ -16,9 +16,9 @@ keywords:
   - cli math table python
   - vedic math pahada generator
   - nested loop table project
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Dynamic Mathematical Multiplication Matrix & Table Engine
@@ -265,7 +265,43 @@ Drill Accuracy: 100.0% (3/3 Correct)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In the 2D multiplication matrix, what statement is necessary after the inner column loop completes to move to the next table row?
 A. `continue`
@@ -274,7 +310,6 @@ C. `pass`
 D. `break`
 
 **Answer:** B
-**Explanation:** Because each cell in the inner loop is printed with `end=""` to stay on the same horizontal line, an empty `print()` call is required after the inner loop finishes to issue a newline before starting the next row.
 
 ---
 
@@ -285,7 +320,6 @@ C. $N + 1$
 D. $N!$
 
 **Answer:** B
-**Explanation:** In an $N \times N$ matrix, the outer loop runs $N$ times and the inner loop runs $N$ times for each outer iteration, yielding $N \times N = N^2$ total product calculations.
 
 ---
 
@@ -296,7 +330,6 @@ C. `{val:^5}`
 D. `{val:5r}`
 
 **Answer:** B
-**Explanation:** In Python format specifiers, `>` indicates right-alignment, `<` indicates left-alignment, and `^` indicates centered alignment. `{val:>5}` right-aligns `val` within 5 columns.
 
 ---
 
@@ -307,7 +340,6 @@ C. The loop executes in reverse automatically
 D. Python runs in an infinite loop
 
 **Answer:** B
-**Explanation:** In Python, if `start > stop` and step is positive (default `+1`), the range is empty. The `for` loop body is never executed.
 
 ---
 
@@ -318,7 +350,6 @@ C. It sorts the numbers in descending order
 D. It prevents negative numbers from existing
 
 **Answer:** A
-**Explanation:** A list comprehension generates the entire sequence of multiples in a single declarative line with optimized C-level execution speed, making it ideal for downstream numerical processing.
 
 ---
 
@@ -391,3 +422,10 @@ Output:
 | 95       9          9 x 10 = 90  9025           PASS   |
 +==============================================================+
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Defining & Calling Functions** (14: Functions).
+
+👉 **[Continue to Next Lesson: Defining & Calling Functions →](/tutorials/python-for-beginners/defining-calling-functions)**

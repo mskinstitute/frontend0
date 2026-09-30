@@ -16,9 +16,9 @@ keywords:
   - windows file paths
   - newline tab carriage return
   - unicode escape
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Escape Characters: Backslash Sequences & Raw Strings
@@ -276,7 +276,7 @@ Workaround 3 (Pathlib): C:\Program Files\Python
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which symbol is used in Python to initiate an escape sequence?
 A. Forward slash `/`
@@ -285,7 +285,6 @@ C. Percentage `%`
 D. Caret `^`
 
 **Answer:** B
-**Explanation:** The backslash `\` is the escape character in Python. When placed before certain characters, it gives them a special meaning (such as `\n` for newline or `\t` for horizontal tab).
 
 ---
 
@@ -296,7 +295,6 @@ C. `HelloWorld`
 D. `SyntaxError`
 
 **Answer:** B
-**Explanation:** The `r` prefix designates a raw string literal. In raw strings, escape sequences are not interpreted, so `\n` is printed as two literal characters: a backslash followed by the letter 'n'.
 
 ---
 
@@ -307,7 +305,6 @@ C. It strips the backslash automatically
 D. It creates an empty directory
 
 **Answer:** B
-**Explanation:** In Python's lexical tokenizer, a trailing backslash escapes the closing quotation mark, even inside a raw string. Since the closing quote is escaped, the string remains open, resulting in a fatal `SyntaxError`.
 
 ---
 
@@ -318,7 +315,6 @@ C. `\t`
 D. `\h`
 
 **Answer:** C
-**Explanation:** `\t` represents a horizontal tab, moving the cursor to the next tab stop (typically 4 or 8 spaces).
 
 ---
 
@@ -329,7 +325,6 @@ C. The Indian Rupee currency sign (₹)
 D. The Japanese Yen symbol (¥)
 
 **Answer:** C
-**Explanation:** `\u20B9` is the official 16-bit Unicode hexadecimal code point for the Indian Rupee symbol (`₹`).
 
 ---
 
@@ -409,3 +404,10 @@ Contains literal '\' : True
 Backslash character count: 4
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **String Methods** (5: Strings).
+
+👉 **[Continue to Next Lesson: String Methods →](/tutorials/python-for-beginners/string-methods)**

@@ -17,9 +17,9 @@ keywords:
   - csv export
   - analytics
   - python project
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Personal Finance & Expense Tracker
@@ -349,7 +349,7 @@ Total reloaded items from CSV: 7
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. In the aggregation idiom breakdown[cat] = breakdown.get(cat, 0.0) + amt, what is the role of 0.0?
 A. It resets the category counter to zero on every loop
@@ -357,7 +357,6 @@ B. It provides a default fallback value if the category key does not exist yet i
 C. It rounds the float value to zero decimals
 D. It specifies an empty string
 **Answer:** B
-**Explanation:** `dict.get(key, default)` returns the existing accumulated sum if `cat` is already present, or `0.0` if it's the first time encountering that category.
 
 ---
 
@@ -367,7 +366,6 @@ B. It concatenates the string amounts together
 C. It sorts the expenses list
 D. It deletes invalid expenses
 **Answer:** A
-**Explanation:** The generator expression `item["amount"] for item in expenses` extracts the numeric value from each dictionary lazily, passing them into `sum()` with $O(1)$ auxiliary memory.
 
 ---
 
@@ -377,7 +375,6 @@ B. Reads and consumes the CSV header row so subsequent data iterations only proc
 C. Encrypts the CSV file
 D. Converts commas to semicolons
 **Answer:** B
-**Explanation:** Calling `f.readline()` once advances the file cursor past the header line (`Title,Amount,Category,Date`), allowing the subsequent `for line in f:` loop to parse pure data rows.
 
 ---
 
@@ -387,7 +384,6 @@ B. `₹24,050.50`
 C. `₹24.050,50`
 D. `Error: invalid format specifier`
 **Answer:** B
-**Explanation:** The format specifier `:,` inserts a comma as thousands separator, and `.2f` formats the float with exactly 2 decimal places, producing `₹24,050.50`.
 
 ---
 
@@ -397,7 +393,6 @@ B. Because float conversion requires internet connectivity
 C. Because float numbers can only hold negative values
 D. Because Python cannot convert integers to floats
 **Answer:** A
-**Explanation:** If a user accidentally enters non-numeric text (e.g., `"fifty"` or `"12.a"`), `float()` raises a `ValueError`. Wrapping it in `try...except` prevents application crashes.
 
 ---
 
@@ -467,3 +462,10 @@ print(f"Daily Average Spend   : ₹{avg_spend:.2f} across unique active days")
 Top Spending Category : Utilities (₹2200.00)
 Daily Average Spend   : ₹1666.67 across unique active days
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Basic Student Management System** (16: Projects).
+
+👉 **[Continue to Next Lesson: Basic Student Management System →](/tutorials/python-for-beginners/basic-student-management-system)**

@@ -17,9 +17,9 @@ keywords:
   - reverse string
   - indexerror vs slice tolerance
   - palindrome check
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python String Slicing & Indexing: The Complete Guide
@@ -286,7 +286,33 @@ city[100:200] -> ''
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Attempting to Mutate a String in Place
+Python strings are immutable. You cannot assign directly to a character index:
+```python
+text = "Python"
+# ❌ INCORRECT (TypeError: 'str' object does not support item assignment)
+text[0] = "J"
+
+# ✅ CORRECT (Create a new string using slicing or concatenation)
+text = "J" + text[1:]
+print(text)  # "Jython"
+```
+
+### 2. Off-By-One Errors in Slicing
+In Python slicing `text[start:stop]`, the `stop` index is **exclusive** (not included in the slice):
+```python
+word = "Coding"
+# Slicing word[0:3] gives indices 0, 1, 2 ('Cod'), NOT index 3!
+print(word[0:3])  # 'Cod'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does evaluating the expression `"BANGALORE"[1:5]` return?
 A. `'BANGA'`
@@ -295,7 +321,6 @@ C. `'ANGA L'`
 D. `'BAN'`
 
 **Answer:** B
-**Explanation:** Slicing is zero-based and the stop index is exclusive. Indices 1, 2, 3, and 4 correspond to characters `'A'`, `'N'`, `'G'`, and `'A'`, yielding `'ANGA'`.
 
 ---
 
@@ -306,7 +331,6 @@ C. It executes successfully and returns an empty string `""`
 D. Python fills the missing space with spaces
 
 **Answer:** C
-**Explanation:** Python slicing is boundary-tolerant. Slicing with indices that exceed the length of the string does not raise an `IndexError`; it simply truncates at the valid boundaries, returning an empty string `""` if completely beyond the end.
 
 ---
 
@@ -317,7 +341,6 @@ C. `title[::-1]`
 D. `title[-1:0]`
 
 **Answer:** C
-**Explanation:** The slice syntax `title[::-1]` sets the step to `-1` with default start and stop, instructing Python to iterate backwards through the entire string in optimized C-level code. Note that strings do not have a `.reverse()` method because they are immutable.
 
 ---
 
@@ -328,7 +351,6 @@ C. `'H'`
 D. `'I'`
 
 **Answer:** C
-**Explanation:** Negative indexing counts from the rear: `s[-1]` is `'I'`, `s[-2]` is `'H'`, `s[-3]` is `'L'`, `s[-4]` is `'E'`, and `s[-5]` is `'D'`.
 
 ---
 
@@ -339,7 +361,6 @@ C. `'ABC'`
 D. `'CFH'`
 
 **Answer:** A
-**Explanation:** The step stride is 3, starting from index 0: index 0 is `'A'`, index 3 is `'D'`, and index 6 is `'G'`. The resulting string is `'ADG'`.
 
 ---
 
@@ -453,3 +474,10 @@ Email        : contact@isro.gov.in
   > TLD Ext  : in
 ------------------------------------------------------------
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Modifying Strings** (5: Strings).
+
+👉 **[Continue to Next Lesson: Modifying Strings →](/tutorials/python-for-beginners/modifying-strings)**

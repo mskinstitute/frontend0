@@ -16,9 +16,9 @@ keywords:
   - updating dictionary items
   - dict keys values items
   - dictionary update method
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Accessing & Updating Dictionary Items: Lookups, Safe `get()`, and In-Place Mutations
@@ -259,7 +259,35 @@ After bulk update:
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens when you access `d["city"]` if `"city"` is NOT a key in dictionary `d`?
 A. Python returns `None`
@@ -268,7 +296,6 @@ C. Python raises a `KeyError`
 D. Python returns an empty string `""`
 
 **Answer:** C
-**Explanation:** Bracket access `d[key]` expects the key to exist. If it is missing, a `KeyError` is raised. To return `None` or a default value without crashing, use `d.get("city")`.
 
 ---
 
@@ -279,7 +306,6 @@ C. `KeyError`
 D. `0`
 
 **Answer:** B
-**Explanation:** `dict.get(key, default)` returns the specified default value (`18`) when the requested key is absent from the dictionary.
 
 ---
 
@@ -296,7 +322,6 @@ C. 1
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** Direct assignment overwrites `"Math"` from 80 to 95 and inserts the new key `"Science"`. The dictionary contains 2 items: `{"Math": 95, "Science": 88}`.
 
 ---
 
@@ -307,7 +332,6 @@ C. `dict.items()`
 D. `dict.tuples()`
 
 **Answer:** C
-**Explanation:** The `.items()` method returns a dynamic dictionary view of `(key, value)` tuple pairs, designed for loops: `for k, v in d.items():`.
 
 ---
 
@@ -318,7 +342,6 @@ C. `key in d` searches values instead of keys
 D. `d.keys()` converts the dictionary into a list
 
 **Answer:** A
-**Explanation:** Checking membership directly on the dictionary (`key in d`) executes directly against the hash table in $O(1)$ time without requiring the extra method dispatch call to `.keys()`.
 
 ---
 
@@ -395,3 +418,10 @@ international_roaming        | ACTIVE_UAE_SAUDI
 roaming_pack_validity_days   | 10
 ott_bundle                   | Disney+ Hotstar Premium
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Adding & Removing Items** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Adding & Removing Items →](/tutorials/python-for-beginners/adding-removing-dict-items)**

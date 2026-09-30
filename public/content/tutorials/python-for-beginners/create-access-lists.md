@@ -16,9 +16,9 @@ keywords:
   - indexerror list index out of range
   - list membership operator
   - reverse list slice
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Creating and Accessing Python Lists: Indexing, Negative Indices, and Slicing
@@ -239,7 +239,38 @@ Notice: Transfer to Orange Line required for Airport T3.
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Given `cities = ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bengaluru"]`, what does `cities[-1]` return?
 A. `"Delhi"`
@@ -248,7 +279,6 @@ C. `"Bengaluru"`
 D. `IndexError`
 
 **Answer:** C
-**Explanation:** In Python, negative index `-1` points to the final element of the sequence, which is `"Bengaluru"`.
 
 ---
 
@@ -259,7 +289,6 @@ C. `[20, 30, 40, 50]`
 D. `[10, 20, 30, 40]`
 
 **Answer:** B
-**Explanation:** Slicing `[start:stop]` includes the start index (1) and excludes the stop index (4). Therefore, elements at indices 1, 2, and 3 are returned: `[20, 30, 40]`.
 
 ---
 
@@ -270,7 +299,6 @@ C. `data[-1:0]`
 D. `data[-1:-4]`
 
 **Answer:** B
-**Explanation:** Slicing with a step of `-1` without specifying start and stop (`data[::-1]`) traverses the entire list backwards from end to beginning, returning `[4, 3, 2, 1]`.
 
 ---
 
@@ -281,7 +309,6 @@ C. Python raises an `IndexError: list index out of range`
 D. Python extends the list with empty slots
 
 **Answer:** C
-**Explanation:** Direct indexing out of bounds raises an `IndexError`. (Note that slicing outside list bounds such as `items[10:20]` returns `[]` without erroring, but direct indexing `items[10]` crashes).
 
 ---
 
@@ -292,7 +319,6 @@ C. `['B', 'D']`
 D. `['C', 'D', 'E']`
 
 **Answer:** B
-**Explanation:** The stride `2` selects elements at indices 0, 2, and 4, which correspond to `'A'`, `'C'`, and `'E'`.
 
 ---
 
@@ -359,3 +385,10 @@ Lowest 2 scores:  [64, 71]
 Highest 3 scores: [95, 92, 90]
 No subject achieved a perfect 100. Keep practicing!
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Add & Remove Items** (8: Lists).
+
+👉 **[Continue to Next Lesson: Add & Remove Items →](/tutorials/python-for-beginners/add-remove-items)**

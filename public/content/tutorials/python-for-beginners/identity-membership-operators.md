@@ -18,9 +18,9 @@ keywords:
   - object identity
   - small integer caching
   - singleton none
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Identity & Membership Operators: is vs == & in Collections
@@ -284,7 +284,39 @@ Is 'A+' in grades.values()?     : True
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be the output of evaluating `[1, 2] == [1, 2]` vs `[1, 2] is [1, 2]`?
 A. `True` and `True`
@@ -293,7 +325,6 @@ C. `False` and `True`
 D. `False` and `False`
 
 **Answer:** B
-**Explanation:** The `==` operator tests value equality: both lists have identical elements, so it returns `True`. The `is` operator tests object identity: each list literal creates a brand-new, independent list in memory with a distinct address, so `is` returns `False`.
 
 ---
 
@@ -304,7 +335,6 @@ C. `if result.equals(None):`
 D. `if None in result:`
 
 **Answer:** B
-**Explanation:** `None` is a singleton in Python. PEP 8 specifies that comparisons to singletons like `None` should always be done with `is` or `is not`, never with equality operators.
 
 ---
 
@@ -315,7 +345,6 @@ C. Both keys and values
 D. Raises a `TypeError`
 
 **Answer:** B
-**Explanation:** When the `in` operator is used directly on a dictionary, it tests whether the specified item exists among the dictionary's **keys**. To check values, you must use `'admin' in my_dict.values()`.
 
 ---
 
@@ -326,7 +355,6 @@ C. Numbers above 500 automatically convert to floats
 D. `is` can only compare single-digit numbers
 
 **Answer:** B
-**Explanation:** CPython optimizes memory by maintaining a global integer array for values between -5 and 256. Any variable assigned an integer in this range references the identical pre-existing object. Integers outside this range allocate fresh objects, making `is` evaluate to `False`.
 
 ---
 
@@ -337,7 +365,6 @@ C. `if (tag in allowed_tags) == False:`
 D. `if tag in allowed_tags is False:`
 
 **Answer:** B
-**Explanation:** Python provides the compound membership operator `not in`, which reads naturally like English and is the official Pythonic standard.
 
 ---
 
@@ -453,3 +480,10 @@ SECURITY BREACH: Token 'TOKEN_REVOKED_88' is flagged on REVOCATION LIST!
 GATEWAY HALTED: Database session is offline (db_connection is None).
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Bitwise Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Bitwise Operators →](/tutorials/python-for-beginners/bitwise-operators)**

@@ -16,9 +16,9 @@ keywords:
   - hashable keys
   - dictionary insertion order
   - python mapping type
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Dictionaries: Key-Value Mappings, Hash-Table Architecture & Insertion Ordering
@@ -236,7 +236,35 @@ Chai Preparation Recipe (Guaranteed Order):
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What data structure powers Python dictionaries under the hood?
 A. Binary Search Tree
@@ -245,7 +273,6 @@ C. Linked List of tuples
 D. Heap Queue
 
 **Answer:** B
-**Explanation:** CPython implements dictionaries as compact hash tables consisting of a sparse index array pointing to a dense array of entries, ensuring $O(1)$ lookups and insertion order preservation.
 
 ---
 
@@ -256,7 +283,6 @@ C. The second value `20` silently overwrites `10`, leaving `{"x": 20}`
 D. Python raises a `SyntaxError`
 
 **Answer:** C
-**Explanation:** Dictionary keys must be unique. If duplicate keys are encountered during initialization or assignment, the later key overwrites the earlier value.
 
 ---
 
@@ -267,7 +293,6 @@ C. `tuple` (`(1, 2)`)
 D. `list` (`[1, 2]`)
 
 **Answer:** D
-**Explanation:** A dictionary key must be hashable. Because lists are mutable, they do not possess a stable hash value, raising `TypeError: unhashable type: 'list'`.
 
 ---
 
@@ -278,7 +303,6 @@ C. Python 3.7
 D. Python 3.12
 
 **Answer:** C
-**Explanation:** Compact dict implementation was introduced as a CPython detail in 3.6, and officially standardized as a core language specification guarantee in Python 3.7.
 
 ---
 
@@ -289,7 +313,6 @@ C. 1
 D. `ValueError`
 
 **Answer:** B
-**Explanation:** The key `"A"` appears twice; the second entry overwrites the first. The resulting dictionary is `{"A": 3, "B": 2}`, having a length of 2.
 
 ---
 
@@ -365,3 +388,10 @@ Ananya Roy           | Rs        990.00
 ----------------------------------------
 TOTAL OUTSTANDING    | Rs       7140.50
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Accessing & Updating Items** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Accessing & Updating Items →](/tutorials/python-for-beginners/accessing-updating-items)**

@@ -16,9 +16,9 @@ keywords:
   - call stack python
   - docstrings python pep 257
   - modular programming python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Defining and Calling Functions in Python: The `def` Keyword & Call Stack Architecture
@@ -243,7 +243,37 @@ Rs 4,850,000.75
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which keyword is used to declare a function in Python?
 A. `function`
@@ -252,7 +282,6 @@ C. `def`
 D. `method`
 
 **Answer:** C
-**Explanation:** Python uses the `def` keyword (short for define) to declare functions.
 
 ---
 
@@ -263,7 +292,6 @@ C. It evaluates to a reference to the function object itself without executing i
 D. Python executes it in background daemon mode
 
 **Answer:** C
-**Explanation:** Parentheses `()` trigger execution. Omitting parentheses merely refers to the function object in memory without calling it.
 
 ---
 
@@ -274,7 +302,6 @@ C. Python skips the call and continues
 D. Python issues an `IndentationWarning`
 
 **Answer:** B
-**Explanation:** Python is an interpreted language that parses and executes line-by-line from top to bottom. Calling a function before its `def` statement has been reached causes a `NameError`.
 
 ---
 
@@ -285,7 +312,6 @@ C. Semicolons followed by text
 D. Inline hashtags `# doc:`
 
 **Answer:** B
-**Explanation:** PEP 257 specifies that docstrings enclosed in triple quotes (`"""..."""`) placed as the first statement in a function body serve as official documentation.
 
 ---
 
@@ -296,7 +322,6 @@ C. Binary Search Tree
 D. Circular Buffer
 
 **Answer:** B
-**Explanation:** The runtime maintains a Call Stack (Last-In, First-Out). When a function is called, a stack frame containing its local variables and instruction pointer is pushed onto the stack. When it returns, the frame is popped off.
 
 ---
 
@@ -415,3 +440,10 @@ Output:
 [ACCOUNT STATEMENT] Account: XXXX-XXXX-0194
   Current Available Balance: Rs 32,000.00
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Arguments: Positional, Keyword** (14: Functions).
+
+👉 **[Continue to Next Lesson: Arguments: Positional, Keyword →](/tutorials/python-for-beginners/arguments-positional-keyword)**

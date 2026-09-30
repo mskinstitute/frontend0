@@ -16,9 +16,9 @@ keywords:
   - loop counter increment
   - sentinel controlled loop
   - while loop flow control
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # While Loops in Python: Condition-Controlled Iteration & State Invariants
@@ -248,7 +248,43 @@ Final Invoice: 3 Items | Total: Rs 465.50
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating Infinite While Loops
+If you forget to update your loop counter inside a `while` loop, the condition remains True forever:
+```python
+# ❌ Infinite loop trap (Press Ctrl+C to kill if accidentally run)
+# count = 1
+# while count <= 5:
+#     print(count)
+#     # Missing: count += 1
+
+# ✅ CORRECT
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+```
+
+### 2. Modifying a List While Iterating Over It
+Removing or inserting items in a list while looping over it causes skipped elements:
+```python
+nums = [1, 2, 3, 4]
+# ❌ INCORRECT (Skips items during iteration)
+# for n in nums:
+#     if n % 2 == 0:
+#         nums.remove(n)
+
+# ✅ CORRECT (Iterate over a copy or use a list comprehension)
+nums = [n for n in nums if n % 2 != 0]
+print(nums)  # [1, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens if the condition of a `while` loop is `False` upon first evaluation?
 A. The loop runs exactly once
@@ -257,7 +293,6 @@ C. The loop body is skipped entirely, and execution proceeds past the loop
 D. Python hangs in an infinite loop
 
 **Answer:** C
-**Explanation:** Python's `while` loop is a pre-test loop. The condition is evaluated prior to entering the body. If it evaluates to `False` immediately, the loop body is bypassed completely.
 
 ---
 
@@ -274,7 +309,6 @@ C. -1
 D. 3
 
 **Answer:** C
-**Explanation:** Trace the loop: Initially `i = 5`. Iteration 1: `5 > 0` is True, `i` becomes `5 - 2 = 3`. Iteration 2: `3 > 0` is True, `i` becomes `3 - 2 = 1`. Iteration 3: `1 > 0` is True, `i` becomes `1 - 2 = -1`. Iteration 4: `-1 > 0` is False, loop exits. Final `print(i)` outputs `-1`.
 
 ---
 
@@ -285,7 +319,6 @@ C. Ctrl + Shift + Esc
 D. Alt + F4
 
 **Answer:** B
-**Explanation:** In command line and terminal environments, pressing `Ctrl + C` sends a `SIGINT` (Signal Interrupt) to Python, raising a `KeyboardInterrupt` exception that terminates the script.
 
 ---
 
@@ -296,7 +329,6 @@ C. An integer counter that increments by 2
 D. A cryptographic hash guarding the loop body
 
 **Answer:** B
-**Explanation:** A sentinel value (such as `"exit"`, `"stop"`, or `-1`) is a distinctive signal entered by a user or data stream that indicates data entry has concluded, triggering loop termination.
 
 ---
 
@@ -313,7 +345,6 @@ C. It produces an infinite loop printing `0` repeatedly
 D. It raises a `NameError`
 
 **Answer:** C
-**Explanation:** Because variable `x` is never modified or incremented inside the loop body, `x < 3` remains perpetually `True` (`0 < 3`). This results in an infinite loop printing `0 0 0 ...`.
 
 ---
 
@@ -398,3 +429,10 @@ Total Cancellations Processed: 4
 Remaining Waitlist:            0
 Final Status:                  ALL PASSENGERS CONFIRMED (CNF)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **For Loop** (13: Loops).
+
+👉 **[Continue to Next Lesson: For Loop →](/tutorials/python-for-beginners/for-loop)**

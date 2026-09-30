@@ -16,9 +16,9 @@ keywords:
   - growing list with slice
   - list aliasing vs copying
   - in-place list replacement
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Updating List Items in Python: Direct Mutation & Slice Assignment Power
@@ -240,7 +240,38 @@ Are they identical?      False
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the output of the following code?
 ```python
@@ -254,7 +285,6 @@ C. `["Mango", "Banana", "Cherry"]`
 D. `TypeError: 'list' object does not support item assignment`
 
 **Answer:** B
-**Explanation:** Lists are mutable. Assigning `fruits[1] = "Mango"` replaces the element at index 1 (`"Banana"`) with `"Mango"`, yielding `["Apple", "Mango", "Cherry"]`.
 
 ---
 
@@ -265,7 +295,6 @@ C. Python raises an `IndexError: list assignment index out of range`
 D. Python replaces the last item
 
 **Answer:** C
-**Explanation:** Direct index assignment requires the index to already exist within bounds (`0 <= index < len(items)`). To add a new element at the tail, you must use `append()`.
 
 ---
 
@@ -280,7 +309,6 @@ C. `["A", "B", "X", "Y", "Z", "D"]`
 D. `ValueError: slice length mismatch`
 
 **Answer:** A
-**Explanation:** Slice assignment does not require matching lengths. The 2 elements at indices 1 and 2 (`"B"`, `"C"`) are replaced by the 3 elements `["X", "Y", "Z"]`, expanding the list to `["A", "X", "Y", "Z", "D"]`.
 
 ---
 
@@ -297,7 +325,6 @@ C. None
 D. IndexError
 
 **Answer:** B
-**Explanation:** `copy_nums = nums` creates an alias referencing the exact same list in memory (`nums is copy_nums` is True). Modifying `copy_nums[0]` mutates `nums[0]` as well.
 
 ---
 
@@ -308,7 +335,6 @@ C. `data[2:3] = [100, 200]`
 D. `data[2:] = [100, 200]`
 
 **Answer:** B
-**Explanation:** An empty slice `data[2:2]` has a length of 0. Assigning `[100, 200]` to it inserts the two elements at index 2 while shifting all subsequent elements to the right.
 
 ---
 
@@ -386,3 +412,10 @@ Slot [6] -> K. Verma (Meal Preference: Vegan)
 === GROUND CREW VERIFICATION ===
 Backup preserved original meal status? True
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **List Methods** (8: Lists).
+
+👉 **[Continue to Next Lesson: List Methods →](/tutorials/python-for-beginners/list-methods)**

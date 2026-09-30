@@ -16,9 +16,9 @@ keywords:
   - list remove
   - list pop
   - python del list
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Adding and Removing List Items: Dynamic List Mutation in Python
@@ -232,7 +232,38 @@ Understanding Big-O complexity helps prevent performance bottlenecks when workin
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be the value of `numbers` after executing `numbers = [1, 2]; numbers.append([3, 4])`?
 A. `[1, 2, 3, 4]`
@@ -241,7 +272,6 @@ C. `[[1, 2], [3, 4]]`
 D. `TypeError: append() takes only integers`
 
 **Answer:** B
-**Explanation:** `append()` adds its argument as a single element. When passed a list `[3, 4]`, it creates a nested list `[1, 2, [3, 4]]` of length 3. To unpack and add items individually, `extend()` must be used.
 
 ---
 
@@ -252,7 +282,6 @@ C. Python raises a `ValueError`
 D. Python raises an `IndexError`
 
 **Answer:** C
-**Explanation:** `list.remove(x)` raises a `ValueError: list.remove(x): x not in list` if the requested item is absent from the sequence.
 
 ---
 
@@ -263,7 +292,6 @@ C. `list.pop()`
 D. `list.shift()`
 
 **Answer:** C
-**Explanation:** `list.pop()` removes and returns the element at the specified index, which defaults to `-1` (the last element). Removing from the tail requires zero element shifting, running in $O(1)$ time.
 
 ---
 
@@ -274,7 +302,6 @@ C. There is no difference; they are identical
 D. `my_list = []` retains elements in hidden storage
 
 **Answer:** B
-**Explanation:** `my_list.clear()` mutates the existing list object in memory, retaining its memory address (`id`) so all other references reflect the change. Reassignment `my_list = []` creates a completely new list object, leaving other references pointing to the old list.
 
 ---
 
@@ -289,7 +316,6 @@ C. `["A", "B", "Z", "D"]`
 D. `["Z", "A", "B", "C", "D"]`
 
 **Answer:** B
-**Explanation:** `insert(2, "Z")` places `"Z"` at index 2, shifting `"C"` and `"D"` one position to the right, yielding `["A", "B", "Z", "C", "D"]`.
 
 ---
 
@@ -366,3 +392,10 @@ Current Queue: ['Ramesh Gupta', 'Sunil Kumar']
 [x] Counter closed. Cleared 2 pending tokens.
 Final Queue State: []
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Update Items** (8: Lists).
+
+👉 **[Continue to Next Lesson: Update Items →](/tutorials/python-for-beginners/update-items)**

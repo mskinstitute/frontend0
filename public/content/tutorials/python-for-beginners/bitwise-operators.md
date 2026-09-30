@@ -17,9 +17,9 @@ keywords:
   - bitmasking permissions
   - twos complement
   - bin function
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Bitwise Operators: Binary Logic, Bitmasks, & Bit Shifting
@@ -296,7 +296,39 @@ After Revoking Write    : 100 (Has Write: False)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the value of the bitwise expression `6 & 3` in Python?
 A. `9`
@@ -305,7 +337,6 @@ C. `7`
 D. `5`
 
 **Answer:** B
-**Explanation:** 6 in binary is `0110` and 3 in binary is `0011`. Performing bitwise AND: only the second bit from the right is 1 in both numbers (`0010`), which equals decimal `2`.
 
 ---
 
@@ -316,7 +347,6 @@ C. `8`
 D. `0`
 
 **Answer:** B
-**Explanation:** In Python's two's complement representation, the bitwise NOT operator `~` follows the mathematical formula `~x = -(x + 1)`. Therefore, `~7 = -(7 + 1) = -8`.
 
 ---
 
@@ -327,7 +357,6 @@ C. `32`
 D. `4`
 
 **Answer:** B
-**Explanation:** Right-shifting an integer by $n$ bits divides it by $2^n$ using floor division. $8 >> 2 = 8 // 2^2 = 8 // 4 = 2$.
 
 ---
 
@@ -338,7 +367,6 @@ C. Bitwise XOR (`^`)
 D. Bitwise NOT (`~`)
 
 **Answer:** C
-**Explanation:** The bitwise XOR (exclusive OR) operator `^` returns 1 when exactly one of the bits is 1 and the other is 0 (i.e., when the bits differ).
 
 ---
 
@@ -349,7 +377,6 @@ C. It causes an `OverflowError`
 D. The compiler rejects the number 1
 
 **Answer:** B
-**Explanation:** In Python's operator precedence table, relational comparison operators (`==`, `!=`, `<`, `>`) have higher precedence than bitwise operators (`&`, `^`, `|`). `num & 1 == 0` evaluates as `num & (1 == 0)` -> `num & False` -> `0`, which is always falsy! Parentheses are required: `(num & 1) == 0`.
 
 ---
 
@@ -451,3 +478,10 @@ Active Hub State Byte : 00001100 (Decimal: 12)
 Is active byte (12) an even configuration? True
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Implicit Casting** (7: Casting).
+
+👉 **[Continue to Next Lesson: Implicit Casting →](/tutorials/python-for-beginners/implicit-casting)**

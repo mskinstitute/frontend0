@@ -18,9 +18,9 @@ keywords:
   - file pointer
   - writelines
   - flush
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # File Methods: read, readline, readlines, seek, and tell
@@ -254,7 +254,29 @@ INV-2026-003,Rahul Verma,INR 23120.00
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting to Close Files (Leaking File Handles)
+Always use the `with open()` context manager so files are automatically closed even if an exception occurs:
+```python
+# ❌ Risky manual file handling
+# f = open("notes.txt", "w")
+# f.write("Data")
+# f.close()  # May never execute if an error occurs above!
+
+# ✅ Production standard context manager
+with open("notes.txt", "w", encoding="utf-8") as f:
+    f.write("Data safely flushed to disk")
+```
+
+### 2. Accidental Overwrite in `'w'` Mode
+Opening an existing file in `'w'` (write) mode immediately truncates (erases) all existing content! To preserve existing data and add to the end, use `'a'` (append) mode.
+
+---
+
+## Practice Quiz
 
 ### 1. What does the file method f.tell() return?
 A. The total number of words in the file
@@ -262,7 +284,6 @@ B. The current byte position / offset of the file cursor
 C. The file's creation timestamp
 D. A boolean flag indicating whether the file has errors
 **Answer:** B
-**Explanation:** `f.tell()` returns an integer representing the current byte position of the file cursor from the start of the file.
 
 ---
 
@@ -272,7 +293,6 @@ B. An EOFError exception
 C. An empty string `""`
 D. It starts over from the first line
 **Answer:** C
-**Explanation:** Once the file pointer reaches End Of File (EOF), any subsequent `f.read()` or `f.readline()` call returns an empty string `""` until `f.seek(0)` is called.
 
 ---
 
@@ -282,7 +302,6 @@ B. `f.read()` into a single string
 C. Iterating line-by-line using `for line in f:`
 D. `f.read().split('\n')`
 **Answer:** C
-**Explanation:** Direct iteration `for line in f:` uses Python's built-in line generator. It reads one line at a time on demand into a tiny buffer, using constant $O(1)$ memory regardless of file size.
 
 ---
 
@@ -292,7 +311,6 @@ B. Moves the file cursor to the beginning of the file (byte offset 0)
 C. Closes the file permanently
 D. Deletes the file from disk
 **Answer:** B
-**Explanation:** `f.seek(0)` moves the file cursor back to the very beginning (offset 0), allowing the program to re-read the file without reopening it.
 
 ---
 
@@ -302,7 +320,6 @@ B. Yes, it inserts commas between items
 C. No, it concatenates and writes the strings exactly as provided without adding newlines
 D. No, it throws a TypeError unless items already contain commas
 **Answer:** C
-**Explanation:** Unlike `print()`, `f.writelines()` does not append or insert any separators or newline characters. If newlines are needed, each string element must explicitly end with `\n`.
 
 ---
 
@@ -381,3 +398,10 @@ Re-read Reading 3: 09:02 AM - 35.1 C
 
 Total characters from byte 0: 95
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Contact Book** (16: Projects).
+
+👉 **[Continue to Next Lesson: Contact Book →](/tutorials/python-for-beginners/contact-book)**

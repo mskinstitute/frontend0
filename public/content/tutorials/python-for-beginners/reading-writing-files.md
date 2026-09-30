@@ -16,9 +16,9 @@ keywords:
   - line by line file iteration
   - newline character file write
   - memory efficient file reading
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Reading and Writing Text Files in Python: `write()`, `writelines()`, & Stream Iteration
@@ -239,7 +239,29 @@ Chunk 2: ': Rajesh Kum'
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting to Close Files (Leaking File Handles)
+Always use the `with open()` context manager so files are automatically closed even if an exception occurs:
+```python
+# ❌ Risky manual file handling
+# f = open("notes.txt", "w")
+# f.write("Data")
+# f.close()  # May never execute if an error occurs above!
+
+# ✅ Production standard context manager
+with open("notes.txt", "w", encoding="utf-8") as f:
+    f.write("Data safely flushed to disk")
+```
+
+### 2. Accidental Overwrite in `'w'` Mode
+Opening an existing file in `'w'` (write) mode immediately truncates (erases) all existing content! To preserve existing data and add to the end, use `'a'` (append) mode.
+
+---
+
+## Practice Quiz
 
 ### 1. What happens if you call `file.write(500)` where `file` is opened in text write mode?
 A. Python converts 500 to string "500" automatically
@@ -248,7 +270,6 @@ C. Python writes 500 blank spaces to the file
 D. Python writes 500 binary bytes
 
 **Answer:** B
-**Explanation:** In Python text mode, `.write()` strictly demands a `str` argument. Passing an `int` directly triggers a `TypeError`. You must pass `str(500)`.
 
 ---
 
@@ -259,7 +280,6 @@ C. `.write()` cannot write newlines
 D. There is no difference; they are aliases
 
 **Answer:** B
-**Explanation:** `print()` appends `\n` automatically (controlled by its `end` parameter). `.write()` outputs only the exact characters provided, requiring explicit `\n` strings to create line breaks.
 
 ---
 
@@ -270,7 +290,6 @@ C. A list formatted as `['Apple', 'Banana', 'Cherry']`
 D. An error because commas are missing
 
 **Answer:** B
-**Explanation:** `.writelines()` simply writes each string in the iterable sequentially without adding separator characters or newlines. Unless the strings themselves contain `\n`, they concatenate into `AppleBananaCherry`.
 
 ---
 
@@ -281,7 +300,6 @@ C. `for line in f:`
 D. `list(f)`
 
 **Answer:** C
-**Explanation:** Stream iteration (`for line in f:`) evaluates lazily, reading one line into memory at a time. Both `f.read()` and `f.readlines()` attempt to load the entire 20 GB file into RAM at once, causing out-of-memory crashes.
 
 ---
 
@@ -292,7 +310,6 @@ C. To encrypt the string in memory
 D. To convert the string to a list of tokens
 
 **Answer:** B
-**Explanation:** When Python reads lines from a file, it includes the trailing newline character (`\n`) at the end of each line. Calling `.strip()` removes this trailing newline and any surrounding whitespace.
 
 ---
 
@@ -435,3 +452,10 @@ Class Top Scorer:          Rohan Verma (98.0%)
 
 [CLEANUP] Scratch CSV audit file removed.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Working with open()** (15: File Handling).
+
+👉 **[Continue to Next Lesson: Working with open() →](/tutorials/python-for-beginners/working-with-open)**

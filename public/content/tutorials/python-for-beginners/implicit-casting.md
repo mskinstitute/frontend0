@@ -16,9 +16,9 @@ keywords:
   - strong vs weak typing
   - bool to int promotion
   - typeerror safety
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Implicit Type Casting: Automatic Coercion & Type Hierarchy
@@ -259,7 +259,24 @@ Explicitly Handled Total: 300
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Casting Non-Numeric Strings to `int`
+Passing alphabetic or floating-point text directly to `int()` raises a `ValueError`:
+```python
+# ❌ INCORRECT (Raises ValueError: invalid literal for int() with base 10: '45.8')
+# num = int("45.8")
+
+# ✅ CORRECT (Parse as float first, then cast to int)
+num = int(float("45.8"))
+print(num)  # 45
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the data type and value produced by the expression `15 + 4.0` in Python?
 A. `19` of `<class 'int'>`
@@ -268,7 +285,6 @@ C. `19.0` of `<class 'double'>`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** Python automatically promotes the integer `15` to the floating-point number `15.0` to prevent loss of precision, returning `19.0` of `<class 'float'>`.
 
 ---
 
@@ -279,7 +295,6 @@ C. `TypeError`
 D. `True`
 
 **Answer:** A
-**Explanation:** In Python, the `bool` type is a subclass of `int` where `True` has numerical value `1` and `False` has numerical value `0`. Therefore, `1 + 1 + 0 + 10 = 12`.
 
 ---
 
@@ -290,7 +305,6 @@ C. It converts `"Cost: "` into ASCII numbers
 D. It returns `None`
 
 **Answer:** B
-**Explanation:** Python is strongly typed and strictly prohibits implicit conversion between strings and numbers. Concatenating a string with an integer raises a `TypeError`.
 
 ---
 
@@ -301,7 +315,6 @@ C. `<class 'tuple'>`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** In Python's numeric widening hierarchy, `complex` is higher than `float`. Python implicitly promotes `3.5` to `(3.5 + 0j)` and adds it to `(2 + 4j)`, yielding `(5.5 + 4j)` of type `complex`.
 
 ---
 
@@ -312,7 +325,6 @@ C. Python only sums the truthy elements
 D. It is a bug in the `sum()` function
 
 **Answer:** B
-**Explanation:** Because `bool` inherits from `int`, `sum()` treats `True` as `1` and `False` as `0`. $1 + 0 + 1 + 1 = 3$.
 
 ---
 
@@ -425,3 +437,10 @@ Delivery Charge     : INR        70.00 (Prime Member: False)
 GRAND PAYABLE TOTAL : INR     1,073.00 (Type: float)
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Explicit Casting (int(), float(), str())** (7: Casting).
+
+👉 **[Continue to Next Lesson: Explicit Casting (int(), float(), str()) →](/tutorials/python-for-beginners/explicit-casting)**

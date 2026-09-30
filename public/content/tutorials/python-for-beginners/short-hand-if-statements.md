@@ -16,9 +16,9 @@ keywords:
   - pep 8 one line if
   - single line conditional
   - python control flow shorthand
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Short-Hand If Statements in Python: Single-Line Conditionals & PEP 8 Standards
@@ -222,7 +222,33 @@ According to **PEP 8 (Style Guide for Python Code)**:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Inconsistent Indentation
+Python requires consistent indentation (recommended: 4 spaces). Mixing tabs and spaces raises an `IndentationError`:
+```python
+# ❌ Inconsistent indentation
+if True:
+    print("Line 1 with spaces")
+	print("Line 2 with tab")  # IndentationError!
+```
+
+### 2. Forgetting the Trailing Colon (`:`)
+Every `if`, `elif`, and `else` statement must end with a colon:
+```python
+# ❌ SyntaxError: expected ':'
+# if age >= 18
+
+# ✅ CORRECT
+if age >= 18:
+    print("Eligible to vote")
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which of the following is a syntactically valid short-hand if statement in Python?
 A. `if x > 10 then print(x)`
@@ -231,7 +257,6 @@ C. `if x > 10: print(x)`
 D. `if x > 10 -> print(x)`
 
 **Answer:** C
-**Explanation:** Python's short-hand if statement syntax places the condition, a colon `:`, and the executable single statement on the same line: `if condition: statement`.
 
 ---
 
@@ -242,7 +267,6 @@ C. Short-hand `if` requires an mandatory `else` clause
 D. Short-hand `if` can only check numerical values
 
 **Answer:** B
-**Explanation:** A short-hand `if` is a statement used for executing side-effects without returning a value, and it does not take an `else`. A ternary operator (`a if cond else b`) is an expression that evaluates to a value and requires an `else` clause.
 
 ---
 
@@ -253,7 +277,6 @@ C. It is generally discouraged because it hurts code readability and debugging
 D. It causes an indentation compiler warning in Python 3.12+
 
 **Answer:** C
-**Explanation:** PEP 8 explicitly discourages placing multiple statements on the same line separated by semicolons because it degrades code clarity and hinders step-by-step debugger execution.
 
 ---
 
@@ -270,7 +293,6 @@ C. SyntaxError: invalid semicolon in if statement
 D. Status: True
 
 **Answer:** A
-**Explanation:** The condition `score >= 40` evaluates to `True` (45 >= 40). Both statements chained on the line execute sequentially: `passed` is set to `True` and `"Qualified"` is printed, followed by `"Status: True"` on the next line.
 
 ---
 
@@ -281,7 +303,6 @@ C. When nesting four levels of conditional logic
 D. When an `elif` and `else` block are also required
 
 **Answer:** B
-**Explanation:** Short-hand if statements are best suited for ultra-simple, one-liner actions such as toggling a debug print, raising an immediate error, or returning early from a function (`if not payload: return None`).
 
 ---
 
@@ -363,3 +384,10 @@ Node: BLR-EDGE-ROUTER    | Region: ap-south-1 (Bengaluru)
   Alerts Count:    2
   Triggered Flags: LOW_DISK_SPACE, HIGH_NETWORK_LATENCY
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Ternary Operators** (12: Conditional Statements).
+
+👉 **[Continue to Next Lesson: Ternary Operators →](/tutorials/python-for-beginners/ternary-operators)**

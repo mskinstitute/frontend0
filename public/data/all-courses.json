@@ -4758,12 +4758,57 @@
       }
     ],
     "learningOutcomes": [
-      "Python installation, VS Code setup, interactive REPL, and clean syntax principles",
-      "Variables, dynamic typing, primitive data types (int, float, str, bool), and type casting",
-      "Conditional logic (if-elif-else) and iteration control (for loops, while loops, range)",
-      "Core data collections: Lists, Tuples, Sets, and Dictionaries with built-in methods",
-      "Function definition, positional/keyword arguments, return values, and variable scope",
-      "Basic file I/O operations (reading and writing text files) and error handling with try-except"
+      "Install Python 3.12+, configure system PATH, and master the VS Code development environment",
+      "Write clean, idiomatic Python code adhering to PEP 8 standards and modern best practices",
+      "Master variables, dynamic typing, primitive data types, and explicit type casting",
+      "Implement branching logic with if-elif-else statements and write efficient while and for loops",
+      "Utilize Python's core data structures: Lists, Tuples, Sets, and Dictionaries with built-in methods",
+      "Design modular, reusable functions with positional arguments, keyword arguments, *args, and **kwargs",
+      "Perform robust file I/O operations (read, write, append) using Python context managers",
+      "Build 4 real-world portfolio capstone projects from scratch with full documentation and error handling"
+    ],
+    "description": "# Python for Beginners: The Complete Practical Programming Tutorial\n\nWelcome to **Python for Beginners**, the definitive beginner-friendly guide designed to take you from writing your first line of code to building complete, real-world Python applications with confidence.\n\nWhether you are a school or college student taking your very first programming steps, an aspiring developer looking to build a rock-solid coding foundation, or a working professional aiming to automate day-to-day spreadsheet and file tasks, this course provides a structured, hands-on path forward.\n\n---\n\n## 🎯 Course Overview\n\nPython is the world's most popular, versatile, and readable programming language. Used by tech leaders like Google, NASA, Netflix, and Microsoft, Python powers everything from web development and data science to artificial intelligence, automation scripts, and game engines.\n\nUnlike traditional computer science courses that overwhelm you with abstract mathematical formulas, this course focuses on **people-first, intuitive learning**:\n- **Zero-jargon explanations**: Every technical concept is introduced with a relatable, real-world analogy.\n- **Immediate hands-on coding**: Run real Python scripts from Day 1 in your terminal and VS Code.\n- **Interactive validation**: Every topic includes targeted knowledge-check quizzes and code challenges.\n- **Production-grade capstone projects**: Consolidate your knowledge by building 4 complete, portfolio-ready software projects.\n\n---\n\n## 👥 Who Is This Course For?\n\n- **Absolute Beginners:** Anyone with zero coding experience who wants to learn programming without confusion.\n- **High School & College Students:** Students pursuing BCA, B.Tech, MCA, Polytechnic, or school computer science curricula seeking practical clarity.\n- **Working Professionals:** Non-programmers, accountants, marketers, and data analysts who want to automate repetitive Excel and data workflows.\n- **Future Software Engineers & Data Scientists:** Anyone planning to specialize later in Web Development (Django/Flask), Data Analysis (Pandas/NumPy), or Artificial Intelligence.\n\n---\n\n## 📋 Prerequisites\n\n- **No prior coding knowledge required.** We start from absolute zero.\n- **Basic Computer Literacy:** Familiarity with operating a computer (creating folders, saving files, and browsing the web).\n- **Hardware & OS:** Any standard laptop or desktop running Windows 10/11, macOS, or modern Linux.\n- **Software:** Python 3.12+ and Visual Studio Code (both free, open-source, and installed step by step in Module 1).\n\n---\n\n## 💡 What You Will Master\n\n1. **Environment Setup & REPL:** Install Python 3.12+, configure the system PATH, set up VS Code with essential extensions, and explore the interactive REPL.\n2. **Core Language Fundamentals:** Variables, dynamic memory models, naming conventions, primitive data types (integers, floats, strings, booleans), and strict type casting.\n3. **Operators & Mathematical Computing:** Arithmetic, assignment, comparison, logical short-circuiting, membership (`in`, `not in`), identity (`is`, `is not`), and bitwise operators.\n4. **Text Processing & String Mastery:** String indexing, negative slicing, string immutability, format specifiers, modern f-strings, and 20+ string manipulation methods.\n5. **Data Collections & Memory Architecture:** In-depth mastery of Python's 4 core data structures:\n   - **Lists:** Ordered, mutable dynamic arrays, slicing, appending, inserting, sorting, and nested list matrices.\n   - **Tuples:** Immutable sequences, data safety, tuple packing, and sequence unpacking.\n   - **Sets:** Unordered unique collections, hash table lookup, and mathematical operations (union, intersection, difference, symmetric difference).\n   - **Dictionaries:** High-speed key-value hash maps, nested dictionary databases, and modern dictionary comprehension.\n6. **Decision Making & Branching Logic:** Conditional statements (`if`, `elif`, `else`), ternary expressions, and clean 4-space indentation architecture.\n7. **Iteration & Control Flow:** `while` loops, `for` loops, `range()` generator sequences, nested loops, `break`, `continue`, `pass`, and loop `else` clauses.\n8. **Modular Programming & Functions:** Function definitions (`def`), positional and keyword arguments, default parameters, arbitrary `*args` and `**kwargs`, return values, lambda expressions, recursion, and variable scope (LEGB rule).\n9. **Persistent File Handling (I/O):** Opening files safely with context managers (`with open()`), reading files line-by-line, writing data, appending logs, and managing file cursors with `seek()` and `tell()`.\n\n---\n\n## 🚀 Hands-On Capstone Projects\n\nTo graduate beyond theory, you will implement 4 progressive, production-quality terminal applications:\n\n1. **CLI Contact Book with File Persistence:**\n   - Store, search, update, and delete contacts with name, phone, and email validation.\n   - Saves all contacts permanently to a local file database using Python context managers.\n2. **Interactive Multi-Topic Quiz Application:**\n   - Command-line examination engine with multiple-choice questions, automated scoring, instant feedback, and timer simulations.\n3. **Personal Expense Tracker & Budget Analyzer:**\n   - Categorize daily expenditures (Food, Transport, Utilities, Education), compute category totals, and flag budget overruns with clear terminal analytics.\n4. **Student Management System (SMS):**\n   - Comprehensive CRUD application managing student records, course enrollments, subject marks, automated percentage calculations, and merit scholarship qualification audits.\n\n---\n\n## 🏆 Verifiable Certificate & Practical Laboratory Training\n\nStudents attending offline practical laboratory batches at our Shikohabad campus receive:\n- **Dedicated 1-on-1 Lab Workstation:** Daily hands-on coding practice under instructor guidance.\n- **Continuous Code Reviews:** Get your logic and syntax reviewed line-by-line.\n- **Verifiable Completion Certificate:** Includes a unique QR code and serial number verifiable 24/7 on the MSK Institute online portal at `https://www.mskinstitute.in/verify-certificate`.",
+    "faqs": [
+      {
+        "question": "Is this Python course suitable for complete beginners who have never coded before?",
+        "answer": "Yes, absolutely! This course is engineered specifically for learners with zero prior programming experience. We explain every technical term using simple analogies, walk through software installation step by step, and introduce fundamental concepts gradually before progressing to advanced topics."
+      },
+      {
+        "question": "Do I need strong mathematical skills to learn Python?",
+        "answer": "No. Basic arithmetic (addition, subtraction, multiplication, and percentages) is all you need for the vast majority of Python programming. Advanced mathematical topics like calculus or linear algebra are only needed for specialized data science or machine learning fields, which are taught in separate advanced programs."
+      },
+      {
+        "question": "What software and hardware do I need to follow this course?",
+        "answer": "You only need a standard laptop or desktop running Windows 10/11, macOS, or modern Linux with at least 4 GB of RAM. All software used in this course—Python 3.12+ and Visual Studio Code—is 100% free and open source. We guide you through the complete setup in Module 1."
+      },
+      {
+        "question": "Is the course curriculum taught in English or Hindi?",
+        "answer": "The course is delivered in bilingual format (English and Hindi). All technical code, syntax, and study notes are presented in standard English, while classroom explanations and mentor assistance are available in Hindi to ensure complete conceptual clarity."
+      },
+      {
+        "question": "What is the difference between Online mode and Offline Classroom batches?",
+        "answer": "Both modes cover the exact same syllabus and projects. Offline students attend hands-on computer lab sessions at our Shikohabad campus with direct 1-on-1 mentor guidance. Online students access the comprehensive digital curriculum, interactive quizzes, video demonstrations, and downloadable notes from anywhere."
+      },
+      {
+        "question": "Can I attend a free demo class before enrolling?",
+        "answer": "Yes, MSK Institute offers free demo classes and campus lab visits at our Shikohabad center. You can book a free demo slot online through our website or contact our academic counselor via WhatsApp."
+      },
+      {
+        "question": "What real-world projects will I build during this course?",
+        "answer": "You will build 4 complete terminal applications: a CLI Contact Book with file persistence, an Interactive Multi-Topic Quiz Application, a Personal Expense Tracker with budget analytics, and a full Student Management System with automated scholarship evaluations."
+      },
+      {
+        "question": "Do I get a certificate upon course completion?",
+        "answer": "Yes! Upon successfully completing all curriculum modules, submitting the required capstone projects, and passing the practical assessment, you will receive an official MSK Institute Certificate of Completion featuring a unique digital verification code."
+      },
+      {
+        "question": "How can employers verify my MSK Institute certificate?",
+        "answer": "Every certificate issued contains a unique verification code that employers and academic institutions can verify instantly on our public portal at https://www.mskinstitute.in/verify-certificate."
+      },
+      {
+        "question": "What learning path should I pursue after completing Python for Beginners?",
+        "answer": "After mastering Python fundamentals, you can choose to specialize in: (1) Full-Stack Web Development with Django & React, (2) Data Analytics & Visualization with Pandas, NumPy, and Power BI, or (3) Data Structures & Algorithms (DSA) for software engineering interviews."
+      }
     ]
   },
   {

@@ -7,204 +7,744 @@ topic: "VS Code Setup for Python: Extensions, Terminal, and Configuration"
 difficulty: Beginner
 readingTime: 12
 order: 2
-keywords: ["vs code python setup", "visual studio code python", "pylance extension", "select python interpreter", "python integrated terminal", "code editor python"]
-lastUpdated: 2026-09-12
-author: Antigravity Team
-version: 1.0.0
+keywords: ["vs code python setup", "visual studio code python", "python extension", "select python interpreter", "python integrated terminal", "code editor python"]
+lastUpdated: 2026-09-30
+author: MSK Team
+version: 1.1.0
 ---
 
-# Setting Up Visual Studio Code (VS Code)
 
-Welcome to the second chapter of the Python Basic Course at MSK Institute. In this chapter, we'll guide you through setting up Visual Studio Code (VS Code), a powerful and popular code editor that will make your Python programming experience more efficient and enjoyable.
+# 💻 Setting Up VS Code for Python
 
-## Why Use VS Code?
+In the previous topic, we learned **what Python is and where it is used**.
 
-VS Code is a free, open-source code editor developed by Microsoft. It offers numerous features that make coding easier, such as:
-- Syntax highlighting and code snippets
-- IntelliSense (smart code completion)
-- Integrated terminal
-- Debugging tools
-- Extensions and plugins for various languages and tools
+Now it is time to prepare our computer so that we can start writing and running Python programs.
 
-## Installing VS Code
+For this course, we will use **Visual Studio Code (VS Code)** as our code editor.
 
-### Step 1: Download VS Code
-1. Visit the [VS Code website](https://code.visualstudio.com/).
-2. Click on the download button for your operating system (Windows, macOS, or Linux).
-3. Once the download is complete, run the installer and follow the prompts to install VS Code.
+By the end of this lesson, you will be able to:
 
-### Step 2: Install Python
-1. If you haven't already, download and install Python from the official website: [python.org](https://www.python.org/).
-2. Make sure to check the box that says "Add Python to PATH" during the installation process.
-
-## Setting Up VS Code for Python
-
-### Step 3: Open VS Code
-1. Launch VS Code from your desktop or start menu.
-
-### Step 4: Install Python Extension
-1. Click on the Extensions icon in the Activity Bar on the side of the window or press `Ctrl+Shift+X`.
-2. Search for "Python" and select the extension provided by Microsoft.
-3. Click the "Install" button.
-
-### Step 5: Configure Python Interpreter
-1. Open the Command Palette by pressing `Ctrl+Shift+P`.
-2. Type `Python: Select Interpreter` and select it from the dropdown list.
-3. Choose the Python interpreter that you installed earlier (it should display the version number).
-
-### Step 6: Create a New Python File
-1. Open a new file by selecting `File > New File` or pressing `Ctrl+N`.
-2. Save the file with a `.py` extension (e.g., `hello.py`).
-
-### Step 7: Write Your First Python Program
-1. In your new Python file, type the following code:
-   ```python
-   print("Hello, World!")
-   ```
-2. Save the file by selecting `File > Save` or pressing `Ctrl+S`.
-
-### Step 8: Run Your Python Program
-1. Open the integrated terminal by selecting `View > Terminal` or pressing `Ctrl+` (backtick).
-2. In the terminal, navigate to the directory where your Python file is saved using the `cd` command.
-3. Run your program by typing:
-   ```sh
-   python hello.py
-   ```
-4. You should see `Hello, World!` printed in the terminal.
-
-## Additional VS Code Features
-
-### Extensions
-VS Code supports a wide range of extensions to enhance your coding experience. Some useful extensions for Python development include:
-- **Pylint**: For code linting and quality checking.
-- **Jupyter**: For working with Jupyter notebooks.
-- **GitLens**: For powerful Git integration.
-
-### Customization
-VS Code is highly customizable. You can change themes, customize the layout, and set up keyboard shortcuts to suit your preferences. Explore the settings by navigating to `File > Preferences > Settings`.
+* Install VS Code
+* Install Python
+* Add Python support to VS Code
+* Select the correct Python interpreter
+* Create a Python file
+* Write your first program
+* Run the program using the VS Code terminal
 
 ---
 
-Congratulations! You have successfully set up Visual Studio Code for Python development. You are now ready to start coding in Python. In the next chapter, we will dive deeper into Python's basic concepts and start writing some exciting programs.
+# 🧑‍💻 What is VS Code?
 
+**Visual Studio Code**, commonly called **VS Code**, is a code editor developed by Microsoft.
 
+A code editor is a program where programmers **write and manage their code**.
 
+Think of it like a notebook for programmers.
 
-# Multiple Choice Questions
+Instead of writing Python code on paper, we write it inside VS Code.
 
-### 1. Which official extension must be installed in VS Code to enable rich Python autocomplete, linting, and debugging?
-A. Python by Microsoft
-B. Java Development Kit
-C. C-Sharp Dev Kit
-D. Live Server
+### Why do we use VS Code?
 
-**Answer:** A
-**Explanation:** The official "Python" extension created by Microsoft (which bundles Pylance) is the primary plugin required for Python language support, debugging, and IntelliSense in VS Code.
+VS Code provides several useful features:
 
----
+* ✍️ Write and edit code
+* 🎨 Highlight Python syntax
+* 💡 Suggest code while you type
+* 🐛 Help find and debug errors
+* 💻 Open a built-in terminal
+* 🧩 Add extensions for additional features
 
-### 2. Which keyboard shortcut opens the Command Palette in VS Code on Windows?
-A. `Ctrl + Shift + P`
-B. `Alt + F4`
-C. `Ctrl + Z`
-D. `Shift + Esc`
-
-**Answer:** A
-**Explanation:** `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS) opens the Command Palette, allowing you to search and execute any editor command, such as `Python: Select Interpreter`.
+> 💡 **Simple idea:**
+> **Python** is the programming language.
+> **VS Code** is the place where we write and manage our Python code.
 
 ---
 
-### 3. What does Pylance do in VS Code when you write Python code?
-A. It plays background music while coding
-B. It acts as the language server, providing instant type information, auto-completion popups, and syntax error diagnostics
-C. It connects to the internet to back up files
-D. It compiles Python into C++ code
+# 🐍 Before VS Code: Install Python
 
-**Answer:** B
-**Explanation:** Pylance is Microsoft's high-performance language server for Python. It analyzes code as you type, offering smart auto-completions, parameter hints, and type checking.
+Before configuring VS Code, Python itself needs to be installed on your computer.
 
----
+You can download Python from the official Python website.
 
-### 4. What does a solid white circle on a file's tab in VS Code signify?
-A. The file has been successfully uploaded to GitHub
-B. The file contains unsaved changes that will not be executed until saved (`Ctrl + S`)
-C. The file has syntax errors
-D. Python is currently executing that file
+**Official Python website:**
+https://www.python.org/
 
-**Answer:** B
-**Explanation:** A white dot or circle on the editor tab header indicates that the file is "dirty" (has unsaved modifications). If you run `python app.py` in the terminal without saving, Python will run the old version on disk!
+### Important during installation
 
----
+On Windows, you may see an option like:
 
-### 5. Why is the setting `"editor.insertSpaces": true` essential for Python developers?
-A. Python does not allow spaces in code
-B. Python strictly prohibits mixing tab characters and spaces for indentation; using spaces prevents `TabError: inconsistent use of tabs and spaces in indentation`
-C. It saves hard drive space
-D. It prevents Windows from shutting down
+**Add Python to PATH**
 
-**Answer:** B
-**Explanation:** Python uses indentation to define code blocks. Mixing physical Tab characters (`\t`) with Space characters (` `) triggers fatal indentation errors in Python 3. `insertSpaces: true` converts every Tab keypress into consistent spaces.
+If available, enable this option before starting the installation.
+
+This helps Windows find Python when you run Python commands from the terminal.
+
+> ⚠️ **Beginner Tip:**
+> If you forget this option, don't worry. Python can still be configured later.
 
 ---
 
-# Hands-On Practice Challenge: Environment Diagnostic Script
+# 💻 Step 1: Install VS Code
 
-Create a new file named `env_check.py` in VS Code, paste this diagnostic script, and run it using `Ctrl + F5` to inspect your development environment.
+Download VS Code from the official website:
+
+https://code.visualstudio.com/
+
+Choose the version for your operating system:
+
+* Windows
+* macOS
+* Linux
+
+After downloading:
+
+1. Open the installer.
+2. Follow the installation instructions.
+3. Complete the installation.
+4. Open VS Code.
+
+You should now see the VS Code window.
+
+---
+
+# 🧩 Step 2: Install the Python Extension
+
+VS Code can support many programming languages.
+
+To make VS Code work nicely with Python, we need to install the **Python extension from Microsoft**.
+
+### How to install it
+
+1. Open VS Code.
+2. Look at the left side of the window.
+3. Click the **Extensions** icon.
+4. Search for:
+
+```text
+Python
+```
+
+5. Find the Python extension provided by **Microsoft**.
+6. Click **Install**.
+
+After installation, VS Code will have Python-specific features such as:
+
+* Code suggestions
+* Python file support
+* Debugging
+* Running Python programs
+* Interpreter selection
+
+> 💡 **Remember:**
+> The extension adds Python development features to VS Code.
+> It does **not** replace the Python installation itself.
+
+---
+
+# 🧠 Step 3: Select the Python Interpreter
+
+This is one of the most important steps.
+
+Your computer may have more than one Python installation.
+
+VS Code needs to know:
+
+> **"Which Python should I use to run this program?"**
+
+This selected Python installation is called the **Python interpreter**.
+
+### How to select it
+
+1. Open VS Code.
+2. Press:
+
+```text
+Ctrl + Shift + P
+```
+
+This opens the **Command Palette**.
+
+3. Search for:
+
+```text
+Python: Select Interpreter
+```
+
+4. Select the command.
+5. Choose the Python version you installed.
+
+You may see something similar to:
+
+```text
+Python 3.12
+Python 3.11
+Python 3.10
+```
+
+Choose the interpreter you want to use for the course.
+
+> 💡 **Easy way to remember:**
+>
+> **Interpreter = The Python installation VS Code uses to run your code.**
+
+---
+
+# 📁 Step 4: Create a Python Project Folder
+
+Before writing code, it is a good habit to keep your course files organized.
+
+For example, create a folder:
+
+```text
+Python-Beginners
+```
+
+Inside it, you can create folders such as:
+
+```text
+Python-Beginners
+│
+├── Day-01
+├── Day-02
+├── Day-03
+├── Practice
+└── Projects
+```
+
+This will help you find your programs easily later.
+
+### Open the folder in VS Code
+
+In VS Code:
+
+1. Click **File**
+2. Select **Open Folder**
+3. Choose your `Python-Beginners` folder
+4. Click **Select Folder**
+
+Now VS Code will treat this folder as your working area.
+
+---
+
+# 📝 Step 5: Create Your First Python File
+
+Let's create our first Python file.
+
+In VS Code:
+
+1. Create a new file.
+2. Save it as:
+
+```text
+hello.py
+```
+
+The `.py` extension tells us that this is a **Python file**.
+
+For example:
+
+```text
+hello.py
+```
+
+is a Python file.
+
+> 💡 **Remember:**
+> `.py` → Python source file
+
+---
+
+# ✍️ Step 6: Write Your First Python Program
+
+Inside `hello.py`, write:
 
 ```python
-# ==========================================================
-# Challenge 2: Python Environment Diagnostic
-# Run this file inside VS Code to verify your setup!
-# ==========================================================
-
-import sys
-import os
-import platform
-
-print("=" * 55)
-print("     MSK INSTITUTE - PYTHON WORKBENCH DIAGNOSTIC")
-print("=" * 55)
-
-# 1. Python Version Telemetry
-major = sys.version_info.major
-minor = sys.version_info.minor
-micro = sys.version_info.micro
-
-print(f"Python Version Detected : {major}.{minor}.{micro}")
-print(f"Operating System        : {platform.system()} ({platform.release()})")
-print(f"Machine Architecture    : {platform.machine()}")
-
-# 2. Executable Path
-print(f"Interpreter Binary Path : {sys.executable}")
-
-# 3. Current Working Directory
-print(f"Project Workspace Folder: {os.getcwd()}")
-print("=" * 55)
-
-# 4. Version Verification Logic
-if major >= 3 and minor >= 10:
-    print("STATUS: EXCELLENT! Modern Python 3.10+ detected.")
-    print("You are ready to learn modern syntax like match-case and structural typing.")
-else:
-    print("STATUS: OUTDATED. Please upgrade to Python 3.10 or newer.")
-
-print("=" * 55)
-print("Tip: Use Ctrl + ` to toggle your VS Code terminal anytime.")
+print("Hello, World!")
 ```
 
-### Expected Program Output:
+Save the file using:
+
 ```text
-=======================================================
-     MSK INSTITUTE - PYTHON WORKBENCH DIAGNOSTIC
-=======================================================
-Python Version Detected : 3.12.2
-Operating System        : Windows (10.0.26100)
-Machine Architecture    : AMD64
-Interpreter Binary Path : C:\Users\Student\AppData\Local\Programs\Python\Python312\python.exe
-Project Workspace Folder: D:\Sumit\MSK-Institute-Website
-=======================================================
-STATUS: EXCELLENT! Modern Python 3.10+ detected.
-You are ready to learn modern syntax like match-case and structural typing.
-=======================================================
-Tip: Use Ctrl + ` to toggle your VS Code terminal anytime.
+Ctrl + S
 ```
+
+Your file should look like this:
+
+```python
+print("Hello, World!")
+```
+
+---
+
+# ▶️ Step 7: Run Your Python Program
+
+There are different ways to run Python code in VS Code.
+
+For beginners, we will first learn the terminal method.
+
+### Open the VS Code Terminal
+
+Go to:
+
+**View → Terminal**
+
+Or use:
+
+```text
+Ctrl + `
+```
+
+The ` symbol is called a **backtick** and is usually located near the top-left area of the keyboard.
+
+You should see a terminal appear at the bottom of VS Code.
+
+---
+
+## 🚀 Run the Program
+
+If your file is called:
+
+```text
+hello.py
+```
+
+type:
+
+```bash
+python hello.py
+```
+
+Then press **Enter**.
+
+You should see:
+
+```text
+Hello, World!
+```
+
+🎉 Congratulations!
+
+You have successfully run your first Python program.
+
+---
+
+# 🔄 Understand the Complete Process
+
+The complete process looks like this:
+
+```text
+Write Python Code
+       ↓
+Save the .py File
+       ↓
+Select Python Interpreter
+       ↓
+Run the Program
+       ↓
+Python Executes the Code
+       ↓
+See the Output
+```
+
+This basic workflow will become a regular part of your Python learning.
+
+---
+
+# 🧰 Useful VS Code Features
+
+VS Code has many features that can make programming easier.
+
+You don't need to learn everything right now.
+
+Let's understand the most useful ones.
+
+---
+
+## 💡 Code Suggestions
+
+VS Code can suggest code while you type.
+
+For example, when you start writing certain Python functions or objects, VS Code may show suggestions.
+
+This can help you:
+
+* Write code faster
+* Discover available options
+* Reduce typing mistakes
+
+---
+
+## 🎨 Syntax Highlighting
+
+VS Code displays different parts of your code using different visual formatting.
+
+For example:
+
+```python
+name = "Amit"
+age = 20
+print(name)
+```
+
+This makes code easier to read.
+
+---
+
+## 🐛 Debugging
+
+Sometimes your program does not work as expected.
+
+VS Code provides debugging tools that can help you understand what is happening in your program.
+
+We will learn debugging in more detail later in the course.
+
+---
+
+## 💻 Integrated Terminal
+
+The **integrated terminal** allows you to use command-line tools without leaving VS Code.
+
+For example:
+
+```bash
+python hello.py
+```
+
+You can run Python programs directly from this terminal.
+
+---
+
+# 🧩 Useful Extensions
+
+VS Code supports thousands of extensions.
+
+However, **don't install many extensions just because they are available**.
+
+Install extensions when you actually need them.
+
+Some useful extensions for Python development include:
+
+### Python
+
+Provides core Python development support from Microsoft.
+
+### Jupyter
+
+Useful when working with Jupyter Notebooks.
+
+### Pylance
+
+Provides advanced Python language features such as smart code completion, type information, and code analysis.
+
+### GitLens
+
+Provides additional features for working with Git and source control.
+
+> 💡 **Beginner Tip:**
+> For this course, start with the **Python extension**. We will introduce other extensions when they become useful.
+
+---
+
+# ⚙️ VS Code Customization
+
+VS Code can be customized according to your preferences.
+
+You can change things such as:
+
+* Theme
+* Font size
+* Editor appearance
+* Keyboard shortcuts
+* Editor settings
+
+You can open Settings using:
+
+```text
+Ctrl + ,
+```
+
+However, customization is optional.
+
+> 🎯 **Focus first on learning Python.**
+> You can customize your editor later.
+
+---
+
+# ⚠️ Common Beginner Problems
+
+You may face a few common problems while setting up Python.
+
+## Problem 1: `python` is not recognized
+
+If the terminal shows an error when you type:
+
+```bash
+python
+```
+
+Python may not be installed correctly or Windows may not know where Python is located.
+
+Check your Python installation and PATH configuration.
+
+---
+
+## Problem 2: Wrong Python interpreter
+
+Your program may use a different Python version than expected.
+
+Use:
+
+```text
+Ctrl + Shift + P
+```
+
+and select:
+
+```text
+Python: Select Interpreter
+```
+
+Then choose the correct Python installation.
+
+---
+
+## Problem 3: Program does not show your latest changes
+
+Make sure you save your file before running it:
+
+```text
+Ctrl + S
+```
+
+Then run the program again.
+
+> 💡 **Good habit:**
+> **Write → Save → Run → Check Output**
+
+---
+
+# 🧪 Hands-On Practice
+
+Now let's verify that your Python environment is working correctly.
+
+Create a file named:
+
+```text
+env_check.py
+```
+
+Add the following code:
+
+```python
+import sys
+import platform
+import os
+
+print("=" * 50)
+print("PYTHON ENVIRONMENT CHECK")
+print("=" * 50)
+
+print("Python Version :", sys.version.split()[0])
+print("Operating System:", platform.system())
+print("Machine:", platform.machine())
+print("Python Location:", sys.executable)
+print("Working Folder:", os.getcwd())
+
+print("=" * 50)
+print("Your Python environment is working!")
+print("=" * 50)
+```
+
+Save the file.
+
+Then run:
+
+```bash
+python env_check.py
+```
+
+---
+
+# 🔍 What Does This Program Do?
+
+Don't worry if you don't understand every line yet.
+
+We will learn these concepts later.
+
+For now, understand the purpose:
+
+| Code                | Purpose                                     |
+| ------------------- | ------------------------------------------- |
+| `sys`               | Gives information about Python              |
+| `platform`          | Gives information about the computer        |
+| `os`                | Helps work with the operating system        |
+| `sys.version`       | Shows the Python version                    |
+| `platform.system()` | Shows the operating system                  |
+| `sys.executable`    | Shows which Python executable is being used |
+| `os.getcwd()`       | Shows the current working folder            |
+
+---
+
+# 📺 Example Output
+
+Your output may look different depending on your computer.
+
+For example:
+
+```text
+==================================================
+PYTHON ENVIRONMENT CHECK
+==================================================
+Python Version : 3.12.2
+Operating System: Windows
+Machine: AMD64
+Python Location: C:\Users\Student\AppData\Local\Programs\Python\Python312\python.exe
+Working Folder: C:\Users\Student\Python-Beginners
+==================================================
+Your Python environment is working!
+==================================================
+```
+
+> ⚠️ **Important:**
+> Your Python version, username, computer architecture, and folder location may be different. That is completely normal.
+
+---
+
+# 🎯 Setup Checklist
+
+Before moving to the next lesson, make sure you can check all of these:
+
+* [ ] Python is installed
+* [ ] VS Code is installed
+* [ ] Python extension is installed
+* [ ] Correct Python interpreter is selected
+* [ ] A `.py` file can be created
+* [ ] VS Code terminal can be opened
+* [ ] `hello.py` runs successfully
+* [ ] `env_check.py` runs successfully
+
+If all of these are working, your Python development environment is ready.
+
+---
+
+# 🧠 Quick Summary
+
+In this lesson, you learned:
+
+* **VS Code** is a code editor.
+* Python must be installed separately.
+* The **Python extension** adds Python development features to VS Code.
+* The **Python interpreter** is the Python installation used to execute your code.
+* Python programs are saved using the `.py` extension.
+* VS Code has a built-in terminal.
+* You can run a Python program using:
+
+```bash
+python filename.py
+```
+
+* `Ctrl + Shift + P` opens the Command Palette.
+* `Ctrl + S` saves your file.
+* `Ctrl + `` opens the integrated terminal.
+
+### ⭐ Most Important Workflow
+
+```text
+Python Installed
+      ↓
+VS Code Installed
+      ↓
+Python Extension
+      ↓
+Select Interpreter
+      ↓
+Create .py File
+      ↓
+Write Code
+      ↓
+Save
+      ↓
+Run
+      ↓
+Check Output
+```
+
+---
+
+## Practice Quiz
+
+### 1. What is VS Code?
+A. A database
+B. A programming language
+C. A code editor
+D. An operating system
+**Answer:** C A code editor
+**Explanation:** VS Code is a code editor developed by Microsoft that can be used to write Python and many other types of code.
+
+---
+
+### 2. Which extension should you install to add Python support to VS Code?
+A. Python extension by Microsoft
+B. Live Server
+C. C# Dev Kit
+D. Java Extension Pack
+**Answer:** A Python extension by Microsoft
+**Explanation:** The Microsoft Python extension provides the main Python development features used in VS Code.
+
+---
+
+### 3. What is a Python interpreter?
+A. A database
+B. The Python installation used to execute Python code
+C. A VS Code theme
+D. A file extension
+**Answer:** B The Python installation used to execute Python code
+**Explanation:** VS Code needs to know which Python installation should be used to run your program.
+
+---
+
+### 4. Which shortcut opens the Command Palette in VS Code on Windows?
+A. `Ctrl + S`
+B. `Ctrl + Shift + P`
+C. `Ctrl + Z`
+D. `Alt + F4`
+**Answer:** B `Ctrl + Shift + P`
+**Explanation:** The Command Palette allows you to search for and run VS Code commands such as `Python: Select Interpreter`.
+
+---
+
+### 5. Which extension should a Python file normally have?
+A. `.html`
+B. `.css`
+C. `.py`
+D. `.java`
+**Answer:** C `.py`
+**Explanation:** Python source files normally use the `.py` extension.
+
+---
+
+### 6. Which command can be used to run `hello.py` from the terminal?
+A. `run hello.py`
+B. `python hello.py`
+C. `execute hello.py`
+D. `start-python hello.py`
+**Answer:** B `python hello.py`
+**Explanation:** The Python command followed by the filename tells Python to execute that program.
+
+---
+
+### 7. What does `Ctrl + S` do in VS Code?
+A. Opens the terminal
+B. Saves the current file
+C. Opens the Command Palette
+D. Deletes the file
+**Answer:** B Saves the current file
+**Explanation:** Saving your file before running it helps ensure that Python executes your latest changes.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Python Setup** (1: Introduction and Setup).
+
+👉 **[Continue to Next Lesson: Python Setup →](/tutorials/python-for-beginners/python-setup)**

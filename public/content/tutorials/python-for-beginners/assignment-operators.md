@@ -16,9 +16,9 @@ keywords:
   - walrus operator
   - assignment expressions
   - in place mutation
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Assignment Operators: Compound Shortcuts & The Walrus Operator (:=)
@@ -266,7 +266,39 @@ Dispatching delivery cargo to: KOLKATA
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Confusing Assignment (`=`) with Equality (`==`)
+A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
+```python
+score = 100  # Assignment
+
+# In conditions:
+# ❌ INCORRECT (SyntaxError in Python 3)
+# if score = 100:
+
+# ✅ CORRECT
+if score == 100:
+    print("Perfect score!")
+```
+
+### 2. Chained Boolean Logic with `and` / `or`
+Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
+```python
+# ❌ INCORRECT (Always True because 2 is truthy!)
+# if x == 1 or 2:
+
+# ✅ CORRECT
+# if x == 1 or x == 2:
+# Or even cleaner:
+# if x in (1, 2):
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be the data type and value of variable `x` after executing `x = 20; x /= 4` in Python?
 A. `5` of `<class 'int'>`
@@ -275,7 +307,6 @@ C. `5` of `<class 'double'>`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** In Python 3, the true division operator `/` (and its compound counterpart `/=`) always produces a floating-point number. `20 /= 4` yields `5.0` of type `float`.
 
 ---
 
@@ -286,7 +317,6 @@ C. `:=`
 D. `~=`
 
 **Answer:** C
-**Explanation:** `:=` is called the walrus operator because the colon and equals sign resemble the eyes and long downward tusks of a walrus sideways. It was introduced in Python 3.8 as the assignment expression operator.
 
 ---
 
@@ -297,7 +327,6 @@ C. It raises a `TypeError`
 D. It adds 10 to every number in the list
 
 **Answer:** B
-**Explanation:** For mutable sequences like lists, the `+=` operator executes in-place mutation via the `__iadd__` protocol, appending the items directly without reallocating the list container.
 
 ---
 
@@ -308,7 +337,6 @@ C. `x` is assigned `2`
 D. `SyntaxError`
 
 **Answer:** B
-**Explanation:** Comparison operators (like `>`) have higher precedence than the walrus operator `:=`. Python first evaluates `5 > 2` which yields `True`, and then assigns `True` to `x`. To assign `5`, parentheses are required: `if (x := 5) > 2:`.
 
 ---
 
@@ -319,7 +347,6 @@ C. `9`
 D. `5`
 
 **Answer:** B
-**Explanation:** `n **= 3` is compound exponentiation, equivalent to `n = n ** 3`. $2^3 = 8$.
 
 ---
 
@@ -410,3 +437,10 @@ Holding: PENNY_STOCK  | Qty:  10  | Val: INR      45.00 [MICRO-CAP / IGNORED]
 TOTAL CONSOLIDATED WEALTH : INR 220,703.50
 ============================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Comparison Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Comparison Operators →](/tutorials/python-for-beginners/comparison-operators)**

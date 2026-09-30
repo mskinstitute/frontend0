@@ -16,9 +16,9 @@ keywords:
   - print vs return python
   - early return guard clauses
   - tuple return unpacking
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Function Return Values in Python: The `return` Statement, Multiple Returns, & `None`
@@ -252,7 +252,37 @@ Verification: True | Advisory: KYC verified. Account unlocked.
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the return value of a Python function that does not contain a `return` statement?
 A. `0`
@@ -261,7 +291,6 @@ C. `None`
 D. An empty string `""`
 
 **Answer:** C
-**Explanation:** If execution reaches the end of a function body without encountering a `return` statement, Python implicitly returns `None`.
 
 ---
 
@@ -272,7 +301,6 @@ C. `dict`
 D. `set`
 
 **Answer:** B
-**Explanation:** In Python, returning comma-separated values causes automatic tuple packing. The return type is a `tuple: (10, 20, 30)`.
 
 ---
 
@@ -290,7 +318,6 @@ C. 20
 D. None \n None
 
 **Answer:** A
-**Explanation:** The function `multiply` calls `print(a * b)`, displaying `20` on the screen. Because it lacks a `return` statement, it implicitly returns `None`. The variable `result` is assigned `None`, which is printed on the second line.
 
 ---
 
@@ -301,7 +328,6 @@ C. Python throws a `SyntaxError: unreachable code`
 D. They execute in reverse order
 
 **Answer:** B
-**Explanation:** When Python encounters an unconditional `return`, function execution terminates immediately. Any statements placed below it inside that block are unreachable dead code.
 
 ---
 
@@ -312,7 +338,6 @@ C. `name & age & city = get_user()`
 D. `[name, age, city] -> get_user()`
 
 **Answer:** B
-**Explanation:** Python allows sequence unpacking: `name, age, city = get_user()` unpacks the 3-element tuple directly into the three variables in order.
 
 ---
 
@@ -433,3 +458,10 @@ Output:
   NET IN-HAND TAKE HOME SALARY:   Rs   99100.00
 +==========================================================+
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Lambda Functions** (14: Functions).
+
+👉 **[Continue to Next Lesson: Lambda Functions →](/tutorials/python-for-beginners/lambda-functions)**

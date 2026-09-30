@@ -18,9 +18,9 @@ keywords:
   - file io
   - loops
   - dictionaries
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Capstone Project: Interactive CLI Quiz Application
@@ -378,7 +378,17 @@ RANK  | PLAYER             | SCORE    | ACCURACY   | DATE
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Production Development Best Practices & Common Traps
+
+1. **Always Validate User Input:** Never trust raw user inputs. Wrap numeric casts with `try...except ValueError` to prevent sudden crashes.
+2. **Defensive File Loading:** Always check whether a storage file exists or catch `FileNotFoundError` when initializing terminal databases.
+3. **Modular Function Design:** Keep functions focused on a single responsibility (e.g. `load_data()`, `save_data()`, `display_menu()`, `add_record()`).
+
+---
+
+## Practice Quiz
 
 ### 1. What does random.sample(population, k) return when shuffling questions?
 A. It deletes `k` items from the original list
@@ -386,7 +396,6 @@ B. It returns a new list of `k` unique elements chosen randomly without altering
 C. It reverses the list in place
 D. It returns a single random integer
 **Answer:** B
-**Explanation:** `random.sample()` creates a new list containing `k` randomly selected items from the source population, leaving the original data structure untouched.
 
 ---
 
@@ -396,7 +405,6 @@ B. Because 'a' compresses the file
 C. Because 'w' mode can only write integers
 D. Because 'a' mode requires administrative rights
 **Answer:** A
-**Explanation:** Write mode (`'w'`) truncates the file to 0 bytes upon opening, destroying past entries. Append mode (`'a'`) appends new lines at the end of the existing file without erasing prior history.
 
 ---
 
@@ -406,7 +414,6 @@ B. It provides direct $O(1)$ key lookup when validating the user's letter select
 C. Python dictionaries automatically sort options alphabetically
 D. Dictionaries prevent syntax errors during multiplication
 **Answer:** B
-**Explanation:** Mapping letter choices (`"A"`, `"B"`, `"C"`, `"D"`) directly to dictionary keys enables immediate constant-time validation (`if choice in options`) and retrieval of the chosen option text.
 
 ---
 
@@ -416,7 +423,6 @@ B. Removes leading/trailing whitespace and converts the string to uppercase, ena
 C. Replaces spaces with underscores
 D. Reverses the string
 **Answer:** B
-**Explanation:** Combining `.strip()` and `.upper()` normalizes responses like `" b "` or `"b"` into `"B"`, preventing frustrating user input rejection.
 
 ---
 
@@ -426,7 +432,6 @@ B. Sorts in descending order (highest score first)
 C. Reverses the spelling of the contestant's name
 D. Ignores negative numbers
 **Answer:** B
-**Explanation:** Setting `reverse=True` reverses the default ascending sort order, causing the highest numeric scores to appear at the top of the leaderboard.
 
 ---
 
@@ -513,3 +518,10 @@ After 50-50 Lifeline:
 
 [SUCCESS] 50-50 Lifeline validated successfully!
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Expense Tracker** (16: Projects).
+
+👉 **[Continue to Next Lesson: Expense Tracker →](/tutorials/python-for-beginners/expense-tracker)**

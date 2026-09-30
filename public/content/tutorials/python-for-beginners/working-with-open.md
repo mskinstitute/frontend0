@@ -16,9 +16,9 @@ keywords:
   - safe file io
   - enter and exit
   - file leak prevention
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Working with open() & Context Managers
@@ -256,7 +256,29 @@ Order 103: 2 kg Toor Dal - Rs 320
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting to Close Files (Leaking File Handles)
+Always use the `with open()` context manager so files are automatically closed even if an exception occurs:
+```python
+# ❌ Risky manual file handling
+# f = open("notes.txt", "w")
+# f.write("Data")
+# f.close()  # May never execute if an error occurs above!
+
+# ✅ Production standard context manager
+with open("notes.txt", "w", encoding="utf-8") as f:
+    f.write("Data safely flushed to disk")
+```
+
+### 2. Accidental Overwrite in `'w'` Mode
+Opening an existing file in `'w'` (write) mode immediately truncates (erases) all existing content! To preserve existing data and add to the end, use `'a'` (append) mode.
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary architectural advantage of using the 'with open(...) as f:' context manager over manual open() and close()?
 A. It compresses the file using gzip algorithm
@@ -264,7 +286,6 @@ B. It automatically and deterministically closes the file upon block exit, even 
 C. It allows writing to read-only files without permission errors
 D. It keeps the file permanently open in RAM for faster continuous reading
 **Answer:** B
-**Explanation:** The context manager protocol triggers the file object's `__exit__()` method automatically when execution leaves the indented block, guaranteeing resource release even in the presence of unhandled errors.
 
 ---
 
@@ -274,7 +295,6 @@ B. `__start__` and `__stop__`
 C. `__enter__` and `__exit__`
 D. `__open__` and `__close__`
 **Answer:** C
-**Explanation:** Any Python object implementing `__enter__()` and `__exit__()` satisfies the Context Management protocol and can be utilized with the `with` statement.
 
 ---
 
@@ -289,7 +309,6 @@ B. True
 C. None
 D. AttributeError: 'file' object has no attribute 'closed'
 **Answer:** B
-**Explanation:** Outside the `with` block, Python has already invoked `f.close()`. Inspecting the `f.closed` boolean attribute returns `True`.
 
 ---
 
@@ -299,7 +318,6 @@ B. `with open("in.txt", "r") as src, open("out.txt", "w") as dst:`
 C. `with (open("in.txt", "r") + open("out.txt", "w")) as (src, dst):`
 D. `with open(["in.txt", "out.txt"], ["r", "w"]) as f:`
 **Answer:** B
-**Explanation:** Python permits multiple context managers in a single `with` statement separated by commas: `with open(...) as src, open(...) as dst:`. Both files are guaranteed to be closed safely.
 
 ---
 
@@ -309,7 +327,6 @@ B. The operating system corrupts the entire hard drive
 C. The `__exit__()` method executes, closes the file, and then the ZeroDivisionError propagates upward
 D. Python swallows the error silently and keeps running
 **Answer:** C
-**Explanation:** Context managers do not suppress exceptions unless explicitly programmed to do so. Python calls `__exit__()` to flush and close the file, and then bubbles the exception up the call stack.
 
 ---
 
@@ -372,3 +389,10 @@ Archive file closed: True
 [TXN-103] Vikram: Sugar 1kg - Rs 45
 [TXN-104] Ananya: Tea 500g - Rs 160
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **File Methods (read, readline, write)** (15: File Handling).
+
+👉 **[Continue to Next Lesson: File Methods (read, readline, write) →](/tutorials/python-for-beginners/file-methods-read-readline-write)**

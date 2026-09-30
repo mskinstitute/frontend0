@@ -17,405 +17,1230 @@ keywords:
   - pemdas bodmas
   - divmod
   - operator precedence
-lastUpdated: 2026-09-12
-author: Antigravity Team
-version: 1.0.0
+l lastUpdated: 2026-09-30
+author: MSK Team
+version: 1.1.0
 ---
 
-# Python Mathematical Operations: Arithmetic, Floor Division, & PEMDAS Precedence
+# 🧮 Python Mathematical Operations
 
-Python excels as an intuitive, high-performance mathematical workbench. From basic classroom arithmetic to advanced engineering algorithms, Python provides seven core arithmetic operators designed with mathematical rigor.
+Python can be used as a powerful calculator.
 
-Unlike many older programming languages where dividing two integers truncates the decimal portion silently (e.g., in C or Java `5 / 2` yields `2`), Python 3 cleanly separates **true division (`/`)** from **floor division (`//`)**, preventing catastrophic financial rounding bugs.
+You can use Python to:
 
----
+* Add numbers
+* Subtract numbers
+* Multiply numbers
+* Divide numbers
+* Find remainders
+* Calculate powers
+* Solve formulas
+* Work with percentages
+* Calculate loan EMIs
+* Build scientific and engineering programs
 
-## Real-World Analogy: Distributing Diwali Laddus
+Python provides **seven basic arithmetic operators**:
 
-Imagine your grandmother made **23 fresh Besan Laddus** to pack into **4 gift boxes** for visiting family:
+| Operator | Name           | Example   | Result |
+| -------- | -------------- | --------- | -----: |
+| `+`      | Addition       | `10 + 5`  |   `15` |
+| `-`      | Subtraction    | `10 - 5`  |    `5` |
+| `*`      | Multiplication | `10 * 5`  |   `50` |
+| `/`      | True Division  | `10 / 5`  |  `2.0` |
+| `//`     | Floor Division | `10 // 3` |    `3` |
+| `%`      | Modulo         | `10 % 3`  |    `1` |
+| `**`     | Exponentiation | `2 ** 3`  |    `8` |
 
-```
-+-------------------------------------------------------------------------+
-|                  THE ARITHMETIC DIVISION TRIO ANALOGY                   |
-+-------------------------------------------------------------------------+
-
-  Total Items : 23 Laddus
-  Recipients  : 4 Gift Boxes
-
-  1. TRUE DIVISION (23 / 4 = 5.75):
-     - You slice the remaining laddus into fractions with a knife.
-     - Each box receives exactly 5 whole laddus and 0.75 of a laddu.
-     - In Python: Single slash '/' ALWAYS produces a float!
-
-  2. FLOOR DIVISION (23 // 4 = 5):
-     - You refuse to crush laddus; each box receives 5 whole, intact laddus.
-     - Any fractional decimal is discarded towards the floor.
-     - In Python: Double slash '//' yields the integer quotient.
-
-  3. MODULO (23 % 4 = 3):
-     - After placing 5 laddus in each of the 4 boxes (20 total),
-       exactly 3 whole laddus remain on the plate for you to eat!
-     - In Python: Percent '%' yields the remainder of integer division.
-+-------------------------------------------------------------------------+
-```
+Let's understand each operator step by step.
 
 ---
 
-## Visual Architecture: Division & Negative Floor Mechanics
+# 🍬 Real-Life Example: Sharing 23 Laddus
 
-Floor division does not simply "chop off" decimals—it mathematically rounds down towards negative infinity: $\lfloor x \rfloor$.
+Imagine you have **23 laddus** and want to distribute them equally into **4 boxes**.
 
-```
-===========================================================================
-                FLOOR DIVISION ON POSITIVE vs NEGATIVE NUMBERS
-===========================================================================
+There are three useful operations here:
 
-  1. POSITIVE DIVISION: 7 // 2
-     7 / 2 = +3.5
-     Number line:  [... 2 -------- 3 --(3.5)-- 4 ...]
-     Rounds down (left) towards floor -> +3
-
-  2. NEGATIVE DIVISION: -7 // 2   <--- THE TRAP!
-     -7 / 2 = -3.5
-     Number line:  [... -5 -------- -4 --(-3.5)-- -3 ...]
-     Rounds down (left) towards floor -> -4 (NOT -3!)
-
-  3. PYTHON'S BUILT-IN divmod() EQUATION:
-     Dividend = (Divisor * Quotient) + Remainder
-     For -7 and 2:
-     -7 = (2 * -4) + 1   ==> Quotient = -4, Remainder = 1
-```
-
----
-
-## 1. The 7 Native Arithmetic Operators
-
-Python includes seven arithmetic operators for scalar numbers:
+### 1. True Division `/`
 
 ```python
-# ==========================================================
-# Example 1: The 7 Core Arithmetic Operators
-# ==========================================================
+23 / 4
+```
 
+Result:
+
+```text
+5.75
+```
+
+This tells us the exact mathematical result.
+
+---
+
+### 2. Floor Division `//`
+
+```python
+23 // 4
+```
+
+Result:
+
+```text
+5
+```
+
+This tells us how many **complete groups** of 4 can be made.
+
+---
+
+### 3. Modulo `%`
+
+```python
+23 % 4
+```
+
+Result:
+
+```text
+3
+```
+
+This tells us that **3 laddus remain** after making four groups of 5.
+
+So:
+
+```text
+23 = (4 × 5) + 3
+```
+
+### Remember
+
+```text
+/   → Exact division result
+//  → Whole-number quotient after flooring
+%   → Remainder
+```
+
+---
+
+# 1. Addition (`+`)
+
+The `+` operator adds two or more numbers.
+
+```python
 a = 17
 b = 5
 
-print("Addition (+)            :", a + b)       # 22
-print("Subtraction (-)         :", a - b)       # 12
-print("Multiplication (*)      :", a * b)       # 85
-print("True Division (/)       :", a / b)       # 3.4 (Always float!)
-print("Floor Division (//)     :", a // b)      # 3 (Integer quotient)
-print("Modulus (%)             :", a % b)       # 2 (Remainder)
-print("Exponentiation (**)     :", 2 ** 8)      # 256 (2 to the power 8)
+result = a + b
+
+print(result)
 ```
 
-### Output:
+Output:
+
 ```text
-Addition (+)            : 22
-Subtraction (-)         : 12
-Multiplication (*)      : 85
-True Division (/)       : 3.4
-Floor Division (//)     : 3
-Modulus (%)             : 2
-Exponentiation (**)     : 256
+22
+```
+
+Another example:
+
+```python
+price = 500
+delivery = 50
+
+total = price + delivery
+
+print(total)
+```
+
+Output:
+
+```text
+550
 ```
 
 ---
 
-## 2. Fast Quotient & Remainder with `divmod()`
+# 2. Subtraction (`-`)
 
-When you need both the quotient and the remainder simultaneously—such as converting minutes into hours and minutes, or seconds into clock formats—calling `divmod(x, y)` performs both operations in a single, highly optimized C-level step:
+The `-` operator subtracts one number from another.
 
 ```python
-# ==========================================================
-# Example 2: Practical Time Formatting with divmod()
-# ==========================================================
+a = 17
+b = 5
 
-total_flight_minutes = 285  # Flight from New Delhi to London leg
+result = a - b
 
-hours, minutes = divmod(total_flight_minutes, 60)
-print(f"Flight Duration: {hours} Hours and {minutes} Minutes")
-
-# Formatting seconds into HH:MM:SS
-total_seconds = 7385
-hours, remainder_secs = divmod(total_seconds, 3600)
-minutes, seconds = divmod(remainder_secs, 60)
-print(f"Video Timestamp: {hours:02d}:{minutes:02d}:{seconds:02d}")
+print(result)
 ```
 
-### Output:
+Output:
+
 ```text
-Flight Duration: 4 Hours and 45 Minutes
-Video Timestamp: 02:03:05
+12
+```
+
+Real-life example:
+
+```python
+wallet = 1000
+spent = 350
+
+remaining = wallet - spent
+
+print(remaining)
+```
+
+Output:
+
+```text
+650
 ```
 
 ---
 
-## 3. Operator Precedence: PEMDAS / BODMAS Hierarchy
+# 3. Multiplication (`*`)
 
-When multiple operators appear in a single line, Python evaluates them in strict order of mathematical precedence:
-
-```
-+----------+------------------------------------------+--------------------+
-| PRIORITY | OPERATOR                                 | ASSOCIATIVITY      |
-+----------+------------------------------------------+--------------------+
-| 1 (High) | ( ) Parentheses                          | Left to Right      |
-| 2        | ** Exponentiation                        | RIGHT TO LEFT!     |
-| 3        | +x, -x (Unary plus / minus)              | Right to Left      |
-| 4        | *, /, //, % (Multiplication / Divisions) | Left to Right      |
-| 5 (Low)  | +, - (Addition / Subtraction)            | Left to Right      |
-+----------+------------------------------------------+--------------------+
-```
-
-### The Right-to-Left Exponentiation Quirk:
-
-Notice that exponentiation (`**`) binds from **right to left**, unlike all other arithmetic operators:
+The `*` operator multiplies numbers.
 
 ```python
-# ==========================================================
-# Example 3: Exponentiation Associativity and PEMDAS
-# ==========================================================
+price = 250
+quantity = 4
 
-# Standard PEMDAS evaluation
-# 1. (4 + 6) = 10
-# 2. 3 ** 2 = 9
-# 3. 10 * 9 = 90
-# 4. 90 / 5 = 18.0
-calculation = (4 + 6) * 3 ** 2 / 5
-print("Result of (4 + 6) * 3 ** 2 / 5 =", calculation)
+total = price * quantity
 
-# The Right-to-Left Exponentiation Trap:
-# 2 ** 3 ** 2 evaluates as 2 ** (3 ** 2) = 2 ** 9 = 512
-# NOT (2 ** 3) ** 2 = 8 ** 2 = 64!
-power_chain = 2 ** 3 ** 2
-print("2 ** 3 ** 2 evaluates to          :", power_chain)
-
-power_chain_explicit = (2 ** 3) ** 2
-print("(2 ** 3) ** 2 evaluates to        :", power_chain_explicit)
+print(total)
 ```
 
-### Output:
+Output:
+
 ```text
-Result of (4 + 6) * 3 ** 2 / 5 = 18.0
-2 ** 3 ** 2 evaluates to          : 512
-(2 ** 3) ** 2 evaluates to        : 64
+1000
+```
+
+This is useful for:
+
+* Shopping calculations
+* Salary calculations
+* Area calculations
+* Quantity × price
+* Mathematical formulas
+
+---
+
+# 4. True Division (`/`)
+
+The `/` operator performs normal division.
+
+```python
+result = 17 / 5
+
+print(result)
+```
+
+Output:
+
+```text
+3.4
+```
+
+An important Python rule:
+
+> The `/` operator returns a `float`.
+
+Even when the division is exact:
+
+```python
+result = 8 / 4
+
+print(result)
+print(type(result))
+```
+
+Output:
+
+```text
+2.0
+<class 'float'>
+```
+
+Notice that the result is `2.0`, not `2`.
+
+---
+
+# 5. Floor Division (`//`)
+
+The `//` operator performs **floor division**.
+
+Example:
+
+```python
+result = 17 // 5
+
+print(result)
+```
+
+Output:
+
+```text
+3
+```
+
+Why?
+
+Because:
+
+```text
+17 / 5 = 3.4
+```
+
+Floor division moves down to the next whole-number value:
+
+```text
+3.4 → 3
 ```
 
 ---
 
-## 4. Practical Odd/Even & Cycle Checking with Modulo (`%`)
+# ⚠️ Important: Negative Numbers
 
-The modulo operator `%` is one of the most powerful utilities in software engineering:
-1. **Parity Check:** `number % 2 == 0` determines whether an integer is even.
-2. **Circular Wrapping:** Rotating carousel slides or board games: `(index + 1) % total_slides`.
+Floor division can be surprising with negative numbers.
+
+For example:
 
 ```python
-# ==========================================================
-# Example 4: Real-World Applications of Modulo
-# ==========================================================
+print(-7 // 2)
+```
 
-tokens = [101, 102, 103, 104, 105]
+Output:
 
-print("--- ODD/EVEN PARITY CHECK ---")
-for t in tokens:
-    parity = "EVEN" if t % 2 == 0 else "ODD"
-    print(f"Token {t} is {parity}")
+```text
+-4
+```
 
-print("\n--- CIRCULAR QUEUE / CAROUSEL ---")
+Why not `-3`?
+
+Because floor division moves toward **negative infinity**.
+
+```text
+-7 / 2 = -3.5
+
+Floor of -3.5 = -4
+```
+
+Compare:
+
+```python
+print(7 // 2)
+print(-7 // 2)
+```
+
+Output:
+
+```text
+3
+-4
+```
+
+### Remember
+
+`//` does **not** simply remove the decimal part.
+
+It performs **floor division**.
+
+---
+
+# 6. Modulo (`%`)
+
+The `%` operator gives the **remainder** after division.
+
+Example:
+
+```python
+print(17 % 5)
+```
+
+Output:
+
+```text
+2
+```
+
+Because:
+
+```text
+17 = (5 × 3) + 2
+```
+
+So:
+
+```text
+17 // 5 = 3
+17 % 5  = 2
+```
+
+---
+
+# 💡 Modulo for Even and Odd Numbers
+
+Modulo is commonly used to check whether a number is even or odd.
+
+### Even number
+
+If a number divided by 2 has remainder `0`, it is even.
+
+```python
+number = 20
+
+print(number % 2 == 0)
+```
+
+Output:
+
+```text
+True
+```
+
+### Odd number
+
+```python
+number = 21
+
+print(number % 2 == 0)
+```
+
+Output:
+
+```text
+False
+```
+
+We can write a simple checker:
+
+```python
+number = 21
+
+if number % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+```
+
+Output:
+
+```text
+Odd
+```
+
+---
+
+# 🔄 Modulo for Repeating Cycles
+
+Modulo is also useful when something repeats in a cycle.
+
+For example, imagine 4 slides in a presentation:
+
+```text
+Slide 0
+Slide 1
+Slide 2
+Slide 3
+```
+
+After Slide 3, we want to return to Slide 0.
+
+We can use:
+
+```python
 TOTAL_SLIDES = 4
+
 for click in range(7):
-    active_slide = click % TOTAL_SLIDES
-    print(f"User Click #{click + 1} -> Displays Slide #{active_slide}")
+    slide = click % TOTAL_SLIDES
+    print(slide)
 ```
 
-### Output:
+Output:
+
 ```text
---- ODD/EVEN PARITY CHECK ---
-Token 101 is ODD
-Token 102 is EVEN
-Token 103 is ODD
-Token 104 is EVEN
-Token 105 is ODD
+0
+1
+2
+3
+0
+1
+2
+```
 
---- CIRCULAR QUEUE / CAROUSEL ---
-User Click #1 -> Displays Slide #0
-User Click #2 -> Displays Slide #1
-User Click #3 -> Displays Slide #2
-User Click #4 -> Displays Slide #3
-User Click #5 -> Displays Slide #0
-User Click #6 -> Displays Slide #1
-User Click #7 -> Displays Slide #2
+This idea is useful for:
+
+* Carousels
+* Games
+* Circular queues
+* Repeating schedules
+* Clock-like systems
+
+---
+
+# 7. Exponentiation (`**`)
+
+The `**` operator is used for powers.
+
+For example:
+
+```python
+result = 2 ** 3
+
+print(result)
+```
+
+Output:
+
+```text
+8
+```
+
+Because:
+
+```text
+2 × 2 × 2 = 8
+```
+
+More examples:
+
+```python
+print(5 ** 2)
+print(10 ** 3)
+print(2 ** 10)
+```
+
+Output:
+
+```text
+25
+1000
+1024
+```
+
+### Easy Rule
+
+```text
+2 ** 3
+↑     ↑
+base  power
 ```
 
 ---
 
-## Do's and Don'ts: Arithmetic Operations
+# 📊 All Seven Operators Together
 
-| Scenario | Anti-Pattern (Don't) | Best Practice (Do) | Why |
-| :--- | :--- | :--- | :--- |
-| **Formula Readability** | `val = a + b * c / d ** e` | `val = a + (b * c) / (d ** e)` | Explicit parentheses eliminate ambiguity for other programmers. |
-| **Quotient and Remainder** | `q = x // y; r = x % y` | `q, r = divmod(x, y)` | `divmod` computes both values in a single C-level operation. |
-| **Even/Odd Check** | Comparing string ends: `str(x)[-1] in '02468'` | `x % 2 == 0` | Modulo check is clean, idiomatic, and thousands of times faster. |
-| **Power Calculation** | Importing `math.pow(2, 10)` for ints | `2 ** 10` | `**` preserves arbitrary-precision integers; `math.pow()` converts to float. |
+Let's see all seven operators in one program.
+
+```python
+a = 17
+b = 5
+
+print("Addition        :", a + b)
+print("Subtraction     :", a - b)
+print("Multiplication  :", a * b)
+print("True Division   :", a / b)
+print("Floor Division  :", a // b)
+print("Modulo          :", a % b)
+print("Exponentiation  :", 2 ** 8)
+```
+
+Output:
+
+```text
+Addition        : 22
+Subtraction     : 12
+Multiplication  : 85
+True Division   : 3.4
+Floor Division  : 3
+Modulo          : 2
+Exponentiation  : 256
+```
 
 ---
 
-## Quick Revision Summary
+# 8. `divmod()` — Get Quotient and Remainder Together
 
+Sometimes you need both:
+
+* Quotient
+* Remainder
+
+Instead of writing:
+
+```python
+quotient = 29 // 6
+remainder = 29 % 6
 ```
-+-------------------------------------------------------------------------+
-|                  MATHEMATICAL OPERATIONS CHEAT SHEET                    |
-+-------------------------------------------------------------------------+
-  - Addition:        +
-  - Subtraction:     -
-  - Multiplication:  *
-  - True Division:   /  (Always yields float; e.g., 4 / 2 = 2.0)
-  - Floor Division:  // (Rounds down to -inf; e.g., 7 // 2 = 3, -7 // 2 = -4)
-  - Modulus:         %  (Remainder; e.g., 17 % 5 = 2)
-  - Exponent:        ** (Right-associative; 2 ** 3 ** 2 = 512)
-  - divmod():        divmod(17, 5) -> (3, 2)
-  - Order:           PEMDAS / BODMAS (Parentheses > Exponents > Mul/Div > Add/Sub)
-+-------------------------------------------------------------------------+
+
+you can use:
+
+```python
+quotient, remainder = divmod(29, 6)
+
+print(quotient)
+print(remainder)
+```
+
+Output:
+
+```text
+4
+5
+```
+
+So:
+
+```python
+divmod(29, 6)
+```
+
+returns:
+
+```text
+(4, 5)
+```
+
+You can think of it as:
+
+```text
+divmod(number, divisor)
+       ↓
+(quotient, remainder)
 ```
 
 ---
 
-# Multiple Choice Questions
+# ⏱️ Practical Example: Convert Minutes into Hours
 
-### 1. What is the result and data type produced by evaluating `8 / 4` in Python 3?
-A. `2` of type `<class 'int'>`
-B. `2.0` of type `<class 'float'>`
-C. `2` of type `<class 'double'>`
-D. `0.5` of type `<class 'float'>`
+Suppose a video is 285 minutes long.
 
+```python
+total_minutes = 285
+
+hours, minutes = divmod(total_minutes, 60)
+
+print(hours)
+print(minutes)
+```
+
+Output:
+
+```text
+4
+45
+```
+
+So the video duration is:
+
+```text
+4 hours 45 minutes
+```
+
+---
+
+# 🎬 Practical Example: Convert Seconds into HH:MM:SS
+
+```python
+total_seconds = 7385
+
+hours, remaining_seconds = divmod(total_seconds, 3600)
+
+minutes, seconds = divmod(remaining_seconds, 60)
+
+print(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+```
+
+Output:
+
+```text
+02:03:05
+```
+
+This means:
+
+```text
+2 hours
+3 minutes
+5 seconds
+```
+
+---
+
+# 🧠 Operator Precedence
+
+What happens when we use many operators in one expression?
+
+For example:
+
+```python
+result = 10 + 5 * 2
+```
+
+Will Python calculate:
+
+```text
+(10 + 5) × 2 = 30
+```
+
+or:
+
+```text
+10 + (5 × 2) = 20
+```
+
+The answer is:
+
+```text
+20
+```
+
+Python follows **operator precedence**.
+
+This is similar to the **PEMDAS/BODMAS** rule you may have learned in mathematics.
+
+---
+
+# 📋 Basic Precedence Order
+
+For the operators covered in this lesson:
+
+| Priority | Operation                 | Example             |
+| -------: | ------------------------- | ------------------- |
+|        1 | Parentheses               | `(2 + 3)`           |
+|        2 | Exponentiation            | `2 ** 3`            |
+|        3 | Multiplication / Division | `*`, `/`, `//`, `%` |
+|        4 | Addition / Subtraction    | `+`, `-`            |
+
+So Python generally evaluates:
+
+```text
+Parentheses
+      ↓
+Powers
+      ↓
+Multiply / Divide
+      ↓
+Add / Subtract
+```
+
+---
+
+# Example: PEMDAS/BODMAS
+
+Consider:
+
+```python
+result = 10 + 5 * 2 ** 2
+```
+
+Python evaluates it in this order:
+
+### Step 1 — Power
+
+```text
+2 ** 2 = 4
+```
+
+### Step 2 — Multiplication
+
+```text
+5 × 4 = 20
+```
+
+### Step 3 — Addition
+
+```text
+10 + 20 = 30
+```
+
+Therefore:
+
+```python
+print(result)
+```
+
+Output:
+
+```text
+30
+```
+
+---
+
+# Parentheses Can Make Code Clearer
+
+Instead of relying completely on precedence:
+
+```python
+result = 10 + 5 * 2 ** 2
+```
+
+you can make the intended order clearer:
+
+```python
+result = 10 + (5 * (2 ** 2))
+```
+
+Both produce:
+
+```text
+30
+```
+
+### Best Practice
+
+Use parentheses when they make a formula easier to understand.
+
+---
+
+# ⚡ A Special Case: Chained Powers
+
+Exponentiation works from **right to left**.
+
+For example:
+
+```python
+result = 2 ** 3 ** 2
+```
+
+Python interprets it as:
+
+```python
+2 ** (3 ** 2)
+```
+
+First:
+
+```text
+3 ** 2 = 9
+```
+
+Then:
+
+```text
+2 ** 9 = 512
+```
+
+So:
+
+```python
+print(2 ** 3 ** 2)
+```
+
+Output:
+
+```text
+512
+```
+
+But:
+
+```python
+print((2 ** 3) ** 2)
+```
+
+gives:
+
+```text
+64
+```
+
+because:
+
+```text
+2 ** 3 = 8
+8 ** 2 = 64
+```
+
+### Beginner Tip
+
+If a formula contains multiple powers, use parentheses to make your intention obvious.
+
+---
+
+# 🧮 Practical Formula Example
+
+Let's calculate:
+
+```text
+(4 + 6) × 3² ÷ 5
+```
+
+Python:
+
+```python
+calculation = (4 + 6) * 3 ** 2 / 5
+
+print(calculation)
+```
+
+Output:
+
+```text
+18.0
+```
+
+Python automatically follows the correct order.
+
+---
+
+# 🛠️ Practical Example: Simple Shopping Calculator
+
+```python
+price = 500
+quantity = 3
+discount = 100
+
+subtotal = price * quantity
+final_price = subtotal - discount
+
+print("Subtotal:", subtotal)
+print("Final Price:", final_price)
+```
+
+Output:
+
+```text
+Subtotal: 1500
+Final Price: 1400
+```
+
+Here we used:
+
+```text
+* → multiplication
+- → subtraction
+```
+
+---
+
+# ⚠️ Division by Zero
+
+You cannot divide a number by zero.
+
+For example:
+
+```python
+result = 10 / 0
+```
+
+Python raises:
+
+```text
+ZeroDivisionError
+```
+
+The same applies to:
+
+```python
+10 // 0
+```
+
+and:
+
+```python
+10 % 0
+```
+
+### Remember
+
+> Always make sure the divisor is not zero before performing a division operation.
+
+---
+
+# ✅ Do's and Don'ts
+
+| Situation            | Avoid                                          | Prefer                                      |
+| -------------------- | ---------------------------------------------- | ------------------------------------------- |
+| Clear formulas       | Very long unclear expressions                  | Use parentheses                             |
+| Quotient + remainder | Calculate both separately when both are needed | `divmod()`                                  |
+| Even/odd checking    | Convert number to string                       | `number % 2`                                |
+| Powers               | Unnecessary conversion to float                | `**`                                        |
+| Division             | Assume `/` returns `int`                       | Remember `/` returns `float`                |
+| Negative division    | Assume `//` simply removes decimals            | Remember it floors toward negative infinity |
+
+---
+
+# 📌 Quick Revision Cheat Sheet
+
+```text
+PYTHON ARITHMETIC OPERATORS
+────────────────────────────────────
+
++    Addition
+-    Subtraction
+*    Multiplication
+/    True Division
+//   Floor Division
+%    Modulo / Remainder
+**   Exponentiation
+
+Examples:
+
+10 + 5     → 15
+10 - 5     → 5
+10 * 5     → 50
+10 / 5     → 2.0
+10 // 3    → 3
+10 % 3     → 1
+2 ** 3     → 8
+
+divmod():
+divmod(29, 6) → (4, 5)
+
+Operator order:
+Parentheses
+     ↓
+Exponent
+     ↓
+Multiply / Divide
+     ↓
+Add / Subtract
+```
+
+---
+
+## Practice Quiz
+
+### 1. What is the result of `8 / 4` in Python?
+A. `2`
+B. `2.0`
+C. `4`
+D. `0`
 **Answer:** B
-**Explanation:** In Python 3, the single-slash true division operator `/` always produces a floating-point number, regardless of whether the division divides evenly. Hence, `8 / 4` results in `2.0`.
 
 ---
 
-### 2. What is the value of the expression `-9 // 2` in Python?
+### 2. What is the result of `-9 // 2`?
 A. `-4`
 B. `-5`
 C. `-4.5`
 D. `4`
-
 **Answer:** B
-**Explanation:** Floor division `//` rounds down towards negative infinity ($\lfloor x \rfloor$). Since $-9 / 2 = -4.5$, rounding down to the next lower integer on the number line produces `-5`.
 
 ---
 
-### 3. How does Python evaluate the chained power expression `2 ** 2 ** 3`?
-A. `(2 ** 2) ** 3 = 4 ** 3 = 64`
-B. `2 ** (2 ** 3) = 2 ** 8 = 256`
-C. `2 * 2 * 3 = 12`
-D. Syntax error
-
-**Answer:** B
-**Explanation:** Exponentiation (`**`) is right-associative in Python. It evaluates from right to left: first `2 ** 3 = 8`, and then `2 ** 8 = 256`.
+### 3. What is the result of `17 % 5`?
+A. `2`
+B. `3`
+C. `5`
+D. `0`
+**Answer:** A
+```text
+17 = (5 × 3) + 2
+```
+So the remainder is `2`.
 
 ---
 
-### 4. What does the built-in function `divmod(29, 6)` return?
+### 4. What does `divmod(29, 6)` return?
 A. `(4.83, 5)`
 B. `(4, 5)`
 C. `(5, 4)`
-D. `4`
-
+D. `4
 **Answer:** B
-**Explanation:** `divmod(a, b)` returns a tuple containing the floor quotient and remainder: `(a // b, a % b)`. For 29 and 6: $29 // 6 = 4$ and $29 \% 6 = 5$, giving `(4, 5)`.
+```text
+(quotient, remainder)
+```
+For `29 ÷ 6`:
+```text
+quotient = 4
+remainder = 5
+```
 
----
-
-### 5. What is the result of evaluating the arithmetic expression `10 + 5 * 2 ** 2`?
+### 5. What is the result of `10 + 5 * 2 ** 2`?
 A. `60`
 B. `100`
 C. `30`
 D. `400`
-
 **Answer:** C
-**Explanation:** Following PEMDAS: Exponentiation has highest priority ($2 ** 2 = 4$), followed by multiplication ($5 * 4 = 20$), followed by addition ($10 + 20 = 30$).
+```text
+2 ** 2 = 4
+5 * 4 = 20
+10 + 20 = 30
+```
+
+### 6. What is the result of `2 ** 3 ** 2`?
+A. `64`
+B. `256`
+C. `512`
+D. `36`
+**Answer:** C
+```text
+2 ** (3 ** 2)
+= 2 ** 9
+= 512
+---
+
+# 💻 Hands-On Practice Challenge
+
+## Challenge 15: Home Loan EMI Calculator
+
+Now let's use Python's mathematical operators in a real-world calculation.
+
+We will create a simple **Home Loan EMI Calculator**.
+
+The standard EMI formula is:
+
+```text
+EMI = P × r × (1 + r)ⁿ
+     ─────────────────────
+       (1 + r)ⁿ - 1
+```
+
+Where:
+
+* `P` = Loan amount
+* `r` = Monthly interest rate
+* `n` = Number of monthly payments
+
+This challenge gives you practice with:
+
+* `+`
+* `-`
+* `*`
+* `/`
+* `**`
+* `divmod()`
+
+### Starter Code
+
+```python
+def calculate_emi(principal, annual_rate, tenure_months):
+
+    # Convert annual interest rate into monthly decimal rate
+    monthly_rate = (annual_rate / 12) / 100
+
+    # Calculate the growth factor
+    growth_factor = (1 + monthly_rate) ** tenure_months
+
+    # Calculate EMI
+    emi = (
+        principal
+        * monthly_rate
+        * growth_factor
+        / (growth_factor - 1)
+    )
+
+    # Calculate total repayment
+    total_payment = emi * tenure_months
+
+    # Calculate total interest
+    total_interest = total_payment - principal
+
+    # Convert months into years and remaining months
+    years, months = divmod(tenure_months, 12)
+
+    print("=" * 50)
+    print("       HOME LOAN EMI CALCULATOR")
+    print("=" * 50)
+
+    print(f"Loan Amount      : ₹{principal:,.2f}")
+    print(f"Interest Rate    : {annual_rate:.2f}%")
+    print(f"Tenure           : {years} Years {months} Months")
+    print("-" * 50)
+    print(f"Monthly EMI      : ₹{emi:,.2f}")
+    print(f"Total Payment    : ₹{total_payment:,.2f}")
+    print(f"Total Interest   : ₹{total_interest:,.2f}")
+
+    print("=" * 50)
+
+
+# Test the calculator
+calculate_emi(
+    principal=45_00_000,
+    annual_rate=8.75,
+    tenure_months=240
+)
+```
+
+### What This Program Demonstrates
+
+```text
+annual_rate / 12
+        ↓
+      Division
+
+principal * monthly_rate
+        ↓
+    Multiplication
+
+(1 + monthly_rate) ** tenure_months
+        ↓
+    Exponentiation
+
+growth_factor - 1
+        ↓
+    Subtraction
+
+divmod(tenure_months, 12)
+        ↓
+Years + remaining months
+```
+
+### Practice Tasks
+
+After running the program, try changing the values:
+
+**Test 1**
+
+```python
+calculate_emi(
+    principal=20_00_000,
+    annual_rate=8.5,
+    tenure_months=120
+)
+```
+
+**Test 2**
+
+```python
+calculate_emi(
+    principal=10_00_000,
+    annual_rate=9.5,
+    tenure_months=60
+)
+```
+
+Then observe how changing:
+
+* Loan amount
+* Interest rate
+* Loan tenure
+
+changes the monthly EMI and total interest.
 
 ---
 
-# Hands-On Practice Challenge: Indian Home Loan EMI & Amortization Calculator
+# 🎯 Lesson Summary
 
-Write a script that calculates the Equated Monthly Installment (EMI) for a housing loan in India using the standard banking formula:
-$$\text{EMI} = \frac{P \times r \times (1 + r)^n}{(1 + r)^n - 1}$$
-where $P$ is principal, $r$ is monthly interest rate, and $n$ is total months. The program will also calculate total interest and use `divmod()` to output the tenure in years and remaining months.
+In this lesson, you learned:
 
-```python
-# ==========================================================
-# Challenge 15: Home Loan EMI & Repayment Calculator
-# MSK Institute of Technology
-# ==========================================================
+* The seven basic arithmetic operators in Python
+* Addition using `+`
+* Subtraction using `-`
+* Multiplication using `*`
+* True division using `/`
+* Floor division using `//`
+* Modulo using `%`
+* Exponentiation using `**`
+* The difference between `/` and `//`
+* Why negative floor division can produce surprising results
+* How `%` can check even and odd numbers
+* How modulo can create repeating cycles
+* How `divmod()` returns quotient and remainder
+* How Python follows operator precedence
+* How PEMDAS/BODMAS applies to Python expressions
+* Why chained exponentiation works from right to left
+* How arithmetic operators can be used in practical formulas
+---
 
-def calculate_home_loan_emi(principal: float, annual_rate_pct: float, tenure_months: int):
-    # ------------------------------------------------------
-    # 1. Convert Annual Percentage Rate to Monthly Decimal Rate
-    # ------------------------------------------------------
-    monthly_rate = (annual_rate_pct / 12) / 100
+## 🚀 What's Next?
 
-    # ------------------------------------------------------
-    # 2. Banking EMI Formula: P * r * (1 + r)^n / ((1 + r)^n - 1)
-    # Demonstrates: +, *, /, -, and ** with proper parentheses
-    # ------------------------------------------------------
-    growth_factor = (1 + monthly_rate) ** tenure_months
-    emi = (principal * monthly_rate * growth_factor) / (growth_factor - 1)
+In the next lesson, we will continue your Python learning journey with **Math Module (math, random)** (4: Numbers).
 
-    total_payment = emi * tenure_months
-    total_interest_payable = total_payment - principal
-
-    # Use divmod() to split tenure into years and remaining months
-    tenure_years, rem_months = divmod(tenure_months, 12)
-
-    # ------------------------------------------------------
-    # 3. Print Comprehensive Amortization Summary
-    # ------------------------------------------------------
-    print("=" * 55)
-    print("           SBI / HDFC HOME LOAN EMI ADVISOR")
-    print("=" * 55)
-    print(f"Loan Principal Sanctioned: INR {principal:>12,.2f}")
-    print(f"Annual Interest Rate     : {annual_rate_pct:>11.2f} % p.a.")
-    print(f"Repayment Tenure         : {tenure_years} Years {rem_months} Months ({tenure_months} Mo)")
-    print("-" * 55)
-    print(f"Monthly EMI Payable      : INR {emi:>12,.2f}")
-    print(f"Total Amount Repayable   : INR {total_payment:>12,.2f}")
-    print(f"Total Interest Portion   : INR {total_interest_payable:>12,.2f}")
-    print("=" * 55 + "\n")
-
-
-# ----------------------------------------------------------
-# Test Case: 45 Lakhs loan at 8.75% for 20 years (240 months)
-# ----------------------------------------------------------
-calculate_home_loan_emi(principal=45_00_000.0, annual_rate_pct=8.75, tenure_months=240)
-
-# Test Case: 15 Lakhs Car Loan at 9.5% for 5.5 years (66 months)
-calculate_home_loan_emi(principal=15_00_000.0, annual_rate_pct=9.50, tenure_months=66)
-```
-
-### Expected Program Output:
-```text
-=======================================================
-           SBI / HDFC HOME LOAN EMI ADVISOR
-=======================================================
-Loan Principal Sanctioned: INR 4,500,000.00
-Annual Interest Rate     :        8.75 % p.a.
-Repayment Tenure         : 20 Years 0 Months (240 Mo)
--------------------------------------------------------
-Monthly EMI Payable      : INR    39,781.33
-Total Amount Repayable   : INR 9,547,519.86
-Total Interest Portion   : INR 5,047,519.86
-=======================================================
-
-=======================================================
-           SBI / HDFC HOME LOAN EMI ADVISOR
-=======================================================
-Loan Principal Sanctioned: INR 1,500,000.00
-Annual Interest Rate     :        9.50 % p.a.
-Repayment Tenure         : 5 Years 6 Months (66 Mo)
--------------------------------------------------------
-Monthly EMI Payable      : INR    29,292.05
-Total Amount Repayable   : INR 1,933,275.46
-Total Interest Portion   : INR   433,275.46
-=======================================================
-```
+👉 **[Continue to Next Lesson: Math Module (math, random) →](/tutorials/python-for-beginners/math-module-math-random)**

@@ -17,9 +17,9 @@ keywords:
   - startswith endswith
   - isdigit isalpha isalnum
   - data validation
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python String Inspection & Tokenization: split(), join(), find(), & Validators
@@ -285,7 +285,33 @@ Is '42.5' a digit?       : False
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Attempting to Mutate a String in Place
+Python strings are immutable. You cannot assign directly to a character index:
+```python
+text = "Python"
+# ❌ INCORRECT (TypeError: 'str' object does not support item assignment)
+text[0] = "J"
+
+# ✅ CORRECT (Create a new string using slicing or concatenation)
+text = "J" + text[1:]
+print(text)  # "Jython"
+```
+
+### 2. Off-By-One Errors in Slicing
+In Python slicing `text[start:stop]`, the `stop` index is **exclusive** (not included in the slice):
+```python
+word = "Coding"
+# Slicing word[0:3] gives indices 0, 1, 2 ('Cod'), NOT index 3!
+print(word[0:3])  # 'Cod'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does `text.find("python")` return if the word `"python"` does not exist in `text`?
 A. `None`
@@ -294,7 +320,6 @@ C. `-1`
 D. `ValueError`
 
 **Answer:** C
-**Explanation:** The `.find()` method returns `-1` if the target substring is not found. In contrast, the `.index()` method raises a `ValueError`.
 
 ---
 
@@ -305,7 +330,6 @@ C. `"Apple,Mango,Banana,"`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** `str.join(iterable)` concatenates the elements of the iterable using the calling string as a separator between elements, producing `"Apple, Mango, Banana"`.
 
 ---
 
@@ -316,7 +340,6 @@ C. `filename.endswith([".jpg", ".jpeg", ".png"])`
 D. `filename.has_extension(".jpg", ".png")`
 
 **Answer:** B
-**Explanation:** Both `.startswith()` and `.endswith()` accept a `tuple` of target suffixes. Passing a tuple checks if the string ends with any one of the specified extensions.
 
 ---
 
@@ -327,7 +350,6 @@ C. `TypeError`
 D. `540`
 
 **Answer:** B
-**Explanation:** The `.isdigit()` method returns `True` only if every single character in the string is a digit. Because the decimal point `.` is a punctuation character and not a digit, `"540.25".isdigit()` returns `False`.
 
 ---
 
@@ -338,7 +360,6 @@ C. `['Python', 'Django', 'FastAPI']`
 D. An error requiring a delimiter
 
 **Answer:** C
-**Explanation:** When `.split()` is called without arguments, Python treats consecutive runs of whitespace (spaces, tabs, newlines) as a single delimiter and automatically discards leading and trailing whitespace, returning `['Python', 'Django', 'FastAPI']`.
 
 ---
 
@@ -431,3 +452,10 @@ IP: 10.0.0.12       | Failed Attempts: 3 | Threat: CRITICAL (POSSIBLE ATTACK)
   [!] PROBE: 203.0.113.5 -> GET /backup.tar.gz (HTTP 403)
 =================================================================
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Arithmetic Operators** (6: Operators).
+
+👉 **[Continue to Next Lesson: Arithmetic Operators →](/tutorials/python-for-beginners/arithmetic-operators)**

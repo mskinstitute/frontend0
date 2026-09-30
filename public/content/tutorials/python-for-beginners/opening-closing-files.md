@@ -16,9 +16,9 @@ keywords:
   - file descriptor python
   - append vs write python
   - persistent file storage
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Opening & Closing Files in Python: Access Modes & Resource Management
@@ -228,7 +228,29 @@ except FileExistsError:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting to Close Files (Leaking File Handles)
+Always use the `with open()` context manager so files are automatically closed even if an exception occurs:
+```python
+# ❌ Risky manual file handling
+# f = open("notes.txt", "w")
+# f.write("Data")
+# f.close()  # May never execute if an error occurs above!
+
+# ✅ Production standard context manager
+with open("notes.txt", "w", encoding="utf-8") as f:
+    f.write("Data safely flushed to disk")
+```
+
+### 2. Accidental Overwrite in `'w'` Mode
+Opening an existing file in `'w'` (write) mode immediately truncates (erases) all existing content! To preserve existing data and add to the end, use `'a'` (append) mode.
+
+---
+
+## Practice Quiz
 
 ### 1. Which file mode will completely overwrite and erase the existing contents of a file when opened?
 A. `'r'`
@@ -237,7 +259,6 @@ C. `'w'`
 D. `'x'`
 
 **Answer:** C
-**Explanation:** Opening a file in write mode (`'w'`) truncates the file length to 0 bytes, completely overwriting and wiping any prior data.
 
 ---
 
@@ -248,7 +269,6 @@ C. Python returns `None`
 D. The script pauses until the file is manually created
 
 **Answer:** B
-**Explanation:** Read mode (`'r'`) requires the file to exist on disk. If the specified file cannot be located, Python raises a `FileNotFoundError`.
 
 ---
 
@@ -259,7 +279,6 @@ C. `'x'` mode runs 50% faster than `'w'`
 D. `'x'` mode is required for binary images
 
 **Answer:** B
-**Explanation:** Exclusive creation mode (`'x'`) guarantees that a file is only created if it does not already exist. If a file with that name is present, Python prevents overwriting by raising a `FileExistsError`.
 
 ---
 
@@ -270,7 +289,6 @@ C. The operating system only writes files at midnight
 D. `file.write()` is an asynchronous non-blocking thread
 
 **Answer:** B
-**Explanation:** For I/O performance efficiency, Python buffers writes in RAM. The buffer is automatically flushed and committed to physical disk when `file.close()` or `file.flush()` executes.
 
 ---
 
@@ -281,7 +299,6 @@ C. `'a'`
 D. `'x'`
 
 **Answer:** C
-**Explanation:** Append mode (`'a'`) positions the write pointer at the end of the file, adding new content without altering or truncating existing records.
 
 ---
 
@@ -380,3 +397,10 @@ Output:
 
 [CLEANUP] Scratch manifest file removed.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Reading & Writing Files** (15: File Handling).
+
+👉 **[Continue to Next Lesson: Reading & Writing Files →](/tutorials/python-for-beginners/reading-writing-files)**

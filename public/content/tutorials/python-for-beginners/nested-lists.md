@@ -16,9 +16,9 @@ keywords:
   - deepcopy vs copy
   - list multiplication trap
   - flatten 2d list
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Lists in Python: Multi-Dimensional Matrices, Coordinate Indexing & Deep Copying
@@ -282,7 +282,38 @@ Flattened 1D list: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Accidental Shallow List Aliasing
+Assigning `list_b = list_a` does NOT create a copy; both variables point to the same memory object:
+```python
+a = [1, 2, 3]
+b = a  # Aliasing (same object!)
+b.append(4)
+print(a)  # [1, 2, 3, 4] - 'a' was modified too!
+
+# ✅ CORRECT (Make an explicit shallow copy)
+c = a.copy()  # Or c = a[:]
+c.append(5)
+print(a)  # [1, 2, 3, 4] - safe!
+```
+
+### 2. Index Out of Range Error
+Accessing an index equal to or greater than `len(my_list)` raises `IndexError`:
+```python
+items = ["apple", "banana"]
+# ❌ IndexError (len is 2, valid indices are 0 and 1)
+# print(items[2])
+
+# ✅ CORRECT
+print(items[1])  # 'banana'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Given `grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`, what does `grid[1][2]` evaluate to?
 A. 4
@@ -291,7 +322,6 @@ C. 6
 D. 8
 
 **Answer:** C
-**Explanation:** `grid[1]` accesses the second row `[4, 5, 6]`. `[2]` accesses the third element within that row, which is `6`.
 
 ---
 
@@ -302,7 +332,6 @@ C. It only creates a 1D list of length 9
 D. It causes a syntax error
 
 **Answer:** B
-**Explanation:** The multiplication operator duplicates object references. The outer multiplication replicates the reference to the single inner list `[0, 0, 0]` three times. Changing `board[0][0]` mutates that shared object, reflecting across all three rows.
 
 ---
 
@@ -313,7 +342,6 @@ C. `copy`
 D. `collections`
 
 **Answer:** C
-**Explanation:** The standard library `copy` module provides `copy.deepcopy()`, which recursively duplicates all nested objects, lists, and references.
 
 ---
 
@@ -329,7 +357,6 @@ C. `[1, 3, 2, 4]`
 D. `[[1, 3], [2, 4]]`
 
 **Answer:** B
-**Explanation:** The nested comprehension iterates over each `row` in `matrix` and then each `x` in `row`, appending them into a single flat list: `[1, 2, 3, 4]`.
 
 ---
 
@@ -340,7 +367,6 @@ C. `TypeError: list indices must be integers or slices, not tuple`
 D. `ValueError`
 
 **Answer:** C
-**Explanation:** In Python, comma-separated indices `[1, 2]` form a tuple `(1, 2)`. Standard Python lists do not accept tuples as indices (unlike NumPy arrays) and raise `TypeError`. Correct syntax is `matrix[1][2]`.
 
 ---
 
@@ -428,3 +454,10 @@ Row 3:  O       O       O       O       X
 
 Total Seats Booked: 3/20 (15.0% Occupancy)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Tuple Introduction** (9: Tuples).
+
+👉 **[Continue to Next Lesson: Tuple Introduction →](/tutorials/python-for-beginners/tuple-introduction)**

@@ -16,9 +16,9 @@ keywords:
   - list tuple set dict casting
   - base conversion int base
   - defensive casting valueerror
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Explicit Type Casting: Constructor Functions & Base Conversion
@@ -260,7 +260,24 @@ Invalid Float : None
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Casting Non-Numeric Strings to `int`
+Passing alphabetic or floating-point text directly to `int()` raises a `ValueError`:
+```python
+# ❌ INCORRECT (Raises ValueError: invalid literal for int() with base 10: '45.8')
+# num = int("45.8")
+
+# ✅ CORRECT (Parse as float first, then cast to int)
+num = int(float("45.8"))
+print(num)  # 45
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will be returned by evaluating `int("1010", 2)` in Python?
 A. `"1010"`
@@ -269,7 +286,6 @@ C. `1010`
 D. `ValueError`
 
 **Answer:** B
-**Explanation:** Passing `2` as the second argument to `int(string, base)` instructs Python to interpret the string as a base-2 binary number. $1010_2 = (1 \times 8) + (0 \times 4) + (1 \times 2) + (0 \times 1) = 10$.
 
 ---
 
@@ -280,7 +296,6 @@ C. It raises a `ValueError: invalid literal for int() with base 10: '59.99'`
 D. It returns `59.99`
 
 **Answer:** C
-**Explanation:** The `int()` constructor can only parse strings containing valid integer digits. The decimal point `.` causes an immediate `ValueError`. To cast it, you must first convert it to a float: `int(float("59.99"))`.
 
 ---
 
@@ -291,7 +306,6 @@ C. `my_list.dedupe()`
 D. `tuple(my_list)`
 
 **Answer:** B
-**Explanation:** The `set()` constructor takes any iterable and converts it into a set, which by definition only stores unique, distinct elements, automatically dropping duplicates.
 
 ---
 
@@ -302,7 +316,6 @@ C. `-8.0`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** When converting a float to an integer via `int()`, Python truncates the fractional portion towards zero. For negative numbers, truncating towards zero turns `-8.85` into `-8`.
 
 ---
 
@@ -313,7 +326,6 @@ C. `{'a', 'b', 1, 2}`
 D. `TypeError`
 
 **Answer:** B
-**Explanation:** The `dict()` constructor accepts an iterable of key-value pairs (2-tuples or 2-element lists) and converts them into a standard Python dictionary: `{'a': 1, 'b': 2}`.
 
 ---
 
@@ -404,3 +416,10 @@ Device #60    |    41.5    |   92%    |   ALERT (Flag 4)
 Valid Packets Processed: 3 / 4
 Mean Regional Temp     : 34.27 °C
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Common Pitfalls** (7: Casting).
+
+👉 **[Continue to Next Lesson: Common Pitfalls →](/tutorials/python-for-beginners/common-pitfalls)**

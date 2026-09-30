@@ -16,9 +16,9 @@ keywords:
   - positional argument follows keyword argument
   - keyword only arguments python
   - function argument binding
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Function Arguments in Python: Positional & Keyword Mechanics
@@ -218,7 +218,37 @@ Keyword-only parameters prevent accidental bugs when functions accept boolean fl
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Forgetting the `return` Statement
+If a function computes a value but doesn't return it, Python returns `None` by default:
+```python
+def add(a, b):
+    result = a + b
+    # Missing: return result
+
+total = add(5, 10)
+print(total)  # None (not 15!)
+```
+
+### 2. Modifying Global Variables Without the `global` Keyword
+Reading a global variable is permitted, but assigning to it creates a local variable unless explicitly declared:
+```python
+counter = 0
+
+def increment():
+    global counter  # Required to modify global scope
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What will happen if you run the following code?
 ```python
@@ -233,7 +263,6 @@ C. TypeError: greet() takes 2 arguments but got 1
 D. Output: `None, Karan!`
 
 **Answer:** B
-**Explanation:** Python syntax strictly requires that all positional arguments appear before any keyword arguments. Passing `"Good Morning"` (a positional argument) after `name="Karan"` (a keyword argument) results in a `SyntaxError`.
 
 ---
 
@@ -250,7 +279,6 @@ C. TypeError: unexpected keyword order
 D. I have a animal_type named pet_name.
 
 **Answer:** B
-**Explanation:** Keyword arguments match parameters by name rather than position. Python correctly assigns `"Dog"` to `animal_type` and `"Sheru"` to `pet_name`, printing `"I have a Dog named Sheru."`.
 
 ---
 
@@ -267,7 +295,6 @@ C. ValueError: duplicate key
 D. NameError: user_id redefined
 
 **Answer:** B
-**Explanation:** The parameter `user_id` was already assigned the value `101` positionally. Passing `user_id=202` again via keyword causes Python to raise a `TypeError: display_info() got multiple values for argument 'user_id'`.
 
 ---
 
@@ -278,7 +305,6 @@ C. `def log(msg, kw_only(debug_mode)):`
 D. `def log(msg, kwargs: debug_mode):`
 
 **Answer:** B
-**Explanation:** In Python 3, a bare asterisk `*` in the parameter list separates positional parameters from keyword-only parameters. Any parameter defined after `*` must be passed explicitly using its keyword name.
 
 ---
 
@@ -289,7 +315,6 @@ C. Parameters must be strings; arguments must be numbers
 D. There is no difference; they are exact technical synonyms
 
 **Answer:** B
-**Explanation:** A parameter is the named variable listed in the function definition. An argument is the actual value or object passed into the function when it is called.
 
 ---
 
@@ -418,3 +443,10 @@ Output:
   FINAL AMOUNT TO PAY: Rs   600.00
 +======================================================+
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Arguments: Default, *args, **kwargs** (14: Functions).
+
+👉 **[Continue to Next Lesson: Arguments: Default, *args, **kwargs →](/tutorials/python-for-beginners/arguments-default-args-kwargs)**

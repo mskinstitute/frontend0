@@ -16,9 +16,9 @@ keywords:
   - single element tuple comma
   - tuple packing
   - python tuple memory efficiency
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Tuples: The Immutable, High-Performance Ordered Data Structure
@@ -223,7 +223,7 @@ Memory saved:        24 bytes
 
 ---
 
-## Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What is the fundamental difference between a Python list and a Python tuple?
 A. Lists are ordered, while tuples are unordered
@@ -232,7 +232,6 @@ C. Tuples can contain strings, while lists can only contain numbers
 D. Lists use parentheses, while tuples use square brackets
 
 **Answer:** B
-**Explanation:** Both lists and tuples are ordered sequences, but lists are mutable (can be altered in-place) while tuples are immutable (cannot be modified after creation).
 
 ---
 
@@ -243,7 +242,6 @@ C. `set`
 D. `list`
 
 **Answer:** B
-**Explanation:** Parentheses without a comma are treated as arithmetic grouping. `(42)` is simply the integer `42`. To create a single-element tuple, a trailing comma is required: `(42,)`.
 
 ---
 
@@ -254,7 +252,6 @@ C. Python raises a `TypeError: 'tuple' object does not support item assignment`
 D. Python raises a `ValueError`
 
 **Answer:** C
-**Explanation:** Tuples do not permit in-place item reassignment. Attempting to assign to an indexed position raises a `TypeError`.
 
 ---
 
@@ -265,7 +262,6 @@ C. `{"delhi", "mumbai"}`
 D. `[108]`
 
 **Answer:** B
-**Explanation:** Dictionary keys in Python must be hashable and immutable. A tuple containing immutable objects is hashable and can serve as a dictionary key, whereas lists and sets are mutable and unhashable.
 
 ---
 
@@ -276,7 +272,6 @@ C. `int`
 D. `generator`
 
 **Answer:** B
-**Explanation:** Comma-separated values without enclosing brackets are automatically packed into a tuple: `x = 1, 2, 3` creates a tuple `(1, 2, 3)`.
 
 ---
 
@@ -342,3 +337,10 @@ Tuple memory: 72 bytes
 List memory:  88 bytes
 System integrity verified: Zero configuration drift permitted.
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Accessing Items** (9: Tuples).
+
+👉 **[Continue to Next Lesson: Accessing Items →](/tutorials/python-for-beginners/accessing-items)**

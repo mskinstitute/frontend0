@@ -16,9 +16,9 @@ keywords:
   - bool string pitfall
   - precision loss casting
   - safe type conversion
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Common Casting Pitfalls in Python: Traps, Illusions, and Defensive Solutions
@@ -290,7 +290,7 @@ Numeric doubled: 100
 
 ---
 
-## Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What is the runtime result of executing `int("42.8")` in Python?
 A. 42
@@ -299,7 +299,6 @@ C. 42.8
 D. ValueError
 
 **Answer:** D
-**Explanation:** `int()` parses base-10 integer literal characters (`0-9`). When it encounters a decimal dot `.` in a string, it raises a `ValueError: invalid literal for int() with base 10`. To safely convert it, use `int(float("42.8"))`.
 
 ---
 
@@ -310,7 +309,6 @@ C. Because Python's boolean parser is case-sensitive
 D. Because Python converts strings into their ASCII character sums
 
 **Answer:** B
-**Explanation:** In Python, string truthiness is determined strictly by sequence length. Any non-empty string (`len(s) > 0`) evaluates to `True`, while only the empty string `""` evaluates to `False`.
 
 ---
 
@@ -325,7 +323,6 @@ C. 7 8
 D. 8 7
 
 **Answer:** C
-**Explanation:** `int()` truncates the fractional part towards zero, yielding `7`. In contrast, `round(7.89)` evaluates to the nearest integer, which is `8`.
 
 ---
 
@@ -336,7 +333,6 @@ C. `float("3.14159")`
 D. `bool(0.0)`
 
 **Answer:** B
-**Explanation:** Python does not automatically coerce integers to strings during string concatenation with the `+` operator. `"Roll: " + 42` raises `TypeError: can only concatenate str (not "int") to str`.
 
 ---
 
@@ -347,7 +343,6 @@ C. `"252525"` and `"252525"`
 D. `TypeError` and `75`
 
 **Answer:** B
-**Explanation:** Multiplying a string by an integer invokes sequence repetition, producing `"252525"`. Multiplying an integer by an integer performs arithmetic multiplication, producing `75`.
 
 ---
 
@@ -417,3 +412,10 @@ newsletter_opt_in   : False      (type: bool)
 discount_code       : 'FESTIVE20' (type: str)
 reward_points       : 0          (type: int)
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **List Introduction** (8: Lists).
+
+👉 **[Continue to Next Lesson: List Introduction →](/tutorials/python-for-beginners/list-introduction)**

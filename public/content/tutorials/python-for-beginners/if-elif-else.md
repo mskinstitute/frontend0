@@ -16,9 +16,9 @@ keywords:
   - python indentation blocks
   - decision making python
   - short circuit branch
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Conditional Statements in Python: `if`, `elif`, `else` & Indentation Architecture
@@ -241,7 +241,33 @@ Welcome back, rahul_verma!
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Inconsistent Indentation
+Python requires consistent indentation (recommended: 4 spaces). Mixing tabs and spaces raises an `IndentationError`:
+```python
+# ❌ Inconsistent indentation
+if True:
+    print("Line 1 with spaces")
+	print("Line 2 with tab")  # IndentationError!
+```
+
+### 2. Forgetting the Trailing Colon (`:`)
+Every `if`, `elif`, and `else` statement must end with a colon:
+```python
+# ❌ SyntaxError: expected ':'
+# if age >= 18
+
+# ✅ CORRECT
+if age >= 18:
+    print("Eligible to vote")
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What determines code block boundaries in Python conditional statements?
 A. Curly braces `{}`
@@ -250,7 +276,6 @@ C. Consistent indentation (typically 4 spaces)
 D. `then` and `endif` keywords
 
 **Answer:** C
-**Explanation:** Python uses indentation levels to delineate blocks of code. Indented statements following a colon `:` belong to that conditional block.
 
 ---
 
@@ -272,7 +297,6 @@ C. Cherry
 D. Date
 
 **Answer:** B
-**Explanation:** In an `if-elif-else` chain, Python stops at the first condition that evaluates to `True`. Because `15 > 10` is True, `"Banana"` is printed and the remaining `elif` and `else` branches are skipped.
 
 ---
 
@@ -283,7 +307,6 @@ C. `"0"` (string containing digit zero)
 D. `None`
 
 **Answer:** C
-**Explanation:** Any non-empty string in Python evaluates to `True`, regardless of what characters it contains. `"0"` has a length of 1 and is truthy. Empty collections, `0`, and `None` are falsy.
 
 ---
 
@@ -294,7 +317,6 @@ C. Nothing inside the conditional executes; program continues past it
 D. Python executes the first `elif` block by default
 
 **Answer:** C
-**Explanation:** The `else` clause is optional. If none of the `if` or `elif` conditions evaluate to `True` and no `else` is provided, Python simply skips all indented blocks and continues execution.
 
 ---
 
@@ -305,7 +327,6 @@ C. `if items:`
 D. `if bool(items) == True:`
 
 **Answer:** C
-**Explanation:** Python collections have built-in truthiness: non-empty collections evaluate to `True`, while empty ones evaluate to `False`. Testing `if items:` is the idiomatic standard.
 
 ---
 
@@ -405,3 +426,10 @@ Passenger: Sanjay Gupta (Business Traveler)    (Age: 42)
   Discount:     Rs   0.00
   Final Amount: Rs 1150.00
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Nested Conditions** (12: Conditional Statements).
+
+👉 **[Continue to Next Lesson: Nested Conditions →](/tutorials/python-for-beginners/nested-conditions)**

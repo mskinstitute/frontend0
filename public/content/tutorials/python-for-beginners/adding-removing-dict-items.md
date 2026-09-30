@@ -16,9 +16,9 @@ keywords:
   - dict pop vs popitem
   - del dict key
   - lifo dictionary popitem
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Adding & Removing Dictionary Items: In-Place Growth, LIFO `popitem()`, and Safe `pop()`
@@ -244,7 +244,35 @@ Session after clear:     {} (ID preserved: 2410892558720)
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Using Square Brackets for Keys That Might Not Exist
+Accessing `dict[key]` directly raises a `KeyError` if the key is missing. Use `.get()` instead:
+```python
+user = {"name": "Pooja"}
+
+# ❌ Raises KeyError: 'email'
+# print(user["email"])
+
+# ✅ Safe with default fallback
+print(user.get("email", "Not provided"))  # "Not provided"
+```
+
+### 2. Using Mutable Objects as Dictionary Keys
+Keys must be hashable and immutable. Lists cannot be used as keys, but tuples can:
+```python
+# ❌ TypeError: unhashable type: 'list'
+# d = {[1, 2]: "coords"}
+
+# ✅ CORRECT (Use tuple)
+d = {(1, 2): "coords"}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does `d.setdefault("score", 100)` do if `"score"` already exists in `d` with value `85`?
 A. Overwrites the score to 100
@@ -253,7 +281,6 @@ C. Leaves `"score"` unchanged as 85 and returns 85
 D. Deletes the `"score"` key
 
 **Answer:** C
-**Explanation:** `setdefault(key, default)` only sets the default value if the key does NOT exist. If the key is already present, it leaves the value untouched and returns the existing value (`85`).
 
 ---
 
@@ -264,7 +291,6 @@ C. Returns an empty string `""`
 D. Inserts `"missing_key": None`
 
 **Answer:** B
-**Explanation:** `dict.pop(key)` requires the key to exist unless a second default parameter is provided (e.g. `d.pop("missing_key", None)`). Without a default, missing keys raise `KeyError`.
 
 ---
 
@@ -275,7 +301,6 @@ C. The last key-value pair added (LIFO)
 D. The key-value pair with the lowest alphanumeric key
 
 **Answer:** C
-**Explanation:** Since Python 3.7 guaranteed dictionary insertion ordering, `popitem()` removes and returns the most recently inserted `(key, value)` pair in Last-In, First-Out (LIFO) order.
 
 ---
 
@@ -286,7 +311,6 @@ C. `None` (it is a language statement, not an expression returning a value)
 D. The updated dictionary
 
 **Answer:** C
-**Explanation:** `del` is a Python keyword statement that performs in-place object deletion and does not return any value. If you need the deleted value, use `dict.pop()`.
 
 ---
 
@@ -302,7 +326,6 @@ C. 2
 D. 3
 
 **Answer:** B
-**Explanation:** `data.popitem()` removes the last item `("C", 3)`. `data.pop("A")` removes `("A", 1)`. Only `{"B": 2}` remains, so `len(data)` is 1.
 
 ---
 
@@ -388,3 +411,10 @@ Total Items Ordered: 2
 [SUCCESS] Payment settled. Cart cleared for next shopping trip.
 Final Cart Status: {}
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Copying Dictionaries** (11: Dictionaries).
+
+👉 **[Continue to Next Lesson: Copying Dictionaries →](/tutorials/python-for-beginners/copying-dictionaries)**

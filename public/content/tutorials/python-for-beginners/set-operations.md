@@ -16,9 +16,9 @@ keywords:
   - venn diagram python
   - set operators vs methods
   - in-place set update
-lastUpdated: 2026-09-12
+lastUpdated: 2026-09-30
 author: Antigravity Team
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Set Operations: Mathematical Set Theory, Operators & Venn Diagrams
@@ -259,7 +259,35 @@ Active cluster after &=:                {'Node-1'}
 
 ---
 
-## Multiple Choice Questions
+---
+
+## ⚠️ Common Beginner Mistakes & Gotchas
+
+### 1. Creating an Empty Set with `{}`
+Curly braces `{}` create an empty dictionary, not an empty set!
+```python
+empty_dict = {}       # <class 'dict'>
+empty_set = set()     # <class 'set'>
+
+print(type(empty_dict))  # <class 'dict'>
+print(type(empty_set))   # <class 'set'>
+```
+
+### 2. Attempting to Index or Slice a Set
+Sets are unordered collections with no fixed position. They cannot be indexed:
+```python
+s = {10, 20, 30}
+# ❌ TypeError: 'set' object is not subscriptable
+# print(s[0])
+
+# ✅ CORRECT (Iterate through or convert to list)
+for item in s:
+    print(item)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the result of evaluating `{1, 2, 3} & {2, 3, 4}`?
 A. `{1, 2, 3, 4}`
@@ -268,7 +296,6 @@ C. `{1, 4}`
 D. `{1}`
 
 **Answer:** B
-**Explanation:** The `&` operator computes set intersection, returning elements common to both sets: `{2, 3}`.
 
 ---
 
@@ -279,7 +306,6 @@ C. `A.union(B)` modifies set A in-place
 D. There is no difference
 
 **Answer:** B
-**Explanation:** Set operators like `|`, `&`, `-` require all operands to be set instances. The corresponding methods like `.union()` can take any iterable (e.g. lists, tuples) as arguments.
 
 ---
 
@@ -290,7 +316,6 @@ C. `{1, 2, 4, 5}`
 D. `{-2}`
 
 **Answer:** A
-**Explanation:** The difference operator `A - B` returns elements that belong to `A` but do NOT belong to `B`, which leaves `{1, 2}`.
 
 ---
 
@@ -301,7 +326,6 @@ C. Symmetric Difference (`^`)
 D. Disjoint (`isdisjoint()`)
 
 **Answer:** C
-**Explanation:** Symmetric difference (`^` or `symmetric_difference()`) returns elements exclusive to each set, excluding any common overlapping elements.
 
 ---
 
@@ -316,7 +340,6 @@ C. `{"Delhi"}`
 D. `set()`
 
 **Answer:** B
-**Explanation:** `&=` is the in-place intersection update operator. It keeps only elements that exist in both sets, reducing `s` to `{"Mumbai"}`.
 
 ---
 
@@ -388,3 +411,10 @@ Candidate Profile:      {'FastAPI', 'HTML', 'Git', 'JavaScript', 'AWS', 'Docker'
 
 Screening Result: NEEDS UPSKILLING
 ```
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your Python learning journey with **Set Methods** (10: Sets).
+
+👉 **[Continue to Next Lesson: Set Methods →](/tutorials/python-for-beginners/set-methods)**
