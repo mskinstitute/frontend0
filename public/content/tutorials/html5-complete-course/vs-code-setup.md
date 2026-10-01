@@ -16,9 +16,9 @@ keywords:
   - emmet boilerplate shortcut
   - code editor for html
   - html setup for school students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # VS Code Setup (The Best Tool for HTML Coding)
@@ -182,7 +182,35 @@ Remembering these shortcuts will speed up your coding:
 
 ---
 
-# Practice Quiz
+---
+
+## ⚠️ Common Beginner Mistakes & How to Avoid Them
+
+### 1. Forgetting to Close Non-Empty Tags
+Every paired tag must have a matching closing tag with a forward slash `/`:
+```html
+<!-- ❌ INCORRECT (Missing closing tag) -->
+<p>This paragraph is never closed!
+<h1>Next Heading</h1>
+
+<!-- ✅ CORRECT -->
+<p>This paragraph is cleanly closed.</p>
+<h1>Next Heading</h1>
+```
+
+### 2. Writing Tags in Uppercase
+While browsers tolerate `<H1>` or `<P>`, standard modern W3C HTML5 code conventions strictly use lowercase tag and attribute names:
+```html
+<!-- ❌ Outdated practice -->
+<DIV CLASS="CONTAINER"><P>Text</P></DIV>
+
+<!-- ✅ Modern W3C Standard -->
+<div class="container"><p>Text</p></div>
+```
+
+---
+
+## Practice Quiz
 
 Test your understanding with these questions:
 
@@ -192,7 +220,6 @@ B. `!` and Enter (or Tab)
 C. `Ctrl + H`
 D. `<html>` and Space
 **Answer:** B
-**Explanation:** In VS Code, typing `!` (exclamation mark) triggers the built-in Emmet abbreviation that generates the full HTML boilerplate.
 
 ---
 
@@ -202,7 +229,6 @@ B. Live Server
 C. Calculator
 D. Chrome Tab
 **Answer:** B
-**Explanation:** Live Server (by Ritwick Dey) creates a local development server that reloads your webpage automatically on save.
 
 ---
 
@@ -212,7 +238,6 @@ B. `Ctrl + Alt + Delete`
 C. `Ctrl + P`
 D. `Shift + Esc`
 **Answer:** A
-**Explanation:** Pressing `Ctrl + Shift + X` opens the Extensions panel where you can search and install tools.
 
 ---
 
@@ -222,7 +247,6 @@ B. `index.html`
 C. `main.txt`
 D. `page1.html`
 **Answer:** B
-**Explanation:** Web servers automatically look for `index.html` as the default landing page of a website directory.
 
 ---
 
@@ -232,7 +256,6 @@ B. `Shift + Alt + F`
 C. `Ctrl + C`
 D. `Alt + F4`
 **Answer:** B
-**Explanation:** `Shift + Alt + F` triggers code formatting in VS Code (using formatters like Prettier).
 
 ---
 
@@ -245,3 +268,10 @@ D. `Alt + F4`
 5. Use the **`!`** shortcut to generate your boilerplate.
 6. Inside `<body>`, add your name and school name.
 7. Right-click and choose **Open with Live Server** to preview your live webpage! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Elements** (Introduction).
+
+👉 **[Continue to Next Lesson: Elements →](/tutorials/html5-complete-course/elements)**

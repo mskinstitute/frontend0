@@ -18,9 +18,9 @@ keywords:
   - mailto
   - tel
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Links & Hyperlinks (Connecting the World Wide Web) 🌐
@@ -289,7 +289,7 @@ Remember: Images use `src` (source). Links use `href` (hypertext reference)!
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -299,7 +299,6 @@ B. Address
 C. Anchor
 D. Article
 **Answer:** C
-**Explanation:** The `<a>` tag stands for Anchor, because it anchors a piece of text or media to a destination URL.
 
 ---
 
@@ -309,7 +308,6 @@ B. `link`
 C. `url`
 D. `href`
 **Answer:** D
-**Explanation:** `href` stands for Hypertext Reference and specifies the destination URL where the user will be taken upon clicking.
 
 ---
 
@@ -319,7 +317,6 @@ B. `<a href="https://www.google.com">Google</a>`
 C. `<a link="https://www.google.com">Google</a>`
 D. `<a src="https://www.google.com">Google</a>`
 **Answer:** B
-**Explanation:** External links require an absolute URL including the protocol `https://` so the browser knows to connect to the external web.
 
 ---
 
@@ -329,7 +326,6 @@ B. `<a href="#syllabus">Go to Syllabus</a>`
 C. `<a target="#syllabus">Go to Syllabus</a>`
 D. `<a id="syllabus">Go to Syllabus</a>`
 **Answer:** B
-**Explanation:** An internal bookmark/jump link uses a hashtag (`#`) followed by the matching element's `id`.
 
 ---
 
@@ -339,7 +335,6 @@ B. `phone:`
 C. `dial:`
 D. `tel:`
 **Answer:** D
-**Explanation:** The `tel:` protocol (e.g., `<a href="tel:+918393042166">`) tells smartphones to open the telephone dialer.
 
 ---
 
@@ -360,3 +355,10 @@ Create a mini School Website Home Page with working links:
 ---
 
 **Next Up:** In Topic 6.2, we will explore **Target Attributes & Hyperlink Security**—how to open links in brand new browser tabs safely without exposing your website to hackers!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Target Attributes & Security** (Links).
+
+👉 **[Continue to Next Lesson: Target Attributes & Security →](/tutorials/html5-complete-course/target-attributes-security)**

@@ -17,9 +17,9 @@ keywords:
   - sub and sup tags
   - del and ins tags
   - html for school students
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Text Formatting Elements in HTML
@@ -243,7 +243,7 @@ On the internet, users expect underlined text to be a **clickable link**. If you
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -253,7 +253,6 @@ B. `<sub>`
 C. `<below>`
 D. `<down>`
 **Answer:** B
-**Explanation:** The `<sub>` (subscript) element lowers text half a line below the normal text baseline, which is ideal for chemical formulas.
 
 ---
 
@@ -263,7 +262,6 @@ B. `<yellow>`
 C. `<mark>`
 D. `<color>`
 **Answer:** C
-**Explanation:** The `<mark>` tag represents text marked or highlighted for reference purposes, rendering with a yellow background by default.
 
 ---
 
@@ -273,7 +271,6 @@ B. `x<sub>2</sub>`
 C. `x<sup>2</sup>`
 D. `x<up>2</up>`
 **Answer:** C
-**Explanation:** The `<sup>` (superscript) tag raises text half a line above the normal text baseline, which is standard for exponents and powers.
 
 ---
 
@@ -283,7 +280,6 @@ B. `<strong>` indicates important text with strong semantic weight (announced st
 C. `<strong>` can only be used inside headings
 D. There is no difference at all
 **Answer:** B
-**Explanation:** `<strong>` represents strong importance, seriousness, or urgency semantically, whereas `<b>` draws attention visually without conveying extra importance.
 
 ---
 
@@ -293,7 +289,6 @@ B. `<cut>` and `<add>`
 C. `<del>` and `<ins>`
 D. `<strike>` and `<u>`
 **Answer:** C
-**Explanation:** `<del>` displays deleted/struck-through text, and `<ins>` displays inserted/underlined replacement text.
 
 ---
 
@@ -306,3 +301,10 @@ D. `<strike>` and `<u>`
    - Write a special offer on computer books: `Book Price: <del>₹500</del> <ins>₹299</ins> only!`
    - Highlight the word: `<mark>Special Offer</mark>`.
 3. Save the file (`Ctrl + S`) and view your clean, formatted study sheet live in your browser! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Quotations & Citations** (Text Formatting).
+
+👉 **[Continue to Next Lesson: Quotations & Citations →](/tutorials/html5-complete-course/quotations-citations)**

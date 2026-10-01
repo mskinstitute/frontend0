@@ -18,9 +18,9 @@ keywords:
   - template tag
   - native modal
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Interactive HTML5 Elements: Dialog, Details & Summary 🪄
@@ -299,7 +299,7 @@ Here is a complete, working interactive webpage combining all modern HTML5 widge
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -309,7 +309,6 @@ B. `<toggle>` and `<content>`
 C. `<details>` and `<summary>`
 D. `<collapse>` and `<panel>`
 **Answer:** C
-**Explanation:** `<details>` and `<summary>` are the native HTML5 elements for expandable disclosure widgets and accordions.
 
 ---
 
@@ -319,7 +318,6 @@ B. `.showModal()`
 C. `.display()`
 D. `.popup()`
 **Answer:** B
-**Explanation:** The `.showModal()` method opens a `<dialog>` as a top-layer modal, dimming the background with `::backdrop` and trapping keyboard focus.
 
 ---
 
@@ -329,7 +327,6 @@ B. Put a `<form method="dialog">` with a submit button inside the dialog
 C. Pressing Backspace on the keyboard
 D. Modals cannot be closed without JavaScript
 **Answer:** B
-**Explanation:** When a form with `method="dialog"` is submitted inside a `<dialog>`, the browser automatically closes the dialog and sets its `returnValue`.
 
 ---
 
@@ -339,7 +336,6 @@ B. `<progress>`
 C. `<input type="range">`
 D. `<dialog>`
 **Answer:** A
-**Explanation:** `<meter>` represents a scalar measurement within a known range (such as exam grades or temperatures), whereas `<progress>` is for task progress.
 
 ---
 
@@ -349,7 +345,6 @@ B. It is hidden and inactive until cloned using JavaScript
 C. It plays an alert audio sound
 D. It causes a browser validation error
 **Answer:** B
-**Explanation:** Content inside `<template>` is parsed by the browser but remains dormant and invisible until cloned and inserted into the active DOM.
 
 ---
 
@@ -376,3 +371,10 @@ Open the file in your browser, test opening the flaps, and trigger your native p
 ---
 
 **Next Up:** In Topic 12.4, we conclude the course with **HTML5 Web APIs, Storage & Industry Best Practices** &mdash; including `localStorage`, `data-*` attributes, web security, and top technical interview questions!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML5 APIs & Storage Best Practices** (Semantic Tags).
+
+👉 **[Continue to Next Lesson: HTML5 APIs & Storage Best Practices →](/tutorials/html5-complete-course/html5-apis-storage-best-practices)**

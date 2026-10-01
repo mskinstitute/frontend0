@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, BookOpen, Video, FileText, Download, ShieldCheck } from 'lucide-react';
 import { usePwa } from '@/context/PwaContext';
+import { useLiveStatus } from '@/context/LiveStatusContext';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
   const { isRunningStandalone, installApp } = usePwa();
+  const { isLiveNow } = useLiveStatus();
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -90,8 +92,8 @@ export default function MobileBottomNav() {
                   }`}
                 />
 
-                {/* Pulsing Live Beacon Indicator */}
-                {item.badge === 'LIVE' && (
+                {/* Pulsing Live Beacon Indicator: ONLY visible when live class is running */}
+                {item.badge === 'LIVE' && isLiveNow && (
                   <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500 ring-2 ring-white" />

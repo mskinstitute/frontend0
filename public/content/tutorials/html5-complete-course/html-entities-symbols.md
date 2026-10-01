@@ -18,9 +18,9 @@ keywords:
   - html emojis
   - math symbols html
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Entities, Symbols & Emojis (Typing Special Characters) 🪙
@@ -298,7 +298,7 @@ Here is a complete, working webpage demonstrating proper use of entities, curren
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -308,7 +308,6 @@ B. `&lt;`
 C. `&#less;`
 D. `&l;`
 **Answer:** B
-**Explanation:** `&lt;` stands for "less than" and prevents browsers from mistaking the symbol for an HTML opening tag.
 
 ---
 
@@ -318,7 +317,6 @@ B. Non-Breaking Space
 C. Number Between System Positions
 D. Native Browser Special Page
 **Answer:** B
-**Explanation:** `&nbsp;` stands for Non-Breaking Space. It creates a space that prevents the browser from breaking the line at that position.
 
 ---
 
@@ -328,7 +326,6 @@ B. `&#8377;`
 C. `&inr;`
 D. `&#100;`
 **Answer:** B
-**Explanation:** `&#8377;` is the official Unicode decimal entity code for the Indian Rupee symbol (₹).
 
 ---
 
@@ -338,7 +335,6 @@ B. A period (`.`)
 C. A semicolon (`;`)
 D. An exclamation mark (`!`)
 **Answer:** C
-**Explanation:** All HTML entities must terminate with a semicolon (`;`), such as in `&copy;` or `&amp;`.
 
 ---
 
@@ -348,7 +344,6 @@ B. `&deg;`
 C. `&#temp;`
 D. `&circle;`
 **Answer:** B
-**Explanation:** `&deg;` is the standard HTML entity for the degree symbol (&deg;).
 
 ---
 
@@ -370,3 +365,10 @@ Create a **School Canteen & Stationery Store Price List**:
 5. **Add Emojis:** Add celebration emojis using Unicode decimal codes (like `&#128512;` and `&#128640;`).
 
 Open your file in Google Chrome or Microsoft Edge to see your symbols render cleanly!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML Comments** (Comments).
+
+👉 **[Continue to Next Lesson: HTML Comments →](/tutorials/html5-complete-course/html-comments)**

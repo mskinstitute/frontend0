@@ -16,9 +16,9 @@ keywords:
   - html layout basics
   - html display behavior
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Block vs Inline Elements (The Building Blocks of Webpages) 🧱
@@ -192,7 +192,7 @@ If you find yourself writing `<br><br>` after every link just to make them stack
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -202,7 +202,6 @@ B. 50% of the screen
 C. 100% of its parent container
 D. Exactly 200 pixels
 **Answer:** C
-**Explanation:** Block-level elements automatically expand horizontally to fill 100% of the width available in their parent container.
 
 ---
 
@@ -212,7 +211,6 @@ B. `<p>`
 C. `<div>`
 D. `<a>`
 **Answer:** D
-**Explanation:** The anchor tag `<a>` is an inline element that flows naturally inside text without forcing a line break.
 
 ---
 
@@ -222,7 +220,6 @@ B. They sit side-by-side on the same line if space permits
 C. The browser deletes the second element
 D. They automatically merge into a table
 **Answer:** B
-**Explanation:** Inline elements do not force line breaks; they sit side-by-side horizontally across the line.
 
 ---
 
@@ -232,7 +229,6 @@ B. `font-size`
 C. `width`
 D. `background-color`
 **Answer:** C
-**Explanation:** Standard inline elements do not have a block box structure, so CSS `width` and `height` properties have no effect on them.
 
 ---
 
@@ -242,7 +238,6 @@ B. `<span><div>Box</div></span>`
 C. `<div><p>This is a paragraph.</p></div>`
 D. `<strong><section>Content</section></strong>`
 **Answer:** C
-**Explanation:** Block elements like `<div>` can legally contain other block elements (like `<p>`) and inline elements.
 
 ---
 
@@ -264,3 +259,10 @@ Build a "School Notice Board" that demonstrates both display behaviors:
 ---
 
 **Next Up:** In Topic 9.2, we will master **Div & Span Containers** &mdash; the two most important grouping elements in web development!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Div & Span Containers** (Block & Inline).
+
+👉 **[Continue to Next Lesson: Div & Span Containers →](/tutorials/html5-complete-course/div-span-containers)**

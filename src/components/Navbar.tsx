@@ -25,6 +25,7 @@ import {
 
 import InstallAppButton from '@/components/InstallAppButton';
 import SearchModal from '@/components/SearchModal';
+import { useLiveStatus } from '@/context/LiveStatusContext';
 
 interface Announcement {
   id: string;
@@ -42,6 +43,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const { isLiveNow } = useLiveStatus();
 
   useEffect(() => {
     async function loadAnnouncements() {
@@ -104,7 +106,7 @@ export default function Navbar() {
   const directLinks: DirectLink[] = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Courses', href: '/courses', icon: BookOpen },
-    { name: 'Live', href: '/live', icon: Video, badge: 'LIVE' },
+    { name: 'Live', href: '/live', icon: Video, badge: isLiveNow ? 'LIVE' : undefined },
   ];
 
   const dropdownGroups: NavDropdown[] = [
@@ -129,7 +131,7 @@ export default function Navbar() {
           name: 'Live Batches',
           href: '/live',
           icon: Video,
-          badge: 'LIVE',
+          badge: isLiveNow ? 'LIVE' : undefined,
           description: 'Interactive batches with mentor doubt sessions',
         },
         {

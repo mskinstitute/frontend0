@@ -18,9 +18,9 @@ keywords:
   - figure figcaption
   - webp
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Images & Responsive Art (Bringing Visuals to Life) 📸
@@ -196,7 +196,7 @@ If your photo is $800 \times 400$ (a 2:1 ratio), never set `width="800"` and `he
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -206,7 +206,6 @@ B. `link`
 C. `src`
 D. `path`
 **Answer:** C
-**Explanation:** `src` stands for Source and holds the URL or file path of the image.
 
 ---
 
@@ -216,7 +215,6 @@ B. It provides alternative text for screen readers and slow internet connections
 C. It compresses the file size automatically
 D. It opens the image in a new tab
 **Answer:** B
-**Explanation:** The `alt` attribute provides accessible alternative text read by screen readers and displayed if the image fails to load.
 
 ---
 
@@ -226,7 +224,6 @@ B. The image is downloaded only when the user scrolls near it
 C. The image animates in slow motion
 D. The browser waits 10 seconds before rendering
 **Answer:** B
-**Explanation:** Native lazy loading delays downloading the image until it is near the user's visible viewport, saving bandwidth.
 
 ---
 
@@ -236,7 +233,6 @@ B. `<figure>` and `<figcaption>`
 C. `<photo>` and `<caption>`
 D. `<picture>` and `<title>`
 **Answer:** B
-**Explanation:** `<figure>` groups media content, and `<figcaption>` provides its official caption.
 
 ---
 
@@ -246,7 +242,6 @@ B. PNG
 C. SVG
 D. WebP
 **Answer:** C
-**Explanation:** SVG (Scalable Vector Graphics) is based on XML mathematical paths, so it stays pin-sharp at any resolution.
 
 ---
 
@@ -264,3 +259,10 @@ Create a "School Science & Sports Exhibition Showcase":
 ---
 
 **Next Up:** In Topic 10.2, we will master **Audio & Video in HTML5** &mdash; how to play native school podcasts, video lectures, and add accessible subtitles!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Audio & Video** (Media).
+
+👉 **[Continue to Next Lesson: Audio & Video →](/tutorials/html5-complete-course/audio-video)**

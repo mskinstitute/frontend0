@@ -16,9 +16,9 @@ keywords:
   - html tables
   - table layout
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Colspan & Rowspan (Merging Cells Like a Pro) 🧩
@@ -302,7 +302,7 @@ Remember that `rowspan` pushes down into the row below. If your table has 3 colu
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -312,7 +312,6 @@ B. `colspan`
 C. `rowspan`
 D. `colwidth`
 **Answer:** B
-**Explanation:** `colspan` (Column Span) merges a cell horizontally across multiple adjacent columns.
 
 ---
 
@@ -322,7 +321,6 @@ B. 1
 C. 2
 D. 3
 **Answer:** B
-**Explanation:** A 4-column table can hold 4 column widths. If one cell takes 3 column widths, only $4 - 3 = 1$ remaining column space is available.
 
 ---
 
@@ -332,7 +330,6 @@ B. `rowmerge`
 C. `colspan`
 D. `vertical-align`
 **Answer:** A
-**Explanation:** `rowspan` (Row Span) stretches a table cell downwards across multiple rows.
 
 ---
 
@@ -342,7 +339,6 @@ B. `<tr>`
 C. `<td>` or `<th>`
 D. `<tbody>`
 **Answer:** C
-**Explanation:** `colspan` and `rowspan` are cell-level attributes and can only be placed on `<td>` (data cell) or `<th>` (header cell).
 
 ---
 
@@ -352,7 +348,6 @@ B. 1 cell
 C. 2 cells
 D. 3 cells
 **Answer:** B
-**Explanation:** Because the cell from Row 1 already extends down into Row 2, that spot is already taken, so Row 2 must omit 1 cell.
 
 ---
 
@@ -371,3 +366,10 @@ Create a "School Annual Sports Day Tournament Schedule":
 ---
 
 **Congratulations!** You have completed Chapter 8: Tables! You can now organize complex numerical data, marks, and schedules like a professional web developer!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Block vs Inline Elements** (Block & Inline).
+
+👉 **[Continue to Next Lesson: Block vs Inline Elements →](/tutorials/html5-complete-course/block-vs-inline-elements)**

@@ -16,9 +16,9 @@ keywords:
   - html head and body
   - html tags explained
   - html basics for students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Basic Document Structure (The HTML Skeleton)
@@ -141,7 +141,7 @@ Inside `<head>`, we normally have three main tags:
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these questions:
 
@@ -151,7 +151,6 @@ B. `<title>`
 C. `<meta>`
 D. `<body>`
 **Answer:** B
-**Explanation:** The `<title>` tag is placed inside the `<head>` section and defines the title that appears on the browser tab.
 
 ---
 
@@ -161,7 +160,6 @@ B. `<title>`
 C. `<body>`
 D. `<html>`
 **Answer:** C
-**Explanation:** All visible content that users interact with on the screen must be placed inside the `<body>` tag.
 
 ---
 
@@ -171,7 +169,6 @@ B. To tell the browser that the document is written in modern HTML5
 C. To connect the webpage to the internet
 D. To add an image to the webpage
 **Answer:** B
-**Explanation:** `<!DOCTYPE html>` is the document type declaration that tells web browsers to render the page using the latest HTML5 standard.
 
 ---
 
@@ -181,7 +178,6 @@ B. To tell the browser to support universal characters, including Indian Rupee s
 C. To connect to Wi-Fi
 D. To set the font size to 8px
 **Answer:** B
-**Explanation:** UTF-8 character encoding allows the browser to display virtually all written languages, symbols, and emojis without corruption.
 
 ---
 
@@ -191,7 +187,6 @@ B. Because body does not support English
 C. Because title only works on mobile phones
 D. Because head makes the title colorful
 **Answer:** A
-**Explanation:** The `<title>` is metadata about the document and appears on the browser tab strip and in search engine search snippets.
 
 ---
 
@@ -205,3 +200,10 @@ D. Because head makes the title colorful
    - An `<h1>` heading with your name.
    - A `<p>` paragraph describing your two favorite school subjects or hobbies.
 6. Save the file and open it in Google Chrome to check your work! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **VS-Code Setup** (Introduction).
+
+👉 **[Continue to Next Lesson: VS-Code Setup →](/tutorials/html5-complete-course/vs-code-setup)**

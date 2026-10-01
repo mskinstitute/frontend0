@@ -18,9 +18,9 @@ keywords:
   - whitespace collapsing
   - html text formatting
   - html for school students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Paragraphs, Line Breaks & Dividers (`<p>`, `<br>`, `<hr>`)
@@ -211,7 +211,7 @@ Whatever you write inside `<pre>...</pre>` will be displayed **exactly as you ty
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -221,7 +221,6 @@ B. `<lb>`
 C. `<br>`
 D. `<newline>`
 **Answer:** C
-**Explanation:** The `<br>` (break) element inserts a single line break without creating a new paragraph.
 
 ---
 
@@ -231,7 +230,6 @@ B. The browser produces an error
 C. The browser collapses them into a single space
 D. The second word disappears
 **Answer:** C
-**Explanation:** HTML applies whitespace collapsing, compressing multiple spaces, tabs, and line returns into a single space.
 
 ---
 
@@ -241,7 +239,6 @@ B. `<pre>`
 C. `<text>`
 D. `<format>`
 **Answer:** B
-**Explanation:** The `<pre>` (preformatted) tag displays text in a fixed-width font while preserving all spaces and line breaks.
 
 ---
 
@@ -251,7 +248,6 @@ B. Draws a thematic horizontal divider line across the page
 C. Highlights the text in red
 D. Plays a sound
 **Answer:** B
-**Explanation:** `<hr>` stands for horizontal rule. It visually separates content with a horizontal dividing line.
 
 ---
 
@@ -261,7 +257,6 @@ B. Browsers crash when encountering empty paragraphs
 C. Empty paragraphs turn red
 D. Empty paragraphs are illegal
 **Answer:** A
-**Explanation:** Using empty `<p>` tags for layout spacing hurts accessibility and violates separation of content and styling. Use CSS margin/padding instead.
 
 ---
 
@@ -274,3 +269,10 @@ D. Empty paragraphs are illegal
    - An `<hr>` divider line.
    - A short 4-line poem written using either `<p>` with `<br>` tags, or using `<pre>`.
 3. Save the file (`Ctrl + S`) and view it live in your browser to verify the spacing! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Text Formatting Elements** (Text Formatting).
+
+👉 **[Continue to Next Lesson: Text Formatting Elements →](/tutorials/html5-complete-course/text-formatting-elements)**

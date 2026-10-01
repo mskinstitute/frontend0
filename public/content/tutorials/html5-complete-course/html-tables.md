@@ -18,9 +18,9 @@ keywords:
   - thead tbody tfoot
   - table caption
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Tables (Rows, Columns & Data Grids) 📊
@@ -283,7 +283,7 @@ If your top header row has 4 columns (`<th>`), every data row underneath should 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -293,7 +293,6 @@ B. `<td>`
 C. `<tr>`
 D. `<th>`
 **Answer:** C
-**Explanation:** `<tr>` stands for Table Row and defines a single horizontal line of cells.
 
 ---
 
@@ -303,7 +302,6 @@ B. `<th>` text is bold and centered by default, while `<td>` text is normal and 
 C. `<th>` can only be used once per table
 D. `<td>` creates rows, `<th>` creates columns
 **Answer:** B
-**Explanation:** `<th>` (Table Header) renders bold, centered text for column titles, whereas `<td>` (Table Data) renders regular text for data cells.
 
 ---
 
@@ -313,7 +311,6 @@ B. `<header>`
 C. `<caption>`
 D. `<heading>`
 **Answer:** C
-**Explanation:** The `<caption>` tag defines the official title or summary of a table and is announced first by screen readers.
 
 ---
 
@@ -323,7 +320,6 @@ B. `border-collapse: collapse;`
 C. `border-spacing: none;`
 D. `border-merge: true;`
 **Answer:** B
-**Explanation:** `border-collapse: collapse;` merges adjacent double cell borders into crisp, single borderlines.
 
 ---
 
@@ -333,7 +329,6 @@ B. Browsers will refuse to open the page
 C. Tables are not responsive for mobile devices and harm web accessibility
 D. Tables turn all text blue
 **Answer:** C
-**Explanation:** Using tables for page layouts damages responsiveness on smartphones and makes navigation confusing for screen reader users. Page layouts should be designed with CSS Flexbox or Grid.
 
 ---
 
@@ -353,3 +348,10 @@ Create your own professional School Annual Examination Marksheet:
 ---
 
 **Next Up:** In Topic 8.2, we will explore **Colspan & Rowspan** &mdash; how to merge cells horizontally and vertically like a spreadsheet master!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Colspan & Rowspan** (Table).
+
+👉 **[Continue to Next Lesson: Colspan & Rowspan →](/tutorials/html5-complete-course/colspan-rowspan)**

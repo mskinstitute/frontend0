@@ -16,9 +16,9 @@ keywords:
   - base 16 hexadecimal
   - web design
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HEX & HSL Color Codes (Color Like a Pro!) 🎯
@@ -335,7 +335,7 @@ In `hsl()`, the Saturation and Lightness values **must** include the percent sym
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -345,7 +345,6 @@ B. Hexadecimal (Base-16 number system)
 C. Highly Extended
 D. Helium Extra
 **Answer:** B
-**Explanation:** HEX is short for Hexadecimal, which is the base-16 number system used in computer science.
 
 ---
 
@@ -355,7 +354,6 @@ B. E
 C. F
 D. Z
 **Answer:** C
-**Explanation:** In hexadecimal, the digits are 0-9 followed by A(10), B(11), C(12), D(13), E(14), and F(15). F is the maximum single digit.
 
 ---
 
@@ -365,7 +363,6 @@ B. `#000`
 C. `#0`
 D. `#BBB`
 **Answer:** B
-**Explanation:** When each pair of digits is identical (`00`, `00`, `00`), it can be written with 3 digits as `#000`.
 
 ---
 
@@ -375,7 +372,6 @@ B. 60°
 C. 120°
 D. 240°
 **Answer:** C
-**Explanation:** On the 360° color circle, 0° is Red, 120° is Green, and 240° is Blue.
 
 ---
 
@@ -385,7 +381,6 @@ B. Pure White
 C. Pitch Black
 D. Muted Gray
 **Answer:** C
-**Explanation:** Setting Lightness to 0% means zero illumination, which turns any color completely Black.
 
 ---
 
@@ -405,3 +400,10 @@ Design a modern, professional Student ID badge for your school using HEX and HSL
 ---
 
 **Congratulations!** You have completed Chapter 5: Colors! You are now ready to tackle links, navigation, and building multi-page websites!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Links & Hyperlinks** (Links).
+
+👉 **[Continue to Next Lesson: Links & Hyperlinks →](/tutorials/html5-complete-course/links-hyperlinks)**

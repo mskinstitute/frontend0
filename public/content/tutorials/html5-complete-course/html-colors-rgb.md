@@ -16,9 +16,9 @@ keywords:
   - html color names
   - web design for beginners
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Colors & RGB / RGBA (Painting Your Webpage) 🎨
@@ -321,7 +321,7 @@ Always separate the numbers in RGB with a comma.
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -331,7 +331,6 @@ B. Yellow
 C. Green
 D. Blue
 **Answer:** B
-**Explanation:** Computer screens mix Red, Green, and Blue light (RGB). Yellow is formed digitally by mixing Red and Green light together!
 
 ---
 
@@ -341,7 +340,6 @@ B. Bright Yellow
 C. Pitch Black
 D. Dark Gray
 **Answer:** C
-**Explanation:** When Red, Green, and Blue lights are all set to 0, all light bulbs are turned off, producing total darkness (Black).
 
 ---
 
@@ -351,7 +349,6 @@ B. 250
 C. 255
 D. 500
 **Answer:** C
-**Explanation:** Each color channel in RGB uses an 8-bit value ranging from 0 to 255 (a total of 256 levels of brightness).
 
 ---
 
@@ -361,7 +358,6 @@ B. Alpha (Transparency / Opacity)
 C. Amber
 D. Alignment
 **Answer:** B
-**Explanation:** Alpha specifies the transparency or opacity level, using a decimal number between 0.0 (invisible) and 1.0 (fully solid).
 
 ---
 
@@ -371,7 +367,6 @@ B. `rgba(0, 0, 0, 0.5)`
 C. `rgb(0, 0, 0, 50)`
 D. `rgba(255, 255, 255, 0.5)`
 **Answer:** B
-**Explanation:** Black is `0, 0, 0`, and 50% opacity is represented as decimal `0.5` in RGBA.
 
 ---
 
@@ -390,3 +385,10 @@ Create a special greeting card celebrating India's National Flag (Tiranga) using
 ---
 
 **Next Up:** In Topic 5.2, we will explore **HEX Codes and HSL**—the industry-standard color secrets used by professional UI/UX designers and web developers worldwide!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HEX & HSL Color Codes** (Colors).
+
+👉 **[Continue to Next Lesson: HEX & HSL Color Codes →](/tutorials/html5-complete-course/hex-hsl-color-codes)**

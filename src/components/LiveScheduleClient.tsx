@@ -12,6 +12,7 @@ import {
 import { LiveClass, LiveBatch } from '@/types';
 import DemoBookingForm from './DemoBookingForm';
 import WebShareButton from '@/components/WebShareButton';
+import { parseISTTimeToEpoch } from '@/context/LiveStatusContext';
 
 interface LiveScheduleClientProps {
   initialClasses: LiveClass[];
@@ -150,15 +151,22 @@ export default function LiveScheduleClient({ initialClasses, initialBatches }: L
   // Helper to parse class date & time
   const parseClassDateTime = (dateStr?: string, timeStr?: string) => {
     if (!dateStr || !timeStr) return new Date();
+    const epoch = parseISTTimeToEpoch(dateStr, timeStr);
+    if (epoch) return new Date(epoch);
     try {
       const [year, month, day] = dateStr.split('-').map(Number);
       const d = new Date(year, month - 1, day);
-      const [timeVal, modifier] = timeStr.trim().split(' ');
-      let [hours, minutes] = (timeVal || '0:0').split(':').map(Number);
-      if (modifier === 'PM' && hours < 12) hours += 12;
-      if (modifier === 'AM' && hours === 12) hours = 0;
-      d.setHours(hours, minutes, 0, 0);
-      return d;
+      const match = timeStr.trim().match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?$/i);
+      if (match) {
+        let hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2], 10);
+        const modifier = match[4]?.toUpperCase();
+        if (modifier === 'PM' && hours < 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+        d.setHours(hours, minutes, 0, 0);
+        return d;
+      }
+      return new Date();
     } catch {
       return new Date();
     }

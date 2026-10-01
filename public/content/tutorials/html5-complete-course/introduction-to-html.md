@@ -16,9 +16,9 @@ keywords:
   - learn html5
   - web development basics
   - tags elements attributes
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Introduction to HTML
@@ -101,7 +101,35 @@ Your Code (index.html)  ➡️  Web Browser (Chrome/Edge)  ➡️  Clean Webpage
 
 ---
 
-# Practice Quiz
+---
+
+## ⚠️ Common Beginner Mistakes & How to Avoid Them
+
+### 1. Forgetting to Close Non-Empty Tags
+Every paired tag must have a matching closing tag with a forward slash `/`:
+```html
+<!-- ❌ INCORRECT (Missing closing tag) -->
+<p>This paragraph is never closed!
+<h1>Next Heading</h1>
+
+<!-- ✅ CORRECT -->
+<p>This paragraph is cleanly closed.</p>
+<h1>Next Heading</h1>
+```
+
+### 2. Writing Tags in Uppercase
+While browsers tolerate `<H1>` or `<P>`, standard modern W3C HTML5 code conventions strictly use lowercase tag and attribute names:
+```html
+<!-- ❌ Outdated practice -->
+<DIV CLASS="CONTAINER"><P>Text</P></DIV>
+
+<!-- ✅ Modern W3C Standard -->
+<div class="container"><p>Text</p></div>
+```
+
+---
+
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -111,7 +139,6 @@ B. High Tech Modern Language
 C. Hyperlink Text Making Language
 D. Home Tool Markup Language
 **Answer:** A
-**Explanation:** HTML stands for HyperText Markup Language. It is the standard markup language used to create web pages.
 
 ---
 
@@ -121,7 +148,6 @@ B. HTML requires special paid software to run
 C. HTML is a markup language that defines the structure of a webpage
 D. HTML was created by Google in 2020
 **Answer:** C
-**Explanation:** HTML is a markup language created by Sir Tim Berners-Lee in 1991 that defines the layout and structure of webpages.
 
 ---
 
@@ -131,7 +157,6 @@ B. Steve Jobs
 C. Sir Tim Berners-Lee
 D. Mark Zuckerberg
 **Answer:** C
-**Explanation:** Sir Tim Berners-Lee invented the World Wide Web and HTML in 1991 at CERN.
 
 ---
 
@@ -141,7 +166,6 @@ B. `.docx`
 C. `.html` or `.htm`
 D. `.css`
 **Answer:** C
-**Explanation:** Web browsers recognize HTML documents by their `.html` (or `.htm`) extension.
 
 ---
 
@@ -156,3 +180,10 @@ D. `.css`
 3. Click `File -> Save As` and name the file: `mypage.html` (make sure to include `.html` at the end).
 4. Go to the folder where you saved it, and double-click `mypage.html`.
 5. Your very first webpage will open right inside your web browser! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Basic Document Structure** (Introduction).
+
+👉 **[Continue to Next Lesson: Basic Document Structure →](/tutorials/html5-complete-course/basic-document-structure)**

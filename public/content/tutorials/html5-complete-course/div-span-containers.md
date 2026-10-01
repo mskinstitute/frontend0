@@ -17,9 +17,9 @@ keywords:
   - block vs inline
   - divitis
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Div & Span Containers (The Invisible Organizers) 📦
@@ -202,7 +202,7 @@ Always write `<div></div>` first, and then put your content in the middle.
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -212,7 +212,6 @@ B. Division
 C. Divergence
 D. Diversity
 **Answer:** B
-**Explanation:** `div` stands for Division, as it divides a webpage into logical grouped sections.
 
 ---
 
@@ -222,7 +221,6 @@ B. `<section>`
 C. `<span>`
 D. `<header>`
 **Answer:** C
-**Explanation:** `<span>` is an inline container that wraps text without causing a line break, making it ideal for coloring individual words.
 
 ---
 
@@ -232,7 +230,6 @@ B. Block
 C. Table
 D. Hidden
 **Answer:** B
-**Explanation:** `<div>` is a block-level element that starts on a new line and occupies 100% of the available container width.
 
 ---
 
@@ -242,7 +239,6 @@ B. Overusing generic `<div>` tags instead of meaningful semantic HTML5 tags like
 C. A CSS error that makes text invisible
 D. A plugin for Visual Studio Code
 **Answer:** B
-**Explanation:** "Div-itis" refers to the bad habit of using excessive, non-semantic `<div>` elements for every component of a webpage.
 
 ---
 
@@ -252,7 +248,6 @@ B. `<p>Hello <span class="highlight">World</span></p>`
 C. `<span><div class="box">Oops</div></span>`
 D. `<div><button>Click</button></div>`
 **Answer:** C
-**Explanation:** Placing a block-level element (`<div>`) inside an inline element (`<span>`) is invalid HTML.
 
 ---
 
@@ -271,3 +266,10 @@ Design an attractive "Annual School Science Fair Pass" using `<div>` and `<span>
 ---
 
 **Congratulations!** You have completed Chapter 9: Block & Inline Elements! You now understand the fundamental skeleton and building blocks that form every webpage on the internet!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Images & Responsive Art** (Media).
+
+👉 **[Continue to Next Lesson: Images & Responsive Art →](/tutorials/html5-complete-course/images-responsive-art)**

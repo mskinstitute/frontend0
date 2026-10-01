@@ -20,9 +20,9 @@ keywords:
   - datalist autocomplete
   - fieldset and legend
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Form Controls & Built-in Validations (Smart & Error-Free Forms) 🛡️
@@ -474,7 +474,7 @@ Here is a complete, working HTML form combining everything we learned in this le
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -484,7 +484,6 @@ B. `<textarea>`
 C. `<textbox>`
 D. `<input type="paragraph">`
 **Answer:** B
-**Explanation:** `<textarea>` is the standard HTML tag for multi-line text input.
 
 ---
 
@@ -494,7 +493,6 @@ B. `<datalist>` does not support `<option>` tags
 C. `<datalist>` allows users to pick suggestions OR freely type their own custom text
 D. `<datalist>` cannot be placed inside a form
 **Answer:** C
-**Explanation:** A `<select>` dropdown forces users to choose only from the list, whereas `<input list="...">` combined with `<datalist>` offers helpful suggestions while still permitting custom text input.
 
 ---
 
@@ -504,7 +502,6 @@ B. `hint`
 C. `title`
 D. `description`
 **Answer:** C
-**Explanation:** The browser uses the text in the `title` attribute as the tooltip message explaining what pattern format is expected.
 
 ---
 
@@ -514,7 +511,6 @@ B. `disabled` fields turn blue, while `readonly` fields turn red
 C. `readonly` only works on buttons
 D. There is no difference; they are exact synonyms
 **Answer:** A
-**Explanation:** Both prevent user editing, but `readonly` field values are sent with form submissions, whereas `disabled` field values are completely ignored.
 
 ---
 
@@ -524,7 +520,6 @@ B. `[6-9][0-9]{9}`
 C. `[A-Z]{10}`
 D. `[1-10]{9}`
 **Answer:** B
-**Explanation:** `[6-9]` matches the first digit (which must be 6, 7, 8, or 9 in India), and `[0-9]{9}` matches the remaining 9 digits, making a total of 10 digits.
 
 ---
 
@@ -556,3 +551,10 @@ Open your file in Google Chrome or Microsoft Edge and test submitting with empty
 ---
 
 **Next Up:** In Chapter 12, we will discover **Semantic HTML5 Tags** &mdash; how tags like `<header>`, `<nav>`, `<main>`, `<article>`, and `<footer>` give meaning, structure, and superior Google SEO to your websites!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Semantic Layout Elements** (Semantic Tags).
+
+👉 **[Continue to Next Lesson: Semantic Layout Elements →](/tutorials/html5-complete-course/semantic-layout-elements)**

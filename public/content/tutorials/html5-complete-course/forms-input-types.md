@@ -18,9 +18,9 @@ keywords:
   - checkboxes
   - password input
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Forms & Input Types (Collecting User Information) 📝
@@ -253,7 +253,7 @@ Never use GET for login forms! A GET request places your password right in the U
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -263,7 +263,6 @@ B. `src`
 C. `action`
 D. `target`
 **Answer:** C
-**Explanation:** The `action` attribute specifies the URL or API endpoint that processes the submitted form data.
 
 ---
 
@@ -273,7 +272,6 @@ B. GET displays form values openly in the browser's URL address bar
 C. POST makes passwords encrypted in blue text
 D. GET limits passwords to 3 letters
 **Answer:** B
-**Explanation:** `GET` appends form data to the URL query string, exposing sensitive passwords in browser history and address bars. `POST` transmits data securely in the request body.
 
 ---
 
@@ -283,7 +281,6 @@ B. Give all radio buttons in the group the exact same `name` attribute
 C. Add the `single="true"` attribute
 D. Wrap each radio button in a separate `<form>`
 **Answer:** B
-**Explanation:** Browsers group radio buttons based on their `name` attribute. Only one button sharing the same `name` can be selected at a time.
 
 ---
 
@@ -293,7 +290,6 @@ B. `type="datetime"`
 C. `type="date"`
 D. `type="day"`
 **Answer:** C
-**Explanation:** `<input type="date">` instructs modern browsers to open an interactive date-picker calendar.
 
 ---
 
@@ -303,7 +299,6 @@ B. The input is automatically focused or checked
 C. The page reloads
 D. The label turns red
 **Answer:** B
-**Explanation:** Clicking a linked `<label>` transfers focus directly to the associated input or toggles a checkbox/radio button.
 
 ---
 
@@ -327,3 +322,10 @@ Create an "Inter-School Coding Club Membership Form":
 ---
 
 **Next Up:** In Topic 11.2, we will explore **Form Controls & Built-in Validations** &mdash; how to use textareas, dropdowns, and enforce mandatory fields without writing a single line of JavaScript!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Form Controls & Validations** (Form).
+
+👉 **[Continue to Next Lesson: Form Controls & Validations →](/tutorials/html5-complete-course/form-controls-validations)**

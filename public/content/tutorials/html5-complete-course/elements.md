@@ -17,9 +17,9 @@ keywords:
   - void elements
   - html tags vs elements
   - html basics for students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Elements (The Building Blocks)
@@ -199,7 +199,7 @@ Writing in lowercase makes your code clean, professional, and easy to read.
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -209,7 +209,6 @@ B. `<br>`
 C. `<h1>`
 D. `<button>`
 **Answer:** B
-**Explanation:** `<br>` is an empty element used to create a line break. It has no content and does not require a closing tag.
 
 ---
 
@@ -219,7 +218,6 @@ B. `<b><p>Hello World</b></p>`
 C. `<p>Hello <b>World</b></p>`
 D. `<p><b>Hello World</p>`
 **Answer:** C
-**Explanation:** Tags must be closed in reverse order. Since `<b>` opens after `<p>`, it must close before `</p>`.
 
 ---
 
@@ -229,7 +227,6 @@ B. A tag is only the bracketed keyword (`<p>`), while an element includes the ta
 C. Tags are written in lowercase, and elements must be written in uppercase
 D. There is no difference at all
 **Answer:** B
-**Explanation:** A tag refers specifically to `<tagname>` or `</tagname>`. An element is the entire structure from opening tag to closing tag including the content inside.
 
 ---
 
@@ -239,7 +236,6 @@ B. `<hr>`
 C. `<span>`
 D. `<h2>`
 **Answer:** B
-**Explanation:** `<hr>` creates a horizontal line divider across the page. It is a void element with no content or closing tag.
 
 ---
 
@@ -249,7 +245,6 @@ B. Lowercase tags are the modern web standard, cleaner to read, and strictly req
 C. Browsers refuse to open uppercase tags
 D. Uppercase tags delete your CSS styles
 **Answer:** B
-**Explanation:** While HTML is technically case-insensitive, writing tags in lowercase (e.g. `<h1>` instead of `<H1>`) is the universal industry best practice.
 
 ---
 
@@ -263,3 +258,10 @@ D. Uppercase tags delete your CSS styles
    - Use `<br>` to split the sentence into two separate lines.
    - Add an `<hr>` horizontal divider line below it.
 3. Save your file (`Ctrl + S`) and check your live page in the browser! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Attributes** (Introduction).
+
+👉 **[Continue to Next Lesson: Attributes →](/tutorials/html5-complete-course/attributes)**

@@ -17,9 +17,9 @@ keywords:
   - iframe loading lazy
   - web embeds
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Iframes & Web Embeds (A Window into Other Websites) 🪟
@@ -276,7 +276,7 @@ Here is a complete, working HTML webpage combining responsive iframes, YouTube l
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -286,7 +286,6 @@ B. `<iframe>`
 C. `<frame-window>`
 D. `<portal>`
 **Answer:** B
-**Explanation:** `<iframe>` (Inline Frame) is the standard HTML tag used to embed external web documents and media.
 
 ---
 
@@ -296,7 +295,6 @@ B. YouTube videos only play on Android phones
 C. HTML does not support YouTube
 D. You must buy a special license key
 **Answer:** A
-**Explanation:** YouTube blocks standard watch pages from being framed to protect against clickjacking. The dedicated `/embed/` URL format must be used.
 
 ---
 
@@ -306,7 +304,6 @@ B. `allowfullscreen`
 C. `screen="maximize"`
 D. `zoom="100%"`
 **Answer:** B
-**Explanation:** `allowfullscreen` is the standard HTML Boolean attribute that permits the contents of an iframe to expand into full-screen mode.
 
 ---
 
@@ -316,7 +313,6 @@ B. It acts as a security shield that restricts untrusted scripts, popups, and fo
 C. It speeds up video loading speed by 50%
 D. It compresses the video into an audio file
 **Answer:** B
-**Explanation:** `sandbox` isolates the framed content in a restricted environment, preventing unauthorized scripts, popups, or access to browser storage.
 
 ---
 
@@ -326,7 +322,6 @@ B. It is required for Web Accessibility so screen reader users know what the fra
 C. It sets the copyright owner of the iframe
 D. It automatically downloads subtitles
 **Answer:** B
-**Explanation:** Screen readers announce the `title` attribute when navigating to an `<iframe>`, allowing visually impaired users to understand what is being framed.
 
 ---
 
@@ -347,3 +342,10 @@ Build an **Interactive School Virtual Tour Page**:
 5. **Footer Area:** Include copyright `&copy; 2026` and school address.
 
 Open the file in your browser to verify that both your video player and interactive map stream smoothly!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML5 Graphics: SVG & Canvas** (Media).
+
+👉 **[Continue to Next Lesson: HTML5 Graphics: SVG & Canvas →](/tutorials/html5-complete-course/html5-svg-canvas)**

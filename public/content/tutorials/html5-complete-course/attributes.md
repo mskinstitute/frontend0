@@ -18,9 +18,9 @@ keywords:
   - title attribute
   - boolean attributes
   - html basics for students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Attributes (Adding Superpowers to Tags)
@@ -228,7 +228,7 @@ Some special HTML attributes do not need a `"value"`. Their mere presence inside
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -238,7 +238,6 @@ B. Inside the opening tag
 C. Between the two tags alongside content
 D. Outside the `<html>` tag
 **Answer:** B
-**Explanation:** Attributes must always be specified inside the start tag (opening tag) of an element.
 
 ---
 
@@ -248,7 +247,6 @@ B. `link`
 C. `href`
 D. `target`
 **Answer:** C
-**Explanation:** The `href` (Hypertext Reference) attribute defines the address where the link navigates when clicked.
 
 ---
 
@@ -258,7 +256,6 @@ B. It makes the image load faster
 C. It provides alternate descriptive text if the image fails to load or for screen readers
 D. It automatically adds animation to the image
 **Answer:** C
-**Explanation:** The `alt` attribute provides accessible descriptions for users with visual impairments and displays fallback text if the image link is broken.
 
 ---
 
@@ -268,7 +265,6 @@ B. Boolean Attribute (presence alone means true)
 C. Numeric Attribute
 D. CSS Attribute
 **Answer:** B
-**Explanation:** Boolean attributes do not need a value; their presence on an element automatically sets their state to true.
 
 ---
 
@@ -278,7 +274,6 @@ B. `_parent`
 C. `_blank`
 D. `_new`
 **Answer:** C
-**Explanation:** Setting `target="_blank"` instructs the browser to open the linked document in a new tab or window.
 
 ---
 
@@ -299,3 +294,10 @@ D. `_new`
      <p title="Tip: You are doing great in web development!">Hover over this tip!</p>
      ```
 3. Save your file (`Ctrl + S`) and view your interactive webpage live with Live Server! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML Headings** (Heading & Paragraphs).
+
+👉 **[Continue to Next Lesson: HTML Headings →](/tutorials/html5-complete-course/html-headings)**

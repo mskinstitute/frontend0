@@ -17,9 +17,9 @@ keywords:
   - reverse tabnabbing
   - download attribute
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Target Attributes & Link Security (Opening Tabs Safely) 🛡️
@@ -235,7 +235,7 @@ Always treat `target="_blank"` and `rel="noopener noreferrer"` as inseparable be
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -245,7 +245,6 @@ B. `target="_window"`
 C. `target="_blank"`
 D. `target="_open"`
 **Answer:** C
-**Explanation:** `target="_blank"` is the official HTML attribute value that instructs the browser to open the destination document in a new tab or window.
 
 ---
 
@@ -255,7 +254,6 @@ B. Reverse Tabnabbing (the original tab can be redirected to a fake phishing sit
 C. The internet router catches fire
 D. The monitor screen loses all colors
 **Answer:** B
-**Explanation:** Reverse tabnabbing allows malicious destination pages to access `window.opener` and redirect the original page to a fraudulent phishing website.
 
 ---
 
@@ -265,7 +263,6 @@ B. `rel="noopener noreferrer"`
 C. `protect="tab"`
 D. `lock="parent"`
 **Answer:** B
-**Explanation:** `rel="noopener noreferrer"` cuts the digital bridge (`window.opener = null`) and protects user privacy by withholding referral headers.
 
 ---
 
@@ -275,7 +272,6 @@ B. It creates a named browsing context, re-using the same tab for subsequent cli
 C. The link turns into an image
 D. The link stops working completely
 **Answer:** B
-**Explanation:** Without the underscore, the browser treats "blank" as a target frame name, causing all links with that target to reuse that exact same tab.
 
 ---
 
@@ -285,7 +281,6 @@ B. `store`
 C. `download`
 D. `export`
 **Answer:** C
-**Explanation:** The `download` attribute instructs the browser to download the linked resource directly to the user's device.
 
 ---
 
@@ -308,3 +303,10 @@ Create a "Student Resources & Downloads Portal" for your school:
 ---
 
 **Congratulations!** You have mastered Chapter 6: Links! You now know how to build fully connected, multi-page websites and keep your users 100% safe from cyber tricks!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Unordered & Ordered Lists** (Lists).
+
+👉 **[Continue to Next Lesson: Unordered & Ordered Lists →](/tutorials/html5-complete-course/unordered-ordered-lists)**

@@ -18,9 +18,9 @@ keywords:
   - li tag
   - nested lists
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Unordered & Ordered Lists (Organizing Information) 📋
@@ -315,7 +315,7 @@ Never put a sub-list outside of an `<li>`.
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -325,7 +325,6 @@ B. `<ul>`
 C. `<dl>`
 D. `<list>`
 **Answer:** B
-**Explanation:** `<ul>` stands for Unordered List and creates a bulleted list for items where sequence is not important.
 
 ---
 
@@ -335,7 +334,6 @@ B. `<point>`
 C. `<li>`
 D. `<bullet>`
 **Answer:** C
-**Explanation:** `<li>` stands for List Item and must wrap every item inside both `<ul>` and `<ol>`.
 
 ---
 
@@ -345,7 +343,6 @@ B. `<ol style="ABC">`
 C. `<ol type="A">`
 D. `<ol format="A">`
 **Answer:** C
-**Explanation:** Setting `type="A"` on an `<ol>` instructs the browser to use uppercase alphabet letters for numbering.
 
 ---
 
@@ -355,7 +352,6 @@ B. `countdown`
 C. `reversed`
 D. `order="down"`
 **Answer:** C
-**Explanation:** The boolean attribute `reversed` reverses the numbering order of an `<ol>`.
 
 ---
 
@@ -365,7 +361,6 @@ B. Inside a parent `<li>` element
 C. Directly between two `<ul>` tags
 D. Inside the `<head>` section
 **Answer:** B
-**Explanation:** In valid HTML, nested sub-lists must always be contained inside a parent `<li>` element.
 
 ---
 
@@ -384,3 +379,10 @@ Create a neat "School Activity & Recipe Board" containing:
 ---
 
 **Next Up:** In Topic 7.2, we will explore **Description Lists (`<dl>`)** &mdash; the secret weapon for building glossaries, dictionaries, and FAQ sections!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Description Lists** (Lists).
+
+👉 **[Continue to Next Lesson: Description Lists →](/tutorials/html5-complete-course/description-lists)**

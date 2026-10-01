@@ -18,9 +18,9 @@ keywords:
   - footer tag
   - div soup
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Semantic Layout Elements (Giving Real Meaning to Webpages) 🏛️
@@ -376,7 +376,7 @@ Here is a complete, beautifully structured webpage using modern semantic layout 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -386,7 +386,6 @@ B. Exactly one
 C. One per section
 D. As many as there are articles
 **Answer:** B
-**Explanation:** The `<main>` element represents the unique central topic of the document and must appear exactly once on a visible web page.
 
 ---
 
@@ -396,7 +395,6 @@ B. `<div>`
 C. `<article>`
 D. `<span>`
 **Answer:** C
-**Explanation:** `<article>` represents self-contained content that can stand alone independently and be distributed or reused elsewhere.
 
 ---
 
@@ -406,7 +404,6 @@ B. It automatically writes CSS styles
 C. It gives clear structural meaning to browsers, search engines (SEO), and screen readers
 D. It prevents the website from crashing on Android phones
 **Answer:** C
-**Explanation:** Semantic elements describe their structural purpose, making web content accessible to assistive screen readers and clearly understandable by search engine robots.
 
 ---
 
@@ -416,7 +413,6 @@ B. `<picture>` and `<label>`
 C. `<figure>` and `<figcaption>`
 D. `<photo>` and `<title>`
 **Answer:** C
-**Explanation:** `<figure>` acts as the media container, and `<figcaption>` provides the caption directly tied to that figure.
 
 ---
 
@@ -426,7 +422,6 @@ B. Inside `<aside>`
 C. Inside `<footer>`
 D. Inside `<header>`
 **Answer:** C
-**Explanation:** The `<footer>` element represents the bottom strip of a webpage or section, holding copyright notices, contacts, and legal disclaimers.
 
 ---
 
@@ -450,3 +445,10 @@ Open your file in your browser to verify that your document has clean semantic s
 ---
 
 **Next Up:** In Topic 12.2, we will master **Web Accessibility & ARIA** &mdash; how to make sure your websites are completely inclusive and usable by students with visual, auditory, and motor disabilities!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Accessibility & ARIA** (Semantic Tags).
+
+👉 **[Continue to Next Lesson: Accessibility & ARIA →](/tutorials/html5-complete-course/accessibility-aria)**

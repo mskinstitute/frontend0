@@ -17,9 +17,9 @@ keywords:
   - html5 game development
   - vector vs raster
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML5 Graphics: SVG & Canvas (Drawing on the Web) 🎨
@@ -299,7 +299,7 @@ Here is a complete, working HTML webpage featuring a pure SVG School Shield Embl
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -309,7 +309,6 @@ B. It remains 100% razor sharp with zero loss in visual quality
 C. The colors invert into black and white
 D. The browser crashes
 **Answer:** B
-**Explanation:** SVG graphics are mathematical vector descriptions. They re-render smoothly at any scale or zoom level without losing quality.
 
 ---
 
@@ -319,7 +318,6 @@ B. `<circle cx="..." cy="..." r="...">`
 C. `<dot>`
 D. `<arc>`
 **Answer:** B
-**Explanation:** The `<circle>` tag in SVG defines a circle using center coordinates `cx` and `cy`, and radius `r`.
 
 ---
 
@@ -329,7 +327,6 @@ B. At the bottom-left corner
 C. At the top-left corner
 D. At the bottom-right corner
 **Answer:** C
-**Explanation:** The Canvas 2D rendering grid begins with $(0, 0)$ at the top-left corner. $X$ increases to the right, and $Y$ increases downwards.
 
 ---
 
@@ -339,7 +336,6 @@ B. `canvas.getContext('2d')`
 C. `canvas.createTool()`
 D. `canvas.drawContext()`
 **Answer:** B
-**Explanation:** The `.getContext('2d')` method returns the 2D rendering context object containing all drawing functions (like `fillRect`, `arc`, `stroke`).
 
 ---
 
@@ -349,7 +345,6 @@ B. Canvas renders directly into a pixel bitmap in memory, making it much faster 
 C. SVG only works on desktop computers
 D. Canvas does not require electricity
 **Answer:** B
-**Explanation:** Each SVG element creates a DOM node, which slows down the browser when thousands of objects move simultaneously. Canvas draws directly to pixels with high performance.
 
 ---
 
@@ -371,3 +366,10 @@ Build a **School Science & Sports Graphic Studio**:
    - Draw three white cricket stumps using lines or thin rectangles.
 
 Open the file in your browser to admire your custom vector badge and painted canvas pitch!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Forms & Input Types** (Form).
+
+👉 **[Continue to Next Lesson: Forms & Input Types →](/tutorials/html5-complete-course/forms-input-types)**

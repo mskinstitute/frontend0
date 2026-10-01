@@ -13,24 +13,29 @@
       "html5",
       "web development"
     ],
-    "documentationTitle": "HTML5 Complete Course",
-    "shortDescription": "Master HTML5 from basics to advanced concepts. Learn document structure, semantic layouts, accessible forms, audio/video media, tables, ARIA, and modern web standards.",
+    "documentationTitle": "HTML5 Complete Course: From Beginner to Pro",
+    "shortDescription": "Master HTML5 from the ground up in 1 month. Comprehensive hands-on curriculum covering modern document structure, semantic layouts, accessible forms, audio/video media, tables, ARIA, and real-world web standards.",
     "lessonsCount": 12,
     "totalHours": "30h",
     "topicsCount": 31,
     "githubRepo": "github.com/msk-institute/html5-complete-course",
-    "updatedAt": "2026-09-05",
+    "updatedAt": "2026-09-30",
     "seo": {
-      "title": "HTML5 Complete Course: From Beginner to Pro - MSK Notes | MSK Institute",
-      "description": "Learn HTML5 from scratch to pro with structured lessons, code snippets, and quizzes based on the HTML5 Complete Course at MSK Institute.",
+      "title": "HTML5 Complete Course Tutorial: Step-by-Step Web Development Guide | MSK Institute",
+      "description": "Master HTML5 from scratch with our beginner-friendly tutorial. Learn semantic elements, responsive media, accessible web forms, tables, ARIA, and live projects.",
       "keywords": [
         "html5 complete course",
-        "html tutorial",
-        "learn html5",
-        "html beginner to pro",
-        "html documentation",
+        "html tutorial for beginners",
+        "learn html5 step by step",
+        "html web development tutorial",
         "html notes",
-        "msk notes"
+        "semantic html5",
+        "html forms and inputs",
+        "html tables tutorial",
+        "html course shikohabad",
+        "html5 tags and elements",
+        "web accessibility html",
+        "html responsive images picture tag"
       ]
     }
   },

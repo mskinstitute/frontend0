@@ -18,9 +18,9 @@ keywords:
   - track subtitles
   - web multimedia
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Audio & Video in HTML5 (The Multimedia Revolution) 🎬
@@ -216,7 +216,7 @@ Always include a friendly note between `<video>...</video>` so users on older br
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -226,7 +226,6 @@ B. The video will be displayed without any play/pause or volume buttons
 C. The browser will delete the video file
 D. The video will automatically download to the computer
 **Answer:** B
-**Explanation:** The `controls` attribute tells the browser to display the native playback UI (play button, seek bar, volume control). Without it, no controls are shown.
 
 ---
 
@@ -236,7 +235,6 @@ B. Because modern browsers block unmuted autoplay to protect users from unexpect
 C. Because muted videos load 10x faster
 D. Because screen readers cannot read unmuted videos
 **Answer:** B
-**Explanation:** Modern browser security policies prevent videos from autoplaying with sound enabled to avoid disturbing users.
 
 ---
 
@@ -246,7 +244,6 @@ B. `preview`
 C. `poster`
 D. `cover`
 **Answer:** C
-**Explanation:** The `poster` attribute specifies the URL of an image to be shown until the user starts playing the video.
 
 ---
 
@@ -256,7 +253,6 @@ B. `<caption>`
 C. `<track>`
 D. `<text>`
 **Answer:** C
-**Explanation:** The `<track>` element specifies text tracks (subtitles, captions, chapter headings) in WebVTT format for video and audio.
 
 ---
 
@@ -266,7 +262,6 @@ B. MP4 (H.264)
 C. WMV
 D. FLV
 **Answer:** B
-**Explanation:** MP4 encoded with H.264 is the global standard with 100% native support across all modern desktop and mobile browsers.
 
 ---
 
@@ -291,3 +286,10 @@ Create an "Online School Learning & Cultural Media Hub":
 ---
 
 **Congratulations!** You have completed Chapter 10: Media! You now know how to enrich your web applications with beautiful responsive images, podcasts, and native video lectures!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Iframes & Web Embeds** (Media).
+
+👉 **[Continue to Next Lesson: Iframes & Web Embeds →](/tutorials/html5-complete-course/iframes-web-embeds)**

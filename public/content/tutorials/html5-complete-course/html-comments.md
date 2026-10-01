@@ -15,9 +15,9 @@ keywords:
   - debugging html
   - html comments shortcut
   - html for school students
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Comments (Secret Notes in Your Code) 🤫
@@ -206,7 +206,7 @@ Always remember: Anyone with an internet connection can read your HTML comments.
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -216,7 +216,6 @@ B. `/* This is a comment */`
 C. `<!-- This is a comment -->`
 D. `<comment> This is a comment </comment>`
 **Answer:** C
-**Explanation:** HTML comments begin with `<!--` and end with `-->`. The other formats belong to CSS, JavaScript, or C++.
 
 ---
 
@@ -226,7 +225,6 @@ B. `Ctrl + /`
 C. `Ctrl + C`
 D. `Alt + F4`
 **Answer:** B
-**Explanation:** Pressing `Ctrl + /` toggles comments on the current line or highlighted selection in VS Code.
 
 ---
 
@@ -236,7 +234,6 @@ B. The browser will delete the file
 C. Anyone can read your comments by right-clicking and selecting "View Page Source"
 D. Comments expire after 24 hours
 **Answer:** C
-**Explanation:** HTML source code is delivered directly to the client's browser, meaning anyone can view all HTML comments using the browser's "View Source" tool.
 
 ---
 
@@ -246,7 +243,6 @@ B. The browser stops at the first `-->` closing marker, breaking the rest of you
 C. The computer restarts
 D. The inner comment is translated to Hindi
 **Answer:** B
-**Explanation:** HTML comments cannot be nested because the first `-->` encountered immediately terminates the comment block, causing the remainder to be rendered as broken plain text.
 
 ---
 
@@ -256,7 +252,6 @@ B. You can temporarily hide sections of code without deleting them to see which 
 C. Comments format your CSS
 D. Comments delete viruses
 **Answer:** B
-**Explanation:** Commenting out code allows developers to test hypotheses and locate errors by temporarily disabling code blocks without permanently deleting them.
 
 ---
 
@@ -274,3 +269,10 @@ D. Comments delete viruses
 4. Try using **`Ctrl + /`** on that paragraph to hide it.
 5. Save the file (`Ctrl + S`) and verify in the browser that the paragraph disappears!
 6. Press `Ctrl + /` again to bring it back! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML Colors & RGB** (Colors).
+
+👉 **[Continue to Next Lesson: HTML Colors & RGB →](/tutorials/html5-complete-course/html-colors-rgb)**

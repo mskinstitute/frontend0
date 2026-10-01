@@ -17,9 +17,9 @@ keywords:
   - definition list
   - faq html
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Description Lists (Glossaries, Dictionaries & FAQs) 📖
@@ -262,7 +262,7 @@ Never float a `<dt>` or `<dd>` on its own without wrapping it inside a `<dl>...<
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -272,7 +272,6 @@ B. `<dl>`
 C. `<dt>`
 D. `<def>`
 **Answer:** B
-**Explanation:** `<dl>` stands for Description List and acts as the parent container holding `<dt>` and `<dd>` tags.
 
 ---
 
@@ -282,7 +281,6 @@ B. Description Term
 C. Definition Text
 D. Document Table
 **Answer:** B
-**Explanation:** `<dt>` stands for Description Term, which specifies the word or label being defined.
 
 ---
 
@@ -292,7 +290,6 @@ B. Definition Document
 C. Direct Description
 D. Double Data
 **Answer:** A
-**Explanation:** `<dd>` stands for Description Details (or Description Data), which contains the explanation or value for the preceding term.
 
 ---
 
@@ -302,7 +299,6 @@ B. `<dd>`
 C. `<li>`
 D. `<script>`
 **Answer:** C
-**Explanation:** Description lists do not use list items (`<li>`). They exclusively use `<dt>` and `<dd>` pairs.
 
 ---
 
@@ -312,7 +308,6 @@ B. It automatically indents `<dd>` with left margin spacing
 C. It places a bullet point next to `<dd>`
 D. It underlines `<dd>`
 **Answer:** B
-**Explanation:** Web browsers automatically apply a left margin indentation to `<dd>` elements to visually associate them with the preceding `<dt>`.
 
 ---
 
@@ -332,3 +327,10 @@ Build an "Indian Space Missions Glossary" celebrating ISRO using `<dl>`, `<dt>`,
 ---
 
 **Congratulations!** You have completed Chapter 7: Lists! You are now a master at organizing data with bullet points, numbered rankings, and dictionary glossaries!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML Tables** (Table).
+
+👉 **[Continue to Next Lesson: HTML Tables →](/tutorials/html5-complete-course/html-tables)**

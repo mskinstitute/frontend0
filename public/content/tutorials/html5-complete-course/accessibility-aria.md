@@ -19,9 +19,9 @@ keywords:
   - keyboard navigation
   - wcag
   - school html tutorial
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Web Accessibility & ARIA (Building Inclusive Websites for Everyone) ♿
@@ -351,7 +351,7 @@ Here is a complete, production-ready, fully accessible webpage demonstrating pro
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -361,7 +361,6 @@ B. Accessibility (11 letters between 'a' and 'y')
 C. Apple iPhone layout standard
 D. Artificial Intelligence level 1
 **Answer:** B
-**Explanation:** "a11y" is a common numeronym for "Accessibility", counting the 11 characters between the starting letter 'a' and ending letter 'y'.
 
 ---
 
@@ -371,7 +370,6 @@ B. Only write ARIA in uppercase letters
 C. If a native HTML element can do the job, use it instead of ARIA
 D. Never use ARIA on Android phones
 **Answer:** C
-**Explanation:** The first rule of ARIA is: "No ARIA is better than bad ARIA". Always prefer native semantic HTML elements over custom ARIA roles whenever possible.
 
 ---
 
@@ -381,7 +379,6 @@ B. `aria-label`
 C. `name`
 D. `placeholder`
 **Answer:** B
-**Explanation:** `aria-label` specifies an explicit text string that screen readers announce when focusing an element that lacks visible text.
 
 ---
 
@@ -391,7 +388,6 @@ B. The emoji is hidden from screen readers so it is not spoken aloud
 C. The emoji changes into black and white
 D. The page automatically reloads
 **Answer:** B
-**Explanation:** `aria-hidden="true"` instructs assistive technologies like screen readers to ignore the element, hiding purely visual decorative content.
 
 ---
 
@@ -401,7 +397,6 @@ B. It scrambles the natural keyboard tab order and confuses keyboard users
 C. It only works on Mac computers
 D. It deletes links from Google search results
 **Answer:** B
-**Explanation:** Positive `tabindex` overrides the natural top-to-bottom reading order of the page, jumping focus unpredictably and frustrating keyboard users.
 
 ---
 
@@ -424,3 +419,10 @@ Audit and build an **Accessible Student Science Club Membership Card**:
 ---
 
 **Next Up:** In Topic 12.3, we will explore **Interactive Semantic Elements** &mdash; how to build native expandable FAQ accordions (`<details>` & `<summary>`), modal popup dialogs (`<dialog>`), and progress meters with zero JavaScript!
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Interactive Elements: Dialog & Details** (Semantic Tags).
+
+👉 **[Continue to Next Lesson: Interactive Elements: Dialog & Details →](/tutorials/html5-complete-course/interactive-elements-dialog)**

@@ -18,9 +18,9 @@ keywords:
   - address tag
   - bdo tag
   - html for school students
-lastUpdated: 2026-09-10
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # Quotations & Citations in HTML
@@ -213,7 +213,7 @@ It reads the letters backwards from right to left! It is a fun and powerful tool
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -223,7 +223,6 @@ B. `<quote>`
 C. `<q>`
 D. `<cite>`
 **Answer:** C
-**Explanation:** The `<q>` tag represents short inline quotations and browsers automatically insert quotation marks around the enclosed text.
 
 ---
 
@@ -233,7 +232,6 @@ B. `<abbr title="Indian Space Research Organisation">ISRO</abbr>`
 C. `<abbr desc="Indian Space Research Organisation">ISRO</abbr>`
 D. `<acronym text="Indian Space Research Organisation">ISRO</acronym>`
 **Answer:** B
-**Explanation:** The `title` attribute inside the `<abbr>` element specifies the complete expansion shown when hovering over the abbreviation.
 
 ---
 
@@ -243,7 +241,6 @@ B. To display the physical home address of the user
 C. To write large block quotes
 D. To underline text
 **Answer:** A
-**Explanation:** The `<cite>` element represents the title of a work (e.g., a book, paper, essay, film, or song) and renders in italics.
 
 ---
 
@@ -253,7 +250,6 @@ B. `<blockquote>`
 C. `<longquote>`
 D. `<cite>`
 **Answer:** B
-**Explanation:** `<blockquote>` is a block-level element designed for long quotations, automatically applying left and right indentation margins.
 
 ---
 
@@ -263,7 +259,6 @@ B. To provide contact information for the author or owner of the document or art
 C. To format house numbers in bold
 D. To open a map application
 **Answer:** B
-**Explanation:** The `<address>` element provides contact information for a person, author, or organization.
 
 ---
 
@@ -278,3 +273,10 @@ D. To open a map application
    - Add a short quote in a sentence using `<q>`.
    - At the bottom, add an `<address>` tag with your name and school name.
 3. Save the file (`Ctrl + S`) and view your tribute webpage live with Live Server! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **HTML Entities, Symbols & Emojis** (Text Formatting).
+
+👉 **[Continue to Next Lesson: HTML Entities, Symbols & Emojis →](/tutorials/html5-complete-course/html-entities-symbols)**

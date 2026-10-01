@@ -16,9 +16,9 @@ keywords:
   - seo headings
   - html text basics
   - html for school students
-lastUpdated: 2026-09-09
+lastUpdated: 2026-09-30
 author: MSK Institute
-version: 2.0
+version: 2.1.0
 ---
 
 # HTML Headings (`<h1>` to `<h6>`)
@@ -185,7 +185,7 @@ To write clean, professional code that ranks high on Google, always follow these
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -195,7 +195,6 @@ B. `<h6>`
 C. `<h1>`
 D. `<header>`
 **Answer:** C
-**Explanation:** `<h1>` is the top-level heading. It represents the primary title of the webpage.
 
 ---
 
@@ -205,7 +204,6 @@ B. Exactly one
 C. At least five
 D. None
 **Answer:** B
-**Explanation:** Search engines and accessibility guidelines recommend using exactly one `<h1>` per page to clearly identify the main subject.
 
 ---
 
@@ -219,7 +217,6 @@ B. The code skipped h2 and h3 levels directly to h4
 C. h4 is not a valid HTML tag
 D. Headings cannot follow each other
 **Answer:** B
-**Explanation:** Headings should follow a sequential hierarchy without skipping levels (e.g., from `<h1>` down to `<h2>`, then `<h3>`).
 
 ---
 
@@ -229,7 +226,6 @@ B. Headings define document structure for Google SEO and screen readers; use CSS
 C. Browsers charge money for each heading
 D. Headings can only be used once a year
 **Answer:** B
-**Explanation:** Headings establish the semantic outline of the document. Visual appearance should always be controlled using CSS rather than misusing heading tags.
 
 ---
 
@@ -239,7 +235,6 @@ B. `<h6>`
 C. `<h0>`
 D. `<h12>`
 **Answer:** B
-**Explanation:** HTML defines exactly six levels of headings, ranging from `<h1>` (most important) down to `<h6>` (least important).
 
 ---
 
@@ -252,3 +247,10 @@ D. `<h12>`
    - Add two `<h3>` tags under it for `Batting Rules` and `Bowling Rules` with short paragraph explanations.
    - Add another `<h2>` for `Famous Players`.
 3. Save your file (`Ctrl + S`) and check how neatly your browser displays the hierarchy! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web development journey with **Paragraphs & Line Breaks** (Heading & Paragraphs).
+
+👉 **[Continue to Next Lesson: Paragraphs & Line Breaks →](/tutorials/html5-complete-course/paragraphs-line-breaks)**
