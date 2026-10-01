@@ -17,9 +17,9 @@ keywords:
   - gradient backgrounds
   - css colors
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # CSS Gradients: Linear and Radial Gradients
@@ -291,7 +291,7 @@ Here is how top software applications create stunning gradient buttons with hove
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -301,7 +301,6 @@ B. `background-color`
 C. `background-image` (or `background`)
 D. `border-color`
 **Answer:** C
-**Explanation:** CSS treats gradients as generated images, so they must be applied using `background-image` or the `background` shorthand property.
 
 ---
 
@@ -311,7 +310,6 @@ B. Bottom to top
 C. Top to bottom
 D. Center to outside
 **Answer:** C
-**Explanation:** If no direction is specified in `linear-gradient(color1, color2)`, the browser defaults to top to bottom (equivalent to `to bottom` or `180deg`).
 
 ---
 
@@ -321,7 +319,6 @@ B. `90deg`
 C. `180deg`
 D. `270deg`
 **Answer:** B
-**Explanation:** In CSS linear gradients, 0deg points upward (to top), 90deg points to the right, 180deg points downward, and 270deg points to the left.
 
 ---
 
@@ -331,7 +328,6 @@ B. Radial gradients radiate outward in circular or elliptical patterns from a ce
 C. Radial gradients cannot be displayed on mobile devices
 D. Radial gradients require a video file to run
 **Answer:** B
-**Explanation:** Linear gradients transition colors along a straight axis, while radial gradients radiate outward in concentric rings from a central focal point.
 
 ---
 
@@ -341,7 +337,6 @@ B. The color stop position where gold reaches its peak purity
 C. The size of the button container
 D. The angle of the sun in degrees
 **Answer:** B
-**Explanation:** `50%` is a color stop that specifies that gold should reach its pure, unblended state at exactly the midpoint (50%) of the gradient line.
 
 ---
 
@@ -354,3 +349,10 @@ D. The angle of the sun in degrees
    - **Theme 3 (Spotlight Glow):** Radial gradient with a `circle at center` from `#fef08a` (soft golden glow) to `#0f172a` (midnight slate).
 3. Test your designs on 3 card boxes with white text.
 4. Add a hover effect that slightly changes the box shadow to match the card's theme! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **The CSS Box Model: Content, Padding, Border, Margin** (The CSS Box Model).
+
+👉 **[Continue to Next Lesson: The CSS Box Model: Content, Padding, Border, Margin →](/tutorials/css-for-beginners/css-box-model-content-padding-border-margin)**

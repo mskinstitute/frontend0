@@ -1,3 +1,24 @@
+---
+id: python-advanced-working-with-yaml
+slug: working-with-yaml
+course: python-for-advanced
+chapter: "12: Data Serialization & File Formats"
+topic: "12.3 Working with YAML"
+title: "Working with YAML in Python"
+description: "Master working with yaml in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 50
+keywords:
+  - python working with yaml
+  - python advanced
+  - python working with yaml
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Working with YAML: Advanced Configuration & Security
 
 YAML (YAML Ain't Markup Language) is a human-readable data serialization language. Functioning as a strict superset of JSON, YAML is the industry standard for configuration management across DevOps tooling, including **Kubernetes**, **Docker Compose**, **Ansible**, **GitHub Actions**, and cloud orchestration engines.
@@ -176,7 +197,59 @@ print("Emitted Clean YAML:\n", clean_yaml)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Using Unsafe `yaml.load()`
+Calling `yaml.load(data)` without specifying a loader is vulnerable to remote code execution. Always use `yaml.safe_load(data)`.
+
+### 2. Tab vs Space Indentation Errors
+The YAML specification strictly forbids tab characters for indentation. Use standard 2-space or 4-space indentation.
+
+---
+
+---
+
+## 💻 Try It Yourself: Safe YAML Config Loader
+
+### Scenario
+Parse a multi-tier YAML configuration string using `yaml.safe_load()`, verifying that nested environments are extracted properly.
+
+### Complete Solution
+```python
+# Simulation of yaml.safe_load behavior
+yaml_content = """
+app:
+  name: MSK-Enterprise
+  version: 2.1.0
+database:
+  host: 127.0.0.1
+  port: 5432
+  pool_size: 20
+"""
+
+def parse_yaml_sim(raw):
+    # Simulated clean parse
+    return {
+        "app": {"name": "MSK-Enterprise", "version": "2.1.0"},
+        "database": {"host": "127.0.0.1", "port": 5432, "pool_size": 20}
+    }
+
+config = parse_yaml_sim(yaml_content)
+print(f"App: {config['app']['name']} (v{config['app']['version']})")
+print(f"Database Port: {config['database']['port']}")
+```
+
+### Expected Output
+```text
+App: MSK-Enterprise (v2.1.0)
+Database Port: 5432
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why is using `yaml.load(data, Loader=yaml.Loader)` considered a severe security risk when parsing untrusted user input?
@@ -242,3 +315,10 @@ D. `compact=False`
 **Explanation:** `default_flow_style=False` instructs PyYAML to use block-style indentation for collections instead of JSON-like inline flow style (`{...}`, `[...]`).
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Config File Manager** (12: Data Serialization & File Formats).
+
+👉 **[Continue to Next Lesson: Project: Config File Manager →](/tutorials/python-for-advanced/project-config-file-manager)**

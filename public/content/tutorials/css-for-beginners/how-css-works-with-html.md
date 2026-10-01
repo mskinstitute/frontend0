@@ -17,9 +17,9 @@ keywords:
   - render tree
   - browser rendering pipeline
   - css basics
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # How CSS Works with HTML
@@ -211,7 +211,7 @@ Even experienced programmers occasionally make small syntax typos. Keep these ru
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -221,7 +221,6 @@ B. Property
 C. Value
 D. Declaration Block
 **Answer:** B
-**Explanation:** `color` is the CSS property that you want to style. `p` is the selector, and `blue` is the value.
 
 ---
 
@@ -231,7 +230,6 @@ B. Semicolon (`;`)
 C. Colon (`:`)
 D. Comma (`,`)
 **Answer:** C
-**Explanation:** In CSS declarations, a colon (`:`) separates the property name from its assigned value (e.g., `font-size: 16px;`).
 
 ---
 
@@ -241,7 +239,6 @@ B. Full stop (`.`)
 C. Exclamation mark (`!`)
 D. Question mark (`?`)
 **Answer:** A
-**Explanation:** A semicolon (`;`) is required at the end of every declaration to separate it from the next declaration.
 
 ---
 
@@ -251,7 +248,6 @@ B. Render Tree
 C. Database Table
 D. Operating System Kernel
 **Answer:** B
-**Explanation:** The browser merges the DOM (HTML elements) and the CSSOM (styling rules) to construct the Render Tree, which is used to lay out and paint pixels on the screen.
 
 ---
 
@@ -261,7 +257,6 @@ B. `background-color = yellow;`
 C. `background-color: yellow;`
 D. `background-color: "yellow"`
 **Answer:** C
-**Explanation:** `background-color: yellow;` uses the correct hyphenated property name, a colon, valid color keyword, and a terminating semicolon.
 
 ---
 
@@ -286,3 +281,10 @@ h2 (
    - What punctuation mark separates property from value, and what ends the declaration?
 2. Write the corrected version in your text editor.
 3. Test it inside an HTML file with an `<h2>` heading to see it turn royal blue and center-aligned! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Inline, Internal, External CSS** (Introduction to CSS).
+
+👉 **[Continue to Next Lesson: Inline, Internal, External CSS →](/tutorials/css-for-beginners/inline-internal-external-css)**

@@ -17,9 +17,9 @@ keywords:
   - font stack
   - google fonts
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Font Families and Web-Safe Fonts
@@ -171,7 +171,7 @@ Now, every student in the world will see your website in gorgeous, modern **Popp
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -181,7 +181,6 @@ B. Without
 C. Bold
 D. Colorful
 **Answer:** B
-**Explanation:** "Sans" means "without" in French. Sans-serif fonts are typefaces designed without decorative serifs (feet) at the ends of strokes.
 
 ---
 
@@ -191,7 +190,6 @@ B. Times New Roman
 C. Verdana
 D. Trebuchet MS
 **Answer:** B
-**Explanation:** Times New Roman is a prominent serif typeface featuring classic decorative serifs (feet) on its letters.
 
 ---
 
@@ -201,7 +199,6 @@ B. It acts as an ultimate safety fallback in case none of the earlier fonts are 
 C. It translates the webpage into French
 D. It is required by HTML rules
 **Answer:** B
-**Explanation:** If none of the user's preferred fonts are available on the client device, the generic family ensures the browser displays a matching category rather than defaulting unpredictably.
 
 ---
 
@@ -211,7 +208,6 @@ B. `font-family: 'Comic Sans MS', cursive;`
 C. `font-family: Comic-Sans-MS;`
 D. `font-family: [Comic Sans MS];`
 **Answer:** B
-**Explanation:** Font names containing spaces must be enclosed in quotation marks, followed by a fallback family (e.g., `'Comic Sans MS', cursive;`).
 
 ---
 
@@ -221,7 +217,6 @@ B. Monospace
 C. Fantasy
 D. Serif
 **Answer:** B
-**Explanation:** In monospace fonts (like Consolas or Courier New), every character occupies the exact same fixed amount of horizontal space.
 
 ---
 
@@ -289,3 +284,10 @@ D. Serif
    </html>
    ```
 3. Open the file in your browser. Notice how drastically the personality and reading comfort change between each font box! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Font Size, Weight, Style, and Line Height** (Text and Fonts).
+
+👉 **[Continue to Next Lesson: Font Size, Weight, Style, and Line Height →](/tutorials/css-for-beginners/font-size-weight-style-line-height)**

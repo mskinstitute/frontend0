@@ -1,3 +1,24 @@
+---
+id: python-intermediate-raising-exceptions
+slug: raising-exceptions
+course: python-for-intermediate
+chapter: "6: Exception Handling"
+topic: "6.3 Raising Exceptions"
+title: "Raising Exceptions in Python"
+description: "Master raising exceptions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 28
+keywords:
+  - python raising exceptions
+  - python intermediate
+  - python raising exceptions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Raising Exceptions in Python
 
 While Python automatically raises exceptions when illegal runtime operations occur (like dividing by zero or indexing out of bounds), professional Python developers also intentionally trigger exceptions using the `raise` statement. Raising exceptions allows functions to reject invalid parameters, signal invariant violations, and propagate contextual error messages up the execution call stack.
@@ -113,7 +134,55 @@ Now, the traceback will *only* show `ValueError: PIN must consist of 4 to 6 nume
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Raising String Literals
+In modern Python, you must raise an instance or subclass of `BaseException`. Writing `raise "Error"` results in an immediate `TypeError`.
+
+### 2. Losing Original Exception Tracebacks
+When re-raising or transforming an exception, use `raise NewException(...) from err` to preserve the causal chain for easier debugging.
+
+---
+
+---
+
+## 💻 Try It Yourself: Inventory Stock Guard
+
+### Scenario
+Write a function `dispense_item(inventory, item_name, count)` that raises `KeyError` if the item is not in stock and `ValueError` if the requested count exceeds available stock.
+
+### Complete Solution
+```python
+def dispense_item(inventory: dict, item: str, count: int):
+    if item not in inventory:
+        raise KeyError(f"Item '{item}' is not tracked in inventory.")
+    if count <= 0:
+        raise ValueError("Requested count must be positive.")
+    if count > inventory[item]:
+        raise ValueError(f"Insufficient stock for '{item}'. Requested: {count}, Available: {inventory[item]}")
+    
+    inventory[item] -= count
+    print(f"Dispensed {count}x '{item}'. Remaining: {inventory[item]}")
+
+stock = {"Laptops": 5, "Mice": 20}
+try:
+    dispense_item(stock, "Laptops", 3)
+    dispense_item(stock, "Keyboards", 1)
+except (KeyError, ValueError) as err:
+    print(f"Error caught: {err}")
+```
+
+### Expected Output
+```text
+Dispensed 3x 'Laptops'. Remaining: 2
+Error caught: 'Item \'Keyboards\' is not tracked in inventory.'
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which keyword is used in Python to intentionally trigger an exception?
 A. `throw`
@@ -159,3 +228,10 @@ D. `StringException`
 **Answer:** B
 **Explanation:** In Python 3, exceptions must inherit from `BaseException`. Raising a string or any non-exception object raises a `TypeError: exceptions must derive from BaseException`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Creating Custom Exceptions** (6: Exception Handling).
+
+👉 **[Continue to Next Lesson: Creating Custom Exceptions →](/tutorials/python-for-intermediate/creating-custom-exceptions)**

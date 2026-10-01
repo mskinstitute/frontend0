@@ -1,3 +1,24 @@
+---
+id: python-advanced-customizing-classes-with-magic-methods
+slug: customizing-classes-with-magic-methods
+course: python-for-advanced
+chapter: "2: Magic Methods & Operator Overloading"
+topic: "2.4 Customizing Classes with Magic Methods"
+title: "Customizing Classes with Magic Methods in Python"
+description: "Master customizing classes with magic methods in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 9
+keywords:
+  - python customizing classes with magic methods
+  - python advanced
+  - python customizing classes with magic methods
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Customizing Classes with Magic Methods
 
 Beyond basic arithmetic and string representations, Python's Data Model enables deep customization of user-defined classes. By implementing container protocols, callable behaviors, and attribute access hooks, you can create objects that behave like custom dictionaries, custom lists, dynamic proxies, or stateful function pipelines.
@@ -219,7 +240,52 @@ print("Newly assigned dynamic attribute:", record.cluster)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Implementing `__eq__` Without `__hash__`
+Defining `__eq__` automatically sets `__hash__ = None`, making your class unhashable (it cannot be stored in sets or used as dictionary keys). If instances are immutable, explicitly implement `__hash__`.
+
+### 2. Ignoring Slice Objects in `__getitem__`
+When creating a custom sequence class, `obj[1:4]` passes a `slice` object to `__getitem__`, not an integer. Always check `if isinstance(index, slice):`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Callable Pipeline Step with __call__
+
+### Scenario
+Implement a callable `Multiplier` class using `__call__` that allows instances of the class to be invoked directly like regular functions.
+
+### Complete Solution
+```python
+class Multiplier:
+    def __init__(self, factor: float):
+        self.factor = factor
+
+    def __call__(self, value: float) -> float:
+        return value * self.factor
+
+double = Multiplier(2.0)
+triple = Multiplier(3.0)
+
+print("Calling double(15):", double(15))
+print("Calling triple(15):", triple(15))
+print("Is double callable?", callable(double))
+```
+
+### Expected Output
+```text
+Calling double(15): 30.0
+Calling triple(15): 45.0
+Is double callable? True
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Which dunder method is executed when an element is retrieved via square bracket notation `value = obj["my_key"]`?
@@ -285,3 +351,10 @@ D. Call `getattr(self, name)`
 **Explanation:** Accessing `self.__dict__` or calling `getattr(self, ...)` inside `__getattribute__` triggers `__getattribute__` again, causing infinite recursion and a `RecursionError`. One must use `super().__getattribute__(name)`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Vector Class with Overloaded Operators** (2: Magic Methods & Operator Overloading).
+
+👉 **[Continue to Next Lesson: Project: Vector Class with Overloaded Operators →](/tutorials/python-for-advanced/project-vector-class-with-overloaded-operators)**

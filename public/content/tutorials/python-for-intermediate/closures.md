@@ -16,9 +16,9 @@ keywords:
   - cell objects
   - function factories
   - first class functions
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Closures: Mechanics, Scope Retention, and Function Factories
@@ -257,7 +257,66 @@ print(client_limiter("USER_99"))  # Should be blocked!
 
 ---
 
-# Multiple Choice Questions
+---
+
+# Practice Challenge
+
+### Scenario: Indian Chai Stall Running Token & Revenue Tracker
+
+A roadside chai stall owner in Lucknow wants a software counter that tracks both:
+1. Total cups of chai served today.
+2. Total revenue collected in INR (each cup costs ₹15).
+
+Write a closure function `create_chai_counter(price_per_cup=15)` that:
+- Maintains private internal state for `total_cups` and `total_revenue`.
+- Returns an inner function `order_chai(cups=1)`.
+- Each time `order_chai` is called, it increments `total_cups`, adds to `total_revenue`, and returns a summary formatted string:
+  `"Served X cups (+₹Y). Today's Total: Z cups | ₹Total Revenue"`.
+
+### Starter Code
+```python
+def create_chai_counter(price_per_cup=15):
+    # TODO: Implement closure with nonlocal state
+    pass
+```
+
+### Complete Solution
+```python
+def create_chai_counter(price_per_cup=15):
+    total_cups = 0
+    total_revenue = 0
+
+    def order_chai(cups=1):
+        nonlocal total_cups, total_revenue
+        total_cups += cups
+        cost = cups * price_per_cup
+        total_revenue += cost
+        return f"Served {cups} cup(s) (+₹{cost}). Total: {total_cups} cups | ₹{total_revenue:,.2f}"
+
+    return order_chai
+
+# Morning shift stall tracker
+lucknow_chai_stall = create_chai_counter(price_per_cup=15)
+
+print("=== Lucknow Chai Stall Morning Orders ===")
+print(lucknow_chai_stall(2))  # Order 2 cups
+print(lucknow_chai_stall(1))  # Order 1 cup
+print(lucknow_chai_stall(4))  # Order 4 cups for office staff
+print(lucknow_chai_stall(3))  # Order 3 cups
+```
+
+### Expected Output
+```text
+=== Lucknow Chai Stall Morning Orders ===
+Served 2 cup(s) (+₹30). Total: 2 cups | ₹30.00
+Served 1 cup(s) (+₹15). Total: 3 cups | ₹45.00
+Served 4 cup(s) (+₹60). Total: 7 cups | ₹105.00
+Served 3 cup(s) (+₹45). Total: 10 cups | ₹150.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does the __closure__ attribute of a Python function contain?
 A. The source code text of the function
@@ -315,60 +374,10 @@ C. Closures do not consume any RAM
 D. Python classes are being deprecated
 **Answer:** B
 **Explanation:** For lightweight operations (like a customized multiplier or callback token), closures provide private state retention without the syntactic boilerplate of class definitions, constructors, and instance method invocations.
-
 ---
 
-# Practice Challenge
+## 🚀 What's Next?
 
-### Scenario: Indian Chai Stall Running Token & Revenue Tracker
+In the next lesson, we will continue your intermediate Python journey with **Decorators Basics** (2: Functions Deep Dive).
 
-A roadside chai stall owner in Lucknow wants a software counter that tracks both:
-1. Total cups of chai served today.
-2. Total revenue collected in INR (each cup costs ₹15).
-
-Write a closure function `create_chai_counter(price_per_cup=15)` that:
-- Maintains private internal state for `total_cups` and `total_revenue`.
-- Returns an inner function `order_chai(cups=1)`.
-- Each time `order_chai` is called, it increments `total_cups`, adds to `total_revenue`, and returns a summary formatted string:
-  `"Served X cups (+₹Y). Today's Total: Z cups | ₹Total Revenue"`.
-
-### Starter Code
-```python
-def create_chai_counter(price_per_cup=15):
-    # TODO: Implement closure with nonlocal state
-    pass
-```
-
-### Complete Solution
-```python
-def create_chai_counter(price_per_cup=15):
-    total_cups = 0
-    total_revenue = 0
-
-    def order_chai(cups=1):
-        nonlocal total_cups, total_revenue
-        total_cups += cups
-        cost = cups * price_per_cup
-        total_revenue += cost
-        return f"Served {cups} cup(s) (+₹{cost}). Total: {total_cups} cups | ₹{total_revenue:,.2f}"
-
-    return order_chai
-
-# Morning shift stall tracker
-lucknow_chai_stall = create_chai_counter(price_per_cup=15)
-
-print("=== Lucknow Chai Stall Morning Orders ===")
-print(lucknow_chai_stall(2))  # Order 2 cups
-print(lucknow_chai_stall(1))  # Order 1 cup
-print(lucknow_chai_stall(4))  # Order 4 cups for office staff
-print(lucknow_chai_stall(3))  # Order 3 cups
-```
-
-### Expected Output
-```text
-=== Lucknow Chai Stall Morning Orders ===
-Served 2 cup(s) (+₹30). Total: 2 cups | ₹30.00
-Served 1 cup(s) (+₹15). Total: 3 cups | ₹45.00
-Served 4 cup(s) (+₹60). Total: 7 cups | ₹105.00
-Served 3 cup(s) (+₹45). Total: 10 cups | ₹150.00
-```
+👉 **[Continue to Next Lesson: Decorators Basics →](/tutorials/python-for-intermediate/decorators-basics)**

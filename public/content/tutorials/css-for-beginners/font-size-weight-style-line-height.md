@@ -17,9 +17,9 @@ keywords:
   - rem vs px
   - css typography
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Font Size, Weight, Style, and Line Height
@@ -215,7 +215,7 @@ p {
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -225,7 +225,6 @@ B. 24px
 C. 32px
 D. 18px
 **Answer:** B
-**Explanation:** 1.5rem is calculated as 1.5 * 16px = 24px.
 
 ---
 
@@ -235,7 +234,6 @@ B. 400
 C. 700
 D. 900
 **Answer:** B
-**Explanation:** On the numeric weight scale, 400 represents standard normal text, while 700 represents bold.
 
 ---
 
@@ -245,7 +243,6 @@ B. Because unitless line-height scales proportionally with whatever font-size ch
 C. Because unitless numbers load faster over the internet
 D. Because pixels are deprecated in CSS
 **Answer:** B
-**Explanation:** Unitless line-height (e.g., 1.5 or 1.6) acts as a proportional multiplier of the element's current font-size, preventing child elements from inheriting rigid, mismatched line heights.
 
 ---
 
@@ -255,7 +252,6 @@ B. Font weight
 C. Line height
 D. Word spacing
 **Answer:** C
-**Explanation:** In the CSS font shorthand syntax, the value immediately following the forward slash after font-size specifies the line-height (`font-size/line-height`).
 
 ---
 
@@ -265,7 +261,6 @@ B. `font-weight: italic;`
 C. `font-style: italic;`
 D. `text-transform: italic;`
 **Answer:** C
-**Explanation:** The `font-style` property controls whether text is rendered upright (`normal`) or slanted (`italic`).
 
 ---
 
@@ -330,3 +325,10 @@ D. `text-transform: italic;`
    </html>
    ```
 3. Open the file in your browser and notice how the combination of `font-size: 1.05rem` and `line-height: 1.7` makes reading pure pleasure! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Text Alignment, Decoration, Transform, and Spacing** (Text and Fonts).
+
+👉 **[Continue to Next Lesson: Text Alignment, Decoration, Transform, and Spacing →](/tutorials/css-for-beginners/text-align-decoration-transform-spacing)**

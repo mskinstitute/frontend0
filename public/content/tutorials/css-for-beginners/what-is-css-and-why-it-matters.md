@@ -17,9 +17,9 @@ keywords:
   - cascading style sheets
   - html vs css
   - web design basics
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # What is CSS and Why it Matters
@@ -145,7 +145,7 @@ Why do professional software engineers and web designers love CSS?
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -155,7 +155,6 @@ B. Cascading Style Sheets
 C. Creative Styling System
 D. Colorful Sheet Syntax
 **Answer:** B
-**Explanation:** CSS stands for Cascading Style Sheets. It is used to describe how HTML elements are to be displayed on screen, paper, or in other media.
 
 ---
 
@@ -165,7 +164,6 @@ B. The brain and nervous system
 C. The skin, clothes, and hairstyle
 D. The heartbeat and blood circulation
 **Answer:** C
-**Explanation:** In web development, HTML is the skeleton (structure), CSS is the clothes and appearance (styling), and JavaScript is the muscles and brain (actions/interactivity).
 
 ---
 
@@ -175,7 +173,6 @@ B. Håkon Wium Lie
 C. Brendan Eich
 D. James Gosling
 **Answer:** B
-**Explanation:** Håkon Wium Lie proposed CSS in 1994 while working at CERN alongside Sir Tim Berners-Lee.
 
 ---
 
@@ -185,7 +182,6 @@ B. It automatically writes JavaScript code for you
 C. It allows you to style multiple web pages from a single file
 D. It eliminates the need for an internet browser
 **Answer:** C
-**Explanation:** By linking a single external CSS file to many HTML documents, you can change the look and theme of an entire website by editing just one file.
 
 ---
 
@@ -195,7 +191,6 @@ B. They are deprecated and modern web standards separate content (HTML) from des
 C. They only work on computers made before the year 2000
 D. They require an expensive paid software license
 **Answer:** B
-**Explanation:** Tags like `<font>` and `<center>` are deprecated in HTML5 because modern standards require a strict separation of structure (HTML) and presentation (CSS).
 
 ---
 
@@ -245,3 +240,10 @@ D. They require an expensive paid software license
 </style>
 ```
 5. Save and refresh your browser! Compare how magical the difference is between the unstyled page and the styled page. 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **How CSS Works with HTML** (Introduction to CSS).
+
+👉 **[Continue to Next Lesson: How CSS Works with HTML →](/tutorials/css-for-beginners/how-css-works-with-html)**

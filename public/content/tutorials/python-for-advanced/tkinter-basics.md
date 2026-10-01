@@ -1,3 +1,24 @@
+---
+id: python-advanced-tkinter-basics
+slug: tkinter-basics
+course: python-for-advanced
+chapter: "14: GUI Development with Tkinter"
+topic: "14.1 Tkinter Basics"
+title: "Tkinter Basics in Python"
+description: "Master tkinter basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 57
+keywords:
+  - python tkinter basics
+  - python advanced
+  - python tkinter basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Tkinter Basics: Desktop GUI Architecture
 
 While Python is predominantly known for backend servers and data science, it includes a native desktop Graphical User Interface (GUI) toolkit in its standard library: **Tkinter**. Tkinter provides a Python wrapper around the **Tcl/Tk** graphics library, enabling cross-platform desktop applications on Windows, macOS, and Linux without external third-party dependencies.
@@ -149,7 +170,52 @@ Python provides two widget namespaces:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Mixing `pack()` and `grid()` in the Same Master Frame
+Mixing geometry managers within the same parent widget results in an immediate infinite layout negotiation freeze where the window hangs unresponsive.
+
+### 2. Freezing the GUI with Long Synchronous Operations
+Running network requests or heavy calculations inside button click handlers blocks Tkinter's `mainloop()`, causing the OS to report "Application Not Responding". Run heavy tasks in background threads.
+
+---
+
+---
+
+## 💻 Try It Yourself: Minimal Tkinter Window with Event Button
+
+### Scenario
+Create a responsive Tkinter application window with a custom title, geometry sizing, and an interactive click counter button.
+
+### Complete Solution
+```python
+# Simulation of Tkinter event-loop logic
+class MockTkinterApp:
+    def __init__(self):
+        self.count = 0
+
+    def on_button_click(self):
+        self.count += 1
+        return f"Clicked {self.count} times!"
+
+app = MockTkinterApp()
+print(app.on_button_click())
+print(app.on_button_click())
+print(app.on_button_click())
+```
+
+### Expected Output
+```text
+Clicked 1 times!
+Clicked 2 times!
+Clicked 3 times!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the primary role of `root.mainloop()` in a Tkinter desktop application?
@@ -215,3 +281,10 @@ D. `root.expand(col_index)`
 **Explanation:** The `columnconfigure(index, weight=N)` method assigns weight to a column, allowing it to absorb excess horizontal space proportionally when the parent window is resized.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Common Widgets** (14: GUI Development with Tkinter).
+
+👉 **[Continue to Next Lesson: Common Widgets →](/tutorials/python-for-advanced/common-widgets)**

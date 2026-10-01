@@ -18,9 +18,9 @@ keywords:
   - css priority
   - cascading order
   - css for beginners
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Inline, Internal, and External CSS
@@ -250,7 +250,7 @@ Because inline styling is attached directly to the element itself, it has the hi
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -260,7 +260,6 @@ B. `<style>`
 C. `<css>`
 D. `<stylesheet>`
 **Answer:** B
-**Explanation:** The `<style>` tag is used in the `<head>` section to define internal CSS rules for an HTML document.
 
 ---
 
@@ -270,7 +269,6 @@ B. `class`
 C. `style`
 D. `font`
 **Answer:** C
-**Explanation:** The `style` attribute is used directly inside an HTML opening tag to apply inline styles (e.g., `<p style="color: red;">`).
 
 ---
 
@@ -280,7 +278,6 @@ B. `<style src="style.css">`
 C. `<stylesheet>style.css</stylesheet>`
 D. `<css link="style.css">`
 **Answer:** A
-**Explanation:** The `<link rel="stylesheet" href="style.css">` tag placed in the `<head>` section is the standard HTML tag for linking external stylesheets.
 
 ---
 
@@ -290,7 +287,6 @@ B. Green
 C. Crimson
 D. Black (Browser Default)
 **Answer:** C
-**Explanation:** Inline CSS has higher priority than both internal and external CSS, so `color: crimson` overrides the other two rules.
 
 ---
 
@@ -300,7 +296,6 @@ B. External CSS allows one stylesheet to control the design of multiple pages cl
 C. Inline CSS is illegal on the internet
 D. External CSS automatically translates text into Hindi
 **Answer:** B
-**Explanation:** External CSS separates content from styling, enables browser caching, and allows a single CSS file to maintain a consistent look across hundreds of pages.
 
 ---
 
@@ -363,3 +358,10 @@ Build a mini 2-page school website using **External CSS**:
    </html>
    ```
 5. Open both pages in your browser. Notice how both pages automatically share the exact same beautiful green theme from `style.css`! Change `background-color` in `style.css` to see both pages update at once! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **CSS Syntax, Comments, and Code Structure** (CSS Syntax & Selectors Basics).
+
+👉 **[Continue to Next Lesson: CSS Syntax, Comments, and Code Structure →](/tutorials/css-for-beginners/css-syntax-comments-and-structure)**

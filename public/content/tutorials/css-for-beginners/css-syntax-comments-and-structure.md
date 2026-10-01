@@ -16,9 +16,9 @@ keywords:
   - css formatting
   - css case sensitivity
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # CSS Syntax, Comments, and Code Structure
@@ -166,7 +166,7 @@ When learning, **always write Expanded CSS**. Once you launch a real website, bu
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -176,7 +176,6 @@ B. `<!-- This is a comment -->`
 C. `/* This is a comment */`
 D. Hash symbol: `#comment_text`
 **Answer:** C
-**Explanation:** CSS only supports comments wrapped in `/*` and `*/`. `//` is used in JavaScript, `<!-- -->` in HTML, and `#` in Python.
 
 ---
 
@@ -186,7 +185,6 @@ B. The declaration is invalid and the browser ignores it
 C. The browser shows an error popup on the screen
 D. The margin becomes 20 times bigger
 **Answer:** B
-**Explanation:** In CSS, there must never be a space between the number and unit (e.g., `20px`). If a space is present, the browser considers the value invalid and skips it.
 
 ---
 
@@ -196,7 +194,6 @@ B. `font-size: 18px;`
 C. `font-size = 18px;`
 D. `font-size: 18 px;`
 **Answer:** B
-**Explanation:** `font-size: 18px;` uses lowercase property name, a colon, no space between number and unit, and ends with a semicolon.
 
 ---
 
@@ -206,7 +203,6 @@ B. Yes, `.menu` and `.MENU` are treated as completely different selectors
 C. Only on Windows computers, but not on Mac
 D. Only when using internal CSS
 **Answer:** B
-**Explanation:** While standard CSS property names are case-insensitive, custom class and ID names are strictly case-sensitive in CSS.
 
 ---
 
@@ -216,7 +212,6 @@ B. To explain code logic, create sections, and assist other programmers
 C. To encrypt the styling code from hackers
 D. To change the background color of the web browser
 **Answer:** B
-**Explanation:** Comments are human-readable notes ignored by browsers that help developers organize, document, and maintain their code.
 
 ---
 
@@ -265,3 +260,10 @@ D. To change the background color of the web browser
    </html>
    ```
 3. Test temporarily disabling the `letter-spacing` rule by wrapping it in `/* ... */`. Save and refresh your browser to see the effect! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Universal and Element Selectors** (CSS Syntax & Selectors Basics).
+
+👉 **[Continue to Next Lesson: Universal and Element Selectors →](/tutorials/css-for-beginners/universal-and-element-selectors)**

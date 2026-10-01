@@ -16,9 +16,9 @@ keywords:
   - border-left accent
   - dashed border
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Border Styles, Colors, and Shorthand
@@ -206,7 +206,7 @@ button {
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -216,7 +216,6 @@ B. `border-width`
 C. `border-style`
 D. `border-radius`
 **Answer:** C
-**Explanation:** The default value of `border-style` is `none`. Unless a visible style (like `solid` or `dashed`) is declared, the border will remain completely hidden even if width and color are given.
 
 ---
 
@@ -226,7 +225,6 @@ B. `dashed`
 C. `groove`
 D. `double`
 **Answer:** B
-**Explanation:** `border-style: dashed;` renders a series of short line segments (dashes), making it ideal for coupons and file upload targets.
 
 ---
 
@@ -236,7 +234,6 @@ B. `border: 2px solid royalblue;`
 C. `border-style: 2px solid royalblue;`
 D. `border: 2px, solid, royalblue;`
 **Answer:** B
-**Explanation:** The CSS `border` shorthand accepts width, style, and color separated by spaces (e.g., `border: 2px solid royalblue;`).
 
 ---
 
@@ -246,7 +243,6 @@ B. `border-left: 5px solid #10b981;`
 C. `margin-left: 5px solid #10b981;`
 D. `padding-left: 5px line #10b981;`
 **Answer:** B
-**Explanation:** The `border-left` property applies a border exclusively to the left side of an element, creating an accent stripe.
 
 ---
 
@@ -256,7 +252,6 @@ B. `border: transparent;`
 C. `border: none;` (or `border: 0;`)
 D. `border-style: hidden-border;`
 **Answer:** C
-**Explanation:** `border: none;` (or `border: 0;`) strips away all default border styling from buttons and inputs.
 
 ---
 
@@ -332,3 +327,10 @@ D. `border-style: hidden-border;`
    </html>
    ```
 3. Open the file in your browser to see how single-sided and dashed borders create professional UI components! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Border Radius: Rounded Corners, Pills, and Circular Avatars** (Borders, Shadows and Rounded Corners).
+
+👉 **[Continue to Next Lesson: Border Radius: Rounded Corners, Pills, and Circular Avatars →](/tutorials/css-for-beginners/border-radius-rounded-corners-circles)**

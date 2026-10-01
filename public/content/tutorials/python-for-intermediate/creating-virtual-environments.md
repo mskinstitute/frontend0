@@ -1,3 +1,24 @@
+---
+id: python-intermediate-creating-virtual-environments
+slug: creating-virtual-environments
+course: python-for-intermediate
+chapter: "12: Virtual Environments & Pip"
+topic: "12.2 Creating Virtual Environments"
+title: "Creating Virtual Environments in Python"
+description: "Master creating virtual environments in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 57
+keywords:
+  - python creating virtual environments
+  - python intermediate
+  - python creating virtual environments
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Creating and Managing Virtual Environments in Python
 
 Python provides the built-in **`venv`** module in its standard library to create lightweight, isolated virtual environments. In this guide, we cover the exact command-line steps to generate, activate, verify, and deactivate virtual environments across Windows, macOS, and Linux.
@@ -102,7 +123,46 @@ Instead of committing the environment itself, you commit the **dependency specif
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. PowerShell Execution Policy Restriction on Windows
+When running `venv\Scripts\Activate.ps1` on Windows, PowerShell may block the script. Resolve this by opening PowerShell and running: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`.
+
+### 2. Forgetting to Activate Before Installing
+If you run `pip install` without seeing `(.venv)` in your terminal prompt, packages will be installed to your global environment instead of your virtual environment.
+
+---
+
+---
+
+## 💻 Try It Yourself: Step-by-Step Venv Setup
+
+### Scenario
+Create a new isolated virtual environment named `.venv` in your project folder, activate it, verify which Python interpreter is active, and deactivate it.
+
+### Complete Solution
+```bash
+# 1. Create virtual environment
+python -m venv .venv
+
+# 2. Activate virtual environment
+# On Windows PowerShell:
+.venv\Scripts\Activate.ps1
+# On macOS / Linux:
+source .venv/bin/activate
+
+# 3. Verify active python path
+python -c "import sys; print(sys.prefix)"
+
+# 4. Deactivate when finished
+deactivate
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which standard module is used to create virtual environments in modern Python?
 A. `virtualenv_cli`
@@ -148,3 +208,10 @@ D. Virtual environments are encrypted
 **Answer:** B
 **Explanation:** Virtual environments contain machine-specific binaries, symlinks, and absolute paths tailored exclusively to the host system. They should be generated locally and never checked into version control.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Using pip for Package Management** (12: Virtual Environments & Pip).
+
+👉 **[Continue to Next Lesson: Using pip for Package Management →](/tutorials/python-for-intermediate/using-pip-for-package-management)**

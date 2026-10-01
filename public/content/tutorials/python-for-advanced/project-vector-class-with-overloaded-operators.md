@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-vector-class-with-overloaded-operators
+slug: project-vector-class-with-overloaded-operators
+course: python-for-advanced
+chapter: "2: Magic Methods & Operator Overloading"
+topic: "2.5 Project: Vector Class with Overloaded Operators"
+title: "Project: Vector Class with Overloaded Operators in Python"
+description: "Master project: vector class with overloaded operators in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 10
+order: 10
+keywords:
+  - python project vector class with overloaded operators
+  - python advanced
+  - python project: vector class with overloaded operators
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Vector Class with Overloaded Operators
 
 In scientific computing, game development, graphics rendering, and physics simulation, multi-dimensional vectors are core mathematical primitives. In this project, we will construct a high-performance, production-grade **N-dimensional Euclidean Vector class** that leverages Python's Data Model and operator overloading protocols to provide an intuitive mathematical API.
@@ -255,7 +276,53 @@ print(f"Sorted vectors: {sorted([v_large, v1, v_small])}")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Dimension Mismatch Without Validation
+Performing vector arithmetic (addition, dot product) between vectors of different dimensions (e.g. 2D vector + 3D vector) must raise a descriptive `ValueError`.
+
+### 2. Precision Drift in Magnitude Checks
+When verifying vector normalization or orthogonality, use `math.isclose(magnitude, 1.0)` rather than strict equality `== 1.0`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Dot Product Operator
+
+### Challenge
+Overload the matrix multiplication operator `@` (via `__matmul__`) to calculate the dot product between two multi-dimensional vectors.
+
+### Complete Solution
+```python
+class Vector:
+    def __init__(self, *components):
+        self.components = tuple(components)
+
+    def __matmul__(self, other):
+        if not isinstance(other, Vector) or len(self.components) != len(other.components):
+            raise ValueError("Dot product requires vectors of equal dimensions.")
+        return sum(a * b for a, b in zip(self.components, other.components))
+
+    def __repr__(self):
+        return f"Vector{self.components}"
+
+v1 = Vector(2, 3, 4)
+v2 = Vector(1, 0, -1)
+dot_product = v1 @ v2
+print(f"{v1} @ {v2} = {dot_product}")
+```
+
+### Expected Output
+```text
+Vector(2, 3, 4) @ Vector(1, 0, -1) = -2
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 In the `Vector` class implementation, why is `__rmul__` necessary in addition to `__mul__`?
@@ -321,3 +388,10 @@ D. Only the first two coordinates are added, discarding the third.
 **Explanation:** Our implementation explicitly checks `if len(self) != len(other): raise ValueError(...)`, preventing invalid mathematical additions across mismatched dimensions.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Function Decorators Deep Dive** (3: Advanced Decorators and Context Managers).
+
+👉 **[Continue to Next Lesson: Function Decorators Deep Dive →](/tutorials/python-for-advanced/function-decorators-deep-dive)**

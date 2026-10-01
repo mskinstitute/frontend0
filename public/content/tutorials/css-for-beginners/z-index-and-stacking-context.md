@@ -16,9 +16,9 @@ keywords:
   - 3d layering
   - positioned elements
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # z-index Basics: Controlling 3D Layering and Stacking Order
@@ -207,7 +207,7 @@ In professional software development, never throw random numbers like `99999` or
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which condition is strictly required for the `z-index` property to take effect on an element?
 A. The element must have a solid background color
@@ -215,7 +215,6 @@ B. The element must have its `position` set to something other than `static` (su
 C. The element must be an image
 D. The element must be inside an HTML `<form>`
 **Answer:** B
-**Explanation:** `z-index` is ignored on elements with default `position: static;`. The element must be positioned (`relative`, `absolute`, `fixed`, or `sticky`) or be a child of a flex/grid container.
 
 ---
 
@@ -225,7 +224,6 @@ B. The element that appears later in the HTML source code
 C. The element that appears first in the HTML source code
 D. The element with the brightest color
 **Answer:** B
-**Explanation:** Under the natural stacking order, positioned elements without a specified `z-index` stack according to source code order, where later elements overlap earlier ones.
 
 ---
 
@@ -235,7 +233,6 @@ B. The graphic is pushed backward behind the card's text and normal content
 C. The graphic turns into a negative grayscale image
 D. The graphic moves to the left side of the monitor
 **Answer:** B
-**Explanation:** Negative `z-index` values push an element behind standard normal flow text and block content, making it ideal for decorative watermarks and background shapes.
 
 ---
 
@@ -245,7 +242,6 @@ B. No, because Card A creates a stacking context with `z-index: 1`, trapping all
 C. Yes, if the browser is Google Chrome
 D. Only on high-resolution Retina displays
 **Answer:** B
-**Explanation:** This is the classic stacking context rule: a child element cannot rise above an external sibling if its own parent has a lower stacking context level.
 
 ---
 
@@ -255,7 +251,6 @@ B. It prevents messy "z-index wars" where developers keep adding 9s to force ele
 C. It reduces web page file size by 50%
 D. It is legally mandated by the W3C
 **Answer:** B
-**Explanation:** A structured scale prevents conflicts and makes component layering predictable and maintainable across large development teams.
 
 ---
 
@@ -386,3 +381,10 @@ D. It is legally mandated by the W3C
    </html>
    ```
 3. Open this file in your browser. Notice how the cards stack, and how hovering any card lifts its `z-index: 10` immediately to the top of the pile! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts** (Basic Layout Techniques).
+
+👉 **[Continue to Next Lesson: Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts →](/tutorials/css-for-beginners/float-and-clear-basics)**

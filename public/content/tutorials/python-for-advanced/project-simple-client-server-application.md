@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-simple-client-server-application
+slug: project-simple-client-server-application
+course: python-for-advanced
+chapter: "10: Networking with Python"
+topic: "10.4 Project: Simple Client-Server Application"
+title: "Project: Simple Client-Server Application in Python"
+description: "Master project: simple client-server application in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 43
+keywords:
+  - python project simple client server application
+  - python advanced
+  - python project: simple client-server application
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Client-Server Application with Custom Protocol
 
 In distributed systems, microservices frequently exchange structured commands across TCP sockets. While HTTP/REST and gRPC are popular high-level choices, constructing a custom socket protocol provides maximum speed, minimal serialization overhead, and complete control over network framing.
@@ -249,7 +270,56 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Unbounded Buffer Reads
+Calling `socket.recv(1024)` in an uncontrolled loop without checking for empty byte strings (`b""`) results in an infinite CPU-spinning loop when the peer closes the connection.
+
+### 2. Lack of Authentication
+Exposing raw socket listeners on public interfaces without authentication tokens or TLS encryption leaves systems vulnerable to unauthorized remote commands.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - JSON Protocol Framing
+
+### Challenge
+Implement a structured JSON protocol with a 4-byte big-endian message length prefix so client and server can reliably exchange arbitrary JSON objects over TCP streams.
+
+### Complete Solution
+```python
+import json
+import struct
+
+def encode_message(payload_dict: dict) -> bytes:
+    json_bytes = json.dumps(payload_dict).encode("utf-8")
+    header = struct.pack("!I", len(json_bytes))  # 4-byte unsigned int
+    return header + json_bytes
+
+def decode_message(stream_bytes: bytes) -> dict:
+    header = stream_bytes[:4]
+    length = struct.unpack("!I", header)[0]
+    payload_bytes = stream_bytes[4:4+length]
+    return json.loads(payload_bytes.decode("utf-8"))
+
+# Test framing
+msg = {"action": "QUERY_STATUS", "auth_token": "msk_token_123"}
+framed = encode_message(msg)
+unframed = decode_message(framed)
+print("Decoded framed payload:", unframed)
+```
+
+### Expected Output
+```text
+Decoded framed payload: {'action': 'QUERY_STATUS', 'auth_token': 'msk_token_123'}
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why is length-prefixed framing (`struct.pack("!I", length) + payload`) preferred over delimiter framing (e.g. `\n`) when transmitting binary or JSON payloads over TCP?
@@ -315,3 +385,10 @@ D. It bypasses the operating system kernel.
 **Explanation:** Providing an SDK hides socket lifecycle mechanics, protocol encoding, and framing details behind clean methods like `client.ping()` and `client.add_numbers()`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Regex Patterns and Groups** (11: Regular Expressions Advanced).
+
+👉 **[Continue to Next Lesson: Regex Patterns and Groups →](/tutorials/python-for-advanced/regex-patterns-and-groups)**

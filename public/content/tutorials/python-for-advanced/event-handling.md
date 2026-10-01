@@ -1,3 +1,24 @@
+---
+id: python-advanced-event-handling
+slug: event-handling
+course: python-for-advanced
+chapter: "14: GUI Development with Tkinter"
+topic: "14.3 Event Handling"
+title: "Event Handling in Python"
+description: "Master event handling in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 59
+keywords:
+  - python event handling
+  - python advanced
+  - python event handling
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Event Handling and Thread-Safe GUI Updates
 
 In desktop GUI applications, the interface must respond interactively to human inputs: mouse clicks, keyboard shortcuts, window resizing, and mouse movement. In Tkinter, interactions are captured through **Command Callbacks** and low-level **Event Binding**.
@@ -166,7 +187,62 @@ class ThreadSafeApp(tk.Tk):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Late-Binding Closures in Loop Event Handlers
+Binding loop variables inside lambda callbacks causes every button to reference the loop's final value:
+```python
+# ❌ Every button will print the last index!
+for i in range(5):
+    btn = tk.Button(command=lambda: print(i))
+
+# ✅ CORRECT: Bind default argument value
+for i in range(5):
+    btn = tk.Button(command=lambda idx=i: print(idx))
+```
+
+### 2. Mutating Tkinter Widgets from Background Threads
+Tkinter is **not thread-safe**. Never update widget text or state directly from a background worker thread. Schedule updates onto the main thread using `root.after(0, update_func)`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Keyboard Shortcut Key Binding
+
+### Scenario
+Demonstrate binding keyboard events (like `<Return>` to submit and `<Escape>` to clear) to an interactive entry field.
+
+### Complete Solution
+```python
+class FormEventHandler:
+    def __init__(self):
+        self.text = ""
+
+    def handle_return_key(self, event_key):
+        print(f"Submitted text: '{self.text}' (Triggered by {event_key})")
+
+    def handle_escape_key(self, event_key):
+        self.text = ""
+        print(f"Cleared text field (Triggered by {event_key})")
+
+handler = FormEventHandler()
+handler.text = "New User Registration"
+handler.handle_return_key("<Return>")
+handler.handle_escape_key("<Escape>")
+```
+
+### Expected Output
+```text
+Submitted text: 'New User Registration' (Triggered by <Return>)
+Cleared text field (Triggered by <Escape>)
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What argument does Tkinter automatically pass to a callback function registered via `widget.bind("<Button-1>", handler)`?
@@ -232,3 +308,10 @@ D. Disable the monitor display.
 **Explanation:** `WM_DELETE_WINDOW` is the window manager protocol message for window closure, allowing applications to confirm unsaved changes or perform graceful teardown.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: GUI-based To-Do App** (14: GUI Development with Tkinter).
+
+👉 **[Continue to Next Lesson: Project: GUI-based To-Do App →](/tutorials/python-for-advanced/project-gui-based-to-do-app)**

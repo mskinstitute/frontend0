@@ -1,3 +1,24 @@
+---
+id: python-intermediate-connecting-python-with-sqlite
+slug: connecting-python-with-sqlite
+course: python-for-intermediate
+chapter: "11: Database Basics with SQLite"
+topic: "11.3 Connecting Python with SQLite"
+title: "Connecting Python with SQLite in Python"
+description: "Master connecting python with sqlite in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 53
+keywords:
+  - python connecting python with sqlite
+  - python intermediate
+  - python connecting python with sqlite
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Connecting Python with SQLite
 
 Interacting with SQLite in Python requires understanding the relationship between the **Connection**, the **Cursor**, transactions, and parameter substitution. In this topic, we examine how to execute queries safely, access results as structured mappings, and defend against critical SQL injection attacks.
@@ -147,7 +168,51 @@ conn.close()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting to Call `conn.commit()`
+Modifications made via `INSERT`, `UPDATE`, or `DELETE` are staged in an uncommitted transaction. If you close the connection without calling `conn.commit()`, all your changes are silently rolled back!
+
+### 2. Forgetting to Close Connections
+Always close database connections using `conn.close()` or use context managers (`with sqlite3.connect(...) as conn:`) to ensure connection handles are released properly.
+
+---
+
+---
+
+## 💻 Try It Yourself: Safe Database Context Manager
+
+### Scenario
+Connect to an SQLite database file `inventory.db` using Python's `with sqlite3.connect(...) as conn:` context manager, create a `products` table, and verify automatic transaction commit.
+
+### Complete Solution
+```python
+import sqlite3
+
+with sqlite3.connect("inventory.db") as conn:
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL UNIQUE,
+            price REAL NOT NULL,
+            stock INTEGER DEFAULT 0
+        )
+    """)
+    # Context manager automatically commits transaction upon exit!
+    print("Products table verified and transaction committed.")
+```
+
+### Expected Output
+```text
+Products table verified and transaction committed.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Why should you NEVER use Python f-strings or string concatenation to build SQL queries with user input?
 A. F-strings execute too slowly in loops
@@ -193,3 +258,10 @@ D. `False`
 **Answer:** B
 **Explanation:** `cursor.fetchone()` returns the next row as a tuple, or `None` when the result set is exhausted.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **CRUD Operations** (11: Database Basics with SQLite).
+
+👉 **[Continue to Next Lesson: CRUD Operations →](/tutorials/python-for-intermediate/crud-operations)**

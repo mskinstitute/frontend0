@@ -1,3 +1,24 @@
+---
+id: python-advanced-relationships-in-databases
+slug: relationships-in-databases
+course: python-for-advanced
+chapter: "9: Advanced Database Handling"
+topic: "9.2 Relationships in Databases"
+title: "Relationships in Databases in Python"
+description: "Master relationships in databases in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 37
+keywords:
+  - python relationships in databases
+  - python advanced
+  - python relationships in databases
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Relationships in Databases with SQLAlchemy
 
 Relational database systems gain their expressive power from table associations: **One-to-Many (1:N)**, **Many-to-One (N:1)**, **Many-to-Many (M:N)**, and **One-to-One (1:1)**. In SQLAlchemy 2.0, relationships are configured using `ForeignKey` constraints paired with high-level `relationship()` property descriptors, enabling bidirectional navigation and automated cascading lifecycles.
@@ -164,7 +185,69 @@ Configuring `cascade="all, delete-orphan"` ensures database cleanliness:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. The N+1 Query Problem
+Iterating over child relationships in a loop with default lazy loading executes 1 query for the parent plus N separate queries for the children. Use `selectinload()` or `joinedload()` to eager-load relationships in bulk.
+
+### 2. Dangling Foreign Keys
+When deleting parent records, configure `cascade="all, delete-orphan"` on relationships to prevent orphaned foreign keys in child tables.
+
+---
+
+---
+
+## 💻 Try It Yourself: One-to-Many Relationship with Cascading Delete
+
+### Scenario
+Model an `Author` with many `Book` instances in SQLAlchemy. Verify that deleting an author automatically cascades and purges all their associated books.
+
+### Complete Solution
+```python
+from sqlalchemy import create_engine, ForeignKey, select
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, Session
+
+class Base(DeclarativeBase):
+    pass
+
+class Author(Base):
+    __tablename__ = "authors"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    books: Mapped[list["Book"]] = relationship(back_populates="author", cascade="all, delete-orphan")
+
+class Book(Base):
+    __tablename__ = "books"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str]
+    author_id: Mapped[int] = mapped_column(ForeignKey("authors.id"))
+    author: Mapped["Author"] = relationship(back_populates="books")
+
+engine = create_engine("sqlite:///:memory:")
+Base.metadata.create_all(engine)
+
+with Session(engine) as session:
+    author = Author(name="Arthur Conan Doyle", books=[Book(title="Study in Scarlet"), Book(title="Sign of Four")])
+    session.add(author)
+    session.commit()
+    
+    # Cascade delete
+    session.delete(author)
+    session.commit()
+    remaining_books = session.scalars(select(Book)).all()
+    print(f"Remaining books after author deletion: {len(remaining_books)}")
+```
+
+### Expected Output
+```text
+Remaining books after author deletion: 0
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What problem occurs when accessing lazy-loaded relationship attributes inside a loop over $N$ parent objects?
@@ -230,3 +313,10 @@ D. `back_populates` creates automated database indexes.
 **Explanation:** Explicitly defining relationships on both classes using `back_populates` ensures strict type annotations and clarity, avoiding the implicit attribute creation caused by legacy `backref`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Transactions and Rollbacks** (9: Advanced Database Handling).
+
+👉 **[Continue to Next Lesson: Transactions and Rollbacks →](/tutorials/python-for-advanced/transactions-and-rollbacks)**

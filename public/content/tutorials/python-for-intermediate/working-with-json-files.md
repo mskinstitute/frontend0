@@ -1,3 +1,24 @@
+---
+id: python-intermediate-working-with-json-files
+slug: working-with-json-files
+course: python-for-intermediate
+chapter: "4: File Handling Advanced"
+topic: "4.3 Working with JSON Files"
+title: "Working with JSON Files in Python"
+description: "Master working with json files in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 18
+keywords:
+  - python working with json files
+  - python intermediate
+  - python working with json files
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Working with JSON Files in Python
 
 JSON (JavaScript Object Notation) is the standard data interchange format for modern web APIs, configuration files, cloud services, and NoSQL databases. Python provides native support for encoding and decoding JSON via its built-in `json` module.
@@ -170,7 +191,89 @@ except json.JSONDecodeError as err:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Confusing `json.dump()` with `json.dumps()`
+- `json.dump(obj, file)`: Serializes object directly to an open **file stream**.
+- `json.dumps(obj)`: Serializes object to a **Python string** (in memory).
+Using `dumps()` with a file parameter causes a `TypeError`.
+
+### 2. Trying to Serialize Non-JSON-Compatible Types
+Standard JSON does not support Python `datetime`, `set`, or custom class instances directly. Convert them to ISO strings, lists, or dictionaries first, or provide a custom `default` serializer.
+
+---
+
+---
+
+## 💻 Try It Yourself: JSON Configuration Manager
+
+### Scenario
+Build a robust configuration manager that stores server settings in a `config.json` file. If the file exists, load the settings; if it is missing, generate default settings and write them formatted with clean indentation.
+
+### Starter Code
+```python
+import json
+import os
+
+CONFIG_FILE = "app_config.json"
+DEFAULT_CONFIG = {
+    "app_name": "MSK Analytics Portal",
+    "version": "1.2.0",
+    "debug_mode": True,
+    "port": 8080,
+    "database": {
+        "host": "localhost",
+        "name": "analytics_db"
+    }
+}
+
+# TODO: Implement load_or_create_config(filepath, defaults)
+```
+
+### Complete Solution
+```python
+import json
+import os
+
+CONFIG_FILE = "app_config.json"
+DEFAULT_CONFIG = {
+    "app_name": "MSK Analytics Portal",
+    "version": "1.2.0",
+    "debug_mode": True,
+    "port": 8080,
+    "database": {
+        "host": "localhost",
+        "name": "analytics_db"
+    }
+}
+
+def load_or_create_config(filepath, defaults):
+    if not os.path.exists(filepath):
+        print(f"Config not found. Creating default configuration at '{filepath}'...")
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(defaults, f, indent=4)
+        return defaults
+    
+    print(f"Loading existing configuration from '{filepath}'...")
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+# Test config manager
+config = load_or_create_config(CONFIG_FILE, DEFAULT_CONFIG)
+print(f"Connected to: {config['app_name']} on port {config['port']}")
+```
+
+### Expected Output
+```text
+Config not found. Creating default configuration at 'app_config.json'...
+Connected to: MSK Analytics Portal on port 8080
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the difference between `json.dump()` and `json.dumps()` in Python?
 A. `json.dump()` writes directly to a file-like stream, whereas `json.dumps()` returns a formatted JSON string
@@ -216,3 +319,10 @@ D. Set elements cannot be cast to strings
 **Answer:** B
 **Explanation:** Standard JSON specification only supports objects, arrays, strings, numbers, booleans, and null. Sets have no direct representation, so Python requires explicit conversion (e.g. via `list(my_set)`).
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **File Exceptions and Error Handling** (4: File Handling Advanced).
+
+👉 **[Continue to Next Lesson: File Exceptions and Error Handling →](/tutorials/python-for-intermediate/file-exceptions-and-error-handling)**

@@ -17,9 +17,9 @@ keywords:
   - class vs id
   - specificity
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Class and ID Selectors
@@ -215,7 +215,7 @@ Because an ID is unique to a single element, the browser considers it much more 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -225,7 +225,6 @@ B. `.`
 C. `*`
 D. `@`
 **Answer:** B
-**Explanation:** A period or dot (`.`) is used in CSS to define a class selector (e.g., `.highlight { color: red; }`).
 
 ---
 
@@ -235,7 +234,6 @@ B. Multiple elements on the same webpage should share the exact same ID
 C. An ID must be unique to only one element per webpage
 D. ID rules have lower priority than element selectors
 **Answer:** C
-**Explanation:** In HTML and CSS, an ID must be unique on the page. No two elements on the same document should share the same ID.
 
 ---
 
@@ -245,7 +243,6 @@ B. `<button class="btn" class="btn-primary">`
 C. `<button class="btn btn-primary">`
 D. `<button class=".btn .btn-primary">`
 **Answer:** C
-**Explanation:** Multiple classes are assigned inside a single `class` attribute separated by a space, without any dots or commas (`class="btn btn-primary"`).
 
 ---
 
@@ -255,7 +252,6 @@ B. `profile-card`
 C. `#profile-card`
 D. `*profile-card`
 **Answer:** C
-**Explanation:** The hash symbol (`#`) is used in CSS to target an element by its ID attribute (`#profile-card`).
 
 ---
 
@@ -265,7 +261,6 @@ B. Red
 C. Purple (a mix of red and blue)
 D. Black (Browser Default)
 **Answer:** B
-**Explanation:** ID selectors have higher CSS specificity than class selectors. Therefore, the style defined in `#title` (red) will override `.text-blue` (blue).
 
 ---
 
@@ -339,3 +334,10 @@ D. Black (Browser Default)
    - All three cards share the base `.card` styling.
    - Each card gets its house stripe using a secondary class (`.red-house`, `.blue-house`, `.green-house`).
    - Priya Sharma's card gets a golden border and warm yellow background thanks to its unique `#head-girl` ID! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Grouping and Combinator Selectors** (CSS Syntax & Selectors Basics).
+
+👉 **[Continue to Next Lesson: Grouping and Combinator Selectors →](/tutorials/css-for-beginners/grouping-and-combinator-selectors)**

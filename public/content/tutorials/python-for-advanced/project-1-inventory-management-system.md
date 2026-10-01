@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-1-inventory-management-system
+slug: project-1-inventory-management-system
+course: python-for-advanced
+chapter: "15: Final Capstone Projects"
+topic: "15.1 Project 1: Inventory Management System"
+title: "Project 1: Inventory Management System in Python"
+description: "Master project 1: inventory management system in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 61
+keywords:
+  - python project 1 inventory management system
+  - python advanced
+  - python project 1: inventory management system
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Capstone Project: Enterprise Inventory Management System
 
 In global supply chain management and e-commerce infrastructure, an inventory engine must handle high-concurrency stock reservations, maintain strict transactional audit ledgers, trigger real-time restocking events, and enforce multi-warehouse consistency. A race condition that permits selling inventory you do not have causes severe operational disruption and financial loss.
@@ -278,7 +299,52 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Race Conditions on Concurrent Stock Deductions
+When multiple transactions decrement inventory concurrently, two orders can pass stock validation simultaneously, resulting in negative inventory. Use atomic database transactions with row-level locks.
+
+### 2. Hardcoded Database Paths
+Always construct paths relative to the application directory using `pathlib.Path(__file__).parent` to prevent database location failures when executed from different working directories.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Low Stock Warning Alert
+
+### Challenge
+Add an automated inventory audit query that scans product stock levels and triggers a notification if any item falls below its minimum reorder threshold.
+
+### Complete Solution
+```python
+def audit_low_stock(inventory_items, reorder_threshold=5):
+    low_stock = [item for item in inventory_items if item["stock"] <= reorder_threshold]
+    print(f"
+--- Low Stock Audit Report ({len(low_stock)} Items Require Reordering) ---")
+    for item in low_stock:
+        print(f"⚠️ [REORDER NEEDED] {item['name']}: {item['stock']} units left (Threshold: {reorder_threshold})")
+
+items = [
+    {"name": "Mechanical Keyboards", "stock": 12},
+    {"name": "Gaming Mice", "stock": 3},
+    {"name": "USB-C Cables", "stock": 2}
+]
+audit_low_stock(items, 5)
+```
+
+### Expected Output
+```text
+--- Low Stock Audit Report (2 Items Require Reordering) ---
+⚠️ [REORDER NEEDED] Gaming Mice: 3 units left (Threshold: 5)
+⚠️ [REORDER NEEDED] USB-C Cables: 2 units left (Threshold: 5)
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does the `InventoryService` prevent concurrent checkout threads from overselling stock beyond available inventory?
@@ -344,3 +410,10 @@ D. The operating system restarts.
 **Explanation:** Because both the product quantity update and the stock movement insertion reside within the same `with session.begin():` block, any failure triggers an atomic rollback of both operations.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project 2: API-based Weather Dashboard** (15: Final Capstone Projects).
+
+👉 **[Continue to Next Lesson: Project 2: API-based Weather Dashboard →](/tutorials/python-for-advanced/project-2-api-based-weather-dashboard)**

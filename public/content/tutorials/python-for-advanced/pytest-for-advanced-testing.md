@@ -1,3 +1,24 @@
+---
+id: python-advanced-pytest-for-advanced-testing
+slug: pytest-for-advanced-testing
+course: python-for-advanced
+chapter: "13: Testing & Best Practices"
+topic: "13.2 Pytest for Advanced Testing"
+title: "Pytest for Advanced Testing in Python"
+description: "Master pytest for advanced testing in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 53
+keywords:
+  - python pytest for advanced testing
+  - python advanced
+  - python pytest for advanced testing
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Pytest for Advanced Testing
 
 While Python's standard `unittest` module provides an xUnit foundation, **Pytest** has emerged as the industry standard for Python testing. Pytest eliminates boilerplate class hierarchies, leverages Python's native `assert` statement through **Abstract Syntax Tree (AST) rewriting**, and introduces a dependency-injection **Fixture Architecture** and concise test **Parametrization**.
@@ -151,7 +172,57 @@ When fixtures are defined in a file named `conftest.py` in the root of your test
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Testing Float Equality Directly
+Never test floating-point numbers with `assert result == 0.3`. Always use `pytest.approx`: `assert result == pytest.approx(0.3)`.
+
+### 2. Over-Scoping Shared Fixtures
+Using `scope="session"` on fixtures that return mutable database connections or stateful objects introduces hard-to-debug test pollution across independent test modules.
+
+---
+
+---
+
+## 💻 Try It Yourself: Parametric Testing with pytest
+
+### Scenario
+Demonstrate pytest parametric testing using `@pytest.mark.parametrize` to test a password strength validation function across diverse input variations.
+
+### Complete Solution
+```python
+# Demonstrating pytest parametrize pattern
+test_cases = [
+    ("Weak", False),
+    ("12345", False),
+    ("SecurePass99!", True),
+    ("short1!", False)
+]
+
+def is_strong_password(p: str) -> bool:
+    return len(p) >= 8 and any(c.isdigit() for c in p) and any(c in "!@#$%" for c in p)
+
+print("Running parametric test suite:")
+for password, expected in test_cases:
+    result = is_strong_password(password)
+    assert result == expected, f"Failed for {password}"
+    print(f"✓ Validated '{password}' -> {result}")
+```
+
+### Expected Output
+```text
+Running parametric test suite:
+✓ Validated 'Weak' -> False
+✓ Validated '12345' -> False
+✓ Validated 'SecurePass99!' -> True
+✓ Validated 'short1!' -> False
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does Pytest provide detailed error diagnostics when a native Python `assert a == b` statement fails?
@@ -217,3 +288,10 @@ D. `@pytest.mark.matrix`
 **Explanation:** `@pytest.mark.parametrize("args", [data])` unpacks a sequence of test parameters, generating a distinct test execution for each parameter set.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Mocking and Fixtures** (13: Testing & Best Practices).
+
+👉 **[Continue to Next Lesson: Mocking and Fixtures →](/tutorials/python-for-advanced/mocking-and-fixtures)**

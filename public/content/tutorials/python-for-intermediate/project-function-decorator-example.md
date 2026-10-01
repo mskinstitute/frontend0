@@ -17,9 +17,9 @@ keywords:
   - memoization
   - rate limiter
   - production python
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Project: Production Decorators (Retry, Cache, and Rate-Limiter)
@@ -270,56 +270,6 @@ OTP sent to +91 9876543210
 
 ---
 
-# Multiple Choice Questions
-
-### 1. How many levels of nested functions are required to implement a decorator that accepts configuration arguments, like @retry(max_retries=5)?
-A. 1
-B. 2
-C. 3
-D. 4
-**Answer:** C
-**Explanation:** A parameterized decorator requires 3 tiers: (1) An outer Factory function accepting configuration parameters, (2) an intermediate Decorator function accepting the target function, and (3) an inner Wrapper closure executing at call-time.
-
----
-
-### 2. In the memoization decorator, why can args be used directly as a dictionary cache key?
-A. Because all function arguments in Python are automatically converted to strings
-B. Because `*args` packs positional arguments into an immutable `tuple`, which is hashable
-C. Because Python dictionaries accept mutable lists as keys
-D. Because memoization only works with numbers
-**Answer:** B
-**Explanation:** In Python, `*args` produces an immutable `tuple`. As long as the arguments passed into the function are hashable, tuples can serve directly as dictionary keys.
-
----
-
-### 3. What is the danger of writing an unconstrained retry decorator with while True and no maximum attempt limit?
-A. The computer screen turns black
-B. If a service is permanently offline, the program enters an infinite loop, starving CPU threads and preventing recovery
-C. Python deletes the file after 100 loops
-D. Memory is automatically wiped
-**Answer:** B
-**Explanation:** Unbounded retries cause thread starvation and runaway CPU utilization if an external dependency suffers an outage. Production retry logic must enforce a strict `max_retries` ceiling.
-
----
-
-### 4. How does the sliding-window rate limiter prune expired request timestamps?
-A. By deleting the dictionary
-B. By using a list comprehension: `[t for t in timestamps if current_time - t <= period_seconds]`
-C. By resetting the computer's system clock
-D. By terminating the thread
-**Answer:** B
-**Explanation:** Filtering timestamps by `current_time - t <= period_seconds` removes all historical invocations that occurred outside the active time window, keeping only recent active calls.
-
----
-
-### 5. What will happen if you apply both @memoize and @retry_on_failure to a function?
-A. A SyntaxError is raised
-B. The decorators compose together, providing both caching and retry capabilities according to their stacking order
-C. The function is deleted
-D. Python runs them in random sequence
-**Answer:** B
-**Explanation:** Python decorators compose cleanly. Stacking `@memoize` above `@retry_on_failure` first checks the cache; if not found, it invokes the retrying wrapper to fetch the value safely.
-
 ---
 
 # Practice Challenge
@@ -407,3 +357,62 @@ Caught expected ValueError on negative transfer.
 [2026-09-12 15:05:00] SUCCESS: transfer_upi args=('arjun@sbi', 'priya@hdfc', 1500.0) kwargs={} -> TXN-150000
 [2026-09-12 15:05:00] ERROR: transfer_upi args=('arjun@sbi', 'priya@hdfc', -50.0) kwargs={} -> ValueError: Transfer amount must be positive!
 ```
+
+---
+
+## Practice Quiz
+
+### 1. How many levels of nested functions are required to implement a decorator that accepts configuration arguments, like @retry(max_retries=5)?
+A. 1
+B. 2
+C. 3
+D. 4
+**Answer:** C
+**Explanation:** A parameterized decorator requires 3 tiers: (1) An outer Factory function accepting configuration parameters, (2) an intermediate Decorator function accepting the target function, and (3) an inner Wrapper closure executing at call-time.
+
+---
+
+### 2. In the memoization decorator, why can args be used directly as a dictionary cache key?
+A. Because all function arguments in Python are automatically converted to strings
+B. Because `*args` packs positional arguments into an immutable `tuple`, which is hashable
+C. Because Python dictionaries accept mutable lists as keys
+D. Because memoization only works with numbers
+**Answer:** B
+**Explanation:** In Python, `*args` produces an immutable `tuple`. As long as the arguments passed into the function are hashable, tuples can serve directly as dictionary keys.
+
+---
+
+### 3. What is the danger of writing an unconstrained retry decorator with while True and no maximum attempt limit?
+A. The computer screen turns black
+B. If a service is permanently offline, the program enters an infinite loop, starving CPU threads and preventing recovery
+C. Python deletes the file after 100 loops
+D. Memory is automatically wiped
+**Answer:** B
+**Explanation:** Unbounded retries cause thread starvation and runaway CPU utilization if an external dependency suffers an outage. Production retry logic must enforce a strict `max_retries` ceiling.
+
+---
+
+### 4. How does the sliding-window rate limiter prune expired request timestamps?
+A. By deleting the dictionary
+B. By using a list comprehension: `[t for t in timestamps if current_time - t <= period_seconds]`
+C. By resetting the computer's system clock
+D. By terminating the thread
+**Answer:** B
+**Explanation:** Filtering timestamps by `current_time - t <= period_seconds` removes all historical invocations that occurred outside the active time window, keeping only recent active calls.
+
+---
+
+### 5. What will happen if you apply both @memoize and @retry_on_failure to a function?
+A. A SyntaxError is raised
+B. The decorators compose together, providing both caching and retry capabilities according to their stacking order
+C. The function is deleted
+D. Python runs them in random sequence
+**Answer:** B
+**Explanation:** Python decorators compose cleanly. Stacking `@memoize` above `@retry_on_failure` first checks the cache; if not found, it invokes the retrying wrapper to fetch the value safely.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Creating and Importing Modules** (3: Modules and Packages).
+
+👉 **[Continue to Next Lesson: Creating and Importing Modules →](/tutorials/python-for-intermediate/creating-and-importing-modules)**

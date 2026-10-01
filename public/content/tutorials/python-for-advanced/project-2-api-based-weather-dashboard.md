@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-2-api-based-weather-dashboard
+slug: project-2-api-based-weather-dashboard
+course: python-for-advanced
+chapter: "15: Final Capstone Projects"
+topic: "15.2 Project 2: API-based Weather Dashboard"
+title: "Project 2: API-based Weather Dashboard in Python"
+description: "Master project 2: api-based weather dashboard in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 10
+order: 62
+keywords:
+  - python project 2 api based weather dashboard
+  - python advanced
+  - python project 2: api-based weather dashboard
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Capstone Project: Asynchronous Weather Analytics Dashboard
 
 Building distributed data dashboards requires pulling information from multiple third-party REST APIs concurrently, enforcing strict rate-limiting caches to minimize external API costs, running statistical anomaly checks, and rendering real-time metrics onto a responsive user interface.
@@ -333,7 +354,52 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Blocking UI During Forecast Network Calls
+Fetching weather forecasts over slow internet connections will freeze desktop UI elements unless network requests execute in background threads or async tasks.
+
+### 2. Unhandled Missing Forecast Metrics
+Third-party weather APIs often omit metrics like UV index or air quality for certain rural locations. Always use safe dictionary lookups: `data.get("uv", 0.0)`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - 5-Day Forecast Aggregator
+
+### Challenge
+Extend the Weather Dashboard to compute the average expected temperature and total rainfall accumulation over a multi-day forecast array.
+
+### Complete Solution
+```python
+def summarize_forecast(daily_forecasts):
+    avg_temp = sum(day["temp"] for day in daily_forecasts) / len(daily_forecasts)
+    total_rain = sum(day.get("rain_mm", 0.0) for day in daily_forecasts)
+    print(f"5-Day Average Temp : {avg_temp:.1f}°C")
+    print(f"Total Expected Rain: {total_rain:.1f} mm")
+
+forecast = [
+    {"temp": 28.5, "rain_mm": 0.0},
+    {"temp": 29.0, "rain_mm": 5.2},
+    {"temp": 26.5, "rain_mm": 12.0},
+    {"temp": 27.0, "rain_mm": 2.5},
+    {"temp": 30.0, "rain_mm": 0.0}
+]
+summarize_forecast(forecast)
+```
+
+### Expected Output
+```text
+5-Day Average Temp : 28.2°C
+Total Expected Rain: 19.7 mm
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why does querying 8 cities using `asyncio.gather()` complete in roughly 0.25 seconds instead of 2.0 seconds?
@@ -399,3 +465,10 @@ D. `self.tree.color("red")`
 **Explanation:** In `ttk.Treeview`, styling rules are declared using `tag_configure(tag_name, **options)` and applied to individual rows by passing the tag name to the `tags` parameter of `insert()`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project 3: Personal Finance Tracker with Database** (15: Final Capstone Projects).
+
+👉 **[Continue to Next Lesson: Project 3: Personal Finance Tracker with Database →](/tutorials/python-for-advanced/project-3-personal-finance-tracker-with-database)**

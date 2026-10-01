@@ -16,9 +16,9 @@ keywords:
   - unpacking operator
   - keyword only arguments
   - function signature
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Advanced Argument Unpacking: *args and **kwargs in Depth
@@ -249,63 +249,6 @@ Merged Configuration:
 
 ---
 
-# Multiple Choice Questions
-
-### 1. In a function definition def demo(*args):, what data structure does args represent inside the function body?
-A. List
-B. Tuple
-C. Dictionary
-D. Set
-**Answer:** B
-**Explanation:** `*args` packs variable positional arguments into an immutable `tuple`, not a mutable `list`.
-
----
-
-### 2. Which function signature violates Python syntax and raises a SyntaxError upon definition?
-A. `def func(a, *args, b=10, **kwargs):`
-B. `def func(a, b, *, debug=True):`
-C. `def func(**kwargs, *args):`
-D. `def func(*args, **kwargs):`
-**Answer:** C
-**Explanation:** Python syntax mandates that `*args` must always precede `**kwargs`. Placing `**kwargs` before `*args` results in an immediate `SyntaxError: invalid syntax`.
-
----
-
-### 3. What does a standalone bare asterisk (*) do in def process(data, *, secure=True)?:
-A. Enables pointer arithmetic
-B. Forces all parameters declared after the asterisk (`secure`) to be passed exclusively as keyword arguments
-C. Multiplies data by secure
-D. Allows infinite positional parameters
-**Answer:** B
-**Explanation:** A bare asterisk `*` acts as a delimiter indicating that all subsequent parameters are keyword-only and cannot be supplied positionally.
-
----
-
-### 4. What is the output of the following code snippet?
-```python
-def multiply(x, y, z):
-    return x * y * z
-
-numbers = [2, 3, 4]
-print(multiply(*numbers))
-```
-A. `multiply([2, 3, 4])`
-B. `24`
-C. `[2, 3, 4, 2, 3, 4]`
-D. `TypeError: multiply() missing 2 required positional arguments`
-**Answer:** B
-**Explanation:** The call-site unpacking operator `*numbers` explodes the 3-element list into three separate positional arguments: `multiply(2, 3, 4)`, which computes $2 \times 3 \times 4 = 24$.
-
----
-
-### 5. When merging two dictionaries with {**dict_a, **dict_b}, what happens if both dictionaries contain the key 'port'?
-A. Both values are combined into a list
-B. Python raises a DuplicateKeyError
-C. The value from `dict_b` overwrites the value from `dict_a`
-D. The key 'port' is deleted from the merged dictionary
-**Answer:** C
-**Explanation:** During dictionary unpacking, evaluation proceeds from left to right. Keys in subsequent dictionaries overwrite identical keys from preceding dictionaries (last-write-wins).
-
 ---
 
 # Practice Challenge
@@ -385,3 +328,69 @@ Path Params  : ('customer', 9021, 'invoice', 450)
 HTTP Headers : {'Authorization': 'Bearer JWT_TOKEN_XYZ', 'Client-Id': 'MSK_GATEWAY_01'}
 Query Params : {'currency': 'INR', 'include_tax': True}
 ```
+
+---
+
+## Practice Quiz
+
+### 1. In a function definition def demo(*args):, what data structure does args represent inside the function body?
+A. List
+B. Tuple
+C. Dictionary
+D. Set
+**Answer:** B
+**Explanation:** `*args` packs variable positional arguments into an immutable `tuple`, not a mutable `list`.
+
+---
+
+### 2. Which function signature violates Python syntax and raises a SyntaxError upon definition?
+A. `def func(a, *args, b=10, **kwargs):`
+B. `def func(a, b, *, debug=True):`
+C. `def func(**kwargs, *args):`
+D. `def func(*args, **kwargs):`
+**Answer:** C
+**Explanation:** Python syntax mandates that `*args` must always precede `**kwargs`. Placing `**kwargs` before `*args` results in an immediate `SyntaxError: invalid syntax`.
+
+---
+
+### 3. What does a standalone bare asterisk (*) do in def process(data, *, secure=True)?:
+A. Enables pointer arithmetic
+B. Forces all parameters declared after the asterisk (`secure`) to be passed exclusively as keyword arguments
+C. Multiplies data by secure
+D. Allows infinite positional parameters
+**Answer:** B
+**Explanation:** A bare asterisk `*` acts as a delimiter indicating that all subsequent parameters are keyword-only and cannot be supplied positionally.
+
+---
+
+### 4. What is the output of the following code snippet?
+```python
+def multiply(x, y, z):
+    return x * y * z
+
+numbers = [2, 3, 4]
+print(multiply(*numbers))
+```
+A. `multiply([2, 3, 4])`
+B. `24`
+C. `[2, 3, 4, 2, 3, 4]`
+D. `TypeError: multiply() missing 2 required positional arguments`
+**Answer:** B
+**Explanation:** The call-site unpacking operator `*numbers` explodes the 3-element list into three separate positional arguments: `multiply(2, 3, 4)`, which computes $2 \times 3 \times 4 = 24$.
+
+---
+
+### 5. When merging two dictionaries with {**dict_a, **dict_b}, what happens if both dictionaries contain the key 'port'?
+A. Both values are combined into a list
+B. Python raises a DuplicateKeyError
+C. The value from `dict_b` overwrites the value from `dict_a`
+D. The key 'port' is deleted from the merged dictionary
+**Answer:** C
+**Explanation:** During dictionary unpacking, evaluation proceeds from left to right. Keys in subsequent dictionaries overwrite identical keys from preceding dictionaries (last-write-wins).
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Default vs Keyword Arguments** (2: Functions Deep Dive).
+
+👉 **[Continue to Next Lesson: Default vs Keyword Arguments →](/tutorials/python-for-intermediate/default-vs-keyword-arguments)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-introduction-to-matplotlib
+slug: introduction-to-matplotlib
+course: python-for-intermediate
+chapter: "13: Data Visualization Basics"
+topic: "13.1 Introduction to Matplotlib"
+title: "Introduction to Matplotlib in Python"
+description: "Master introduction to matplotlib in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 61
+keywords:
+  - python introduction to matplotlib
+  - python intermediate
+  - python introduction to matplotlib
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Introduction to Matplotlib in Python
 
 Data visualization is a vital discipline in modern software engineering, data science, machine learning, and business analytics. While raw numbers and tables convey exact quantities, graphical visualizations immediately reveal patterns, trends, correlations, and anomalies. In Python, **Matplotlib** is the foundational plotting library upon which the entire scientific visualization ecosystem (including Seaborn, Pandas plotting, and scikit-learn) is built.
@@ -118,7 +139,53 @@ Setting `bbox_inches="tight"` ensures no labels or legends are cropped off at th
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting `plt.show()`
+In standalone Python scripts, plots are not displayed on screen until `plt.show()` is invoked.
+
+### 2. Mismatched X and Y Array Dimensions
+Matplotlib requires X and Y sequences to have the exact same number of data points. If `len(x) != len(y)`, it raises a `ValueError: x and y must have same first dimension`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Basic Temperature Trend Plot
+
+### Scenario
+Plot daily temperatures recorded over one week in Shikohabad using Matplotlib. Add gridlines, axis labels, markers, and a descriptive title.
+
+### Complete Solution
+```python
+import matplotlib.pyplot as plt
+
+days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+temperatures = [28.5, 30.0, 31.2, 29.8, 32.5, 33.0, 31.8]
+
+plt.figure(figsize=(8, 4.5))
+plt.plot(days, temperatures, marker="o", color="#2563eb", linewidth=2, label="Daily High (°C)")
+plt.title("Weekly Temperature Trend - Shikohabad", fontsize=14, fontweight="bold")
+plt.xlabel("Day of Week", fontsize=11)
+plt.ylabel("Temperature (°C)", fontsize=11)
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend()
+plt.tight_layout()
+plt.savefig("temperature_trend.png", dpi=150)
+print("Temperature trend plot saved to 'temperature_trend.png'.")
+plt.close()
+```
+
+### Expected Output
+```text
+Temperature trend plot saved to 'temperature_trend.png'.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In Matplotlib's object architecture, what is the difference between a `Figure` and an `Axes`?
 A. `Figure` is for 3D plots; `Axes` is for 2D plots
@@ -164,3 +231,10 @@ D. `del fig.memory`
 **Answer:** B
 **Explanation:** `plt.close(fig)` frees the memory allocated for the figure canvas, which is crucial in batch scripts generating many plots.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Line, Bar and Pie Charts** (13: Data Visualization Basics).
+
+👉 **[Continue to Next Lesson: Line, Bar and Pie Charts →](/tutorials/python-for-intermediate/line-bar-and-pie-charts)**

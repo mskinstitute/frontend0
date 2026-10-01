@@ -16,9 +16,9 @@ keywords:
   - syntactic sugar
   - meta programming
   - function chaining
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Decorators: Core Mechanics, @ Syntax, and functools.wraps
@@ -262,62 +262,6 @@ print(format_announcement("Diwali Festive Sale!"))
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What is the expression @my_decorator above def my_func(): equivalent to in standard Python?
-A. `my_func = my_decorator(my_func)`
-B. `my_decorator = my_func()`
-C. `my_func() + my_decorator()`
-D. `import my_decorator`
-**Answer:** A
-**Explanation:** The `@decorator` syntax is syntactic sugar that passes the declared function into the decorator and rebinds the function's name to the returned wrapper: `my_func = my_decorator(my_func)`.
-
----
-
-### 2. Why should @functools.wraps(func) be applied to the inner wrapper function?
-A. It compiles the function to C code
-B. It preserves the original function's metadata such as `__name__` and `__doc__`, preventing them from being overwritten by the wrapper
-C. It allows functions to run without arguments
-D. It prevents the function from ever raising exceptions
-**Answer:** B
-**Explanation:** Without `@functools.wraps(func)`, inspecting `func.__name__` returns `"wrapper"`, and docstrings are lost. `@wraps` copies the original function's introspection attributes onto the wrapper.
-
----
-
-### 3. If a function is decorated with both @decorator_one and @decorator_two:
-```python
-@decorator_one
-@decorator_two
-def action(): pass
-```
-In what order are the decorators applied?
-A. `decorator_two(decorator_one(action))`
-B. `decorator_one(decorator_two(action))`
-C. Randomly depending on system memory
-D. Simultaneously in parallel threads
-**Answer:** B
-**Explanation:** Decorators apply from bottom to top (innermost to outermost). `action` is first wrapped by `decorator_two`, and the resulting wrapper is then passed to `decorator_one`.
-
----
-
-### 4. What happens if a wrapper function omits return result after calling the target function?
-A. The target function automatically returns `True`
-B. Any caller of the decorated function will receive `None` instead of the target function's actual return value
-C. Python throws a SyntaxError
-D. The operating system reboots
-**Answer:** B
-**Explanation:** In Python, functions without an explicit `return` return `None`. If the wrapper does not return the result of `func(*args, **kwargs)`, callers receive `None` regardless of what the original function computed.
-
----
-
-### 5. Why do wrapper functions typically declare def wrapper(*args, **kwargs):?
-A. Because Python prohibits any other parameter names
-B. To enable the decorator to wrap any function regardless of its parameter signature or arity
-C. To convert inputs into hexadecimal numbers
-D. To disable type checking
-**Answer:** B
-**Explanation:** Using `*args, **kwargs` makes the wrapper universal, allowing it to intercept, forward, and return calls for functions with zero parameters, multiple positional parameters, or complex keyword arguments.
-
 ---
 
 # Practice Challenge
@@ -391,3 +335,68 @@ Result: Dispensed ₹4,000.0. Remaining: ₹6,000.0
 [AUDIT FAILED] ValueError: Insufficient funds! Requested ₹15,000.0 but balance is ₹10,000.0
 [TEST PASSED] Exception was accurately intercepted and logged by audit decorator.
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What is the expression @my_decorator above def my_func(): equivalent to in standard Python?
+A. `my_func = my_decorator(my_func)`
+B. `my_decorator = my_func()`
+C. `my_func() + my_decorator()`
+D. `import my_decorator`
+**Answer:** A
+**Explanation:** The `@decorator` syntax is syntactic sugar that passes the declared function into the decorator and rebinds the function's name to the returned wrapper: `my_func = my_decorator(my_func)`.
+
+---
+
+### 2. Why should @functools.wraps(func) be applied to the inner wrapper function?
+A. It compiles the function to C code
+B. It preserves the original function's metadata such as `__name__` and `__doc__`, preventing them from being overwritten by the wrapper
+C. It allows functions to run without arguments
+D. It prevents the function from ever raising exceptions
+**Answer:** B
+**Explanation:** Without `@functools.wraps(func)`, inspecting `func.__name__` returns `"wrapper"`, and docstrings are lost. `@wraps` copies the original function's introspection attributes onto the wrapper.
+
+---
+
+### 3. If a function is decorated with both @decorator_one and @decorator_two:
+```python
+@decorator_one
+@decorator_two
+def action(): pass
+```
+In what order are the decorators applied?
+A. `decorator_two(decorator_one(action))`
+B. `decorator_one(decorator_two(action))`
+C. Randomly depending on system memory
+D. Simultaneously in parallel threads
+**Answer:** B
+**Explanation:** Decorators apply from bottom to top (innermost to outermost). `action` is first wrapped by `decorator_two`, and the resulting wrapper is then passed to `decorator_one`.
+
+---
+
+### 4. What happens if a wrapper function omits return result after calling the target function?
+A. The target function automatically returns `True`
+B. Any caller of the decorated function will receive `None` instead of the target function's actual return value
+C. Python throws a SyntaxError
+D. The operating system reboots
+**Answer:** B
+**Explanation:** In Python, functions without an explicit `return` return `None`. If the wrapper does not return the result of `func(*args, **kwargs)`, callers receive `None` regardless of what the original function computed.
+
+---
+
+### 5. Why do wrapper functions typically declare def wrapper(*args, **kwargs):?
+A. Because Python prohibits any other parameter names
+B. To enable the decorator to wrap any function regardless of its parameter signature or arity
+C. To convert inputs into hexadecimal numbers
+D. To disable type checking
+**Answer:** B
+**Explanation:** Using `*args, **kwargs` makes the wrapper universal, allowing it to intercept, forward, and return calls for functions with zero parameters, multiple positional parameters, or complex keyword arguments.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Function Decorator Example** (2: Functions Deep Dive).
+
+👉 **[Continue to Next Lesson: Project: Function Decorator Example →](/tutorials/python-for-intermediate/project-function-decorator-example)**

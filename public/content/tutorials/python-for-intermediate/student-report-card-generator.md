@@ -1,3 +1,24 @@
+---
+id: python-intermediate-student-report-card-generator
+slug: student-report-card-generator
+course: python-for-intermediate
+chapter: "15: Capstone Project"
+topic: "15.2 Student Report Card Generator"
+title: "Student Report Card Generator in Python"
+description: "Master student report card generator in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 70
+keywords:
+  - python student report card generator
+  - python intermediate
+  - python student report card generator
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Capstone Project 2: Student Report Card Generator in Python
 
 In this final capstone project of the intermediate curriculum, we unite all major technical competencies acquired across this course—**Data Structures, File Handling with JSON & CSV, Object-Oriented Design, Exception Safety, Statistical Metrics, and Visual Chart Generation with Matplotlib**—to build an automated **Academic Report Card & Performance Analytics Generator**.
@@ -220,7 +241,54 @@ Performance Chart saved to: 'transcripts/report_CS-101.png'
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Accumulating Figure Buffers Across Multiple Students
+Always call `plt.close(fig)` after exporting each student's PNG chart to prevent memory exhaustion when generating report cards for large classrooms.
+
+### 2. Hardcoded Directory Paths
+Ensure the output directory is created safely using `os.makedirs(output_dir, exist_ok=True)` before saving report cards and chart images.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Rank Calculation
+
+### Challenge
+Extend the Report Card Generator to compute and display each student's class rank based on their cumulative GPA.
+
+### Complete Solution
+```python
+def calculate_class_ranks(students_data):
+    # Sort students descending by GPA
+    ranked = sorted(students_data, key=lambda s: s["gpa"], reverse=True)
+    for rank, student in enumerate(ranked, 1):
+        student["rank"] = rank
+    return ranked
+
+cohort = [
+    {"name": "Aarav", "gpa": 8.9},
+    {"name": "Diya", "gpa": 9.4},
+    {"name": "Kavya", "gpa": 8.6}
+]
+
+for s in calculate_class_ranks(cohort):
+    print(f"Rank #{s['rank']}: {s['name']} (GPA: {s['gpa']})")
+```
+
+### Expected Output
+```text
+Rank #1: Diya (GPA: 9.4)
+Rank #2: Aarav (GPA: 8.9)
+Rank #3: Kavya (GPA: 8.6)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, which Python built-in function ensures that a student fails if ANY subject score is below 40?
 A. `any()`
@@ -266,3 +334,13 @@ D. To commit the database transaction
 **Answer:** A
 **Explanation:** Closing figures in batch image generators releases canvas memory buffers, preventing excessive RAM consumption.
 ---
+---
+
+## 🎓 Congratulations on Completing Python for Intermediate!
+
+You have successfully completed all 70 modules across the 15 chapters of **Python for Intermediate**! You have mastered advanced comprehensions, closures, decorators, modular packages, OOP architecture, exceptions, iterators, REST APIs, industrial logging, SQLite databases, and data visualization.
+
+### What To Do Next:
+1. **Claim Your Verified Certificate:** Visit the [Python for Intermediate Course Page](/courses/python-for-intermediate) to verify your course progress and receive your digital credential.
+2. **Publish Your Capstones:** Push your Bank Account System, SQLite Database, and Student Report Card Generator projects to GitHub.
+3. **Explore Advanced Pathways:** Advance into Full-Stack Web Development with Django & FastAPI, or explore Data Science & Machine Learning with Pandas, NumPy, and Scikit-Learn!

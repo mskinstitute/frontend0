@@ -1,3 +1,24 @@
+---
+id: python-advanced-method-resolution-order-mro
+slug: method-resolution-order-mro
+course: python-for-advanced
+chapter: "1: Advanced OOP Concepts"
+topic: "1.3 Method Resolution Order (MRO)"
+title: "Method Resolution Order (MRO) in Python"
+description: "Master method resolution order (mro) in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 3
+keywords:
+  - python method resolution order mro
+  - python advanced
+  - python method resolution order (mro)
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Method Resolution Order (MRO) and C3 Linearization in Python
 
 In complex object-oriented systems with multiple inheritance, determining which parent version of a method executes is not always trivial. Python resolves method lookups deterministically using the **Method Resolution Order (MRO)**, calculated via the sophisticated **C3 Linearization Algorithm**. Understanding MRO is essential for mastering cooperative multiple inheritance, mixins, and large Python frameworks.
@@ -152,7 +173,72 @@ except TypeError as err:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Bypassing `super()` with Direct Base Class Calls
+Calling `Parent.__init__(self)` directly in multiple inheritance violates C3 Linearization and causes common ancestor constructors to be invoked multiple times in diamond hierarchies. Always use cooperative `super().__init__()`.
+
+### 2. Inconsistent Hierarchy Signatures
+Cooperative multiple inheritance requires that all participating classes accept consistent arguments or forward extra arguments with `*args, **kwargs`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Inspecting C3 Linearization in Diamonds
+
+### Scenario
+Construct a classic diamond inheritance hierarchy with classes `A`, `B(A)`, `C(A)`, and `D(B, C)`. Use cooperative `super()` calls and inspect `D.__mro__`.
+
+### Complete Solution
+```python
+class A:
+    def ping(self):
+        print("A.ping()")
+
+class B(A):
+    def ping(self):
+        print("B.ping() -> calling super")
+        super().ping()
+
+class C(A):
+    def ping(self):
+        print("C.ping() -> calling super")
+        super().ping()
+
+class D(B, C):
+    def ping(self):
+        print("D.ping() -> calling super")
+        super().ping()
+
+d = D()
+d.ping()
+print("
+Method Resolution Order (MRO):")
+for idx, cls in enumerate(D.__mro__, 1):
+    print(f"{idx}. {cls.__name__}")
+```
+
+### Expected Output
+```text
+D.ping() -> calling super
+B.ping() -> calling super
+C.ping() -> calling super
+A.ping()
+
+Method Resolution Order (MRO):
+1. D
+2. B
+3. C
+4. A
+5. object
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which algorithm does Python use to compute the Method Resolution Order (MRO)?
 A. Breadth-First Search (BFS)
@@ -198,3 +284,10 @@ D. Because `A` is marked as abstract
 **Answer:** B
 **Explanation:** C3 linearization guarantees that a parent class (A) is never visited until all of its derived subclasses (B and C) in the hierarchy have been evaluated.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Multiple Inheritance** (1: Advanced OOP Concepts).
+
+👉 **[Continue to Next Lesson: Multiple Inheritance →](/tutorials/python-for-advanced/multiple-inheritance)**

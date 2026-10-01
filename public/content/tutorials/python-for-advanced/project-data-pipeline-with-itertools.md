@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-data-pipeline-with-itertools
+slug: project-data-pipeline-with-itertools
+course: python-for-advanced
+chapter: "4: Itertools and Functools"
+topic: "4.4 Project: Data Pipeline with Itertools"
+title: "Project: Data Pipeline with Itertools in Python"
+description: "Master project: data pipeline with itertools in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 19
+keywords:
+  - python project data pipeline with itertools
+  - python advanced
+  - python project: data pipeline with itertools
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Data Pipeline with Itertools and Functools
 
 In big data engineering, ingesting and analyzing multi-gigabyte log files using naive `list` loads quickly causes `MemoryError` crashes. By combining the zero-memory lazy streaming capabilities of `itertools` with the functional transformations of `functools`, we can construct an enterprise-grade **Real-Time Streaming Log Processing Pipeline** that consumes constant $O(1)$ RAM regardless of input volume.
@@ -182,7 +203,51 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Eager Materialization of Streaming Pipelines
+Calling `list(pipeline)` defeats the entire memory efficiency of generator pipelines. Keep transformations lazy until the final consumption stage.
+
+### 2. Consuming Multi-Stage Iterators Twice
+Iterators are stateful and consumable once. If you need to feed the same stream to multiple consumers, use `itertools.tee(iterable, 2)`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Moving Average Aggregator
+
+### Challenge
+Extend the Itertools Data Pipeline by adding a sliding-window moving average transformer that computes the 3-period moving average of stock prices.
+
+### Complete Solution
+```python
+from collections import deque
+
+def moving_average_stream(price_iterable, window_size=3):
+    window = deque(maxlen=window_size)
+    for price in price_iterable:
+        window.append(price)
+        if len(window) == window_size:
+            yield round(sum(window) / window_size, 2)
+
+prices = [100.0, 102.0, 104.0, 108.0, 106.0, 110.0]
+averages = list(moving_average_stream(prices, 3))
+print("Prices:", prices)
+print("3-Day Moving Averages:", averages)
+```
+
+### Expected Output
+```text
+Prices: [100.0, 102.0, 104.0, 108.0, 106.0, 110.0]
+3-Day Moving Averages: [102.0, 104.67, 106.0, 108.0]
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 In the pipeline implementation, why is `itertools.chain.from_iterable()` preferred over `node_streams[0] + node_streams[1]`?
@@ -248,3 +313,10 @@ D. Sorting reduces the memory size of each record.
 **Explanation:** `itertools.groupby()` operates by grouping contiguous runs of matching keys. If identical keys are separated by other items, multiple separate groups will be emitted unless the dataset is pre-sorted.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Advanced Generator Patterns** (5: Generators & Coroutines).
+
+👉 **[Continue to Next Lesson: Advanced Generator Patterns →](/tutorials/python-for-advanced/advanced-generator-patterns)**

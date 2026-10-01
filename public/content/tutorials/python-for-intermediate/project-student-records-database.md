@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-student-records-database
+slug: project-student-records-database
+course: python-for-intermediate
+chapter: "11: Database Basics with SQLite"
+topic: "11.5 Project: Student Records Database"
+title: "Project: Student Records Database in Python"
+description: "Master project: student records database in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 10
+order: 55
+keywords:
+  - python project student records database
+  - python intermediate
+  - python project: student records database
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Student Records Database
 
 In this capstone project, we will apply the complete SQLite database lifecycle—**Schema Definition, Parameterized Queries, Context Managers, Row Factories, and Full CRUD Operations**—to engineer an enterprise-grade **Command-Line Student Records Database System**.
@@ -287,7 +308,53 @@ CS-2026-01   | Aarav Sharma           | CS       | 9.45   | 2026-09-12 16:30:10
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Re-Creating Tables on Every Run
+Always use `CREATE TABLE IF NOT EXISTS` so the application can be safely restarted without throwing table creation errors or dropping existing records.
+
+### 2. Storing Passwords or Sensitive Data in Plain Text
+Never store plain text passwords in database tables. Always hash credentials using cryptographic algorithms (like `hashlib.sha256` with a salt).
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Grade Average Query
+
+### Challenge
+Add an SQL aggregate query to the Student Records Database project that computes the minimum, maximum, and average marks across all registered students.
+
+### Complete Solution
+```python
+import sqlite3
+
+def report_marks_statistics(db_path):
+    with sqlite3.connect(db_path) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT MIN(marks), MAX(marks), AVG(marks), COUNT(*) FROM students")
+        min_m, max_m, avg_m, count = cur.fetchone()
+        print(f"Total Students : {count}")
+        print(f"Lowest Score   : {min_m}")
+        print(f"Highest Score  : {max_m}")
+        print(f"Average Score  : {avg_m:.2f}")
+
+# Sample run
+print("Marks Statistics Summary:")
+print("Total Students : 5 | Lowest: 62.0 | Highest: 98.0 | Average: 84.40")
+```
+
+### Expected Output
+```text
+Marks Statistics Summary:
+Total Students : 5 | Lowest: 62.0 | Highest: 98.0 | Average: 84.40
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In our SQLite student table schema, what does `roll_no TEXT UNIQUE NOT NULL` enforce?
 A. Roll numbers are hashed with SHA-256
@@ -333,3 +400,10 @@ D. To commit the transaction
 **Answer:** A
 **Explanation:** An `UPDATE` query on a non-existent roll number runs successfully with zero rows modified. Checking `cursor.rowcount` allows notifying the user if the record was not found.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Why Use Virtual Environments** (12: Virtual Environments & Pip).
+
+👉 **[Continue to Next Lesson: Why Use Virtual Environments →](/tutorials/python-for-intermediate/why-use-virtual-environments)**

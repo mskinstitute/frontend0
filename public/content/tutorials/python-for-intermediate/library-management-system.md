@@ -1,3 +1,24 @@
+---
+id: python-intermediate-library-management-system
+slug: library-management-system
+course: python-for-intermediate
+chapter: "15: Capstone Project"
+topic: "15.1 Library Management System"
+title: "Library Management System in Python"
+description: "Master library management system in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 11
+order: 69
+keywords:
+  - python library management system
+  - python intermediate
+  - python library management system
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Capstone Project 1: Library Management System in Python
 
 In this major capstone project, we integrate everything mastered across Python for Intermediate—**Object-Oriented Design, Encapsulation, Custom Exceptions, Relational SQLite Databases, Datetime Arithmetic, and Defensive Architecture**—to build a multi-table, enterprise-grade **Library Management & Circulation System**.
@@ -340,7 +361,68 @@ ISBN           | TITLE                      | AUTHOR             | COPIES
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Inconsistent Book Inventory State
+Ensure that issuing a book decrements the available count and marks the borrower's record within an atomic database transaction.
+
+### 2. Duplicate ISBN Registration
+Enforce `UNIQUE` constraints on book ISBNs in SQLite to prevent duplicate records from corrupting catalogue searches.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Book Reservation Queue
+
+### Challenge
+Extend the Library Management System with a waiting list / reservation queue for books that are currently checked out by another borrower.
+
+### Complete Solution
+```python
+from collections import deque
+
+class ReservableBook:
+    def __init__(self, title):
+        self.title = title
+        self.is_issued = False
+        self.reservation_queue = deque()
+
+    def reserve(self, borrower_name):
+        if not self.is_issued:
+            print(f"'{self.title}' is available right now! No reservation needed.")
+            return
+        self.reservation_queue.append(borrower_name)
+        print(f"Reserved '{self.title}' for {borrower_name}. Position in queue: {len(self.reservation_queue)}")
+
+    def return_book(self):
+        self.is_issued = False
+        if self.reservation_queue:
+            next_user = self.reservation_queue.popleft()
+            self.is_issued = True
+            print(f"Book returned! Automatically issued to next waiting borrower: {next_user}")
+        else:
+            print("Book returned and placed back on catalogue shelf.")
+
+book = ReservableBook("Fluent Python")
+book.is_issued = True
+book.reserve("Priya")
+book.reserve("Rohan")
+book.return_book()
+```
+
+### Expected Output
+```text
+Reserved 'Fluent Python' for Priya. Position in queue: 1
+Reserved 'Fluent Python' for Rohan. Position in queue: 2
+Book returned! Automatically issued to next waiting borrower: Priya
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, what ensures that returning a book updates the borrow record AND increments available stock together?
 A. Running separate Python threads
@@ -386,3 +468,10 @@ D. To prevent the script from using CPU
 **Answer:** B
 **Explanation:** Exception hierarchies allow client code to catch high-level domain base classes (`LibraryError`) to intercept all module-specific errors uniformly.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Student Report Card Generator** (15: Capstone Project).
+
+👉 **[Continue to Next Lesson: Student Report Card Generator →](/tutorials/python-for-intermediate/student-report-card-generator)**

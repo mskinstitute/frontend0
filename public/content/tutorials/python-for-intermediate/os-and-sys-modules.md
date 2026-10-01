@@ -1,3 +1,24 @@
+---
+id: python-intermediate-os-and-sys-modules
+slug: os-and-sys-modules
+course: python-for-intermediate
+chapter: "10: Python Standard Libraries"
+topic: "10.4 OS and Sys Modules"
+title: "OS and Sys Modules in Python"
+description: "Master os and sys modules in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 49
+keywords:
+  - python os and sys modules
+  - python intermediate
+  - python os and sys modules
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The OS and Sys Modules in Python
 
 Python scripts frequently need to interact with the underlying operating system and the Python runtime interpreter itself. The **`os`** module provides a portable interface for interacting with the operating system (filesystem, environment variables, directories), while the **`sys`** module grants access to interpreter internals, command-line arguments, and standard I/O streams.
@@ -138,7 +159,51 @@ print("First 2 paths in sys.path:", sys.path[:2])
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Using `os.system()` with Unsanitized Input
+`os.system()` passes raw commands to the shell, making your code vulnerable to command injection attacks. Use `subprocess.run()` with a list of arguments instead.
+
+### 2. Hardcoding Path Separators
+Never construct file paths using string concatenation with `"/"` or `"\\"`. Always use `os.path.join()` or modern `pathlib.Path`.
+
+---
+
+---
+
+## 💻 Try It Yourself: CLI Argument Greeter with System Info
+
+### Scenario
+Write a script that inspects `sys.argv` for a user's name and displays the current working directory, operating system platform, and Python version.
+
+### Complete Solution
+```python
+import os
+import sys
+
+def display_environment():
+    name = sys.argv[1] if len(sys.argv) > 1 else "Learner"
+    print(f"Hello, {name}!")
+    print(f"Current Directory : {os.getcwd()}")
+    print(f"Platform          : {sys.platform}")
+    print(f"Python Version    : {sys.version.split()[0]}")
+
+display_environment()
+```
+
+### Expected Output
+```text
+Hello, Learner!
+Current Directory : d:\Sumit\MSK-Institute-Website
+Platform          : win32
+Python Version    : 3.12.2
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Why should you use `os.path.join("a", "b")` instead of `"a/" + "b"`?
 A. String concatenation is forbidden in Python 3
@@ -184,3 +249,10 @@ D. `os.path.env("API_KEY")`
 **Answer:** B
 **Explanation:** `os.environ.get("KEY", default)` returns the default value if the environment variable does not exist, avoiding a `KeyError`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: File & Directory Utility Tool** (10: Python Standard Libraries).
+
+👉 **[Continue to Next Lesson: Project: File & Directory Utility Tool →](/tutorials/python-for-intermediate/project-file-directory-utility-tool)**

@@ -16,9 +16,9 @@ keywords:
   - pt points
   - css measurements
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Absolute Units: Pixels (px), Points (pt), and Physical Units
@@ -164,7 +164,7 @@ If an elderly user or visually impaired student changes their device settings to
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -174,7 +174,6 @@ B. `px`
 C. `%`
 D. `vw`
 **Answer:** B
-**Explanation:** The pixel (`px`) is the standard absolute unit for digital displays.
 
 ---
 
@@ -184,7 +183,6 @@ B. 1/72nd of an inch
 C. 1/96th of an inch
 D. 1/100th of an inch
 **Answer:** B
-**Explanation:** By international printing standards, 1 point (`pt`) is exactly 1/72 of an inch.
 
 ---
 
@@ -194,7 +192,6 @@ B. On smartphone screens narrower than 950px, it causes horizontal overflow and 
 C. Pixels cannot be displayed on phones
 D. Colors will fail to render
 **Answer:** B
-**Explanation:** Mobile phones typically have screen widths between 360px and 430px. A fixed 950px element will overflow the screen, forcing the user to scroll horizontally.
 
 ---
 
@@ -204,7 +201,6 @@ B. `width: 1200px;`
 C. Full-page layout columns
 D. Line height on scalable text
 **Answer:** A
-**Explanation:** Fine borders, shadows, and subtle corner curves are best defined in `px` because you want consistent, millimeter-sharp lines regardless of screen size.
 
 ---
 
@@ -214,7 +210,6 @@ B. The entire declaration is considered invalid and ignored
 C. The corner radius is multiplied by 10
 D. The text inside gets deleted
 **Answer:** B
-**Explanation:** CSS syntax forbids whitespace between a numeric value and its measurement unit. `12 px` is invalid and skipped by the browser.
 
 ---
 
@@ -284,3 +279,10 @@ D. The text inside gets deleted
    </html>
    ```
 3. Open the file in your browser to observe how 80px avatars and 2px borders remain perfectly sharp on any monitor! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Relative Units: %, rem, em, vh, vw** (CSS Units and Measurements).
+
+👉 **[Continue to Next Lesson: Relative Units: %, rem, em, vh, vw →](/tutorials/css-for-beginners/css-units-relative-percentages-rem-em-vh-vw)**

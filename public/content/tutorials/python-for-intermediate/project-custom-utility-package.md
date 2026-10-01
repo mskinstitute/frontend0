@@ -17,9 +17,9 @@ keywords:
   - lakhs crores formatting
   - pan validation
   - package facade
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Project: Custom Indian Business Utility Package (indialib)
@@ -269,56 +269,6 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
-
-### 1. In the Indian numbering system, how is the number 1234567.89 correctly formatted?
-A. `₹1,234,567.89`
-B. `₹12,34,567.89`
-C. `₹123,456,7.89`
-D. `₹1.234.567,89`
-**Answer:** B
-**Explanation:** Under the Indian numbering system, the last three digits are grouped together (567), and all preceding digits are grouped in pairs of two (12 and 34), producing `₹12,34,567.89` (12 Lakhs, 34 Thousand, 567).
-
----
-
-### 2. What is the standard structure of a valid 10-character Indian PAN number?
-A. 4 letters, 5 numbers, 1 letter
-B. 5 uppercase letters, 4 digits, 1 uppercase letter
-C. 10 numeric digits
-D. 3 letters, 6 numbers, 1 letter
-**Answer:** B
-**Explanation:** An Indian PAN card consists of 5 alphabetic characters, followed by 4 numeric characters, ending with 1 alphabetic character (e.g. `ABCDE1234F`).
-
----
-
-### 3. Why is data masking (e.g. XXXX-XXXX-1098) applied to Aadhaar numbers in software systems?
-A. To make the database file size smaller
-B. To comply with Indian data protection laws and UIDAI regulations that prohibit storing or displaying unmasked Aadhaar numbers
-C. Because Python cannot print 12-digit integers
-D. To convert Aadhaar numbers into cryptocurrency
-**Answer:** B
-**Explanation:** Indian privacy regulations mandate that public-facing and non-banking storage systems must mask the first 8 digits of Aadhaar numbers to prevent identity theft.
-
----
-
-### 4. What is the role of secrets.token_hex(4).upper() in generating transaction references?
-A. It calculates the square root of the transaction amount
-B. It generates a cryptographically random, unpredictable 8-character hexadecimal string suitable for transaction audit trails
-C. It sorts the database
-D. It connects to the bank's WiFi network
-**Answer:** B
-**Explanation:** `secrets.token_hex(4)` produces 4 random bytes represented as an 8-character hexadecimal string using the OS's secure random number generator, making it unpredictable and unique.
-
----
-
-### 5. Why should a package's __init__.py explicitly define an __all__ list?
-A. To prevent Python from compiling bytecode
-B. To define the exact public interface of the package and protect internal helper functions from being exposed during wildcard imports
-C. Because Python refuses to run without __all__
-D. To make the package compatible only with Windows
-**Answer:** B
-**Explanation:** `__all__` establishes an explicit boundary between public APIs and private internal implementation details, preventing accidental exposure when users run `from indialib import *`.
-
 ---
 
 # Practice Challenge
@@ -408,3 +358,62 @@ for phone in sample_phones:
   Raw: 1234567890         ➔ Normalized: [INVALID]
   Raw: +91 8877665544     ➔ Normalized: 8877665544
 ```
+
+---
+
+## Practice Quiz
+
+### 1. In the Indian numbering system, how is the number 1234567.89 correctly formatted?
+A. `₹1,234,567.89`
+B. `₹12,34,567.89`
+C. `₹123,456,7.89`
+D. `₹1.234.567,89`
+**Answer:** B
+**Explanation:** Under the Indian numbering system, the last three digits are grouped together (567), and all preceding digits are grouped in pairs of two (12 and 34), producing `₹12,34,567.89` (12 Lakhs, 34 Thousand, 567).
+
+---
+
+### 2. What is the standard structure of a valid 10-character Indian PAN number?
+A. 4 letters, 5 numbers, 1 letter
+B. 5 uppercase letters, 4 digits, 1 uppercase letter
+C. 10 numeric digits
+D. 3 letters, 6 numbers, 1 letter
+**Answer:** B
+**Explanation:** An Indian PAN card consists of 5 alphabetic characters, followed by 4 numeric characters, ending with 1 alphabetic character (e.g. `ABCDE1234F`).
+
+---
+
+### 3. Why is data masking (e.g. XXXX-XXXX-1098) applied to Aadhaar numbers in software systems?
+A. To make the database file size smaller
+B. To comply with Indian data protection laws and UIDAI regulations that prohibit storing or displaying unmasked Aadhaar numbers
+C. Because Python cannot print 12-digit integers
+D. To convert Aadhaar numbers into cryptocurrency
+**Answer:** B
+**Explanation:** Indian privacy regulations mandate that public-facing and non-banking storage systems must mask the first 8 digits of Aadhaar numbers to prevent identity theft.
+
+---
+
+### 4. What is the role of secrets.token_hex(4).upper() in generating transaction references?
+A. It calculates the square root of the transaction amount
+B. It generates a cryptographically random, unpredictable 8-character hexadecimal string suitable for transaction audit trails
+C. It sorts the database
+D. It connects to the bank's WiFi network
+**Answer:** B
+**Explanation:** `secrets.token_hex(4)` produces 4 random bytes represented as an 8-character hexadecimal string using the OS's secure random number generator, making it unpredictable and unique.
+
+---
+
+### 5. Why should a package's __init__.py explicitly define an __all__ list?
+A. To prevent Python from compiling bytecode
+B. To define the exact public interface of the package and protect internal helper functions from being exposed during wildcard imports
+C. Because Python refuses to run without __all__
+D. To make the package compatible only with Windows
+**Answer:** B
+**Explanation:** `__all__` establishes an explicit boundary between public APIs and private internal implementation details, preventing accidental exposure when users run `from indialib import *`.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Working with Context Managers (with statement)** (4: File Handling Advanced).
+
+👉 **[Continue to Next Lesson: Working with Context Managers (with statement) →](/tutorials/python-for-intermediate/working-with-context-managers-with-statement)**

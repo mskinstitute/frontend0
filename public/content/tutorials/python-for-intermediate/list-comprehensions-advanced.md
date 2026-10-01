@@ -17,9 +17,9 @@ keywords:
   - walrus operator
   - cpython bytecode
   - performance optimization
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Advanced List Comprehensions in Python
@@ -266,61 +266,6 @@ Expensive Cess Charges (> ₹100): ['₹286.00', '₹650.00']
 
 ---
 
-# Multiple Choice Questions
-
-### 1. In which position must a ternary if-else expression be placed inside a list comprehension?
-A. At the very end after the iterable: `[x for x in data if x > 0 else 0]`
-B. Before the `for` keyword: `[x if x > 0 else 0 for x in data]`
-C. Inside parentheses around the entire comprehension
-D. List comprehensions forbid ternary expressions completely
-**Answer:** B
-**Explanation:** When providing alternative values using `if-else`, it forms a conditional expression that must appear before the `for` keyword: `[val_if_true if condition else val_if_false for x in iterable]`. Placing `else` after the `for` loop causes a `SyntaxError`.
-
----
-
-### 2. Given matrix = [[1, 2], [3, 4]], what does the expression [val for row in matrix for val in row] produce?
-A. `[[1, 2], [3, 4]]`
-B. `[1, 2, 3, 4]`
-C. `[1, 3, 2, 4]`
-D. `[[1, 3], [2, 4]]`
-**Answer:** B
-**Explanation:** Multi-loop comprehensions evaluate left-to-right. The outer loop `for row in matrix` runs first, followed by the inner loop `for val in row`, successfully flattening the 2D matrix into the 1D list `[1, 2, 3, 4]`.
-
----
-
-### 3. Why is a list comprehension generally faster in CPython than a standard for-loop with .append()?
-A. It bypasses CPU cache memory
-B. It is compiled down to optimized C-level `LIST_APPEND` bytecode opcodes, avoiding repeated Python method lookup overhead
-C. It runs on a secondary GPU thread automatically
-D. It skips data type verification
-**Answer:** B
-**Explanation:** A standard `for` loop must look up `.append` on the list instance and execute Python function calling frames on every iteration. Comprehensions utilize the direct `LIST_APPEND` bytecode instruction implemented directly in C runtime.
-
----
-
-### 4. How does the Walrus operator (:=) optimize list comprehensions that filter by expensive function results?
-A. It compiles the function to machine code
-B. It assigns the function return value to a temporary variable during filtering, avoiding a redundant second function call in the output expression
-C. It suppresses all exceptions
-D. It reverses the order of iteration
-**Answer:** B
-**Explanation:** Without the walrus operator, developers often call `func(x)` twice: once in the `if` filter and once in the projection expression. With `if (res := func(x)) > limit`, `res` is computed once and reused.
-
----
-
-### 5. What is the output of the following comprehension?
-```python
-nums = [1, 2, 3, 4, 5, 6]
-result = [x * 10 for x in nums if x % 2 == 0 if x > 3]
-print(result)
-```
-A. `[20, 40, 60]`
-B. `[40, 60]`
-C. `[10, 20, 30]`
-D. `SyntaxError`
-**Answer:** B
-**Explanation:** Chaining multiple `if` clauses acts as a logical `AND`. Only numbers that are both even (`x % 2 == 0`) AND strictly greater than 3 (`x > 3`) qualify. Out of `nums`, 4 and 6 satisfy both conditions, resulting in `[40, 60]`.
-
 ---
 
 # Practice Challenge
@@ -380,3 +325,67 @@ for stock in volatile_movers:
 [RELIANCE] Change: -4.14% (Vol: 1,200,000)
 [TATAMOTORS] Change: +4.59% (Vol: 900,000)
 ```
+
+---
+
+## Practice Quiz
+
+### 1. In which position must a ternary if-else expression be placed inside a list comprehension?
+A. At the very end after the iterable: `[x for x in data if x > 0 else 0]`
+B. Before the `for` keyword: `[x if x > 0 else 0 for x in data]`
+C. Inside parentheses around the entire comprehension
+D. List comprehensions forbid ternary expressions completely
+**Answer:** B
+**Explanation:** When providing alternative values using `if-else`, it forms a conditional expression that must appear before the `for` keyword: `[val_if_true if condition else val_if_false for x in iterable]`. Placing `else` after the `for` loop causes a `SyntaxError`.
+
+---
+
+### 2. Given matrix = [[1, 2], [3, 4]], what does the expression [val for row in matrix for val in row] produce?
+A. `[[1, 2], [3, 4]]`
+B. `[1, 2, 3, 4]`
+C. `[1, 3, 2, 4]`
+D. `[[1, 3], [2, 4]]`
+**Answer:** B
+**Explanation:** Multi-loop comprehensions evaluate left-to-right. The outer loop `for row in matrix` runs first, followed by the inner loop `for val in row`, successfully flattening the 2D matrix into the 1D list `[1, 2, 3, 4]`.
+
+---
+
+### 3. Why is a list comprehension generally faster in CPython than a standard for-loop with .append()?
+A. It bypasses CPU cache memory
+B. It is compiled down to optimized C-level `LIST_APPEND` bytecode opcodes, avoiding repeated Python method lookup overhead
+C. It runs on a secondary GPU thread automatically
+D. It skips data type verification
+**Answer:** B
+**Explanation:** A standard `for` loop must look up `.append` on the list instance and execute Python function calling frames on every iteration. Comprehensions utilize the direct `LIST_APPEND` bytecode instruction implemented directly in C runtime.
+
+---
+
+### 4. How does the Walrus operator (:=) optimize list comprehensions that filter by expensive function results?
+A. It compiles the function to machine code
+B. It assigns the function return value to a temporary variable during filtering, avoiding a redundant second function call in the output expression
+C. It suppresses all exceptions
+D. It reverses the order of iteration
+**Answer:** B
+**Explanation:** Without the walrus operator, developers often call `func(x)` twice: once in the `if` filter and once in the projection expression. With `if (res := func(x)) > limit`, `res` is computed once and reused.
+
+---
+
+### 5. What is the output of the following comprehension?
+```python
+nums = [1, 2, 3, 4, 5, 6]
+result = [x * 10 for x in nums if x % 2 == 0 if x > 3]
+print(result)
+```
+A. `[20, 40, 60]`
+B. `[40, 60]`
+C. `[10, 20, 30]`
+D. `SyntaxError`
+**Answer:** B
+**Explanation:** Chaining multiple `if` clauses acts as a logical `AND`. Only numbers that are both even (`x % 2 == 0`) AND strictly greater than 3 (`x > 3`) qualify. Out of `nums`, 4 and 6 satisfy both conditions, resulting in `[40, 60]`.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Set Comprehensions** (1: Advanced Data Types & Comprehensions).
+
+👉 **[Continue to Next Lesson: Set Comprehensions →](/tutorials/python-for-intermediate/set-comprehensions)**

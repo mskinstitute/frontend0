@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-weather-data-fetcher
+slug: project-weather-data-fetcher
+course: python-for-intermediate
+chapter: "8: Working with APIs"
+topic: "8.5 Project: Weather Data Fetcher"
+title: "Project: Weather Data Fetcher in Python"
+description: "Master project: weather data fetcher in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 40
+keywords:
+  - python project weather data fetcher
+  - python intermediate
+  - python project: weather data fetcher
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Weather Data Fetcher
 
 In this hands-on project, we will apply the HTTP networking concepts covered throughout this chapter—**HTTP Requests, Query Parameters, JSON Parsing, and Network Exception Handling**—to build a functional, real-time **Command-Line Weather Data Fetcher**.
@@ -198,7 +219,47 @@ Thank you for using the Weather Dashboard. Stay safe!
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Unhandled Network Disconnection
+Network drops raise `requests.exceptions.ConnectionError`. Always wrap API calls in a `try-except` block targeting `requests.exceptions.RequestException`.
+
+### 2. Assuming City Names Are Always Valid
+Handle 404 responses gracefully by informing the user that the city was not found rather than letting the application crash with a traceback.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Temperature Unit Switch
+
+### Challenge
+Extend the Weather Data Fetcher to accept a command-line flag (`--unit C` or `--unit F`) that converts temperatures between Celsius and Fahrenheit.
+
+### Complete Solution
+```python
+def convert_temp(celsius_temp: float, unit: str = "C") -> str:
+    if unit.upper() == "F":
+        fahrenheit = (celsius_temp * 9/5) + 32
+        return f"{fahrenheit:.1f}°F"
+    return f"{celsius_temp:.1f}°C"
+
+# Test conversion
+print("28°C in Fahrenheit:", convert_temp(28.0, "F"))
+print("28°C in Celsius:", convert_temp(28.0, "C"))
+```
+
+### Expected Output
+```text
+28°C in Fahrenheit: 82.4°F
+28°C in Celsius: 28.0°C
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, what is the role of the Geocoding API step?
 A. To check whether the user has internet access
@@ -244,3 +305,10 @@ D. `response.assert_status()`
 **Answer:** B
 **Explanation:** `response.raise_for_status()` checks the status code and raises an `HTTPError` if the response represents a client or server failure (4xx or 5xx).
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Using print vs logging** (9: Debugging and Logging).
+
+👉 **[Continue to Next Lesson: Using print vs logging →](/tutorials/python-for-intermediate/using-print-vs-logging)**

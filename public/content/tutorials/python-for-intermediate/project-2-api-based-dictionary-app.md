@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-2-api-based-dictionary-app
+slug: project-2-api-based-dictionary-app
+course: python-for-intermediate
+chapter: "14: Intermediate Projects"
+topic: "14.2 Project 2: API-based Dictionary App"
+title: "Project 2: API-based Dictionary App in Python"
+description: "Master project 2: api-based dictionary app in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 67
+keywords:
+  - python project 2 api based dictionary app
+  - python intermediate
+  - python project 2: api-based dictionary app
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project 2: API-Based Dictionary & Vocab Builder in Python
 
 In this intermediate project, we apply modern HTTP networking and local state persistence—**HTTP Requests with `requests`, JSON Parsing, Exception Handling, and File Serialization with `json`**—to construct a feature-complete **Command-Line Dictionary & Vocabulary Builder**.
@@ -232,7 +253,56 @@ Enter word to look up: resilient
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Assuming Every Word Has Phonetics or Audio
+Free dictionary APIs often return `None` or empty lists for audio clips and phonetics on rare words. Use `.get()` with safe fallbacks.
+
+### 2. Crashing on Network Latency
+Always provide user feedback (e.g. "Fetching definition...") and enforce a 5-second timeout on API calls to prevent the CLI from freezing.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - History Caching
+
+### Challenge
+Implement a local caching dictionary in the Dictionary App so that repeatedly searched words are displayed instantly from local memory without making unnecessary network API calls.
+
+### Complete Solution
+```python
+search_cache = {}
+
+def get_definition_cached(word):
+    word = word.lower().strip()
+    if word in search_cache:
+        print(f"[CACHE HIT] Returning definition for '{word}' from local memory.")
+        return search_cache[word]
+    
+    print(f"[NETWORK CALL] Fetching '{word}' from remote API...")
+    # Simulated remote definition
+    definition = f"A high-level programming language."
+    search_cache[word] = definition
+    return definition
+
+print(get_definition_cached("python"))
+print(get_definition_cached("python"))  # Instant cache hit!
+```
+
+### Expected Output
+```text
+[NETWORK CALL] Fetching 'python' from remote API...
+A high-level programming language.
+[CACHE HIT] Returning definition for 'python' from local memory.
+A high-level programming language.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this application, how is offline functionality achieved for words previously searched?
 A. By downloading the entire Oxford English Dictionary on startup
@@ -278,3 +348,10 @@ D. `random.uniform()`
 **Answer:** B
 **Explanation:** `random.choice(sequence)` picks a single random element from a non-empty sequence.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project 3: CLI-based To-do App** (14: Intermediate Projects).
+
+👉 **[Continue to Next Lesson: Project 3: CLI-based To-do App →](/tutorials/python-for-intermediate/project-3-cli-based-to-do-app)**

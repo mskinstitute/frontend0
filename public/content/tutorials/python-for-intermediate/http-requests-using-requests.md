@@ -1,3 +1,24 @@
+---
+id: python-intermediate-http-requests-using-requests
+slug: http-requests-using-requests
+course: python-for-intermediate
+chapter: "8: Working with APIs"
+topic: "8.1 HTTP Requests using requests"
+title: "HTTP Requests using requests in Python"
+description: "Master http requests using requests in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 36
+keywords:
+  - python http requests using requests
+  - python intermediate
+  - python http requests using requests
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # HTTP Requests Using the Requests Library in Python
 
 In modern software development, applications rarely operate in isolation. They communicate with external web services, payment gateways, authentication providers, and cloud databases via **HTTP (Hypertext Transfer Protocol)**. While Python includes a standard `urllib` module, the third-party **`requests`** library is the undisputed industry standard—dubbed "HTTP for Humans"—due to its intuitive, developer-friendly API.
@@ -122,7 +143,60 @@ data = fetch_data_safely("https://httpbin.org/get")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting `timeout` on Network Calls
+By default, `requests.get()` will wait indefinitely if a remote server hangs. Always provide an explicit timeout: `requests.get(url, timeout=5.0)`.
+
+### 2. Skipping `response.raise_for_status()`
+A response with HTTP 404 (Not Found) or 500 (Server Error) does not raise an exception automatically. Always call `response.raise_for_status()` to catch HTTP errors reliably.
+
+---
+
+---
+
+## 💻 Try It Yourself: Safe GitHub User Profile Inspector
+
+### Scenario
+Use the `requests` library to query GitHub's public API for a user profile (`https://api.github.com/users/<username>`), verifying status codes and displaying the public repository count.
+
+### Complete Solution
+```python
+import requests
+
+def inspect_github_user(username):
+    url = f"https://api.github.com/users/{username}"
+    try:
+        response = requests.get(url, timeout=5.0)
+        response.raise_for_status()
+        data = response.json()
+        print(f"User: {data.get('name')} (@{data.get('login')})")
+        print(f"Public Repos: {data.get('public_repos')}")
+        print(f"Followers: {data.get('followers')}")
+    except requests.exceptions.HTTPError as err:
+        if response.status_code == 404:
+            print(f"Error: User '{username}' was not found on GitHub.")
+        else:
+            print(f"HTTP Error: {err}")
+    except requests.exceptions.RequestException as err:
+        print(f"Network Connection Failed: {err}")
+
+# Inspect user
+inspect_github_user("octocat")
+```
+
+### Expected Output
+```text
+User: The Octocat (@octocat)
+Public Repos: 8
+Followers: 15000+
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does the `response.ok` property return when a server responds with status code `200`?
 A. `200`
@@ -168,3 +242,10 @@ D. `requests.BaseError`
 **Answer:** C
 **Explanation:** All exceptions thrown by `requests` inherit from `requests.exceptions.RequestException`, enabling clean catch-all handlers.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **GET & POST Methods** (8: Working with APIs).
+
+👉 **[Continue to Next Lesson: GET & POST Methods →](/tutorials/python-for-intermediate/get-post-methods)**

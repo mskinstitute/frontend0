@@ -1,3 +1,24 @@
+---
+id: python-intermediate-get-post-methods
+slug: get-post-methods
+course: python-for-intermediate
+chapter: "8: Working with APIs"
+topic: "8.2 GET & POST Methods"
+title: "GET & POST Methods in Python"
+description: "Master get & post methods in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 37
+keywords:
+  - python get post methods
+  - python intermediate
+  - python get & post methods
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # GET and POST Methods in Python
 
 In RESTful architecture and web communications, HTTP verbs inform the destination web server of the intended action. The two most fundamental verbs are **GET** (retrieving data) and **POST** (submitting or creating data). The `requests` library simplifies configuring parameters, headers, and payloads for both.
@@ -117,7 +138,52 @@ print(response.json())
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Sending Query Parameters via String Formatting
+Never concatenate query parameters manually into the URL string. Use the `params={}` dictionary argument in `requests.get()` so special characters and spaces are URL-encoded automatically.
+
+### 2. Confusing `data=` and `json=` in POST
+- `data=payload`: Sends form-encoded data (`application/x-www-form-urlencoded`).
+- `json=payload`: Serializes the dict to JSON and automatically sets `Content-Type: application/json`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Simulated POST Submission
+
+### Scenario
+Send a POST request containing a new user registration dictionary to `https://httpbin.org/post` using the `json=` argument, and verify that the remote server echoed back the JSON body.
+
+### Complete Solution
+```python
+import requests
+
+payload = {
+    "username": "aarav_developer",
+    "role": "Backend Engineer",
+    "skills": ["Python", "SQLite", "REST APIs"]
+}
+
+response = requests.post("https://httpbin.org/post", json=payload, timeout=5.0)
+if response.status_code == 200:
+    echoed = response.json()
+    print("Server successfully received and echoed payload:")
+    print("Received JSON:", echoed["json"])
+```
+
+### Expected Output
+```text
+Server successfully received and echoed payload:
+Received JSON: {'role': 'Backend Engineer', 'skills': ['Python', 'SQLite', 'REST APIs'], 'username': 'aarav_developer'}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which keyword argument should you pass to `requests.get()` to include URL query parameters cleanly?
 A. `query`
@@ -163,3 +229,10 @@ D. `requests.get(url, token="my_token")`
 **Answer:** B
 **Explanation:** Standard HTTP authentication tokens (like Bearer tokens) are passed as key-value pairs inside the `headers` dictionary.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Parsing JSON Data** (8: Working with APIs).
+
+👉 **[Continue to Next Lesson: Parsing JSON Data →](/tutorials/python-for-intermediate/parsing-json-data)**

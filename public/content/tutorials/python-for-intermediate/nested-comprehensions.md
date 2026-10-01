@@ -16,9 +16,9 @@ keywords:
   - nested list comprehension
   - nested dictionary
   - multi dimensional data
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Nested Comprehensions in Python
@@ -272,72 +272,6 @@ While Python allows arbitrary nesting, deeply nested comprehensions quickly beco
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What is the difference between [x for row in matrix for x in row] and [[x for x in row] for row in matrix]?
-A. The first produces a 1D flattened list, whereas the second produces a 2D nested list
-B. The first produces a dictionary, whereas the second produces a tuple
-C. The first is invalid syntax that causes a SyntaxError
-D. Both produce identical 2D lists
-**Answer:** A
-**Explanation:** The first expression flattens the matrix into a single 1D list by chaining two `for` clauses. The second expression nests an inner list comprehension `[x for x in row]` inside an outer list comprehension, preserving the 2D row-by-row structure.
-
----
-
-### 2. What will the following expression evaluate to?
-```python
-matrix = [[1, 2], [3, 4]]
-transposed = [[row[i] for row in matrix] for i in range(2)]
-print(transposed)
-```
-A. `[[1, 2], [3, 4]]`
-B. `[[1, 3], [2, 4]]`
-C. `[1, 2, 3, 4]`
-D. `[[4, 3], [2, 1]]`
-**Answer:** B
-**Explanation:** For `i = 0`, it gathers column 0 from each row: `[1, 3]`. For `i = 1`, it gathers column 1 from each row: `[2, 4]`. The resulting transposed matrix is `[[1, 3], [2, 4]]`.
-
----
-
-### 3. Given matrix = [[10, 20], [30, 40], [50, 60]], what is the order of execution for [val for row in matrix for val in row]?
-A. The inner loop `for val in row` executes before the matrix is accessed
-B. The outer loop `for row in matrix` iterates first, and for each row, the inner loop `for val in row` executes
-C. Python evaluates elements randomly in parallel
-D. Elements are evaluated from highest value to lowest value
-**Answer:** B
-**Explanation:** Multi-loop comprehensions strictly follow left-to-right evaluation order, mirroring the exact structure of standard nested `for` statements.
-
----
-
-### 4. What is the primary software engineering concern with deeply nested comprehensions (3 or more levels)?
-A. CPython refuses to compile more than 2 loops
-B. Code readability deteriorates rapidly, violating Python's core design philosophy (PEP 20: "Readability counts")
-C. They consume 100 times more GPU power
-D. They automatically convert integers into strings
-**Answer:** B
-**Explanation:** While Python syntactically allows deeply nested comprehensions, code comprehension and maintainability suffer drastically. Industry standard guidelines recommend breaking 3+ level comprehensions into clear functions or traditional loops.
-
----
-
-### 5. What does the following nested dictionary comprehension output?
-```python
-grades = {
-    "Batch-A": {"Aman": 85, "Pooja": 92},
-    "Batch-B": {"Rohan": 65, "Kavita": 45}
-}
-passed = {
-    b: {name: sc for name, sc in students.items() if sc >= 50}
-    for b, students in grades.items()
-}
-print(len(passed["Batch-B"]))
-```
-A. 2
-B. 1
-C. 0
-D. KeyError
-**Answer:** B
-**Explanation:** In `"Batch-B"`, Rohan scored 65 (passed) and Kavita scored 45 (filtered out because `sc < 50`). Only Rohan remains in `passed["Batch-B"]`, so its length is 1.
-
 ---
 
 # Practice Challenge
@@ -424,3 +358,78 @@ for bay_num, bay_seats in enumerate(coach_bays, start=1):
   Seat 17 (MB)
   Seat 18 (UB)
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What is the difference between [x for row in matrix for x in row] and [[x for x in row] for row in matrix]?
+A. The first produces a 1D flattened list, whereas the second produces a 2D nested list
+B. The first produces a dictionary, whereas the second produces a tuple
+C. The first is invalid syntax that causes a SyntaxError
+D. Both produce identical 2D lists
+**Answer:** A
+**Explanation:** The first expression flattens the matrix into a single 1D list by chaining two `for` clauses. The second expression nests an inner list comprehension `[x for x in row]` inside an outer list comprehension, preserving the 2D row-by-row structure.
+
+---
+
+### 2. What will the following expression evaluate to?
+```python
+matrix = [[1, 2], [3, 4]]
+transposed = [[row[i] for row in matrix] for i in range(2)]
+print(transposed)
+```
+A. `[[1, 2], [3, 4]]`
+B. `[[1, 3], [2, 4]]`
+C. `[1, 2, 3, 4]`
+D. `[[4, 3], [2, 1]]`
+**Answer:** B
+**Explanation:** For `i = 0`, it gathers column 0 from each row: `[1, 3]`. For `i = 1`, it gathers column 1 from each row: `[2, 4]`. The resulting transposed matrix is `[[1, 3], [2, 4]]`.
+
+---
+
+### 3. Given matrix = [[10, 20], [30, 40], [50, 60]], what is the order of execution for [val for row in matrix for val in row]?
+A. The inner loop `for val in row` executes before the matrix is accessed
+B. The outer loop `for row in matrix` iterates first, and for each row, the inner loop `for val in row` executes
+C. Python evaluates elements randomly in parallel
+D. Elements are evaluated from highest value to lowest value
+**Answer:** B
+**Explanation:** Multi-loop comprehensions strictly follow left-to-right evaluation order, mirroring the exact structure of standard nested `for` statements.
+
+---
+
+### 4. What is the primary software engineering concern with deeply nested comprehensions (3 or more levels)?
+A. CPython refuses to compile more than 2 loops
+B. Code readability deteriorates rapidly, violating Python's core design philosophy (PEP 20: "Readability counts")
+C. They consume 100 times more GPU power
+D. They automatically convert integers into strings
+**Answer:** B
+**Explanation:** While Python syntactically allows deeply nested comprehensions, code comprehension and maintainability suffer drastically. Industry standard guidelines recommend breaking 3+ level comprehensions into clear functions or traditional loops.
+
+---
+
+### 5. What does the following nested dictionary comprehension output?
+```python
+grades = {
+    "Batch-A": {"Aman": 85, "Pooja": 92},
+    "Batch-B": {"Rohan": 65, "Kavita": 45}
+}
+passed = {
+    b: {name: sc for name, sc in students.items() if sc >= 50}
+    for b, students in grades.items()
+}
+print(len(passed["Batch-B"]))
+```
+A. 2
+B. 1
+C. 0
+D. KeyError
+**Answer:** B
+**Explanation:** In `"Batch-B"`, Rohan scored 65 (passed) and Kavita scored 45 (filtered out because `sc < 50`). Only Rohan remains in `passed["Batch-B"]`, so its length is 1.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Data Filtering with Comprehensions** (1: Advanced Data Types & Comprehensions).
+
+👉 **[Continue to Next Lesson: Project: Data Filtering with Comprehensions →](/tutorials/python-for-intermediate/project-data-filtering-with-comprehensions)**

@@ -16,9 +16,9 @@ keywords:
   - margin collapse
   - clock rule css
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # The CSS Box Model: Content, Padding, Border, and Margin
@@ -204,7 +204,7 @@ Paragraph 2  [ margin-top: 20px ]
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -214,7 +214,6 @@ B. Padding
 C. Outline
 D. Header
 **Answer:** B
-**Explanation:** Padding is the clear area inside the box that separates the content from the border.
 
 ---
 
@@ -224,7 +223,6 @@ B. Right margin
 C. Bottom margin
 D. Left margin
 **Answer:** D
-**Explanation:** Shorthand order goes clockwise: Top (10px), Right (20px), Bottom (30px), Left (15px).
 
 ---
 
@@ -234,7 +232,6 @@ B. Left gets 12px; Right gets 24px
 C. All 4 sides get 36px
 D. Top gets 12px; Bottom gets 24px
 **Answer:** A
-**Explanation:** In two-value shorthand, the first value applies to vertical sides (Top and Bottom), and the second value applies to horizontal sides (Left and Right).
 
 ---
 
@@ -244,7 +241,6 @@ B. The border does not show because border-style defaults to none
 C. The browser shows an error alert
 D. The text inside becomes red
 **Answer:** B
-**Explanation:** If border-style is omitted, its default value is `none`. Therefore, the border will remain completely invisible even if width and color are given.
 
 ---
 
@@ -254,7 +250,6 @@ B. 15px (40 - 25)
 C. 40px (the larger of the two)
 D. 0px
 **Answer:** C
-**Explanation:** Under CSS vertical margin collapse, adjacent vertical margins collapse into a single space equal to the maximum margin value (40px).
 
 ---
 
@@ -311,3 +306,10 @@ D. 0px
    </html>
    ```
 4. Right-click the card in your browser, select **Inspect**, and look at the Chrome DevTools **Box Model diagram**! You will see Content, Padding, Border, and Margin visually highlighted with different colors! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Width, Height, Max-Width, and Min-Width** (The CSS Box Model).
+
+👉 **[Continue to Next Lesson: Width, Height, Max-Width, and Min-Width →](/tutorials/css-for-beginners/width-height-max-min-dimensions)**

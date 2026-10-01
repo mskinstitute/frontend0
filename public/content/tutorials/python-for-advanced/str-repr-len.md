@@ -1,3 +1,24 @@
+---
+id: python-advanced-str-repr-len
+slug: str-repr-len
+course: python-for-advanced
+chapter: "2: Magic Methods & Operator Overloading"
+topic: "2.2 __str__, __repr__, __len__"
+title: "__str__, __repr__, __len__ in Python"
+description: "Master __str__, __repr__, __len__ in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 7
+keywords:
+  - python str repr len
+  - python advanced
+  - python __str__, __repr__, __len__
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # `__str__`, `__repr__`, and `__len__`
 
 In Python, the way objects display themselves to developers and end users—as well as how their size is evaluated—is governed by foundational dunder methods: `__repr__`, `__str__`, and `__len__`. Implementing these methods thoughtfully ensures that your custom data structures integrate seamlessly with logging frameworks, interactive debuggers, formatted strings, and built-in Python functions.
@@ -198,7 +219,61 @@ print(f"Standard formatting: {balance:.1f}")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Returning Non-Strings from `__str__` or `__repr__`
+Special methods like `__str__` and `__repr__` MUST return a string. Returning an integer, list, or `None` raises an immediate `TypeError`.
+
+### 2. Returning Negative Values from `__len__`
+`len()` enforces that `__len__()` must return a non-negative integer $ge 0$. Returning a negative integer raises a `ValueError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Custom Playing Card Deck with __repr__ and __len__
+
+### Scenario
+Create a `CardDeck` class representing a standard 52-card deck. Implement `__len__`, `__getitem__`, and `__repr__`.
+
+### Complete Solution
+```python
+class CardDeck:
+    ranks = [str(n) for n in range(2, 11)] + list("JQKA")
+    suits = ["Spades", "Diamonds", "Clubs", "Hearts"]
+
+    def __init__(self):
+        self._cards = [(rank, suit) for suit in self.suits for rank in self.ranks]
+
+    def __len__(self) -> int:
+        return len(self._cards)
+
+    def __getitem__(self, position):
+        return self._cards[position]
+
+    def __repr__(self) -> str:
+        return f"CardDeck(total_cards={len(self)})"
+
+deck = CardDeck()
+print(deck)
+print("Total cards:", len(deck))
+print("First card:", deck[0])
+print("Last card:", deck[-1])
+```
+
+### Expected Output
+```text
+CardDeck(total_cards=52)
+Total cards: 52
+First card: ('2', 'Spades')
+Last card: ('A', 'Hearts')
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What happens when you execute `print(obj)` on an instance of a class that defines `__repr__` but DOES NOT define `__str__`?
@@ -264,3 +339,10 @@ D. It raises a `TypeError`.
 **Explanation:** In the absence of `__bool__`, Python checks for `__len__`. If `__len__` is defined, the object is truthy if length is non-zero. If neither method is defined, all instances of user-defined classes are considered truthy (`True`).
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Operator Overloading** (2: Magic Methods & Operator Overloading).
+
+👉 **[Continue to Next Lesson: Operator Overloading →](/tutorials/python-for-advanced/operator-overloading)**

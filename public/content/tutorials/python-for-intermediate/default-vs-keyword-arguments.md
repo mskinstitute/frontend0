@@ -16,9 +16,9 @@ keywords:
   - sentinel pattern
   - positional only
   - function defaults
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Default vs Keyword Arguments & The Mutable Default Trap
@@ -237,63 +237,6 @@ TXN 102 stamped at 15:04:48
 
 ---
 
-# Multiple Choice Questions
-
-### 1. When is a default argument expression like def func(x=[]): evaluated in Python?
-A. Every time the function is called
-B. Exactly once, when the def statement is first executed by the interpreter
-C. Only when an error occurs
-D. When the program exits
-**Answer:** B
-**Explanation:** Python evaluates default parameter expressions once at function definition time, storing them in the function's `__defaults__` tuple.
-
----
-
-### 2. What is the output of the following code snippet?
-```python
-def add(item, box=[]):
-    box.append(item)
-    return len(box)
-
-print(add(1), add(2), add(3))
-```
-A. `1 1 1`
-B. `1 2 3`
-C. `3 3 3`
-D. `TypeError`
-**Answer:** B
-**Explanation:** Because `box=[]` is created once, each invocation appends to the same list. On call 1, `box` has 1 item; on call 2, it has 2 items; on call 3, it has 3 items. The output is `1 2 3`.
-
----
-
-### 3. What is the recommended idiom to avoid the mutable default argument trap?
-A. Use a tuple as default: `box=()`
-B. Set the default to `None` and initialize the mutable object inside the function body if the argument is `None`
-C. Pass an empty string
-D. Delete the function after each use
-**Answer:** B
-**Explanation:** The `None` sentinel pattern (`def func(param=None): if param is None: param = []`) ensures a brand-new list is allocated dynamically in memory on every call where no argument is passed.
-
----
-
-### 4. Given def calculate(a, b, /, c, *, d):, how can argument 'a' be passed?
-A. Only as a keyword argument: `calculate(a=1, ...)`
-B. Only positionally: `calculate(1, ...)`
-C. Either positionally or as keyword
-D. It cannot be passed
-**Answer:** B
-**Explanation:** In Python parameter syntax, all parameters preceding the slash `/` are positional-only. Passing `a` as a keyword argument raises a `TypeError`.
-
----
-
-### 5. Why should datetime.now() NOT be written directly as a default argument: def create_record(timestamp=datetime.now())?
-A. Because datetime objects cannot be default arguments
-B. Because it freezes the timestamp to the exact millisecond when the script was launched, rather than recording the actual time of each record creation
-C. Because it consumes 100% CPU
-D. Because datetime.now() is an asynchronous coroutine
-**Answer:** B
-**Explanation:** Since default expressions evaluate at import/definition time, `timestamp` will hold the static timestamp of when the function was compiled, failing to capture the time of future function calls.
-
 ---
 
 # Practice Challenge
@@ -353,3 +296,69 @@ Aarav's Initial Log: ['CREDIT of ₹5,000.00 on Account [SBIN-101]']
 Priya's Private Log: ['DEBIT of ₹12,500.00 on Account [HDFC-999]']
 Aarav's Updated Log: ['CREDIT of ₹5,000.00 on Account [SBIN-101]', 'DEBIT of ₹1,200.00 on Account [SBIN-101]']
 ```
+
+---
+
+## Practice Quiz
+
+### 1. When is a default argument expression like def func(x=[]): evaluated in Python?
+A. Every time the function is called
+B. Exactly once, when the def statement is first executed by the interpreter
+C. Only when an error occurs
+D. When the program exits
+**Answer:** B
+**Explanation:** Python evaluates default parameter expressions once at function definition time, storing them in the function's `__defaults__` tuple.
+
+---
+
+### 2. What is the output of the following code snippet?
+```python
+def add(item, box=[]):
+    box.append(item)
+    return len(box)
+
+print(add(1), add(2), add(3))
+```
+A. `1 1 1`
+B. `1 2 3`
+C. `3 3 3`
+D. `TypeError`
+**Answer:** B
+**Explanation:** Because `box=[]` is created once, each invocation appends to the same list. On call 1, `box` has 1 item; on call 2, it has 2 items; on call 3, it has 3 items. The output is `1 2 3`.
+
+---
+
+### 3. What is the recommended idiom to avoid the mutable default argument trap?
+A. Use a tuple as default: `box=()`
+B. Set the default to `None` and initialize the mutable object inside the function body if the argument is `None`
+C. Pass an empty string
+D. Delete the function after each use
+**Answer:** B
+**Explanation:** The `None` sentinel pattern (`def func(param=None): if param is None: param = []`) ensures a brand-new list is allocated dynamically in memory on every call where no argument is passed.
+
+---
+
+### 4. Given def calculate(a, b, /, c, *, d):, how can argument 'a' be passed?
+A. Only as a keyword argument: `calculate(a=1, ...)`
+B. Only positionally: `calculate(1, ...)`
+C. Either positionally or as keyword
+D. It cannot be passed
+**Answer:** B
+**Explanation:** In Python parameter syntax, all parameters preceding the slash `/` are positional-only. Passing `a` as a keyword argument raises a `TypeError`.
+
+---
+
+### 5. Why should datetime.now() NOT be written directly as a default argument: def create_record(timestamp=datetime.now())?
+A. Because datetime objects cannot be default arguments
+B. Because it freezes the timestamp to the exact millisecond when the script was launched, rather than recording the actual time of each record creation
+C. Because it consumes 100% CPU
+D. Because datetime.now() is an asynchronous coroutine
+**Answer:** B
+**Explanation:** Since default expressions evaluate at import/definition time, `timestamp` will hold the static timestamp of when the function was compiled, failing to capture the time of future function calls.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Closures** (2: Functions Deep Dive).
+
+👉 **[Continue to Next Lesson: Closures →](/tutorials/python-for-intermediate/closures)**

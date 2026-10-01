@@ -1,3 +1,24 @@
+---
+id: python-advanced-transactions-and-rollbacks
+slug: transactions-and-rollbacks
+course: python-for-advanced
+chapter: "9: Advanced Database Handling"
+topic: "9.3 Transactions and Rollbacks"
+title: "Transactions and Rollbacks in Python"
+description: "Master transactions and rollbacks in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 38
+keywords:
+  - python transactions and rollbacks
+  - python advanced
+  - python transactions and rollbacks
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Transactions and Rollbacks in SQLAlchemy
 
 Data consistency in backend systems relies on the **ACID** guarantees of relational databases (Atomicity, Consistency, Isolation, Durability). In SQLAlchemy, transactions are governed by the Unit of Work pattern through the `Session` object.
@@ -167,7 +188,72 @@ def process_batch_with_savepoints():
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Confusing `session.flush()` with `session.commit()`
+- `session.flush()`: Sends SQL statements to the database engine and populates generated IDs, but keeps the transaction open.
+- `session.commit()`: Persists the transaction permanently to disk.
+
+### 2. Re-using an Errored Session Without Rollback
+Once an exception occurs inside a transaction, the session enters an inactive state. Any subsequent query raises an `InvalidRequestError` until `session.rollback()` is called.
+
+---
+
+---
+
+## 💻 Try It Yourself: Simulating Transaction Rollback on Failure
+
+### Scenario
+Demonstrate transaction rollback in SQLAlchemy by attempting a dual-account fund transfer where an error occurs midway through the operation.
+
+### Complete Solution
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
+
+class Base(DeclarativeBase):
+    pass
+
+class UserAccount(Base):
+    __tablename__ = "accounts"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    balance: Mapped[float]
+
+engine = create_engine("sqlite:///:memory:")
+Base.metadata.create_all(engine)
+
+with Session(engine) as session:
+    a1 = UserAccount(id=1, balance=1000.0)
+    session.add(a1)
+    session.commit()
+
+# Transaction with failure
+with Session(engine) as session:
+    try:
+        acc = session.get(UserAccount, 1)
+        acc.balance -= 500.0
+        raise RuntimeError("Network crashed during bank transfer!")
+        session.commit()
+    except RuntimeError:
+        session.rollback()
+        print("Transaction safely rolled back.")
+
+with Session(engine) as session:
+    acc = session.get(UserAccount, 1)
+    print(f"Verified Balance: ₹{acc.balance:,.2f} (Funds intact!)")
+```
+
+### Expected Output
+```text
+Transaction safely rolled back.
+Verified Balance: ₹1,000.00 (Funds intact!)
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What happens if an unhandled exception occurs inside a `with session.begin():` block?
@@ -233,3 +319,10 @@ D. `KeyError`
 **Explanation:** Database constraint violations (such as unique constraints, foreign key violations, or nullability violations) trigger a `sqlalchemy.exc.IntegrityError`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Blogging Platform Database** (9: Advanced Database Handling).
+
+👉 **[Continue to Next Lesson: Project: Blogging Platform Database →](/tutorials/python-for-advanced/project-blogging-platform-database)**

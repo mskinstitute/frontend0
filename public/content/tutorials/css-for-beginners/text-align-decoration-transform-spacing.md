@@ -17,9 +17,9 @@ keywords:
   - word-spacing
   - css typography
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Text Alignment, Decoration, Transform, and Spacing
@@ -233,7 +233,7 @@ In printed storybooks and textbooks, the very first line of a new paragraph is o
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -243,7 +243,6 @@ B. `text-decoration: none;`
 C. `underline: false;`
 D. `link-style: remove;`
 **Answer:** B
-**Explanation:** `text-decoration: none;` removes the browser's default underline from links and other decorated text elements.
 
 ---
 
@@ -253,7 +252,6 @@ B. "Science And Technology"
 C. "science and technology"
 D. "Science and technology"
 **Answer:** B
-**Explanation:** `capitalize` transforms the first letter of every individual word to uppercase.
 
 ---
 
@@ -263,7 +261,6 @@ B. `justify`
 C. `spread`
 D. `both`
 **Answer:** B
-**Explanation:** `text-align: justify;` expands spacing between words so that each line aligns with both the left and right edges of the container.
 
 ---
 
@@ -273,7 +270,6 @@ B. `letter-spacing`
 C. `line-height`
 D. `font-stretch`
 **Answer:** B
-**Explanation:** `letter-spacing` controls the horizontal space between individual characters (tracking).
 
 ---
 
@@ -283,7 +279,6 @@ B. `text-decoration: underline;`
 C. `font-style: strikethrough;`
 D. `text-transform: strike;`
 **Answer:** A
-**Explanation:** `text-decoration: line-through;` renders a horizontal line directly through the middle of the text, commonly used to denote discounted or deleted pricing.
 
 ---
 
@@ -393,3 +388,10 @@ D. `text-transform: strike;`
    </html>
    ```
 3. Open the file in your browser to see how `text-transform`, `letter-spacing`, `line-through`, and `text-decoration: none` create a stunning, polished layout! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Absolute Units: Pixels (px), Points (pt)** (CSS Units and Measurements).
+
+👉 **[Continue to Next Lesson: Absolute Units: Pixels (px), Points (pt) →](/tutorials/css-for-beginners/css-units-absolute-px-pt)**

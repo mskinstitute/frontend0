@@ -16,9 +16,9 @@ keywords:
   - set operations
   - hashable
   - data cleaning
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Set Comprehensions in Python
@@ -224,66 +224,6 @@ Unique bookings    : 3
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What differentiates a set comprehension from a dictionary comprehension syntactically?
-A. Set comprehensions use square brackets while dictionary comprehensions use parentheses
-B. Dictionary comprehensions use key-value pairs separated by a colon `{k: v for ...}`, whereas set comprehensions use single values `{val for ...}`
-C. Set comprehensions can only process numbers
-D. Dictionary comprehensions cannot use `if` filters
-**Answer:** B
-**Explanation:** Both constructs utilize curly braces `{}`, but a dictionary comprehension produces key-value mappings using `<key>: <value>`, whereas a set comprehension specifies single values without colons.
-
----
-
-### 2. What will be the output of the following set comprehension?
-```python
-text = "BABBAC"
-result = {char for char in text}
-print(len(result))
-```
-A. 6
-B. 3
-C. 1
-D. TypeError
-**Answer:** B
-**Explanation:** The characters in `"BABBAC"` are 'B', 'A', 'B', 'B', 'A', 'C'. A set comprehension automatically removes duplicate characters, leaving only `{'A', 'B', 'C'}`. Its length is 3.
-
----
-
-### 3. What occurs if you execute {[x, x * 2] for x in [1, 2, 3]}?
-A. A set containing 3 sublists is created
-B. `TypeError: unhashable type: 'list'`
-C. The lists are automatically converted to strings
-D. It returns `[1, 2, 2, 4, 3, 6]`
-**Answer:** B
-**Explanation:** Elements of a set must be hashable and immutable. Because a `list` is a mutable data type, Python cannot compute its hash, raising a `TypeError`. Converting the inner collection to a tuple `(x, x * 2)` resolves the issue.
-
----
-
-### 4. Why is {x for x in data} preferred over set([x for x in data])?
-A. `set([...])` raises a runtime warning in modern Python
-B. `{x for x in data}` avoids allocating an intermediate list in RAM, streaming elements directly into the set hash table
-C. `{x for x in data}` automatically sorts the elements in ascending order
-D. `set([...])` only works with integer data types
-**Answer:** B
-**Explanation:** Writing `set([x for x in data])` first builds a complete list in memory and then passes it to the `set()` constructor. The direct set comprehension `{x for x in data}` builds the set directly without the temporary list allocation.
-
----
-
-### 5. What is the value of result in the following snippet?
-```python
-numbers = [12, 15, 18, 21, 24, 25, 27]
-result = {n % 3 for n in numbers}
-print(sorted(result))
-```
-A. `[0, 1, 2]`
-B. `[0, 1]`
-C. `[0, 15, 18]`
-D. `[12, 15, 18, 21, 24, 25, 27]`
-**Answer:** B
-**Explanation:** Let us calculate `n % 3` for each number: 12 $\to$ 0, 15 $\to$ 0, 18 $\to$ 0, 21 $\to$ 0, 24 $\to$ 0, 25 $\to$ 1, 27 $\to$ 0. The unique modulo remainders collected in the set are `{0, 1}`. Sorting yields `[0, 1]`.
-
 ---
 
 # Practice Challenge
@@ -360,3 +300,72 @@ print("Active Tax Jurisdictions    :", sorted(active_states))
 Extracted Unique State Codes: ['07', '27', '29']
 Active Tax Jurisdictions    : ['Delhi', 'Karnataka', 'Maharashtra']
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What differentiates a set comprehension from a dictionary comprehension syntactically?
+A. Set comprehensions use square brackets while dictionary comprehensions use parentheses
+B. Dictionary comprehensions use key-value pairs separated by a colon `{k: v for ...}`, whereas set comprehensions use single values `{val for ...}`
+C. Set comprehensions can only process numbers
+D. Dictionary comprehensions cannot use `if` filters
+**Answer:** B
+**Explanation:** Both constructs utilize curly braces `{}`, but a dictionary comprehension produces key-value mappings using `<key>: <value>`, whereas a set comprehension specifies single values without colons.
+
+---
+
+### 2. What will be the output of the following set comprehension?
+```python
+text = "BABBAC"
+result = {char for char in text}
+print(len(result))
+```
+A. 6
+B. 3
+C. 1
+D. TypeError
+**Answer:** B
+**Explanation:** The characters in `"BABBAC"` are 'B', 'A', 'B', 'B', 'A', 'C'. A set comprehension automatically removes duplicate characters, leaving only `{'A', 'B', 'C'}`. Its length is 3.
+
+---
+
+### 3. What occurs if you execute {[x, x * 2] for x in [1, 2, 3]}?
+A. A set containing 3 sublists is created
+B. `TypeError: unhashable type: 'list'`
+C. The lists are automatically converted to strings
+D. It returns `[1, 2, 2, 4, 3, 6]`
+**Answer:** B
+**Explanation:** Elements of a set must be hashable and immutable. Because a `list` is a mutable data type, Python cannot compute its hash, raising a `TypeError`. Converting the inner collection to a tuple `(x, x * 2)` resolves the issue.
+
+---
+
+### 4. Why is {x for x in data} preferred over set([x for x in data])?
+A. `set([...])` raises a runtime warning in modern Python
+B. `{x for x in data}` avoids allocating an intermediate list in RAM, streaming elements directly into the set hash table
+C. `{x for x in data}` automatically sorts the elements in ascending order
+D. `set([...])` only works with integer data types
+**Answer:** B
+**Explanation:** Writing `set([x for x in data])` first builds a complete list in memory and then passes it to the `set()` constructor. The direct set comprehension `{x for x in data}` builds the set directly without the temporary list allocation.
+
+---
+
+### 5. What is the value of result in the following snippet?
+```python
+numbers = [12, 15, 18, 21, 24, 25, 27]
+result = {n % 3 for n in numbers}
+print(sorted(result))
+```
+A. `[0, 1, 2]`
+B. `[0, 1]`
+C. `[0, 15, 18]`
+D. `[12, 15, 18, 21, 24, 25, 27]`
+**Answer:** B
+**Explanation:** Let us calculate `n % 3` for each number: 12 $\to$ 0, 15 $\to$ 0, 18 $\to$ 0, 21 $\to$ 0, 24 $\to$ 0, 25 $\to$ 1, 27 $\to$ 0. The unique modulo remainders collected in the set are `{0, 1}`. Sorting yields `[0, 1]`.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Dictionary Comprehensions** (1: Advanced Data Types & Comprehensions).
+
+👉 **[Continue to Next Lesson: Dictionary Comprehensions →](/tutorials/python-for-intermediate/dictionary-comprehensions)**

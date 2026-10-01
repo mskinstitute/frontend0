@@ -1,3 +1,24 @@
+---
+id: python-intermediate-line-bar-and-pie-charts
+slug: line-bar-and-pie-charts
+course: python-for-intermediate
+chapter: "13: Data Visualization Basics"
+topic: "13.2 Line, Bar and Pie Charts"
+title: "Line, Bar and Pie Charts in Python"
+description: "Master line, bar and pie charts in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 62
+keywords:
+  - python line bar and pie charts
+  - python intermediate
+  - python line, bar and pie charts
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Line, Bar, and Pie Charts in Python
 
 Choosing the correct visualization type is essential for communicating data insights effectively. In this guide, we dive into the three most essential chart types in Matplotlib: **Line Charts** (for continuous trends), **Bar Charts** (for categorical comparisons), and **Pie Charts** (for proportional composition).
@@ -149,7 +170,57 @@ fig.gca().add_artist(centre_circle)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Using Pie Charts with Too Many Categories
+Pie charts become unreadable when displaying more than 5–6 slices. Use a horizontal bar chart for datasets with numerous categories.
+
+### 2. Cluttered X-Axis Labels
+When x-axis categories have long names, they overlap horizontally. Rotate them using `plt.xticks(rotation=45, ha='right')` for clean readability.
+
+---
+
+---
+
+## 💻 Try It Yourself: Comparing Quarterly Revenue Bar Chart
+
+### Scenario
+Create a vertical bar chart comparing revenue across 4 fiscal quarters, coloring the highest quarter differently and displaying data labels on top of each bar.
+
+### Complete Solution
+```python
+import matplotlib.pyplot as plt
+
+quarters = ["Q1", "Q2", "Q3", "Q4"]
+revenue = [12.5, 15.8, 14.2, 19.5]  # in Lakhs INR
+colors = ["#93c5fd", "#93c5fd", "#93c5fd", "#2563eb"]  # Highlight Q4
+
+plt.figure(figsize=(7, 4.5))
+bars = plt.bar(quarters, revenue, color=colors, width=0.55)
+
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2.0, yval + 0.3, f"₹{yval}L", ha="center", va="bottom", fontweight="bold")
+
+plt.title("Fiscal Year Quarterly Revenue", fontsize=13, fontweight="bold")
+plt.ylabel("Revenue (₹ Lakhs)")
+plt.ylim(0, 24)
+plt.tight_layout()
+plt.savefig("quarterly_revenue.png", dpi=150)
+print("Chart saved to 'quarterly_revenue.png'.")
+plt.close()
+```
+
+### Expected Output
+```text
+Chart saved to 'quarterly_revenue.png'.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which chart type is best suited for visualizing website traffic trends over 30 days?
 A. Pie chart
@@ -195,3 +266,10 @@ D. `ax.display_info()`
 **Answer:** B
 **Explanation:** `ax.legend()` renders the legend box mapping line labels to their respective colors and markers.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Customizing Graphs** (13: Data Visualization Basics).
+
+👉 **[Continue to Next Lesson: Customizing Graphs →](/tutorials/python-for-intermediate/customizing-graphs)**

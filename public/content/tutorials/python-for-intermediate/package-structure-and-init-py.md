@@ -16,9 +16,9 @@ keywords:
   - public api facade
   - all export
   - package architecture
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Python Packages and __init__.py: Architecture and Facades
@@ -249,56 +249,6 @@ Does 'json' have a __path__ attribute? True
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What differentiates a Python Package from a standalone Python Module?
-A. Modules are written in C, while packages are written in Python
-B. A module is a single `.py` file, whereas a package is a directory that can contain multiple modules and sub-packages
-C. Modules can only contain 1 function
-D. Packages cannot be imported
-**Answer:** B
-**Explanation:** A module is an individual file (e.g. `utils.py`), while a package is a filesystem directory containing an `__init__.py` file along with multiple `.py` modules and nested sub-packages.
-
----
-
-### 2. What is the primary purpose of writing from .engine import start_engine inside a package's __init__.py?
-A. To prevent start_engine from ever being executed
-B. To provide an API Facade, allowing users to import start_engine directly from the package root rather than drilling into internal submodules
-C. To delete the engine.py file
-D. To convert the function into a class
-**Answer:** B
-**Explanation:** Re-exporting functions in `__init__.py` implements the Facade pattern. Consumers write `from my_package import start_engine` instead of navigating deep internal directory hierarchies.
-
----
-
-### 3. What does the __all__ variable in an __init__.py file control?
-A. It defines which operating systems can run the package
-B. It defines the explicit list of symbol names that will be exported when a consumer executes from package import *
-C. It lists all author names
-D. It lists all unit tests
-**Answer:** B
-**Explanation:** When wildcard import `from package import *` is invoked, Python checks `__all__`. Only strings present in the `__all__` sequence are imported into the caller's namespace.
-
----
-
-### 4. What does the single dot (.) represent in from .auth import login?
-A. The computer's root directory `C:\`
-B. The current package / directory where the importing file resides
-C. The parent directory of the current package
-D. A syntax error
-**Answer:** B
-**Explanation:** In explicit relative imports, a single dot `.` refers to the current package/directory, while two dots `..` refer to the parent package.
-
----
-
-### 5. Why does running python my_package/submodule.py directly often trigger an ImportError on relative imports?
-A. Because relative imports require root administrative privileges
-B. Because when a script is executed directly, Python sets `__name__` to `"__main__"` and loses context of the parent package hierarchy
-C. Because Python requires `.exe` files
-D. Because submodules cannot contain functions
-**Answer:** B
-**Explanation:** When run directly as the entry point, the file is not treated as part of an enclosing package. To execute a submodule with relative imports, invoke Python with the module flag: `python -m my_package.submodule`.
-
 ---
 
 # Practice Challenge
@@ -368,3 +318,62 @@ Estimated Time  : 3-4 Business Days (Inter-State Express)
 Standard Rate   : ₹200.00
 Express Air Rate: ₹300.00
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What differentiates a Python Package from a standalone Python Module?
+A. Modules are written in C, while packages are written in Python
+B. A module is a single `.py` file, whereas a package is a directory that can contain multiple modules and sub-packages
+C. Modules can only contain 1 function
+D. Packages cannot be imported
+**Answer:** B
+**Explanation:** A module is an individual file (e.g. `utils.py`), while a package is a filesystem directory containing an `__init__.py` file along with multiple `.py` modules and nested sub-packages.
+
+---
+
+### 2. What is the primary purpose of writing from .engine import start_engine inside a package's __init__.py?
+A. To prevent start_engine from ever being executed
+B. To provide an API Facade, allowing users to import start_engine directly from the package root rather than drilling into internal submodules
+C. To delete the engine.py file
+D. To convert the function into a class
+**Answer:** B
+**Explanation:** Re-exporting functions in `__init__.py` implements the Facade pattern. Consumers write `from my_package import start_engine` instead of navigating deep internal directory hierarchies.
+
+---
+
+### 3. What does the __all__ variable in an __init__.py file control?
+A. It defines which operating systems can run the package
+B. It defines the explicit list of symbol names that will be exported when a consumer executes from package import *
+C. It lists all author names
+D. It lists all unit tests
+**Answer:** B
+**Explanation:** When wildcard import `from package import *` is invoked, Python checks `__all__`. Only strings present in the `__all__` sequence are imported into the caller's namespace.
+
+---
+
+### 4. What does the single dot (.) represent in from .auth import login?
+A. The computer's root directory `C:\`
+B. The current package / directory where the importing file resides
+C. The parent directory of the current package
+D. A syntax error
+**Answer:** B
+**Explanation:** In explicit relative imports, a single dot `.` refers to the current package/directory, while two dots `..` refer to the parent package.
+
+---
+
+### 5. Why does running python my_package/submodule.py directly often trigger an ImportError on relative imports?
+A. Because relative imports require root administrative privileges
+B. Because when a script is executed directly, Python sets `__name__` to `"__main__"` and loses context of the parent package hierarchy
+C. Because Python requires `.exe` files
+D. Because submodules cannot contain functions
+**Answer:** B
+**Explanation:** When run directly as the entry point, the file is not treated as part of an enclosing package. To execute a submodule with relative imports, invoke Python with the module flag: `python -m my_package.submodule`.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Popular Python Modules Overview** (3: Modules and Packages).
+
+👉 **[Continue to Next Lesson: Popular Python Modules Overview →](/tutorials/python-for-intermediate/popular-python-modules-overview)**

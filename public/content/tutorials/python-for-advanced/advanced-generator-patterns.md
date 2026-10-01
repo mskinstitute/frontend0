@@ -1,3 +1,24 @@
+---
+id: python-advanced-advanced-generator-patterns
+slug: advanced-generator-patterns
+course: python-for-advanced
+chapter: "5: Generators & Coroutines"
+topic: "5.1 Advanced Generator Patterns"
+title: "Advanced Generator Patterns in Python"
+description: "Master advanced generator patterns in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 20
+keywords:
+  - python advanced generator patterns
+  - python advanced
+  - python advanced generator patterns
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Advanced Generator Patterns
 
 Generators are more than simple lazy iterators—they are stateful execution frames capable of suspension, resumption, bidirectional communication, and clean lifecycle management. Under the hood, Python generators pause their execution context, retaining local variables, instruction pointers, and exception states on the CPython heap.
@@ -176,7 +197,57 @@ for alert in enriched_pipeline:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Calling `next()` on an Active Generator
+Calling `next()` or `.send()` on a generator from inside itself (or concurrently from multiple threads) raises a `ValueError: generator already executing`.
+
+### 2. Assuming Generators Support Indexing
+Generators do not support indexing (`gen[0]`) or slicing (`gen[:5]`). Use `itertools.islice` to slice generator streams lazily.
+
+---
+
+---
+
+## 💻 Try It Yourself: Inspecting Generator Execution States
+
+### Scenario
+Use the `inspect` module to inspect a generator's lifecycle states: `GEN_CREATED`, `GEN_SUSPENDED`, and `GEN_CLOSED`.
+
+### Complete Solution
+```python
+import inspect
+
+def state_demo():
+    yield 1
+    yield 2
+
+gen = state_demo()
+print("Initial state:", inspect.getgeneratorstate(gen))
+
+next(gen)
+print("After first next():", inspect.getgeneratorstate(gen))
+
+next(gen)
+try:
+    next(gen)
+except StopIteration:
+    pass
+print("After exhaustion:", inspect.getgeneratorstate(gen))
+```
+
+### Expected Output
+```text
+Initial state: GEN_CREATED
+After first next(): GEN_SUSPENDED
+After exhaustion: GEN_CLOSED
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the state of a freshly instantiated generator object before `next()` or `send()` has been invoked on it?
@@ -242,3 +313,10 @@ D. The entire pipeline is converted to SQL queries.
 **Explanation:** Generator pipelines operate via demand-driven pull: the consumer requests one item, which causes each stage in the chain to execute just enough to produce that single item, requiring minimal memory.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Yield from Expression** (5: Generators & Coroutines).
+
+👉 **[Continue to Next Lesson: Yield from Expression →](/tutorials/python-for-advanced/yield-from-expression)**

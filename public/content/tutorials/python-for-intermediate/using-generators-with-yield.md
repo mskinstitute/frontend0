@@ -1,3 +1,24 @@
+---
+id: python-intermediate-using-generators-with-yield
+slug: using-generators-with-yield
+course: python-for-intermediate
+chapter: "7: Iterators and Generators"
+topic: "7.3 Using Generators with yield"
+title: "Using Generators with yield in Python"
+description: "Master using generators with yield in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 33
+keywords:
+  - python using generators with yield
+  - python intermediate
+  - python using generators with yield
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Using Generators with Yield in Python
 
 Writing custom iterator classes requires boilerplate code: tracking indices, defining `__iter__()`, handling `__next__()`, and manually managing `StopIteration`. 
@@ -142,7 +163,54 @@ avg_calculator.close()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Re-using an Exhausted Generator
+A generator can only be consumed once. Once it raises `StopIteration`, iterating over it again yields zero items silently. Create a new generator instance if you need a fresh pass.
+
+### 2. Calling a Generator Function Without Iterating
+Calling a generator function returns a generator object; it does not execute the function body until `next()` is called or a `for` loop begins.
+
+---
+
+---
+
+## 💻 Try It Yourself: Chunked Data Generator
+
+### Scenario
+Build a generator function `chunk_stream(iterable, chunk_size)` that yields fixed-size sublists lazily without loading the entire collection into memory.
+
+### Complete Solution
+```python
+def chunk_stream(iterable, chunk_size):
+    chunk = []
+    for item in iterable:
+        chunk.append(item)
+        if len(chunk) == chunk_size:
+            yield chunk
+            chunk = []
+    if chunk:
+        yield chunk
+
+# Test chunk generator
+numbers = list(range(1, 11))
+for batch in chunk_stream(numbers, 3):
+    print(f"Batch: {batch}")
+```
+
+### Expected Output
+```text
+Batch: [1, 2, 3]
+Batch: [4, 5, 6]
+Batch: [7, 8, 9]
+Batch: [10]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does Python return when a function containing a `yield` statement is invoked?
 A. The value specified after `yield`
@@ -188,3 +256,10 @@ D. `feed()`
 **Answer:** B
 **Explanation:** The `.send(value)` method resumes the generator and provides a value that becomes the result of the current `yield` expression inside the generator.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Generator Expressions** (7: Iterators and Generators).
+
+👉 **[Continue to Next Lesson: Generator Expressions →](/tutorials/python-for-intermediate/generator-expressions)**

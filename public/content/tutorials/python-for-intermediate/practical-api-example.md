@@ -1,3 +1,24 @@
+---
+id: python-intermediate-practical-api-example
+slug: practical-api-example
+course: python-for-intermediate
+chapter: "8: Working with APIs"
+topic: "8.4 Practical API Example"
+title: "Practical API Example in Python"
+description: "Master practical api example in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 39
+keywords:
+  - python practical api example
+  - python intermediate
+  - python practical api example
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Practical API Example: Building an API Client Class in Python
 
 In professional software development, API calls should not be scattered haphazardly throughout codebase files. Instead, best practices dictate encapsulating HTTP interactions inside a dedicated **API Client Class** that manages base URLs, authentication tokens, connection pooling via `requests.Session`, pagination, and error handling.
@@ -127,7 +148,52 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Hardcoding API Keys in Public Code
+Never commit private API keys to Git repositories. Always load secrets from environment variables using `os.getenv("API_KEY")`.
+
+### 2. Ignoring Rate Limits (HTTP 429)
+Public APIs enforce rate limits. If your script loops too fast, you will be blocked. Add gentle pauses with `time.sleep()` or check rate limit headers.
+
+---
+
+---
+
+## 💻 Try It Yourself: Public Quotes Fetcher
+
+### Scenario
+Fetch an inspirational quote from the public Quotable API (`https://dummyjson.com/quotes/random`), cleanly extracting the quote and author.
+
+### Complete Solution
+```python
+import requests
+
+def fetch_random_quote():
+    url = "https://dummyjson.com/quotes/random"
+    try:
+        res = requests.get(url, timeout=5.0)
+        res.raise_for_status()
+        quote_data = res.json()
+        print(f"\"{quote_data.get('quote')}\"")
+        print(f"  — {quote_data.get('author')}")
+    except requests.exceptions.RequestException as e:
+        print(f"Could not retrieve quote: {e}")
+
+fetch_random_quote()
+```
+
+### Expected Output
+```text
+"Life isn't about finding yourself. Life is about creating yourself."
+  — George Bernard Shaw
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary performance benefit of using `requests.Session()` over calling `requests.get()` repeatedly?
 A. It compiles Python scripts into C binaries
@@ -173,3 +239,10 @@ D. By setting an environment variable
 **Answer:** B
 **Explanation:** Passing a dictionary to the `params` argument in `requests` dynamically appends `?per_page=...` to the final request URL.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Weather Data Fetcher** (8: Working with APIs).
+
+👉 **[Continue to Next Lesson: Project: Weather Data Fetcher →](/tutorials/python-for-intermediate/project-weather-data-fetcher)**

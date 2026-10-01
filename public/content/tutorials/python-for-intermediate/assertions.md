@@ -1,3 +1,24 @@
+---
+id: python-intermediate-assertions
+slug: assertions
+course: python-for-intermediate
+chapter: "9: Debugging and Logging"
+topic: "9.4 Assertions"
+title: "Assertions in Python"
+description: "Master assertions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 44
+keywords:
+  - python assertions
+  - python intermediate
+  - python assertions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Assertions in Python
 
 An **Assertion** is a debugging sanity check that tests if a condition is `True`. If the condition evaluates to `False`, Python immediately halts execution and raises an **`AssertionError`**. Assertions are designed for developers to detect impossible internal states and logic bugs during development, not as everyday control-flow or user input validation mechanisms.
@@ -122,7 +143,51 @@ assert 1 == 2, "This condition is obviously false!"
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Using `assert` for Production Input Validation
+Python disables all assertions when run with optimization flags (`python -O script.py`). Never rely on assertions for business logic, authentication, or input validation. Use `if ...: raise ValueError(...)` instead.
+
+### 2. Passing a Tuple to `assert`
+`assert(condition, "error message")` evaluates a non-empty 2-element tuple, which is ALWAYS truthy in Python! Write `assert condition, "error message"` without outer parentheses.
+
+---
+
+---
+
+## 💻 Try It Yourself: Invariant Assertion Checker
+
+### Scenario
+Write a function `distribute_shares(total_shares, num_partners)` using assertions to guarantee that total shares remain conserved without creating fractional phantom shares.
+
+### Complete Solution
+```python
+def distribute_shares(total_shares: int, num_partners: int):
+    assert total_shares > 0, "Total shares must be positive."
+    assert num_partners > 0, "Number of partners must be positive."
+    
+    per_partner = total_shares // num_partners
+    remainder = total_shares % num_partners
+    
+    # Invariant assertion
+    assert (per_partner * num_partners) + remainder == total_shares, "Conservation of shares violated!"
+    
+    return per_partner, remainder
+
+shares, left = distribute_shares(1000, 3)
+print(f"Each partner receives: {shares} shares (Remainder: {left})")
+```
+
+### Expected Output
+```text
+Each partner receives: 333 shares (Remainder: 1)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which exception is raised when an `assert` statement fails?
 A. `ValueError`
@@ -168,3 +233,10 @@ D. Allocating memory for data structures
 **Answer:** B
 **Explanation:** Assertions serve as internal consistency checks during development to confirm assumptions about program state.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Debugging a Student Grading App** (9: Debugging and Logging).
+
+👉 **[Continue to Next Lesson: Project: Debugging a Student Grading App →](/tutorials/python-for-intermediate/project-debugging-a-student-grading-app)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-package-ready-mini-app
+slug: project-package-ready-mini-app
+course: python-for-intermediate
+chapter: "12: Virtual Environments & Pip"
+topic: "12.5 Project: Package-Ready Mini App"
+title: "Project: Package-Ready Mini App in Python"
+description: "Master project: package-ready mini app in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 60
+keywords:
+  - python project package ready mini app
+  - python intermediate
+  - python project: package-ready mini app
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Package-Ready Mini App
 
 In this capstone project, we will apply the software packaging and environment concepts covered across this chapter—**Virtual Environments, Pip Management, Dependency Manifests, and PEP 621 Standard Packaging**—to structure, package, and install a professional, distributable **Command-Line Currency Converter Tool**.
@@ -188,7 +209,48 @@ Fetching live conversion rate from USD to INR...
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Hardcoding Absolute System Paths
+Hardcoding paths like `C:\Users\Sumit\project\data.json` will break as soon as another developer clones your project. Use relative paths derived from `__file__`.
+
+### 2. Missing `.gitignore` File
+Always create a clean `.gitignore` including `__pycache__/`, `.venv/`, and `*.pyc` before publishing your project repository.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Setup Script
+
+### Challenge
+Create a basic `setup.py` or `pyproject.toml` configuration that makes your package installable in editable mode using `pip install -e .`.
+
+### Complete Solution
+```python
+# pyproject.toml
+"""
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "msk_utility_tool"
+version = "1.0.0"
+authors = [{ name="MSK Institute" }]
+description = "Production utility package"
+dependencies = [
+    "requests>=2.31.0",
+]
+"""
+print("Created standard modern pyproject.toml for editable pip install.")
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does the `-e` flag stand for in `pip install -e .`?
 A. Encrypted
@@ -234,3 +296,10 @@ D. `python.dll`
 **Answer:** C
 **Explanation:** `requirements.txt` specifies the list of package dependencies and version constraints for reproducing the environment.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Introduction to Matplotlib** (13: Data Visualization Basics).
+
+👉 **[Continue to Next Lesson: Introduction to Matplotlib →](/tutorials/python-for-intermediate/introduction-to-matplotlib)**

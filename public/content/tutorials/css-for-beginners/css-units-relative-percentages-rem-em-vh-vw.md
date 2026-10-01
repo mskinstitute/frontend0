@@ -16,9 +16,9 @@ keywords:
   - percentages css
   - responsive units
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Relative Units: Percentages (%), REM, EM, VH, and VW
@@ -228,7 +228,7 @@ Whether viewed on an iPhone, a tablet, or an ultrawide desktop monitor, `100vh` 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -238,7 +238,6 @@ B. Ratio
 C. Root
 D. Responsive
 **Answer:** C
-**Explanation:** `rem` stands for Root EM. It is calculated relative to the font-size of the root `<html>` element.
 
 ---
 
@@ -248,7 +247,6 @@ B. 24px
 C. 32px
 D. 64px
 **Answer:** C
-**Explanation:** 2rem is calculated as 2 * 16px = 32px.
 
 ---
 
@@ -258,7 +256,6 @@ B. `100px`
 C. `100vw`
 D. `100vh`
 **Answer:** D
-**Explanation:** `100vh` equals 100% of the viewport height, ensuring the container fills the entire visible window height.
 
 ---
 
@@ -268,7 +265,6 @@ B. `rem` avoids the compound multiplication (snowball) issue that happens with n
 C. `em` is deprecated in HTML5
 D. `rem` works only on computers
 **Answer:** B
-**Explanation:** Because `rem` always references the single root `<html>` element, it does not compound or multiply unpredictably when elements are nested inside one another.
 
 ---
 
@@ -278,7 +274,6 @@ B. 600px
 C. 550px
 D. 700px
 **Answer:** B
-**Explanation:** 75% of 800px is calculated as (75 / 100) * 800 = 600px.
 
 ---
 
@@ -356,3 +351,10 @@ D. 700px
    </html>
    ```
 3. Open the file in your browser and resize the window height and width. Notice how the hero section stays anchored to the exact screen height! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Responsive Units & The calc() Function** (CSS Units and Measurements).
+
+👉 **[Continue to Next Lesson: Responsive Units & The calc() Function →](/tutorials/css-for-beginners/responsive-units-and-calc-function)**

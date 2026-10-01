@@ -16,9 +16,9 @@ keywords:
   - opacity zero
   - document flow
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Display: none vs Visibility: hidden: Hiding Elements in CSS
@@ -198,7 +198,7 @@ Use `visibility: hidden;`! If your form reserves a 20px spot for a red error mes
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What happens to the surrounding page layout when an element is styled with `display: none;`?
 A. The element becomes semi-transparent
@@ -206,7 +206,6 @@ B. Surrounding elements shift to fill the space because the element takes up 0px
 C. A large gray box is rendered in its place
 D. The page freezes until the user reloads
 **Answer:** B
-**Explanation:** `display: none;` removes the element from the document layout flow entirely, so adjacent elements collapse to occupy the vacant area.
 
 ---
 
@@ -216,7 +215,6 @@ B. `visibility: hidden;` turns all text green
 C. `visibility: hidden;` works only in dark mode
 D. `visibility: hidden;` makes the element animate continuously
 **Answer:** A
-**Explanation:** An element with `visibility: hidden;` is invisible to the eye, but the browser still reserves its full physical space in the layout.
 
 ---
 
@@ -226,7 +224,6 @@ B. The `display` property cannot be interpolated across time because an element 
 C. Modern browsers block all CSS transitions
 D. `display: none` disables your graphics card
 **Answer:** B
-**Explanation:** CSS transitions only work on numeric or continuous values (like opacity, color, width). `display` is a discrete switch and cannot be animated smoothly.
 
 ---
 
@@ -236,7 +233,6 @@ B. `visibility: hidden;`
 C. `opacity: 0;`
 D. `content: invisible;`
 **Answer:** C
-**Explanation:** `opacity: 0;` creates 100% transparency while retaining full layout dimensions and mouse interactivity.
 
 ---
 
@@ -246,7 +242,6 @@ B. To preserve the vertical height so the submit button doesn't jump or jitter w
 C. Because `display: none` deletes user input
 D. Because `visibility: hidden` highlights the text in red
 **Answer:** B
-**Explanation:** Reserving the height with `visibility: hidden;` prevents annoying Cumulative Layout Shift (CLS) where buttons jump up and down.
 
 ---
 
@@ -350,3 +345,10 @@ D. Because `visibility: hidden` highlights the text in red
    </html>
    ```
 3. Open the file in your web browser and notice how the red box is handled in each row! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto** (Display and Visibility).
+
+👉 **[Continue to Next Lesson: CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto →](/tutorials/css-for-beginners/css-overflow-visible-hidden-scroll-auto)**

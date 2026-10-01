@@ -1,3 +1,24 @@
+---
+id: python-intermediate-polymorphism-basics
+slug: polymorphism-basics
+course: python-for-intermediate
+chapter: "5: Object-Oriented Programming (Intermediate)"
+topic: "5.3 Polymorphism Basics"
+title: "Polymorphism Basics in Python"
+description: "Master polymorphism basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 23
+keywords:
+  - python polymorphism basics
+  - python intermediate
+  - python polymorphism basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Polymorphism Basics in Python
 
 The term **Polymorphism** is derived from Greek words meaning "having multiple forms". In software architecture and Object-Oriented Programming, polymorphism allows different classes to expose the same interface (method signatures) while providing distinct, specialized implementations behind the scenes.
@@ -181,7 +202,59 @@ checkout(CreditCardPayment(), 4999.00)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Excessive `isinstance()` Checks
+Writing cascades of `if isinstance(obj, Cat): ... elif isinstance(obj, Dog): ...` defeats polymorphism. Instead, define a common method (e.g., `.speak()`) on all classes and let duck typing handle execution.
+
+### 2. Returning `None` from `__str__()` or `__repr__()`
+Special methods like `__str__()` must return a string. Returning a non-string or printing inside the method causes a `TypeError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Polymorphic Payment Processing
+
+### Scenario
+Create a polymorphic payment system where different payment methods (`CreditCardPayment`, `UPIPayment`, `CryptoPayment`) implement a unified `pay(amount)` method.
+
+### Complete Solution
+```python
+class CreditCardPayment:
+    def __init__(self, card_last4: str):
+        self.card_last4 = card_last4
+
+    def pay(self, amount: float):
+        print(f"Paid ₹{amount:,.2f} using Credit Card ending in {self.card_last4} (+2% surcharge).")
+
+class UPIPayment:
+    def __init__(self, vpa: str):
+        self.vpa = vpa
+
+    def pay(self, amount: float):
+        print(f"Paid ₹{amount:,.2f} via UPI to {self.vpa} (Instant settlement).")
+
+# Polymorphic processor function
+def process_checkout(payment_method, bill_amount):
+    payment_method.pay(bill_amount)
+
+# Test diverse payment methods
+process_checkout(CreditCardPayment("8821"), 4500.0)
+process_checkout(UPIPayment("aarav@upi"), 1200.0)
+```
+
+### Expected Output
+```text
+Paid ₹4,500.00 using Credit Card ending in 8821 (+2% surcharge).
+Paid ₹1,200.00 via UPI to aarav@upi (Instant settlement).
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does "Duck Typing" mean in the context of Python polymorphism?
 A. Classes must be named after biological entities
@@ -227,3 +300,10 @@ D. `__len__()`
 **Answer:** D
 **Explanation:** Python's built-in `len(obj)` calls `obj.__len__()`, which must return a non-negative integer.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Encapsulation and Abstraction** (5: Object-Oriented Programming (Intermediate)).
+
+👉 **[Continue to Next Lesson: Encapsulation and Abstraction →](/tutorials/python-for-intermediate/encapsulation-and-abstraction)**

@@ -16,9 +16,9 @@ keywords:
   - floating action button
   - sticky table header
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners
@@ -230,7 +230,7 @@ A sticky element cannot stick outside its parent container. If the parent contai
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS positioning scheme keeps an element pinned in the exact same spot on the screen, even as the user scrolls thousands of pixels down the page?
 A. `position: relative;`
@@ -238,7 +238,6 @@ B. `position: fixed;`
 C. `position: static;`
 D. `position: inherit;`
 **Answer:** B
-**Explanation:** `position: fixed;` anchors an element relative to the browser viewport, making it completely immune to page scrolling.
 
 ---
 
@@ -248,7 +247,6 @@ B. Add `padding-top: 60px;` to the `<body>` element
 C. Change the screen resolution
 D. Set the header font size to 0
 **Answer:** B
-**Explanation:** Because fixed elements occupy 0 space in the document flow, page content slides under them. Adding `padding-top: 60px;` to the `<body>` pushes the page content down safely.
 
 ---
 
@@ -258,7 +256,6 @@ B. Sticky elements take normal space in flow and stop sticking once their parent
 C. Sticky elements are always semi-transparent
 D. Sticky elements cannot contain text
 **Answer:** B
-**Explanation:** `position: sticky;` is container-bound. It scrolls normally until reaching its threshold, sticks while its parent is visible, and then scrolls away with its parent.
 
 ---
 
@@ -268,7 +265,6 @@ B. Setting a background color on the element
 C. Using Google Chrome browser
 D. Giving the sticky element a border
 **Answer:** A
-**Explanation:** A sticky element must have a defined threshold coordinate (like `top: 0;` or `bottom: 10px;`) so the browser knows at what scroll point to lock it.
 
 ---
 
@@ -278,7 +274,6 @@ B. So the column titles remain visible at the top of the screen as the student s
 C. To prevent students from copying table data
 D. Because HTML5 requires all tables to be sticky
 **Answer:** B
-**Explanation:** Setting `position: sticky; top: 0;` keeps column headers locked to the top of the viewing area while scrolling through long data tables.
 
 ---
 
@@ -419,3 +414,10 @@ D. Because HTML5 requires all tables to be sticky
    </html>
    ```
 3. Scroll through the page in your browser and experience how the fixed navbar stays pinned while each chapter title sticks dynamically within its own section! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **z-index Basics: Controlling 3D Layering and Stacking Order** (Introduction to Positioning).
+
+👉 **[Continue to Next Lesson: z-index Basics: Controlling 3D Layering and Stacking Order →](/tutorials/css-for-beginners/z-index-and-stacking-context)**

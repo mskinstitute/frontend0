@@ -17,9 +17,9 @@ keywords:
   - list comprehension
   - set comprehension
   - dictionary comprehension
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Project: Data Filtering with Comprehensions
@@ -277,7 +277,45 @@ BLR      |   0   |   0   |   -
 
 ---
 
-# Multiple Choice Questions
+---
+
+# Practice Challenge
+
+### Scenario: Red-Eye Night Flight Discount Filter
+
+Airlines offer promotional discounts on late-night **Red-Eye** flights (flights departing between **21:00 (9 PM)** and **05:00 (5 AM)**):
+1. Write a list comprehension that filters only Red-Eye flights from `FLIGHT_MANIFEST` (`f["dep_hour"] >= 21 or f["dep_hour"] <= 5`).
+2. Apply a **20% promotional discount** to the base price: `price * 0.80`.
+3. Format each output record as: `"[DISCOUNTED] <FlightNo> (<Airline>) - New Price: ₹<Price> (Dep: <Hour>:00 hrs)"`.
+
+### Starter Code
+```python
+# Using FLIGHT_MANIFEST from the main lesson
+# TODO: Filter red-eye flights with 20% discount using list comprehension
+```
+
+### Complete Solution
+```python
+red_eye_deals = [
+    f"[DISCOUNTED] {f['flight']} ({f['airline']}) - New Price: ₹{f['price'] * 0.80:.0f} (Dep: {f['dep_hour']:02d}:00 hrs)"
+    for f in FLIGHT_MANIFEST
+    if f["dep_hour"] >= 21 or f["dep_hour"] <= 5
+]
+
+print("=== Red-Eye Promotional Deals (20% Off) ===")
+for deal in red_eye_deals:
+    print(deal)
+```
+
+### Expected Output
+```text
+=== Red-Eye Promotional Deals (20% Off) ===
+[DISCOUNTED] SG-442 (SpiceJet) - New Price: ₹2880 (Dep: 22:00 hrs)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In the flight search engine, why is a set comprehension chosen to extract airport codes from the raw manifest?
 A. Because airport codes must be converted into floats
@@ -326,39 +364,10 @@ C. Because dictionary values cannot be dictionaries
 D. It is not valid Python syntax
 **Answer:** A
 **Explanation:** Flight numbers are immutable strings that uniquely identify individual flights, making them ideal hash keys for fast $O(1)$ dictionary lookups of complete flight record objects.
-
 ---
 
-# Practice Challenge
+## 🚀 What's Next?
 
-### Scenario: Red-Eye Night Flight Discount Filter
+In the next lesson, we will continue your intermediate Python journey with **Arguments Recap (*args, **kwargs)** (2: Functions Deep Dive).
 
-Airlines offer promotional discounts on late-night **Red-Eye** flights (flights departing between **21:00 (9 PM)** and **05:00 (5 AM)**):
-1. Write a list comprehension that filters only Red-Eye flights from `FLIGHT_MANIFEST` (`f["dep_hour"] >= 21 or f["dep_hour"] <= 5`).
-2. Apply a **20% promotional discount** to the base price: `price * 0.80`.
-3. Format each output record as: `"[DISCOUNTED] <FlightNo> (<Airline>) - New Price: ₹<Price> (Dep: <Hour>:00 hrs)"`.
-
-### Starter Code
-```python
-# Using FLIGHT_MANIFEST from the main lesson
-# TODO: Filter red-eye flights with 20% discount using list comprehension
-```
-
-### Complete Solution
-```python
-red_eye_deals = [
-    f"[DISCOUNTED] {f['flight']} ({f['airline']}) - New Price: ₹{f['price'] * 0.80:.0f} (Dep: {f['dep_hour']:02d}:00 hrs)"
-    for f in FLIGHT_MANIFEST
-    if f["dep_hour"] >= 21 or f["dep_hour"] <= 5
-]
-
-print("=== Red-Eye Promotional Deals (20% Off) ===")
-for deal in red_eye_deals:
-    print(deal)
-```
-
-### Expected Output
-```text
-=== Red-Eye Promotional Deals (20% Off) ===
-[DISCOUNTED] SG-442 (SpiceJet) - New Price: ₹2880 (Dep: 22:00 hrs)
-```
+👉 **[Continue to Next Lesson: Arguments Recap (*args, **kwargs) →](/tutorials/python-for-intermediate/arguments-recap-args-kwargs)**

@@ -1,3 +1,24 @@
+---
+id: python-advanced-building-a-chat-server
+slug: building-a-chat-server
+course: python-for-advanced
+chapter: "10: Networking with Python"
+topic: "10.3 Building a Chat Server"
+title: "Building a Chat Server in Python"
+description: "Master building a chat server in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 42
+keywords:
+  - python building a chat server
+  - python advanced
+  - python building a chat server
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Building a Multi-Client Chat Server
 
 Building a real-time, multi-client chat server requires managing multiple persistent TCP socket connections simultaneously. While a multithreaded architecture (one thread per client) quickly runs into thread memory limits and lock contention, an **Asynchronous Event-Driven Architecture** powered by `asyncio` scales effortlessly to thousands of concurrent users on a single operating system thread.
@@ -176,7 +197,54 @@ async def start_chat_client(host: str = "127.0.0.1", port: int = 8888) -> None:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Crashing on Client Disconnection During Broadcast
+When a client disconnects unexpectedly, broadcasting to its socket raises `ConnectionResetError` or `BrokenPipeError`. Always wrap socket sends in `try...except` and remove stale client handles.
+
+### 2. Unsynchronized Shared Client Collections
+In multi-threaded chat servers, iterate over a copy of the active clients list (`list(clients)`) to prevent `RuntimeError: dictionary changed size during iteration`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Multi-Client Broadcast Simulation
+
+### Scenario
+Build a thread-safe message broadcast function that relays an incoming chat message to all connected client sockets.
+
+### Complete Solution
+```python
+class ChatBroadcastManager:
+    def __init__(self):
+        self.clients = set()
+
+    def register(self, client_id):
+        self.clients.add(client_id)
+
+    def broadcast(self, sender_id, message):
+        formatted = f"[{sender_id}]: {message}"
+        print(f"Broadcasting to {len(self.clients) - 1} recipients: {formatted}")
+        return formatted
+
+chat = ChatBroadcastManager()
+chat.register("Aarav")
+chat.register("Priya")
+chat.register("Rohan")
+chat.broadcast("Aarav", "Welcome to Advanced Python!")
+```
+
+### Expected Output
+```text
+Broadcasting to 2 recipients: [Aarav]: Welcome to Advanced Python!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Which high-level `asyncio` function creates and starts a non-blocking TCP socket server?
@@ -242,3 +310,10 @@ D. Sockets only work in asynchronous mode.
 **Explanation:** Operating system threads have heavy stack allocations and kernel scheduling overhead. In contrast, thousands of lightweight async coroutines can multiplex over a single thread using minimal memory.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Simple Client-Server Application** (10: Networking with Python).
+
+👉 **[Continue to Next Lesson: Project: Simple Client-Server Application →](/tutorials/python-for-advanced/project-simple-client-server-application)**

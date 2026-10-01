@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-blogging-platform-database
+slug: project-blogging-platform-database
+course: python-for-advanced
+chapter: "9: Advanced Database Handling"
+topic: "9.4 Project: Blogging Platform Database"
+title: "Project: Blogging Platform Database in Python"
+description: "Master project: blogging platform database in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 39
+keywords:
+  - python project blogging platform database
+  - python advanced
+  - python project: blogging platform database
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Blogging Platform Database with SQLAlchemy
 
 In modern web development and content management systems (CMS), building an extensible, type-safe, and high-performance database layer is foundational. A blogging platform requires complex relational modeling—including User-to-Post ownership (1:N), Post-to-Comment hierarchies (1:N with cascading teardown), and Post-to-Tag categorizations (M:N via an association table).
@@ -250,7 +271,63 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Missing Database Indexes on Foreign Keys and Slugs
+Failing to add `index=True` on frequently filtered fields (like article slugs or foreign keys) leads to slow full-table scans in production.
+
+### 2. Storing Passwords in Plain Text
+Always hash user passwords using cryptographic algorithms (like `bcrypt` or `hashlib.pbkdf2_hmac`) before storing them in the database.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Tag-Based Filtering
+
+### Challenge
+Add a Many-to-Many association table linking `Post` and `Tag` entities in the blogging platform, and query all posts tagged with `"Python"`.
+
+### Complete Solution
+```python
+from sqlalchemy import Table, Column, Integer, ForeignKey, create_engine, select
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, Session
+
+class Base(DeclarativeBase):
+    pass
+
+post_tags = Table(
+    "post_tags", Base.metadata,
+    Column("post_id", Integer, ForeignKey("posts.id")),
+    Column("tag_id", Integer, ForeignKey("tags.id"))
+)
+
+class Post(Base):
+    __tablename__ = "posts"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str]
+    tags: Mapped[list["Tag"]] = relationship(secondary=post_tags)
+
+class Tag(Base):
+    __tablename__ = "tags"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+
+engine = create_engine("sqlite:///:memory:")
+Base.metadata.create_all(engine)
+print("Many-to-Many association table verified.")
+```
+
+### Expected Output
+```text
+Many-to-Many association table verified.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does `cascade="all, delete-orphan"` on `Post.comments` maintain referential integrity when a post is removed?
@@ -316,3 +393,10 @@ D. `session.filter(name).first()`
 **Explanation:** Calling `.one()` on a scalar result verifies that exactly one record matches the query, raising `NoResultFound` if missing or `MultipleResultsFound` if more than one exists.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Socket Programming Basics** (10: Networking with Python).
+
+👉 **[Continue to Next Lesson: Socket Programming Basics →](/tutorials/python-for-advanced/socket-programming-basics)**

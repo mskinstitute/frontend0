@@ -16,9 +16,9 @@ keywords:
   - absolute badge
   - flexbox pills
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Project 1: Styled Student Profile & ID Card
@@ -333,7 +333,17 @@ Create a file named `student-profile-card.html` in your editor and paste the fol
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Beginner Project Production Best Practices
+
+1. **Avoid Rigid Pixel Heights:** Let containers grow organically with their content using padding rather than hardcoding `height: 400px`.
+2. **Add Smooth Transitions to Hover States:** Always include `transition: all 0.2s ease;` on interactive buttons and cards to avoid jarring visual jumps.
+3. **Keep Accessible Contrast:** Ensure text colors maintain a high contrast ratio against backgrounds (minimum 4.5:1 for standard body text).
+
+---
+
+## Practice Quiz
 
 ### 1. Which CSS technique is used to create the classic modern effect where the circular avatar overlaps the top banner?
 A. Applying a negative top margin (`margin-top: -55px;`) on the avatar container
@@ -341,7 +351,6 @@ B. Setting the avatar width to -100px
 C. Deleting the banner background
 D. Using `display: none`
 **Answer:** A
-**Explanation:** A negative margin pulls an element upwards in the normal document flow, allowing it to overlap the preceding sibling element cleanly.
 
 ---
 
@@ -351,7 +360,6 @@ B. To ensure that the top gradient banner's sharp square corners are clipped to 
 C. To turn the card invisible
 D. Because CSS requires all cards to hide overflow
 **Answer:** B
-**Explanation:** Child elements with rectangular backgrounds will poke out of parent rounded corners unless the parent has `overflow: hidden;` applied.
 
 ---
 
@@ -361,7 +369,6 @@ B. It converts the HTML element into an SVG image
 C. It compresses the pixels by 50%
 D. It rotates the box 360 degrees
 **Answer:** A
-**Explanation:** Applying `50%` border-radius to an element with equal width and height curves the edges completely into a perfect circle.
 
 ---
 
@@ -371,7 +378,6 @@ B. It forces both buttons to grow equally to fill the entire horizontal width of
 C. It stacks the buttons on top of each other
 D. It hides the secondary button
 **Answer:** B
-**Explanation:** When siblings in a flex container all have `flex: 1`, they share all available space along the main axis equally.
 
 ---
 
@@ -381,7 +387,6 @@ B. To serve as the coordinate boundary anchor so the badge positions relative to
 C. To prevent the badge from having text
 D. Because absolute badges only accept yellow colors without relative parents
 **Answer:** B
-**Explanation:** An absolute child measures its `top` and `right` offsets from its nearest positioned ancestor. Making the card `position: relative` traps the badge neatly inside the top corner of the card.
 
 ---
 
@@ -391,3 +396,10 @@ D. Because absolute badges only accept yellow colors without relative parents
 2. Customize the card with your own name, grade, favorite school subjects, and sports!
 3. Add a second badge on the top-left corner displaying your House color (e.g., Red House or Emerald House)!
 4. Test the card on your mobile phone to verify that the card adapts cleanly to smaller touchscreens! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Project 2: Simple School Club Landing Page** (Beginner Projects).
+
+👉 **[Continue to Next Lesson: Project 2: Simple School Club Landing Page →](/tutorials/css-for-beginners/project-simple-landing-page-layout)**

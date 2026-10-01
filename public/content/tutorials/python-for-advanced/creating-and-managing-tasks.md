@@ -1,3 +1,24 @@
+---
+id: python-advanced-creating-and-managing-tasks
+slug: creating-and-managing-tasks
+course: python-for-advanced
+chapter: "8: Asynchronous Programming (Asyncio)"
+topic: "8.3 Creating and Managing Tasks"
+title: "Creating and Managing Tasks in Python"
+description: "Master creating and managing tasks in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 34
+keywords:
+  - python creating and managing tasks
+  - python advanced
+  - python creating and managing tasks
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Creating and Managing Tasks
 
 While the `await` expression pauses the current coroutine until a single operation completes, achieving true concurrent execution requires wrapping coroutines into **Tasks**. An `asyncio.Task` schedules a coroutine on the active event loop, allowing multiple operations to interleave and run concurrently on the single thread.
@@ -189,7 +210,54 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Losing Strong References to Background Tasks
+Tasks created with `asyncio.create_task()` that are not retained in a strong reference (like a set) can be garbage-collected mid-execution!
+
+### 2. Unhandled Exceptions in `asyncio.gather`
+By default, if one task in `asyncio.gather()` raises an exception, the exception propagates immediately, but other running tasks continue in the background unless handled with `return_exceptions=True`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Task Cancellation and Timeout Handling
+
+### Scenario
+Demonstrate canceling a slow async task using `asyncio.wait_for()` and gracefully catching `asyncio.TimeoutError`.
+
+### Complete Solution
+```python
+import asyncio
+
+async def long_query():
+    print("Executing complex database migration...")
+    await asyncio.sleep(2.0)
+    return "Finished migration."
+
+async def main():
+    try:
+        # Enforce strict 0.2s timeout
+        result = await asyncio.wait_for(long_query(), timeout=0.2)
+        print(result)
+    except asyncio.TimeoutError:
+        print("⏱️ [TIMEOUT] Query exceeded maximum SLA and was safely cancelled!")
+
+asyncio.run(main())
+```
+
+### Expected Output
+```text
+Executing complex database migration...
+⏱️ [TIMEOUT] Query exceeded maximum SLA and was safely cancelled!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the effect of calling `task = asyncio.create_task(my_coro())`?
@@ -255,3 +323,10 @@ D. Python reboots the machine.
 **Explanation:** If `CancelledError` is caught and not re-raised, the task does not acknowledge cancellation and continues executing, which breaks structured concurrency cancellation semantics.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Async Web Scraper** (8: Asynchronous Programming (Asyncio)).
+
+👉 **[Continue to Next Lesson: Project: Async Web Scraper →](/tutorials/python-for-advanced/project-async-web-scraper)**

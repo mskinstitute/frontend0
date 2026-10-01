@@ -1,3 +1,24 @@
+---
+id: python-intermediate-creating-custom-exceptions
+slug: creating-custom-exceptions
+course: python-for-intermediate
+chapter: "6: Exception Handling"
+topic: "6.4 Creating Custom Exceptions"
+title: "Creating Custom Exceptions in Python"
+description: "Master creating custom exceptions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 29
+keywords:
+  - python creating custom exceptions
+  - python intermediate
+  - python creating custom exceptions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Creating Custom Exceptions in Python
 
 While Python's standard library provides dozens of built-in exceptions, production systems frequently encounter domain-specific error conditions that standard exceptions like `ValueError` or `RuntimeError` cannot clearly describe. By creating **Custom Exceptions**, you provide descriptive, domain-aligned error types that make debugging, automated recovery, and API design vastly more intuitive.
@@ -125,7 +146,63 @@ except InventoryError as err:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Not Inheriting from `Exception`
+Always inherit custom exceptions from `Exception` (or an application-level base exception), never directly from `BaseException`.
+
+### 2. Over-Complicating Custom Exceptions
+Keep custom exceptions lightweight. They exist to categorize domain failures cleanly, so a descriptive name and message are usually all you need.
+
+---
+
+---
+
+## 💻 Try It Yourself: Custom Authentication Exception Hierarchy
+
+### Scenario
+Create an `AuthError` base exception, with subclasses `UserNotFoundError` and `InvalidCredentialsError`. Write a simple login verification function demonstrating both.
+
+### Complete Solution
+```python
+class AuthError(Exception):
+    """Base exception for authentication failures."""
+    pass
+
+class UserNotFoundError(AuthError):
+    pass
+
+class InvalidPasswordError(AuthError):
+    pass
+
+USERS_DB = {"aarav": "securepass123"}
+
+def authenticate(username, password):
+    if username not in USERS_DB:
+        raise UserNotFoundError(f"User '{username}' does not exist.")
+    if USERS_DB[username] != password:
+        raise InvalidPasswordError("Incorrect password provided.")
+    return f"Welcome back, {username}!"
+
+for u, p in [("aarav", "securepass123"), ("priya", "pass"), ("aarav", "wrong")]:
+    try:
+        print(authenticate(u, p))
+    except AuthError as err:
+        print(f"[{err.__class__.__name__}] {err}")
+```
+
+### Expected Output
+```text
+Welcome back, aarav!
+[UserNotFoundError] User 'priya' does not exist.
+[InvalidPasswordError] Incorrect password provided.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which class should your custom exception inherit from directly or indirectly in modern Python?
 A. `BaseException`
@@ -171,3 +248,10 @@ D. To terminate child threads
 **Answer:** B
 **Explanation:** Passing the error message to `super().__init__(message)` initializes the base exception's string representation, ensuring clear traceback and log outputs.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Error-Handled Calculator** (6: Exception Handling).
+
+👉 **[Continue to Next Lesson: Project: Error-Handled Calculator →](/tutorials/python-for-intermediate/project-error-handled-calculator)**

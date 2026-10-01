@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-visualizing-sales-data
+slug: project-visualizing-sales-data
+course: python-for-intermediate
+chapter: "13: Data Visualization Basics"
+topic: "13.5 Project: Visualizing Sales Data"
+title: "Project: Visualizing Sales Data in Python"
+description: "Master project: visualizing sales data in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 65
+keywords:
+  - python project visualizing sales data
+  - python intermediate
+  - python project: visualizing sales data
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Visualizing Sales Data
 
 In this capstone project, we bring together all the data visualization capabilities mastered throughout this chapter—**Matplotlib's Object-Oriented Architecture, Line & Bar Charts, Donut Charts, Seaborn Aesthetics, and Multi-Panel Dashboards**—to build an automated **Executive Sales Analytics Visual Dashboard**.
@@ -165,7 +186,57 @@ The resulting `sales_dashboard.png` image provides a clean 300 DPI executive gra
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Memory Leaks During Multi-Figure Generation
+When generating hundreds of charts in an automated reporting loop, always call `plt.close(fig)` after saving each figure to free GUI canvas memory.
+
+### 2. Misleading Zero-Baseline Truncation
+Truncating the Y-axis baseline on bar charts exaggerates minor differences between categories, leading to misleading data interpretation.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Category Breakdown Pie Chart
+
+### Challenge
+Add a sub-plot chart to the Sales Data Visualizer displaying percentage sales contribution by product category using a donut pie chart.
+
+### Complete Solution
+```python
+import matplotlib.pyplot as plt
+
+categories = ["Electronics", "Apparel", "Home Goods", "Books"]
+sales = [450000, 280000, 190000, 80000]
+colors = ["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"]
+
+plt.figure(figsize=(6, 6))
+wedges, texts, autotexts = plt.pie(
+    sales, labels=categories, autopct="%1.1f%%", colors=colors,
+    startangle=140, pctdistance=0.82
+)
+# Draw center circle for donut chart
+centre_circle = plt.Circle((0, 0), 0.65, fc="white")
+plt.gca().add_artist(centre_circle)
+
+plt.title("Sales by Product Category", fontsize=14, fontweight="bold")
+plt.tight_layout()
+plt.savefig("category_donut.png", dpi=150)
+print("Donut pie chart saved to 'category_donut.png'.")
+plt.close()
+```
+
+### Expected Output
+```text
+Donut pie chart saved to 'category_donut.png'.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In our dashboard project, what makes Panel 3 render as a "Donut Chart" rather than a standard solid pie chart?
 A. Passing `style="donut"` to Matplotlib
@@ -211,3 +282,10 @@ D. Network bandwidth
 **Answer:** B
 **Explanation:** Boxplots reveal data dispersion, medians, quartiles, and outlier anomalies that are masked when reducing data to a simple average.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project 1: Expense Tracker with CSV** (14: Intermediate Projects).
+
+👉 **[Continue to Next Lesson: Project 1: Expense Tracker with CSV →](/tutorials/python-for-intermediate/project-1-expense-tracker-with-csv)**

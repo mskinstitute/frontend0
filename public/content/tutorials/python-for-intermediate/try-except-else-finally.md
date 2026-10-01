@@ -1,3 +1,24 @@
+---
+id: python-intermediate-try-except-else-finally
+slug: try-except-else-finally
+course: python-for-intermediate
+chapter: "6: Exception Handling"
+topic: "6.2 Try-Except-Else-Finally"
+title: "Try-Except-Else-Finally in Python"
+description: "Master try-except-else-finally in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 27
+keywords:
+  - python try except else finally
+  - python intermediate
+  - python try-except-else-finally
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Try-Except-Else-Finally in Python
 
 Exception handling in Python provides a structured mechanism to intercept runtime errors, run corrective routines, and ensure resource cleanup without crashing the application. The complete statement consists of four distinct clauses: `try`, `except`, `else`, and `finally`.
@@ -135,7 +156,64 @@ result = read_first_line("system.ini")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Putting Code That Can Raise Errors Inside the `else` Block
+The `else` block runs only when NO exception was raised in the `try` block. Keep only operations that depend on success here, not code that requires its own exception handling.
+
+### 2. Returning from `finally`
+A `return` statement inside a `finally` block will silently suppress and discard any exception raised in `try`! Never return values inside `finally`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Resource Guardian Demonstration
+
+### Scenario
+Demonstrate the full `try-except-else-finally` lifecycle by simulating a database transaction that ensures a connection is always closed in `finally`.
+
+### Complete Solution
+```python
+def execute_transaction(amount):
+    print("
+--- Starting Transaction ---")
+    connection_open = True
+    try:
+        print("Connected to database.")
+        if amount <= 0:
+            raise ValueError("Transaction amount must be positive.")
+        result = 1000 - amount
+    except ValueError as err:
+        print(f"[RECOVERED] Transaction failed: {err}")
+    else:
+        print(f"[SUCCESS] Debited ₹{amount}. Remaining: ₹{result}")
+    finally:
+        connection_open = False
+        print("Database connection safely closed.")
+
+execute_transaction(250)
+execute_transaction(-50)
+```
+
+### Expected Output
+```text
+--- Starting Transaction ---
+Connected to database.
+[SUCCESS] Debited ₹250. Remaining: ₹750
+Database connection safely closed.
+
+--- Starting Transaction ---
+Connected to database.
+[RECOVERED] Transaction failed: Transaction amount must be positive.
+Database connection safely closed.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Under what condition does the `else` clause in a `try-except-else-finally` block execute?
 A. Whenever an unhandled exception is encountered
@@ -181,3 +259,10 @@ D. Order does not matter in Python
 **Answer:** C
 **Explanation:** Python checks `except` blocks from top to bottom. If a parent class appears first, it catches all derived subclasses before the specialized child block is ever evaluated.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Raising Exceptions** (6: Exception Handling).
+
+👉 **[Continue to Next Lesson: Raising Exceptions →](/tutorials/python-for-intermediate/raising-exceptions)**

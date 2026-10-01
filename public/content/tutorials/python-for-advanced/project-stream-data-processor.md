@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-stream-data-processor
+slug: project-stream-data-processor
+course: python-for-advanced
+chapter: "5: Generators & Coroutines"
+topic: "5.4 Project: Stream Data Processor"
+title: "Project: Stream Data Processor in Python"
+description: "Master project: stream data processor in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 23
+keywords:
+  - python project stream data processor
+  - python advanced
+  - python project: stream data processor
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Stream Data Processor
 
 In financial trading, Internet of Things (IoT) telemetry, and real-time monitoring systems, architectures must process continuous, unbounded streams of incoming event data with minimal latency and constant memory usage.
@@ -181,7 +202,52 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Accumulating Unbounded Window State
+When aggregating sliding windows of streaming records, always prune expired records to prevent unbounded RAM growth.
+
+### 2. Unhandled Exception Propagation in Coroutine Pipelines
+An unhandled exception in one coroutine stage will terminate the entire pipeline. Wrap processing stages in `try...except` blocks.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - High Error Threshold Alerting
+
+### Challenge
+Add an error frequency alert coroutine to the Stream Data Processor that triggers an alert callback whenever more than 3 errors occur within 5 seconds.
+
+### Complete Solution
+```python
+def error_alert_consumer(threshold=3):
+    error_count = 0
+    while True:
+        log_entry = yield
+        if "ERROR" in log_entry:
+            error_count += 1
+            if error_count >= threshold:
+                print(f"🚨 [CRITICAL ALERT] Threshold breached: {error_count} errors detected!")
+                error_count = 0
+
+consumer = error_alert_consumer(3)
+next(consumer)
+for log in ["INFO ok", "ERROR 500", "INFO ok", "ERROR 403", "ERROR 502"]:
+    consumer.send(log)
+consumer.close()
+```
+
+### Expected Output
+```text
+🚨 [CRITICAL ALERT] Threshold breached: 3 errors detected!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 In the push-based stream processor, how are events propagated from one stage to the next?
@@ -247,3 +313,10 @@ D. `windowed_metrics_aggregator`
 **Explanation:** The `broadcast` coroutine receives an event and iterates through its list of registered downstream targets, calling `target.send(event)` on each one.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Threading Module Basics** (6: Multithreading in Python).
+
+👉 **[Continue to Next Lesson: Threading Module Basics →](/tutorials/python-for-advanced/threading-module-basics)**

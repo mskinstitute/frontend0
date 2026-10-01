@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-parallel-file-processor
+slug: project-parallel-file-processor
+course: python-for-advanced
+chapter: "7: Multiprocessing in Python"
+topic: "7.4 Project: Parallel File Processor"
+title: "Project: Parallel File Processor in Python"
+description: "Master project: parallel file processor in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 31
+keywords:
+  - python project parallel file processor
+  - python advanced
+  - python project: parallel file processor
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Parallel File Processor
 
 Processing large volumes of log files, sensor records, or text corpora sequentially introduces severe operational bottlenecks. Because parsing, regular expression extraction, and cryptographic hashing are CPU-bound, multithreading cannot achieve multi-core speedups due to Python's Global Interpreter Lock (GIL).
@@ -190,7 +211,56 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Passing Unpickleable Callbacks to Process Pools
+Functions and arguments passed to `Pool.map()` must be pickleable. Lambda functions and local nested functions will fail with `PicklingError`. Use top-level module functions.
+
+### 2. Forgetting `pool.close()` and `pool.join()`
+Always close the pool and wait for worker tasks to complete, or use `with multiprocessing.Pool() as pool:` context management.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Batch Word Count MapReduce
+
+### Challenge
+Implement a parallel MapReduce word counter that distributes text files across processes and combines partial word frequency dictionaries.
+
+### Complete Solution
+```python
+from collections import Counter
+import multiprocessing
+
+def map_word_count(text_chunk):
+    return Counter(text_chunk.lower().split())
+
+if __name__ == "__main__":
+    chunks = [
+        "python multiprocessing unlocks true multicore parallelism",
+        "multiprocessing overcomes the cpython global interpreter lock",
+        "python is powerful and python is fast"
+    ]
+    with multiprocessing.Pool(processes=2) as pool:
+        partial_counts = pool.map(map_word_count, chunks)
+    
+    total = Counter()
+    for pc in partial_counts:
+        total.update(pc)
+    print("Most frequent words:", total.most_common(2))
+```
+
+### Expected Output
+```text
+Most frequent words: [('python', 3), ('multiprocessing', 2)]
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why is `concurrent.futures.ProcessPoolExecutor` preferred over manual `multiprocessing.Process` instantiation for large batch jobs?
@@ -256,3 +326,10 @@ D. The exception is silently suppressed.
 **Explanation:** `concurrent.futures` catches exceptions occurring in worker processes, storing them in the corresponding `Future` object and re-raising them when `.result()` is invoked by the caller.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Introduction to Asyncio** (8: Asynchronous Programming (Asyncio)).
+
+👉 **[Continue to Next Lesson: Introduction to Asyncio →](/tutorials/python-for-advanced/introduction-to-asyncio)**

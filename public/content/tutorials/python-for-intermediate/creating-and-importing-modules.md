@@ -16,9 +16,9 @@ keywords:
   - sys.modules
   - circular imports
   - namespace pollution
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Creating and Importing Modules in Python
@@ -245,56 +245,6 @@ When Python encounters this, Module B tries to access an attribute in Module A b
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What does the sys.modules dictionary in Python represent?
-A. A list of all files on your computer
-B. An in-memory cache mapping module names to previously loaded module objects, ensuring each module executes only once
-C. A list of all syntax errors encountered
-D. The system password table
-**Answer:** B
-**Explanation:** Python caches all imported modules in `sys.modules`. When an import statement executes, Python first checks `sys.modules`; if found, it reuses the existing module object without re-executing its code.
-
----
-
-### 2. Why is from module import * considered an anti-pattern in professional Python development?
-A. It causes Python to run in 32-bit mode
-B. It pollutes the local namespace with unknown variables, obscures the origin of functions, and can silently overwrite existing names
-C. It deletes the source file
-D. It only imports integers
-**Answer:** B
-**Explanation:** Wildcard imports (`from module import *`) import all public symbols into the current namespace. This makes code difficult to debug, breaks automated linters, and risks accidental variable overwrites (name shadowing).
-
----
-
-### 3. What happens if you name your local script math.py and run import math?
-A. Python deletes the standard library
-B. Python imports your local math.py instead of the built-in C math module because the current directory comes first in sys.path
-C. The computer crashes
-D. Python renames your file automatically
-**Answer:** B
-**Explanation:** Because the current script directory is the first entry in `sys.path`, local files take precedence over standard library modules. This is called **module shadowing** and causes `AttributeError: module 'math' has no attribute 'sqrt'`.
-
----
-
-### 4. What is the root cause of ImportError: cannot import name ... from partially initialized module?
-A. Hard drive is full
-B. A circular import where two modules depend on each other at module-load time before either has finished initializing
-C. Outdated pip version
-D. Missing semicolons
-**Answer:** B
-**Explanation:** A circular import causes Python to load a module that has not yet finished executing its top-level definitions, resulting in a partially initialized module error.
-
----
-
-### 5. According to PEP 8 standards, in what order should imports be grouped at the top of a Python file?
-A. Local imports first, standard library last
-B. Standard library imports $\to$ Third-party imports $\to$ Local project imports (separated by blank lines)
-C. Alphabetical order regardless of origin
-D. In the exact order the functions are called
-**Answer:** B
-**Explanation:** PEP 8 prescribes three distinct import sections separated by single blank lines: (1) Standard library, (2) Related third-party libraries, and (3) Local application-specific imports.
-
 ---
 
 # Practice Challenge
@@ -365,3 +315,62 @@ for k, v in sample_shipment.items():
   fuel_surcharge  : ₹1,315.12
   total_payable   : ₹38,890.12
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What does the sys.modules dictionary in Python represent?
+A. A list of all files on your computer
+B. An in-memory cache mapping module names to previously loaded module objects, ensuring each module executes only once
+C. A list of all syntax errors encountered
+D. The system password table
+**Answer:** B
+**Explanation:** Python caches all imported modules in `sys.modules`. When an import statement executes, Python first checks `sys.modules`; if found, it reuses the existing module object without re-executing its code.
+
+---
+
+### 2. Why is from module import * considered an anti-pattern in professional Python development?
+A. It causes Python to run in 32-bit mode
+B. It pollutes the local namespace with unknown variables, obscures the origin of functions, and can silently overwrite existing names
+C. It deletes the source file
+D. It only imports integers
+**Answer:** B
+**Explanation:** Wildcard imports (`from module import *`) import all public symbols into the current namespace. This makes code difficult to debug, breaks automated linters, and risks accidental variable overwrites (name shadowing).
+
+---
+
+### 3. What happens if you name your local script math.py and run import math?
+A. Python deletes the standard library
+B. Python imports your local math.py instead of the built-in C math module because the current directory comes first in sys.path
+C. The computer crashes
+D. Python renames your file automatically
+**Answer:** B
+**Explanation:** Because the current script directory is the first entry in `sys.path`, local files take precedence over standard library modules. This is called **module shadowing** and causes `AttributeError: module 'math' has no attribute 'sqrt'`.
+
+---
+
+### 4. What is the root cause of ImportError: cannot import name ... from partially initialized module?
+A. Hard drive is full
+B. A circular import where two modules depend on each other at module-load time before either has finished initializing
+C. Outdated pip version
+D. Missing semicolons
+**Answer:** B
+**Explanation:** A circular import causes Python to load a module that has not yet finished executing its top-level definitions, resulting in a partially initialized module error.
+
+---
+
+### 5. According to PEP 8 standards, in what order should imports be grouped at the top of a Python file?
+A. Local imports first, standard library last
+B. Standard library imports $\to$ Third-party imports $\to$ Local project imports (separated by blank lines)
+C. Alphabetical order regardless of origin
+D. In the exact order the functions are called
+**Answer:** B
+**Explanation:** PEP 8 prescribes three distinct import sections separated by single blank lines: (1) Standard library, (2) Related third-party libraries, and (3) Local application-specific imports.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Using __name__ == '__main__'** (3: Modules and Packages).
+
+👉 **[Continue to Next Lesson: Using __name__ == '__main__' →](/tutorials/python-for-intermediate/using-name-main)**

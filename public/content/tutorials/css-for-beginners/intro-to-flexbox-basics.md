@@ -16,9 +16,9 @@ keywords:
   - align-items
   - flex-direction
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Intro to Flexbox: The Modern 1D Layout Powerhouse
@@ -233,7 +233,7 @@ That is all it takes! No margins, no transforms, no complex calculations.
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS declaration turns an element into a Flex container and transforms its direct children into Flex items?
 A. `layout: flexbox;`
@@ -241,7 +241,6 @@ B. `display: flex;`
 C. `box-mode: flexible;`
 D. `flex: start;`
 **Answer:** B
-**Explanation:** `display: flex;` activates the Flexible Box layout mode on the selected parent element.
 
 ---
 
@@ -251,7 +250,6 @@ B. `justify-content`
 C. `align-content`
 D. `flex-align`
 **Answer:** B
-**Explanation:** `justify-content` distributes space and aligns items along the Main Axis (horizontal by default).
 
 ---
 
@@ -261,7 +259,6 @@ B. `justify-content: space-between;`
 C. `justify-content: space-around;`
 D. `justify-content: center;`
 **Answer:** B
-**Explanation:** `space-between` places the first item against the start edge, the last item against the end edge, and evenly distributes leftover space between all intermediate items.
 
 ---
 
@@ -271,7 +268,6 @@ B. `gap`
 C. `between-margin`
 D. `flex-distance`
 **Answer:** B
-**Explanation:** The `gap` property provides clean gutter spacing between flex items without applying unwanted outer margins to the first or last child.
 
 ---
 
@@ -281,7 +277,6 @@ B. `display: block; text-align: center; vertical-align: middle;`
 C. `display: inline; margin: auto;`
 D. `position: center; align: center;`
 **Answer:** A
-**Explanation:** In Flexbox, combining `justify-content: center` (main axis centering) with `align-items: center` (cross axis centering) achieves perfect 2D centering in 3 lines.
 
 ---
 
@@ -412,3 +407,10 @@ D. `position: center; align: center;`
    </html>
    ```
 3. Open this file in your browser to experience the power of modern Flexbox layouts! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Project 1: Styled Student Profile & ID Card** (Beginner Projects).
+
+👉 **[Continue to Next Lesson: Project 1: Styled Student Profile & ID Card →](/tutorials/css-for-beginners/project-styled-profile-card)**

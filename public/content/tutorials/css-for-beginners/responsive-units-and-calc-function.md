@@ -16,9 +16,9 @@ keywords:
   - responsive units best practices
   - css math
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Responsive Units & The calc() Function
@@ -173,7 +173,7 @@ Bookmark this handy table for all your future web development projects:
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -183,7 +183,6 @@ B. `width: calc(100%-40px);`
 C. `width: calc(100% / 2);`
 D. `width: calc(50% + 10px);`
 **Answer:** B
-**Explanation:** In CSS `calc()`, spaces are strictly mandatory around the `+` and `-` operators. Without spaces, the browser parses `-40px` as a negative value rather than a subtraction operator.
 
 ---
 
@@ -193,7 +192,6 @@ B. `height: calc(100vh - 80px);`
 C. `height: calc(100% - 80px);`
 D. `height: 80vh;`
 **Answer:** B
-**Explanation:** `calc(100vh - 80px)` subtracts the 80px header height from the total viewport height (100vh), fitting the screen perfectly without triggering a vertical scrollbar.
 
 ---
 
@@ -203,7 +201,6 @@ B. The preferred font size
 C. The minimum lower limit font size
 D. The line height
 **Answer:** C
-**Explanation:** `clamp(min, preferred, max)` takes three arguments. The first value (`1rem`) represents the minimum threshold below which the font will never shrink.
 
 ---
 
@@ -213,7 +210,6 @@ B. The declaration is invalid because you must divide by a unitless number
 C. The browser multiplies the numbers instead
 D. The font size becomes 500px
 **Answer:** B
-**Explanation:** In CSS division, the divisor must be a unitless number (e.g., `calc(100px / 5)`). Dividing a unit by another unit is mathematically invalid for length declarations.
 
 ---
 
@@ -223,7 +219,6 @@ B. `1em`
 C. `1%`
 D. `1px`
 **Answer:** D
-**Explanation:** Pixels (`px`) are the optimal choice for borders because you want an absolute, razor-sharp stroke that does not stretch with screen scaling.
 
 ---
 
@@ -316,3 +311,10 @@ D. `1px`
    </html>
    ```
 3. Open the file in your browser to see how `calc(100vh - 60px)` and `calc(100% - 240px)` lock together with mathematical perfection! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Border Styles, Colors, and Shorthand** (Borders, Shadows and Rounded Corners).
+
+👉 **[Continue to Next Lesson: Border Styles, Colors, and Shorthand →](/tutorials/css-for-beginners/border-styles-colors-shorthand)**

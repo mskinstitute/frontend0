@@ -1,3 +1,24 @@
+---
+id: python-intermediate-understanding-iterators
+slug: understanding-iterators
+course: python-for-intermediate
+chapter: "7: Iterators and Generators"
+topic: "7.1 Understanding Iterators"
+title: "Understanding Iterators in Python"
+description: "Master understanding iterators in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 31
+keywords:
+  - python understanding iterators
+  - python intermediate
+  - python understanding iterators
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Understanding Iterators in Python
 
 Iteration is one of the most fundamental operations in Python. Whenever you write `for item in sequence:`, Python leverages the **Iterator Protocol** behind the scenes. Understanding how iterables and iterators function under the hood allows you to process massive datasets memory-efficiently and master advanced Python data patterns.
@@ -117,7 +138,58 @@ To iterate over the elements again, you must generate a fresh iterator by callin
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Confusing Iterables with Iterators
+- **Iterable**: An object with an `__iter__()` method returning a fresh iterator (e.g., `list`, `dict`, `range`). Can be iterated over multiple times.
+- **Iterator**: A stateful object with a `__next__()` method. Once exhausted, it cannot be reset!
+
+### 2. Expecting `len()` on an Iterator
+Iterators calculate items on the fly and do not know their total size in advance. Calling `len(iter)` raises a `TypeError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Custom Reverse Iterator
+
+### Scenario
+Build a `ReverseIterator` class that accepts a list and yields elements from last to first using the Iterator Protocol (`__iter__` and `__next__`).
+
+### Complete Solution
+```python
+class ReverseIterator:
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data) - 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < 0:
+            raise StopIteration
+        item = self.data[self.index]
+        self.index -= 1
+        return item
+
+numbers = [10, 20, 30, 40]
+rev = ReverseIterator(numbers)
+for num in rev:
+    print(num, end=" ")
+print()
+```
+
+### Expected Output
+```text
+40 30 20 10 
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which special method must an object implement to be classified as an iterable in Python?
 A. `__next__()`
@@ -163,3 +235,10 @@ D. Iterators only store integers
 **Answer:** B
 **Explanation:** Iterators evaluate lazily, keeping only the current element and internal pointer in RAM, whereas a list stores all elements in memory simultaneously.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Custom Iterators** (7: Iterators and Generators).
+
+👉 **[Continue to Next Lesson: Custom Iterators →](/tutorials/python-for-intermediate/custom-iterators)**

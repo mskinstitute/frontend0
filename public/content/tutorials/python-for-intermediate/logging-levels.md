@@ -1,3 +1,24 @@
+---
+id: python-intermediate-logging-levels
+slug: logging-levels
+course: python-for-intermediate
+chapter: "9: Debugging and Logging"
+topic: "9.2 Logging Levels"
+title: "Logging Levels in Python"
+description: "Master logging levels in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 42
+keywords:
+  - python logging levels
+  - python intermediate
+  - python logging levels
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Logging Levels in Python
 
 Python's `logging` module categorizes diagnostic and operational messages using a standardized **severity hierarchy**. By assigning appropriate severity levels to log messages, you can control the volume of logging output without altering your source code—viewing granular debug details during local development while filtering down to warnings and errors in production.
@@ -117,7 +138,65 @@ DEBUG           10                  Local Development & Troubleshooting
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Calling `logging.basicConfig()` Multiple Times
+`logging.basicConfig()` only does work the first time it is invoked. Subsequent calls are silently ignored unless `force=True` is set (Python 3.8+).
+
+### 2. Misusing Log Severity Levels
+- Use `DEBUG` for fine-grained diagnostic details.
+- Use `INFO` for general operational confirmation.
+- Use `WARNING` for unexpected but recoverable events.
+- Use `ERROR` for failures affecting a specific operation.
+- Use `CRITICAL` for application-wide fatal crashes.
+
+---
+
+---
+
+## 💻 Try It Yourself: Multi-Handler Logger (Console + File)
+
+### Scenario
+Create a logger that prints `INFO` and higher messages to the console while simultaneously recording detailed `DEBUG` and higher messages to a persistent `app.log` file.
+
+### Complete Solution
+```python
+import logging
+
+logger = logging.getLogger("AppLogger")
+logger.setLevel(logging.DEBUG)
+
+# File handler (records everything)
+file_handler = logging.FileHandler("app.log", encoding="utf-8")
+file_handler.setLevel(logging.DEBUG)
+file_fmt = logging.Formatter("%(asctime)s [%(levelname)s] (%(filename)s:%(lineno)d) - %(message)s")
+file_handler.setFormatter(file_fmt)
+
+# Console handler (records only INFO and above)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_fmt = logging.Formatter("[%(levelname)s] %(message)s")
+console_handler.setFormatter(console_fmt)
+
+logger.addHandler(file_handler)
+logger.addHandler(console_handler)
+
+logger.debug("Database connection pool initialized with 5 workers.")
+logger.info("Server started on http://localhost:8000")
+logger.warning("Disk space usage is at 82%.")
+```
+
+### Expected Output
+```text
+[INFO] Server started on http://localhost:8000
+[WARNING] Disk space usage is at 82%.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the default logging level if no level is explicitly configured in `logging.basicConfig()`?
 A. `DEBUG`
@@ -163,3 +242,10 @@ D. Strings longer than 10 characters cause memory leaks
 **Answer:** B
 **Explanation:** Logs are often exported, indexed, and accessible to teams. Logging sensitive credentials introduces severe security and compliance vulnerabilities.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Basic Debugging with pdb** (9: Debugging and Logging).
+
+👉 **[Continue to Next Lesson: Basic Debugging with pdb →](/tutorials/python-for-intermediate/basic-debugging-with-pdb)**

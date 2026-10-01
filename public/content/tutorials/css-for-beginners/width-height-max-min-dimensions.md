@@ -17,9 +17,9 @@ keywords:
   - margin auto
   - centering in css
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Width, Height, Max-Width, and Min-Width
@@ -211,7 +211,7 @@ Even if the button text is only two letters (`OK`), the button will maintain a c
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -221,7 +221,6 @@ B. On smaller or mobile screens, text may wrap and spill out over other elements
 C. The web browser will crash
 D. The internet connection will become slow
 **Answer:** B
-**Explanation:** Fixed heights do not expand when text wraps into multiple lines on narrow screens, causing the content to overflow and overlap neighboring elements.
 
 ---
 
@@ -231,7 +230,6 @@ B. `width: 600px; min-width: 100%;`
 C. `height: 100%; max-height: 600px;`
 D. `min-width: 600px; max-width: 100px;`
 **Answer:** A
-**Explanation:** `width: 100%` allows the card to adapt to mobile screens, while `max-width: 600px` ensures it never stretches wider than 600px on large displays.
 
 ---
 
@@ -241,7 +239,6 @@ B. It calculates equal left and right margins, centering the element horizontall
 C. It makes the webpage scroll automatically
 D. It resets all borders to zero
 **Answer:** B
-**Explanation:** Setting horizontal margins to `auto` instructs the browser to divide the remaining space equally between the left and right sides, centering the element.
 
 ---
 
@@ -251,7 +248,6 @@ B. Because without a width, a block element naturally expands to 100% width, lea
 C. Because auto only works with pixel values
 D. Because the browser will throw an error
 **Answer:** B
-**Explanation:** Block elements naturally take up 100% of available width. If there is no leftover horizontal space, `auto` margins evaluate to zero and centering cannot occur.
 
 ---
 
@@ -261,7 +257,6 @@ B. The card will start at least 250px tall, but can freely expand taller if more
 C. The card can never be taller than 250px
 D. The card's width will be 250px
 **Answer:** B
-**Explanation:** `min-height` establishes a minimum height floor. If the content needs more than 250px, the box expands naturally to accommodate it.
 
 ---
 
@@ -335,3 +330,10 @@ D. The card's width will be 250px
 3. Open the file in your browser and resize your browser window from wide to narrow:
    - Notice how on desktop, the card sits comfortably in the center.
    - On mobile screen widths, the card compresses smoothly without any horizontal scrollbars! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **The Box-Sizing Property: border-box vs content-box** (The CSS Box Model).
+
+👉 **[Continue to Next Lesson: The Box-Sizing Property: border-box vs content-box →](/tutorials/css-for-beginners/box-sizing-border-box-vs-content-box)**

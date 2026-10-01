@@ -1,3 +1,24 @@
+---
+id: python-advanced-functools-for-higher-order-functions
+slug: functools-for-higher-order-functions
+course: python-for-advanced
+chapter: "4: Itertools and Functools"
+topic: "4.2 functools for Higher-Order Functions"
+title: "functools for Higher-Order Functions in Python"
+description: "Master functools for higher-order functions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 17
+keywords:
+  - python functools for higher order functions
+  - python advanced
+  - python functools for higher-order functions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # `functools` for Higher-Order Functions
 
 The `functools` module provides fundamental higher-order functions—functions that act on or return other callables. By adopting functional programming paradigms, `functools` allows Python engineers to write declarative, modular, and polymorphic architectures without brittle `isinstance()` branching trees or repetitive accumulator loops.
@@ -179,7 +200,57 @@ print(f"Second lookup: {stats2} in {(time.perf_counter() - start)*1000:.4f} ms")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Calling `reduce()` Without an Initializer
+If `functools.reduce()` is invoked on an empty iterable without an `initializer` argument, Python raises a `TypeError: reduce() of empty sequence with no initial value`.
+
+### 2. `singledispatch` Only Dispatches on First Argument
+`functools.singledispatch` inspects only the type of the **first** positional argument. It does not support multiple dispatch based on secondary arguments.
+
+---
+
+---
+
+## 💻 Try It Yourself: Type-Based Serialization with singledispatch
+
+### Scenario
+Use `functools.singledispatch` to build a clean JSON serializer function that handles custom data types (`datetime`, `set`, `tuple`) without cascading `isinstance` checks.
+
+### Complete Solution
+```python
+from functools import singledispatch
+from datetime import datetime
+
+@singledispatch
+def serialize_item(val):
+    return str(val)
+
+@serialize_item.register(datetime)
+def _(val):
+    return val.isoformat()
+
+@serialize_item.register(set)
+def _(val):
+    return sorted(list(val))
+
+print("String:", serialize_item("MSK Institute"))
+print("DateTime:", serialize_item(datetime(2026, 10, 1, 12, 0)))
+print("Set:", serialize_item({3, 1, 2}))
+```
+
+### Expected Output
+```text
+String: MSK Institute
+DateTime: 2026-10-01T12:00:00
+Set: [1, 2, 3]
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What will be returned by `functools.reduce(lambda acc, x: acc * x, [1, 2, 3, 4], 2)`?
@@ -245,3 +316,10 @@ D. It raises an `IndexError`.
 **Explanation:** Calling `reduce()` with an empty sequence and no initial value raises `TypeError: reduce() of empty iterable with no initial value`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **lru_cache and Partial Functions** (4: Itertools and Functools).
+
+👉 **[Continue to Next Lesson: lru_cache and Partial Functions →](/tutorials/python-for-advanced/lru-cache-and-partial-functions)**

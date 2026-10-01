@@ -1,3 +1,24 @@
+---
+id: python-intermediate-types-of-exceptions
+slug: types-of-exceptions
+course: python-for-intermediate
+chapter: "6: Exception Handling"
+topic: "6.1 Types of Exceptions"
+title: "Types of Exceptions in Python"
+description: "Master types of exceptions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 26
+keywords:
+  - python types of exceptions
+  - python intermediate
+  - python types of exceptions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Types of Exceptions in Python
 
 Errors in Python fall into two broad categories: **Syntax Errors** (detected by the parser before code execution begins) and **Exceptions** (anomalies detected during execution at runtime). When an exception is not intercepted, Python halts program execution and displays a traceback.
@@ -133,7 +154,55 @@ print(safe_lookup({"id": 101}, "age"))  # Lookup failure (KeyError)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Catching `BaseException` Blindly
+Catching `BaseException` catches `KeyboardInterrupt` (Ctrl+C) and `SystemExit`, making your script unkillable from the terminal! Always inherit from and catch `Exception`.
+
+### 2. Confusing `ValueError` with `TypeError`
+- `TypeError`: An argument is of the wrong type (e.g. passing a string to `math.sqrt()`).
+- `ValueError`: An argument is of the right type but inappropriate value (e.g. `math.sqrt(-1)`).
+
+---
+
+---
+
+## 💻 Try It Yourself: Robust User Input Validator
+
+### Scenario
+Write a script that prompts the user for their age. Handle both `ValueError` (if non-numeric string is entered) and custom range validation without crashing.
+
+### Complete Solution
+```python
+def parse_age(input_str: str) -> int:
+    try:
+        age = int(input_str)
+        if age < 0 or age > 120:
+            raise ValueError(f"Age {age} is out of realistic human range (0-120).")
+        return age
+    except ValueError as err:
+        print(f"Validation Error: {err}")
+        return -1
+
+print("Test 1 ('25'):", parse_age("25"))
+print("Test 2 ('abc'):", parse_age("abc"))
+print("Test 3 ('150'):", parse_age("150"))
+```
+
+### Expected Output
+```text
+Test 1 ('25'): 25
+Validation Error: invalid literal for int() with base 10: 'abc'
+Test 2 ('abc'): -1
+Validation Error: Age 150 is out of realistic human range (0-120).
+Test 3 ('150'): -1
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which base class sits at the very top of Python's exception hierarchy?
 A. `Exception`
@@ -179,3 +248,10 @@ D. `MethodNotFoundError`
 **Answer:** B
 **Explanation:** Integers do not have an `append` attribute or method, so Python raises an `AttributeError`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Try-Except-Else-Finally** (6: Exception Handling).
+
+👉 **[Continue to Next Lesson: Try-Except-Else-Finally →](/tutorials/python-for-intermediate/try-except-else-finally)**

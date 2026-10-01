@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-config-file-manager
+slug: project-config-file-manager
+course: python-for-advanced
+chapter: "12: Data Serialization & File Formats"
+topic: "12.4 Project: Config File Manager"
+title: "Project: Config File Manager in Python"
+description: "Master project: config file manager in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 51
+keywords:
+  - python project config file manager
+  - python advanced
+  - python project: config file manager
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Universal Configuration File Manager
 
 Production cloud services and microservices rarely rely on hardcoded settings. Modern Twelve-Factor application architectures require robust configuration systems that support multiple file formats (JSON, YAML, INI), validate configuration schemas, allow environment variable overrides, and protect sensitive secrets from leaking into logs.
@@ -224,7 +245,51 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Missing Hierarchy Fallbacks
+When merging user configuration with default settings, perform a deep recursive dictionary update so nested default values are not completely overwritten by partial user overrides.
+
+### 2. Unsanitized Environment Variable Type Casts
+Environment variables loaded via `os.getenv()` are always strings. Explicitly cast booleans and integers with validation (e.g. checking `"true"`, `"1"`).
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Environment Variable Overrides
+
+### Challenge
+Extend the Configuration Manager to allow environment variables with prefix `APP_` (e.g. `APP_PORT=9000`) to override configuration settings loaded from disk.
+
+### Complete Solution
+```python
+import os
+
+def load_with_env_overrides(base_config):
+    config = dict(base_config)
+    for env_key, env_val in os.environ.items():
+        if env_key.startswith("APP_"):
+            key = env_key[4:].lower()
+            config[key] = int(env_val) if env_val.isdigit() else env_val
+    return config
+
+base = {"host": "localhost", "port": 8000}
+os.environ["APP_PORT"] = "9090"
+active = load_with_env_overrides(base)
+print("Active Config with Env Override:", active)
+```
+
+### Expected Output
+```text
+Active Config with Env Override: {'host': 'localhost', 'port': 9090}
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the advantage of using a deep recursive merge over Python's built-in `dict.update()` when combining configurations?
@@ -290,3 +355,10 @@ D. `.env`
 **Explanation:** YAML configuration files conventionally use either the `.yaml` or `.yml` file extension and are parsed safely with `yaml.safe_load()`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Unit Testing with unittest** (13: Testing & Best Practices).
+
+👉 **[Continue to Next Lesson: Unit Testing with unittest →](/tutorials/python-for-advanced/unit-testing-with-unittest)**

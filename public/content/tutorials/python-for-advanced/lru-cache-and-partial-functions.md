@@ -1,3 +1,24 @@
+---
+id: python-advanced-lru-cache-and-partial-functions
+slug: lru-cache-and-partial-functions
+course: python-for-advanced
+chapter: "4: Itertools and Functools"
+topic: "4.3 lru_cache and Partial Functions"
+title: "lru_cache and Partial Functions in Python"
+description: "Master lru_cache and partial functions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 18
+keywords:
+  - python lru cache and partial functions
+  - python advanced
+  - python lru_cache and partial functions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # `lru_cache` and Partial Functions
 
 In production Python engineering, optimizing CPU-bound functions and simplifying callable interfaces are common architectural requirements. The `functools` module provides two essential tools for these tasks: `@lru_cache` (and `@cache`) for memoization, and `partial` (and `partialmethod`) for partial function application.
@@ -158,7 +179,55 @@ client.post("/users/login")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Passing Unhashable Arguments to `@lru_cache`
+`@lru_cache` stores cached results in an internal dictionary keyed by function arguments. Passing mutable types (like `list` or `dict`) raises a `TypeError: unhashable type`. Use tuples instead.
+
+### 2. Memory Leaks with `maxsize=None`
+Setting `maxsize=None` creates an unbounded cache that never evicts stale entries, leading to silent memory exhaustion in long-running services. Always set a sensible `maxsize` limit.
+
+---
+
+---
+
+## 💻 Try It Yourself: Fibonacci Acceleration & Pre-configured Partial Functions
+
+### Scenario
+Demonstrate the exponential speedup of `@lru_cache` on recursive Fibonacci calculation, and use `functools.partial` to create a specialized `power_of_two` calculator.
+
+### Complete Solution
+```python
+from functools import lru_cache, partial
+
+@lru_cache(maxsize=128)
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+# High-speed memoized calculation
+print("Fib(50):", fib(50))
+print("Cache info:", fib.cache_info())
+
+# Partial function application
+power = lambda base, exp: base ** exp
+power_of_two = partial(power, 2)
+print("2^8 =", power_of_two(8))
+```
+
+### Expected Output
+```text
+Fib(50): 12586269025
+Cache info: CacheInfo(hits=48, misses=51, maxsize=128, currsize=51)
+2^8 = 256
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What exception is raised when passing a mutable `list` into a function decorated with `@functools.lru_cache`?
@@ -224,3 +293,10 @@ D. `partial` is deprecated in modern Python.
 **Explanation:** Standard `partial` does not implement descriptor binding protocol. `partialmethod` is specifically designed for class definitions so that the instance `self` is properly bound when the method is invoked on an instance.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Data Pipeline with Itertools** (4: Itertools and Functools).
+
+👉 **[Continue to Next Lesson: Project: Data Pipeline with Itertools →](/tutorials/python-for-advanced/project-data-pipeline-with-itertools)**

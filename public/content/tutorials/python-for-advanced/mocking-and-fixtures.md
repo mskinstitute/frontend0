@@ -1,3 +1,24 @@
+---
+id: python-advanced-mocking-and-fixtures
+slug: mocking-and-fixtures
+course: python-for-advanced
+chapter: "13: Testing & Best Practices"
+topic: "13.3 Mocking and Fixtures"
+title: "Mocking and Fixtures in Python"
+description: "Master mocking and fixtures in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 54
+keywords:
+  - python mocking and fixtures
+  - python advanced
+  - python mocking and fixtures
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Mocking and Fixtures with `unittest.mock`
 
 When testing complex software systems, isolating the unit under test from slow, non-deterministic, or hazardous external dependencies—such as third-party payment gateways, remote REST APIs, email servers, or physical disks—is a fundamental testing requirement.
@@ -179,7 +200,50 @@ def test_order_placement_success(mock_gateway: MagicMock):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Mocking Where Defined Instead of Where Used
+Always patch where the object is **imported and used**, not where it is declared. If `app.py` imports `requests`, patch `"app.requests.get"`, NOT `"requests.get"`.
+
+### 2. Over-Mocking Business Logic
+Mocking every internal component tests the mock rather than the code. Only mock slow or non-deterministic external boundaries (network APIs, databases, clocks).
+
+---
+
+---
+
+## 💻 Try It Yourself: Mocking Third-Party HTTP Calls with unittest.mock
+
+### Scenario
+Test a function that fetches user account data from an external API, mocking `requests.get` to return a simulated response without hitting the live internet.
+
+### Complete Solution
+```python
+from unittest.mock import Mock, patch
+
+def get_account_balance(account_id):
+    import requests
+    res = requests.get(f"https://api.bank.com/accounts/{account_id}")
+    return res.json()["balance"]
+
+# Mocking external network dependency
+with patch("requests.get") as mock_get:
+    mock_get.return_value = Mock(status_code=200, json=lambda: {"balance": 15000.0})
+    balance = get_account_balance("ACC-101")
+    print(f"Mocked Account Balance: ₹{balance:,.2f}")
+    mock_get.assert_called_once_with("https://api.bank.com/accounts/ACC-101")
+```
+
+### Expected Output
+```text
+Mocked Account Balance: ₹15,000.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the primary operational difference between `Mock` and `MagicMock` in Python's `unittest.mock` library?
@@ -245,3 +309,10 @@ D. The module is deleted.
 **Explanation:** `patch` acts as a context manager or function wrapper that guarantees the target namespace is cleanly un-patched and restored to its original state once the test exits.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Test-Driven Development** (13: Testing & Best Practices).
+
+👉 **[Continue to Next Lesson: Test-Driven Development →](/tutorials/python-for-advanced/test-driven-development)**

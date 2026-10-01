@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-gui-based-to-do-app
+slug: project-gui-based-to-do-app
+course: python-for-advanced
+chapter: "14: GUI Development with Tkinter"
+topic: "14.4 Project: GUI-based To-Do App"
+title: "Project: GUI-based To-Do App in Python"
+description: "Master project: gui-based to-do app in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 10
+order: 60
+keywords:
+  - python project gui based to do app
+  - python advanced
+  - python project: gui-based to-do app
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: GUI-Based Task Manager Application
 
 Desktop utility applications require an intuitive user interface, robust data persistence, clean layout architecture, and keyboard-driven efficiency.
@@ -300,7 +321,50 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Not Handling Window Close Protocol
+If user data must be saved to disk on exit, bind the window close event: `root.protocol("WM_DELETE_WINDOW", on_close)` to prevent data loss.
+
+### 2. Missing Input Validation on Add Task
+Check for empty or whitespace-only inputs (`if not task_text.strip():`) to prevent adding blank entries to task lists.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Double-Click Complete Toggle
+
+### Challenge
+Add event binding `<Double-Button-1>` to the Task Listbox so double-clicking any task item strikes it through and toggles its completion status.
+
+### Complete Solution
+```python
+class TaskListManager:
+    def __init__(self):
+        self.tasks = [{"name": "Finish Chapter 14", "done": False}]
+
+    def toggle_task(self, index):
+        self.tasks[index]["done"] = not self.tasks[index]["done"]
+        status = "COMPLETED ✓" if self.tasks[index]["done"] else "PENDING"
+        print(f"Task #{index+1} toggled: {self.tasks[index]['name']} -> {status}")
+
+manager = TaskListManager()
+manager.toggle_task(0)
+manager.toggle_task(0)
+```
+
+### Expected Output
+```text
+Task #1 toggled: Finish Chapter 14 -> COMPLETED ✓
+Task #1 toggled: Finish Chapter 14 -> PENDING
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How are rows in a `ttk.Treeview` visually styled with custom colors based on data attributes (such as priority or status)?
@@ -366,3 +430,10 @@ D. `tree.destroy()`
 **Explanation:** To clear a Treeview, you retrieve its current item IDs via `tree.get_children()` and delete each one using `tree.delete(item)`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project 1: Inventory Management System** (15: Final Capstone Projects).
+
+👉 **[Continue to Next Lesson: Project 1: Inventory Management System →](/tutorials/python-for-advanced/project-1-inventory-management-system)**

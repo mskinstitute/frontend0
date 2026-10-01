@@ -1,3 +1,24 @@
+---
+id: python-advanced-property-decorator
+slug: property-decorator
+course: python-for-advanced
+chapter: "1: Advanced OOP Concepts"
+topic: "1.2 Property Decorator"
+title: "Property Decorator in Python"
+description: "Master property decorator in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 2
+keywords:
+  - python property decorator
+  - python advanced
+  - python property decorator
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The Property Decorator in Python: Advanced Patterns & Descriptors
 
 The `@property` decorator is one of Python's most elegant mechanisms for managing object state. It allows methods to be accessed syntactically as simple attributes (`user.email`) while executing getter, setter, and deleter logic behind the scenes. In advanced Python architecture, properties provide **data encapsulation**, **lazy caching**, and **transparent backward compatibility**.
@@ -169,7 +190,73 @@ def celsius(self, val):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Infinite Recursion in Property Setters
+Assigning to the property name instead of the underlying private attribute inside the setter causes an immediate `RecursionError`:
+```python
+# ❌ INFINITE RECURSION BUG
+@temperature.setter
+def temperature(self, value):
+    self.temperature = value  # Calls setter repeatedly!
+
+# ✅ CORRECT
+@temperature.setter
+def temperature(self, value):
+    self._temperature = value
+```
+
+### 2. Defining Setter Without Getter
+A `@prop.setter` decorator requires the corresponding `@property` getter to be defined first in the class with the exact same method name.
+
+---
+
+---
+
+## 💻 Try It Yourself: Validated Bank Account Balance Property
+
+### Scenario
+Create a `BankAccount` class that protects its `balance` attribute using `@property`. Prevent negative deposits, prevent overdrafts beyond a fixed limit, and log all balance modifications.
+
+### Complete Solution
+```python
+class BankAccount:
+    def __init__(self, owner: str, initial_deposit: float = 0.0):
+        self.owner = owner
+        self._balance = 0.0
+        self.balance = initial_deposit
+
+    @property
+    def balance(self) -> float:
+        return self._balance
+
+    @balance.setter
+    def balance(self, value: float):
+        if value < 0:
+            raise ValueError(f"Balance cannot be negative! Attempted: ₹{value:,.2f}")
+        print(f"[{self.owner}] Balance updated: ₹{self._balance:,.2f} -> ₹{value:,.2f}")
+        self._balance = float(value)
+
+acc = BankAccount("Aarav", 5000.0)
+acc.balance += 2500.0
+try:
+    acc.balance = -100.0
+except ValueError as err:
+    print(f"Validation Guard: {err}")
+```
+
+### Expected Output
+```text
+[Aarav] Balance updated: ₹0.00 -> ₹5,000.00
+[Aarav] Balance updated: ₹5,000.00 -> ₹7,500.00
+Validation Guard: Balance cannot be negative! Attempted: ₹-100.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What built-in Python protocol powers the `@property` decorator under the hood?
 A. Context Manager Protocol
@@ -215,3 +302,10 @@ D. `@destructor`
 **Answer:** B
 **Explanation:** The `@<attribute>.deleter` decorator registers the function invoked when the `del` statement targets that property.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Method Resolution Order (MRO)** (1: Advanced OOP Concepts).
+
+👉 **[Continue to Next Lesson: Method Resolution Order (MRO) →](/tutorials/python-for-advanced/method-resolution-order-mro)**

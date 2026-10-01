@@ -1,3 +1,24 @@
+---
+id: python-intermediate-requirements-txt
+slug: requirements-txt
+course: python-for-intermediate
+chapter: "12: Virtual Environments & Pip"
+topic: "12.4 Requirements.txt"
+title: "Requirements.txt in Python"
+description: "Master requirements.txt in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 59
+keywords:
+  - python requirements txt
+  - python intermediate
+  - python requirements.txt
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Working with requirements.txt in Python
 
 In professional software development, sharing code requires sharing its exact dependencies. Instead of telling teammates or DevOps engineers to manually install multiple individual libraries, Python projects use a standardized manifest file called **`requirements.txt`**. This file lists all third-party libraries and version constraints needed to run the application reliably.
@@ -106,7 +127,42 @@ python -m pip install -r requirements-dev.txt
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Running `pip freeze` in Global Environment
+Running `pip freeze > requirements.txt` without an active virtual environment dumps every single package installed on your computer into the project requirements file. Always activate your virtual environment first.
+
+### 2. Forgetting to Install with `-r`
+Running `pip install requirements.txt` attempts to install a single package named literally "requirements.txt". Always include the flag: `pip install -r requirements.txt`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Generating and Replicating Environments
+
+### Scenario
+Generate a production `requirements.txt` file from an active virtual environment, and demonstrate how a team member recreates the exact environment in a single command.
+
+### Complete Solution
+```bash
+# Developer 1: Freeze active dependencies
+python -m pip freeze > requirements.txt
+
+# Inspect generated requirements.txt
+cat requirements.txt
+
+# Developer 2: Recreate identical environment in 1 command
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which command generates a `requirements.txt` file listing all packages installed in the active environment?
 A. `pip export requirements.txt`
@@ -152,3 +208,10 @@ D. It cannot write to text files
 **Answer:** B
 **Explanation:** Running `pip freeze` in the global environment captures every package ever installed on your system. It should always be executed within an isolated project virtual environment.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Package-Ready Mini App** (12: Virtual Environments & Pip).
+
+👉 **[Continue to Next Lesson: Project: Package-Ready Mini App →](/tutorials/python-for-intermediate/project-package-ready-mini-app)**

@@ -1,3 +1,24 @@
+---
+id: python-advanced-substitution-and-splitting
+slug: substitution-and-splitting
+course: python-for-advanced
+chapter: "11: Regular Expressions Advanced"
+topic: "11.3 Substitution and Splitting"
+title: "Substitution and Splitting in Python"
+description: "Master substitution and splitting in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 46
+keywords:
+  - python substitution and splitting
+  - python advanced
+  - python substitution and splitting
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Regex Substitution and Splitting
 
 Beyond searching and matching, text processing pipelines frequently require transforming, sanitizing, redacting, and tokenizing text data. In Python, the `re` module provides robust primitives for these workflows through `re.sub()`, `re.subn()`, and `re.split()`.
@@ -127,7 +148,48 @@ print("Without delimiters:", tokens_clean)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Backslash Escaping in `re.sub` Replacement Strings
+Backslashes in replacement strings are treated as escape sequences or group references (`\1`). To write literal backslashes, escape them or use raw strings.
+
+### 2. Empty Matches in `re.split`
+Splitting strings by regex patterns that match at string boundaries can produce leading or trailing empty strings (`""`) in the result list.
+
+---
+
+---
+
+## 💻 Try It Yourself: Masking Sensitive PII with re.sub Callbacks
+
+### Scenario
+Use `re.sub()` with a callback replacement function to mask credit card numbers in text, keeping only the last 4 digits visible.
+
+### Complete Solution
+```python
+import re
+
+text = "User card 4532-8891-2311-9021 charged ₹4,500. Backup card: 5412-3211-9874-1234."
+
+def mask_card(match):
+    full_card = match.group(0)
+    last4 = full_card[-4:]
+    return f"XXXX-XXXX-XXXX-{last4}"
+
+masked_text = re.sub(r"d{4}-d{4}-d{4}-(d{4})", mask_card, text)
+print(masked_text)
+```
+
+### Expected Output
+```text
+User card XXXX-XXXX-XXXX-9021 charged ₹4,500. Backup card: XXXX-XXXX-XXXX-1234.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What syntax is used in `re.sub()` replacement strings to reference a named capturing group `(?P<user>\w+)`?
@@ -193,3 +255,10 @@ D. `\10` inserts an octal newline.
 **Explanation:** When a group reference is immediately followed by numeric digits, `\g<1>0` disambiguates that you are referencing group 1 followed by a literal `'0'`, rather than group 10.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Log File Analyzer** (11: Regular Expressions Advanced).
+
+👉 **[Continue to Next Lesson: Project: Log File Analyzer →](/tutorials/python-for-advanced/project-log-file-analyzer)**

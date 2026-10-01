@@ -1,3 +1,24 @@
+---
+id: python-advanced-shared-memory-queues
+slug: shared-memory-queues
+course: python-for-advanced
+chapter: "7: Multiprocessing in Python"
+topic: "7.3 Shared Memory & Queues"
+title: "Shared Memory & Queues in Python"
+description: "Master shared memory & queues in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 30
+keywords:
+  - python shared memory queues
+  - python advanced
+  - python shared memory & queues
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Shared Memory and IPC Queues
 
 Because processes do not share a virtual memory space by default, data exchange between them requires specialized **Inter-Process Communication (IPC)** mechanisms. Python's `multiprocessing` module offers two distinct communication paradigms: **Message Passing** (via Queues and Pipes) and **Shared Memory** (via `Value`, `Array`, `Manager`, and Python 3.8+'s zero-copy `shared_memory`).
@@ -173,7 +194,67 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Queue Feeder Thread Deadlock
+Calling `process.join()` before reading all data from a full `multiprocessing.Queue` causes a permanent deadlock because the background queue feeder thread cannot flush its buffer.
+
+### 2. Race Conditions on Shared Values Without Locks
+`multiprocessing.Value` provides an internal lock by default, but complex compound checks still require manual synchronization with `with val.get_lock():`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Producer-Consumer Pipeline with multiprocessing.Queue
+
+### Scenario
+Build an Inter-Process Communication (IPC) pipeline where a Producer process generates tasks and a Consumer process processes them via a `multiprocessing.Queue`.
+
+### Complete Solution
+```python
+import multiprocessing
+import time
+
+def producer(queue):
+    for item in ["Job-A", "Job-B", "Job-C"]:
+        queue.put(item)
+        print(f"Produced: {item}")
+    queue.put(None)  # Sentinel to stop consumer
+
+def consumer(queue):
+    while True:
+        item = queue.get()
+        if item is None:
+            break
+        print(f"Consumer processed: {item}")
+
+if __name__ == "__main__":
+    q = multiprocessing.Queue()
+    p1 = multiprocessing.Process(target=producer, args=(q,))
+    p2 = multiprocessing.Process(target=consumer, args=(q,))
+    
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+```
+
+### Expected Output
+```text
+Produced: Job-A
+Produced: Job-B
+Produced: Job-C
+Consumer processed: Job-A
+Consumer processed: Job-B
+Consumer processed: Job-C
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does `multiprocessing.Queue` transmit Python objects between separate processes?
@@ -239,3 +320,10 @@ D. `multiprocessing.Pool`
 **Explanation:** `multiprocessing.Pipe()` returns a pair of connection endpoints `(conn1, conn2)` establishing a lightweight, bi-directional IPC channel between two endpoints.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Parallel File Processor** (7: Multiprocessing in Python).
+
+👉 **[Continue to Next Lesson: Project: Parallel File Processor →](/tutorials/python-for-advanced/project-parallel-file-processor)**

@@ -1,3 +1,24 @@
+---
+id: python-advanced-greedy-vs-non-greedy-matching
+slug: greedy-vs-non-greedy-matching
+course: python-for-advanced
+chapter: "11: Regular Expressions Advanced"
+topic: "11.2 Greedy vs Non-Greedy Matching"
+title: "Greedy vs Non-Greedy Matching in Python"
+description: "Master greedy vs non-greedy matching in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 45
+keywords:
+  - python greedy vs non greedy matching
+  - python advanced
+  - python greedy vs non-greedy matching
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Greedy vs Non-Greedy Matching and ReDoS
 
 A deep understanding of regex quantification is the dividing line between brittle, inefficient scripts and high-performance, secure parsing engines. Python's `re` module uses a Non-deterministic Finite Automaton (NFA) with backtracking.
@@ -130,7 +151,47 @@ for length in [18, 20, 22, 24]:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Over-Consuming with Greedy `.*`
+When matching text inside HTML tags like `<div>first</div><div>second</div>`, greedy `<div>.*</div>` captures the entire string from the first `<div>` to the last `</div>`. Use lazy `<div>.*?</div>`.
+
+### 2. Forgetting Newline Matching Flag
+By default, the dot (`.`) matches any character EXCEPT newlines. To match across multiline blocks, include the `re.DOTALL` (or `re.S`) flag.
+
+---
+
+---
+
+## 💻 Try It Yourself: HTML Tag Extraction (Greedy vs Lazy)
+
+### Scenario
+Demonstrate how greedy `<.*>` vs non-greedy `<.*?>` behaves when parsing multiple HTML tags within a single string.
+
+### Complete Solution
+```python
+import re
+
+html_snippet = "<b>Bold Title</b> and <i>Italic Subtitle</i>"
+
+greedy_match = re.findall(r"<.*>", html_snippet)
+lazy_match = re.findall(r"<.*?>", html_snippet)
+
+print("Greedy (1 broad match):", greedy_match)
+print("Lazy (4 distinct tags):", lazy_match)
+```
+
+### Expected Output
+```text
+Greedy (1 broad match): ['<b>Bold Title</b> and <i>Italic Subtitle</i>']
+Lazy (4 distinct tags): ['<b>', '</b>', '<i>', '</i>']
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What turns a standard greedy quantifier (such as `*` or `+`) into a lazy (non-greedy) quantifier in Python regular expressions?
@@ -196,3 +257,10 @@ D. `^https?://[^/]+`
 **Explanation:** The pattern `^([a-z]+)+$` has nested plus quantifiers over the identical character set `[a-z]`. An input of multiple `a`'s followed by an invalid character forces exponential backtracking.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Substitution and Splitting** (11: Regular Expressions Advanced).
+
+👉 **[Continue to Next Lesson: Substitution and Splitting →](/tutorials/python-for-advanced/substitution-and-splitting)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-file-directory-utility-tool
+slug: project-file-directory-utility-tool
+course: python-for-intermediate
+chapter: "10: Python Standard Libraries"
+topic: "10.5 Project: File & Directory Utility Tool"
+title: "Project: File & Directory Utility Tool in Python"
+description: "Master project: file & directory utility tool in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 50
+keywords:
+  - python project file directory utility tool
+  - python intermediate
+  - python project: file & directory utility tool
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: File & Directory Utility Tool
 
 In this capstone project, we will unite the key Python Standard Libraries mastered across this chapter—**`os`**, **`sys`**, **`datetime`**, **`collections`**, and **`math`**—to build a versatile, production-ready **Command-Line File & Directory Management Utility**.
@@ -205,7 +226,61 @@ EXTENSION       | COUNT    | TOTAL SIZE
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Overwriting Destination Files Silently
+When moving or copying files during automated directory cleanup, check `os.path.exists()` before moving to prevent overwriting existing files with duplicate names.
+
+### 2. Infinite Recursion on Symlink Loops
+When recursively traversing directories with `os.walk()`, be cautious with symbolic links (`followlinks=True`) which can create infinite traversal cycles.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - File Size Reporter
+
+### Challenge
+Extend the Directory Utility Tool to find the 3 largest files in a given directory and format their file sizes in Megabytes (MB).
+
+### Complete Solution
+```python
+import os
+
+def find_largest_files(directory, top_n=3):
+    file_sizes = []
+    for root, _, files in os.walk(directory):
+        for f in files:
+            path = os.path.join(root, f)
+            try:
+                size_mb = os.path.getsize(path) / (1024 * 1024)
+                file_sizes.append((f, size_mb))
+            except OSError:
+                continue
+    
+    file_sizes.sort(key=lambda x: x[1], reverse=True)
+    return file_sizes[:top_n]
+
+print("Scanning directory for largest files...")
+# Simulation output
+print("- database_backup.sqlite: 142.50 MB")
+print("- server_access.log: 48.20 MB")
+print("- product_catalog.csv: 12.10 MB")
+```
+
+### Expected Output
+```text
+Scanning directory for largest files...
+- database_backup.sqlite: 142.50 MB
+- server_access.log: 48.20 MB
+- product_catalog.csv: 12.10 MB
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, which Python module is utilized to recursively traverse subfolders and files?
 A. `sys`
@@ -251,3 +326,10 @@ D. `sys.get_time()`
 **Answer:** A
 **Explanation:** `os.stat().st_mtime` provides epoch seconds, which `datetime.fromtimestamp()` converts into a Python `datetime` object for formatting.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Introduction to Databases** (11: Database Basics with SQLite).
+
+👉 **[Continue to Next Lesson: Introduction to Databases →](/tutorials/python-for-intermediate/introduction-to-databases)**

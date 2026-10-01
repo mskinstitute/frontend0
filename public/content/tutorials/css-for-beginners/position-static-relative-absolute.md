@@ -16,9 +16,9 @@ keywords:
   - position static
   - top left offset
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # CSS Positioning: Static, Relative, and Absolute Explained
@@ -239,7 +239,7 @@ This is the classic, bulletproof centering technique!
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What happens if you apply `top: 30px; left: 20px;` to an element with default `position: static;`?
 A. The element moves 30px down and 20px right
@@ -247,7 +247,6 @@ B. The offsets are completely ignored because static elements do not respond to 
 C. The element is deleted from the page
 D. The element turns blue
 **Answer:** B
-**Explanation:** Directional offset properties (`top`, `right`, `bottom`, `left`) are completely ignored on elements with `position: static;`.
 
 ---
 
@@ -257,7 +256,6 @@ B. The original space remains completely reserved as an empty gap in the normal 
 C. Surrounding elements slide up to fill the space
 D. The entire webpage shifts down 15px
 **Answer:** B
-**Explanation:** `position: relative;` preserves the element's original space in the document flow. Only the visual rendering of the element is nudged.
 
 ---
 
@@ -267,7 +265,6 @@ B. The nearest paragraph
 C. The initial containing block (the viewport / `<html>` element)
 D. The center of the computer monitor
 **Answer:** C
-**Explanation:** If an absolute element has no ancestor with a position other than `static`, it defaults to the viewport (`<html>`/`<body>`).
 
 ---
 
@@ -277,7 +274,6 @@ B. To establish the card as the coordinate reference boundary so the badge stays
 C. To force the badge to rotate 45 degrees
 D. Because CSS requires cards to be relative
 **Answer:** B
-**Explanation:** A child with `position: absolute;` positions itself relative to its nearest positioned ancestor. Setting `position: relative;` on the card confines the badge inside that card.
 
 ---
 
@@ -287,7 +283,6 @@ B. `transform: rotate(90deg);`
 C. `transform: translate(-50%, -50%);`
 D. `transform: center();`
 **Answer:** C
-**Explanation:** `top: 50%; left: 50%;` moves the element's top-left corner to the center. `transform: translate(-50%, -50%);` shifts the element backwards by half of its own width and height, centering it perfectly.
 
 ---
 
@@ -411,3 +406,10 @@ D. `transform: center();`
    </html>
    ```
 3. Open the file in your browser to inspect how the badges sit locked in position inside the card! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners** (Introduction to Positioning).
+
+👉 **[Continue to Next Lesson: Fixed and Sticky Positioning: Headers, Floating Action Buttons, and Banners →](/tutorials/css-for-beginners/position-fixed-and-sticky)**

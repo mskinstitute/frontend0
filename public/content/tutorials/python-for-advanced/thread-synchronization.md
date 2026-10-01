@@ -1,3 +1,24 @@
+---
+id: python-advanced-thread-synchronization
+slug: thread-synchronization
+course: python-for-advanced
+chapter: "6: Multithreading in Python"
+topic: "6.2 Thread Synchronization"
+title: "Thread Synchronization in Python"
+description: "Master thread synchronization in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 25
+keywords:
+  - python thread synchronization
+  - python advanced
+  - python thread synchronization
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Thread Synchronization
 
 When multiple threads execute concurrently within the same process, they share a unified memory space. While this shared heap enables fast inter-thread communication without serialization, it introduces severe hazards: **race conditions**, **memory corruption**, and **deadlocks**.
@@ -162,7 +183,59 @@ for w in workers: w.join()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Deadlock via Inconsistent Lock Acquisition Order
+If Thread 1 acquires Lock A then Lock B, while Thread 2 acquires Lock B then Lock A, a deadlock is guaranteed. Always acquire multiple locks in a globally consistent order.
+
+### 2. Forgetting to Release Locks
+Always use locks as context managers: `with lock:`. Manually calling `lock.acquire()` and `lock.release()` risks leaving the lock permanently held if an exception is raised.
+
+---
+
+---
+
+## 💻 Try It Yourself: Safe Bank Vault with Threading Lock
+
+### Scenario
+Simulate multiple concurrent threads depositing money into a shared bank account. Demonstrate how a `threading.Lock` prevents race condition corruption.
+
+### Complete Solution
+```python
+import threading
+import time
+
+class SafeVault:
+    def __init__(self):
+        self.balance = 0
+        self.lock = threading.Lock()
+
+    def deposit(self, amount):
+        with self.lock:
+            current = self.balance
+            time.sleep(0.001)  # Simulate context switch
+            self.balance = current + amount
+
+vault = SafeVault()
+threads = [threading.Thread(target=vault.deposit, args=(10,)) for _ in range(50)]
+for t in threads:
+    t.start()
+for t in threads:
+    t.join()
+
+print(f"Expected: ₹500 | Actual Vault Balance: ₹{vault.balance}")
+```
+
+### Expected Output
+```text
+Expected: ₹500 | Actual Vault Balance: ₹500
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why does `counter += 1` lead to race conditions in multithreaded Python despite the Global Interpreter Lock (GIL)?
@@ -228,3 +301,10 @@ D. `event.block()`
 **Explanation:** `event.wait()` pauses the calling thread until the event's internal boolean flag is set to `True` via a call to `event.set()`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Daemon vs Non-Daemon Threads** (6: Multithreading in Python).
+
+👉 **[Continue to Next Lesson: Daemon vs Non-Daemon Threads →](/tutorials/python-for-advanced/daemon-vs-non-daemon-threads)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-custom-iterators
+slug: custom-iterators
+course: python-for-intermediate
+chapter: "7: Iterators and Generators"
+topic: "7.2 Custom Iterators"
+title: "Custom Iterators in Python"
+description: "Master custom iterators in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 32
+keywords:
+  - python custom iterators
+  - python intermediate
+  - python custom iterators
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Custom Iterators in Python
 
 While Python provides built-in iterators for sequences and collections, writing your own **Custom Iterators** allows you to stream complex data structures, generate custom mathematical sequences, and traverse domain models cleanly using Python's native `for` loop syntax.
@@ -170,7 +191,58 @@ for b in shelf:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting to Return `self` from `__iter__()`
+An iterator must implement both `__iter__()` and `__next__()`. `__iter__()` should return `self` so the iterator can be used directly in `for` loops.
+
+### 2. Forgetting to Raise `StopIteration`
+If `__next__()` does not raise `StopIteration` upon completion, a `for` loop over the iterator will become an infinite loop.
+
+---
+
+---
+
+## 💻 Try It Yourself: Step Range Iterator
+
+### Scenario
+Build a custom float range iterator `FloatRange(start, stop, step)` that supports floating-point increments without floating-point drift.
+
+### Complete Solution
+```python
+class FloatRange:
+    def __init__(self, start: float, stop: float, step: float = 0.5):
+        if step == 0:
+            raise ValueError("Step cannot be zero.")
+        self.current = float(start)
+        self.stop = float(stop)
+        self.step = float(step)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if (self.step > 0 and self.current >= self.stop) or (self.step < 0 and self.current <= self.stop):
+            raise StopIteration
+        val = self.current
+        self.current = round(self.current + self.step, 6)
+        return val
+
+for val in FloatRange(1.0, 3.0, 0.5):
+    print(val, end=" | ")
+print()
+```
+
+### Expected Output
+```text
+1.0 | 1.5 | 2.0 | 2.5 | 
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What two methods must a custom iterator class implement to satisfy the Python Iterator Protocol?
 A. `__init__()` and `__del__()`
@@ -216,3 +288,10 @@ D. `StopIteration`
 **Answer:** B
 **Explanation:** In both Python's built-in `range()` and custom range implementations, a step of 0 is mathematically invalid and raises a `ValueError`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Using Generators with yield** (7: Iterators and Generators).
+
+👉 **[Continue to Next Lesson: Using Generators with yield →](/tutorials/python-for-intermediate/using-generators-with-yield)**

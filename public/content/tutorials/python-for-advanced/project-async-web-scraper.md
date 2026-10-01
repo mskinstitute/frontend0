@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-async-web-scraper
+slug: project-async-web-scraper
+course: python-for-advanced
+chapter: "8: Asynchronous Programming (Asyncio)"
+topic: "8.4 Project: Async Web Scraper"
+title: "Project: Async Web Scraper in Python"
+description: "Master project: async web scraper in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 35
+keywords:
+  - python project async web scraper
+  - python advanced
+  - python project: async web scraper
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Async Web Scraper
 
 Building a scalable web crawler requires handling thousands of network requests concurrently while strictly respecting rate limits, timeouts, and network failure modes. Sequential scraping is orders of magnitude too slow, while spawning thousands of threads causes memory exhaustion.
@@ -205,7 +226,56 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Bombarding Servers Without Concurrency Limits
+Spawning 10,000 asynchronous HTTP requests simultaneously triggers rate limiting or connection refused errors. Always gate concurrency using `asyncio.Semaphore(50)`.
+
+### 2. Leaking Client Sessions
+Always wrap `aiohttp.ClientSession()` in an `async with` block to ensure socket connections and SSL contexts are gracefully closed.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Bounded Concurrency Semaphore
+
+### Challenge
+Add an `asyncio.Semaphore(2)` to limit the scraper to at most 2 concurrent active network connections simultaneously.
+
+### Complete Solution
+```python
+import asyncio
+
+async def bounded_fetch(sem, url_id):
+    async with sem:
+        print(f"Fetching URL #{url_id} with semaphore lock...")
+        await asyncio.sleep(0.1)
+        return f"Content of #{url_id}"
+
+async def main():
+    sem = asyncio.Semaphore(2)  # Max 2 concurrent
+    tasks = [bounded_fetch(sem, i) for i in range(1, 5)]
+    results = await asyncio.gather(*tasks)
+    print(f"Fetched {len(results)} pages under controlled concurrency.")
+
+asyncio.run(main())
+```
+
+### Expected Output
+```text
+Fetching URL #1 with semaphore lock...
+Fetching URL #2 with semaphore lock...
+Fetching URL #3 with semaphore lock...
+Fetching URL #4 with semaphore lock...
+Fetched 4 pages under controlled concurrency.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What role does `asyncio.Semaphore` play in the asynchronous web crawler?
@@ -271,3 +341,10 @@ D. It guarantees zero HTTP 500 errors.
 **Explanation:** Asynchronous coroutines are lightweight user-space objects, enabling thousands of concurrent I/O connections with minimal memory and zero thread-switching penalty.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **SQLAlchemy ORM Basics** (9: Advanced Database Handling).
+
+👉 **[Continue to Next Lesson: SQLAlchemy ORM Basics →](/tutorials/python-for-advanced/sqlalchemy-orm-basics)**

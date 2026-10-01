@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-bank-account-class-system
+slug: project-bank-account-class-system
+course: python-for-intermediate
+chapter: "5: Object-Oriented Programming (Intermediate)"
+topic: "5.5 Project: Bank Account Class System"
+title: "Project: Bank Account Class System in Python"
+description: "Master project: bank account class system in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 25
+keywords:
+  - python project bank account class system
+  - python intermediate
+  - python project: bank account class system
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Bank Account Class System
 
 In this end-of-chapter project, we unify all key Object-Oriented concepts covered in this module—**Classes, Encapsulation, Inheritance, Method Overriding, Polymorphism, and Abstraction**—to architect a comprehensive **Banking System Engine**.
@@ -193,7 +214,51 @@ checking.print_statement()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Floating-Point Precision Drift
+In production financial systems, never use standard floats for currency due to rounding anomalies (e.g. `0.1 + 0.2 != 0.3`). Use the `decimal.Decimal` module or store cents/paise as integers.
+
+### 2. Allowing Direct Modification of `_balance`
+Always route all balance updates through validated methods (`deposit`, `withdraw`) to maintain an unbroken audit trail.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Fixed Deposit Account
+
+### Challenge
+Add a `FixedDepositAccount` subclass to the Banking System that locks funds for a specified term (in months) and computes compound interest upon monthly maintenance.
+
+### Complete Solution
+```python
+class FixedDepositAccount:
+    def __init__(self, account_no: str, holder_name: str, deposit: float, annual_rate: float = 7.5):
+        self.account_no = account_no
+        self.holder_name = holder_name
+        self.balance = float(deposit)
+        self.annual_rate = annual_rate
+
+    def monthly_maintenance(self):
+        monthly_interest = self.balance * (self.annual_rate / 12 / 100)
+        self.balance += monthly_interest
+        print(f"[{self.account_no}] Accrued Monthly FD Interest: ₹{monthly_interest:,.2f}. New Balance: ₹{self.balance:,.2f}")
+
+fd = FixedDepositAccount("FD-901", "Aarav Sharma", 100000.0, 7.5)
+fd.monthly_maintenance()
+```
+
+### Expected Output
+```text
+[FD-901] Accrued Monthly FD Interest: ₹625.00. New Balance: ₹100,625.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, what stops an external script from instantiating `Account("AC-1", "Test")` directly?
 A. Python file permissions
@@ -239,3 +304,10 @@ D. To convert all numbers into floating-point decimals
 **Answer:** A
 **Explanation:** `super().__init__()` calls the parent `Account` constructor to properly initialize common fields and record the opening transaction in the ledger.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Types of Exceptions** (6: Exception Handling).
+
+👉 **[Continue to Next Lesson: Types of Exceptions →](/tutorials/python-for-intermediate/types-of-exceptions)**

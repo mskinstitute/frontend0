@@ -1,3 +1,24 @@
+---
+id: python-intermediate-math-and-random-module
+slug: math-and-random-module
+course: python-for-intermediate
+chapter: "10: Python Standard Libraries"
+topic: "10.1 Math and Random Module"
+title: "Math and Random Module in Python"
+description: "Master math and random module in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 46
+keywords:
+  - python math and random module
+  - python intermediate
+  - python math and random module
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The Math and Random Modules in Python
 
 Python's standard library includes comprehensive mathematical and stochastic computing capabilities out of the box. The **`math`** module provides access to C-standard mathematical functions for floating-point arithmetic, while the **`random`** module provides tools for generating pseudo-random numbers, shuffling datasets, and stochastic modeling.
@@ -148,7 +169,50 @@ print("Simulation result:", spin[0])
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Using `random` for Passwords and Security Tokens
+The `random` module uses the Mersenne Twister algorithm, which is completely predictable and cryptographically insecure. Always use the built-in `secrets` module for passwords, tokens, and encryption keys.
+
+### 2. Floating-Point Equality Checks
+Never check floats with `a == b` due to binary floating-point representation quirks. Use `math.isclose(a, b, rel_tol=1e-9)`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Cryptographic Password & OTP Generator
+
+### Scenario
+Use Python's `secrets` and `string` modules to generate an ultra-secure 12-character random password and a 6-digit banking OTP.
+
+### Complete Solution
+```python
+import secrets
+import string
+
+def generate_secure_password(length=12):
+    characters = string.ascii_letters + string.digits + "!@#$%^&*"
+    return "".join(secrets.choice(characters) for _ in range(length))
+
+def generate_banking_otp(digits=6):
+    return "".join(secrets.choice(string.digits) for _ in range(digits))
+
+print("Generated Secure Password:", generate_secure_password())
+print("Generated Banking OTP:", generate_banking_otp())
+```
+
+### Expected Output
+```text
+Generated Secure Password: pK9#m$X2@qL7
+Generated Banking OTP: 482915
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which function should be used to compare two floating-point numbers safely to avoid precision errors?
 A. `math.equals()`
@@ -194,3 +258,10 @@ D. It deletes files on collision
 **Answer:** B
 **Explanation:** Mersenne Twister is a pseudo-random generator whose state can be reconstructed after observing ~624 outputs. Use `secrets` for cryptographic security.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Datetime Module** (10: Python Standard Libraries).
+
+👉 **[Continue to Next Lesson: Datetime Module →](/tutorials/python-for-intermediate/datetime-module)**

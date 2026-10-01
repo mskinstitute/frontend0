@@ -1,3 +1,24 @@
+---
+id: python-intermediate-customizing-graphs
+slug: customizing-graphs
+course: python-for-intermediate
+chapter: "13: Data Visualization Basics"
+topic: "13.3 Customizing Graphs"
+title: "Customizing Graphs in Python"
+description: "Master customizing graphs in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 63
+keywords:
+  - python customizing graphs
+  - python intermediate
+  - python customizing graphs
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Customizing Graphs in Python with Matplotlib
 
 Default Matplotlib charts often look dated and utilitarian. By mastering styling options—including **custom palettes, style sheets, typography, axis formatting, callout annotations, and multi-panel subplot grids**—you can produce polished, publication-ready visual artifacts suitable for executive presentations and academic papers.
@@ -131,7 +152,59 @@ plt.show()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Saving After Calling `plt.show()`
+Calling `plt.savefig()` AFTER `plt.show()` results in an empty blank image! `plt.show()` clears the active figure buffer. Always call `plt.savefig()` BEFORE `plt.show()`.
+
+### 2. Omitted `plt.tight_layout()`
+Without `plt.tight_layout()`, long axis labels or titles frequently get clipped or cut off when exporting charts to images.
+
+---
+
+---
+
+## 💻 Try It Yourself: Multi-Line Comparison Chart with Legend
+
+### Scenario
+Plot two competing products' monthly user adoption metrics on the same figure with customized colors, dashed line styles, markers, and an annotated peak point.
+
+### Complete Solution
+```python
+import matplotlib.pyplot as plt
+
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+app_a = [1000, 2200, 3800, 5400, 7100, 9500]
+app_b = [1500, 2800, 4200, 5100, 6300, 7800]
+
+plt.figure(figsize=(8, 5))
+plt.plot(months, app_a, label="Product Alpha", color="#16a34a", marker="s", linewidth=2.5)
+plt.plot(months, app_b, label="Product Beta", color="#dc2626", marker="^", linestyle="--", linewidth=2)
+
+plt.annotate("Viral Growth Spike", xy=("Jun", 9500), xytext=("Apr", 8500),
+             arrowprops=dict(facecolor="black", shrink=0.05, width=1, headwidth=6))
+
+plt.title("Monthly Active Users (MAU) Growth", fontsize=14)
+plt.xlabel("Month")
+plt.ylabel("Active Users")
+plt.legend(loc="upper left")
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig("user_growth.png", dpi=150)
+print("Annotated comparison chart saved to 'user_growth.png'.")
+plt.close()
+```
+
+### Expected Output
+```text
+Annotated comparison chart saved to 'user_growth.png'.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which function activates a global pre-designed Matplotlib style sheet such as 'ggplot'?
 A. `plt.set_theme()`
@@ -177,3 +250,10 @@ D. A string
 **Answer:** B
 **Explanation:** For multi-dimensional subplots, Matplotlib returns `axs` as a 2D array of `Axes` objects indexable as `axs[row, col]`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Seaborn Basics** (13: Data Visualization Basics).
+
+👉 **[Continue to Next Lesson: Seaborn Basics →](/tutorials/python-for-intermediate/seaborn-basics)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-1-expense-tracker-with-csv
+slug: project-1-expense-tracker-with-csv
+course: python-for-intermediate
+chapter: "14: Intermediate Projects"
+topic: "14.1 Project 1: Expense Tracker with CSV"
+title: "Project 1: Expense Tracker with CSV in Python"
+description: "Master project 1: expense tracker with csv in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 66
+keywords:
+  - python project 1 expense tracker with csv
+  - python intermediate
+  - python project 1: expense tracker with csv
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project 1: Expense Tracker with CSV in Python
 
 In this intermediate project, we synthesize multiple concepts covered across the curriculum—**File Handling with CSV, Context Managers, Dictionary Comprehensions, Exception Handling, and the `datetime` module**—to construct a production-ready **Command-Line Personal Finance & Expense Tracker**.
@@ -260,7 +281,64 @@ Grand Total: ₹450.00
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Crashing on Missing CSV File
+On the first run, the CSV file will not exist yet. Check `os.path.exists()` before attempting to read, or initialize the file with header columns if missing.
+
+### 2. Invalid Date and Currency Input
+Validate numeric inputs using `try-except float(amount)` to ensure users cannot crash the application by typing letters into expense fields.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Monthly Expense Summary
+
+### Challenge
+Add a summary function that groups all recorded expenses by category (e.g. Food, Travel, Utilities) and prints the subtotal and percentage of total expenditure for each category.
+
+### Complete Solution
+```python
+from collections import defaultdict
+
+def print_category_breakdown(expenses):
+    totals = defaultdict(float)
+    grand_total = 0.0
+    for exp in expenses:
+        cat = exp["category"]
+        amt = float(exp["amount"])
+        totals[cat] += amt
+        grand_total += amt
+        
+    print(f"
+--- Category Breakdown (Total: ₹{grand_total:,.2f}) ---")
+    for cat, amt in sorted(totals.items(), key=lambda x: x[1], reverse=True):
+        pct = (amt / grand_total) * 100 if grand_total > 0 else 0
+        print(f"- {cat:<15}: ₹{amt:>9,.2f} ({pct:5.1f}%)")
+
+sample_expenses = [
+    {"category": "Food", "amount": 450},
+    {"category": "Travel", "amount": 200},
+    {"category": "Food", "amount": 350},
+    {"category": "Utilities", "amount": 1200}
+]
+print_category_breakdown(sample_expenses)
+```
+
+### Expected Output
+```text
+--- Category Breakdown (Total: ₹2,200.00) ---
+- Utilities      : ₹ 1,200.00 ( 54.5%)
+- Food           : ₹   800.00 ( 36.4%)
+- Travel         : ₹   200.00 (  9.1%)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, what ensures that sequential IDs never collide when generating a new expense?
 A. Generating a random integer
@@ -306,3 +384,10 @@ D. To prevent buffer overflows
 **Answer:** A
 **Explanation:** Flat CSV files store plain text; numeric columns must be explicitly parsed from strings to floats for arithmetic.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project 2: API-based Dictionary App** (14: Intermediate Projects).
+
+👉 **[Continue to Next Lesson: Project 2: API-based Dictionary App →](/tutorials/python-for-intermediate/project-2-api-based-dictionary-app)**

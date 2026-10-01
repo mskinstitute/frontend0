@@ -1,3 +1,24 @@
+---
+id: python-intermediate-basic-debugging-with-pdb
+slug: basic-debugging-with-pdb
+course: python-for-intermediate
+chapter: "9: Debugging and Logging"
+topic: "9.3 Basic Debugging with pdb"
+title: "Basic Debugging with pdb in Python"
+description: "Master basic debugging with pdb in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 43
+keywords:
+  - python basic debugging with pdb
+  - python intermediate
+  - python basic debugging with pdb
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Basic Debugging with pdb in Python
 
 When complex logical bugs appear, inserting dozens of temporary `print()` statements is slow and inefficient. Python provides a powerful interactive command-line debugging tool: the **`pdb` (Python Debugger)** module. With `pdb`, you can pause execution at any point, inspect variables in memory, step through code line by line, and analyze call stacks in real time.
@@ -128,7 +149,49 @@ $env:PYTHONBREAKPOINT="0"
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Leaving `breakpoint()` in Production Code
+Forgetting to remove `breakpoint()` or `import pdb; pdb.set_trace()` will freeze background production servers waiting for user terminal input!
+
+### 2. Confusing `n` (Next) and `s` (Step)
+- `n` (Next): Executes the current line and advances to the next line in the current function (steps over function calls).
+- `s` (Step): Steps into the function called on the current line.
+
+---
+
+---
+
+## 💻 Try It Yourself: Interactive PDB Inspection Practice
+
+### Scenario
+Run a small script that sets a programmatic breakpoint using `breakpoint()`. Inspect variables `x`, `y`, and their accumulated product.
+
+### Complete Solution
+```python
+def calculate_compound(principal, rate, years):
+    total = principal
+    for year in range(1, years + 1):
+        interest = total * (rate / 100)
+        total += interest
+        # In interactive terminal: breakpoint()
+        # Allows inspecting year, interest, and total with 'p year', 'c'
+    return total
+
+result = calculate_compound(10000, 10, 3)
+print(f"Final Amount after 3 years: ₹{result:,.2f}")
+```
+
+### Expected Output
+```text
+Final Amount after 3 years: ₹13,310.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which built-in function introduced in Python 3.7 drops execution directly into the interactive debugger?
 A. `debug()`
@@ -174,3 +237,10 @@ D. Wrap all functions in `try/except`
 **Answer:** A
 **Explanation:** Setting `PYTHONBREAKPOINT=0` disables the built-in `breakpoint()` hook globally.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Assertions** (9: Debugging and Logging).
+
+👉 **[Continue to Next Lesson: Assertions →](/tutorials/python-for-intermediate/assertions)**

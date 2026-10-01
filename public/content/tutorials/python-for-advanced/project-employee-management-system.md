@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-employee-management-system
+slug: project-employee-management-system
+course: python-for-advanced
+chapter: "1: Advanced OOP Concepts"
+topic: "1.5 Project: Employee Management System"
+title: "Project: Employee Management System in Python"
+description: "Master project: employee management system in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 5
+keywords:
+  - python project employee management system
+  - python advanced
+  - python project: employee management system
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Enterprise Employee Management System
 
 In this end-of-chapter capstone project, we integrate all advanced object-oriented engineering principles mastered across this module—**Advanced `@classmethod` Polymorphic Factories, Class-Level Registries, `@property` Encapsulation with Invariant Validation, Multiple Inheritance with Mixins, and Cooperative MRO**—to architect a production-grade **Enterprise Employee & Payroll System**.
@@ -331,7 +352,51 @@ Total Division Monthly Payout: ₹658,000.00
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Forgetting Abstract Method Enforcement
+Subclasses inheriting from `abc.ABC` that fail to implement all declared `@abstractmethod`s cannot be instantiated and will raise a `TypeError`.
+
+### 2. Mutating Class-Level Registries Directly
+When tracking registered employees in a class-level dictionary, ensure dictionary updates are thread-safe and handle unique identifier collisions gracefully.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Executive Stock Option Grant
+
+### Challenge
+Extend the Employee Management System by implementing an `ExecutiveEmployee` subclass that calculates annual executive bonuses based on company profit share alongside their base salary.
+
+### Complete Solution
+```python
+class ExecutiveEmployee:
+    def __init__(self, name: str, base_salary: float, profit_share_pct: float):
+        self.name = name
+        self.base_salary = base_salary
+        self.profit_share_pct = profit_share_pct
+
+    def calculate_total_compensation(self, company_net_profit: float) -> float:
+        bonus = company_net_profit * (self.profit_share_pct / 100.0)
+        total = self.base_salary + bonus
+        print(f"[{self.name}] Base: ₹{self.base_salary:,.2f} | Bonus: ₹{bonus:,.2f} | Total: ₹{total:,.2f}")
+        return total
+
+exec_staff = ExecutiveEmployee("Priya Patel (CTO)", 3500000.0, 1.5)
+exec_staff.calculate_total_compensation(50000000.0)
+```
+
+### Expected Output
+```text
+[Priya Patel (CTO)] Base: ₹3,500,000.00 | Bonus: ₹750,000.00 | Total: ₹4,250,000.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. How does the `Employee.create_from_dict()` method determine which specific concrete class to instantiate?
 A. By reading file names from disk
@@ -377,3 +442,10 @@ D. To convert Python to C++
 **Answer:** B
 **Explanation:** An `@abstractmethod` enforces the contractual obligation that all derived subclasses must provide a concrete implementation of that method.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Introduction to Dunder Methods** (2: Magic Methods & Operator Overloading).
+
+👉 **[Continue to Next Lesson: Introduction to Dunder Methods →](/tutorials/python-for-advanced/introduction-to-dunder-methods)**

@@ -1,3 +1,24 @@
+---
+id: python-advanced-introduction-to-asyncio
+slug: introduction-to-asyncio
+course: python-for-advanced
+chapter: "8: Asynchronous Programming (Asyncio)"
+topic: "8.1 Introduction to Asyncio"
+title: "Introduction to Asyncio in Python"
+description: "Master introduction to asyncio in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 32
+keywords:
+  - python introduction to asyncio
+  - python advanced
+  - python introduction to asyncio
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Introduction to `asyncio`
 
 Asynchronous programming represents a paradigm shift in how high-concurrency network servers and distributed clients are built in Python. The standard library module `asyncio` introduces **Cooperative Multitasking** on a single thread via an **Event Loop**, allowing applications to handle tens of thousands of concurrent network sockets with minimal memory overhead.
@@ -124,7 +145,55 @@ asyncio.run(main())
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Blocking the Event Loop with Synchronous Code
+Executing synchronous blocking calls like `time.sleep(5)` or `requests.get()` inside a coroutine freezes the entire event loop, starving all other concurrent coroutines. Use `asyncio.sleep()` and `aiohttp`.
+
+### 2. Running CPU-Bound Calculations in Asyncio
+Asyncio is designed for cooperative I/O-bound concurrency. Offload heavy CPU calculations to a process pool using `loop.run_in_executor()`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Basic Asyncio Event Loop & Coroutines
+
+### Scenario
+Write two async coroutines running concurrently on the asyncio event loop using `asyncio.gather()`.
+
+### Complete Solution
+```python
+import asyncio
+import time
+
+async def fetch_user(user_id):
+    print(f"Fetching user #{user_id}...")
+    await asyncio.sleep(0.2)
+    return {"id": user_id, "name": f"User_{user_id}"}
+
+async def main():
+    start = time.perf_counter()
+    u1, u2 = await asyncio.gather(fetch_user(101), fetch_user(102))
+    print(f"Retrieved: {u1['name']} and {u2['name']}")
+    print(f"Total time elapsed: {time.perf_counter() - start:.2f}s (Concurrent!)")
+
+asyncio.run(main())
+```
+
+### Expected Output
+```text
+Fetching user #101...
+Fetching user #102...
+Retrieved: User_101 and User_102
+Total time elapsed: 0.20s (Concurrent!)
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does cooperative multitasking in `asyncio` differ from preemptive multithreading?
@@ -190,3 +259,10 @@ D. Coroutines bypass the Linux kernel.
 **Explanation:** OS threads allocate a dedicated stack memory allocation (2MB+ each), causing memory exhaustion under high concurrency. Coroutines exist as small heap objects consuming only kilobytes.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Async and Await Syntax** (8: Asynchronous Programming (Asyncio)).
+
+👉 **[Continue to Next Lesson: Async and Await Syntax →](/tutorials/python-for-advanced/async-and-await-syntax)**

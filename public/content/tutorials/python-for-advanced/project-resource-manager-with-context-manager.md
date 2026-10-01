@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-resource-manager-with-context-manager
+slug: project-resource-manager-with-context-manager
+course: python-for-advanced
+chapter: "3: Advanced Decorators and Context Managers"
+topic: "3.5 Project: Resource Manager with Context Manager"
+title: "Project: Resource Manager with Context Manager in Python"
+description: "Master project: resource manager with context manager in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 15
+keywords:
+  - python project resource manager with context manager
+  - python advanced
+  - python project: resource manager with context manager
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Resource Manager with Context Manager
 
 In distributed computing and enterprise backend systems, safely managing critical external resources—such as file locks, scratch workspaces, database connections, and transactional state—is essential to prevent data corruption and resource leaks.
@@ -211,7 +232,58 @@ if os.path.exists(target_file):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Deadlocks in Re-entrant Lock Acquisitions
+Attempting to acquire the same non-reentrant lock twice within nested context managers freezes the thread indefinitely. Use `threading.RLock` when re-entrancy is needed.
+
+### 2. Leaving Orphan Lock Files
+If a file lock relies on PID tracking on disk, handle process termination crashes by validating whether the owning PID is still active before reporting a deadlock.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Atomic File Write Context Manager
+
+### Challenge
+Build a context manager `atomic_file_write(filepath)` that writes data to a temporary file first and only replaces the destination file if the `with` block exits without exceptions.
+
+### Complete Solution
+```python
+import contextlib
+import os
+
+@contextlib.contextmanager
+def atomic_file_write(filepath):
+    temp_path = f"{filepath}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as f:
+        yield f
+    # Atomic swap on exit
+    os.replace(temp_path, filepath)
+
+# Test atomic writing
+with atomic_file_write("safe_config.txt") as f:
+    f.write("status=active
+mode=production")
+
+with open("safe_config.txt", "r") as f:
+    print("Safely committed file content:
+" + f.read())
+```
+
+### Expected Output
+```text
+Safely committed file content:
+status=active
+mode=production
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why must the temporary staging file in an atomic file writer be created on the same filesystem directory as the destination file?
@@ -277,3 +349,10 @@ D. `contextlib`
 **Explanation:** The `tempfile` module provides `tempfile.mkstemp()`, which generates uniquely named temporary files safely without race conditions.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Itertools for Iteration Tools** (4: Itertools and Functools).
+
+👉 **[Continue to Next Lesson: Itertools for Iteration Tools →](/tutorials/python-for-advanced/itertools-for-iteration-tools)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-parsing-json-data
+slug: parsing-json-data
+course: python-for-intermediate
+chapter: "8: Working with APIs"
+topic: "8.3 Parsing JSON Data"
+title: "Parsing JSON Data in Python"
+description: "Master parsing json data in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 38
+keywords:
+  - python parsing json data
+  - python intermediate
+  - python parsing json data
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Parsing JSON Data from Web APIs in Python
 
 The overwhelming majority of modern REST APIs respond with data formatted in **JSON (JavaScript Object Notation)**. Effectively navigating, extracting, and reshaping complex, deeply nested JSON responses is an essential skill for every Python developer.
@@ -130,7 +151,60 @@ def parse_api_endpoint(url: str):
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Accessing Missing Keys with Square Brackets
+Using `data["key"]` throws a `KeyError` if the key is missing from the API response. Use `data.get("key", default_value)` for resilient parsing.
+
+### 2. Parsing Non-JSON Responses with `.json()`
+If the API returns an HTML error page or empty string, calling `response.json()` raises a `requests.exceptions.JSONDecodeError`. Verify `response.status_code` first.
+
+---
+
+---
+
+## 💻 Try It Yourself: Nested JSON Navigator
+
+### Scenario
+Parse a deeply nested JSON response representing e-commerce orders, safely extracting customer names and the total order price without raising `KeyError`.
+
+### Complete Solution
+```python
+orders_json = '''
+{
+  "order_id": "ORD-9921",
+  "customer": {
+    "id": 401,
+    "profile": {"name": "Priya Patel", "email": "priya@example.com"}
+  },
+  "items": [
+    {"name": "Mechanical Keyboard", "price": 4500, "qty": 1},
+    {"name": "Wireless Mouse", "price": 1200, "qty": 2}
+  ]
+}
+'''
+import json
+
+data = json.loads(orders_json)
+customer_name = data.get("customer", {}).get("profile", {}).get("name", "Unknown")
+items = data.get("items", [])
+order_total = sum(item.get("price", 0) * item.get("qty", 1) for item in items)
+
+print(f"Customer: {customer_name}")
+print(f"Order Total: ₹{order_total:,.2f}")
+```
+
+### Expected Output
+```text
+Customer: Priya Patel
+Order Total: ₹6,900.00
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which method on a `requests.Response` object parses the JSON response body directly into Python data structures?
 A. `response.to_dict()`
@@ -176,3 +250,10 @@ D. Lambda Loop
 **Answer:** A
 **Explanation:** List comprehensions provide a concise and Pythonic mechanism for extracting and filtering attributes across API lists.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Practical API Example** (8: Working with APIs).
+
+👉 **[Continue to Next Lesson: Practical API Example →](/tutorials/python-for-intermediate/practical-api-example)**

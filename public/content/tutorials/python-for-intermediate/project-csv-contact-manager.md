@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-csv-contact-manager
+slug: project-csv-contact-manager
+course: python-for-intermediate
+chapter: "4: File Handling Advanced"
+topic: "4.5 Project: CSV Contact Manager"
+title: "Project: CSV Contact Manager in Python"
+description: "Master project: csv contact manager in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 20
+keywords:
+  - python project csv contact manager
+  - python intermediate
+  - python project: csv contact manager
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: CSV Contact Manager
 
 In this hands-on project, we will apply the advanced file handling techniques covered in this chapter—including `csv.DictReader`, `csv.DictWriter`, context managers, and robust error handling—to build a persistent Command-Line **CSV Contact Manager**.
@@ -217,7 +238,54 @@ Anita Desai          | +91-9876543210  | Work       | anita@example.com
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Corrupting Data During Mid-Write Crashes
+Writing directly to the target CSV file risks truncating existing data if the script crashes mid-write. In mission-critical systems, write to a temporary file first and atomically replace the destination with `os.replace()`.
+
+### 2. Case-Sensitive Search Mismatches
+Always normalize search strings and contact names using `.lower().strip()` before comparison to ensure reliable search results.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Contact Export
+
+### Challenge
+Extend the Contact Manager to add a search filter method that finds contacts by company domain name (e.g., finding all contacts with an email ending in `@msk.in`).
+
+### Solution
+```python
+def find_contacts_by_domain(contacts, domain):
+    target = f"@{domain.lower().lstrip('@')}"
+    return [c for c in contacts if c.get("email", "").lower().endswith(target)]
+
+# Sample test
+test_contacts = [
+    {"name": "Aarav", "email": "aarav@msk.in"},
+    {"name": "Priya", "email": "priya@google.com"},
+    {"name": "Rohan", "email": "rohan@msk.in"}
+]
+
+matched = find_contacts_by_domain(test_contacts, "msk.in")
+print(f"Found {len(matched)} matching contacts:")
+for c in matched:
+    print(f"- {c['name']} ({c['email']})")
+```
+
+### Expected Output
+```text
+Found 2 matching contacts:
+- Aarav (aarav@msk.in)
+- Rohan (rohan@msk.in)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In our Contact Manager, what happens if `contacts.csv` does not exist when the program boots?
 A. The script crashes immediately with a `FileNotFoundError`
@@ -263,3 +331,10 @@ D. `DictReader` handles binary image files
 **Answer:** B
 **Explanation:** `DictReader` accesses values by header names instead of fixed integer indices, preventing bugs when columns are added, removed, or reordered in the CSV file.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Creating Classes & Objects (Review)** (5: Object-Oriented Programming (Intermediate)).
+
+👉 **[Continue to Next Lesson: Creating Classes & Objects (Review) →](/tutorials/python-for-intermediate/creating-classes-objects-review)**

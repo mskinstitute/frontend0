@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-debugging-a-student-grading-app
+slug: project-debugging-a-student-grading-app
+course: python-for-intermediate
+chapter: "9: Debugging and Logging"
+topic: "9.5 Project: Debugging a Student Grading App"
+title: "Project: Debugging a Student Grading App in Python"
+description: "Master project: debugging a student grading app in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 9
+order: 45
+keywords:
+  - python project debugging a student grading app
+  - python intermediate
+  - python project: debugging a student grading app
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Debugging a Student Grading App
 
 In this capstone project, we will apply the debugging and diagnostic techniques mastered throughout this chapter—**Structured Logging, Logging Levels, Exception Traceback Capture, and Invariant Assertions**—to diagnose and resolve logical and runtime bugs in an enterprise **Student Grading & Analytics Application**.
@@ -212,7 +233,51 @@ INFO     | Grading run completed: 4/5 students graded successfully.
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Off-by-One Loop Indices
+Iterating with `range(len(items) - 1)` skips the final element. Use idiomatic `for item in items:` or `range(len(items))`.
+
+### 2. Integer Division Discarding Decimals
+In algorithms calculating averages or percentages, ensure values are cast or divided with `/` (float division) rather than `//` (floor division).
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Zero Marks Handling
+
+### Challenge
+Enhance the Student Grading App to catch students who were absent (marked as `None` or negative) and distinguish them from students who genuinely scored zero.
+
+### Complete Solution
+```python
+def sanitize_marks(marks_list):
+    valid_scores = []
+    for m in marks_list:
+        if m is None or m < 0:
+            print(f"Warning: Discarding invalid score: {m}")
+            continue
+        valid_scores.append(m)
+    return valid_scores
+
+scores = [85, None, 92, -5, 0, 78]
+cleaned = sanitize_marks(scores)
+print(f"Cleaned Scores: {cleaned} -> Average: {sum(cleaned)/len(cleaned):.2f}")
+```
+
+### Expected Output
+```text
+Warning: Discarding invalid score: None
+Warning: Discarding invalid score: -5
+Cleaned Scores: [85, 92, 0, 78] -> Average: 63.75
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In our refactored grading application, why do we configure two separate handlers (console and file)?
 A. Because Python requires at least two handlers to run
@@ -258,3 +323,10 @@ D. It sends an email alert automatically
 **Answer:** B
 **Explanation:** `logger.exception()` automatically captures and appends the active traceback, preserving essential debugging context.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Math and Random Module** (10: Python Standard Libraries).
+
+👉 **[Continue to Next Lesson: Math and Random Module →](/tutorials/python-for-intermediate/math-and-random-module)**

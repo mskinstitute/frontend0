@@ -1,3 +1,24 @@
+---
+id: python-advanced-multiprocessing-basics
+slug: multiprocessing-basics
+course: python-for-advanced
+chapter: "7: Multiprocessing in Python"
+topic: "7.1 Multiprocessing Basics"
+title: "Multiprocessing Basics in Python"
+description: "Master multiprocessing basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 28
+keywords:
+  - python multiprocessing basics
+  - python advanced
+  - python multiprocessing basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Multiprocessing Basics
 
 When executing CPU-intensive tasks—such as mathematical matrix crunching, cryptographic hashing, image transformation, or machine learning model inference—Python's Global Interpreter Lock (GIL) prevents threads from utilizing multiple CPU cores simultaneously.
@@ -137,7 +158,63 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Missing `if __name__ == '__main__':` Guard
+On Windows and macOS (which use the `spawn` process start method), child processes re-import the main script. Omitting this guard triggers an infinite fork bomb!
+```python
+# ❌ DANGEROUS: Will spawn infinite child processes on Windows
+p = Process(target=worker)
+p.start()
+
+# ✅ MANDATORY
+if __name__ == "__main__":
+    p = Process(target=worker)
+    p.start()
+```
+
+### 2. IPC Serialization Overhead
+Data passed between processes must be serialized (pickled) and transferred over OS pipes. If the serialization overhead exceeds computation time, multiprocessing will run slower than a single thread.
+
+---
+
+---
+
+## 💻 Try It Yourself: Parallel Factorial Computation
+
+### Scenario
+Use `multiprocessing.Pool` to compute large factorials across multiple CPU cores, demonstrating true parallelism.
+
+### Complete Solution
+```python
+import multiprocessing
+import math
+
+def compute_factorial(n):
+    return n, len(str(math.factorial(n)))
+
+if __name__ == "__main__":
+    numbers = [5000, 10000, 15000, 20000]
+    with multiprocessing.Pool(processes=2) as pool:
+        results = pool.map(compute_factorial, numbers)
+    
+    for n, digits in results:
+        print(f"Factorial of {n} has {digits:,} decimal digits.")
+```
+
+### Expected Output
+```text
+Factorial of 5000 has 16,326 decimal digits.
+Factorial of 10000 has 35,660 decimal digits.
+Factorial of 15000 has 56,130 decimal digits.
+Factorial of 20000 has 77,338 decimal digits.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why can `multiprocessing` achieve true multi-core CPU parallelism in Python while `threading` cannot?
@@ -203,3 +280,10 @@ D. Processes cannot return values.
 **Explanation:** Each process requires its own memory footprint (CPython runtime, modules, heap) and communicating between processes requires serializing (pickling) data across IPC channels, which introduces serialization overhead.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Process vs Thread** (7: Multiprocessing in Python).
+
+👉 **[Continue to Next Lesson: Process vs Thread →](/tutorials/python-for-advanced/process-vs-thread)**

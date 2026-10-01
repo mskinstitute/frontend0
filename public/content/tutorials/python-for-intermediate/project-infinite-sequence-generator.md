@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-infinite-sequence-generator
+slug: project-infinite-sequence-generator
+course: python-for-intermediate
+chapter: "7: Iterators and Generators"
+topic: "7.5 Project: Infinite Sequence Generator"
+title: "Project: Infinite Sequence Generator in Python"
+description: "Master project: infinite sequence generator in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 35
+keywords:
+  - python project infinite sequence generator
+  - python intermediate
+  - python project: infinite sequence generator
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Infinite Sequence & Data Stream Generator
 
 In this capstone project, we will apply our mastery of **Iterators, Generator Functions, `yield`, and Generator Expressions** to build an **Infinite Sequence & IoT Telemetry Streaming Engine**.
@@ -192,7 +213,56 @@ Stream demonstration finished safely without memory exhaustion.
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Unbounded Iteration Without a Break Condition
+When consuming an infinite generator, always ensure your loop has an explicit counter or threshold break condition to avoid hanging the program.
+
+### 2. Storing Yielded History Unintentionally
+If your generator keeps appending yielded items to an internal list, you eliminate the memory advantage of using a generator. Keep state minimal.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Prime Number Stream
+
+### Challenge
+Create an infinite prime number generator function that yields successive prime numbers on demand using lazy evaluation.
+
+### Complete Solution
+```python
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def prime_stream():
+    num = 2
+    while True:
+        if is_prime(num):
+            yield num
+        num += 1
+
+# Extract first 6 primes
+primes = prime_stream()
+first_six = [next(primes) for _ in range(6)]
+print("First 6 Primes:", first_six)
+```
+
+### Expected Output
+```text
+First 6 Primes: [2, 3, 5, 7, 11, 13]
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Why doesn't the `while True: yield ...` statement inside `infinite_primes()` cause an infinite freeze or crash?
 A. Python runs generator functions on separate CPU cores
@@ -238,3 +308,10 @@ D. Singleton Pattern
 **Answer:** B
 **Explanation:** Chaining generators and chunking utilities creates a modular stream processing pipeline where producers emit data lazily and downstream consumers process it in stages.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **HTTP Requests using requests** (8: Working with APIs).
+
+👉 **[Continue to Next Lesson: HTTP Requests using requests →](/tutorials/python-for-intermediate/http-requests-using-requests)**

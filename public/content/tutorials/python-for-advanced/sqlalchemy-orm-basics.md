@@ -1,3 +1,24 @@
+---
+id: python-advanced-sqlalchemy-orm-basics
+slug: sqlalchemy-orm-basics
+course: python-for-advanced
+chapter: "9: Advanced Database Handling"
+topic: "9.1 SQLAlchemy ORM Basics"
+title: "SQLAlchemy ORM Basics in Python"
+description: "Master sqlalchemy orm basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 36
+keywords:
+  - python sqlalchemy orm basics
+  - python advanced
+  - python sqlalchemy orm basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # SQLAlchemy ORM Basics
 
 In enterprise software engineering, connecting object-oriented application code with relational database schemas is a fundamental challenge. **SQLAlchemy** is the standard Object-Relational Mapping (ORM) toolkit for Python.
@@ -159,7 +180,58 @@ active_users = session.scalars(stmt).all()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Mixing SQLAlchemy 1.x and 2.0 Syntax
+SQLAlchemy 2.0 deprecates `session.query(Model)` in favor of declarative `select(Model)` executed via `session.scalars(select(Model))`.
+
+### 2. Leaking Unclosed Sessions
+Always manage database sessions with context managers (`with Session(engine) as session:`) to guarantee sessions and connection pool handles are released back to the pool.
+
+---
+
+---
+
+## 💻 Try It Yourself: Modern SQLAlchemy 2.0 Declarative Model
+
+### Scenario
+Define a modern SQLAlchemy 2.0 `Product` model using `Mapped` and `mapped_column`, insert records, and query with `select()`.
+
+### Complete Solution
+```python
+from sqlalchemy import create_engine, select, String, Float
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
+
+class Base(DeclarativeBase):
+    pass
+
+class Product(Base):
+    __tablename__ = "products"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(50))
+    price: Mapped[float] = mapped_column(Float)
+
+engine = create_engine("sqlite:///:memory:")
+Base.metadata.create_all(engine)
+
+with Session(engine) as session:
+    session.add(Product(name="Ergonomic Keyboard", price=3499.0))
+    session.commit()
+    
+    prod = session.scalars(select(Product).where(Product.name.like("%Keyboard%"))).first()
+    print(f"Found Product: {prod.name} (₹{prod.price:,.2f})")
+```
+
+### Expected Output
+```text
+Found Product: Ergonomic Keyboard (₹3,499.00)
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How are table columns defined with strict type-safety in modern SQLAlchemy 2.0?
@@ -225,3 +297,10 @@ D. To disable transaction isolation.
 **Explanation:** Using the session context manager guarantees that the session's internal resources and checked-out engine connections are closed and returned to the pool even if unhandled exceptions occur.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Relationships in Databases** (9: Advanced Database Handling).
+
+👉 **[Continue to Next Lesson: Relationships in Databases →](/tutorials/python-for-advanced/relationships-in-databases)**

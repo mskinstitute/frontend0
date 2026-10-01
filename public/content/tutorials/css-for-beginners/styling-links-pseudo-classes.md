@@ -16,9 +16,9 @@ keywords:
   - lvha rule
   - button link
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Styling Links with Pseudo-classes
@@ -284,7 +284,7 @@ Because `<a>` is an **inline** element by default, top and bottom padding do not
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which mnemonic helps you remember the correct cascade order of CSS link pseudo-classes?
 A. VHAL (Visitors Have A Lot)
@@ -292,7 +292,6 @@ B. LVHA (LoVe HAte)
 C. HVAL (Hover Visitors Are Loud)
 D. ALVH (All Links Visit Here)
 **Answer:** B
-**Explanation:** The LVHA rule stands for `:link`, `:visited`, `:hover`, `:active`. Declaring them in this order ensures that hover and active states take precedence properly.
 
 ---
 
@@ -302,7 +301,6 @@ B. The visited link color will override the hover color when you hover over an a
 C. The link underline can never be removed
 D. All hyperlinks on the webpage become invisible
 **Answer:** B
-**Explanation:** Because of CSS cascade rules, if `a:visited` comes after `a:hover`, its styles override the hover state for any link the user has previously visited.
 
 ---
 
@@ -312,7 +310,6 @@ B. Because `<a>` tags cannot have text without inline-block
 C. Because `<a>` is an inline element by default, which does not respect vertical padding or margins cleanly
 D. Because inline-block is required to make links clickable
 **Answer:** C
-**Explanation:** By default, `<a>` is an inline element. Inline elements do not push adjacent lines or elements properly when vertical padding and margins are applied. Setting `display: inline-block` fixes this.
 
 ---
 
@@ -322,7 +319,6 @@ B. `font-style: clean;`
 C. `text-decoration: none;`
 D. `border-bottom: 0;`
 **Answer:** C
-**Explanation:** `text-decoration: none;` removes underlines, overlines, and strike-through lines from text elements.
 
 ---
 
@@ -332,7 +328,6 @@ B. To protect user privacy so malicious websites cannot probe which sites the vi
 C. Because visited links automatically delete their HTML cache
 D. Because the W3C deprecated all visited links in CSS3
 **Answer:** B
-**Explanation:** If malicious sites could change dimensions or fonts on `:visited`, they could run timing or layout scripts to detect which websites the user has visited without their consent.
 
 ---
 
@@ -450,3 +445,10 @@ D. Because the W3C deprecated all visited links in CSS3
    </html>
    ```
 3. Test hovering your mouse over the text links and clicking the "Pay School Fees" button to see the smooth interactive states! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Styling Ordered and Unordered Lists** (Links, Lists and Tables Styling).
+
+👉 **[Continue to Next Lesson: Styling Ordered and Unordered Lists →](/tutorials/css-for-beginners/styling-ordered-unordered-lists)**

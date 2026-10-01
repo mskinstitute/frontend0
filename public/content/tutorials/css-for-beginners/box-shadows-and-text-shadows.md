@@ -17,9 +17,9 @@ keywords:
   - inset shadow
   - neon glow
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Box Shadows and Text Shadows: Depth and Elevation
@@ -202,7 +202,7 @@ By setting both `offset-x` and `offset-y` to `0` and using a bright neon color w
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -212,7 +212,6 @@ B. Vertical offset (offset-y)
 C. Blur radius
 D. Spread radius
 **Answer:** B
-**Explanation:** In the box-shadow syntax, the first value is offset-x (horizontal) and the second value is offset-y (vertical). `8px` pushes the shadow 8 pixels downwards.
 
 ---
 
@@ -222,7 +221,6 @@ B. `inner`
 C. `inset`
 D. `internal`
 **Answer:** C
-**Explanation:** The `inset` keyword changes the shadow from an outer drop shadow to an inner shadow that sits inside the box's borders.
 
 ---
 
@@ -232,7 +230,6 @@ B. Translucent shadows blend softly with backgrounds, mimicking natural diffused
 C. Solid black is not allowed in modern CSS
 D. `rgba()` works without a graphics card
 **Answer:** B
-**Explanation:** Solid black creates a harsh, cartoonish outline. Low-alpha `rgba()` mimics real optical physics by letting background colors show through soft shadow edges.
 
 ---
 
@@ -242,7 +239,6 @@ B. A centered glowing neon halo appears around the letters
 C. The text is underlined in blue
 D. The text drops to the bottom of the page
 **Answer:** B
-**Explanation:** With zero horizontal and vertical offsets, the blur radiates symmetrically in all directions, producing a glowing neon aura.
 
 ---
 
@@ -252,7 +248,6 @@ B. Color
 C. Spread radius
 D. Vertical offset
 **Answer:** C
-**Explanation:** `text-shadow` takes only `x-offset`, `y-offset`, `blur-radius`, and `color`. It does not support a `spread-radius` parameter.
 
 ---
 
@@ -329,3 +324,10 @@ D. Vertical offset
    </html>
    ```
 3. Open the file in your browser and hover your mouse over the card. Feel how alive, responsive, and tactile the floating card elevation feels! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Styling Links with Pseudo-classes** (Links, Lists and Tables Styling).
+
+👉 **[Continue to Next Lesson: Styling Links with Pseudo-classes →](/tutorials/css-for-beginners/styling-links-pseudo-classes)**

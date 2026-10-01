@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-3-cli-based-to-do-app
+slug: project-3-cli-based-to-do-app
+course: python-for-intermediate
+chapter: "14: Intermediate Projects"
+topic: "14.3 Project 3: CLI-based To-do App"
+title: "Project 3: CLI-based To-do App in Python"
+description: "Master project 3: cli-based to-do app in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 9
+order: 68
+keywords:
+  - python project 3 cli based to do app
+  - python intermediate
+  - python project 3: cli-based to-do app
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project 3: CLI-Based To-Do App in Python
 
 In this project, we apply our cumulative understanding of **Object-Oriented Architecture, SQLite Database Management, Datetime Arithmetic, and Defensive Error Handling** to engineer a high-productivity **Command-Line Task & To-Do Management Engine**.
@@ -251,7 +272,56 @@ ID   | STATUS       | PRIORITY | DUE DATE             | TITLE
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Off-by-One Task Numbering
+Users expect 1-based indexing for task lists (Task #1, #2), while Python lists use 0-based indexing. Always convert cleanly with `idx = user_input - 1`.
+
+### 2. Unhandled Empty Task Lists
+Guard against operations on empty task lists by displaying a friendly message ("No tasks found!") instead of raising an `IndexError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Priority Sorting
+
+### Challenge
+Extend the CLI To-Do App to support task priority levels (`HIGH`, `MEDIUM`, `LOW`) and display the active task list sorted by urgency.
+
+### Complete Solution
+```python
+PRIORITY_ORDER = {"HIGH": 1, "MEDIUM": 2, "LOW": 3}
+
+def display_sorted_tasks(tasks):
+    sorted_tasks = sorted(tasks, key=lambda t: PRIORITY_ORDER.get(t["priority"].upper(), 99))
+    print(f"{'#':<3} | {'PRIORITY':<8} | {'TASK'}")
+    print("-" * 35)
+    for idx, t in enumerate(sorted_tasks, 1):
+        print(f"{idx:<3} | {t['priority']:<8} | {t['title']}")
+
+tasks = [
+    {"title": "Buy groceries", "priority": "LOW"},
+    {"title": "Submit client report", "priority": "HIGH"},
+    {"title": "Review pull request", "priority": "MEDIUM"}
+]
+display_sorted_tasks(tasks)
+```
+
+### Expected Output
+```text
+#   | PRIORITY | TASK
+-----------------------------------
+1   | HIGH     | Submit client report
+2   | MEDIUM   | Review pull request
+3   | LOW      | Buy groceries
+```
+
+---
+
+## Practice Quiz
 
 ### 1. How does the SQLite table schema prevent arbitrary invalid values from being stored in the `status` column?
 A. With an external Python cron job
@@ -297,3 +367,10 @@ D. It is mandatory for Python functions
 **Answer:** A
 **Explanation:** Parameterized placeholders treat values strictly as literal data rather than executable SQL code, preventing SQL injection vulnerabilities.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Library Management System** (15: Capstone Project).
+
+👉 **[Continue to Next Lesson: Library Management System →](/tutorials/python-for-intermediate/library-management-system)**

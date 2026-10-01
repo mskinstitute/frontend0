@@ -17,9 +17,9 @@ keywords:
   - color formats css
   - alpha transparency
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Color Formats: Names, HEX, RGB, and HSL
@@ -251,7 +251,7 @@ Notice how easy it is to create darker or lighter shades with HSL: you only need
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -261,7 +261,6 @@ B. Green
 C. Blue
 D. Yellow
 **Answer:** B
-**Explanation:** In `#RRGGBB`, the middle two characters represent Green. `FF` is the maximum value, while Red and Blue are both set to `00`.
 
 ---
 
@@ -271,7 +270,6 @@ B. 1 to 10
 C. 0 to 255
 D. 0 to 360
 **Answer:** C
-**Explanation:** Standard RGB values range from 0 (minimum intensity) to 255 (maximum intensity) per channel.
 
 ---
 
@@ -281,7 +279,6 @@ B. Alignment
 C. Alpha
 D. Ambient
 **Answer:** C
-**Explanation:** "A" stands for Alpha. It represents the opacity/transparency level, measured on a decimal scale from 0.0 (transparent) to 1.0 (opaque).
 
 ---
 
@@ -291,7 +288,6 @@ B. `hsl(120, 100%, 50%)`
 C. `hsl(240, 100%, 50%)`
 D. `hsl(60, 100%, 50%)`
 **Answer:** A
-**Explanation:** On the HSL color wheel, 0 degrees (and 360 degrees) corresponds to Red, 120 degrees is Green, and 240 degrees is Blue.
 
 ---
 
@@ -301,7 +297,6 @@ B. Because rgba only makes the background transparent, keeping text crisp and re
 C. Because opacity requires an expensive software license
 D. Because rgba uses less computer memory
 **Answer:** B
-**Explanation:** Applying `opacity: 0.5` makes the element and all child elements (including text and icons) transparent. In contrast, `rgba()` applies transparency exclusively to the background color.
 
 ---
 
@@ -371,3 +366,10 @@ D. Because rgba uses less computer memory
    ```
 3. Open the file in your browser to admire your 4 colorful cards.
 4. Try changing the lightness of `.color-hsl` from `50%` to `30%` (dark purple) and then `80%` (light pastel lavender) to see how intuitive HSL is! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Background Color, Image, Position, and Size** (Colors and Backgrounds).
+
+👉 **[Continue to Next Lesson: Background Color, Image, Position, and Size →](/tutorials/css-for-beginners/background-color-image-position-size)**

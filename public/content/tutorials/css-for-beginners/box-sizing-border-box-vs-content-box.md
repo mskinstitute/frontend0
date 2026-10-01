@@ -16,9 +16,9 @@ keywords:
   - box model calculation
   - universal box-sizing reset
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # The Box-Sizing Property: border-box vs content-box
@@ -194,7 +194,7 @@ It forces **every single element, icon, and pseudo-element** on your website to 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -204,7 +204,6 @@ B. `content-box`
 C. `padding-box`
 D. `margin-box`
 **Answer:** B
-**Explanation:** By default according to W3C specifications, web browsers use `content-box` unless explicitly overridden.
 
 ---
 
@@ -214,7 +213,6 @@ B. 217px
 C. 234px
 D. 250px
 **Answer:** C
-**Explanation:** Under content-box: Total Width = 200 (width) + 15 + 15 (left/right padding) + 2 + 2 (left/right border) = 234px.
 
 ---
 
@@ -224,7 +222,6 @@ B. 200px
 C. 166px
 D. 185px
 **Answer:** B
-**Explanation:** Under border-box, the declared width (200px) is the total outer width. Padding and border are absorbed inside, shrinking the content area without expanding the outer box.
 
 ---
 
@@ -234,7 +231,6 @@ B. Because adding padding expands the total width beyond 100% (100% + 40px), cau
 C. Because HTML headings take up too much vertical space
 D. Because the browser font size is too large
 **Answer:** B
-**Explanation:** In content-box, horizontal padding is added on top of the 50% width. Since (50% + 20px) + (50% + 20px) exceeds 100%, the second column cannot fit on the same row.
 
 ---
 
@@ -244,7 +240,6 @@ B. To create an intuitive, predictable sizing model across all elements on the w
 C. To prevent hackers from inspecting the website
 D. To change the font family of the entire page
 **Answer:** B
-**Explanation:** This universal reset ensures that all elements and pseudo-elements calculate dimensions predictably, eliminating unintended layout overflow when adding padding or borders.
 
 ---
 
@@ -315,3 +310,10 @@ D. To change the font family of the entire page
    </html>
    ```
 3. Open the file in your browser. Notice how the red `content-box` pushes past the dashed container edge, while the green `border-box` aligns with millimeter precision! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Font Families and Web-Safe Fonts** (Text and Fonts).
+
+👉 **[Continue to Next Lesson: Font Families and Web-Safe Fonts →](/tutorials/css-for-beginners/font-families-web-safe-fonts)**

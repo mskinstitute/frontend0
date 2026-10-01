@@ -17,9 +17,9 @@ keywords:
   - secrets
   - hashlib
   - python batteries included
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Standard Library Tour: collections, itertools, pathlib, and secrets
@@ -257,56 +257,6 @@ SHA-256 Transaction Hash  : a8e4f1079d2b1c3a88df542019ab7c31... (64 chars)
 
 ---
 
-# Multiple Choice Questions
-
-### 1. Which Python module should be used to generate secure authentication tokens and 6-digit SMS OTPs?
-A. `random`
-B. `secrets`
-C. `math`
-D. `time`
-**Answer:** B
-**Explanation:** The `secrets` module accesses the operating system's cryptographically secure pseudo-random number generator (CSPRNG), making numbers unpredictable. The `random` module is pseudo-random and unsafe for security.
-
----
-
-### 2. How does collections.deque improve upon a standard Python list when popping elements from the front?
-A. It compresses memory by 90%
-B. `deque.popleft()` executes in $O(1)$ constant time, whereas `list.pop(0)` requires shifting all elements in memory taking $O(n)$ linear time
-C. `deque` automatically sorts elements
-D. `deque` stores elements on the graphics card
-**Answer:** B
-**Explanation:** A Python list is a contiguous dynamic array, so deleting index 0 requires shifting every subsequent element to the left ($O(n)$). A `deque` is a doubly linked block of memory, popping from either end in $O(1)$ time.
-
----
-
-### 3. What does collections.Counter(["apple", "banana", "apple", "apple"]).most_common(1) return?
-A. `3`
-B. `[('apple', 3)]`
-C. `{'apple': 3}`
-D. `'apple'`
-**Answer:** B
-**Explanation:** `Counter.most_common(k)` returns a list of the top $k$ `(element, count)` tuples ordered by frequency descending.
-
----
-
-### 4. What is the modern, recommended way to construct a file path using pathlib?
-A. `Path.concat("folder", "file.txt")`
-B. `Path("folder") / "file.txt"`
-C. `Path("folder") + "file.txt"`
-D. `Path.create("folder", "file.txt")`
-**Answer:** B
-**Explanation:** `pathlib.Path` overloads the division operator `/` to provide intuitive, cross-platform path concatenation.
-
----
-
-### 5. What happens when you access a missing key in a collections.defaultdict(list)?
-A. It raises a KeyError immediately
-B. It automatically invokes the default factory (list()), inserts an empty list [] for that key, and returns it
-C. It deletes the dictionary
-D. It returns None
-**Answer:** B
-**Explanation:** A `defaultdict` calls its factory callable upon encountering an absent key, populates the key with the newly returned object, and returns that reference without raising an error.
-
 ---
 
 # Practice Challenge
@@ -384,3 +334,62 @@ Activated: Vikram Singh   (9765432109) in Maharashtra  | Token: 9e0f1a2b3c4d5e6f
   Delhi         : 1 SIM activations
   Karnataka     : 1 SIM activations
 ```
+
+---
+
+## Practice Quiz
+
+### 1. Which Python module should be used to generate secure authentication tokens and 6-digit SMS OTPs?
+A. `random`
+B. `secrets`
+C. `math`
+D. `time`
+**Answer:** B
+**Explanation:** The `secrets` module accesses the operating system's cryptographically secure pseudo-random number generator (CSPRNG), making numbers unpredictable. The `random` module is pseudo-random and unsafe for security.
+
+---
+
+### 2. How does collections.deque improve upon a standard Python list when popping elements from the front?
+A. It compresses memory by 90%
+B. `deque.popleft()` executes in $O(1)$ constant time, whereas `list.pop(0)` requires shifting all elements in memory taking $O(n)$ linear time
+C. `deque` automatically sorts elements
+D. `deque` stores elements on the graphics card
+**Answer:** B
+**Explanation:** A Python list is a contiguous dynamic array, so deleting index 0 requires shifting every subsequent element to the left ($O(n)$). A `deque` is a doubly linked block of memory, popping from either end in $O(1)$ time.
+
+---
+
+### 3. What does collections.Counter(["apple", "banana", "apple", "apple"]).most_common(1) return?
+A. `3`
+B. `[('apple', 3)]`
+C. `{'apple': 3}`
+D. `'apple'`
+**Answer:** B
+**Explanation:** `Counter.most_common(k)` returns a list of the top $k$ `(element, count)` tuples ordered by frequency descending.
+
+---
+
+### 4. What is the modern, recommended way to construct a file path using pathlib?
+A. `Path.concat("folder", "file.txt")`
+B. `Path("folder") / "file.txt"`
+C. `Path("folder") + "file.txt"`
+D. `Path.create("folder", "file.txt")`
+**Answer:** B
+**Explanation:** `pathlib.Path` overloads the division operator `/` to provide intuitive, cross-platform path concatenation.
+
+---
+
+### 5. What happens when you access a missing key in a collections.defaultdict(list)?
+A. It raises a KeyError immediately
+B. It automatically invokes the default factory (list()), inserts an empty list [] for that key, and returns it
+C. It deletes the dictionary
+D. It returns None
+**Answer:** B
+**Explanation:** A `defaultdict` calls its factory callable upon encountering an absent key, populates the key with the newly returned object, and returns that reference without raising an error.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Custom Utility Package** (3: Modules and Packages).
+
+👉 **[Continue to Next Lesson: Project: Custom Utility Package →](/tutorials/python-for-intermediate/project-custom-utility-package)**

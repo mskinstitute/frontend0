@@ -1,3 +1,24 @@
+---
+id: python-advanced-using-contextlib
+slug: using-contextlib
+course: python-for-advanced
+chapter: "3: Advanced Decorators and Context Managers"
+topic: "3.4 Using contextlib"
+title: "Using contextlib in Python"
+description: "Master using contextlib in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 14
+keywords:
+  - python using contextlib
+  - python advanced
+  - python using contextlib
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Using `contextlib`
 
 The Python standard library's `contextlib` module provides high-level utilities and decorators that drastically simplify context management. Instead of authoring boilerplate classes with explicit `__enter__` and `__exit__` methods, you can construct robust context managers using simple generator functions, dynamically manage arbitrary numbers of resources, and redirect I/O streams.
@@ -182,7 +203,58 @@ with contextlib.ExitStack() as stack:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Missing `try...finally` in `@contextmanager`
+In a generator decorated with `@contextmanager`, if an exception occurs inside the `with` block, it is re-raised at the point of `yield`. Without `try...finally`, cleanup code after `yield` will never execute!
+
+### 2. Yielding Multiple Times
+A context manager generator must yield **exactly once**. Yielding zero times or multiple times raises a `RuntimeError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Temporary Working Directory Switcher with contextlib
+
+### Scenario
+Use `@contextlib.contextmanager` to create a context manager that switches the current working directory temporarily and guarantees switching back upon exit.
+
+### Complete Solution
+```python
+import contextlib
+import os
+
+@contextlib.contextmanager
+def temporary_working_directory(target_path):
+    prev_cwd = os.getcwd()
+    try:
+        os.chdir(target_path)
+        yield os.getcwd()
+    finally:
+        os.chdir(prev_cwd)
+
+# Verify directory restoration
+initial = os.getcwd()
+with temporary_working_directory("..") as temp_dir:
+    print(f"Inside with block: {temp_dir}")
+
+print(f"After with block restored: {os.getcwd()}")
+print("Directory restored successfully:", os.getcwd() == initial)
+```
+
+### Expected Output
+```text
+Inside with block: d:\Sumit
+After with block restored: d:\Sumit\MSK-Institute-Website
+Directory restored successfully: True
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does the `@contextlib.contextmanager` decorator identify the value that should be passed to the variable in the `as` clause?
@@ -248,3 +320,10 @@ D. To suppress all syntax errors.
 **Explanation:** `contextlib.nullcontext(enter_result)` is a no-op context manager that simply returns its argument upon enter and does nothing upon exit. It is ideal when a context manager is optional or dynamically provided.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Resource Manager with Context Manager** (3: Advanced Decorators and Context Managers).
+
+👉 **[Continue to Next Lesson: Project: Resource Manager with Context Manager →](/tutorials/python-for-advanced/project-resource-manager-with-context-manager)**

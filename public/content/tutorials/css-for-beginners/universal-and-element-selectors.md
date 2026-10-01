@@ -16,9 +16,9 @@ keywords:
   - css selectors
   - css basics
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Universal and Element Selectors
@@ -230,7 +230,7 @@ Let us combine both selectors in an HTML document:
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -240,7 +240,6 @@ B. `.`
 C. `*`
 D. `@`
 **Answer:** C
-**Explanation:** The asterisk (`*`) is the universal selector in CSS. It targets and applies styles to every single element on the webpage.
 
 ---
 
@@ -250,7 +249,6 @@ B. `.p { color: green; }`
 C. `p { color: green; }`
 D. `#p { color: green; }`
 **Answer:** C
-**Explanation:** Element selectors are written using just the tag name without any dots, hashes, or angle brackets. Therefore, `p { color: green; }` is correct.
 
 ---
 
@@ -260,7 +258,6 @@ B. To reset default browser margins and paddings
 C. To link an external JavaScript file
 D. To change the browser's language setting
 **Answer:** B
-**Explanation:** Web browsers apply different default margins and paddings to elements. Developers use `* { margin: 0; padding: 0; box-sizing: border-box; }` as a CSS reset to create a uniform foundation across all browsers.
 
 ---
 
@@ -270,7 +267,6 @@ B. The browser will look for an element with `class="h1"`, so standard `<h1>` ta
 C. The browser will show a syntax error screen
 D. The heading text will disappear
 **Answer:** B
-**Explanation:** Adding a dot (`.`) creates a class selector. It will only style elements that have `class="h1"`, leaving standard `<h1>` elements unaffected.
 
 ---
 
@@ -280,7 +276,6 @@ B. Only the last paragraph
 C. All five paragraphs
 D. None of the paragraphs
 **Answer:** C
-**Explanation:** An element selector targets every matching HTML tag found on the entire document, so all five `<p>` elements will be styled.
 
 ---
 
@@ -300,3 +295,10 @@ D. None of the paragraphs
    - The **Element Selector `p`** to give it a readable font size (`16px`) and gray color (`#475569`).
    - The **Element Selector `button`** to give it a blue background with white text and rounded corners.
 4. Open the file in Chrome or Edge and see your clean, consistent design come alive! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Class and ID Selectors** (CSS Syntax & Selectors Basics).
+
+👉 **[Continue to Next Lesson: Class and ID Selectors →](/tutorials/css-for-beginners/class-and-id-selectors)**

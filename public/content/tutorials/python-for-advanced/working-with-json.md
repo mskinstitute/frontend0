@@ -1,3 +1,24 @@
+---
+id: python-advanced-working-with-json
+slug: working-with-json
+course: python-for-advanced
+chapter: "12: Data Serialization & File Formats"
+topic: "12.2 Working with JSON"
+title: "Working with JSON in Python"
+description: "Master working with json in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 49
+keywords:
+  - python working with json
+  - python advanced
+  - python working with json
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Working with JSON: Advanced Serialization
 
 JavaScript Object Notation (JSON) is the lingua franca of modern web services, RESTful APIs, configuration files, and distributed microservice messaging. Standardized in RFC 8259, JSON is text-based, language-agnostic, and safe against arbitrary code execution.
@@ -140,7 +161,66 @@ print("Canonical JSON String:    ", canon_json)
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Loss of Non-String Dictionary Keys
+JSON standard requires all object keys to be strings. If you serialize a dictionary with integer keys (`{1: "a", 2: "b"}`), deserializing it yields string keys (`{"1": "a", "2": "b"}`).
+
+### 2. Inability to Serialize Datetime Objects Directly
+Standard `json.dump()` raises a `TypeError` when encountering `datetime` objects. Provide a custom serializer with `default=str` or implement a custom `JSONEncoder`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Custom JSONEncoder for Sets and Decimals
+
+### Scenario
+Create a subclass of `json.JSONEncoder` that cleanly serializes Python `set` collections and `Decimal` objects to valid JSON.
+
+### Complete Solution
+```python
+import json
+from decimal import Decimal
+
+class CustomEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        elif isinstance(obj, set):
+            return sorted(list(obj))
+        return super().default(obj)
+
+data = {
+    "account": "ACC-9021",
+    "balance": Decimal("12450.75"),
+    "tags": {"vip", "verified", "priority"}
+}
+
+encoded = json.dumps(data, cls=CustomEncoder, indent=2)
+print("Custom Encoded JSON:
+" + encoded)
+```
+
+### Expected Output
+```text
+Custom Encoded JSON:
+{
+  "account": "ACC-9021",
+  "balance": 12450.75,
+  "tags": [
+    "priority",
+    "verified",
+    "vip"
+  ]
+}
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What exception is raised when calling `json.dumps({"time": datetime.datetime.now()})` without a custom serializer?
@@ -206,3 +286,10 @@ D. It raises a `ValueError`.
 **Explanation:** JSON does not have a distinct tuple type—only arrays. As a result, Python tuples serialize to JSON arrays and deserialize back into Python `list` objects.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Working with YAML** (12: Data Serialization & File Formats).
+
+👉 **[Continue to Next Lesson: Working with YAML →](/tutorials/python-for-advanced/working-with-yaml)**

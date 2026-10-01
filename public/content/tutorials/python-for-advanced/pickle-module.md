@@ -1,3 +1,24 @@
+---
+id: python-advanced-pickle-module
+slug: pickle-module
+course: python-for-advanced
+chapter: "12: Data Serialization & File Formats"
+topic: "12.1 Pickle Module"
+title: "Pickle Module in Python"
+description: "Master pickle module in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 48
+keywords:
+  - python pickle module
+  - python advanced
+  - python pickle module
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The `pickle` Module: Serialization & Security
 
 Serialization—the process of converting complex in-memory Python object graphs into a contiguous byte stream for storage or network transit—is a fundamental requirement in data engineering and distributed computing.
@@ -146,7 +167,54 @@ Because `pickle` cannot be securely sandboxed, production architectures rely on 
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Unpickling Untrusted Data (Arbitrary Code Execution)
+Never unpickle data received over untrusted networks or from untrusted users. A malicious pickle payload can execute arbitrary shell commands via the `__reduce__` hook! Use JSON or Protocol Buffers instead.
+
+### 2. Pickling Non-Deterministic Objects
+Pickling objects containing lambda functions, open socket connections, file descriptors, or database connections will fail with `PicklingError`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Custom Object Serialization with Pickle
+
+### Scenario
+Serialize a complex machine learning model state class using `pickle.dumps()` and restore it cleanly with `pickle.loads()`.
+
+### Complete Solution
+```python
+import pickle
+
+class LinearWeights:
+    def __init__(self, slope: float, intercept: float):
+        self.slope = slope
+        self.intercept = intercept
+
+    def predict(self, x: float) -> float:
+        return (self.slope * x) + self.intercept
+
+model = LinearWeights(2.5, 10.0)
+serialized = pickle.dumps(model)
+print(f"Serialized object size: {len(serialized)} bytes")
+
+restored_model = pickle.loads(serialized)
+print("Prediction from restored model (x=4):", restored_model.predict(4))
+```
+
+### Expected Output
+```text
+Serialized object size: 85 bytes
+Prediction from restored model (x=4): 20.0
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Why is it dangerous to call `pickle.loads()` on untrusted data received from an external user or network socket?
@@ -212,3 +280,10 @@ D. `eval()` strings
 **Explanation:** Formats like JSON and MessagePack represent raw data structures without executable semantics, eliminating the risk of arbitrary code execution upon deserialization.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Working with JSON** (12: Data Serialization & File Formats).
+
+👉 **[Continue to Next Lesson: Working with JSON →](/tutorials/python-for-advanced/working-with-json)**

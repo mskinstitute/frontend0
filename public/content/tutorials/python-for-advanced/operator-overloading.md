@@ -1,3 +1,24 @@
+---
+id: python-advanced-operator-overloading
+slug: operator-overloading
+course: python-for-advanced
+chapter: "2: Magic Methods & Operator Overloading"
+topic: "2.3 Operator Overloading"
+title: "Operator Overloading in Python"
+description: "Master operator overloading in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 10
+order: 8
+keywords:
+  - python operator overloading
+  - python advanced
+  - python operator overloading
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Operator Overloading
 
 Operator overloading allows user-defined classes to intercept and define custom semantics for Python's built-in operators—such as arithmetic symbols (`+`, `-`, `*`, `/`), matrix multiplication (`@`), augmented assignment (`+=`, `-=`), and rich comparison operators (`==`, `<`, `>=`).
@@ -224,7 +245,69 @@ print("Sorted nodes:", sorted(nodes))
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. In-Place Mutation in Binary Operators
+Binary arithmetic operators like `__add__(self, other)` must return a **new instance** rather than mutating `self`. Mutating `self` violates mathematical immutability expectations.
+
+### 2. Forgetting Reflected Operators (`__radd__`)
+If the left operand does not support the operation with the right operand, Python falls back to the right operand's reflected method (`__radd__`). Implementing reflected operators allows operations like `5 + my_vector`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Overloading Currency Addition and Comparison
+
+### Scenario
+Build a `Rupee` monetary class that supports addition with another `Rupee` instance or integer, proper string representation, and comparison operators.
+
+### Complete Solution
+```python
+class Rupee:
+    def __init__(self, amount: float):
+        self.amount = round(float(amount), 2)
+
+    def __add__(self, other):
+        if isinstance(other, Rupee):
+            return Rupee(self.amount + other.amount)
+        elif isinstance(other, (int, float)):
+            return Rupee(self.amount + other)
+        return NotImplemented
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __lt__(self, other):
+        if isinstance(other, Rupee):
+            return self.amount < other.amount
+        return self.amount < other
+
+    def __repr__(self):
+        return f"₹{self.amount:,.2f}"
+
+wallet1 = Rupee(450.50)
+wallet2 = Rupee(120.00)
+total = wallet1 + wallet2
+augmented = 50 + wallet1
+
+print("Total Wallet:", total)
+print("Augmented with raw number:", augmented)
+print("Is wallet2 < wallet1?", wallet2 < wallet1)
+```
+
+### Expected Output
+```text
+Total Wallet: ₹570.50
+Augmented with raw number: ₹500.50
+Is wallet2 < wallet1? True
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What should a binary operator dunder method like `__add__(self, other)` return when it encounters an unsupported type for `other`?
@@ -290,3 +373,10 @@ D. Decorator application (`@property`)
 **Explanation:** The `@` binary operator was introduced in Python 3.5 (PEP 465) specifically for matrix multiplication and corresponds to the `__matmul__` and `__rmatmul__` dunder methods.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Customizing Classes with Magic Methods** (2: Magic Methods & Operator Overloading).
+
+👉 **[Continue to Next Lesson: Customizing Classes with Magic Methods →](/tutorials/python-for-advanced/customizing-classes-with-magic-methods)**

@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-log-file-analyzer
+slug: project-log-file-analyzer
+course: python-for-advanced
+chapter: "11: Regular Expressions Advanced"
+topic: "11.4 Project: Log File Analyzer"
+title: "Project: Log File Analyzer in Python"
+description: "Master project: log file analyzer in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 47
+keywords:
+  - python project log file analyzer
+  - python advanced
+  - python project: log file analyzer
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: High-Performance Log File Analyzer
 
 In cloud infrastructure and cybersecurity operations, analyzing millions of web and application server log records is critical for detecting malicious penetration attempts, performance degradations, and system anomalies.
@@ -212,7 +233,62 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Loading Multi-Gigabyte Logs Entirely into Memory
+Never use `file.read()` on server log files. Iterate over the file line-by-line (`for line in file:`) to maintain a constant, minimal memory footprint.
+
+### 2. Recompiling Regex Inside the Line Loop
+Compiling regular expressions inside a high-frequency loop introduces severe performance overhead. Compile regex patterns once globally using `re.compile()`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - HTTP Error Frequency Counter
+
+### Challenge
+Extend the Log File Analyzer to aggregate error status codes (4xx and 5xx) and print the top 3 most common HTTP error endpoints.
+
+### Complete Solution
+```python
+from collections import Counter
+import re
+
+logs = [
+    'GET /api/v1/users 200',
+    'POST /api/v1/auth 401',
+    'GET /favicon.ico 404',
+    'POST /api/v1/auth 401',
+    'POST /api/v1/upload 500',
+    'POST /api/v1/auth 401'
+]
+
+error_pattern = re.compile(r'(?P<method>[A-Z]+)s+(?P<endpoint>S+)s+(?P<status>[45]d{2})')
+error_counter = Counter()
+
+for line in logs:
+    m = error_pattern.search(line)
+    if m:
+        error_counter[m.group("endpoint")] += 1
+
+print("Top failing endpoints:")
+for ep, count in error_counter.most_common(2):
+    print(f"- {ep}: {count} errors")
+```
+
+### Expected Output
+```text
+Top failing endpoints:
+- /api/v1/auth: 3 errors
+- /favicon.ico: 1 errors
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 How does the `re.VERBOSE` flag benefit the `LOG_PATTERN` regular expression definition?
@@ -278,3 +354,10 @@ D. It creates an operating system thread lock.
 **Explanation:** Compiling with `re.compile()` parses and prepares the pattern's finite state machine once, maximizing runtime efficiency when evaluating high-volume loops.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Pickle Module** (12: Data Serialization & File Formats).
+
+👉 **[Continue to Next Lesson: Pickle Module →](/tutorials/python-for-advanced/pickle-module)**

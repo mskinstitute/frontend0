@@ -1,3 +1,24 @@
+---
+id: python-intermediate-sqlite-installation-setup
+slug: sqlite-installation-setup
+course: python-for-intermediate
+chapter: "11: Database Basics with SQLite"
+topic: "11.2 SQLite Installation & Setup"
+title: "SQLite Installation & Setup in Python"
+description: "Master sqlite installation & setup in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 52
+keywords:
+  - python sqlite installation setup
+  - python intermediate
+  - python sqlite installation & setup
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # SQLite Installation & Setup in Python
 
 One of Python's greatest superpowers is its "batteries-included" philosophy. Unlike many languages that require installing third-party drivers or setting up external database servers, Python comes pre-bundled with a complete, production-ready SQL database engine via the **`sqlite3`** standard library module.
@@ -103,7 +124,48 @@ print("Database and table successfully initialized!")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Trying to `pip install sqlite3`
+SQLite3 is built directly into the standard CPython distribution! Trying to install it via pip will fail or install an obsolete third-party package.
+
+### 2. Locking the Database File
+SQLite locks the file during writes. Keeping a write transaction open for extended periods will cause other processes to fail with `sqlite3.OperationalError: database is locked`. Keep transactions short.
+
+---
+
+---
+
+## 💻 Try It Yourself: Verifying SQLite Version in Python
+
+### Scenario
+Verify that SQLite3 is installed and functioning in your Python environment by printing the Python `sqlite3` wrapper version and the underlying SQLite engine C library version.
+
+### Complete Solution
+```python
+import sqlite3
+
+print(f"sqlite3 Module Version: {sqlite3.version}")
+print(f"SQLite Library Version: {sqlite3.sqlite_version}")
+
+# Create an in-memory database test
+conn = sqlite3.connect(":memory:")
+print("In-memory SQLite database successfully connected!")
+conn.close()
+```
+
+### Expected Output
+```text
+sqlite3 Module Version: 2.6.0
+SQLite Library Version: 3.45.1
+In-memory SQLite database successfully connected!
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which command is used to install SQLite support for Python?
 A. `pip install sqlite3`
@@ -149,3 +211,10 @@ D. `connection.query_handler()`
 **Answer:** B
 **Explanation:** The `Cursor` object (`connection.cursor()`) is responsible for executing SQL statements and traversing result sets.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Connecting Python with SQLite** (11: Database Basics with SQLite).
+
+👉 **[Continue to Next Lesson: Connecting Python with SQLite →](/tutorials/python-for-intermediate/connecting-python-with-sqlite)**

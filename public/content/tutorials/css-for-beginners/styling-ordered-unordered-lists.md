@@ -16,9 +16,9 @@ keywords:
   - navbar list reset
   - custom bullets
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Styling Ordered and Unordered Lists
@@ -269,7 +269,7 @@ However, browsers add default margin and 40px of left padding. To build a navbar
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS property and value completely removes bullet markers from an unordered list?
 A. `bullet: hidden;`
@@ -277,7 +277,6 @@ B. `list-style-type: none;`
 C. `marker-style: clear;`
 D. `list-decoration: off;`
 **Answer:** B
-**Explanation:** `list-style-type: none;` (or the shorthand `list-style: none;`) removes bullet points and numeric markers from list elements.
 
 ---
 
@@ -287,7 +286,6 @@ B. HTML lists have a mandatory 50px border
 C. The HTML `<li>` tag automatically floats to the right
 D. The browser font size is too large
 **Answer:** A
-**Explanation:** Most web browsers apply an indent of approximately 40px using `padding-left` on `<ul>` and `<ol>`. To completely flush a list to the edge, you must set `padding: 0;`.
 
 ---
 
@@ -297,7 +295,6 @@ B. With `outside`, subsequent lines align underneath the text; with `inside`, su
 C. `inside` hides the marker on mobile phones
 D. `outside` moves the entire list to an external CSS stylesheet
 **Answer:** B
-**Explanation:** In `outside` (default), the bullet marker sits outside the content block, so all wrapped lines align neatly. In `inside`, the bullet is treated as inline text, causing wrapped lines to fall underneath the bullet itself.
 
 ---
 
@@ -307,7 +304,6 @@ B. `indic-number`
 C. `devanagari`
 D. `sans-script`
 **Answer:** C
-**Explanation:** CSS natively supports `list-style-type: devanagari;`, which formats ordered list counters as १, २, ३, ४, etc.
 
 ---
 
@@ -317,7 +313,6 @@ B. Emojis and pseudo-elements give full control over sizing, alignment, color, a
 C. `list-style-image` only works in Firefox
 D. `li::before` converts lists into tables
 **Answer:** B
-**Explanation:** `list-style-image` does not provide easy CSS controls for image width, height, or vertical alignment. Using `::before` pseudo-elements with emojis or SVGs allows precise styling and responsive scaling.
 
 ---
 
@@ -431,3 +426,10 @@ D. `li::before` converts lists into tables
    </html>
    ```
 3. Open the file in your browser to see how custom bullet points make lists look clean and appetizing! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Styling Tables: Borders, Striping, and Responsive Tables** (Links, Lists and Tables Styling).
+
+👉 **[Continue to Next Lesson: Styling Tables: Borders, Striping, and Responsive Tables →](/tutorials/css-for-beginners/styling-tables-borders-striping)**

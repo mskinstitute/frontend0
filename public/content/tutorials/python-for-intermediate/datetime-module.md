@@ -1,3 +1,24 @@
+---
+id: python-intermediate-datetime-module
+slug: datetime-module
+course: python-for-intermediate
+chapter: "10: Python Standard Libraries"
+topic: "10.2 Datetime Module"
+title: "Datetime Module in Python"
+description: "Master datetime module in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 47
+keywords:
+  - python datetime module
+  - python intermediate
+  - python datetime module
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The Datetime Module in Python
 
 Date and time manipulation is central to backend systems, financial transaction logs, scheduling engines, and data analytics. Python's built-in **`datetime`** module provides classes for managing calendar dates, times, durations, and timezones.
@@ -128,7 +149,55 @@ print(f"Time in India: {ist_time}")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Confusing Naive and Aware Datetimes
+A naive datetime object has no timezone (`tzinfo=None`). Comparing a naive datetime with a timezone-aware datetime raises a `TypeError`. In modern Python (3.11+), use `datetime.now(timezone.utc)`.
+
+### 2. Mixing up `%m` (Month) and `%M` (Minute)
+In `strftime` format strings:
+- `%m`: 2-digit month (01–12)
+- `%M`: 2-digit minute (00–59)
+
+---
+
+---
+
+## 💻 Try It Yourself: Days Until Next Birthday Calculator
+
+### Scenario
+Write a function that calculates the exact number of days remaining until your next birthday using `datetime.date` and `timedelta`.
+
+### Complete Solution
+```python
+from datetime import date
+
+def days_until_birthday(birth_month: int, birth_day: int) -> int:
+    today = date.today()
+    this_year_bday = date(today.year, birth_month, birth_day)
+    
+    if this_year_bday < today:
+        next_bday = date(today.year + 1, birth_month, birth_day)
+    else:
+        next_bday = this_year_bday
+        
+    return (next_bday - today).days
+
+# Example calculation
+days = days_until_birthday(12, 25)
+print(f"Days until December 25th: {days} days")
+```
+
+### Expected Output
+```text
+Days until December 25th: 85 days
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which method converts a `datetime` object into a custom formatted string?
 A. `datetime.strptime()`
@@ -174,3 +243,10 @@ D. `%d`
 **Answer:** B
 **Explanation:** `%Y` outputs the 4-digit year (e.g. 2026), whereas lowercase `%y` outputs the 2-digit year (e.g. 26).
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Collections Module** (10: Python Standard Libraries).
+
+👉 **[Continue to Next Lesson: Collections Module →](/tutorials/python-for-intermediate/collections-module)**

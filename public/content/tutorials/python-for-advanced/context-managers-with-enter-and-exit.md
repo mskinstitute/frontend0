@@ -1,3 +1,24 @@
+---
+id: python-advanced-context-managers-with-enter-and-exit
+slug: context-managers-with-enter-and-exit
+course: python-for-advanced
+chapter: "3: Advanced Decorators and Context Managers"
+topic: "3.3 Context Managers with __enter__ and __exit__"
+title: "Context Managers with __enter__ and __exit__ in Python"
+description: "Master context managers with __enter__ and __exit__ in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 13
+keywords:
+  - python context managers with enter and exit
+  - python advanced
+  - python context managers with __enter__ and __exit__
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Context Managers with `__enter__` and `__exit__`
 
 Context managers are Python's standard mechanism for deterministic resource acquisition and release. Formalized in PEP 343, the `with` statement guarantees that critical cleanup logic—such as releasing database connection locks, closing file descriptors, rolling back failed database transactions, or restoring system environments—executes reliably, even in the event of unexpected runtime exceptions.
@@ -192,7 +213,55 @@ with open("source.txt", "w") as src, open("dest.txt", "w") as dst:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Forgetting to Return `True` to Suppress Exceptions
+If `__exit__` handles an exception and wants to suppress it from propagating up the call stack, it MUST return `True`. Returning `None` or `False` allows the exception to re-raise.
+
+### 2. Misunderstanding `__exit__` Argument Signatures
+`__exit__` must accept 4 arguments: `self, exc_type, exc_val, exc_tb`. If no exception occurred, all three exception arguments are `None`.
+
+---
+
+---
+
+## 💻 Try It Yourself: High-Precision Code Benchmark Context Manager
+
+### Scenario
+Build a class-based context manager `BenchmarkTimer(label)` that precisely records the execution duration of any code block in milliseconds.
+
+### Complete Solution
+```python
+import time
+
+class BenchmarkTimer:
+    def __init__(self, label: str):
+        self.label = label
+        self.duration_ms = 0.0
+
+    def __enter__(self):
+        self.start = time.perf_counter()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.duration_ms = (time.perf_counter() - self.start) * 1000
+        print(f"⏱️ [{self.label}] Completed in {self.duration_ms:.2f} ms")
+        return False  # Do not suppress exceptions
+
+with BenchmarkTimer("List Comprehension 100k"):
+    squares = [x * x for x in range(100_000)]
+```
+
+### Expected Output
+```text
+⏱️ [List Comprehension 100k] Completed in 6.42 ms
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What four arguments are passed to the `__exit__` method by the Python runtime when a `with` block exits?
@@ -258,3 +327,10 @@ D. Python crashes with a segmentation fault.
 **Explanation:** If `__enter__` fails or raises an exception, the context was never established, so the corresponding `__exit__` method is not invoked.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Using contextlib** (3: Advanced Decorators and Context Managers).
+
+👉 **[Continue to Next Lesson: Using contextlib →](/tutorials/python-for-advanced/using-contextlib)**

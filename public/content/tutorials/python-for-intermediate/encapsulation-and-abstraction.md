@@ -1,3 +1,24 @@
+---
+id: python-intermediate-encapsulation-and-abstraction
+slug: encapsulation-and-abstraction
+course: python-for-intermediate
+chapter: "5: Object-Oriented Programming (Intermediate)"
+topic: "5.4 Encapsulation and Abstraction"
+title: "Encapsulation and Abstraction in Python"
+description: "Master encapsulation and abstraction in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 24
+keywords:
+  - python encapsulation and abstraction
+  - python intermediate
+  - python encapsulation and abstraction
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Encapsulation and Abstraction in Python
 
 Encapsulation and Abstraction are two foundational pillars of Object-Oriented software design. Together, they protect internal object integrity, hide internal implementation complexity, and expose clean, intuitive interfaces to external consumers.
@@ -153,7 +174,64 @@ pg.disconnect()
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Believing Double Underscores (`__`) Make Attributes Truly Private
+Python does not enforce true private memory. Double underscores simply trigger name mangling (`_ClassName__attribute`). Use single underscore (`_attr`) for protected convention, and double underscores only when avoiding subclass name collisions.
+
+### 2. Defining Setter Without Getter in `@property`
+A `@prop.setter` requires the matching `@property` getter to be defined first with the exact same method name.
+
+---
+
+---
+
+## 💻 Try It Yourself: Temperature Sensor with @property
+
+### Scenario
+Build a `TemperatureSensor` class where the internal temperature is stored in Celsius, but provides a getter and setter in Fahrenheit using `@property`.
+
+### Complete Solution
+```python
+class TemperatureSensor:
+    def __init__(self, celsius: float = 0.0):
+        self._celsius = float(celsius)
+
+    @property
+    def celsius(self) -> float:
+        return self._celsius
+
+    @celsius.setter
+    def celsius(self, value: float):
+        if value < -273.15:
+            raise ValueError("Temperature below absolute zero is physically impossible!")
+        self._celsius = value
+
+    @property
+    def fahrenheit(self) -> float:
+        return (self._celsius * 9/5) + 32
+
+    @fahrenheit.setter
+    def fahrenheit(self, value: float):
+        self.celsius = (value - 32) * 5/9
+
+sensor = TemperatureSensor(25.0)
+print(f"Temperature: {sensor.celsius}°C = {sensor.fahrenheit}°F")
+sensor.fahrenheit = 98.6
+print(f"Set to 98.6°F -> Celsius is: {sensor.celsius:.1f}°C")
+```
+
+### Expected Output
+```text
+Temperature: 25.0°C = 77.0°F
+Set to 98.6°F -> Celsius is: 37.0°C
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What happens when an attribute name begins with two leading underscores (e.g. `__secret`)?
 A. Python makes the attribute read-only in memory
@@ -199,3 +277,10 @@ D. `sys`
 **Answer:** C
 **Explanation:** The standard Python module for abstract base classes is `abc` (Abstract Base Classes).
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Bank Account Class System** (5: Object-Oriented Programming (Intermediate)).
+
+👉 **[Continue to Next Lesson: Project: Bank Account Class System →](/tutorials/python-for-intermediate/project-bank-account-class-system)**

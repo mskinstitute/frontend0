@@ -1,3 +1,24 @@
+---
+id: python-intermediate-using-print-vs-logging
+slug: using-print-vs-logging
+course: python-for-intermediate
+chapter: "9: Debugging and Logging"
+topic: "9.1 Using print vs logging"
+title: "Using print vs logging in Python"
+description: "Master using print vs logging in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 41
+keywords:
+  - python using print vs logging
+  - python intermediate
+  - python using print vs logging
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Using print() vs. Logging in Python
 
 When beginning their programming journey, almost all developers rely on `print()` statements to inspect variables and track program execution. While `print()` is convenient for quick one-line script checks, it quickly breaks down in production-grade software. Python's built-in **`logging`** module offers a professional, configurable alternative designed specifically for monitoring, diagnostics, and audit tracking.
@@ -108,7 +129,59 @@ This pattern enables configuring distinct log levels for individual packages (e.
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Leaving `print()` in Production Code
+`print()` writes unformatted text to standard output without timestamps, severity levels, or source line numbers, and cannot be filtered or redirected without editing code.
+
+### 2. String Concatenation in Logging Calls
+Do not format strings using f-strings inside logger calls if the log level is disabled. Use parameterized logging: `logger.info("Processed %s items", count)` to save formatting overhead when logs are suppressed.
+
+---
+
+---
+
+## 💻 Try It Yourself: Transitioning from Print to Logging
+
+### Scenario
+Refactor a script that uses multiple `print()` statements into a clean logging script that records timestamped messages with severity levels.
+
+### Complete Solution
+```python
+import logging
+
+# Configure basic logger
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+
+def process_payment(account_id, amount):
+    logging.info("Initiating payment of ₹%s for account %s", amount, account_id)
+    if amount <= 0:
+        logging.error("Invalid transaction amount: ₹%s", amount)
+        return False
+    logging.info("Payment of ₹%s processed successfully.", amount)
+    return True
+
+process_payment("ACC-101", 500)
+process_payment("ACC-102", -50)
+```
+
+### Expected Output
+```text
+2026-10-01 14:00:00 [INFO] Initiating payment of ₹500 for account ACC-101
+2026-10-01 14:00:00 [INFO] Payment of ₹500 processed successfully.
+2026-10-01 14:00:00 [INFO] Initiating payment of ₹-50 for account ACC-102
+2026-10-01 14:00:00 [ERROR] Invalid transaction amount: ₹-50
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary disadvantage of using `print()` statements for debugging in production applications?
 A. `print()` only supports ASCII characters
@@ -154,3 +227,10 @@ D. `logging.critical("Power outage")`
 **Answer:** C
 **Explanation:** `logging.INFO` is of lower severity than `WARNING`, so all `INFO` and `DEBUG` calls are suppressed.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Logging Levels** (9: Debugging and Logging).
+
+👉 **[Continue to Next Lesson: Logging Levels →](/tutorials/python-for-intermediate/logging-levels)**

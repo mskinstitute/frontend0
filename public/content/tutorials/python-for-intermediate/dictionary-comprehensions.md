@@ -16,9 +16,9 @@ keywords:
   - zip mapping
   - hash table
   - data transformation
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Dictionary Comprehensions in Python
@@ -246,61 +246,6 @@ Marks Breakdown:
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What method must be invoked on a dictionary to unpack both key and value inside a comprehension?
-A. `d.values()`
-B. `d.keys()`
-C. `d.items()`
-D. `d.entries()`
-**Answer:** C
-**Explanation:** Calling `d.items()` returns an iterable of `(key, value)` tuples, enabling simultaneous unpacking: `for k, v in d.items()`. Calling just `for k in d:` only yields keys.
-
----
-
-### 2. What is the output of the following dictionary comprehension?
-```python
-fruits = ["apple", "fig", "banana"]
-result = {f: len(f) for f in fruits if len(f) > 3}
-print(result)
-```
-A. `{'apple': 5, 'banana': 6}`
-B. `{'fig': 3}`
-C. `{'apple': 5, 'fig': 3, 'banana': 6}`
-D. `[5, 6]`
-**Answer:** A
-**Explanation:** The `if len(f) > 3` condition discards `"fig"` (length 3). The remaining items are `"apple"` (length 5) and `"banana"` (length 6), forming `{'apple': 5, 'banana': 6}`.
-
----
-
-### 3. What happens if you invert a dictionary {v: k for k, v in d.items()} when multiple keys have the same value?
-A. Python raises a DuplicateValueError
-B. All keys are collected into a set automatically
-C. The later key encountered during iteration overwrites the earlier key for that value
-D. The dictionary is deleted
-**Answer:** C
-**Explanation:** Dictionary keys must be unique. When duplicate values become keys, subsequent assignments overwrite prior assignments, resulting in only the last key associated with that value surviving.
-
----
-
-### 4. Which of the following correctly pairs two lists into a dictionary?
-A. `{k, v for k, v in list1 + list2}`
-B. `{k: v for k, v in zip(list1, list2)}`
-C. `dict(list1 + list2)`
-D. `{k: v for k in list1 for v in list2}`
-**Answer:** B
-**Explanation:** The `zip(list1, list2)` function pairs corresponding elements from both sequences as tuples `(k, v)`, which can then be cleanly unpacked into a dictionary comprehension `{k: v for k, v in zip(list1, list2)}`.
-
----
-
-### 5. What is the output of {x: x**2 for x in (1, 2, 3) if x % 2 != 0}?
-A. `{1: 1, 2: 4, 3: 9}`
-B. `{1: 1, 3: 9}`
-C. `{2: 4}`
-D. `[1, 9]`
-**Answer:** B
-**Explanation:** The condition `x % 2 != 0` filters for odd numbers. From `(1, 2, 3)`, 1 and 3 are odd. Squaring them yields `{1: 1, 3: 9}`.
-
 ---
 
 # Practice Challenge
@@ -378,3 +323,67 @@ LINEN-44    : ₹1470.00 (5% Standard GST)
 KHADI-07    : ₹336.00 (5% Standard GST)
 VELVET-88   : ₹4130.00 (18% Luxury GST)
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What method must be invoked on a dictionary to unpack both key and value inside a comprehension?
+A. `d.values()`
+B. `d.keys()`
+C. `d.items()`
+D. `d.entries()`
+**Answer:** C
+**Explanation:** Calling `d.items()` returns an iterable of `(key, value)` tuples, enabling simultaneous unpacking: `for k, v in d.items()`. Calling just `for k in d:` only yields keys.
+
+---
+
+### 2. What is the output of the following dictionary comprehension?
+```python
+fruits = ["apple", "fig", "banana"]
+result = {f: len(f) for f in fruits if len(f) > 3}
+print(result)
+```
+A. `{'apple': 5, 'banana': 6}`
+B. `{'fig': 3}`
+C. `{'apple': 5, 'fig': 3, 'banana': 6}`
+D. `[5, 6]`
+**Answer:** A
+**Explanation:** The `if len(f) > 3` condition discards `"fig"` (length 3). The remaining items are `"apple"` (length 5) and `"banana"` (length 6), forming `{'apple': 5, 'banana': 6}`.
+
+---
+
+### 3. What happens if you invert a dictionary {v: k for k, v in d.items()} when multiple keys have the same value?
+A. Python raises a DuplicateValueError
+B. All keys are collected into a set automatically
+C. The later key encountered during iteration overwrites the earlier key for that value
+D. The dictionary is deleted
+**Answer:** C
+**Explanation:** Dictionary keys must be unique. When duplicate values become keys, subsequent assignments overwrite prior assignments, resulting in only the last key associated with that value surviving.
+
+---
+
+### 4. Which of the following correctly pairs two lists into a dictionary?
+A. `{k, v for k, v in list1 + list2}`
+B. `{k: v for k, v in zip(list1, list2)}`
+C. `dict(list1 + list2)`
+D. `{k: v for k in list1 for v in list2}`
+**Answer:** B
+**Explanation:** The `zip(list1, list2)` function pairs corresponding elements from both sequences as tuples `(k, v)`, which can then be cleanly unpacked into a dictionary comprehension `{k: v for k, v in zip(list1, list2)}`.
+
+---
+
+### 5. What is the output of {x: x**2 for x in (1, 2, 3) if x % 2 != 0}?
+A. `{1: 1, 2: 4, 3: 9}`
+B. `{1: 1, 3: 9}`
+C. `{2: 4}`
+D. `[1, 9]`
+**Answer:** B
+**Explanation:** The condition `x % 2 != 0` filters for odd numbers. From `(1, 2, 3)`, 1 and 3 are odd. Squaring them yields `{1: 1, 3: 9}`.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Nested Comprehensions** (1: Advanced Data Types & Comprehensions).
+
+👉 **[Continue to Next Lesson: Nested Comprehensions →](/tutorials/python-for-intermediate/nested-comprehensions)**

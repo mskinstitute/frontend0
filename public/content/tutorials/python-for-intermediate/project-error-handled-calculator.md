@@ -1,3 +1,24 @@
+---
+id: python-intermediate-project-error-handled-calculator
+slug: project-error-handled-calculator
+course: python-for-intermediate
+chapter: "6: Exception Handling"
+topic: "6.5 Project: Error-Handled Calculator"
+title: "Project: Error-Handled Calculator in Python"
+description: "Master project: error-handled calculator in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 9
+order: 30
+keywords:
+  - python project error handled calculator
+  - python intermediate
+  - python project: error-handled calculator
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Error-Handled Calculator
 
 In this comprehensive chapter project, we will apply every concept covered across our exception handling module—**Built-in Exceptions, `try-except-else-finally`, Explicit `raise`, and Custom Exception Hierarchies**—to build a production-grade, crash-resilient **Command-Line Scientific Calculator**.
@@ -258,7 +279,65 @@ Thank you for using the Calculator. Goodbye!
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Using `eval()` for Calculation
+Never use Python's built-in `eval()` to parse user formulas, as it allows arbitrary remote code execution (e.g. `__import__('os').system('rm -rf /')`). Always use a custom parser or AST validator.
+
+### 2. Infinite Retry Loops Without Escape
+When prompting the user on invalid input, always provide a clean exit keyword (e.g. `'q'` or `'exit'`) so the user is never trapped in an infinite retry loop.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Memory Storage
+
+### Challenge
+Add memory recall functionality (`M+` to store, `MR` to recall, `MC` to clear) to the calculator system with appropriate error handling when reading from empty memory.
+
+### Complete Solution
+```python
+class CalculatorMemory:
+    def __init__(self):
+        self._memory = None
+
+    def store(self, value: float):
+        self._memory = float(value)
+        print(f"Memory stored: {self._memory}")
+
+    def recall(self) -> float:
+        if self._memory is None:
+            raise LookupError("Memory is empty! Store a value first.")
+        return self._memory
+
+    def clear(self):
+        self._memory = None
+        print("Memory cleared.")
+
+mem = CalculatorMemory()
+mem.store(42.5)
+print("Recalled:", mem.recall())
+mem.clear()
+try:
+    mem.recall()
+except LookupError as e:
+    print(f"Caught: {e}")
+```
+
+### Expected Output
+```text
+Memory stored: 42.5
+Recalled: 42.5
+Memory cleared.
+Caught: Memory is empty! Store a value first.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. In this project, why does the calculator avoid using Python's built-in `eval()` function?
 A. `eval()` cannot perform floating point division
@@ -304,3 +383,10 @@ D. `catch`
 **Answer:** C
 **Explanation:** The `else` block executes only if the preceding `try` block completes successfully without raising any exceptions.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Understanding Iterators** (7: Iterators and Generators).
+
+👉 **[Continue to Next Lesson: Understanding Iterators →](/tutorials/python-for-intermediate/understanding-iterators)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-file-exceptions-and-error-handling
+slug: file-exceptions-and-error-handling
+course: python-for-intermediate
+chapter: "4: File Handling Advanced"
+topic: "4.4 File Exceptions and Error Handling"
+title: "File Exceptions and Error Handling in Python"
+description: "Master file exceptions and error handling in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 19
+keywords:
+  - python file exceptions and error handling
+  - python intermediate
+  - python file exceptions and error handling
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # File Exceptions and Error Handling in Python
 
 File operations interact directly with the operating system and physical storage drives, making them inherently prone to runtime exceptions. A file might be missing, locked by another process, lack read/write permissions, or contain an incompatible text encoding. 
@@ -145,7 +166,62 @@ In Python development, there are two distinct design philosophies:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Not Specifying `encoding="utf-8"`
+Relying on platform-default encoding leads to silent corruption or `UnicodeDecodeError` when moving code between Windows (which often defaults to `cp1252`) and Linux (UTF-8). Always declare `encoding="utf-8"`.
+
+### 2. Catching Generic `Exception` Too Early
+Catching `Exception` before specific file exceptions (`FileNotFoundError`, `PermissionError`) hides the root cause. Catch specific errors first, with generic exceptions as a fallback.
+
+---
+
+---
+
+## 💻 Try It Yourself: Resilient File Reader Utility
+
+### Scenario
+Write a utility function `read_file_safe(filepath)` that gracefully handles `FileNotFoundError`, `PermissionError`, and `UnicodeDecodeError` with descriptive error logs without crashing the program.
+
+### Starter Code
+```python
+# TODO: Implement read_file_safe function handling specific file exceptions
+```
+
+### Complete Solution
+```python
+import os
+
+def read_file_safe(filepath):
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        print(f"[ERROR] The file '{filepath}' does not exist.")
+    except PermissionError:
+        print(f"[ERROR] Permission denied to read '{filepath}'.")
+    except UnicodeDecodeError as err:
+        print(f"[ERROR] Encoding mismatch while reading '{filepath}': {err}")
+    except Exception as err:
+        print(f"[UNEXPECTED ERROR] An error occurred: {err}")
+    return None
+
+# Test with a non-existent file
+result = read_file_safe("non_existent_records.txt")
+print("Execution resumed normally without crash.")
+```
+
+### Expected Output
+```text
+[ERROR] The file 'non_existent_records.txt' does not exist.
+Execution resumed normally without crash.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which base class do `FileNotFoundError`, `PermissionError`, and `IsADirectoryError` all inherit from?
 A. `ValueError`
@@ -191,3 +267,10 @@ D. `AttributeError`
 **Answer:** C
 **Explanation:** When bytes in the target stream do not adhere to the expected byte rules of the specified encoding, Python raises `UnicodeDecodeError`.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: CSV Contact Manager** (4: File Handling Advanced).
+
+👉 **[Continue to Next Lesson: Project: CSV Contact Manager →](/tutorials/python-for-intermediate/project-csv-contact-manager)**

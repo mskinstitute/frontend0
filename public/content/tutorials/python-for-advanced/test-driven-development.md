@@ -1,3 +1,24 @@
+---
+id: python-advanced-test-driven-development
+slug: test-driven-development
+course: python-for-advanced
+chapter: "13: Testing & Best Practices"
+topic: "13.4 Test-Driven Development"
+title: "Test-Driven Development in Python"
+description: "Master test-driven development in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 55
+keywords:
+  - python test driven development
+  - python advanced
+  - python test-driven development
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Test-Driven Development (TDD) & Code Quality
 
 Test-Driven Development (TDD) is an established software engineering discipline where tests are written **before** the implementation code. Formulated by Kent Beck, TDD transforms automated tests from an afterthought into a design tool that enforces loose coupling, modularity, and high code quality.
@@ -159,7 +180,56 @@ pytest --cov=rate_limiter --cov-report=term-missing --cov-branch
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Skipping the Red Phase
+Writing production code before writing the failing test often results in tests that pass trivially without actually exercising the required behavior.
+
+### 2. Testing Private Implementation Details
+Write unit tests against public API contracts, not private internal helper methods (`_helper`). Testing private methods creates brittle test suites that break during simple refactoring.
+
+---
+
+---
+
+## 💻 Try It Yourself: Red-Green-Refactor TDD Cycle
+
+### Scenario
+Practice Test-Driven Development by writing a test for a roman numeral converter function before implementing the function itself.
+
+### Complete Solution
+```python
+# 1. Test (Written First)
+def test_to_roman():
+    assert to_roman(1) == "I"
+    assert to_roman(4) == "IV"
+    assert to_roman(9) == "IX"
+    assert to_roman(10) == "X"
+
+# 2. Implementation (Satisfying the Test)
+def to_roman(num: int) -> str:
+    mapping = [(10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]
+    res = []
+    for val, sym in mapping:
+        while num >= val:
+            res.append(sym)
+            num -= val
+    return "".join(res)
+
+test_to_roman()
+print("All TDD Roman Numeral assertions passed successfully!")
+```
+
+### Expected Output
+```text
+All TDD Roman Numeral assertions passed successfully!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What are the three sequential phases of the Test-Driven Development (TDD) cycle?
@@ -225,3 +295,10 @@ D. `--deep-coverage`
 **Explanation:** The `--cov-branch` flag instructs `coverage.py` and `pytest-cov` to measure branch coverage across all conditional statements.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Tested Calculator Application** (13: Testing & Best Practices).
+
+👉 **[Continue to Next Lesson: Project: Tested Calculator Application →](/tutorials/python-for-advanced/project-tested-calculator-application)**

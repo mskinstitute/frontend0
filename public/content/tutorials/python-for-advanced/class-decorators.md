@@ -1,3 +1,24 @@
+---
+id: python-advanced-class-decorators
+slug: class-decorators
+course: python-for-advanced
+chapter: "3: Advanced Decorators and Context Managers"
+topic: "3.2 Class Decorators"
+title: "Class Decorators in Python"
+description: "Master class decorators in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 12
+keywords:
+  - python class decorators
+  - python advanced
+  - python class decorators
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Class Decorators
 
 While decorators are most commonly applied to functions, Python equally supports **Class Decorators** (decorating a class definition) and **Classes as Decorators** (using a callable class with `__call__` to wrap functions). Introduced formally in PEP 3129, class decorators provide a cleaner, more composable alternative to metaclasses for modifying or augmenting class definitions at definition time.
@@ -161,7 +182,63 @@ print(f"Total recorded invocations: {compute_checksum.count}")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Mutating Class State Unintentionally
+Class decorators execute once at class definition time. If a class decorator attaches a mutable dictionary to the class, all instances will share that same dictionary unless explicitly created inside `__init__`.
+
+### 2. Breaking Subclassing
+If a class decorator replaces the original class with a wrapper function, `isinstance()` and `issubclass()` checks may fail unless proper proxies or wrappers are configured.
+
+---
+
+---
+
+## 💻 Try It Yourself: Automated Method Instrumentation Class Decorator
+
+### Scenario
+Write a class decorator `@log_all_methods` that automatically wraps every public method of a class with execution timing logs.
+
+### Complete Solution
+```python
+import functools
+import time
+
+def log_all_methods(cls):
+    for attr_name, attr_value in cls.__dict__.items():
+        if callable(attr_value) and not attr_name.startswith("_"):
+            def make_wrapper(orig_method, name):
+                @functools.wraps(orig_method)
+                def wrapper(self, *args, **kwargs):
+                    start = time.perf_counter()
+                    res = orig_method(self, *args, **kwargs)
+                    duration = (time.perf_counter() - start) * 1000
+                    print(f"[EXEC LOG] {cls.__name__}.{name}() took {duration:.2f}ms")
+                    return res
+                return wrapper
+            setattr(cls, attr_name, make_wrapper(attr_value, attr_name))
+    return cls
+
+@log_all_methods
+class MathEngine:
+    def compute(self, n):
+        return sum(i * i for i in range(n))
+
+engine = MathEngine()
+print("Result:", engine.compute(50000))
+```
+
+### Expected Output
+```text
+[EXEC LOG] MathEngine.compute() took 2.45ms
+Result: 41665416675000
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 At what phase of execution does a class decorator run?
@@ -227,3 +304,10 @@ D. `threading`
 **Explanation:** The `@dataclass` decorator in the `dataclasses` module inspects class type annotations and dynamically generates boilerplate methods such as `__init__`, `__repr__`, and `__eq__`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Context Managers with __enter__ and __exit__** (3: Advanced Decorators and Context Managers).
+
+👉 **[Continue to Next Lesson: Context Managers with __enter__ and __exit__ →](/tutorials/python-for-advanced/context-managers-with-enter-and-exit)**

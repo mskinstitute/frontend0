@@ -1,3 +1,24 @@
+---
+id: python-advanced-process-vs-thread
+slug: process-vs-thread
+course: python-for-advanced
+chapter: "7: Multiprocessing in Python"
+topic: "7.2 Process vs Thread"
+title: "Process vs Thread in Python"
+description: "Master process vs thread in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 29
+keywords:
+  - python process vs thread
+  - python advanced
+  - python process vs thread
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Process vs Thread: Deep Architectural Comparison
 
 Choosing the appropriate concurrency model is one of the most critical engineering decisions in systems programming. In Python, the choice between **Threads** (`threading`) and **Processes** (`multiprocessing`) impacts memory footprint, throughput, fault tolerance, and developer ergonomics.
@@ -165,7 +186,50 @@ Use this systematic checklist when architecting Python systems:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Modifying Global Variables in Child Processes
+Processes have completely isolated virtual memory spaces. Modifying a global variable inside a child process has zero effect on the parent process's global variable! Use `Value`, `Array`, or `Queue` for IPC.
+
+### 2. High Memory Footprint
+Each process duplicates Python interpreter runtime memory. Spawning 32 processes on a 16 GB machine running heavy libraries like NumPy can easily trigger system out-of-memory crashes.
+
+---
+
+---
+
+## 💻 Try It Yourself: Benchmarking CPU-Bound Workload
+
+### Scenario
+Compare execution time of heavy CPU calculations using a single thread vs a `multiprocessing.Process` pool to observe the multi-core speedup.
+
+### Complete Solution
+```python
+import time
+import multiprocessing
+
+def cpu_heavy(n):
+    return sum(i * i for i in range(n))
+
+if __name__ == "__main__":
+    tasks = [10_000_000, 10_000_000]
+    
+    start = time.perf_counter()
+    with multiprocessing.Pool(processes=2) as pool:
+        pool.map(cpu_heavy, tasks)
+    print(f"Parallel multiprocessing took: {time.perf_counter() - start:.2f}s")
+```
+
+### Expected Output
+```text
+Parallel multiprocessing took: 0.52s
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What occurs at the operating system level during a process context switch that makes it significantly more expensive than a thread context switch?
@@ -231,3 +295,10 @@ D. Through global environment variables.
 **Explanation:** Because processes have isolated virtual memory spaces, Python serializes data objects using the `pickle` protocol and sends the bytes through operating system pipes or sockets.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Shared Memory & Queues** (7: Multiprocessing in Python).
+
+👉 **[Continue to Next Lesson: Shared Memory & Queues →](/tutorials/python-for-advanced/shared-memory-queues)**

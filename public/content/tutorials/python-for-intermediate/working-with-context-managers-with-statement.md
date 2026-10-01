@@ -16,9 +16,9 @@ keywords:
   - exception suppression
   - database transaction
   - resource management
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Advanced Context Managers: Custom Classes, contextlib, and Exception Suppression
@@ -246,56 +246,6 @@ Outside block cwd: D:\Sumit\MSK-Institute-Website
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What parameters does the __exit__ method of a context manager receive?
-A. Only `self`
-B. `self, exc_type, exc_val, exc_tb`
-C. `self, *args, **kwargs`
-D. `self, status_code`
-**Answer:** B
-**Explanation:** When exiting a `with` block, Python passes four arguments to `__exit__`: the instance reference (`self`), the exception class (`exc_type`), the exception value (`exc_val`), and the traceback object (`exc_tb`). If no error occurred, the latter three are `None`.
-
----
-
-### 2. How can a custom context manager suppress an exception that was raised inside its with block?
-A. By raising a KeyboardInterrupt
-B. By explicitly returning True from its `__exit__()` method
-C. By deleting the traceback object
-D. Exceptions inside with blocks cannot be suppressed
-**Answer:** B
-**Explanation:** If `__exit__()` evaluates to a truthy value (specifically `True`), Python suppresses the exception and resumes normal execution immediately after the `with` block.
-
----
-
-### 3. In a generator decorated with @contextlib.contextmanager, where must the cleanup code be placed?
-A. Before the `yield` statement
-B. In a `finally` block following the `yield` statement
-C. In a separate `.txt` file
-D. Outside the generator function
-**Answer:** B
-**Explanation:** Placing cleanup code in a `finally` block guarantees that teardown occurs even if the user code executed during `yield` raises an uncaught exception.
-
----
-
-### 4. What is the value bound to the variable target in with MyManager() as target:?
-A. The `MyManager()` instance itself always
-B. Whatever object is returned by the `__enter__()` method of `MyManager`
-C. The boolean `True`
-D. None
-**Answer:** B
-**Explanation:** In `with ContextManager() as alias:`, `alias` is bound strictly to the return value of `__enter__()`, which can be `self`, an opened file, a database connection, or any arbitrary object.
-
----
-
-### 5. What does the standard library context manager contextlib.suppress(FileNotFoundError) accomplish?
-A. Prevents files from being deleted
-B. Ignores and swallows FileNotFoundError if it occurs inside the block, allowing execution to continue without crashing
-C. Creates an empty file if missing
-D. Throws a warning
-**Answer:** B
-**Explanation:** `contextlib.suppress(*exceptions)` is a built-in context manager that silences specified non-fatal exceptions, replacing cumbersome `try...except FileNotFoundError: pass` blocks.
-
 ---
 
 # Practice Challenge
@@ -395,3 +345,62 @@ File Content After Crash (Verified Uncorrupted):
 database_host=db.mumbai.msk.internal
 port=5432
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What parameters does the __exit__ method of a context manager receive?
+A. Only `self`
+B. `self, exc_type, exc_val, exc_tb`
+C. `self, *args, **kwargs`
+D. `self, status_code`
+**Answer:** B
+**Explanation:** When exiting a `with` block, Python passes four arguments to `__exit__`: the instance reference (`self`), the exception class (`exc_type`), the exception value (`exc_val`), and the traceback object (`exc_tb`). If no error occurred, the latter three are `None`.
+
+---
+
+### 2. How can a custom context manager suppress an exception that was raised inside its with block?
+A. By raising a KeyboardInterrupt
+B. By explicitly returning True from its `__exit__()` method
+C. By deleting the traceback object
+D. Exceptions inside with blocks cannot be suppressed
+**Answer:** B
+**Explanation:** If `__exit__()` evaluates to a truthy value (specifically `True`), Python suppresses the exception and resumes normal execution immediately after the `with` block.
+
+---
+
+### 3. In a generator decorated with @contextlib.contextmanager, where must the cleanup code be placed?
+A. Before the `yield` statement
+B. In a `finally` block following the `yield` statement
+C. In a separate `.txt` file
+D. Outside the generator function
+**Answer:** B
+**Explanation:** Placing cleanup code in a `finally` block guarantees that teardown occurs even if the user code executed during `yield` raises an uncaught exception.
+
+---
+
+### 4. What is the value bound to the variable target in with MyManager() as target:?
+A. The `MyManager()` instance itself always
+B. Whatever object is returned by the `__enter__()` method of `MyManager`
+C. The boolean `True`
+D. None
+**Answer:** B
+**Explanation:** In `with ContextManager() as alias:`, `alias` is bound strictly to the return value of `__enter__()`, which can be `self`, an opened file, a database connection, or any arbitrary object.
+
+---
+
+### 5. What does the standard library context manager contextlib.suppress(FileNotFoundError) accomplish?
+A. Prevents files from being deleted
+B. Ignores and swallows FileNotFoundError if it occurs inside the block, allowing execution to continue without crashing
+C. Creates an empty file if missing
+D. Throws a warning
+**Answer:** B
+**Explanation:** `contextlib.suppress(*exceptions)` is a built-in context manager that silences specified non-fatal exceptions, replacing cumbersome `try...except FileNotFoundError: pass` blocks.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Reading & Writing CSV Files** (4: File Handling Advanced).
+
+👉 **[Continue to Next Lesson: Reading & Writing CSV Files →](/tutorials/python-for-intermediate/reading-writing-csv-files)**

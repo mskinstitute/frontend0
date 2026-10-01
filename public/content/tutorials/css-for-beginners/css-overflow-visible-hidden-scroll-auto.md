@@ -16,9 +16,9 @@ keywords:
   - overflow scroll
   - scrollable container
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # CSS Overflow: Handling Content Spills with Visible, Hidden, Scroll, and Auto
@@ -205,7 +205,7 @@ pre.code-block {
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS overflow value automatically displays a scrollbar ONLY when content exceeds the container's boundaries?
 A. `overflow: scroll;`
@@ -213,7 +213,6 @@ B. `overflow: visible;`
 C. `overflow: auto;`
 D. `overflow: clip;`
 **Answer:** C
-**Explanation:** `overflow: auto;` is dynamic: it keeps the box clean when content fits, and adds scrollbars only when content spills over.
 
 ---
 
@@ -223,7 +222,6 @@ B. No scrollbar appears because the container simply expands vertically to fit a
 C. The text turns into an image
 D. The text is automatically truncated with an ellipsis
 **Answer:** B
-**Explanation:** Standard block elements expand in height to accommodate their inner children. Without a height constraint, the box never experiences vertical overflow.
 
 ---
 
@@ -233,7 +231,6 @@ B. To prevent the enlarged image corners from spilling outside the card's rounde
 C. Because images cannot display without `overflow: hidden;`
 D. To convert the image into a grayscale photo
 **Answer:** B
-**Explanation:** When an image inside a rounded card scales up on hover, `overflow: hidden;` clips the image at the card's rounded boundary.
 
 ---
 
@@ -243,7 +240,6 @@ B. It forces permanent scrollbar tracks to display even when there is plenty of 
 C. It only works on Linux operating systems
 D. It deletes the container's background color
 **Answer:** B
-**Explanation:** `overflow: scroll;` forces scrollbars to appear at all times, resulting in disabled, unsightly scrollbar tracks when content easily fits.
 
 ---
 
@@ -253,7 +249,6 @@ B. `overflow: vertical-only;`
 C. `overflow-x: scroll; overflow-y: none;`
 D. `direction: vertical;`
 **Answer:** A
-**Explanation:** `overflow-y: auto;` handles vertical scrolling as messages arrive, while `overflow-x: hidden;` prevents awkward sideways scrolling.
 
 ---
 
@@ -386,3 +381,10 @@ D. `direction: vertical;`
    </html>
    ```
 3. Open this file in your browser to test scrolling through the notices and hovering over the zoom banner! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **CSS Positioning: Static, Relative, and Absolute Explained** (Introduction to Positioning).
+
+👉 **[Continue to Next Lesson: CSS Positioning: Static, Relative, and Absolute Explained →](/tutorials/css-for-beginners/position-static-relative-absolute)**

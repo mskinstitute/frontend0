@@ -1,3 +1,24 @@
+---
+id: python-advanced-introduction-to-dunder-methods
+slug: introduction-to-dunder-methods
+course: python-for-advanced
+chapter: "2: Magic Methods & Operator Overloading"
+topic: "2.1 Introduction to Dunder Methods"
+title: "Introduction to Dunder Methods in Python"
+description: "Master introduction to dunder methods in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 11
+order: 6
+keywords:
+  - python introduction to dunder methods
+  - python advanced
+  - python introduction to dunder methods
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Introduction to Dunder Methods
 
 Special methods in Python—widely referred to as **dunder methods** (short for "double underscore" methods) or **magic methods**—are the foundational building blocks of the Python Data Model. They allow user-defined classes to hook directly into the Python language runtime, enabling instances to exhibit native behaviors such as iteration, context management, indexing, slicing, callable invocation, arithmetic operations, and string representation.
@@ -206,7 +227,60 @@ Python organizes dunder methods into distinct functional protocols:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Invoking Dunder Methods Directly
+Never call `obj.__len__()` or `obj.__str__()` directly in application code. Always use Python's built-in functions: `len(obj)` and `str(obj)`, which leverage optimized C-level slots in CPython.
+
+### 2. Confusing `__new__` with `__init__`
+- `__new__(cls, ...)`: The actual allocator that creates and returns a new instance object.
+- `__init__(self, ...)`: The initializer that populates instance attributes after creation.
+
+---
+
+---
+
+## 💻 Try It Yourself: Singleton Pattern with __new__
+
+### Scenario
+Implement a thread-safe `DatabaseConnectionPool` that enforces the **Singleton pattern** using `__new__`, guaranteeing that only one instance ever exists in memory.
+
+### Complete Solution
+```python
+class DatabaseConnectionPool:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            print("Allocating single database connection pool instance...")
+            cls._instance = super().__new__(cls)
+            cls._instance._initialized = False
+        return cls._instance
+
+    def __init__(self, max_connections: int = 10):
+        if not self._initialized:
+            self.max_connections = max_connections
+            self._initialized = True
+
+pool1 = DatabaseConnectionPool(20)
+pool2 = DatabaseConnectionPool(50)
+
+print("Are pool1 and pool2 the identical instance?", pool1 is pool2)
+print("Configured connections:", pool1.max_connections)
+```
+
+### Expected Output
+```text
+Allocating single database connection pool instance...
+Are pool1 and pool2 the identical instance? True
+Configured connections: 20
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 Which dunder method is the actual allocator responsible for creating and returning a new instance in memory before initialization?
@@ -272,3 +346,10 @@ D. Calling `del obj` always deletes the object instantly regardless of remaining
 **Explanation:** Python's garbage collector does not guarantee prompt invocation of `__del__`, especially in the presence of circular references or sudden program termination. Context managers (`with` statements) should be used for deterministic cleanup.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **__str__, __repr__, __len__** (2: Magic Methods & Operator Overloading).
+
+👉 **[Continue to Next Lesson: __str__, __repr__, __len__ →](/tutorials/python-for-advanced/str-repr-len)**

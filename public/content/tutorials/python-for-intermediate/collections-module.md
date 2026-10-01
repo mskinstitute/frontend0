@@ -1,3 +1,24 @@
+---
+id: python-intermediate-collections-module
+slug: collections-module
+course: python-for-intermediate
+chapter: "10: Python Standard Libraries"
+topic: "10.3 Collections Module"
+title: "Collections Module in Python"
+description: "Master collections module in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 48
+keywords:
+  - python collections module
+  - python intermediate
+  - python collections module
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # The Collections Module in Python
 
 Python's built-in general-purpose containers—`dict`, `list`, `set`, and `tuple`—are versatile, but certain high-performance algorithmic tasks demand specialized data structures. The **`collections`** module provides high-performance container alternatives that eliminate boilerplate and dramatically optimize time complexity.
@@ -134,7 +155,55 @@ print(dict(word_counts))
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Modifying a `defaultdict` via Read Operations
+Accessing a missing key in a `defaultdict` automatically creates that key with the default factory! If you only want to inspect without inserting, use standard `.get()` or `in`.
+
+### 2. Mutating `namedtuple` Attributes
+`namedtuple` instances are immutable, just like standard tuples. Attempting to reassign an attribute directly raises an `AttributeError`. Use `._replace()` to create a modified copy.
+
+---
+
+---
+
+## 💻 Try It Yourself: Word Frequency Counter with Counter
+
+### Scenario
+Use `collections.Counter` to parse a paragraph of text, eliminate punctuation, and display the top 3 most frequently occurring words.
+
+### Complete Solution
+```python
+from collections import Counter
+import re
+
+text = """
+Python is high-level, interpreted, and powerful. Python is widely used in data science,
+machine learning, and web development. Learning Python opens infinite programming doors.
+"""
+
+# Extract clean words
+words = re.findall(r"w+", text.lower())
+counter = Counter(words)
+
+print("Top 3 most frequent words:")
+for word, count in counter.most_common(3):
+    print(f"- '{word}': {count} occurrences")
+```
+
+### Expected Output
+```text
+Top 3 most frequent words:
+- 'python': 3 occurrences
+- 'and': 3 occurrences
+- 'is': 2 occurrences
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the time complexity of removing an item from the beginning of a `collections.deque` using `popleft()`?
 A. $O(n)$
@@ -180,3 +249,10 @@ D. The new element is rejected
 **Answer:** B
 **Explanation:** When a bounded `deque` with `maxlen` is full, appending an item to one end automatically evicts an item from the opposite end.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **OS and Sys Modules** (10: Python Standard Libraries).
+
+👉 **[Continue to Next Lesson: OS and Sys Modules →](/tutorials/python-for-intermediate/os-and-sys-modules)**

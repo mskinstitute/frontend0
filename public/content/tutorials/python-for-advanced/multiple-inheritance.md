@@ -1,3 +1,24 @@
+---
+id: python-advanced-multiple-inheritance
+slug: multiple-inheritance
+course: python-for-advanced
+chapter: "1: Advanced OOP Concepts"
+topic: "1.4 Multiple Inheritance"
+title: "Multiple Inheritance in Python"
+description: "Master multiple inheritance in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 4
+keywords:
+  - python multiple inheritance
+  - python advanced
+  - python multiple inheritance
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Multiple Inheritance and Mixin Architecture in Python
 
 Python is one of the few mainstream programming languages that supports **Multiple Inheritance** natively. When used judiciously, multiple inheritance enables elegant architectural patterns such as **Mixins**—small, modular classes that inject specialized capabilities into diverse class hierarchies without duplicating code.
@@ -138,7 +159,61 @@ print(f"SKU: {item.sku} | Name: {item.name} | Price: ₹{item.value:,.2f}")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Stateful Mixins Causing Attribute Shadowing
+Mixins should provide reusable behavior (methods), not complex instance state. When mixins initialize attributes with common names (like `self.data`), they can silently overwrite the host class state.
+
+### 2. Incorrect Mixin Inheritance Order
+Python resolves inheritance from left to right. Place mixin classes before base classes in the class definition (`class MyService(LoggingMixin, BaseService):`) so mixin method overrides take precedence.
+
+---
+
+---
+
+## 💻 Try It Yourself: Reusable JSON and Logging Mixins
+
+### Scenario
+Build two independent, stateless mixins: `JSONSerializableMixin` and `TimestampedAuditMixin`. Combine them onto a `UserRecord` domain entity.
+
+### Complete Solution
+```python
+import json
+from datetime import datetime
+
+class JSONSerializableMixin:
+    def to_json(self) -> str:
+        return json.dumps(self.__dict__, default=str, indent=2)
+
+class TimestampedAuditMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+class UserRecord(JSONSerializableMixin, TimestampedAuditMixin):
+    def __init__(self, username: str, email: str):
+        self.username = username
+        self.email = email
+        super().__init__()
+
+user = UserRecord("aarav_sharma", "aarav@msk.in")
+print(user.to_json())
+```
+
+### Expected Output
+```text
+{
+  "username": "aarav_sharma",
+  "email": "aarav@msk.in",
+  "created_at": "2026-10-01 14:00:00"
+}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary purpose of a Mixin class in Python?
 A. To serve as a root replacement for `object`
@@ -184,3 +259,10 @@ D. Whichever class was modified most recently
 **Answer:** B
 **Explanation:** Python checks classes in MRO sequence (`C` -> `A` -> `B`); since `A` is listed first, its implementation takes precedence.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Employee Management System** (1: Advanced OOP Concepts).
+
+👉 **[Continue to Next Lesson: Project: Employee Management System →](/tutorials/python-for-advanced/project-employee-management-system)**

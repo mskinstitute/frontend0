@@ -16,9 +16,9 @@ keywords:
   - css combinators
   - dry principle
   - css selectors basics
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Grouping and Combinator Selectors
@@ -223,7 +223,7 @@ If you forget the comma when grouping, the browser thinks you are using a descen
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -233,7 +233,6 @@ B. Comma (`,`)
 C. Plus sign (`+`)
 D. Asterisk (`*`)
 **Answer:** B
-**Explanation:** A comma (`,`) is used to separate multiple selectors in a group (e.g., `h1, h2, h3 { color: navy; }`).
 
 ---
 
@@ -243,7 +242,6 @@ B. Select all `<p>` elements that are inside a `<div>`
 C. Select all `<div>` elements that have class `p`
 D. Select `<p>` elements that immediately follow a `<div>`
 **Answer:** B
-**Explanation:** The space is the descendant combinator. `div p` targets every `<p>` element located anywhere inside a `<div>` container.
 
 ---
 
@@ -253,7 +251,6 @@ B. `section p` matches any `<p>` inside `<section>` at any depth, while `section
 C. There is no difference; they are completely interchangeable
 D. `section > p` is invalid CSS syntax
 **Answer:** B
-**Explanation:** The child combinator (`>`) strictly selects direct (immediate) children, whereas the space combinator selects descendants at any level of nesting.
 
 ---
 
@@ -263,7 +260,6 @@ B. Don't Repeat Yourself
 C. Document Real Yield
 D. Data Rendering Yield
 **Answer:** B
-**Explanation:** DRY stands for "Don't Repeat Yourself". Grouping CSS selectors is a key way to keep stylesheets DRY and prevent duplicated rules.
 
 ---
 
@@ -273,7 +269,6 @@ B. The trailing comma after `h2` makes the selector list invalid
 C. Headings cannot be red
 D. Braces `{ }` are not allowed after a comma
 **Answer:** B
-**Explanation:** A trailing comma creates an incomplete selector in the group, causing the browser to consider the entire rule set invalid.
 
 ---
 
@@ -340,3 +335,10 @@ D. Braces `{ }` are not allowed after a comma
    - All headings share the dark slate color from one grouped rule.
    - The navigation links are styled bold and blue without underline, but the documentation link at the bottom retains its default underline because it is not inside `.nav-bar`.
    - The list items are styled emerald green using the direct child combinator! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Color Formats: Names, HEX, RGB, and HSL** (Colors and Backgrounds).
+
+👉 **[Continue to Next Lesson: Color Formats: Names, HEX, RGB, and HSL →](/tutorials/css-for-beginners/color-formats-names-hex-rgb-hsl)**

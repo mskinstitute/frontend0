@@ -16,9 +16,9 @@ keywords:
   - pill button
   - 4-corner border radius
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Border Radius: Rounded Corners, Pills, and Circular Avatars
@@ -212,7 +212,7 @@ Have you ever created a card with `border-radius: 16px`, placed an image at the 
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -222,7 +222,6 @@ B. `border-radius: 50%;`
 C. `border-shape: round;`
 D. `border-radius: 100px;`
 **Answer:** B
-**Explanation:** When applied to an element with equal width and height, `border-radius: 50%` curves all corners completely, forming a perfect circle.
 
 ---
 
@@ -232,7 +231,6 @@ B. An oval / ellipse
 C. A square
 D. A triangle
 **Answer:** B
-**Explanation:** If width and height are unequal, a 50% radius produces an oval (egg) shape rather than a circular avatar.
 
 ---
 
@@ -242,7 +240,6 @@ B. `border-radius: 2px;`
 C. `border-style: pill;`
 D. `border-width: 50%;`
 **Answer:** A
-**Explanation:** A very high border-radius value like `9999px` (or `50px`) curves the shorter ends into perfect semicircles, creating a pill button.
 
 ---
 
@@ -252,7 +249,6 @@ B. Top-Left
 C. Bottom-Right
 D. Bottom-Left
 **Answer:** B
-**Explanation:** The 4-value border-radius shorthand starts at the Top-Left corner and proceeds clockwise: Top-Left, Top-Right, Bottom-Right, Bottom-Left.
 
 ---
 
@@ -262,7 +258,6 @@ B. Child elements do not automatically clip to parent curves; add `overflow: hid
 C. The image is in PNG format; change it to JPEG
 D. Increase the border-width to 50px
 **Answer:** B
-**Explanation:** Adding `overflow: hidden;` to the parent container instructs the browser to clip all child contents (including header images) strictly within the parent's rounded boundary.
 
 ---
 
@@ -357,3 +352,10 @@ D. Increase the border-width to 50px
    </html>
    ```
 4. Open the file in your browser to admire how the card, circle, pill, and speech bubble all demonstrate the versatility of `border-radius`! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Box Shadows and Text Shadows: Depth and Elevation** (Borders, Shadows and Rounded Corners).
+
+👉 **[Continue to Next Lesson: Box Shadows and Text Shadows: Depth and Elevation →](/tutorials/css-for-beginners/box-shadows-and-text-shadows)**

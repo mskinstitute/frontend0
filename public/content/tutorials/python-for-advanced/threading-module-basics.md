@@ -1,3 +1,24 @@
+---
+id: python-advanced-threading-module-basics
+slug: threading-module-basics
+course: python-for-advanced
+chapter: "6: Multithreading in Python"
+topic: "6.1 Threading Module Basics"
+title: "Threading Module Basics in Python"
+description: "Master threading module basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 24
+keywords:
+  - python threading module basics
+  - python advanced
+  - python threading module basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Threading Module Basics
 
 Concurrency is the composition of independently executing computations. In Python, the `threading` module provides high-level primitives for creating and managing native operating system threads. Understanding how Python threads interact with system hardware and the CPython runtime is essential for designing high-performance, responsive applications.
@@ -176,7 +197,57 @@ print(f"Concurrent Thread I/O Duration: {thr_duration:.3f}s (Speedup: {seq_durat
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Expecting CPU-Bound Speedups with Threading
+Due to CPython's Global Interpreter Lock (GIL), multi-threaded CPU-bound calculations will not run faster on multi-core processors. Use `multiprocessing` for CPU-bound tasks and `threading` for I/O-bound tasks.
+
+### 2. Race Conditions on Unprotected Shared Variables
+Even simple operations like `counter += 1` compile into multiple bytecode instructions (`LOAD_FAST`, `INPLACE_ADD`, `STORE_FAST`) that can be interrupted by thread context switching. Always synchronize with a `Lock`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Concurrent Web Status Checker
+
+### Scenario
+Use Python's `threading.Thread` to check the responsiveness of multiple web hostnames concurrently, measuring total execution time vs sequential execution.
+
+### Complete Solution
+```python
+import threading
+import time
+
+def check_host(hostname, delay):
+    time.sleep(delay)
+    print(f"[{hostname}] Responsive (Latency: {delay:.2f}s)")
+
+hosts = [("api.service-a.com", 0.3), ("auth.service-b.com", 0.5), ("db.service-c.com", 0.2)]
+
+start = time.perf_counter()
+threads = [threading.Thread(target=check_host, args=(host, d)) for host, d in hosts]
+for t in threads:
+    t.start()
+for t in threads:
+    t.join()
+
+print(f"Concurrent check finished in {time.perf_counter() - start:.2f}s (vs 1.00s sequential)!")
+```
+
+### Expected Output
+```text
+[db.service-c.com] Responsive (Latency: 0.20s)
+[api.service-a.com] Responsive (Latency: 0.30s)
+[auth.service-b.com] Responsive (Latency: 0.50s)
+Concurrent check finished in 0.51s (vs 1.00s sequential)!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the primary constraint imposed by the Global Interpreter Lock (GIL) on Python threads in CPython?
@@ -242,3 +313,10 @@ D. `main()`
 **Explanation:** In a custom subclass of `threading.Thread`, the `run()` method contains the code that will be executed once the thread is started via `.start()`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Thread Synchronization** (6: Multithreading in Python).
+
+👉 **[Continue to Next Lesson: Thread Synchronization →](/tutorials/python-for-advanced/thread-synchronization)**

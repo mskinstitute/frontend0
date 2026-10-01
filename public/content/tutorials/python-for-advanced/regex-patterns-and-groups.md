@@ -1,3 +1,24 @@
+---
+id: python-advanced-regex-patterns-and-groups
+slug: regex-patterns-and-groups
+course: python-for-advanced
+chapter: "11: Regular Expressions Advanced"
+topic: "11.1 Regex Patterns and Groups"
+title: "Regex Patterns and Groups in Python"
+description: "Master regex patterns and groups in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 44
+keywords:
+  - python regex patterns and groups
+  - python advanced
+  - python regex patterns and groups
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Regex Patterns and Groups
 
 Regular expressions (regex) provide a domain-specific language for string pattern matching, parsing, and data validation. In Python, the `re` module interfaces with an optimized C-level backtracking regex engine.
@@ -144,7 +165,58 @@ if match:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Catastrophic Backtracking
+Nesting greedy quantifiers like `(a+)+$` on non-matching strings causes exponential backtracking complexity, freezing the Python interpreter. Use non-greedy quantifiers or possessive atomic groupings.
+
+### 2. Accessing Groups Without Match Checks
+Calling `match.group(1)` when `re.search()` returned `None` raises an `AttributeError: 'NoneType' object has no attribute 'group'`. Always check `if match:` first.
+
+---
+
+---
+
+## 💻 Try It Yourself: Named Capture Groups for Log Parsing
+
+### Scenario
+Parse a structured Apache web server log line using named capture groups (`(?P<name>...)`), cleanly extracting client IP, timestamp, method, and HTTP status code.
+
+### Complete Solution
+```python
+import re
+
+log_line = '192.168.1.50 - - [01/Oct/2026:14:32:10 +0530] "POST /api/login HTTP/1.1" 200 4821'
+pattern = re.compile(
+    r'(?P<ip>d+.d+.d+.d+)s+-s+-s+'
+    r'[(?P<timestamp>[^]]+)]s+'
+    r'"(?P<method>[A-Z]+)s+(?P<path>[^s]+)s+[^"]+"s+'
+    r'(?P<status>d{3})'
+)
+
+match = pattern.search(log_line)
+if match:
+    data = match.groupdict()
+    print("Parsed Log Entity:")
+    for k, v in data.items():
+        print(f"- {k:<10}: {v}")
+```
+
+### Expected Output
+```text
+Parsed Log Entity:
+- ip        : 192.168.1.50
+- timestamp : 01/Oct/2026:14:32:10 +0530
+- method    : POST
+- path      : /api/login
+- status    : 200
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What is the primary operational difference between `(abc)` and `(?:abc)` in a regular expression?
@@ -210,3 +282,10 @@ D. `re.DEBUG`
 **Explanation:** `re.VERBOSE` (or `re.X`) instructs the regex engine to ignore whitespace (except when escaped or inside character classes) and treat text following `#` as comments.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Greedy vs Non-Greedy Matching** (11: Regular Expressions Advanced).
+
+👉 **[Continue to Next Lesson: Greedy vs Non-Greedy Matching →](/tutorials/python-for-advanced/greedy-vs-non-greedy-matching)**

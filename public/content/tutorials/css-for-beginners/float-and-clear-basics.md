@@ -16,9 +16,9 @@ keywords:
   - text wrap image
   - flow-root
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Float and Clear Basics: Wrapping Text Around Images and Legacy Layouts
@@ -194,7 +194,7 @@ Today:
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. What was the original design purpose of the CSS `float` property?
 A. To create 3D video game animations
@@ -202,7 +202,6 @@ B. To wrap paragraph text around images and illustrations like in print magazine
 C. To connect a website to cloud servers
 D. To change text color dynamically
 **Answer:** B
-**Explanation:** `float` was created to mimic print editorial layouts where text flows smoothly around images or pull-quotes.
 
 ---
 
@@ -212,7 +211,6 @@ B. The parent container collapses to 0 height because floated elements are remov
 C. The parent turns red
 D. The webpage refuses to open
 **Answer:** B
-**Explanation:** Because floated children are removed from the standard vertical document flow, the parent container cannot calculate their height and collapses.
 
 ---
 
@@ -222,7 +220,6 @@ B. `display: flow-root;`
 C. `float: parent;`
 D. `overflow: initial;`
 **Answer:** B
-**Explanation:** `display: flow-root;` creates a new Block Formatting Context (BFC) that contains all floated children without hacky pseudo-elements.
 
 ---
 
@@ -232,7 +229,6 @@ B. It ensures the element renders below any preceding left-floated or right-floa
 C. It floats the element to both left and right simultaneously
 D. It resets all browser cache
 **Answer:** B
-**Explanation:** `clear: both;` forces the element to drop down until it is past the bottom edge of any floated elements on either side.
 
 ---
 
@@ -242,7 +238,6 @@ B. Modern layout tools like Flexbox and CSS Grid are far more robust, predictabl
 C. `float` increases internet data bills
 D. `float` only works on desktop monitors
 **Answer:** B
-**Explanation:** Flexbox and Grid offer native alignment, gap spacing, and 1D/2D layout control without the height collapse issues of float.
 
 ---
 
@@ -361,3 +356,10 @@ D. `float` only works on desktop monitors
    </html>
    ```
 3. Open this file in your browser to see how cleanly the text wraps around the trophy photo box, and notice how the author line clears below the photo! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Aligning Elements: Mastering text-align, margin auto, and Centering Tricks** (Basic Layout Techniques).
+
+👉 **[Continue to Next Lesson: Aligning Elements: Mastering text-align, margin auto, and Centering Tricks →](/tutorials/css-for-beginners/aligning-elements-text-align-and-margin)**

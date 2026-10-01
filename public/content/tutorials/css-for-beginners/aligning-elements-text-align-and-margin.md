@@ -16,9 +16,9 @@ keywords:
   - center block element
   - horizontal alignment
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Aligning Elements: Mastering text-align, margin auto, and Centering Tricks
@@ -207,7 +207,7 @@ If a button or pill badge has a fixed height, setting `line-height` equal to tha
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS property and value centers a 400px wide card `<div>` horizontally on the screen?
 A. `text-align: center;` on the card
@@ -215,7 +215,6 @@ B. `margin: 0 auto;` on the card
 C. `float: center;`
 D. `align: middle;`
 **Answer:** B
-**Explanation:** `margin: 0 auto;` calculates equal left and right margins for a block element with a defined width, placing it squarely in the center of its container.
 
 ---
 
@@ -225,7 +224,6 @@ B. Nothing visible happens because block elements default to 100% width, leaving
 C. The browser console logs a syntax error
 D. The text inside becomes italic
 **Answer:** B
-**Explanation:** Standard block elements fill 100% of their parent width. For `auto` margins to calculate spacing, the element must be narrower than its parent (via `width` or `max-width`).
 
 ---
 
@@ -235,7 +233,6 @@ B. On the parent header container
 C. In the HTML `<head>` tag
 D. On the browser scrollbar
 **Answer:** B
-**Explanation:** `text-align: center;` is an inherited property that must be applied to the parent container to center all inline and inline-block children inside it.
 
 ---
 
@@ -245,7 +242,6 @@ B. Because `margin: auto` only calculates horizontal spacing for block-level ele
 C. Because `<span>` tags are deprecated
 D. Because links only center if they point to Google
 **Answer:** B
-**Explanation:** Inline elements only occupy the space required for their text letters. To use `margin: 0 auto;`, you must first convert the element to `display: block;`.
 
 ---
 
@@ -255,7 +251,6 @@ B. `margin: 0 auto;` on the image itself
 C. `float: middle;`
 D. `image-position: center;`
 **Answer:** B
-**Explanation:** Once an image is transformed into a block element with an explicit width, applying `margin: 0 auto;` centers the image box directly.
 
 ---
 
@@ -374,3 +369,10 @@ D. `image-position: center;`
    </html>
    ```
 3. Open this file in your browser and resize the window to watch the card stay perfectly centered on the screen while the banner text flows naturally! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Intro to Flexbox: The Modern 1D Layout Powerhouse** (Basic Layout Techniques).
+
+👉 **[Continue to Next Lesson: Intro to Flexbox: The Modern 1D Layout Powerhouse →](/tutorials/css-for-beginners/intro-to-flexbox-basics)**

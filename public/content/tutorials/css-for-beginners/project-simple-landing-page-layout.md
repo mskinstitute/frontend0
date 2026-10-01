@@ -16,9 +16,9 @@ keywords:
   - hero section
   - container pattern
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Project 2: Simple School Club Landing Page
@@ -462,7 +462,17 @@ Create a file named `school-club-landing-page.html` in your editor and paste the
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Beginner Project Production Best Practices
+
+1. **Avoid Rigid Pixel Heights:** Let containers grow organically with their content using padding rather than hardcoding `height: 400px`.
+2. **Add Smooth Transitions to Hover States:** Always include `transition: all 0.2s ease;` on interactive buttons and cards to avoid jarring visual jumps.
+3. **Keep Accessible Contrast:** Ensure text colors maintain a high contrast ratio against backgrounds (minimum 4.5:1 for standard body text).
+
+---
+
+## Practice Quiz
 
 ### 1. What is the main purpose of the `.container { max-width: 1100px; margin: 0 auto; }` pattern?
 A. To prevent web content from stretching uncontrollably across ultra-wide monitors and center it neatly on the screen
@@ -470,7 +480,6 @@ B. To delete all HTML headings
 C. To force the browser into full-screen mode
 D. To download Google Fonts automatically
 **Answer:** A
-**Explanation:** The container pattern restricts content to a maximum comfortable reading width (e.g. 1100px) and centers the layout using `margin: 0 auto;`.
 
 ---
 
@@ -480,7 +489,6 @@ B. By adding a blue image
 C. By typing a blue pipe symbol `|`
 D. Using `text-decoration: left-stripe;`
 **Answer:** A
-**Explanation:** The single-sided border property `border-left` creates a solid accent stripe on the left edge of alert boxes and callouts.
 
 ---
 
@@ -490,7 +498,6 @@ B. `gap: 24px;`
 C. `margin-between: 24px;`
 D. `padding-all: 24px;`
 **Answer:** B
-**Explanation:** The `gap` property cleanly defines gutters between flex items along both main and cross axes.
 
 ---
 
@@ -500,7 +507,6 @@ B. A negative margin (`margin-top: -25px;`) combined with `position: relative;`
 C. `padding-top: -25px;`
 D. `border-top: -25px;`
 **Answer:** B
-**Explanation:** Negative margins pull an element in the specified direction. Combining `margin-top: -25px` with `position: relative` creates a visually appealing overlap.
 
 ---
 
@@ -510,7 +516,6 @@ B. Because flex items default to `align-items: stretch;`, stretching all sibling
 C. Because all cards have the exact same number of letters
 D. Because HTML tables were used
 **Answer:** B
-**Explanation:** In Flexbox, the default value of `align-items` is `stretch`, ensuring that all flex items in a row automatically match heights.
 
 ---
 
@@ -519,3 +524,10 @@ D. Because HTML tables were used
 1. Open `school-club-landing-page.html` in your browser and resize the window to see how it responds.
 2. Customize the hero heading and subtitle for your own school or sports club.
 3. Add a fourth card to the `.features-grid` (for example, "Game Design & Unity") and observe how Flexbox automatically adapts the layout! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Project 3: Modern Responsive Navigation Bar & Dropdown** (Beginner Projects).
+
+👉 **[Continue to Next Lesson: Project 3: Modern Responsive Navigation Bar & Dropdown →](/tutorials/css-for-beginners/project-navigation-bar-styling)**

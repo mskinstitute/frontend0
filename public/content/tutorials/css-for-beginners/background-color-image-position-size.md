@@ -17,9 +17,9 @@ keywords:
   - background-repeat
   - background shorthand
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Background Color, Image, Position, and Size
@@ -239,7 +239,7 @@ Instead of writing 5 separate lines of CSS, you can combine them into a single `
 
 ---
 
-# Practice Quiz
+## Practice Quiz
 
 Test your understanding with these multiple-choice questions:
 
@@ -249,7 +249,6 @@ B. `background-repeat: no-repeat;`
 C. `background-tile: false;`
 D. `background-repeat: once;`
 **Answer:** B
-**Explanation:** `background-repeat: no-repeat;` instructs the browser to display the background image only once without tiling.
 
 ---
 
@@ -259,7 +258,6 @@ B. The image is deleted and replaced with a solid color
 C. The image scales to completely fill the container, cropping outer edges if necessary to avoid blank spaces
 D. The image automatically repeats 4 times
 **Answer:** C
-**Explanation:** `cover` scales the image so that the entire background area is covered. No empty space is left, though some edge portions may be cropped.
 
 ---
 
@@ -269,7 +267,6 @@ B. `fixed`
 C. `static`
 D. `sticky`
 **Answer:** B
-**Explanation:** `background-attachment: fixed;` fixes the background image relative to the viewport, creating a parallax scrolling effect.
 
 ---
 
@@ -279,7 +276,6 @@ B. Colon (`:`)
 C. Forward slash (`/`)
 D. Hyphen (`-`)
 **Answer:** C
-**Explanation:** In the CSS background shorthand syntax, size must follow position separated by a forward slash (e.g., `center / cover`).
 
 ---
 
@@ -289,7 +285,6 @@ B. If the image fails to load or loads slowly, white text remains readable again
 C. The HTML validator requires it by law
 D. It automatically adds a drop shadow to text
 **Answer:** B
-**Explanation:** If an image fails to load or loads slowly over mobile data, white text on the browser's default white background will be completely unreadable unless a dark fallback color is provided.
 
 ---
 
@@ -371,3 +366,10 @@ D. It automatically adds a drop shadow to text
    </html>
    ```
 4. Open the file in Chrome or Edge to see how `cover`, `center`, and the dark tint overlay create an incredible, professional hero banner! 🚀
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **CSS Gradients: Linear and Radial Gradients** (Colors and Backgrounds).
+
+👉 **[Continue to Next Lesson: CSS Gradients: Linear and Radial Gradients →](/tutorials/css-for-beginners/css-gradients-linear-radial)**

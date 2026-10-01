@@ -1,3 +1,24 @@
+---
+id: python-intermediate-seaborn-basics
+slug: seaborn-basics
+course: python-for-intermediate
+chapter: "13: Data Visualization Basics"
+topic: "13.4 Seaborn Basics"
+title: "Seaborn Basics in Python"
+description: "Master seaborn basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 64
+keywords:
+  - python seaborn basics
+  - python intermediate
+  - python seaborn basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Seaborn Basics for Statistical Visualization in Python
 
 While Matplotlib provides fine-grained, low-level control over every pixel on the canvas, writing complex statistical visualizations with it often requires considerable boilerplate code. **Seaborn** is a high-level statistical data visualization library built directly on top of Matplotlib that integrates seamlessly with Pandas DataFrames and provides stunning visual defaults out of the box.
@@ -145,7 +166,54 @@ Because Seaborn runs directly on top of Matplotlib, every Seaborn plot function 
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting that Seaborn Builds on Matplotlib
+Seaborn is built directly on top of Matplotlib. You can use standard Matplotlib functions (`plt.title()`, `plt.savefig()`, `plt.xlabel()`) to customize Seaborn charts.
+
+### 2. Passing Column Names Without a DataFrame
+Seaborn methods like `sns.barplot(x="col1", y="col2", data=df)` require the `data=` argument when specifying column names as strings.
+
+---
+
+---
+
+## 💻 Try It Yourself: Seaborn Distribution Plot
+
+### Scenario
+Use Seaborn to plot a statistical histogram and Kernel Density Estimate (KDE) curve of student exam scores, applying the `whitegrid` theme.
+
+### Complete Solution
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Sample student scores
+scores = [55, 62, 65, 70, 72, 74, 75, 78, 80, 82, 85, 88, 90, 92, 95, 98]
+
+sns.set_theme(style="whitegrid")
+plt.figure(figsize=(7, 4.5))
+sns.histplot(scores, kde=True, color="#4f46e5", bins=8)
+
+plt.title("Student Marks Distribution with KDE", fontsize=13, fontweight="bold")
+plt.xlabel("Exam Marks")
+plt.ylabel("Student Count")
+plt.tight_layout()
+plt.savefig("marks_kde.png", dpi=150)
+print("Seaborn distribution chart saved to 'marks_kde.png'.")
+plt.close()
+```
+
+### Expected Output
+```text
+Seaborn distribution chart saved to 'marks_kde.png'.
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What underlying Python library is Seaborn built on top of?
 A. NumPy
@@ -191,3 +259,10 @@ D. By calling `plt.merge()`
 **Answer:** A
 **Explanation:** All Seaborn plotting functions accept an `ax` parameter specifying the exact Matplotlib `Axes` on which to draw.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Visualizing Sales Data** (13: Data Visualization Basics).
+
+👉 **[Continue to Next Lesson: Project: Visualizing Sales Data →](/tutorials/python-for-intermediate/project-visualizing-sales-data)**

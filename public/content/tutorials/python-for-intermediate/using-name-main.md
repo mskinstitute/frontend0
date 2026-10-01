@@ -16,9 +16,9 @@ keywords:
   - standalone execution
   - import side effects
   - dual purpose module
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Understanding and Using if __name__ == '__main__' in Python
@@ -222,56 +222,6 @@ Imported 'json' module __name__ : json
 
 ---
 
-# Multiple Choice Questions
-
-### 1. What value does Python automatically assign to __name__ when a script is executed directly from the terminal with python script.py?
-A. `"script"`
-B. `"__main__"`
-C. `"__init__"`
-D. `None`
-**Answer:** B
-**Explanation:** When a file is the entry point executed directly by Python, the interpreter assigns the string `"__main__"` to its `__name__` variable.
-
----
-
-### 2. If a file named helpers.py is imported into main.py via import helpers, what is the value of __name__ inside helpers.py?
-A. `"__main__"`
-B. `"helpers"`
-C. `"root"`
-D. `False`
-**Answer:** B
-**Explanation:** When a file is imported as a module, Python sets its `__name__` variable to the module's name (the filename without `.py`), which is `"helpers"`.
-
----
-
-### 3. What is the primary engineering benefit of using if __name__ == '__main__':?
-A. It speeds up the computer's CPU clock
-B. It allows a file to be both run directly (e.g. for testing or CLI) and imported safely without triggering accidental execution of its script logic
-C. It encrypts the Python bytecode
-D. It prevents the file from ever being imported
-**Answer:** B
-**Explanation:** The guard ensures that execution-specific code (benchmarks, interactive prompts, CLI commands) only runs upon direct invocation, keeping the module clean when imported as a library.
-
----
-
-### 4. What happens to code written outside of if __name__ == '__main__': at the top level of a module?
-A. It is ignored completely
-B. It runs every time the module is imported anywhere in the project
-C. It runs only when the program crashes
-D. It runs only on Windows
-**Answer:** B
-**Explanation:** Any statement situated at the module's top level outside of a function or class executes immediately upon the initial `import` of that file.
-
----
-
-### 5. Why is it best practice to call a main() function inside if __name__ == '__main__': rather than inlining 50 lines of code?
-A. Inlined code is deleted by the garbage collector
-B. Encapsulating logic inside `main()` keeps local variables scoped cleanly, avoiding unintentional global variable pollution
-C. Python throws an indentation error for more than 5 lines under `if`
-D. `main()` is required by the Windows operating system
-**Answer:** B
-**Explanation:** Variables created inside `main()` remain local to `main()`. Inlining 50 lines directly under `if` causes all temporary loop variables to become module-level globals, increasing memory usage and risking accidental name collisions.
-
 ---
 
 # Practice Challenge
@@ -342,3 +292,62 @@ CELSIUS (°C)    | FAHRENHEIT (°F)
 40              | 104.0      (Heatwave Warning!)
 45              | 113.0      (Heatwave Warning!)
 ```
+
+---
+
+## Practice Quiz
+
+### 1. What value does Python automatically assign to __name__ when a script is executed directly from the terminal with python script.py?
+A. `"script"`
+B. `"__main__"`
+C. `"__init__"`
+D. `None`
+**Answer:** B
+**Explanation:** When a file is the entry point executed directly by Python, the interpreter assigns the string `"__main__"` to its `__name__` variable.
+
+---
+
+### 2. If a file named helpers.py is imported into main.py via import helpers, what is the value of __name__ inside helpers.py?
+A. `"__main__"`
+B. `"helpers"`
+C. `"root"`
+D. `False`
+**Answer:** B
+**Explanation:** When a file is imported as a module, Python sets its `__name__` variable to the module's name (the filename without `.py`), which is `"helpers"`.
+
+---
+
+### 3. What is the primary engineering benefit of using if __name__ == '__main__':?
+A. It speeds up the computer's CPU clock
+B. It allows a file to be both run directly (e.g. for testing or CLI) and imported safely without triggering accidental execution of its script logic
+C. It encrypts the Python bytecode
+D. It prevents the file from ever being imported
+**Answer:** B
+**Explanation:** The guard ensures that execution-specific code (benchmarks, interactive prompts, CLI commands) only runs upon direct invocation, keeping the module clean when imported as a library.
+
+---
+
+### 4. What happens to code written outside of if __name__ == '__main__': at the top level of a module?
+A. It is ignored completely
+B. It runs every time the module is imported anywhere in the project
+C. It runs only when the program crashes
+D. It runs only on Windows
+**Answer:** B
+**Explanation:** Any statement situated at the module's top level outside of a function or class executes immediately upon the initial `import` of that file.
+
+---
+
+### 5. Why is it best practice to call a main() function inside if __name__ == '__main__': rather than inlining 50 lines of code?
+A. Inlined code is deleted by the garbage collector
+B. Encapsulating logic inside `main()` keeps local variables scoped cleanly, avoiding unintentional global variable pollution
+C. Python throws an indentation error for more than 5 lines under `if`
+D. `main()` is required by the Windows operating system
+**Answer:** B
+**Explanation:** Variables created inside `main()` remain local to `main()`. Inlining 50 lines directly under `if` causes all temporary loop variables to become module-level globals, increasing memory usage and risking accidental name collisions.
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Package Structure and __init__.py** (3: Modules and Packages).
+
+👉 **[Continue to Next Lesson: Package Structure and __init__.py →](/tutorials/python-for-intermediate/package-structure-and-init-py)**

@@ -16,9 +16,9 @@ keywords:
   - display inline-block
   - normal flow
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Block vs Inline vs Inline-Block: Mastering CSS Display
@@ -223,7 +223,7 @@ span.section-badge {
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS display value forces an element to begin on a brand-new line and take up 100% of its parent's width by default?
 A. `display: inline;`
@@ -231,7 +231,6 @@ B. `display: block;`
 C. `display: inline-block;`
 D. `display: content;`
 **Answer:** B
-**Explanation:** `display: block` creates a block box that starts on a new line and stretches across the full width of its containing parent.
 
 ---
 
@@ -241,7 +240,6 @@ B. Because `<span>` is an inline element by default, which ignores `width` and `
 C. Because `<span>` tags require an external JavaScript library
 D. Because the browser has a bug
 **Answer:** B
-**Explanation:** Pure inline elements (`display: inline`) cannot have explicit `width` or `height` values applied. Setting `display: inline-block` or `display: block` is required.
 
 ---
 
@@ -251,7 +249,6 @@ B. It allows elements to sit side-by-side on the same line while still respectin
 C. It hides elements from view on mobile devices
 D. It only works on tablet devices
 **Answer:** B
-**Explanation:** `display: inline-block` combines the horizontal flow of inline elements with the complete box-model sizing capabilities of block elements.
 
 ---
 
@@ -261,7 +258,6 @@ B. `<span>`
 C. `<div>`
 D. `<a>`
 **Answer:** C
-**Explanation:** `<div>` (along with `<p>`, `<h1>`, `<ul>`, etc.) is a block-level element by default. `<span>`, `<a>`, and `<strong>` are inline elements.
 
 ---
 
@@ -271,7 +267,6 @@ B. `a { display: inline; width: 100%; }`
 C. `a { flow: horizontal; }`
 D. `a { text-width: full; }`
 **Answer:** A
-**Explanation:** Setting `display: block; width: 100%;` converts the naturally inline `<a>` tag into a full-width block container.
 
 ---
 
@@ -369,3 +364,10 @@ D. `a { text-width: full; }`
    </html>
    ```
 3. Load the page in your browser and resize your window to observe how the three display modes behave! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Display: none vs Visibility: hidden: Hiding Elements in CSS** (Display and Visibility).
+
+👉 **[Continue to Next Lesson: Display: none vs Visibility: hidden: Hiding Elements in CSS →](/tutorials/css-for-beginners/display-none-vs-visibility-hidden)**

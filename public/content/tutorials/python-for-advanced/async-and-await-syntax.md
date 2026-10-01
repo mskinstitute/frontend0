@@ -1,3 +1,24 @@
+---
+id: python-advanced-async-and-await-syntax
+slug: async-and-await-syntax
+course: python-for-advanced
+chapter: "8: Asynchronous Programming (Asyncio)"
+topic: "8.2 Async and Await Syntax"
+title: "Async and Await Syntax in Python"
+description: "Master async and await syntax in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 33
+keywords:
+  - python async and await syntax
+  - python advanced
+  - python async and await syntax
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # `async` and `await` Syntax
 
 Formalized in PEP 492, the `async` and `await` keywords establish native asynchronous programming syntax in Python. By distinguishing coroutines from generator objects, native coroutines provide compile-time syntax validation, dedicated runtime protocols (`__await__`, `__aiter__`, `__aenter__`), and clear concurrency semantics.
@@ -161,7 +182,68 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Forgetting `await` on a Coroutine
+Calling an async function without `await` returns a coroutine object without executing it:
+```python
+# ❌ Coroutine was never awaited warning!
+fetch_data()
+
+# ✅ CORRECT
+await fetch_data()
+```
+
+### 2. Using `await` Outside of `async def`
+The `await` keyword is syntactically invalid outside of functions declared with `async def` (except in Python 3.8+ top-level REPL shells).
+
+---
+
+---
+
+## 💻 Try It Yourself: Asynchronous Context Manager with aiofiles Simulation
+
+### Scenario
+Implement a custom asynchronous context manager using `__aenter__` and `__aexit__` to simulate non-blocking file streaming.
+
+### Complete Solution
+```python
+import asyncio
+
+class AsyncDatabaseSession:
+    async def __aenter__(self):
+        print("Acquiring async database connection...")
+        await asyncio.sleep(0.05)
+        return self
+
+    async def query(self, sql):
+        await asyncio.sleep(0.05)
+        return f"Results for: {sql}"
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        print("Releasing async database connection back to pool.")
+        await asyncio.sleep(0.01)
+
+async def main():
+    async with AsyncDatabaseSession() as db:
+        res = await db.query("SELECT * FROM users")
+        print("Query returned:", res)
+
+asyncio.run(main())
+```
+
+### Expected Output
+```text
+Acquiring async database connection...
+Query returned: Results for: SELECT * FROM users
+Releasing async database connection back to pool.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What occurs when an `async def` function is called directly without using the `await` keyword (e.g. `result = my_coroutine()`)?
@@ -227,3 +309,10 @@ D. Inside class definitions directly.
 **Explanation:** Using `await` outside of an `async def` function triggers a `SyntaxError: 'await' outside async function`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Creating and Managing Tasks** (8: Asynchronous Programming (Asyncio)).
+
+👉 **[Continue to Next Lesson: Creating and Managing Tasks →](/tutorials/python-for-advanced/creating-and-managing-tasks)**

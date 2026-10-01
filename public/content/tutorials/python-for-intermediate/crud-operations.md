@@ -1,3 +1,24 @@
+---
+id: python-intermediate-crud-operations
+slug: crud-operations
+course: python-for-intermediate
+chapter: "11: Database Basics with SQLite"
+topic: "11.4 CRUD Operations"
+title: "CRUD Operations in Python"
+description: "Master crud operations in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 54
+keywords:
+  - python crud operations
+  - python intermediate
+  - python crud operations
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # CRUD Operations in Python with SQLite
 
 **CRUD** stands for **Create, Read, Update, and Delete**—the four foundational data manipulation operations powering nearly every software application and REST API. In this guide, we explore how to perform each operation efficiently using Python's `sqlite3` module.
@@ -173,7 +194,69 @@ SELECT * FROM products WHERE is_active = 1;
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. SQL Injection via String Interpolation
+Never format user input into SQL queries using f-strings or `%s`. Always use parameterized queries with `?` placeholders:
+```python
+# ❌ DANGEROUS SQL INJECTION VULNERABILITY
+cursor.execute(f"SELECT * FROM users WHERE name = '{user_input}'")
+
+# ✅ SECURE PARAMETERIZED QUERY
+cursor.execute("SELECT * FROM users WHERE name = ?", (user_input,))
+```
+
+### 2. `UPDATE` or `DELETE` Without a `WHERE` Clause
+Executing an `UPDATE` or `DELETE` statement without a `WHERE` clause modifies or deletes EVERY row in the entire table!
+
+---
+
+---
+
+## 💻 Try It Yourself: Complete CRUD Lifecycle Script
+
+### Scenario
+Write an end-to-end Python script that inserts a record into an SQLite table, reads it back, updates its price, and finally deletes the record using parameterized queries.
+
+### Complete Solution
+```python
+import sqlite3
+
+with sqlite3.connect(":memory:") as conn:
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE books (id INTEGER PRIMARY KEY, title TEXT, price REAL)")
+    
+    # 1. CREATE
+    cur.execute("INSERT INTO books (title, price) VALUES (?, ?)", ("Python Mastery", 599.0))
+    book_id = cur.lastrowid
+    print(f"Created Book ID: {book_id}")
+    
+    # 2. READ
+    cur.execute("SELECT * FROM books WHERE id = ?", (book_id,))
+    print("Read Record:", cur.fetchone())
+    
+    # 3. UPDATE
+    cur.execute("UPDATE books SET price = ? WHERE id = ?", (499.0, book_id))
+    print("Updated price to ₹499.00.")
+    
+    # 4. DELETE
+    cur.execute("DELETE FROM books WHERE id = ?", (book_id,))
+    print(f"Deleted Book ID: {book_id}. Remaining records: {cur.execute('SELECT COUNT(*) FROM books').fetchone()[0]}")
+```
+
+### Expected Output
+```text
+Created Book ID: 1
+Read Record: (1, 'Python Mastery', 599.0)
+Updated price to ₹499.00.
+Deleted Book ID: 1. Remaining records: 0
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which method on a cursor should you use to insert a list of 500 records in a single batch?
 A. `cursor.execute()` in a loop
@@ -219,3 +302,10 @@ D. Hard deletes only run on Linux
 **Answer:** B
 **Explanation:** Hard deletion removes records completely from disk, whereas soft deletion updates a flag (e.g. `is_active = 0`), preserving historical audit trails.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Student Records Database** (11: Database Basics with SQLite).
+
+👉 **[Continue to Next Lesson: Project: Student Records Database →](/tutorials/python-for-intermediate/project-student-records-database)**

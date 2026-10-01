@@ -1,3 +1,24 @@
+---
+id: python-advanced-socket-programming-basics
+slug: socket-programming-basics
+course: python-for-advanced
+chapter: "10: Networking with Python"
+topic: "10.1 Socket Programming Basics"
+title: "Socket Programming Basics in Python"
+description: "Master socket programming basics in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 40
+keywords:
+  - python socket programming basics
+  - python advanced
+  - python socket programming basics
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Socket Programming Basics
 
 At the foundation of all network communication—from HTTP APIs and database drivers to WebSockets and peer-to-peer protocols—lies the **Socket API**. Standardized through the BSD Sockets interface, a socket is an operating system abstraction representing an endpoint for network data transmission.
@@ -159,7 +180,60 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. "Address Already in Use" Error on Restart
+When restarting a server socket quickly, the port remains in the OS `TIME_WAIT` state. Avoid this by setting `SO_REUSEADDR` before binding:
+```python
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+```
+
+### 2. Assuming `recv()` Returns the Full Message
+TCP is a streaming byte protocol, not a message protocol. A single `send()` can be delivered across multiple `recv()` calls. Implement message framing (like newline delimiters or length prefixes).
+
+---
+
+---
+
+## 💻 Try It Yourself: Echo Client-Server Loopback
+
+### Scenario
+Create a loopback TCP socket connection that connects to a local test port, sends a greeting byte string, and verifies the response.
+
+### Complete Solution
+```python
+import socket
+
+# Test loopback socket
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind(("127.0.0.1", 0))  # Bind to ephemeral port
+port = server.getsockname()[1]
+server.listen(1)
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("127.0.0.1", port))
+
+conn, _ = server.accept()
+client.sendall(b"Hello from Client!")
+msg = conn.recv(1024)
+print("Server received bytes:", msg.decode("utf-8"))
+
+client.close()
+conn.close()
+server.close()
+```
+
+### Expected Output
+```text
+Server received bytes: Hello from Client!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What socket family constant represents standard IPv4 internet addressing in Python?
@@ -225,3 +299,10 @@ D. `socket.SOCK_RDM`
 **Explanation:** `socket.SOCK_STREAM` defines a sequenced, two-way, reliable byte stream protocol, which maps directly to TCP.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **TCP vs UDP** (10: Networking with Python).
+
+👉 **[Continue to Next Lesson: TCP vs UDP →](/tutorials/python-for-advanced/tcp-vs-udp)**

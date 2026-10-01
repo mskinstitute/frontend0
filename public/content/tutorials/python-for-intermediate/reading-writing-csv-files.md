@@ -1,3 +1,24 @@
+---
+id: python-intermediate-reading-writing-csv-files
+slug: reading-writing-csv-files
+course: python-for-intermediate
+chapter: "4: File Handling Advanced"
+topic: "4.2 Reading & Writing CSV Files"
+title: "Reading & Writing CSV Files in Python"
+description: "Master reading & writing csv files in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 17
+keywords:
+  - python reading writing csv files
+  - python intermediate
+  - python reading & writing csv files
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Reading & Writing CSV Files in Python
 
 CSV (Comma-Separated Values) is one of the most ubiquitous plain-text data interchange formats across software engineering, data science, and business analytics. Python provides robust, highly optimized native support for reading, writing, and parsing CSV documents through its built-in `csv` standard library module.
@@ -169,7 +190,108 @@ with open("output.csv", mode="w", encoding="utf-8", newline="") as f:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting `newline=''` on Windows
+Opening files for CSV writing without `newline=''` causes empty blank rows between every line on Windows due to double carriage-return translation (`\r\r\n`):
+```python
+# ❌ INCORRECT (Adds blank lines on Windows)
+with open("data.csv", "w", encoding="utf-8") as f:
+    writer = csv.writer(f)
+
+# ✅ CORRECT
+with open("data.csv", "w", encoding="utf-8", newline="") as f:
+    writer = csv.writer(f)
+```
+
+### 2. Assuming CSV Fields are Numbers
+All values read from `csv.reader` or `csv.DictReader` are plain strings. Always explicitly convert numbers before arithmetic:
+```python
+# ❌ INCORRECT: "50" + "10" = "5010"
+total = row["price"] + row["tax"]
+
+# ✅ CORRECT
+total = float(row["price"]) + float(row["tax"])
+```
+
+---
+
+---
+
+## 💻 Try It Yourself: Automated Employee Payroll Filter
+
+### Scenario
+You are building an HR payroll processing script. Given a CSV file of employee salaries, write a script that reads the records, filters employees earning above ₹75,000, and writes their names, departments, and revised salaries (with an 8% bonus added) to a new CSV file `bonus_payouts.csv`.
+
+### Starter Code
+```python
+import csv
+
+# Sample raw payroll data
+raw_payroll = [
+    ["EmployeeID", "Name", "Department", "Salary"],
+    ["E101", "Aarav Sharma", "Engineering", "85000"],
+    ["E102", "Priya Patel", "Marketing", "62000"],
+    ["E103", "Rohan Verma", "Engineering", "92000"],
+    ["E104", "Ananya Gupta", "HR", "54000"],
+    ["E105", "Vikram Singh", "Sales", "78000"]
+]
+
+# Write raw data to payroll.csv
+with open("payroll.csv", "w", encoding="utf-8", newline="") as f:
+    csv.writer(f).writerows(raw_payroll)
+
+# TODO: Read payroll.csv with DictReader, calculate 8% bonus for salary >= 75000, 
+# and write to bonus_payouts.csv using DictWriter
+```
+
+### Complete Solution
+```python
+import csv
+
+# 1. Process payroll with DictReader & DictWriter
+with open("payroll.csv", mode="r", encoding="utf-8", newline="") as infile:
+    reader = csv.DictReader(infile)
+    
+    bonus_records = []
+    for row in reader:
+        salary = float(row["Salary"])
+        if salary >= 75000:
+            bonus = salary * 0.08
+            bonus_records.append({
+                "Name": row["Name"],
+                "Department": row["Department"],
+                "BaseSalary": f"{salary:,.2f}",
+                "BonusAmount": f"{bonus:,.2f}",
+                "TotalPayout": f"{salary + bonus:,.2f}"
+            })
+
+# 2. Write bonus payouts
+fieldnames = ["Name", "Department", "BaseSalary", "BonusAmount", "TotalPayout"]
+with open("bonus_payouts.csv", mode="w", encoding="utf-8", newline="") as outfile:
+    writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(bonus_records)
+
+print(f"Successfully processed {len(bonus_records)} bonus payouts.")
+with open("bonus_payouts.csv", "r", encoding="utf-8") as f:
+    print(f.read())
+```
+
+### Expected Output
+```text
+Successfully processed 3 bonus payouts.
+Name,Department,BaseSalary,BonusAmount,TotalPayout
+Aarav Sharma,Engineering,"85,000.00","6,800.00","91,800.00"
+Rohan Verma,Engineering,"92,000.00","7,360.00","99,360.00"
+Vikram Singh,Sales,"78,000.00","6,240.00","84,240.00"
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary purpose of specifying `newline=''` when opening a file for the `csv` module?
 A. To prevent Python from raising an `IOError` during read mode
@@ -215,3 +337,10 @@ D. A string formatted in JSON
 **Answer:** B
 **Explanation:** `csv.DictReader` parses the header line and maps each subsequent row's values to their respective header keys as a dictionary.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Working with JSON Files** (4: File Handling Advanced).
+
+👉 **[Continue to Next Lesson: Working with JSON Files →](/tutorials/python-for-intermediate/working-with-json-files)**

@@ -1,3 +1,24 @@
+---
+id: python-intermediate-introduction-to-databases
+slug: introduction-to-databases
+course: python-for-intermediate
+chapter: "11: Database Basics with SQLite"
+topic: "11.1 Introduction to Databases"
+title: "Introduction to Databases in Python"
+description: "Master introduction to databases in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 51
+keywords:
+  - python introduction to databases
+  - python intermediate
+  - python introduction to databases
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Introduction to Databases in Python
 
 In earlier chapters, we persisted application data using flat files such as plain text, CSV, and JSON. While flat files are adequate for basic storage and configurations, modern software applications require concurrent access, complex relationships, relational integrity, and fast querying across millions of records. This is where **Databases** become indispensable.
@@ -82,7 +103,41 @@ All production-grade relational databases adhere to ACID guarantees:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Storing Everything in Flat Files
+Using flat CSV/JSON files for applications with frequent concurrent writes leads to file lock collisions and data corruption. Relational databases provide ACID transaction guarantees.
+
+### 2. Missing Primary Keys
+Every database table should have an unambiguous primary key (such as an auto-incrementing integer or UUID) to uniquely identify records and facilitate indexing.
+
+---
+
+---
+
+## 💻 Try It Yourself: Database Schema Design
+
+### Scenario
+Design a SQL `CREATE TABLE` schema for an e-commerce order management system including primary key, foreign key references, and data validation constraints.
+
+### Complete Solution
+```sql
+-- SQL Schema for Customer Orders
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER NOT NULL,
+    order_date TEXT NOT NULL DEFAULT (datetime('now')),
+    total_amount REAL NOT NULL CHECK(total_amount >= 0.0),
+    status TEXT NOT NULL CHECK(status IN ('PENDING', 'PAID', 'SHIPPED', 'CANCELLED')),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What is the primary purpose of a Primary Key in a relational database table?
 A. To encrypt confidential passwords
@@ -128,3 +183,10 @@ D. Indexes prevent users from deleting rows
 **Answer:** B
 **Explanation:** Database indexes use balanced search trees (B-Trees) to locate matching rows in logarithmic time, whereas searching a flat CSV file requires a linear scan of every line.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **SQLite Installation & Setup** (11: Database Basics with SQLite).
+
+👉 **[Continue to Next Lesson: SQLite Installation & Setup →](/tutorials/python-for-intermediate/sqlite-installation-setup)**

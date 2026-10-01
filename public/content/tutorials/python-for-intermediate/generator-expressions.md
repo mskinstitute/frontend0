@@ -1,3 +1,24 @@
+---
+id: python-intermediate-generator-expressions
+slug: generator-expressions
+course: python-for-intermediate
+chapter: "7: Iterators and Generators"
+topic: "7.4 Generator Expressions"
+title: "Generator Expressions in Python"
+description: "Master generator expressions in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 34
+keywords:
+  - python generator expressions
+  - python intermediate
+  - python generator expressions
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Generator Expressions in Python
 
 Just as list comprehensions provide a concise syntax for building lists, **Generator Expressions** provide a compact, one-line syntax for creating generator objects. By simply replacing square brackets `[...]` with parentheses `(...)`, you transform an eager, memory-heavy list into a lazy, on-demand data stream.
@@ -110,7 +131,52 @@ for msg in error_stream:
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Expecting List Indexing on Generator Expressions
+Generator expressions use parentheses `gen = (x * 2 for x in data)`. You cannot access items with `gen[0]` or slice with `gen[:5]`. Use `itertools.islice` or cast to a `list` if indexing is needed.
+
+### 2. Accidental Double Consumption
+If you pass a generator expression to `sum(gen)` and then to `max(gen)`, the second call will operate on an already exhausted generator!
+
+---
+
+---
+
+## 💻 Try It Yourself: Memory-Efficient Log Filter
+
+### Scenario
+Given a list of simulated server logs, use a generator expression to extract all IP addresses causing HTTP 500 errors and compute the unique set of attacking IPs.
+
+### Complete Solution
+```python
+server_logs = [
+    "192.168.1.1 GET /index.html 200",
+    "10.0.0.5 POST /login 500",
+    "172.16.0.2 GET /dashboard 200",
+    "10.0.0.5 GET /api/data 500",
+    "192.168.1.50 GET /admin 403",
+    "10.0.0.99 POST /upload 500"
+]
+
+# Generator expression: lazily filters 500 errors and extracts IP
+error_ips_gen = (log.split()[0] for log in server_logs if "500" in log)
+
+# Collect unique IPs
+unique_failing_ips = set(error_ips_gen)
+print("Unique IPs encountering HTTP 500:", unique_failing_ips)
+```
+
+### Expected Output
+```text
+Unique IPs encountering HTTP 500: {'10.0.0.5', '10.0.0.99'}
+```
+
+---
+
+## Practice Quiz
 
 ### 1. How do you syntactically define a generator expression in Python?
 A. Enclose the expression in square brackets `[...]`
@@ -156,3 +222,10 @@ D. When streaming audio bytes
 **Answer:** B
 **Explanation:** Lists store all data in memory, allowing multiple iteration passes and fast `len()` checks, whereas generators exhaust after a single pass and lack length metadata.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Project: Infinite Sequence Generator** (7: Iterators and Generators).
+
+👉 **[Continue to Next Lesson: Project: Infinite Sequence Generator →](/tutorials/python-for-intermediate/project-infinite-sequence-generator)**

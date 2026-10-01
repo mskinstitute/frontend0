@@ -1,3 +1,24 @@
+---
+id: python-advanced-function-decorators-deep-dive
+slug: function-decorators-deep-dive
+course: python-for-advanced
+chapter: "3: Advanced Decorators and Context Managers"
+topic: "3.1 Function Decorators Deep Dive"
+title: "Function Decorators Deep Dive in Python"
+description: "Master function decorators deep dive in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 11
+keywords:
+  - python function decorators deep dive
+  - python advanced
+  - python function decorators deep dive
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Function Decorators Deep Dive
 
 Decorators represent one of Python's most elegant and powerful design patterns. At their architectural core, decorators are an application of **Higher-Order Functions** and **Closures**, allowing developers to dynamically inject cross-cutting concerns—such as audit logging, execution telemetry, authorization checks, caching, and rate limiting—without altering the underlying function's source code.
@@ -203,7 +224,69 @@ print(render_headline("Advanced Python"))
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Omitting `@functools.wraps(func)`
+Without `@functools.wraps`, the decorated function loses its original `__name__`, `__doc__`, and type annotations, breaking automated doc generators, debuggers, and inspection tools.
+
+### 2. Incorrect Nesting for Decorator Arguments
+A decorator that accepts arguments requires **three** levels of nested functions: the outer factory function, the decorator function, and the wrapper function.
+
+---
+
+---
+
+## 💻 Try It Yourself: Automated Retry Decorator with Exponential Backoff
+
+### Scenario
+Build a customizable decorator factory `@retry(max_retries=3, delay=1.0)` that retries a failing function before re-raising the exception.
+
+### Complete Solution
+```python
+import functools
+import time
+
+def retry(max_retries=3, initial_delay=0.1):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            delay = initial_delay
+            for attempt in range(1, max_retries + 1):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as err:
+                    print(f"[Attempt {attempt}/{max_retries} Failed] {err}. Retrying in {delay:.1f}s...")
+                    time.sleep(delay)
+                    delay *= 2
+            return func(*args, **kwargs)  # Final attempt
+        return wrapper
+    return decorator
+
+# Test unstable network call
+attempts = 0
+@retry(max_retries=3, initial_delay=0.05)
+def unstable_api():
+    global attempts
+    attempts += 1
+    if attempts < 3:
+        raise ConnectionError("Network timeout")
+    return "Data fetched successfully!"
+
+print(unstable_api())
+```
+
+### Expected Output
+```text
+[Attempt 1/3 Failed] Network timeout. Retrying in 0.1s...
+[Attempt 2/3 Failed] Network timeout. Retrying in 0.1s...
+Data fetched successfully!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What does the expression `@my_decorator` placed directly above `def my_func(): pass` actually do behind the scenes?
@@ -269,3 +352,10 @@ D. It is permanently discarded and cannot be accessed.
 **Explanation:** `@functools.wraps` attaches the original undecorated callable to the `__wrapped__` attribute on the wrapper function.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Class Decorators** (3: Advanced Decorators and Context Managers).
+
+👉 **[Continue to Next Lesson: Class Decorators →](/tutorials/python-for-advanced/class-decorators)**

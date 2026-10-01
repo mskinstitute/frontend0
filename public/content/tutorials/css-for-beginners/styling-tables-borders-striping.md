@@ -16,9 +16,9 @@ keywords:
   - nth-child
   - responsive table
   - learn css
-lastUpdated: 2026-09-10
+lastUpdated: 2026-10-01
 author: MSK Institute
-version: 1.0
+version: 1.1.0
 ---
 
 # Styling Tables: Borders, Striping, and Responsive Tables
@@ -281,7 +281,7 @@ table.data-table tbody tr:last-child td {
 
 ---
 
-# Multiple Choice Questions
+## Practice Quiz
 
 ### 1. Which CSS property eliminates the default 2-pixel gap between adjacent table cells and unites borders into a single line?
 A. `table-spacing: 0;`
@@ -289,7 +289,6 @@ B. `border-collapse: collapse;`
 C. `border-style: unified;`
 D. `cell-merge: true;`
 **Answer:** B
-**Explanation:** `border-collapse: collapse;` merges adjacent cell borders into a single crisp divider line.
 
 ---
 
@@ -299,7 +298,6 @@ B. `tbody tr:nth-child(even) { background-color: #f8fafc; }`
 C. `table tr:every-second { color: gray; }`
 D. `td:odd { background-color: #f8fafc; }`
 **Answer:** B
-**Explanation:** The `:nth-child(even)` pseudo-class targets every even row (2nd, 4th, 6th, etc.), creating clean alternating zebra stripes.
 
 ---
 
@@ -309,7 +307,6 @@ B. Hide half of the columns using `display: none`
 C. Wrap the table inside a container `<div>` with `overflow-x: auto;` and give the table a `min-width`
 D. Delete the table headers on mobile
 **Answer:** C
-**Explanation:** Wrapping the table in a container `<div>` styled with `overflow-x: auto;` enables smooth horizontal touch scrolling without breaking the layout.
 
 ---
 
@@ -319,7 +316,6 @@ B. Because collapsed, subtle borders allow readers to focus on the actual data r
 C. Because modern browsers do not support black borders
 D. Because double borders delete the table background color
 **Answer:** B
-**Explanation:** Clean, subtle divider lines and collapsed borders offer superior readability and modern aesthetics compared to heavy "cage-style" grids.
 
 ---
 
@@ -329,7 +325,6 @@ B. Right-aligned
 C. Centered
 D. Justified
 **Answer:** C
-**Explanation:** Browsers center-align `<th>` elements by default with bold weight. Most modern designs override this with `text-align: left;` to match data columns.
 
 ---
 
@@ -496,3 +491,10 @@ D. Justified
    </html>
    ```
 3. Test your report card on both desktop and mobile viewports to verify that zebra striping and horizontal scrolling work smoothly! 🎯
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your web styling journey with **Block vs Inline vs Inline-Block: Mastering CSS Display** (Display and Visibility).
+
+👉 **[Continue to Next Lesson: Block vs Inline vs Inline-Block: Mastering CSS Display →](/tutorials/css-for-beginners/display-block-inline-inline-block)**

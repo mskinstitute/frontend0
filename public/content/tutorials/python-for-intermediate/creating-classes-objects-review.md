@@ -1,3 +1,24 @@
+---
+id: python-intermediate-creating-classes-objects-review
+slug: creating-classes-objects-review
+course: python-for-intermediate
+chapter: "5: Object-Oriented Programming (Intermediate)"
+topic: "5.1 Creating Classes & Objects (Review)"
+title: "Creating Classes & Objects (Review) in Python"
+description: "Master creating classes & objects (review) in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 21
+keywords:
+  - python creating classes objects review
+  - python intermediate
+  - python creating classes & objects (review)
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Creating Classes & Objects (Review & Deep Dive)
 
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of **objects**, which bundle state (attributes/data) and behavior (methods/functions) together. In Python, everything is an object—from simple integers and strings to complex modules and custom classes.
@@ -159,7 +180,72 @@ print(repr(book))  # Book(title='Fluent Python', author='Luciano Ramalho', isbn=
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Confusing Class Attributes with Instance Attributes
+A mutable class attribute (like a list) is shared across all instances of the class!
+```python
+# ❌ SHARED BUG: All students share the same grades list!
+class Student:
+    grades = []
+
+# ✅ CORRECT: Each student gets an independent list in __init__
+class Student:
+    def __init__(self):
+        self.grades = []
+```
+
+### 2. Forgetting `self` in Method Signatures
+Every instance method must take `self` as its first parameter; omitting it causes a `TypeError: method takes 0 positional arguments but 1 was given`.
+
+---
+
+---
+
+## 💻 Try It Yourself: Product Inventory Item Class
+
+### Scenario
+Create an `Item` class for an e-commerce store with attributes `name`, `price`, and `quantity`. Implement methods `total_value()`, `apply_discount(pct)`, and a formatted `__repr__()` method.
+
+### Complete Solution
+```python
+class Item:
+    def __init__(self, name: str, price: float, quantity: int = 1):
+        if price < 0 or quantity < 0:
+            raise ValueError("Price and quantity must be non-negative.")
+        self.name = name
+        self.price = float(price)
+        self.quantity = int(quantity)
+
+    def total_value(self) -> float:
+        return self.price * self.quantity
+
+    def apply_discount(self, discount_pct: float):
+        self.price -= self.price * (discount_pct / 100.0)
+
+    def __repr__(self) -> str:
+        return f"Item(name='{self.name}', price=₹{self.price:,.2f}, qty={self.quantity})"
+
+# Testing
+phone = Item("Smartphone", 25000.0, 4)
+print(phone)
+print(f"Total Inventory Value: ₹{phone.total_value():,.2f}")
+phone.apply_discount(10)
+print(f"After 10% Discount: {phone}")
+```
+
+### Expected Output
+```text
+Item(name='Smartphone', price=₹25,000.00, qty=4)
+Total Inventory Value: ₹100,000.00
+After 10% Discount: Item(name='Smartphone', price=₹22,500.00, qty=4)
+```
+
+---
+
+## Practice Quiz
 
 ### 1. What does the `self` parameter in a Python instance method represent?
 A. The class type that spawned the method
@@ -205,3 +291,10 @@ D. To validate user permissions before accessing attributes
 **Answer:** B
 **Explanation:** `__repr__` is intended for developers and debugging, providing an explicit, unambiguous representation of the object state.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Inheritance & Method Overriding** (5: Object-Oriented Programming (Intermediate)).
+
+👉 **[Continue to Next Lesson: Inheritance & Method Overriding →](/tutorials/python-for-intermediate/inheritance-method-overriding)**

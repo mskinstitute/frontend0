@@ -1,3 +1,24 @@
+---
+id: python-advanced-daemon-vs-non-daemon-threads
+slug: daemon-vs-non-daemon-threads
+course: python-for-advanced
+chapter: "6: Multithreading in Python"
+topic: "6.3 Daemon vs Non-Daemon Threads"
+title: "Daemon vs Non-Daemon Threads in Python"
+description: "Master daemon vs non-daemon threads in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 26
+keywords:
+  - python daemon vs non daemon threads
+  - python advanced
+  - python daemon vs non-daemon threads
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Daemon vs Non-Daemon Threads
 
 In Python's `threading` module, threads are categorized into two fundamental operational modes: **Non-Daemon (Foreground)** threads and **Daemon (Background)** threads. The distinction directly governs how the CPython interpreter behaves during application shutdown and whether running threads prevent the process from terminating.
@@ -106,7 +127,54 @@ print("[MAIN] Main thread is finished. Terminating process now...")
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Abrupt Termination of Daemon Threads
+Daemon threads terminate abruptly when all non-daemon threads finish. Any open files, active database transactions, or network connections held by daemon threads may be left in a corrupted state.
+
+### 2. Waiting Indefinitely with `thread.join()`
+Calling `thread.join()` without a timeout parameter can hang the main program indefinitely if a worker thread deadlocks or crashes silently.
+
+---
+
+---
+
+## 💻 Try It Yourself: Background Heartbeat Daemon Thread
+
+### Scenario
+Create a daemon thread that prints a heartbeat ping every 100ms. Demonstrate that the daemon terminates automatically when the main non-daemon thread finishes.
+
+### Complete Solution
+```python
+import threading
+import time
+
+def background_heartbeat():
+    while True:
+        print("💓 [Daemon Heartbeat] System healthy...")
+        time.sleep(0.1)
+
+daemon_t = threading.Thread(target=background_heartbeat, daemon=True)
+daemon_t.start()
+
+print("Main thread running primary tasks...")
+time.sleep(0.25)
+print("Main thread finished! Daemon will now terminate cleanly.")
+```
+
+### Expected Output
+```text
+Main thread running primary tasks...
+💓 [Daemon Heartbeat] System healthy...
+💓 [Daemon Heartbeat] System healthy...
+Main thread finished! Daemon will now terminate cleanly.
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What happens to active daemon threads when the main thread and all other non-daemon threads finish execution?
@@ -172,3 +240,10 @@ D. Compressing a multi-gigabyte video file to disk.
 **Explanation:** Ephemeral background tasks such as health checks or telemetry gathering—which have no critical shutdown cleanup requirements—are the ideal domain for daemon threads.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Multithreaded Downloader** (6: Multithreading in Python).
+
+👉 **[Continue to Next Lesson: Project: Multithreaded Downloader →](/tutorials/python-for-advanced/project-multithreaded-downloader)**

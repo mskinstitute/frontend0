@@ -1,3 +1,24 @@
+---
+id: python-advanced-project-tested-calculator-application
+slug: project-tested-calculator-application
+course: python-for-advanced
+chapter: "13: Testing & Best Practices"
+topic: "13.5 Project: Tested Calculator Application"
+title: "Project: Tested Calculator Application in Python"
+description: "Master project: tested calculator application in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 9
+order: 56
+keywords:
+  - python project tested calculator application
+  - python advanced
+  - python project: tested calculator application
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Project: Fully Tested Mathematical Expression Engine
 
 Constructing a reliable expression evaluation engine requires rigorous parsing, strict operator precedence, support for variables, and complete test coverage against syntax anomalies, floating-point edge cases, and division-by-zero errors.
@@ -252,7 +273,50 @@ if __name__ == "__main__":
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Missing Boundary Edge Cases
+Failing to test division by zero, negative exponents, overflow numbers, and empty expression strings leaves catastrophic crash paths unverified.
+
+### 2. Incomplete Fixture Cleanup
+Ensure test database instances and temporary test files are destroyed after test suites complete using fixture finalizers or yield fixtures.
+
+---
+
+---
+
+## 💻 Try It Yourself: Extension Challenge - Division by Zero Test Coverage
+
+### Challenge
+Add automated test cases validating that the Calculator application raises a custom `MathDomainError` whenever division by zero is attempted.
+
+### Complete Solution
+```python
+class MathDomainError(Exception):
+    pass
+
+def safe_divide(a: float, b: float) -> float:
+    if b == 0:
+        raise MathDomainError("Cannot divide by zero!")
+    return a / b
+
+# Unit test assertion
+try:
+    safe_divide(100, 0)
+except MathDomainError as e:
+    print(f"✓ Test passed: {e}")
+```
+
+### Expected Output
+```text
+✓ Test passed: Cannot divide by zero!
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What algorithm is utilized by the `ExpressionCalculator` to convert human-readable infix notation into Reverse Polish Notation (RPN)?
@@ -318,3 +382,10 @@ D. `KeyError`
 **Explanation:** An unclosed opening parenthesis is detected during Shunting-Yard parsing, triggering a `CalculatorSyntaxError("Mismatched parentheses detected.")`.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Tkinter Basics** (14: GUI Development with Tkinter).
+
+👉 **[Continue to Next Lesson: Tkinter Basics →](/tutorials/python-for-advanced/tkinter-basics)**

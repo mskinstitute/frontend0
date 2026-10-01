@@ -1,3 +1,24 @@
+---
+id: python-intermediate-inheritance-method-overriding
+slug: inheritance-method-overriding
+course: python-for-intermediate
+chapter: "5: Object-Oriented Programming (Intermediate)"
+topic: "5.2 Inheritance & Method Overriding"
+title: "Inheritance & Method Overriding in Python"
+description: "Master inheritance & method overriding in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Intermediate
+readingTime: 8
+order: 22
+keywords:
+  - python inheritance method overriding
+  - python intermediate
+  - python inheritance & method overriding
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Inheritance & Method Overriding in Python
 
 Inheritance is a cornerstone of Object-Oriented Programming that enables a child (derived) class to inherit attributes and methods from a parent (base) class. It facilitates clean code reuse, models hierarchical domain relationships ("is-a"), and allows subclasses to specialize or override behaviors.
@@ -164,7 +185,61 @@ print(issubclass(Vehicle, ElectricCar))  # False
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Intermediate Mistakes & Gotchas
+
+### 1. Forgetting to Call `super().__init__()`
+Failing to invoke `super().__init__()` leaves base class attributes uninitialized, resulting in unexpected `AttributeError`s when derived methods execute.
+
+### 2. Violating the Liskov Substitution Principle (LSP)
+Overridden methods in child classes should accept the same parameters and return compatible data types as the parent method to prevent breaking caller expectations.
+
+---
+
+---
+
+## 💻 Try It Yourself: Vehicle Hierarchy with Super()
+
+### Scenario
+Define a base class `Vehicle` and a child class `ElectricCar` that extends `__init__` with `battery_capacity_kwh` using `super()` and overrides `drive()` to display battery consumption.
+
+### Complete Solution
+```python
+class Vehicle:
+    def __init__(self, brand: str, model: str):
+        self.brand = brand
+        self.model = model
+
+    def drive(self, distance_km: float):
+        print(f"Driving {self.brand} {self.model} for {distance_km} km.")
+
+class ElectricCar(Vehicle):
+    def __init__(self, brand: str, model: str, battery_kwh: float):
+        super().__init__(brand, model)
+        self.battery_kwh = battery_kwh
+        self.charge_remaining = battery_kwh
+
+    def drive(self, distance_km: float):
+        # Overridden method: consumes ~0.15 kWh per km
+        consumed = distance_km * 0.15
+        self.charge_remaining = max(0.0, self.charge_remaining - consumed)
+        print(f"⚡ Electric drive: {self.brand} {self.model} traveled {distance_km} km.")
+        print(f"Remaining Battery: {self.charge_remaining:.1f}/{self.battery_kwh} kWh")
+
+ev = ElectricCar("Tata", "Nexon EV", 40.5)
+ev.drive(120)
+```
+
+### Expected Output
+```text
+⚡ Electric drive: Tata Nexon EV traveled 120 km.
+Remaining Battery: 22.5/40.5 kWh
+```
+
+---
+
+## Practice Quiz
 
 ### 1. Which function is used in a child class constructor to call the parent class's `__init__` method?
 A. `parent().__init__()`
@@ -210,3 +285,10 @@ D. The `__init__` method of `type` is called
 **Answer:** B
 **Explanation:** If a child class does not declare an `__init__` method, Python traverses the MRO and calls the parent's `__init__` method automatically.
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your intermediate Python journey with **Polymorphism Basics** (5: Object-Oriented Programming (Intermediate)).
+
+👉 **[Continue to Next Lesson: Polymorphism Basics →](/tutorials/python-for-intermediate/polymorphism-basics)**

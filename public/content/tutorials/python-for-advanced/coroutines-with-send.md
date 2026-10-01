@@ -1,3 +1,24 @@
+---
+id: python-advanced-coroutines-with-send
+slug: coroutines-with-send
+course: python-for-advanced
+chapter: "5: Generators & Coroutines"
+topic: "5.3 Coroutines with send()"
+title: "Coroutines with send() in Python"
+description: "Master coroutines with send() in Python: comprehensive explanations, practical code examples, step-by-step walkthroughs, interactive quiz, and hands-on exercises."
+difficulty: Advanced
+readingTime: 8
+order: 22
+keywords:
+  - python coroutines with send
+  - python advanced
+  - python coroutines with send()
+  - msk notes python
+lastUpdated: 2026-10-01
+author: MSK Institute
+version: 1.1.0
+---
+
 # Coroutines with `send()`
 
 Formalized in PEP 342 ("Coroutines via Enhanced Generators"), Python transformed standard generator functions from simple pull-based data producers into **push-based coroutines**. By using `generator.send(value)`, `generator.throw(exception)`, and `generator.close()`, a coroutine can act as an event-driven consumer, state machine, or cooperative multitasking actor.
@@ -163,7 +184,57 @@ Generator-based coroutines served as the historical foundation of asynchronous P
 
 ---
 
-# Multiple Choice Questions
+---
+
+## ⚠️ Common Advanced Mistakes & Gotchas
+
+### 1. Forgetting to Prime the Coroutine
+A newly created generator coroutine cannot receive values immediately. You must prime it first by calling `next(coro)` or `coro.send(None)` to advance execution to the first `yield`.
+
+### 2. Sending Values to Closed Coroutines
+Calling `.send()` on a coroutine that has terminated or closed raises a `StopIteration`. Always handle `StopIteration` gracefully.
+
+---
+
+---
+
+## 💻 Try It Yourself: Running Average Coroutine with .send()
+
+### Scenario
+Build an interactive coroutine `averager()` that accepts streaming numbers via `.send()` and yields the cumulative moving average on each send.
+
+### Complete Solution
+```python
+def averager():
+    total = 0.0
+    count = 0
+    avg = None
+    while True:
+        val = yield avg
+        total += val
+        count += 1
+        avg = total / count
+
+# Test coroutine
+avg_coro = averager()
+next(avg_coro)  # Prime coroutine
+
+print("Sent 10 -> Running Avg:", avg_coro.send(10))
+print("Sent 20 -> Running Avg:", avg_coro.send(20))
+print("Sent 30 -> Running Avg:", avg_coro.send(30))
+avg_coro.close()
+```
+
+### Expected Output
+```text
+Sent 10 -> Running Avg: 10.0
+Sent 20 -> Running Avg: 15.0
+Sent 30 -> Running Avg: 20.0
+```
+
+---
+
+## Practice Quiz
 
 ### 1.
 What error occurs if you call `coro.send("data")` on a freshly created generator coroutine before advancing it with `next()` or `send(None)`?
@@ -229,3 +300,10 @@ D. PEP 3333
 **Explanation:** PEP 492 introduced explicit `async` and `await` syntax in Python 3.5 to create first-class native coroutines distinct from generator objects.
 
 ---
+---
+
+## 🚀 What's Next?
+
+In the next lesson, we will continue your advanced Python journey with **Project: Stream Data Processor** (5: Generators & Coroutines).
+
+👉 **[Continue to Next Lesson: Project: Stream Data Processor →](/tutorials/python-for-advanced/project-stream-data-processor)**
