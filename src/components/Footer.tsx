@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, ExternalLink, ShieldCheck, Star } from 'lucide-react';
 import InstallAppButton from '@/components/InstallAppButton';
+import { SocialIconPills, GoogleGIcon } from '@/components/SocialLinks';
+import { BUSINESS_CONFIG } from '@/config/business';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -36,6 +38,14 @@ export default function Footer() {
               <div>
                 <InstallAppButton variant="header" className="!bg-white/10 !text-white !border-white/20 hover:!bg-secondary hover:!border-secondary" />
               </div>
+            </div>
+
+            {/* Social Media & Trust Channels */}
+            <div className="space-y-2 pt-2 border-t border-white/10">
+              <span className="block text-[11px] font-bold uppercase tracking-wider text-secondary">
+                Follow & Connect
+              </span>
+              <SocialIconPills variant="light" />
             </div>
           </div>
 
@@ -195,15 +205,21 @@ export default function Footer() {
                   mskshikohabad@gmail.com
                 </a>
               </li>
-              <li className="pt-1">
+              <li className="pt-2">
                 <a
-                  href="https://maps.google.com/?q=MSK+Institute+Shikohabad"
+                  href={BUSINESS_CONFIG.socialLinks.maps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-secondary hover:text-secondary-light font-medium"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-amber-300 font-bold transition-all hover:scale-105"
+                  title="Verify 128+ student ratings on Google Reviews"
                 >
-                  Open in Google Maps
-                  <ExternalLink className="w-3 h-3" />
+                  <GoogleGIcon className="w-3.5 h-3.5" />
+                  <span className="flex items-center gap-1">
+                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    <span className="text-white">4.9 ★</span>
+                    <span className="text-gray-300 font-normal">(128+ Google Reviews)</span>
+                  </span>
+                  <ExternalLink className="w-3 h-3 text-secondary ml-0.5" />
                 </a>
               </li>
             </ul>

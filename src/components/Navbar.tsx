@@ -26,6 +26,7 @@ import {
 import InstallAppButton from '@/components/InstallAppButton';
 import SearchModal from '@/components/SearchModal';
 import { useLiveStatus } from '@/context/LiveStatusContext';
+import { SocialIconPills } from '@/components/SocialLinks';
 
 interface Announcement {
   id: string;
@@ -703,6 +704,11 @@ export default function Navbar() {
               <PhoneCall className="w-3.5 h-3.5 text-secondary" />
               <span>Admissions Helpline: +91 83930 42166</span>
             </a>
+
+            {/* Social & Verification Channels */}
+            <div className="pt-2 border-t border-border-subtle flex items-center justify-center">
+              <SocialIconPills variant="dark" iconSize="w-3.5 h-3.5" />
+            </div>
           </div>
         </div>
       )}

@@ -81,10 +81,13 @@ export const BUSINESS_CONFIG = {
 
   // Social & Community Presence
   socialLinks: {
-    facebook: 'https://www.facebook.com/mskinstitute',
+    youtube: 'https://youtube.com/@mskinstitute',
     instagram: 'https://www.instagram.com/mskinstitute',
-    maps: 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
+    linkedin: 'https://linkedin.com/company/msk-institute',
+    facebook: 'https://www.facebook.com/mskinstitute',
+    github: 'https://github.com/mskinstitute',
     whatsapp: 'https://wa.me/918393042166',
+    maps: 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
   },
 
   // Service Areas for Local SEO
@@ -154,8 +157,11 @@ export function getCanonicalBusinessSchema() {
       jobTitle: BUSINESS_CONFIG.founder.jobTitle,
     },
     sameAs: [
-      BUSINESS_CONFIG.socialLinks.facebook,
+      BUSINESS_CONFIG.socialLinks.youtube,
       BUSINESS_CONFIG.socialLinks.instagram,
+      BUSINESS_CONFIG.socialLinks.linkedin,
+      BUSINESS_CONFIG.socialLinks.facebook,
+      BUSINESS_CONFIG.socialLinks.github,
       BUSINESS_CONFIG.socialLinks.maps,
     ],
     contactPoint: {

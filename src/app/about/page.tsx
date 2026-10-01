@@ -4,8 +4,9 @@ import {
   GraduationCap, Award, Users, Laptop, CheckCircle2, 
   MapPin, Phone, Mail, Sparkles, BookOpen, Trophy, 
   ChevronRight, HeartHandshake, ShieldCheck, Target, 
-  Lightbulb, ExternalLink
+  Lightbulb, ExternalLink, Linkedin, Github, Youtube
 } from 'lucide-react';
+import { SocialCommunitySection } from '@/components/SocialLinks';
 
 export const metadata: Metadata = {
   title: 'About Us | MSK Institute & Er. Sumit Kumar | Shikohabad',
@@ -201,6 +202,38 @@ export default function AboutPage() {
                 <Lightbulb className="w-4 h-4 text-amber-500" />
                 <span>&quot;Ratta maarne ke bajaye practical code build karo.&quot;</span>
               </div>
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href="https://linkedin.com/company/msk-institute"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1.5 bg-surface hover:bg-[#0A66C2] hover:text-white border border-border-subtle rounded-lg text-xs font-bold text-primary flex items-center gap-1.5 transition-colors"
+                  title="Connect with Er. Sumit Kumar on LinkedIn"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://github.com/mskinstitute"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1.5 bg-surface hover:bg-slate-900 hover:text-white border border-border-subtle rounded-lg text-xs font-bold text-primary flex items-center gap-1.5 transition-colors"
+                  title="View MSK GitHub Repositories"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href="https://youtube.com/@mskinstitute"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1.5 bg-surface hover:bg-red-600 hover:text-white border border-border-subtle rounded-lg text-xs font-bold text-primary flex items-center gap-1.5 transition-colors"
+                  title="Watch Coding Lectures on YouTube"
+                >
+                  <Youtube className="w-3.5 h-3.5" />
+                  <span>YouTube</span>
+                </a>
+              </div>
             </div>
 
             <div className="lg:col-span-7 space-y-5 text-text-muted text-sm sm:text-base leading-relaxed">
@@ -283,7 +316,15 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 6. Campus Location & Contact CTA */}
+        {/* 6. Social Media & Community Trust */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SocialCommunitySection
+            title="Follow MSK Institute on Social Media"
+            subtitle="Get a glimpse into our daily classroom labs, watch student project presentations, and stay updated with free tech tutorials."
+          />
+        </section>
+
+        {/* 7. Campus Location & Contact CTA */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white p-8 sm:p-10 rounded-3xl border border-border-subtle shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-xl text-center md:text-left">

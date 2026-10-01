@@ -138,8 +138,11 @@ export default function RootLayout({
                 jobTitle: 'Founder & Lead Technical Trainer',
               },
               sameAs: [
-                'https://www.facebook.com/mskinstitute',
+                'https://youtube.com/@mskinstitute',
                 'https://www.instagram.com/mskinstitute',
+                'https://linkedin.com/company/msk-institute',
+                'https://www.facebook.com/mskinstitute',
+                'https://github.com/mskinstitute',
                 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
               ],
               contactPoint: {

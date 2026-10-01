@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { 
   Clock, Award, Users, User, BookOpen, Layers, MessageSquare, 
   Globe, Laptop, HelpCircle, ChevronDown, Check, Download, 
-  Play, PackageCheck, ArrowRight, Sparkles, CheckCircle2, MapPin
+  Play, PackageCheck, ArrowRight, Sparkles, CheckCircle2, MapPin, Star
 } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/SocialLinks';
 import { fetchCourses, fetchLiveBatches } from '@/services/api';
 import { getBranchesForCourse } from '@/lib/branches';
 import DemoBookingForm from '@/components/DemoBookingForm';
@@ -487,6 +488,34 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
                 <p className="text-xs text-center text-text-muted mt-3 leading-relaxed">
                   * Free demo classes available at our campus locations and online interactive batches.
                 </p>
+              </div>
+
+              {/* Direct WhatsApp Mentor Connect & Google Rating */}
+              <div className="pt-4 border-t border-border-subtle space-y-3">
+                <a
+                  href={`https://wa.me/918393042166?text=${encodeURIComponent(`Hi Er. Sumit Kumar, I want to inquire about the ${course.title} syllabus and demo batch seats.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-2xs hover:scale-[1.02]"
+                >
+                  <WhatsAppIcon className="w-4 h-4" />
+                  <span>Chat on WhatsApp with Mentor</span>
+                </a>
+
+                <div className="flex items-center justify-between text-[11px] text-text-muted px-1">
+                  <span className="flex items-center gap-1 font-bold text-primary">
+                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    4.9/5 Rating
+                  </span>
+                  <a
+                    href="https://maps.google.com/?q=MSK+Institute+Shikohabad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-secondary hover:underline font-semibold"
+                  >
+                    128+ Google Reviews &rarr;
+                  </a>
+                </div>
               </div>
             </div>
           </div>

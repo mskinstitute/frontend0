@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { trackContactClick, trackFormSubmit, trackGenerateLead } from '@/lib/tracking';
+import { SocialIconPills, GoogleRatingTrustBadge, SocialCommunitySection } from '@/components/SocialLinks';
 
 const PHONE_NUMBER = '+91 83930 42166';
 const CLEAN_PHONE = '918393042166';
@@ -625,7 +626,26 @@ export default function ContactClient() {
                 </div>
               </div>
             </div>
+
+            {/* Google Rating Trust Badge & Direct Social Links */}
+            <div className="bg-white rounded-2xl border border-border-subtle p-5 space-y-3">
+              <GoogleRatingTrustBadge className="w-full" />
+              <div className="pt-2 border-t border-border-subtle">
+                <span className="block text-[11px] font-bold uppercase tracking-wider text-text-muted mb-2">
+                  Official Channels:
+                </span>
+                <SocialIconPills variant="dark" />
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* Social Media & Community Trust Section */}
+        <div className="mb-14">
+          <SocialCommunitySection 
+            title="Connect with MSK Student Community on Social Media"
+            subtitle="Follow our YouTube tutorials, Instagram campus lab moments, LinkedIn career updates, and chat directly on WhatsApp."
+          />
         </div>
 
         {/* FAQ Section */}

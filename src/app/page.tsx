@@ -14,6 +14,7 @@ import HomeFeaturedCourses from '@/components/HomeFeaturedCourses';
 import { parseBatchStartTimestamp } from '@/lib/batchUtils';
 import CountdownTimer from '@/components/CountdownTimer';
 import HomeFaqAccordion from '@/components/HomeFaqAccordion';
+import { SocialCommunitySection } from '@/components/SocialLinks';
 import { Course, LiveBatch } from '@/types';
 
 export const revalidate = 60; // Refresh live batch schedules every 60s
@@ -735,7 +736,15 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 7. Frequently Asked Questions & Academic Counseling */}
+        {/* 7. Active Student & Developer Community (Social Proof) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SocialCommunitySection 
+            title="Join 1,200+ Students in the MSK Developer Community"
+            subtitle="Subscribe for free tutorials on YouTube, see daily lab sessions on Instagram, connect with alumni on LinkedIn, and ask questions on WhatsApp."
+          />
+        </section>
+
+        {/* 8. Frequently Asked Questions & Academic Counseling */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">
