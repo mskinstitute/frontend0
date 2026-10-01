@@ -75,33 +75,7 @@ const TOOLS: ToolItem[] = [
     tags: ['Monaco Editor', 'Python Pyodide', 'Live HTML Preview', 'Instant Output'],
     cta: 'Open Playground',
     featured: true,
-  },
-  {
-    id: 'certificate-verifier',
-    title: 'Certificate Verification Portal',
-    subtitle: 'Cryptographic Student Credential Check',
-    description:
-      'Instantly verify authentic diplomas, course completion certificates, and marks issued by MSK Institute. Supports instant QR verification and high-resolution official printouts.',
-    href: '/verify-certificate',
-    icon: ShieldCheck,
-    badge: 'Official Service',
-    badgeColor: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30',
-    tags: ['Tamper-Proof', 'Instant Lookup', 'QR Verification', 'Print Ready'],
-    cta: 'Verify Certificate',
-  },
-  {
-    id: 'study-material',
-    title: 'Interactive Tutorials & Cheatsheets',
-    subtitle: 'Developer Guides & Reference Sheets',
-    description:
-      'Deep-dive interactive guides, syntax cheat sheets, and architecture handbooks for MERN Stack, Python, DSA, and Office productivity tools.',
-    href: '/study-material',
-    icon: FileCode,
-    badge: 'Learning Hub',
-    badgeColor: 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30',
-    tags: ['Cheatsheets', 'Tutorials', 'Handbooks', 'Quick Syntax'],
-    cta: 'Browse Material',
-  },
+  }
 ];
 
 export default function ToolsHubPage() {
