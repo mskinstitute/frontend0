@@ -5,14 +5,13 @@ import {
   Linkedin, 
   Facebook, 
   Github, 
-  MapPin, 
   ExternalLink,
   Star,
   CheckCircle2,
   Users,
-  MessageSquare
+  Send
 } from 'lucide-react';
-import { BUSINESS_CONFIG } from '@/config/business';
+import socialRegistry from '../../public/data/social-links.json';
 
 // Custom WhatsApp SVG Icon for exact brand identity
 export function WhatsAppIcon({ className = 'w-5 h-5' }: { className?: string }) {
@@ -56,6 +55,7 @@ export function GoogleGIcon({ className = 'w-4 h-4' }: { className?: string }) {
 export interface SocialChannel {
   id: string;
   name: string;
+  handle: string;
   url: string;
   icon: React.ComponentType<{ className?: string }>;
   color: string;
@@ -63,76 +63,51 @@ export interface SocialChannel {
   badge: string;
   followers?: string;
   description: string;
+  enabled: boolean;
 }
 
-export const OFFICIAL_SOCIAL_CHANNELS: SocialChannel[] = [
-  {
-    id: 'youtube',
-    name: 'YouTube',
-    url: BUSINESS_CONFIG.socialLinks.youtube,
-    icon: Youtube,
-    color: '#FF0000',
-    hoverBg: 'hover:bg-red-600 hover:text-white hover:border-red-600',
-    badge: 'Video Classes',
-    followers: '100+ Lessons',
-    description: 'Free coding video lectures, live project builds, and seminar recordings.',
-  },
-  {
-    id: 'instagram',
-    name: 'Instagram',
-    url: BUSINESS_CONFIG.socialLinks.instagram,
-    icon: Instagram,
-    color: '#E4405F',
-    hoverBg: 'hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white hover:border-pink-600',
-    badge: 'Campus Life',
-    followers: 'Daily Updates',
-    description: 'Classroom lab moments, student achievements, certificate ceremonies, and tech reels.',
-  },
-  {
-    id: 'linkedin',
-    name: 'LinkedIn',
-    url: BUSINESS_CONFIG.socialLinks.linkedin,
-    icon: Linkedin,
-    color: '#0A66C2',
-    hoverBg: 'hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2]',
-    badge: 'Alumni & Jobs',
-    followers: 'Network',
-    description: 'Career opportunities, alumni job placements, software internships, and tech industry news.',
-  },
-  {
-    id: 'whatsapp',
-    name: 'WhatsApp',
-    url: BUSINESS_CONFIG.socialLinks.whatsapp,
-    icon: WhatsAppIcon,
-    color: '#25D366',
-    hoverBg: 'hover:bg-[#25D366] hover:text-white hover:border-[#25D366]',
-    badge: 'Direct Help',
-    followers: 'Instant Support',
-    description: 'Chat directly with Er. Sumit Kumar for course counseling, syllabus inquiries, and demo seats.',
-  },
-  {
-    id: 'github',
-    name: 'GitHub',
-    url: BUSINESS_CONFIG.socialLinks.github,
-    icon: Github,
-    color: '#181717',
-    hoverBg: 'hover:bg-slate-900 hover:text-white hover:border-slate-900',
-    badge: 'Open Source',
-    followers: 'Code Repos',
-    description: 'Explore student capstone code, open-source projects, and starter boilerplates.',
-  },
-  {
-    id: 'facebook',
-    name: 'Facebook',
-    url: BUSINESS_CONFIG.socialLinks.facebook,
-    icon: Facebook,
-    color: '#1877F2',
-    hoverBg: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
-    badge: 'Community',
-    followers: 'Official Page',
-    description: 'Official institute announcements, felicitation photos, and community news.',
-  },
-];
+// Icon component lookup map
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  youtube: Youtube,
+  instagram: Instagram,
+  linkedin: Linkedin,
+  whatsapp: WhatsAppIcon,
+  github: Github,
+  facebook: Facebook,
+  telegram: Send,
+};
+
+// Hover color class lookup map
+const HOVER_BG_MAP: Record<string, string> = {
+  youtube: 'hover:bg-red-600 hover:text-white hover:border-red-600',
+  instagram: 'hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white hover:border-pink-600',
+  linkedin: 'hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2]',
+  whatsapp: 'hover:bg-[#25D366] hover:text-white hover:border-[#25D366]',
+  github: 'hover:bg-slate-900 hover:text-white hover:border-slate-900',
+  facebook: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
+  telegram: 'hover:bg-[#229ED9] hover:text-white hover:border-[#229ED9]',
+};
+
+/**
+ * Dynamically resolves all active channels directly from public/data/social-links.json
+ */
+export function getActiveSocialChannels(): SocialChannel[] {
+  return socialRegistry.channels
+    .filter((channel) => channel.enabled !== false)
+    .map((channel) => ({
+      id: channel.id,
+      name: channel.name,
+      handle: channel.handle,
+      url: channel.url,
+      icon: ICON_MAP[channel.id] || Send,
+      color: channel.color || '#2563EB',
+      hoverBg: HOVER_BG_MAP[channel.id] || 'hover:bg-secondary hover:text-white',
+      badge: channel.badge,
+      followers: channel.followers,
+      description: channel.description,
+      enabled: channel.enabled,
+    }));
+}
 
 /**
  * Compact Icon Pill Row for Footers, Navbars & Cards
@@ -146,9 +121,13 @@ export function SocialIconPills({
   iconSize?: string;
   variant?: 'light' | 'dark';
 }) {
+  const activeChannels = getActiveSocialChannels();
+  const mapsUrl = socialRegistry.googleReviews?.mapsUrl || 'https://maps.google.com/?q=MSK+Institute+Shikohabad';
+  const rating = socialRegistry.googleReviews?.rating || '4.9';
+
   return (
     <div className={`flex items-center flex-wrap gap-2 ${className}`}>
-      {OFFICIAL_SOCIAL_CHANNELS.map((item) => {
+      {activeChannels.map((item) => {
         const Icon = item.icon;
         return (
           <a
@@ -156,7 +135,7 @@ export function SocialIconPills({
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            title={`${item.name} - ${item.description}`}
+            title={`${item.name} (${item.handle}) - ${item.description}`}
             aria-label={`Visit MSK Institute on ${item.name}`}
             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 border ${
               variant === 'light'
@@ -170,24 +149,26 @@ export function SocialIconPills({
       })}
 
       {/* Google Maps Reviews Button */}
-      <a
-        href={BUSINESS_CONFIG.socialLinks.maps}
-        target="_blank"
-        rel="noopener noreferrer"
-        title="MSK Institute on Google Maps (4.9 ★ Rating)"
-        aria-label="View MSK Institute Reviews on Google Maps"
-        className={`px-2.5 h-8 rounded-lg flex items-center gap-1.5 transition-all duration-200 border text-xs font-bold ${
-          variant === 'light'
-            ? 'bg-white/10 text-white/90 border-white/15 hover:bg-white hover:text-primary hover:scale-105'
-            : 'bg-surface text-primary border-border-subtle hover:bg-white hover:border-secondary hover:scale-105'
-        }`}
-      >
-        <GoogleGIcon className="w-3.5 h-3.5" />
-        <span className="flex items-center gap-0.5 text-amber-400">
-          <Star className="w-3 h-3 fill-amber-400" />
-          <span>4.9</span>
-        </span>
-      </a>
+      {socialRegistry.googleReviews?.enabled !== false && (
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`MSK Institute on Google Maps (${rating} ★ Rating)`}
+          aria-label="View MSK Institute Reviews on Google Maps"
+          className={`px-2.5 h-8 rounded-lg flex items-center gap-1.5 transition-all duration-200 border text-xs font-bold ${
+            variant === 'light'
+              ? 'bg-white/10 text-white/90 border-white/15 hover:bg-white hover:text-primary hover:scale-105'
+              : 'bg-surface text-primary border-border-subtle hover:bg-white hover:border-secondary hover:scale-105'
+          }`}
+        >
+          <GoogleGIcon className="w-3.5 h-3.5" />
+          <span className="flex items-center gap-0.5 text-amber-400">
+            <Star className="w-3 h-3 fill-amber-400" />
+            <span>{rating}</span>
+          </span>
+        </a>
+      )}
     </div>
   );
 }
@@ -196,13 +177,17 @@ export function SocialIconPills({
  * Trust & Credibility Google Rating Badge
  */
 export function GoogleRatingTrustBadge({ className = '' }: { className?: string }) {
+  const mapsUrl = socialRegistry.googleReviews?.mapsUrl || 'https://maps.google.com/?q=MSK+Institute+Shikohabad';
+  const rating = socialRegistry.googleReviews?.rating || '4.9';
+  const reviewCount = socialRegistry.googleReviews?.reviewCount || '128+';
+
   return (
     <a
-      href={BUSINESS_CONFIG.socialLinks.maps}
+      href={mapsUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center gap-3 p-3 bg-white rounded-2xl border border-border-subtle shadow-xs hover:shadow-md hover:border-amber-400 transition-all group ${className}`}
-      title="Verify 128+ student ratings on Google Reviews"
+      title={`Verify ${reviewCount} student ratings on Google Reviews`}
     >
       <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
         <GoogleGIcon className="w-5 h-5" />
@@ -215,10 +200,10 @@ export function GoogleRatingTrustBadge({ className = '' }: { className?: string 
               <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
             ))}
           </div>
-          <span className="text-xs font-black text-primary">4.9 / 5.0</span>
+          <span className="text-xs font-black text-primary">{rating} / 5.0</span>
         </div>
         <p className="text-[11px] text-text-muted">
-          Based on <strong className="text-primary">128+ student reviews</strong> in Shikohabad
+          Based on <strong className="text-primary">{reviewCount} student reviews</strong> in Shikohabad
         </p>
       </div>
       <ExternalLink className="w-3.5 h-3.5 text-text-muted group-hover:text-primary group-hover:translate-x-0.5 transition-all ml-auto" />
@@ -236,6 +221,8 @@ export function SocialCommunitySection({
   title?: string;
   subtitle?: string;
 }) {
+  const activeChannels = getActiveSocialChannels();
+
   return (
     <section className="bg-surface/50 rounded-3xl border border-border-subtle p-6 sm:p-10 space-y-8">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border-subtle pb-6">
@@ -260,7 +247,7 @@ export function SocialCommunitySection({
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {OFFICIAL_SOCIAL_CHANNELS.map((channel) => {
+        {activeChannels.map((channel) => {
           const Icon = channel.icon;
           return (
             <div

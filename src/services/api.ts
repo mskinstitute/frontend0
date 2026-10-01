@@ -1,4 +1,4 @@
-import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, StudyMaterial, BlogPost, TutorialItem, TutorialTopicFrontmatter, CareerOpportunity, Branch } from '@/types';
+import { Course, Certificate, Student, Note, LiveClass, LiveBatch, Instructor, StudyMaterial, BlogPost, TutorialItem, TutorialTopicFrontmatter, CareerOpportunity, Branch, SocialLinksRegistry } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -23,6 +23,8 @@ async function loadServerData<T>(fileName: string): Promise<T> {
       return (await import('../../public/data/announcements.json')).default as unknown as T;
     case 'branches.json':
       return (await import('../../public/data/branches.json')).default as unknown as T;
+    case 'social-links.json':
+      return (await import('../../public/data/social-links.json')).default as unknown as T;
     default:
       throw new Error(`Unsupported data file: ${fileName}`);
   }
@@ -1164,5 +1166,29 @@ export async function fetchBranches(): Promise<Branch[]> {
   } catch (err) {
     console.warn('Could not load branches.json:', err);
     return [];
+  }
+}
+
+export async function fetchSocialLinks(): Promise<SocialLinksRegistry> {
+  try {
+    return await getLocalData<SocialLinksRegistry>('social-links.json');
+  } catch (err) {
+    console.warn('Could not load social-links.json:', err);
+    return {
+      channels: [],
+      googleReviews: {
+        rating: '4.9',
+        reviewCount: '128+',
+        mapsUrl: 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
+        enabled: true,
+      },
+      whatsAppSupport: {
+        phone: '+91 83930 42166',
+        cleanNumber: '918393042166',
+        defaultMessage: 'Hi MSK Institute, I want to inquire about courses and demo classes in Shikohabad.',
+        counselorName: 'Er. Sumit Kumar',
+        enabled: true,
+      },
+    };
   }
 }

@@ -12,6 +12,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import Analytics from '@/components/Analytics';
 import { GoogleTagManagerNoScript } from '@/components/GoogleTagManager';
 import FloatingWhatsAppCTA from '@/components/FloatingWhatsAppCTA';
+import socialRegistry from '../../public/data/social-links.json';
 import './globals.css';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -137,14 +138,10 @@ export default function RootLayout({
                 name: 'Er. Sumit Kumar',
                 jobTitle: 'Founder & Lead Technical Trainer',
               },
-              sameAs: [
-                'https://youtube.com/@mskinstitute',
-                'https://www.instagram.com/mskinstitute',
-                'https://linkedin.com/company/msk-institute',
-                'https://www.facebook.com/mskinstitute',
-                'https://github.com/mskinstitute',
-                'https://maps.google.com/?q=MSK+Institute+Shikohabad',
-              ],
+              sameAs: socialRegistry.channels
+                .filter((c) => c.enabled !== false && c.id !== 'whatsapp')
+                .map((c) => c.url)
+                .concat([socialRegistry.googleReviews?.mapsUrl || 'https://maps.google.com/?q=MSK+Institute+Shikohabad']),
               contactPoint: {
                 '@type': 'ContactPoint',
                 telephone: '+918393042166',

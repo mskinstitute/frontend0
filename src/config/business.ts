@@ -5,6 +5,8 @@
  * GeoCoordinates, Operating Hours, and Schema.org metadata.
  */
 
+import socialRegistry from '../../public/data/social-links.json';
+
 export const BUSINESS_CONFIG = {
   name: 'MSK Institute',
   legalName: 'MSK Institute of Technology & Coding',
@@ -79,15 +81,15 @@ export const BUSINESS_CONFIG = {
     picture: '/logo.jpg',
   },
 
-  // Social & Community Presence
+  // Social & Community Presence (Managed in public/data/social-links.json)
   socialLinks: {
-    youtube: 'https://youtube.com/@mskinstitute',
-    instagram: 'https://www.instagram.com/mskinstitute',
-    linkedin: 'https://linkedin.com/company/msk-institute',
-    facebook: 'https://www.facebook.com/mskinstitute',
-    github: 'https://github.com/mskinstitute',
-    whatsapp: 'https://wa.me/918393042166',
-    maps: 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
+    youtube: socialRegistry.channels.find((c) => c.id === 'youtube')?.url || 'https://youtube.com/@mskinstitute',
+    instagram: socialRegistry.channels.find((c) => c.id === 'instagram')?.url || 'https://www.instagram.com/mskinstitute',
+    linkedin: socialRegistry.channels.find((c) => c.id === 'linkedin')?.url || 'https://linkedin.com/company/msk-institute',
+    facebook: socialRegistry.channels.find((c) => c.id === 'facebook')?.url || 'https://www.facebook.com/mskinstitute',
+    github: socialRegistry.channels.find((c) => c.id === 'github')?.url || 'https://github.com/mskinstitute',
+    whatsapp: socialRegistry.whatsAppSupport?.cleanNumber ? `https://wa.me/${socialRegistry.whatsAppSupport.cleanNumber}` : 'https://wa.me/918393042166',
+    maps: socialRegistry.googleReviews?.mapsUrl || 'https://maps.google.com/?q=MSK+Institute+Shikohabad',
   },
 
   // Service Areas for Local SEO
@@ -103,12 +105,12 @@ export const BUSINESS_CONFIG = {
 
   // Trust & Evidence Metrics (Substantiated)
   stats: {
-    studentsMentored: '1,200+',
-    rating: '4.9/5',
-    reviewCount: '128+',
-    verifiedCertificates: '500+',
+    studentsMentored: socialRegistry.communityStats?.studentsMentored || '1,200+',
+    rating: `${socialRegistry.googleReviews?.rating || '4.9'}/5`,
+    reviewCount: socialRegistry.googleReviews?.reviewCount || '128+',
+    verifiedCertificates: socialRegistry.communityStats?.verifiedCertificates || '500+',
     activeCourses: '66+',
-    practicalLabRatio: '100%',
+    practicalLabRatio: socialRegistry.communityStats?.practicalRatio || '100%',
   },
 } as const;
 

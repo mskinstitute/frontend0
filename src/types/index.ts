@@ -474,3 +474,46 @@ export interface BranchSummary {
   isHeadquarters?: boolean;
 }
 
+/**
+ * Social Media & Community Trust Configuration Registry
+ */
+export interface SocialChannelConfig {
+  id: string;
+  name: string;
+  handle: string;
+  url: string;
+  badge: string;
+  followers: string;
+  description: string;
+  enabled: boolean;
+  color?: string;
+}
+
+export interface GoogleReviewsConfig {
+  rating: string;
+  reviewCount: string;
+  mapsUrl: string;
+  label?: string;
+  enabled: boolean;
+}
+
+export interface WhatsAppSupportConfig {
+  phone: string;
+  cleanNumber: string;
+  defaultMessage: string;
+  counselorName: string;
+  enabled: boolean;
+}
+
+export interface SocialLinksRegistry {
+  channels: SocialChannelConfig[];
+  googleReviews: GoogleReviewsConfig;
+  whatsAppSupport: WhatsAppSupportConfig;
+  communityStats?: {
+    studentsMentored?: string;
+    activeLearners?: string;
+    practicalRatio?: string;
+    verifiedCertificates?: string;
+  };
+}
+
