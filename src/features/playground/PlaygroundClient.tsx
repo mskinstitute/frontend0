@@ -59,6 +59,14 @@ import {
   extractDroppedItems,
   detectPrimaryLanguage,
 } from './fileImportUtils';
+import {
+  loadPlaygroundWorkspace,
+  savePlaygroundWorkspace,
+  deletePlaygroundWorkspace,
+  purgeAllExpiredPlaygroundWorkspaces,
+  PLAYGROUND_TTL_MS,
+  formatTtlRemaining,
+} from '@/lib/studioStorage';
 
 interface PyodideInterface {
   runPythonAsync: (code: string) => Promise<unknown>;
@@ -478,6 +486,7 @@ export default function PlaygroundClient({
   // Synchronized refs to guarantee zero stale closures in save & run operations
   const activeFileIdRef = useRef<string>(activeFileId);
   const filesRef = useRef<PlaygroundFile[]>(files);
+  const isHydratedRef = useRef<boolean>(hasIncomingCode);
 
   // Device File & Folder Input Refs & State
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -495,7 +504,7 @@ export default function PlaygroundClient({
     filesRef.current = files;
   }, [files]);
 
-  // Load saved settings & split percentage on mount
+  // Load saved settings, split percentage, and restore non-expired workspace (12h TTL) on mount
   useEffect(() => {
     try {
       const savedSettings = localStorage.getItem(SETTINGS_STORAGE_KEY);
@@ -532,18 +541,87 @@ export default function PlaygroundClient({
           setLanguage(sharedLang);
           const newFiles = buildInitialFiles(sharedLang, decoded);
           setFiles(newFiles);
+          filesRef.current = newFiles;
           setActiveFileId(newFiles[0].id);
+          activeFileIdRef.current = newFiles[0].id;
           setOpenTabIds(newFiles.map((f) => f.id));
           toast.success(`Loaded shared ${sharedLang} workspace!`, { icon: '🔗' });
+          isHydratedRef.current = true;
+          return;
         }
       }
     } catch (hashErr) {
       console.warn('Could not parse shared URL hash:', hashErr);
     }
 
-    // Do not auto-populate default files on initial mount so workspace starts with no files open
-    // Files are created on demand, loaded from examples, or loaded from tutorial code.
-  }, [resolvedInitialLang, queryCode, initialCode]);
+    // Purge expired workspaces across all languages on launch
+    purgeAllExpiredPlaygroundWorkspaces();
+
+    // If no incoming code/URL query, restore active workspace if saved within 12 hours
+    if (!hasIncomingCode) {
+      loadPlaygroundWorkspace(resolvedInitialLang)
+        .then((saved) => {
+          if (saved && Array.isArray(saved.files) && saved.files.length > 0) {
+            const loadedFiles = saved.files as PlaygroundFile[];
+            const loadedFolders = (saved.folders as PlaygroundFolder[]) || [];
+            setFiles(loadedFiles);
+            filesRef.current = loadedFiles;
+            setFolders(loadedFolders);
+
+            const activeId =
+              saved.activeFileId && loadedFiles.some((f) => f.id === saved.activeFileId)
+                ? saved.activeFileId
+                : loadedFiles[0].id;
+            setActiveFileId(activeId);
+            activeFileIdRef.current = activeId;
+
+            const openTabs =
+              Array.isArray(saved.openTabIds) && saved.openTabIds.length > 0
+                ? saved.openTabIds.filter((id) => loadedFiles.some((f) => f.id === id))
+                : [activeId];
+            setOpenTabIds(openTabs.length > 0 ? openTabs : [activeId]);
+
+            const savedDate = new Date(saved.updatedAt || Date.now());
+            setLastSavedTime(
+              savedDate.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+              })
+            );
+
+            const remainingMinutes = Math.max(
+              1,
+              Math.round(
+                (PLAYGROUND_TTL_MS - (Date.now() - (saved.updatedAt || Date.now()))) /
+                  (60 * 1000)
+              )
+            );
+            const hours = Math.floor(remainingMinutes / 60);
+            const mins = remainingMinutes % 60;
+            const timeStr = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+            toast.success(`Restored workspace (${timeStr} auto-save countdown)`, {
+              id: 'restore-playground-workspace',
+              icon: '📂',
+              duration: 3500,
+            });
+          }
+          isHydratedRef.current = true;
+        })
+        .catch(() => {
+          isHydratedRef.current = true;
+        });
+    }
+
+    // Periodic cleanup interval (purges workspaces older than 12 hours)
+    const purgeInterval = setInterval(async () => {
+      await purgeAllExpiredPlaygroundWorkspaces();
+    }, 5 * 60 * 1000);
+
+    return () => {
+      clearInterval(purgeInterval);
+    };
+  }, [resolvedInitialLang, queryCode, initialCode, hasIncomingCode]);
 
   // Synchronize incoming initialCode or initialLanguage prop changes (e.g. clicking different examples in tutorial)
   useEffect(() => {
@@ -588,6 +666,30 @@ export default function PlaygroundClient({
       return updated;
     });
   }, []);
+
+  // Debounced auto-save for workspace files & folders (IndexedDB + localStorage, 12h TTL)
+  const saveWorkspaceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    if (!isHydratedRef.current) return;
+    if (files.length === 0) return;
+
+    if (saveWorkspaceTimerRef.current) clearTimeout(saveWorkspaceTimerRef.current);
+    saveWorkspaceTimerRef.current = setTimeout(() => {
+      const now = Date.now();
+      savePlaygroundWorkspace({
+        language,
+        files,
+        folders,
+        activeFileId,
+        openTabIds,
+        updatedAt: now,
+      });
+    }, 600);
+
+    return () => {
+      if (saveWorkspaceTimerRef.current) clearTimeout(saveWorkspaceTimerRef.current);
+    };
+  }, [files, folders, activeFileId, openTabIds, language]);
 
   const prevFocusModeRef = useRef<boolean | undefined>(undefined);
 
@@ -934,6 +1036,7 @@ export default function PlaygroundClient({
 
     const newFiles = buildInitialFiles(template.language, template.code);
     setFiles(newFiles);
+    filesRef.current = newFiles;
     setFolders([]);
     setActiveFileId(newFiles[0].id);
     activeFileIdRef.current = newFiles[0].id;
@@ -947,12 +1050,14 @@ export default function PlaygroundClient({
       setActiveTab('terminal');
     }
 
-    try {
-      localStorage.setItem(
-        `${SAVED_FILES_PREFIX}${template.language}`,
-        JSON.stringify(newFiles)
-      );
-    } catch {}
+    savePlaygroundWorkspace({
+      language: template.language,
+      files: newFiles,
+      folders: [],
+      activeFileId: newFiles[0].id,
+      openTabIds: [newFiles[0].id],
+      updatedAt: Date.now(),
+    });
 
     toast.success(`Loaded example: ${template.title}`, {
       icon: '💡',
@@ -1325,7 +1430,19 @@ export default function PlaygroundClient({
   };
 
   // When language changes from dropdown, check saved files or load starter
-  const handleLanguageChange = (newLang: SupportedLanguage) => {
+  const handleLanguageChange = async (newLang: SupportedLanguage) => {
+    // Save current language workspace first if it has files
+    if (files.length > 0) {
+      await savePlaygroundWorkspace({
+        language,
+        files: getLatestFiles(),
+        folders,
+        activeFileId,
+        openTabIds,
+        updatedAt: Date.now(),
+      });
+    }
+
     setLanguage(newLang);
     const templates = STARTER_TEMPLATES[newLang] || [];
     const initialTplCode = templates.length > 0 ? templates[0].code : '';
@@ -1333,30 +1450,37 @@ export default function PlaygroundClient({
       setSelectedTemplateId(templates[0].id);
     }
 
-    let filesToLoad: PlaygroundFile[] | null = null;
-    let foldersToLoad: PlaygroundFolder[] = [];
-    try {
-      const saved = localStorage.getItem(`${SAVED_FILES_PREFIX}${newLang}`);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          filesToLoad = parsed;
-        }
-      }
-      const savedFolders = localStorage.getItem(`${SAVED_FOLDERS_PREFIX}${newLang}`);
-      if (savedFolders) {
-        const parsedFolders = JSON.parse(savedFolders);
-        if (Array.isArray(parsedFolders)) {
-          foldersToLoad = parsedFolders;
-        }
-      }
-    } catch {}
+    // Load saved workspace for newLang if available and within 12h TTL
+    const saved = await loadPlaygroundWorkspace(newLang);
+    let newFiles: PlaygroundFile[] = [];
+    let newFolders: PlaygroundFolder[] = [];
+    let newActiveId = '';
+    let newOpenTabs: string[] = [];
 
-    const newFiles = filesToLoad || buildInitialFiles(newLang, initialTplCode);
+    if (saved && Array.isArray(saved.files) && saved.files.length > 0) {
+      newFiles = saved.files as PlaygroundFile[];
+      newFolders = (saved.folders as PlaygroundFolder[]) || [];
+      newActiveId =
+        saved.activeFileId && newFiles.some((f) => f.id === saved.activeFileId)
+          ? saved.activeFileId
+          : newFiles[0].id;
+      newOpenTabs =
+        Array.isArray(saved.openTabIds) && saved.openTabIds.length > 0
+          ? saved.openTabIds.filter((id) => newFiles.some((f) => f.id === id))
+          : [newActiveId];
+    } else {
+      newFiles = buildInitialFiles(newLang, initialTplCode);
+      newFolders = [];
+      newActiveId = newFiles[0].id;
+      newOpenTabs = newFiles.map((f) => f.id);
+    }
+
     setFiles(newFiles);
-    setFolders(foldersToLoad);
-    setActiveFileId(newFiles[0].id);
-    setOpenTabIds(newFiles.map((f) => f.id));
+    filesRef.current = newFiles;
+    setFolders(newFolders);
+    setActiveFileId(newActiveId);
+    activeFileIdRef.current = newActiveId;
+    setOpenTabIds(newOpenTabs);
     setUnsavedFileIds(new Set());
 
     if (newLang === 'html') {
@@ -1375,17 +1499,21 @@ export default function PlaygroundClient({
     if (tpl) {
       const newFiles = buildInitialFiles(language, tpl.code);
       setFiles(newFiles);
+      filesRef.current = newFiles;
       setFolders([]);
       setActiveFileId(newFiles[0].id);
+      activeFileIdRef.current = newFiles[0].id;
       setOpenTabIds(newFiles.map((f) => f.id));
       setUnsavedFileIds(new Set());
       setLogs([]);
-      try {
-        localStorage.setItem(
-          `${SAVED_FILES_PREFIX}${language}`,
-          JSON.stringify(newFiles)
-        );
-      } catch {}
+      savePlaygroundWorkspace({
+        language,
+        files: newFiles,
+        folders: [],
+        activeFileId: newFiles[0].id,
+        openTabIds: newFiles.map((f) => f.id),
+        updatedAt: Date.now(),
+      });
       toast.success(`Loaded template: ${tpl.title}`);
     }
   };
@@ -1703,18 +1831,19 @@ finally:
       setFiles(updatedFiles);
       filesRef.current = updatedFiles;
 
-      // 3. Persist to localStorage
-      try {
-        localStorage.setItem(
-          `${SAVED_FILES_PREFIX}${language}`,
-          JSON.stringify(updatedFiles)
-        );
-      } catch (err) {
-        console.warn('Could not auto-save workspace to localStorage:', err);
-      }
+      // 3. Persist to storage (IndexedDB + localStorage, 12h TTL)
+      const nowTs = Date.now();
+      savePlaygroundWorkspace({
+        language,
+        files: updatedFiles,
+        folders,
+        activeFileId: currentActiveId,
+        openTabIds,
+        updatedAt: nowTs,
+      });
 
       // 4. Update saved state
-      const now = new Date().toLocaleTimeString([], {
+      const now = new Date(nowTs).toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -1748,7 +1877,7 @@ finally:
 
       return updatedFiles;
     },
-    [getLatestFiles, language, activeFile, activeFileId]
+    [getLatestFiles, language, activeFile, activeFileId, folders, openTabIds]
   );
 
   // Insert Markdown formatting snippet or wrap selected text in Monaco editor
@@ -2223,26 +2352,23 @@ _err_result = _stderr_buffer.getvalue()
     if (tpl) {
       const newFiles = buildInitialFiles(language, tpl.code);
       setFiles(newFiles);
+      filesRef.current = newFiles;
       setFolders([]);
       setActiveFileId(newFiles[0].id);
+      activeFileIdRef.current = newFiles[0].id;
       setOpenTabIds(newFiles.map((f) => f.id));
       setUnsavedFileIds(new Set());
       setLogs([]);
       setHasSelection(false);
-      try {
-        localStorage.removeItem(`${SAVED_FOLDERS_PREFIX}${language}`);
-      } catch {}
+
+      deletePlaygroundWorkspace(language);
+
       if (language === 'sql') {
         mysqlEngine.reset();
         window.__mskSqlDb = mysqlEngine.getActiveDb();
         setActiveSqlDbName(mysqlEngine.getActiveDbName());
         setSchemaVersion((v) => v + 1);
         setSqlResults([]);
-      }
-      try {
-        localStorage.removeItem(`${SAVED_FILES_PREFIX}${language}`);
-      } catch (err) {
-        console.warn('Could not clear saved files on reset:', err);
       }
       toast.success('Workspace reset to template');
     }
@@ -3320,6 +3446,18 @@ _err_result = _stderr_buffer.getvalue()
                 </>
               )}
             </button>
+          </ActionTooltip>
+
+          {/* 12-Hour Modification Retention Indicator */}
+          <ActionTooltip
+            label="Playground workspace is automatically preserved for 12 hours after your last edit. Edits and runs renew the 12-hour timer."
+            shortcut="12h Retention"
+            placement="top"
+          >
+            <span className="hidden md:inline-flex items-center gap-1 text-[11px] text-white/80 bg-white/10 hover:bg-white/15 px-2 py-0.5 rounded-full cursor-help transition-colors font-medium border border-white/10">
+              <span className="text-[10px]">⏱️</span>
+              <span>12h auto-save</span>
+            </span>
           </ActionTooltip>
         </div>
 

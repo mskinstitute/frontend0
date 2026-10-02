@@ -143,25 +143,55 @@ export function normalizeMysqlToSqlite(sql: string): string {
   // Convert MySQL hash comments to dash-dash
   s = s.replace(/^(\s*)#(\s*.*)$/gm, '$1--$2');
 
+  // Strip MySQL conditional version comments: /*!40101 ... */
+  s = s.replace(/\/\*!\d+([\s\S]*?)\*\//g, '$1');
+
   // Strip MySQL table options following closing parenthesis on CREATE TABLE:
   // e.g. ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; -> );
   s = s.replace(
-    /\)\s*(?:(?:ENGINE|DEFAULT\s+CHARSET|CHARSET|COLLATE|CHARACTER\s+SET|ROW_FORMAT|AUTO_INCREMENT)\s*=[^;]+)+;?/gi,
+    /\)\s*(?:(?:ENGINE|DEFAULT\s+CHARSET|CHARSET|COLLATE|CHARACTER\s+SET|ROW_FORMAT|AUTO_INCREMENT|COMMENT)\s*=[^;]+)+;?/gi,
     ');'
   );
 
+  // Strip KEY and INDEX constraint definitions inside CREATE TABLE (e.g. KEY `idx` (`col`))
+  s = s.replace(/,\s*(?:KEY|INDEX)\s+[`'"]?[a-zA-Z0-9_]+[`'"]?\s*\([^)]+\)/gi, '');
+
+  // Normalize UNIQUE KEY -> UNIQUE
+  s = s.replace(/\bUNIQUE\s+KEY\b/gi, 'UNIQUE');
+
+  // Strip column comments: COMMENT 'some text'
+  s = s.replace(/\bCOMMENT\s+(['"])(?:(?!\1)[^\\]|\\.)*\1/gi, '');
+
+  // Strip ON UPDATE CURRENT_TIMESTAMP
+  s = s.replace(/\bON\s+UPDATE\s+CURRENT_TIMESTAMP\b/gi, '');
+
+  // Strip UNSIGNED, ZEROFILL
+  s = s.replace(/\bUNSIGNED\b/gi, '');
+  s = s.replace(/\bZEROFILL\b/gi, '');
+
   // MySQL AUTO_INCREMENT conversions:
   // id INT PRIMARY KEY AUTO_INCREMENT -> id INTEGER PRIMARY KEY AUTOINCREMENT
-  // id INT AUTO_INCREMENT PRIMARY KEY -> id INTEGER PRIMARY KEY AUTOINCREMENT
   s = s.replace(
     /\bINT(?:EGER)?\s+(?:PRIMARY\s+KEY\s+)?AUTO_INCREMENT(?:\s+PRIMARY\s+KEY)?\b/gi,
     'INTEGER PRIMARY KEY AUTOINCREMENT'
   );
   s = s.replace(/\bAUTO_INCREMENT\b/gi, 'AUTOINCREMENT');
 
-  // Strip UNSIGNED, ZEROFILL
-  s = s.replace(/\bUNSIGNED\b/gi, '');
-  s = s.replace(/\bZEROFILL\b/gi, '');
+  // If a column was converted to AUTOINCREMENT, remove any duplicate table-level PRIMARY KEY constraint
+  if (/AUTOINCREMENT/i.test(s)) {
+    const colMatch = s.match(/[`'"]?([a-zA-Z0-9_]+)[`'"]?\s+INTEGER\s+PRIMARY\s+KEY\s+AUTOINCREMENT/i);
+    if (colMatch) {
+      const colName = colMatch[1];
+      const pkRegex = new RegExp(`,\\s*PRIMARY\\s+KEY\\s*\\(\\s*[\`'"]?${colName}[\`'"]?\\s*\\)`, 'gi');
+      s = s.replace(pkRegex, '');
+    }
+  }
+
+  // INSERT IGNORE -> INSERT OR IGNORE
+  s = s.replace(/\bINSERT\s+IGNORE\s+INTO\b/gi, 'INSERT OR IGNORE INTO');
+
+  // ON DUPLICATE KEY UPDATE -> ON CONFLICT DO UPDATE SET
+  s = s.replace(/\bON\s+DUPLICATE\s+KEY\s+UPDATE\b/gi, 'ON CONFLICT DO UPDATE SET');
 
   return s;
 }

@@ -45,6 +45,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/tools/playground',
+        destination: '/playground',
+        permanent: true,
+      },
+      {
         source: '/contact-us',
         destination: '/contact',
         permanent: true,

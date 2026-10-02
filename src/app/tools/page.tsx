@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
   Keyboard,
   Code2,
+  Database,
   ShieldCheck,
   Sparkles,
   ArrowRight,
@@ -17,19 +18,47 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Developer & Student Tools Hub | MSK Institute',
+  title: 'Developer & Student Tools Hub | SQL Studio, DB Viewer, Code Playground | MSK Institute',
   description:
-    'Explore free, high-performance in-browser tools built by MSK Institute Shikohabad. Including TypeQuest Typing Master, Monaco Code Playground, and Official Certificate Verifier.',
+    'Explore free, high-performance in-browser tools built by MSK Institute Shikohabad. Including In-Browser SQL Studio, Web SQLite Database Viewer, Monaco Code Playground, and TypeQuest Typing Master.',
   keywords: [
     'MSK Tools',
+    'Developer Tools Hub',
+    'Online Code Playground',
+    'In-Browser SQL Studio',
+    'Database Viewer Online',
+    'SQLite Web Viewer',
     'TypeQuest by MSK',
-    'MSK Code Playground',
     'Online Code Editor Shikohabad',
-    'Typing Master MSK',
     'Student Tools MSK Institute',
+    'Er Sumit Kumar Tools',
   ],
   alternates: {
     canonical: 'https://www.mskinstitute.in/tools',
+  },
+  openGraph: {
+    title: 'Developer & Student Tools Hub | MSK Institute',
+    description:
+      'Free in-browser developer and student learning tools: Web SQL Studio, SQLite Database Viewer, Monaco Multi-Language Code Playground, and TypeQuest Typing Master.',
+    url: 'https://www.mskinstitute.in/tools',
+    siteName: 'MSK Institute',
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: 'https://www.mskinstitute.in/logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'MSK Institute Developer & Student Tools Hub',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Developer & Student Tools Hub | MSK Institute',
+    description:
+      'Access free in-browser developer tools: SQL Studio, SQLite Database Viewer, Code Playground, and Typing Master.',
+    images: ['https://www.mskinstitute.in/logo.jpg'],
   },
 };
 
@@ -48,6 +77,34 @@ interface ToolItem {
 }
 
 const TOOLS: ToolItem[] = [
+  {
+    id: 'db-viewer',
+    title: 'MSK Database Viewer',
+    subtitle: 'Instant In-Browser SQLite (.db, .sqlite, .sql) Inspector',
+    description:
+      'Open and inspect SQLite database files (.db, .sqlite, .sqlite3, .sql) 100% locally in your browser. Browse tables, filter rows, inspect schemas and primary keys, export to CSV/JSON, and bridge seamlessly to SQL Studio.',
+    href: '/tools/db-viewer',
+    icon: Database,
+    badge: '100% Private WASM',
+    badgeColor: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30',
+    tags: ['SQLite 3 WASM', 'Zero Upload', '.db & .sql', 'Table Browser', 'CSV Export'],
+    cta: 'Open DB Viewer',
+    featured: true,
+  },
+  {
+    id: 'sql-studio',
+    title: 'MSK SQL Studio',
+    subtitle: 'In-Browser SQL IDE & Web Database Workbench',
+    description:
+      'Full-featured online SQL workbench powered by Monaco Editor (VS Code). Write queries with autocomplete, view ER diagram cards, inspect query history, and download updated SQLite .db files with your changes.',
+    href: '/tools/sql-studio',
+    icon: Code2,
+    badge: 'Monaco SQL IDE',
+    badgeColor: 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30',
+    tags: ['Monaco Editor', 'Ctrl + Enter', 'ER Cards', 'Query History', 'Save .db'],
+    cta: 'Launch SQL Studio',
+    featured: true,
+  },
   {
     id: 'typequest',
     title: 'TypeQuest by MSK',
@@ -79,8 +136,62 @@ const TOOLS: ToolItem[] = [
 ];
 
 export default function ToolsHubPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': 'https://www.mskinstitute.in/tools#collection',
+        name: 'MSK Developer & Student Tools Hub',
+        url: 'https://www.mskinstitute.in/tools',
+        description:
+          'Directory of free in-browser learning utilities and developer tools built by MSK Institute of Computer Technology.',
+        publisher: {
+          '@type': 'EducationalOrganization',
+          name: 'MSK Institute of Computer Technology',
+          url: 'https://www.mskinstitute.in',
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': 'https://www.mskinstitute.in/tools#itemlist',
+        name: 'Free Online Developer and Student Tools',
+        itemListElement: TOOLS.map((tool, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: tool.title,
+          description: tool.description,
+          url: `https://www.mskinstitute.in${tool.href}`,
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://www.mskinstitute.in/tools#breadcrumb',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.mskinstitute.in',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Tools',
+            item: 'https://www.mskinstitute.in/tools',
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header Banner */}
       <section className="bg-gradient-to-b from-primary via-primary/95 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Background decorative circles */}

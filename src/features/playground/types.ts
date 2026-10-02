@@ -83,6 +83,7 @@ export interface PlaygroundFile {
   content: string;
   isRemovable: boolean;
   folderId?: string | null;
+  updatedAt?: number;
 }
 
 export interface SearchMatch {

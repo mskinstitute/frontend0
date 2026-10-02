@@ -267,10 +267,18 @@ export default function FileExplorerSidebar({
     <div className="w-56 sm:w-60 bg-[#252526] border-r border-[#1e1e1e] flex flex-col select-none text-xs text-slate-300 z-10">
       {/* Explorer Header Toolbar */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-[#1e1e1e] text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-        <span className="flex items-center gap-1">
-          <ChevronDown className="w-3.5 h-3.5" />
-          <span>Explorer</span>
-        </span>
+        <div className="flex items-center gap-1.5">
+          <span className="flex items-center gap-1">
+            <ChevronDown className="w-3.5 h-3.5" />
+            <span>Explorer</span>
+          </span>
+          <span
+            className="text-[9px] font-mono text-emerald-400/90 bg-emerald-950/40 px-1 py-0.5 rounded border border-emerald-800/40 normal-case font-normal hidden sm:inline"
+            title="Files persist in local browser storage and auto-clean after 12 hours of inactivity"
+          >
+            12h save
+          </span>
+        </div>
 
         <div className="flex items-center gap-1">
           {/* New File Button */}
