@@ -132,6 +132,20 @@ const TOOLS: ToolItem[] = [
     tags: ['Monaco Editor', 'Python Pyodide', 'Live HTML Preview', 'Instant Output'],
     cta: 'Open Playground',
     featured: true,
+  },
+  {
+    id: 'python-visualizer',
+    title: 'Python Code Visualizer',
+    subtitle: 'Step-by-Step Execution Tutor & Memory Pointer Inspector',
+    description:
+      'Step through Python code line-by-line in your browser. Inspect Call Stack frames, Heap memory references, pointer aliasing, Linked Lists, Binary Trees, 2D Matrices, and Recursion Trees with zero server latency.',
+    href: '/tools/python-visualizer',
+    icon: Layers,
+    badge: 'Pyodide Wasm 3.12',
+    badgeColor: 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30',
+    tags: ['Step Execution', 'Stack & Heap', 'Pointers & Aliasing', 'Trees & Lists', 'Recursion Tree'],
+    cta: 'Launch Visualizer',
+    featured: true,
   }
 ];
 

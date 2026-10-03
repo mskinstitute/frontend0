@@ -16,431 +16,1016 @@ keywords:
   - walrus operator
   - assignment expressions
   - in place mutation
+  - assignment operators
+  - variable assignment
+  - python shortcuts
 lastUpdated: 2026-09-30
-author: Antigravity Team
+author: MSK Team
 version: 1.1.0
 ---
 
-# Python Assignment Operators: Compound Shortcuts & The Walrus Operator (:=)
 
-In computer programming, **assignment operators** are used to bind values, calculations, and object references to variable names. While simple assignment (`=`) is the most fundamental construct in any language, Python provides a full suite of **augmented (compound) assignment operators** (such as `+=`, `-=`, `*=`, and `//=`) that condense calculation and assignment into a single atomic expression.
+# 📝 Assignment Operators in Python
 
-Furthermore, Python 3.8 introduced the revolutionary **Walrus Operator (`:=`)**—officially known as **Assignment Expressions**—which allows variables to be assigned *inside* conditional checks and loop statements.
+Assignment operators are used to **store a value in a variable**.
 
----
-
-## Real-World Analogy: The Kirana Store Khata & The Walrus Whiskers
-
-```
-+-------------------------------------------------------------------------+
-|                 ASSIGNMENT OPERATORS REAL-WORLD ANALOGY                 |
-+-------------------------------------------------------------------------+
-
-  1. SIMPLE ASSIGNMENT (=):
-     - Opening a fresh customer Khata (ledger account):
-       ramesh_balance = 5000.00
-     - Stamps an initial balance onto a fresh page.
-
-  2. COMPOUND AUGMENTED ASSIGNMENT (+=, -=):
-     - Ramesh purchases 400 Rupees of groceries on credit.
-     - The shopkeeper doesn't write out the verbose mathematical equation:
-       ramesh_balance = ramesh_balance + 400
-     - Instead, he makes an ink tick in the margin:
-       ramesh_balance += 400
-     - Faster, prevents repetitive typing, and updates in-place!
-
-  3. THE WALRUS OPERATOR (:=):
-     - Look at the symbol sideways: ':' are eyes and '=' are long tusks!
-     - Getting your train ticket stamped AND verified at the exact same gate:
-       Assigns a value to a variable AT THE VERY MOMENT it is evaluated inside
-       an 'if' or 'while' condition!
-+-------------------------------------------------------------------------+
-```
-
----
-
-## Visual Architecture: In-Place Mutation vs Reallocation
-
-A critical internal detail in Python is how compound operators behave differently on **immutable** vs **mutable** objects:
-
-```
-===========================================================================
-             BEHAVIOR OF += ON IMMUTABLE vs MUTABLE OBJECTS
-===========================================================================
-
-  1. IMMUTABLE OBJECT (Integer, Float, String):
-     count = 10 (id: 0x100)
-     count += 5
-     +--------------------------------------------------------------------+
-     | Python evaluates count + 5 = 15. Because integers are immutable,   |
-     | it allocates a NEW object 15 at address 0x200!                     |
-     +--------------------------------------------------------------------+
-
-  2. MUTABLE OBJECT (List):
-     cart = ["Laptop"] (id: 0x500)
-     cart += ["Mouse"]
-     +--------------------------------------------------------------------+
-     | Python translates this to cart.extend(["Mouse"]). The list mutates |
-     | IN-PLACE at the EXACT same memory address 0x500!                   |
-     +--------------------------------------------------------------------+
-```
-
----
-
-## 1. The Full Family of Compound Assignment Operators
-
-Compound assignment combines an arithmetic or bitwise operation with assignment:
+The most basic assignment operator in Python is:
 
 ```python
-# ==========================================================
-# Example 1: Arithmetic Compound Assignments
-# ==========================================================
-
-balance = 1000
-
-# 1. Addition Assignment (+=)
-balance += 500       # balance = balance + 500
-print("After += 500 :", balance)      # 1500
-
-# 2. Subtraction Assignment (-=)
-balance -= 250       # balance = balance - 250
-print("After -= 250 :", balance)      # 1250
-
-# 3. Multiplication Assignment (*=)
-balance *= 2         # balance = balance * 2
-print("After *= 2   :", balance)      # 2500
-
-# 4. True Division Assignment (/=) -> Converts to float!
-balance /= 4         # balance = balance / 4
-print("After /= 4   :", balance)      # 625.0
-
-# 5. Floor Division Assignment (//=)
-balance //= 2        # balance = balance // 2
-print("After //= 2  :", balance)      # 312.0
-
-# 6. Modulus Assignment (%=)
-balance %= 100       # balance = balance % 100
-print("After %= 100 :", balance)      # 12.0
-
-# 7. Exponentiation Assignment (**=)
-power_val = 3
-power_val **= 4      # power_val = 3 ** 4
-print("3 **= 4      :", power_val)    # 81
+=
 ```
 
-### Output:
+For example:
+
+```python
+age = 20
+```
+
+This means:
+
+> Store the value `20` in the variable `age`.
+
+You can then use the variable:
+
+```python
+print(age)
+```
+
+Output:
+
 ```text
-After += 500 : 1500
-After -= 250 : 1250
-After *= 2   : 2500
-After /= 4   : 625.0
-After //= 2  : 312.0
-After %= 100 : 12.0
-3 **= 4      : 81
+20
 ```
+
+> 💡 **Easy way to remember:**  
+> `=` means **"put this value into this variable."**
 
 ---
 
-## 2. In-Place List Mutation with `+=`
+## 🧠 How Assignment Works
 
-When used on lists, `+=` calls the internal `__iadd__` method, extending the existing list in-place rather than allocating a new one:
+Look at this example:
 
 ```python
-# ==========================================================
-# Example 2: List In-Place Extension
-# ==========================================================
-
-# Standard list extension with '+='
-metro_stations = ["Kashmere Gate", "Chandni Chowk"]
-initial_id = id(metro_stations)
-
-metro_stations += ["Chawri Bazar", "New Delhi"]
-after_id = id(metro_stations)
-
-print("Updated Metro Route:", metro_stations)
-print("Initial Memory ID  :", initial_id)
-print("After Memory ID    :", after_id)
-print("Was list modified in-place?", initial_id == after_id)  # True!
+name = "Rahul"
 ```
 
-### Output:
+You can think of it like this:
+
 ```text
-Updated Metro Route: ['Kashmere Gate', 'Chandni Chowk', 'Chawri Bazar', 'New Delhi']
-Initial Memory ID  : 2195828723200
-After Memory ID    : 2195828723200
-Was list modified in-place? True
+"Rahul"
+   ↓
+ name
 ```
 
----
+The value `"Rahul"` is stored in `name`.
 
-## 3. The Walrus Operator (`:=`): Assignment Expressions
-
-Introduced in **Python 3.8 via PEP 572**, the walrus operator allows you to assign a value to a variable **directly inside an expression**:
-
-$$\text{variable} \text{ := } \text{expression}$$
-
-### Why the Walrus Operator is Revolutionary:
-Without the walrus operator, you often have to compute a value once to check it, and then redundantly query it again inside the block.
+Another example:
 
 ```python
-# ==========================================================
-# Example 3: The Walrus Operator in Action (Python 3.8+)
-# ==========================================================
-
-# Problem: Check if a passenger name is too long and print its length
-candidate_name = "Dr. Subramanian Chandrasekhar"
-
-# TRADITIONAL APPROACH (Two steps):
-name_len = len(candidate_name)
-if name_len > 15:
-    print(f"Traditional: Name length {name_len} exceeds passport display limit!")
-
-# MODERN WALRUS APPROACH (Single step!):
-# Evaluates len(), assigns to 'n', and checks '> 15' all in one line!
-if (n := len(candidate_name)) > 15:
-    print(f"Walrus (:=) : Name length {n} exceeds passport display limit!")
+marks = 85
 ```
 
-### Output:
 ```text
-Traditional: Name length 29 exceeds passport display limit!
-Walrus (:=) : Name length 29 exceeds passport display limit!
+85
+ ↓
+marks
 ```
+
+Now `marks` contains the value `85`.
 
 ---
 
-## 4. Practical Walrus Use Case: Interactive Loops & Stream Processing
 
-The walrus operator shines brightest when processing streams of user input or reading files line-by-line:
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# ➕ Compound Assignment Operators
+
+Python also provides **shortcuts** for updating a variable.
+
+For example, suppose:
 
 ```python
-# ==========================================================
-# Example 4: Simulated Stream Processing with Walrus
-# ==========================================================
-
-# Simulated stream of user inputs
-incoming_inputs = ["delhi", "mumbai", "kolkata", "exit", "chennai"]
-input_iterator = iter(incoming_inputs)
-
-print("--- PROCESSING STREAM UNTIL 'exit' ---")
-# Reads the next token, assigns it to 'city', and checks condition simultaneously!
-while (city := next(input_iterator)) != "exit":
-    print(f"Dispatching delivery cargo to: {city.upper()}")
+score = 10
 ```
 
-### Output:
+Now you want to add `5`.
+
+You could write:
+
+```python
+score = score + 5
+```
+
+This works perfectly.
+
+But Python gives us a shorter way:
+
+```python
+score += 5
+```
+
+Both statements do the same thing.
+
 ```text
---- PROCESSING STREAM UNTIL 'exit' ---
-Dispatching delivery cargo to: DELHI
-Dispatching delivery cargo to: MUMBAI
-Dispatching delivery cargo to: KOLKATA
+score = score + 5
+
+score += 5
 ```
 
----
-
-## Do's and Don'ts: Assignment Operators
-
-| Scenario | Anti-Pattern (Don't) | Best Practice (Do) | Why |
-| :--- | :--- | :--- | :--- |
-| **Accumulating Counters** | `count = count + 1` | `count += 1` | `+=` is concise and directly communicates an accumulator pattern. |
-| **Walrus Overuse** | Cramming complex logic into `:=` | Use `:=` only when it enhances clarity | Overly nested walrus expressions hurt code readability. |
-| **Division Assignment** | Expecting `x /= 2` to stay `int` | Use `x //= 2` if integer type is needed | True division `/=` always converts the variable to `float`. |
-| **Missing Parens with `:=`** | `if n := len(s) > 5:` | `if (n := len(s)) > 5:` | Without parentheses, `n` gets assigned the boolean `True`/`False`! |
+> 💡 **Compound assignment operators** make repeated updates shorter and easier to write.
 
 ---
 
-## Quick Revision Summary
+# 📋 Common Assignment Operators
 
-```
-+-------------------------------------------------------------------------+
-|                   ASSIGNMENT OPERATORS CHEAT SHEET                      |
-+-------------------------------------------------------------------------+
-  - Simple:         x = 10
-  - Compound:       +=, -=, *=, /=, //=, %=, **=
-  - Float Division: x /= 2 always converts x to a float!
-  - List In-Place:  my_list += [4] extends the list in-place without reallocation
-  - Walrus (:=):    (var := expr) assigns and returns value in an expression
-  - Python Version: Walrus operator requires Python 3.8 or newer
-+-------------------------------------------------------------------------+
-```
+Here are the assignment operators you will commonly see in Python:
 
----
+| Operator | Meaning | Example | Same As |
+|---|---|---|---|
+| `=` | Assign | `x = 10` | — |
+| `+=` | Add and assign | `x += 5` | `x = x + 5` |
+| `-=` | Subtract and assign | `x -= 5` | `x = x - 5` |
+| `*=` | Multiply and assign | `x *= 5` | `x = x * 5` |
+| `/=` | Divide and assign | `x /= 5` | `x = x / 5` |
+| `//=` | Floor divide and assign | `x //= 5` | `x = x // 5` |
+| `%=` | Modulus and assign | `x %= 5` | `x = x % 5` |
+| `**=` | Power and assign | `x **= 2` | `x = x ** 2` |
 
----
-
-## ⚠️ Common Beginner Mistakes & Gotchas
-
-### 1. Confusing Assignment (`=`) with Equality (`==`)
-A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
-```python
-score = 100  # Assignment
-
-# In conditions:
-# ❌ INCORRECT (SyntaxError in Python 3)
-# if score = 100:
-
-# ✅ CORRECT
-if score == 100:
-    print("Perfect score!")
-```
-
-### 2. Chained Boolean Logic with `and` / `or`
-Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
-```python
-# ❌ INCORRECT (Always True because 2 is truthy!)
-# if x == 1 or 2:
-
-# ✅ CORRECT
-# if x == 1 or x == 2:
-# Or even cleaner:
-# if x in (1, 2):
-```
+Let's understand them one by one.
 
 ---
 
-## Practice Quiz
+# 1. `=` — Basic Assignment
 
-### 1. What will be the data type and value of variable `x` after executing `x = 20; x /= 4` in Python?
-A. `5` of `<class 'int'>`
-B. `5.0` of `<class 'float'>`
-C. `5` of `<class 'double'>`
-D. `TypeError`
-
-**Answer:** B
-
----
-
-### 2. Which operator in Python is nicknamed the "Walrus Operator"?
-A. `=>`
-B. `->`
-C. `:=`
-D. `~=`
-
-**Answer:** C
-
----
-
-### 3. What does `items += [10]` do when `items` is an existing Python list?
-A. It creates a brand-new list at a different memory address
-B. It modifies the existing list in-place by appending 10 (equivalent to `items.extend([10])`)
-C. It raises a `TypeError`
-D. It adds 10 to every number in the list
-
-**Answer:** B
-
----
-
-### 4. What will happen if you omit parentheses and write `if x := 5 > 2:` in Python?
-A. `x` is assigned `5`
-B. `x` is assigned `True`
-C. `x` is assigned `2`
-D. `SyntaxError`
-
-**Answer:** B
-
----
-
-### 5. What is the value of `n` after executing `n = 2; n **= 3`?
-A. `6`
-B. `8`
-C. `9`
-D. `5`
-
-**Answer:** B
-
----
-
-# Hands-On Practice Challenge: High-Frequency Stock Portfolio Rebalancer
-
-Write a complete, runnable Python script that manages an investor's brokerage portfolio. Use compound assignment operators (`+=`, `-=`, `*=`) to simulate dividend payouts, brokerage fee deductions, and stock splits, and use the walrus operator (`:=`) to filter out micro-cap stocks with low holdings.
+The `=` operator assigns a value to a variable.
 
 ```python
-# ==========================================================
-# Challenge 24: Stock Portfolio Rebalancer & Walrus Filter
-# MSK Institute of Technology
-# ==========================================================
-
-def simulate_portfolio_lifecycle() -> None:
-    print("=" * 60)
-    print("         DALAL STREET EQUITY PORTFOLIO MANAGER")
-    print("=" * 60)
-
-    # 1. Initialize Portfolio Cash Balance
-    cash_balance = 50_000.00
-    print(f"Initial Cash Reserve     : INR {cash_balance:>10,.2f}")
-
-    # Dividend Credit (+ =)
-    quarterly_dividend = 4500.00
-    cash_balance += quarterly_dividend
-    print(f"Dividend Received (+={quarterly_dividend}) : INR {cash_balance:>10,.2f}")
-
-    # Brokerage & Demat Maintenance (- =)
-    demat_charges = 354.00
-    cash_balance -= demat_charges
-    print(f"Demat Charges Paid (-={demat_charges}): INR {cash_balance:>10,.2f}")
-
-    # Share Holding Units
-    tcs_shares = 20
-    # Stock Bonus Split 1:1 (*=)
-    tcs_shares *= 2
-    print(f"TCS Shares Post-Split (*=2): {tcs_shares} shares")
-
-    print("-" * 60)
-    print("--- WALRUS OPERATOR (:=) PORTFOLIO POSITION AUDIT ---")
-
-    # List of stock positions: (Ticker, Quantity, Market Price)
-    holdings = [
-        ("RELIANCE", 15, 2980.50),
-        ("INFY", 50, 1820.00),
-        ("TATASTEEL", 200, 154.25),
-        ("PENNY_STOCK", 10, 4.50)
-    ]
-
-    total_portfolio_value = cash_balance
-
-    # Use walrus operator inside condition to calculate valuation AND filter
-    for ticker, qty, price in holdings:
-        # Compute value, assign to 'val', and check if substantial in one step!
-        if (val := qty * price) > 5000.00:
-            total_portfolio_value += val
-            print(f"Holding: {ticker:<12} | Qty: {qty:^4} | Val: INR {val:>10,.2f} [CORE ASSET]")
-        else:
-            print(f"Holding: {ticker:<12} | Qty: {qty:^4} | Val: INR {val:>10,.2f} [MICRO-CAP / IGNORED]")
-
-    print("=" * 60)
-    print(f"TOTAL CONSOLIDATED WEALTH : INR {total_portfolio_value:>10,.2f}")
-    print("=" * 60)
-
-
-# ----------------------------------------------------------
-# Execute Portfolio Simulation
-# ----------------------------------------------------------
-simulate_portfolio_lifecycle()
+x = 10
 ```
 
-### Expected Program Output:
+Now:
+
 ```text
-============================================================
-         DALAL STREET EQUITY PORTFOLIO MANAGER
-============================================================
-Initial Cash Reserve     : INR  50,000.00
-Dividend Received (+=4500.0) : INR  54,500.00
-Demat Charges Paid (-=354.0): INR  54,146.00
-TCS Shares Post-Split (*=2): 40 shares
-------------------------------------------------------------
---- WALRUS OPERATOR (:=) PORTFOLIO POSITION AUDIT ---
-Holding: RELIANCE     | Qty:  15  | Val: INR  44,707.50 [CORE ASSET]
-Holding: INFY         | Qty:  50  | Val: INR  91,000.00 [CORE ASSET]
-Holding: TATASTEEL    | Qty: 200  | Val: INR  30,850.00 [CORE ASSET]
-Holding: PENNY_STOCK  | Qty:  10  | Val: INR      45.00 [MICRO-CAP / IGNORED]
-============================================================
-TOTAL CONSOLIDATED WEALTH : INR 220,703.50
-============================================================
+x → 10
 ```
+
+Another example:
+
+```python
+city = "Shikohabad"
+```
+
+Now `city` contains:
+
+```text
+Shikohabad
+```
+
+> ✅ **Remember:**  
+> `=` is used to **assign or store a value**.
+
 ---
 
-## 🚀 What's Next?
+# 2. `+=` — Add and Assign
 
-In the next lesson, we will continue your Python learning journey with **Comparison Operators** (6: Operators).
+The `+=` operator adds a value to the current variable value.
 
-👉 **[Continue to Next Lesson: Comparison Operators →](/tutorials/python-for-beginners/comparison-operators)**
+### Example
+
+```python
+score = 10
+score += 5
+
+print(score)
+```
+
+Output:
+
+```text
+15
+```
+
+It is the same as:
+
+```python
+score = score + 5
+```
+
+### Step by Step
+
+Initially:
+
+```text
+score = 10
+```
+
+Then:
+
+```text
+score += 5
+```
+
+Python does:
+
+```text
+10 + 5 = 15
+```
+
+So now:
+
+```text
+score = 15
+```
+
+### Real-Life Example
+
+Suppose you have ₹500 and receive another ₹200:
+
+```python
+balance = 500
+balance += 200
+
+print(balance)
+```
+
+Output:
+
+```text
+700
+```
+
+> ✅ **Remember:**  
+> `+=` means **add to the current value**.
+
+---
+
+# 3. `-=` — Subtract and Assign
+
+The `-=` operator subtracts a value from the current variable value.
+
+### Example
+
+```python
+score = 20
+score -= 5
+
+print(score)
+```
+
+Output:
+
+```text
+15
+```
+
+It is the same as:
+
+```python
+score = score - 5
+```
+
+### Real-Life Example
+
+Suppose your wallet contains ₹1,000 and you spend ₹250:
+
+```python
+money = 1000
+money -= 250
+
+print(money)
+```
+
+Output:
+
+```text
+750
+```
+
+> ✅ **Remember:**  
+> `-=` means **subtract from the current value**.
+
+---
+
+# 4. `*=` — Multiply and Assign
+
+The `*=` operator multiplies the current value and stores the new result.
+
+### Example
+
+```python
+number = 5
+number *= 3
+
+print(number)
+```
+
+Output:
+
+```text
+15
+```
+
+It is the same as:
+
+```python
+number = number * 3
+```
+
+Another example:
+
+```python
+price = 100
+price *= 2
+
+print(price)
+```
+
+Output:
+
+```text
+200
+```
+
+> ✅ **Remember:**  
+> `*=` means **multiply the current value**.
+
+---
+
+# 5. `/=` — Divide and Assign
+
+The `/=` operator divides the current value and stores the result.
+
+### Example
+
+```python
+number = 20
+number /= 4
+
+print(number)
+```
+
+Output:
+
+```text
+5.0
+```
+
+It is the same as:
+
+```python
+number = number / 4
+```
+
+> ✅ **Remember:**  
+> `/=` means **divide the current value**.
+
+---
+
+# 6. `//=` — Floor Divide and Assign
+
+The `//=` operator performs floor division and stores the result.
+
+### Example
+
+```python
+number = 17
+number //= 4
+
+print(number)
+```
+
+Output:
+
+```text
+4
+```
+
+It is the same as:
+
+```python
+number = number // 4
+```
+
+> ✅ **Remember:**  
+> `//=` means **perform floor division and store the result**.
+
+---
+
+# 7. `%=` — Modulus and Assign
+
+The `%=` operator finds the remainder and stores it in the variable.
+
+### Example
+
+```python
+number = 17
+number %= 5
+
+print(number)
+```
+
+Output:
+
+```text
+2
+```
+
+It is the same as:
+
+```python
+number = number % 5
+```
+
+Because:
+
+```text
+17 ÷ 5
+Remainder = 2
+```
+
+> ✅ **Remember:**  
+> `%=` means **find the remainder and store it**.
+
+---
+
+# 8. `**=` — Power and Assign
+
+The `**=` operator calculates a power and stores the result.
+
+### Example
+
+```python
+number = 2
+number **= 3
+
+print(number)
+```
+
+Output:
+
+```text
+8
+```
+
+It is the same as:
+
+```python
+number = number ** 3
+```
+
+Because:
+
+```text
+2 × 2 × 2 = 8
+```
+
+> ✅ **Remember:**  
+> `**=` means **raise the current value to a power**.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# 🔄 Why Use Compound Assignment?
+
+Compound assignment is useful when you want to **update the same variable again and again**.
+
+For example:
+
+```python
+score = 0
+
+score += 10
+score += 20
+score += 15
+
+print(score)
+```
+
+Output:
+
+```text
+45
+```
+
+The variable keeps changing:
+
+```text
+Start → 0
++10   → 10
++20   → 30
++15   → 45
+```
+
+This makes compound assignment especially useful when a value needs to be updated.
+
+---
+
+# ⚠️ A Common Beginner Mistake
+
+Do not confuse:
+
+```python
+=
+```
+
+with:
+
+```python
+==
+```
+
+For assignment, use:
+
+```python
+x = 10
+```
+
+The operator `==` is used for comparison and belongs to a different topic.
+
+For this lesson, remember only:
+
+> `=` → assign a value
+
+---
+
+# 🟣 The Walrus Operator (`:=`)
+
+Python also has another special assignment operator:
+
+```python
+:=
+```
+
+It is called the **walrus operator**.
+
+The walrus operator allows you to **assign a value and use that value in the same expression**.
+
+### Simple Example
+
+```python
+if (age := 20) >= 18:
+    print(age)
+```
+
+Here:
+
+```python
+age := 20
+```
+
+stores `20` in `age`.
+
+At the same time, the value `20` is used in the condition.
+
+So the program prints:
+
+```text
+20
+```
+
+---
+
+## 🧠 Why is it called the "Walrus" Operator?
+
+The symbol:
+
+```text
+:=
+```
+
+looks a little like the eyes and tusks of a walrus.
+
+That's why Python developers commonly call it the **walrus operator**.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# 🧩 Simple Walrus Example
+
+Consider this example:
+
+```python
+name = "Rahul"
+
+print(name)
+```
+
+Here, the assignment and use happen separately.
+
+With the walrus operator, assignment can happen inside an expression.
+
+For example:
+
+```python
+if (name := "Rahul"):
+    print(name)
+```
+
+The value `"Rahul"` is assigned to `name`, and then `name` is used by the `print()` statement.
+
+Output:
+
+```text
+Rahul
+```
+
+> 💡 **Beginner Tip:**  
+> You do not need to use `:=` everywhere. Normal assignment with `=` is still the most common way to assign a value.
+
+---
+
+# 🔍 `=` vs `+=` vs `:=`
+
+These operators have different purposes.
+
+| Operator | Simple Meaning |
+|---|---|
+| `=` | Assign a value |
+| `+=` | Add and update |
+| `-=` | Subtract and update |
+| `*=` | Multiply and update |
+| `/=` | Divide and update |
+| `//=` | Floor divide and update |
+| `%=` | Find remainder and update |
+| `**=` | Calculate power and update |
+| `:=` | Assign and use the value in the same expression |
+
+Think of them like this:
+
+```text
+=    → Store
++=   → Add + Store
+-=   → Subtract + Store
+*=   → Multiply + Store
+/=   → Divide + Store
+//=  → Floor Divide + Store
+%=   → Remainder + Store
+**=  → Power + Store
+:=   → Assign + Use
+```
+
+---
+
+# 🧪 Try It Yourself
+
+Now practice each assignment operator.
+
+---
+
+## 🟢 Practice 1: Basic Assignment
+
+```python
+marks = 80
+print(marks)
+```
+
+Expected output:
+
+```text
+80
+```
+
+---
+
+## 🟢 Practice 2: Add and Assign
+
+```python
+score = 50
+score += 20
+
+print(score)
+```
+
+Expected output:
+
+```text
+70
+```
+
+---
+
+## 🟢 Practice 3: Subtract and Assign
+
+```python
+money = 1000
+money -= 300
+
+print(money)
+```
+
+Expected output:
+
+```text
+700
+```
+
+---
+
+## 🟡 Practice 4: Multiply and Assign
+
+```python
+number = 6
+number *= 4
+
+print(number)
+```
+
+Expected output:
+
+```text
+24
+```
+
+---
+
+## 🟡 Practice 5: Divide and Assign
+
+```python
+number = 20
+number /= 5
+
+print(number)
+```
+
+Expected output:
+
+```text
+4.0
+```
+
+---
+
+## 🟡 Practice 6: Modulus and Assign
+
+```python
+number = 17
+number %= 5
+
+print(number)
+```
+
+Expected output:
+
+```text
+2
+```
+
+---
+
+## 🔵 Practice 7: Power and Assign
+
+```python
+number = 3
+number **= 2
+
+print(number)
+```
+
+Expected output:
+
+```text
+9
+```
+
+---
+
+## 🔥 Challenge: Update a Score
+
+Start with:
+
+```python
+score = 0
+```
+
+Perform these updates:
+
+```text
++10
++20
+-5
+×2
+```
+
+Try to write the Python code using compound assignment operators.
+
+### One possible solution
+
+```python
+score = 0
+
+score += 10
+score += 20
+score -= 5
+score *= 2
+
+print(score)
+```
+
+Output:
+
+```text
+50
+```
+
+---
+
+# 🧠 Quick Summary
+
+Assignment operators are used to **store and update values**.
+
+The most important operators are:
+
+```text
+=    → Assign
++=   → Add and assign
+-=   → Subtract and assign
+*=   → Multiply and assign
+/=   → Divide and assign
+//=  → Floor divide and assign
+%=   → Modulus and assign
+**=  → Power and assign
+:=   → Assign and use in the same expression
+```
+
+> 🎯 **Key Idea:**  
+> Assignment operators help you store values and update them without writing unnecessary code.
+
+---
+
+# 📝 Practice Quiz
+
+## 1. Which operator is used for basic assignment?
+
+A. `==`  
+B. `=`  
+C. `+=`  
+D. `:=`
+**Answer:** B. `=`
+
+---
+
+## 2. What does `+=` do?
+
+A. Only adds two numbers  
+B. Adds a value to a variable and stores the result  
+C. Compares two values  
+D. Divides a variable
+**Answer:** B. Adds a value to a variable and stores the result
+
+---
+
+## 3. What is the result?
+
+```python
+x = 10
+x += 5
+print(x)
+```
+
+A. `5`  
+B. `10`  
+C. `15`  
+D. `50`
+**Answer:** C. `15`
+
+---
+
+## 4. What does `-=` do?
+
+A. Subtracts and updates the variable  
+B. Compares values  
+C. Finds a remainder  
+D. Creates a new variable
+**Answer:** A. Subtracts and updates the variable
+
+---
+
+## 5. What is the result?
+
+```python
+x = 20
+x //= 6
+print(x)
+```
+
+A. `3`  
+B. `3.33`  
+C. `4`  
+D. `2`
+**Answer:** A. `3`
+
+---
+
+## 6. What does `%=` do?
+
+A. Multiplies and stores  
+B. Finds the remainder and stores it  
+C. Divides and stores  
+D. Calculates power
+**Answer:** B. Finds the remainder and stores it
+
+---
+
+## 7. What does `**=` do?
+
+A. Adds a number  
+B. Finds a remainder  
+C. Calculates a power and stores the result  
+D. Performs comparison
+**Answer:** C. Calculates a power and stores the result
+
+---
+
+## 8. What is the walrus operator?
+
+A. `==`  
+B. `=>`  
+C. `:=`  
+D. `::`
+**Answer:** C. `:=`
+
+---
+
+## 9. What is special about `:=`?
+
+A. It only performs addition  
+B. It assigns a value and allows that value to be used in the same expression  
+C. It compares two variables  
+D. It deletes a variable
+**Answer:** B. It assigns a value and allows that value to be used in the same expression
+
+---
+
+
+
+
+
+
+
+
+
+
+---
+
+# 🚀 Practice Before Moving On
+
+Before moving to the next topic, make sure you can explain these in your own words:
+
+```text
+=     → Store a value
++=    → Add and update
+-=    → Subtract and update
+*=    → Multiply and update
+/=    → Divide and update
+//=   → Floor divide and update
+%=    → Remainder and update
+**=   → Power and update
+:=    → Assign and use in one expression
+```
+
+Try writing a few examples yourself. The more you practice these operators, the more natural they will become.

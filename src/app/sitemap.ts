@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/typing',
     '/tools/db-viewer',
     '/tools/sql-studio',
+    '/tools/python-visualizer',
     '/playground',
     '/contact',
     '/about',

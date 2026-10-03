@@ -2,16 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { Layers, ArrowRight, Play, RotateCcw, Plus, Trash2, Sparkles, Binary, Search, Link2 } from 'lucide-react';
+import PythonVisualizerApp from '@/features/python-visualizer';
 
 interface VisualizerProps {
   currentCode?: string;
   language?: string;
 }
 
-type VisualizerMode = 'array' | 'linked_list' | 'pointers' | 'stack_queue';
+type VisualizerMode = 'python_execution' | 'array' | 'linked_list' | 'pointers' | 'stack_queue';
 
 export default function DataStructureVisualizer({ currentCode = '', language = 'c' }: VisualizerProps) {
-  const [mode, setMode] = useState<VisualizerMode>('array');
+  const [mode, setMode] = useState<VisualizerMode>(language === 'python' ? 'python_execution' : 'array');
 
   // Array State
   const [arrayElements, setArrayElements] = useState<number[]>([25, 50, 75, 100, 125]);
@@ -128,6 +129,18 @@ export default function DataStructureVisualizer({ currentCode = '', language = '
       {/* Top Header / Mode Switcher */}
       <div className="flex flex-wrap items-center justify-between px-3 py-2 bg-[#202020] border-b border-[#2d2d2d] gap-2">
         <div className="flex items-center gap-1 bg-[#151515] p-1 rounded-lg border border-slate-700">
+          {language === 'python' && (
+            <button
+              type="button"
+              onClick={() => setMode('python_execution')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer flex items-center gap-1.5 ${
+                mode === 'python_execution' ? 'bg-secondary text-white shadow-xs font-bold' : 'text-emerald-400 hover:text-white'
+              }`}
+            >
+              <span>🐍 Python Step Tracer</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={() => setMode('array')}
@@ -179,9 +192,14 @@ export default function DataStructureVisualizer({ currentCode = '', language = '
       </div>
 
       {/* Main Canvas Area */}
-      <div className="flex-1 p-4 overflow-y-auto flex flex-col justify-center items-center">
-        {/* MODE 1: ARRAY & POINTERS */}
-        {mode === 'array' && (
+      {mode === 'python_execution' ? (
+        <div className="flex-1 w-full h-full overflow-hidden">
+          <PythonVisualizerApp initialCode={currentCode} isEmbedded={true} />
+        </div>
+      ) : (
+        <div className="flex-1 p-4 overflow-y-auto flex flex-col justify-center items-center">
+          {/* MODE 1: ARRAY & POINTERS */}
+          {mode === 'array' && (
           <div className="w-full max-w-3xl flex flex-col items-center gap-6">
             {/* Array Controls */}
             <div className="w-full flex flex-wrap items-center justify-between gap-2 p-2.5 bg-[#141414] rounded-xl border border-slate-800 text-xs font-sans">
@@ -441,6 +459,7 @@ export default function DataStructureVisualizer({ currentCode = '', language = '
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }

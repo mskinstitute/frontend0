@@ -10,428 +10,993 @@ difficulty: Beginner
 readingTime: 13
 order: 23
 keywords:
+  - arithmetic operators
   - python arithmetic operators
   - operator overloading
   - unary operators
   - string repetition
   - list concatenation
   - float modulo
+  - addition
+  - subtraction
+  - multiplication
+  - division
+  - modulus
+  - exponentiation
+  - floor division
+  - operator precedence
 lastUpdated: 2026-09-30
-author: Antigravity Team
+author: MSK Team
 version: 1.1.0
 ---
 
-# Arithmetic Operators in Python: Polymorphic Overloading & Precision
 
-In Python, **operators** are special symbols that instruct the interpreter to perform specific mathematical, relational, or logical computations on one or more **operands**. 
+# ➕ Arithmetic Operators in Python
 
-While arithmetic operators (`+`, `-`, `*`, `/`, `//`, `%`, `**`) are primarily associated with mathematical numbers, Python's object-oriented architecture gives them **polymorphic abilities** (often called **operator overloading**). Depending on whether the operands are integers, floats, strings, or lists, the exact same symbol can add quantities, concatenate sentences, or duplicate sequences!
+Arithmetic operators are used to perform **mathematical calculations** in Python.
 
----
+You already use these calculations in everyday life:
 
-## Real-World Analogy: The Versatile Indian Post Office Clerk
+- Adding numbers
+- Subtracting numbers
+- Multiplying numbers
+- Dividing numbers
+- Finding the remainder
 
-```
-+-------------------------------------------------------------------------+
-|                  OPERATOR OVERLOADING REAL-WORLD ANALOGY                |
-+-------------------------------------------------------------------------+
+Python can do all of these calculations for you.
 
-  1. NUMERIC ARITHMETIC (Counting Currency Notes):
-     - Cashier adds cash: 500 Rupees + 200 Rupees = 700 Rupees.
-     - Multiplication scales value: 500 Rupees * 4 = 2,000 Rupees.
-
-  2. STRING OVERLOADING (The Wedding Card & Loudspeaker):
-     - Addition '+' stitches phrases together:
-       "Shubham" + " " + "Weds" + " " + "Priya"
-       -> "Shubham Weds Priya"
-     - Multiplication '*' repeats announcements over the station PA system:
-       "Attention please! " * 3
-       -> "Attention please! Attention please! Attention please! "
-
-  3. SEQUENCE OVERLOADING (Indian Railway Train Bogies):
-     - Addition '+' attaches bogies to the train:
-       ["Engine"] + ["AC-1", "AC-2", "Sleeper"]
-       -> ['Engine', 'AC-1', 'AC-2', 'Sleeper']
-+-------------------------------------------------------------------------+
-```
-
----
-
-## Visual Architecture: The Operator Polymorphism Matrix
-
-```
-===========================================================================
-             HOW ARITHMETIC OPERATORS ADAPT TO DATA TYPES
-===========================================================================
-
-  Operator  Numeric (int/float)    Text (str)             Sequence (list/tuple)
-  -------------------------------------------------------------------------
-  +         Mathematical Addition  String Concatenation   Sequence Merging
-            10 + 5 -> 15           "A" + "B" -> "AB"      [1] + [2] -> [1, 2]
-
-  *         Multiplication         Text Repetition        Sequence Replication
-            4 * 3 -> 12            "Om " * 3 -> "Om Om "  [0] * 3 -> [0, 0, 0]
-
-  -         Subtraction            NOT SUPPORTED (Error)  NOT SUPPORTED (Error)
-  /         True Division          NOT SUPPORTED (Error)  NOT SUPPORTED (Error)
-  //        Floor Division         NOT SUPPORTED (Error)  NOT SUPPORTED (Error)
-  %         Modulus (Remainder)    Legacy %-formatting    NOT SUPPORTED (Error)
-  **        Exponentiation         NOT SUPPORTED (Error)  NOT SUPPORTED (Error)
-```
-
----
-
-## 1. Unary vs Binary Arithmetic Operators
-
-Operators that require two values are **binary operators** (e.g., `a + b`). Operators that act on a single value are **unary operators** (e.g., unary minus `-x` and unary plus `+x`):
+For example:
 
 ```python
-# ==========================================================
-# Example 1: Unary and Binary Arithmetic Operations
-# ==========================================================
-
-# Binary operations
-base_price = 1500
-discount = 350
-net_price = base_price - discount
-print(f"Binary Subtraction: {base_price} - {discount} = {net_price}")
-
-# Unary operations (Flipping mathematical sign)
-temperature_delhi = 42
-frozen_temperature = -temperature_delhi
-print(f"Unary Minus: -({temperature_delhi}) = {frozen_temperature}")
-
-# Double negation flips back to positive
-print(f"Double Negation: -(-5) = {-(-5)}")
+10 + 5
 ```
 
-### Output:
+The result is:
+
 ```text
-Binary Subtraction: 1500 - 350 = 1150
-Unary Minus: -(42) = -42
-Double Negation: -(-5) = 5
+15
 ```
+
+> 💡 **Simple idea:**  
+> Arithmetic operators are symbols that tell Python **which mathematical calculation to perform**.
 
 ---
 
-## 2. Operator Overloading on Strings & Lists
+## 🧮 Arithmetic Operators in Python
 
-Python allows `+` and `*` on strings, lists, and tuples:
+Python provides several arithmetic operators:
+
+| Operator | Name | Example | Result |
+|---|---|---:|---:|
+| `+` | Addition | `10 + 5` | `15` |
+| `-` | Subtraction | `10 - 5` | `5` |
+| `*` | Multiplication | `10 * 5` | `50` |
+| `/` | Division | `10 / 5` | `2.0` |
+| `%` | Modulus | `10 % 3` | `1` |
+| `**` | Exponentiation | `2 ** 3` | `8` |
+| `//` | Floor Division | `10 // 3` | `3` |
+
+Don't worry if some of these look new.
+
+We will understand each one with simple examples.
+
+---
+
+# 1. ➕ Addition Operator (`+`)
+
+The `+` operator is used to **add two numbers**.
+
+### Example
 
 ```python
-# ==========================================================
-# Example 2: Operator Overloading in Action
-# ==========================================================
-
-# 1. String Concatenation (+) and Repetition (*)
-greeting = "Namaste"
-banner = (greeting + " ") * 3
-border = "-" * 35
-print(border)
-print(banner)
-print(border)
-
-# 2. List Concatenation (+) and Replication (*)
-delhi_metro_yellow = ["Samaypur Badli", "Kashmere Gate"]
-extension = ["Rajiv Chowk", "HUDA City Centre"]
-
-complete_line = delhi_metro_yellow + extension
-print("\nComplete Metro Line (+):", complete_line)
-
-# Initializing a fixed-size game board or matrix with replication (*)
-grid_row = [0] * 5
-print("Zero Initialized Row   (*):", grid_row)
+print(10 + 5)
 ```
 
-### Output:
+Output:
+
 ```text
------------------------------------
-Namaste Namaste Namaste 
------------------------------------
-
-Complete Metro Line (+): ['Samaypur Badli', 'Kashmere Gate', 'Rajiv Chowk', 'HUDA City Centre']
-Zero Initialized Row   (*): [0, 0, 0, 0, 0]
+15
 ```
 
-> **Warning on List Replication:** Using `[[0] * 3] * 3` to create a 2D matrix copies **references**, not independent lists! Modifying one cell will modify all rows. For 2D matrices, always use list comprehensions.
-
----
-
-## 3. Floating-Point Modulus (`%`)
-
-Unlike languages like C or Java where the modulo operator `%` only works on integers, Python fully supports **floating-point modulo**:
+Another example:
 
 ```python
-# ==========================================================
-# Example 3: Floating-Point Modulo Operations
-# ==========================================================
-
-# 1. Float modulo
-wire_length_meters = 12.5
-cut_size_meters = 3.0
-
-unused_wire = wire_length_meters % cut_size_meters
-pieces_cut = wire_length_meters // cut_size_meters
-
-print(f"Total Wire   : {wire_length_meters} meters")
-print(f"Cuts of {cut_size_meters}m : {int(pieces_cut)} complete pieces")
-print(f"Remaining Wire: {unused_wire:.2f} meters")
-
-# 2. Precise currency change breakdown
-rupees = 187.75
-change_after_fifties = rupees % 50
-print(f"Remaining after INR 50 notes: INR {change_after_fifties:.2f}")
+print(25 + 15)
 ```
 
-### Output:
+Output:
+
 ```text
-Total Wire   : 12.5 meters
-Cuts of 3.0m : 4 complete pieces
-Remaining Wire: 0.50 meters
-Remaining after INR 50 notes: INR 37.75
+40
 ```
 
----
+### Real-Life Example
 
-## 4. The Complete 7-Operator Reference Table
+Suppose you have:
 
-| Operator | Name | Example | Result | Types Supported |
-| :--- | :--- | :--- | :--- | :--- |
-| `+` | Addition / Concat | `10 + 20` / `'A' + 'B'` | `30` / `'AB'` | Numbers, Strings, Lists, Tuples |
-| `-` | Subtraction | `50 - 15` | `35` | Numbers only |
-| `*` | Multiplication / Repeat | `4 * 5` / `'Hi' * 2` | `20` / `'HiHi'` | Numbers, Strings, Lists, Tuples |
-| `/` | True Division | `7 / 2` | `3.5` (Always float) | Numbers only |
-| `//` | Floor Division | `7 // 2` / `-7 // 2` | `3` / `-4` (Rounds to $-\infty$) | Numbers only |
-| `%` | Modulus (Remainder) | `17 % 5` / `7.5 % 2` | `2` / `1.5` | Numbers only |
-| `**` | Exponentiation | `2 ** 10` | `1024` | Numbers only |
-
----
-
-## Do's and Don'ts: Arithmetic Operators
-
-| Scenario | Anti-Pattern (Don't) | Best Practice (Do) | Why |
-| :--- | :--- | :--- | :--- |
-| **String Multiplication** | `"Price: " + 50` | `f"Price: {50}"` | `+` between `str` and `int` raises `TypeError`. |
-| **Even/Odd Detection** | `if n / 2 == int(n / 2):` | `if n % 2 == 0:` | Modulo check is mathematically direct and faster. |
-| **Power Calculation** | Importing `pow` for basic math | `2 ** 8` | The `**` operator is native and cleaner. |
-| **Negative Floor** | Expecting `-7 // 2 == -3` | Remember it rounds to $-\infty$ (`-4`) | Python strictly respects the floor definition $\lfloor x \rfloor$. |
-
----
-
-## Quick Revision Summary
-
-```
-+-------------------------------------------------------------------------+
-|                  ARITHMETIC OPERATORS CHEAT SHEET                       |
-+-------------------------------------------------------------------------+
-  - Addition (+):        Adds numbers, concatenates strings & lists
-  - Subtraction (-):     Subtracts numbers, supports unary minus (-x)
-  - Multiplication (*):  Multiplies numbers, repeats strings & lists
-  - True Division (/):   Always returns float (4 / 2 -> 2.0)
-  - Floor Division (//): Truncates towards negative infinity (-7 // 2 -> -4)
-  - Modulus (%):         Remainder of division; works on floats (7.5 % 2 -> 1.5)
-  - Exponentiation (**): Computes power; right-associative (2 ** 3 ** 2 = 512)
-+-------------------------------------------------------------------------+
-```
-
----
-
----
-
-## ⚠️ Common Beginner Mistakes & Gotchas
-
-### 1. Confusing Assignment (`=`) with Equality (`==`)
-A single equals sign `=` assigns a value. Two equals signs `==` checks for equality:
-```python
-score = 100  # Assignment
-
-# In conditions:
-# ❌ INCORRECT (SyntaxError in Python 3)
-# if score = 100:
-
-# ✅ CORRECT
-if score == 100:
-    print("Perfect score!")
-```
-
-### 2. Chained Boolean Logic with `and` / `or`
-Beginners often write `if x == 1 or 2:`, which always evaluates to True because non-zero integers are truthy!
-```python
-# ❌ INCORRECT (Always True because 2 is truthy!)
-# if x == 1 or 2:
-
-# ✅ CORRECT
-# if x == 1 or x == 2:
-# Or even cleaner:
-# if x in (1, 2):
-```
-
----
-
-## Practice Quiz
-
-### 1. What is the output of evaluating `"Bharat" * 3` in Python?
-A. `TypeError`
-B. `"BharatBharatBharat"`
-C. `"Bharat 3"`
-D. `["Bharat", "Bharat", "Bharat"]`
-
-**Answer:** B
-
----
-
-### 2. What will happen if you attempt to execute `"Chapter " + 1` in Python?
-A. It outputs `"Chapter 1"`
-B. It raises a `TypeError: can only concatenate str (not "int") to str`
-C. It outputs `"Chapter "`
-D. It converts `"Chapter "` to an integer
-
-**Answer:** B
-
----
-
-### 3. What does `11.5 % 3` evaluate to in Python?
-A. `TypeError: float modulo is not allowed`
-B. `2.5`
-C. `3.5`
-D. `2`
-
-**Answer:** B
-
----
-
-### 4. What is the result of evaluating `[1, 2] + [3, 4]`?
-A. `[4, 6]`
-B. `[1, 2, 3, 4]`
-C. `[[1, 2], [3, 4]]`
-D. `TypeError`
-
-**Answer:** B
-
----
-
-### 5. Which of the following statements about unary operators in Python is TRUE?
-A. Python supports `++x` to increment a variable by 1 like C++
-B. The unary minus `-x` negates the numeric value of `x`
-C. Unary operators can only be used on strings
-D. `x++` is valid syntax in Python
-
-**Answer:** B
-
----
-
-# Hands-On Practice Challenge: ATM Cash Dispenser & Denomination Optimizer
-
-Write a complete, runnable Python script that simulates an automated Indian bank ATM. The machine accepts an amount requested by a customer and calculates the minimum number of 500, 200, 100, and 50 Rupee banknotes using arithmetic floor division (`//`) and modulus (`%`).
-
-```python
-# ==========================================================
-# Challenge 23: ATM Banknote Denomination Optimizer
-# MSK Institute of Technology
-# ==========================================================
-
-def dispense_atm_cash(requested_amount: int) -> None:
-    print("=" * 60)
-    print("      STATE BANK CASH DISPENSER: TRANSACTION RECEIPT")
-    print("=" * 60)
-    print(f"Requested Withdrawal Amount: INR {requested_amount:,}")
-    print("-" * 60)
-
-    # 1. Validation: ATM only dispenses in multiples of 50
-    if requested_amount <= 0:
-        print("ERROR: Withdrawal amount must be greater than zero.")
-        print("=" * 60 + "\n")
-        return
-
-    if requested_amount % 50 != 0:
-        print("ERROR: Amount must be a multiple of INR 50 (ATM cannot dispense coins).")
-        print("=" * 60 + "\n")
-        return
-
-    # 2. Denomination Breakdown using // and %
-    # Available notes in Indian ATMs: 500, 200, 100, 50
-    notes_500 = requested_amount // 500
-    rem_after_500 = requested_amount % 500
-
-    notes_200 = rem_after_500 // 200
-    rem_after_200 = rem_after_500 % 200
-
-    notes_100 = rem_after_200 // 100
-    rem_after_100 = rem_after_200 % 100
-
-    notes_50 = rem_after_100 // 50
-    final_remainder = rem_after_100 % 50
-
-    # 3. Print Dispensed Currency Summary
-    print(f"{'DENOMINATION':<18} | {'COUNT':^10} | {'SUBTOTAL (INR)':>15}")
-    print("-" * 60)
-    if notes_500 > 0:
-        print(f"INR 500 Note       | {notes_500:^10} | {notes_500 * 500:>15,}")
-    if notes_200 > 0:
-        print(f"INR 200 Note       | {notes_200:^10} | {notes_200 * 200:>15,}")
-    if notes_100 > 0:
-        print(f"INR 100 Note       | {notes_100:^10} | {notes_100 * 100:>15,}")
-    if notes_50 > 0:
-        print(f"INR 50 Note        | {notes_50:^10} | {notes_50 * 50:>15,}")
-    print("=" * 60)
-    total_notes = notes_500 + notes_200 + notes_100 + notes_50
-    print(f"Total Banknotes Dispensed : {total_notes}")
-    print(f"Unprocessed Remainder     : INR {final_remainder}")
-    print("Status                    : TRANSACTION SUCCESSFUL\n")
-
-
-# ----------------------------------------------------------
-# Test Cases
-# ----------------------------------------------------------
-dispense_atm_cash(8850)
-dispense_atm_cash(1400)
-dispense_atm_cash(1235)  # Invalid: not multiple of 50
-```
-
-### Expected Program Output:
 ```text
-============================================================
-      STATE BANK CASH DISPENSER: TRANSACTION RECEIPT
-============================================================
-Requested Withdrawal Amount: INR 8,850
-------------------------------------------------------------
-DENOMINATION       |   COUNT    |  SUBTOTAL (INR)
-------------------------------------------------------------
-INR 500 Note       |     17     |           8,500
-INR 200 Note       |     1      |             200
-INR 100 Note       |     1      |             100
-INR 50 Note        |     1      |              50
-============================================================
-Total Banknotes Dispensed : 20
-Unprocessed Remainder     : INR 0
-Status                    : TRANSACTION SUCCESSFUL
-
-============================================================
-      STATE BANK CASH DISPENSER: TRANSACTION RECEIPT
-============================================================
-Requested Withdrawal Amount: INR 1,400
-------------------------------------------------------------
-DENOMINATION       |   COUNT    |  SUBTOTAL (INR)
-------------------------------------------------------------
-INR 500 Note       |     2      |           1,000
-INR 200 Note       |     2      |             400
-============================================================
-Total Banknotes Dispensed : 4
-Unprocessed Remainder     : INR 0
-Status                    : TRANSACTION SUCCESSFUL
-
-============================================================
-      STATE BANK CASH DISPENSER: TRANSACTION RECEIPT
-============================================================
-Requested Withdrawal Amount: INR 1,235
-------------------------------------------------------------
-ERROR: Amount must be a multiple of INR 50 (ATM cannot dispense coins).
-============================================================
+₹500
++
+₹200
 ```
+
+Python can calculate:
+
+```python
+print(500 + 200)
+```
+
+Output:
+
+```text
+700
+```
+
+> ✅ **Remember:**  
+> `+` means **add**.
+
+---
+
+# 2. ➖ Subtraction Operator (`-`)
+
+The `-` operator is used to **subtract one number from another**.
+
+### Example
+
+```python
+print(10 - 5)
+```
+
+Output:
+
+```text
+5
+```
+
+Another example:
+
+```python
+print(100 - 35)
+```
+
+Output:
+
+```text
+65
+```
+
+### Real-Life Example
+
+Suppose you have ₹1,000 and spend ₹250.
+
+```python
+print(1000 - 250)
+```
+
+Output:
+
+```text
+750
+```
+
+> ✅ **Remember:**  
+> `-` means **subtract**.
+
+---
+
+# 3. ✖️ Multiplication Operator (`*`)
+
+The `*` operator is used to **multiply numbers**.
+
+In Python, multiplication uses an asterisk `*`.
+
+### Example
+
+```python
+print(10 * 5)
+```
+
+Output:
+
+```text
+50
+```
+
+Another example:
+
+```python
+print(12 * 4)
+```
+
+Output:
+
+```text
+48
+```
+
+### Real-Life Example
+
+Suppose one notebook costs ₹50 and you buy 4 notebooks.
+
+```python
+print(50 * 4)
+```
+
+Output:
+
+```text
+200
+```
+
+> ✅ **Remember:**  
+> `*` means **multiply**.
+
+---
+
+# 4. ➗ Division Operator (`/`)
+
+The `/` operator is used to **divide one number by another**.
+
+### Example
+
+```python
+print(10 / 2)
+```
+
+Output:
+
+```text
+5.0
+```
+
+Notice that Python gives:
+
+```text
+5.0
+```
+
+instead of:
+
+```text
+5
+```
+
+The `/` operator produces a **division result in decimal form**.
+
+Another example:
+
+```python
+print(20 / 4)
+```
+
+Output:
+
+```text
+5.0
+```
+
+### Example with a non-even division
+
+```python
+print(10 / 3)
+```
+
+Output will be approximately:
+
+```text
+3.3333333333333335
+```
+
+> ✅ **Remember:**  
+> `/` means **division**.
+
+---
+
+# 5. 🔢 Modulus Operator (`%`)
+
+The `%` operator is called the **modulus operator**.
+
+It gives us the **remainder** after division.
+
+This is one of the most useful arithmetic operators.
+
+### Example
+
+```python
+print(10 % 3)
+```
+
+Let's understand it:
+
+```text
+10 ÷ 3
+
+3 × 3 = 9
+Remainder = 1
+```
+
+So:
+
+```text
+10 % 3 = 1
+```
+
+Output:
+
+```text
+1
+```
+
+### Another Example
+
+```python
+print(20 % 5)
+```
+
+Output:
+
+```text
+0
+```
+
+Why?
+
+Because 20 can be divided by 5 exactly.
+
+```text
+20 ÷ 5 = 4
+Remainder = 0
+```
+
+### Simple Trick to Remember
+
+Think:
+
+> `%` asks: **"What is left after division?"**
+
+For example:
+
+```python
+print(17 % 5)
+```
+
+Output:
+
+```text
+2
+```
+
+Because:
+
+```text
+17 ÷ 5
+
+5 × 3 = 15
+Remainder = 2
+```
+
+> ✅ **Remember:**  
+> `%` gives the **remainder**.
+
+---
+
+# 6. 🔢 Exponentiation Operator (`**`)
+
+The `**` operator is used to calculate **powers**.
+
+For example:
+
+```python
+print(2 ** 3)
+```
+
+This means:
+
+```text
+2 × 2 × 2
+```
+
+So the result is:
+
+```text
+8
+```
+
+Another example:
+
+```python
+print(5 ** 2)
+```
+
+This means:
+
+```text
+5 × 5
+```
+
+Output:
+
+```text
+25
+```
+
+### Easy Way to Understand
+
+```text
+2 ** 2 = 4
+2 ** 3 = 8
+2 ** 4 = 16
+```
+
+> ✅ **Remember:**  
+> `**` means **power** or **exponentiation**.
+
+---
+
+# 7. 🔽 Floor Division Operator (`//`)
+
+The `//` operator performs division and returns the **whole-number part of the result by rounding down**.
+
+### Example
+
+```python
+print(10 // 3)
+```
+
+Normal division:
+
+```text
+10 / 3 = 3.333...
+```
+
+Floor division:
+
+```text
+10 // 3 = 3
+```
+
+So:
+
+```python
+print(10 // 3)
+```
+
+Output:
+
+```text
+3
+```
+
+Another example:
+
+```python
+print(20 // 6)
+```
+
+Output:
+
+```text
+3
+```
+
+Because:
+
+```text
+20 / 6 = 3.333...
+```
+
+and floor division gives:
+
+```text
+3
+```
+
+> 💡 **Easy way to remember:**  
+> `/` gives the normal division result.  
+> `//` gives the result rounded **down** to the nearest whole number.
+
+---
+
+# 📋 Quick Comparison
+
+Here is an easy way to remember all arithmetic operators:
+
+| Operator | What it does | Example | Result |
+|---|---|---:|---:|
+| `+` | Adds numbers | `8 + 2` | `10` |
+| `-` | Subtracts numbers | `8 - 2` | `6` |
+| `*` | Multiplies numbers | `8 * 2` | `16` |
+| `/` | Divides numbers | `8 / 2` | `4.0` |
+| `%` | Gives remainder | `8 % 3` | `2` |
+| `**` | Calculates power | `2 ** 3` | `8` |
+| `//` | Floor division | `8 // 3` | `2` |
+
+---
+
+# 🧠 Arithmetic Calculations Together
+
+Python can use more than one arithmetic operator in a single calculation.
+
+For example:
+
+```python
+print(10 + 5 * 2)
+```
+
+The result is:
+
+```text
+20
+```
+
+Why is the answer `20` and not `30`?
+
+Because Python follows a specific **order of operations**.
+
+---
+
+# 📐 Order of Operations
+
+When multiple arithmetic operators are used together, Python follows a mathematical order.
+
+A simple rule to remember is:
+
+```text
+1. Parentheses
+2. Powers
+3. Multiplication, Division, Floor Division, Modulus
+4. Addition and Subtraction
+```
+
+![Order of Operations](/content/tutorials/python-for-beginners/images/05_Python_Order_of_Operations.png)
+
+
+
+You can remember the basic idea as:
+
+> **Brackets → Power → Multiply/Divide → Add/Subtract**
+
+---
+
+## Example 1
+
+```python
+print(10 + 5 * 2)
+```
+
+Python first performs:
+
+```text
+5 * 2 = 10
+```
+
+Then:
+
+```text
+10 + 10 = 20
+```
+
+So the output is:
+
+```text
+20
+```
+
+---
+
+## Example 2
+
+```python
+print((10 + 5) * 2)
+```
+
+This time, the parentheses are calculated first:
+
+```text
+10 + 5 = 15
+```
+
+Then:
+
+```text
+15 * 2 = 30
+```
+
+Output:
+
+```text
+30
+```
+
+Notice how parentheses changed the result.
+
+> 💡 **Beginner Tip:**  
+> When you want Python to perform a calculation first, use **parentheses `()`**.
+
+---
+
+
+# 🧪 Let's Practice
+
+Now it's your turn.
+
+Try to predict the output before running each program.
+
+---
+
+## 🟢 Practice 1: Addition
+
+```python
+print(25 + 15)
+```
+
+**Expected Output:**
+
+```text
+40
+```
+
+---
+
+## 🟢 Practice 2: Subtraction
+
+```python
+print(100 - 35)
+```
+
+**Expected Output:**
+
+```text
+65
+```
+
+---
+
+## 🟡 Practice 3: Multiplication
+
+```python
+print(12 * 5)
+```
+
+**Expected Output:**
+
+```text
+60
+```
+
+---
+
+## 🟡 Practice 4: Division
+
+```python
+print(25 / 5)
+```
+
+**Expected Output:**
+
+```text
+5.0
+```
+
+---
+
+## 🟡 Practice 5: Modulus
+
+```python
+print(17 % 4)
+```
+
+**Expected Output:**
+
+```text
+1
+```
+
+---
+
+## 🔵 Practice 6: Power
+
+```python
+print(3 ** 3)
+```
+
+**Expected Output:**
+
+```text
+27
+```
+
+---
+
+## 🔵 Practice 7: Floor Division
+
+```python
+print(17 // 4)
+```
+
+**Expected Output:**
+
+```text
+4
+```
+
+---
+
+## 🔥 Challenge: Mixed Calculation
+
+Try to calculate the answer before running the code:
+
+```python
+print(20 + 5 * 2)
+```
+
+Think carefully about the order of operations.
+
+**Answer:**
+
+```text
+30
+```
+
+---
+
+# 🛠️ Mini Activity
+
+Try these calculations yourself.
+
+```python
+print(50 + 25)
+print(100 - 45)
+print(12 * 8)
+print(100 / 4)
+print(19 % 5)
+print(2 ** 5)
+print(19 // 5)
+```
+
+### Your Task
+
+Before running the code, write down what you think the output of each line will be.
+
+Then run the program and check your answers.
+
+> 🎯 **Learning Tip:** Predicting the answer before running the code is a great way to improve your programming understanding.
+
+---
+
+# ⚠️ Common Beginner Mistakes
+
+## 1. Using `x` instead of `*`
+
+In normal mathematics, multiplication is sometimes written using `×`.
+
+In Python, multiplication uses:
+
+```python
+*
+```
+
+Correct:
+
+```python
+print(5 * 4)
+```
+
+Not:
+
+```python
+print(5 x 4)
+```
+
+---
+
+## 2. Confusing `/` and `//`
+
+Remember:
+
+```python
+10 / 3
+```
+
+gives approximately:
+
+```text
+3.333...
+```
+
+while:
+
+```python
+10 // 3
+```
+
+gives:
+
+```text
+3
+```
+
+---
+
+## 3. Confusing `%` with Percentage
+
+In Python, `%` is the **modulus operator**.
+
+It gives the remainder after division.
+
+For example:
+
+```python
+print(15 % 4)
+```
+
+Output:
+
+```text
+3
+```
+
+---
+
+## 4. Forgetting Operator Priority
+
+Look at:
+
+```python
+print(10 + 2 * 5)
+```
+
+Python performs multiplication first:
+
+```text
+2 * 5 = 10
+10 + 10 = 20
+```
+
+So the result is:
+
+```text
+20
+```
+
+Use parentheses when you want a different order:
+
+```python
+print((10 + 2) * 5)
+```
+
+Output:
+
+```text
+60
+```
+
+---
+
+# 📝 Quick Summary
+
+Arithmetic operators help Python perform mathematical calculations.
+
+The main arithmetic operators are:
+
+- `+` → Addition
+- `-` → Subtraction
+- `*` → Multiplication
+- `/` → Division
+- `%` → Remainder
+- `**` → Power
+- `//` → Floor Division
+
+Python can also combine multiple operators in one calculation.
+
+When calculations are combined, Python follows an order of operations.
+
+> 🎯 **Key Idea:**  
+> Arithmetic operators are the basic tools Python uses to perform mathematical calculations.
+
+---
+
+# 🧠 Practice Quiz
+
+## 1. Which operator is used for addition?
+A. `*`  
+B. `+`  
+C. `/`  
+D. `%`
+**Answer:** B. `+`
+
+---
+
+## 2. Which operator is used for multiplication?
+A. `x`  
+B. `+`  
+C. `*`  
+D. `//`
+**Answer:** C. `*`
+
+---
+
+## 3. What is the result of this expression?
+
+```python
+10 - 4
+```
+
+A. `6`  
+B. `14`  
+C. `40`  
+D. `4`
+**Answer:** A. `6`
+
+---
+
+## 4. What does `%` return?
+
+A. Quotient  
+B. Power  
+C. Remainder  
+D. Average
+**Answer:** C. Remainder
+
+---
+
+## 5. What is the result of:
+
+```python
+10 % 3
+```
+
+A. `3`  
+B. `1`  
+C. `0`  
+D. `10`
+**Answer:** B. `1`
+
+---
+
+## 6. What does `**` do?
+
+A. Division  
+B. Addition  
+C. Calculates power  
+D. Gives remainder
+**Answer:** C. Calculates power
+
+---
+
+## 7. What is the result of:
+
+```python
+10 // 3
+```
+
+A. `3.33`  
+B. `4`  
+C. `3`  
+D. `1`
+**Answer:** C. `3`
+
+---
+
+## 8. What is the output?
+
+```python
+print(10 + 5 * 2)
+```
+
+A. `30`  
+B. `20`  
+C. `25`  
+D. `15`
+**Answer:** B. `20`
+
 ---
 
 ## 🚀 What's Next?
 
-In the next lesson, we will continue your Python learning journey with **Assignment Operators** (6: Operators).
+You now know how Python performs basic mathematical calculations using arithmetic operators.
 
-👉 **[Continue to Next Lesson: Assignment Operators →](/tutorials/python-for-beginners/assignment-operators)**
+Practice these operators by writing your own calculations and predicting the output before running the code.
+
+
+
