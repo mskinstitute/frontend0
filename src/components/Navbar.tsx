@@ -21,6 +21,7 @@ import {
   FileText,
   Newspaper,
   Briefcase,
+  Keyboard,
 } from 'lucide-react';
 
 import InstallAppButton from '@/components/InstallAppButton';
@@ -154,6 +155,13 @@ export default function Navbar() {
           icon: Award,
           badge: 'NEW',
           description: 'Timed skill tests with scorecard & WhatsApp share',
+        },
+        {
+          name: 'Keyboard Shortcuts',
+          href: '/shortcuts',
+          icon: Keyboard,
+          badge: 'NEW',
+          description: 'Software cheatsheets & quick key references',
         },
       ],
     },

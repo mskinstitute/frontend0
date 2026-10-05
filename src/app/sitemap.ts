@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fetchCourses, fetchBlogs, fetchTutorials, fetchLiveBatches } from '@/services/api';
 import { getPublishedBranches } from '@/lib/branches';
+import { getAllToolSlugs } from '@/data/shortcutsData';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mskinstitute.in';
@@ -27,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tools/typing',
     '/tools/db-viewer',
     '/tools/sql-studio',
-    '/tools/python-visualizer',
+    '/shortcuts',
     '/playground',
     '/contact',
     '/about',
@@ -118,8 +119,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: branch.isHeadquarters ? 0.9 : 0.8,
     }));
 
+    const shortcutRoutes = getAllToolSlugs().map((slug) => ({
+      url: `${baseUrl}/shortcuts/${slug}`,
+      lastModified: new Date().toISOString().split('T')[0],
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    }));
+
     return [
       ...routes,
+      ...shortcutRoutes,
       ...branchRoutes,
       ...courseRoutes,
       ...mockTestRoutes,

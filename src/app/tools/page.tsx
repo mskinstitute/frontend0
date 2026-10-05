@@ -134,17 +134,17 @@ const TOOLS: ToolItem[] = [
     featured: true,
   },
   {
-    id: 'python-visualizer',
-    title: 'Python Code Visualizer',
-    subtitle: 'Step-by-Step Execution Tutor & Memory Pointer Inspector',
+    id: 'shortcuts-hub',
+    title: 'Software Shortcuts Hub',
+    subtitle: 'Comprehensive Keyboard Cheatsheets & Reference Guides',
     description:
-      'Step through Python code line-by-line in your browser. Inspect Call Stack frames, Heap memory references, pointer aliasing, Linked Lists, Binary Trees, 2D Matrices, and Recursion Trees with zero server latency.',
-    href: '/tools/python-visualizer',
-    icon: Layers,
-    badge: 'Pyodide Wasm 3.12',
-    badgeColor: 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30',
-    tags: ['Step Execution', 'Stack & Heap', 'Pointers & Aliasing', 'Trees & Lists', 'Recursion Tree'],
-    cta: 'Launch Visualizer',
+      'Master essential keyboard shortcuts for MS Excel, Word, PowerPoint, VS Code, Photoshop, Tally Prime, Windows 11, Chrome, Git, and Linux. Features fast search and instant key combinations.',
+    href: '/shortcuts',
+    icon: Keyboard,
+    badge: '10+ Software Guides',
+    badgeColor: 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30',
+    tags: ['Excel', 'VS Code', 'Photoshop', 'Tally', 'Windows 11', 'Office'],
+    cta: 'Explore Shortcuts Hub',
     featured: true,
   }
 ];

@@ -38,3 +38,6 @@ Thumbs.db
 
 # generated files
 *.tsbuildinfo
+
+# scratch and generator scripts
+/scratch/

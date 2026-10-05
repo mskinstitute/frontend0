@@ -140,6 +140,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/shortcuts" className="hover:text-white transition-colors duration-150 flex items-center gap-2">
+                  <span>Keyboard Shortcuts</span>
+                  <span className="bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">New</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/tools/typing" className="hover:text-white transition-colors duration-150 flex items-center gap-2">
                   <span>TypeQuest Speed Lab</span>
                   <span className="bg-amber-400 text-slate-950 text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">Typing</span>
